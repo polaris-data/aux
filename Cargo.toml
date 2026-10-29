@@ -1,0 +1,9 @@
+[package]
+name = "aux-rs"
+version = "0.0.0"
+edition = "2024"
+description = "Exchange connectors for Rust"
+repository = "https://github.com/polaris-data/connectors"
+license = "MIT"
+readme = "README.md"
+include = ["Cargo.toml", "src/**", "README.md", "LICENSE"]
