@@ -66,7 +66,7 @@ python3.12 -m venv .venv-python
 bash scripts/check-python.sh
 ```
 
-`AUX_PYTHON=/path/to/venv/bin/python` selects another venv. Maturin installs a local development extension. Runtime dependencies are the standard library and compiled extension; Maturin and websockets are development-only. Release publishing, prebuilt wheels and a multi-platform/interpreter wheel matrix remain separate work. The locally verified interpreter/platform is CPython 3.12.7 on macOS arm64.
+`AUX_PYTHON=/path/to/venv/bin/python` selects another venv. Maturin installs a local development extension. Runtime dependencies are the standard library and compiled extension; Maturin and websockets are development-only. The locally verified interpreter/platform is CPython 3.12.7 on macOS arm64. The release workflow below checks additional interpreters and platforms.
 
 Offline tests exercise all bound operations and stream types, the 44 Hyperliquid and 66 Lighter reference vectors, exact values and unknown JSON numbers, partial batches, auth context, callback context/cancellation, concurrent nonces, ambiguous submissions, errors, overflow and cleanup. `bash scripts/check.sh` separately verifies the Rust-only feature/dependency matrix. Neither check makes exchange requests or places orders.
 
@@ -76,6 +76,38 @@ Offline tests exercise all bound operations and stream types, the 44 Hyperliquid
 ```
 
 Funded testnet submit/cancel and real authenticated Lighter order-stream verification still need configured credentials. Lighter's local cryptographic primitives remain experimental and unaudited; see [the signing notes](../exchanges/lighter/SIGNING.md). Python bindings do not remove those release gates.
+
+## Releases
+
+The [Python release workflow](../../.github/workflows/release-python.yml) builds
+CPython 3.10–3.14 wheels for Linux x86_64 (glibc 2.28+) and macOS arm64 and x86_64,
+plus a source distribution containing the local Rust workspace dependencies.
+Each wheel and the source distribution are installed and run through the Python
+test suite before publication. Windows, Linux arm64, and free-threaded Python
+wheels are not included in this initial matrix.
+
+Pull requests affecting the build inputs and manual workflow runs build and test
+artifacts without publishing. Publishing a GitHub release with a tag matching
+`aux-py-v<VERSION>` publishes those artifacts to PyPI using Trusted Publishing.
+Other release tags are ignored. The first version is **0.0.0**, with tag
+`aux-py-v0.0.0`.
+
+Before the first release:
+
+1. Create a GitHub Actions environment named `pypi` in `polaris-data/aux`.
+2. In your PyPI account's [Publishing settings](https://pypi.org/manage/account/publishing/),
+   add a pending GitHub publisher with project name `aux-py`, owner `polaris-data`,
+   repository `aux`, workflow filename `release-python.yml`, and environment `pypi`.
+3. Merge the workflow and run **Release Python SDK** manually on `main` to check
+   all builds. This run does not publish or reserve the package name.
+4. Publish a GitHub release tagged `aux-py-v0.0.0` from the verified commit.
+   The workflow creates the PyPI project on its first successful upload.
+
+For subsequent releases, update both `[project].version` in `pyproject.toml` and
+`[workspace.package].version` in the root `Cargo.toml` before tagging. The workflow
+rejects mismatches between those versions and the release tag. No PyPI API token
+is required. See [PyPI's Trusted Publishing guide](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/)
+for the account setup.
 
 ## Public reads and streams
 

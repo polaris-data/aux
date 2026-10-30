@@ -1,0 +1,146 @@
+name: Release Python SDK
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/release-python.yml
+      - Cargo.toml
+      - Cargo.lock
+      - crates/**
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: python-release-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  validate:
+    name: Validate release version
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'aux-py-v')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Check Python, Rust, and release tag versions agree
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import tomllib
+
+          python_version = tomllib.loads(Path("crates/python/pyproject.toml").read_text())["project"]["version"]
+          rust_version = tomllib.loads(Path("Cargo.toml").read_text())["workspace"]["package"]["version"]
+          if python_version != rust_version:
+              raise SystemExit(f"Python version {python_version} differs from Rust version {rust_version}")
+          tag = os.environ["RELEASE_TAG"]
+          if tag and tag != f"aux-py-v{python_version}":
+              raise SystemExit(f"Expected tag aux-py-v{python_version}, got {tag}")
+          print(f"Building aux-py {python_version}")
+          PY
+
+  wheels:
+    name: Wheel (${{ matrix.os }}, Python ${{ matrix.python.version }})
+    needs: validate
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, macos-15-intel]
+        python:
+          - {version: '3.10', abi: cp310-cp310}
+          - {version: '3.11', abi: cp311-cp311}
+          - {version: '3.12', abi: cp312-cp312}
+          - {version: '3.13', abi: cp313-cp313}
+          - {version: '3.14', abi: cp314-cp314}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python.version }}
+      - name: Build release wheel
+        uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1
+        with:
+          maturin-version: v1.16.0
+          rust-toolchain: '1.92.0'
+          manylinux: '2_28'
+          args: >-
+            --release --locked --manifest-path crates/python/Cargo.toml
+            --interpreter ${{ runner.os == 'Linux' && format('/opt/python/{0}/bin/python', matrix.python.abi) || 'python' }} --out dist
+      - name: Install and test the built wheel
+        run: |
+          python -m pip install --only-binary=:all: dist/*.whl
+          python -m pip install -r crates/python/dev-requirements.txt
+          python -c 'import aux_py; from importlib.metadata import version; assert aux_py.__version__ == version("aux-py")'
+          python -m unittest discover -s crates/python/tests -v
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: python-dist-${{ matrix.os }}-${{ matrix.python.version }}
+          path: dist/*.whl
+          if-no-files-found: error
+
+  sdist:
+    name: Source distribution
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install Rust
+        run: rustup toolchain install 1.92.0 --profile minimal && rustup default 1.92.0
+      - name: Build source distribution
+        uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1
+        with:
+          maturin-version: v1.16.0
+          command: sdist
+          args: --manifest-path crates/python/Cargo.toml --out dist
+      - name: Install and test from the source distribution
+        run: |
+          python -m pip install dist/*.tar.gz
+          python -m pip install -r crates/python/dev-requirements.txt
+          python -c 'import aux_py; from importlib.metadata import version; assert aux_py.__version__ == version("aux-py")'
+          python -m unittest discover -s crates/python/tests -v
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: python-dist-sdist
+          path: dist/*.tar.gz
+          if-no-files-found: error
+
+  publish:
+    name: Publish to PyPI
+    if: github.event_name == 'release'
+    needs: [wheels, sdist]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment:
+      name: pypi
+      url: https://pypi.org/project/aux-py/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: python-dist-*
+          path: dist
+          merge-multiple: true
+      - name: Publish distributions with Trusted Publishing
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # release/v1
