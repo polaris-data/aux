@@ -1,5 +1,6 @@
 use aux_rs_arcus::*;
 use aux_rs_core::WebSocketSubscription;
+use aux_rs_core::hex;
 use aux_rs_core::{HttpRequest, HttpResponse, HttpTransport, TransportError};
 use serde_json::{Value, json};
 use std::{

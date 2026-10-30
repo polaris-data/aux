@@ -1,4 +1,5 @@
 use crate::{Error, Qfex};
+use aux_rs_core::hex;
 use hmac::{Hmac, Mac};
 use serde_json::{Value, json};
 use sha2::Sha256;

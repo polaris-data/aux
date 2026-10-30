@@ -15,7 +15,6 @@ ws = ["aux-rs-core/ws"]
 aux-rs-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-hex.workspace = true
 zeroize.workspace = true
 hmac.workspace = true
 sha2.workspace = true

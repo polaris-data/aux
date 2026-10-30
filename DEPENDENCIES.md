@@ -6,9 +6,9 @@ Target: `aarch64-apple-darwin`. This is a target-specific inventory, not a count
 
 QFEX adds HMAC-SHA256, OS-backed authentication nonces, and exact JSON numbers. Arcus adds Ed25519 signing with ed25519-dalek; market price ticks and size quantums are derived exactly without floating point. Dedicated QFEX trade connections use the shared opt-in WebSocket stack and never replay commands.
 
-Core contracts have no dependencies. Hyperliquid directly adds core, Serde, Serde JSON, K256 (secp256k1), SHA3 (Keccak), rmp-serde (MessagePack), hex (native addresses/signatures), and zeroize (temporary secret buffers). Standard transports add their selected I/O and TLS stacks; Reqwest brings transitive Tower and tracing crates, but the SDK has no direct middleware or tracing dependency. Ring is the selected TLS crypto provider; Hyperliquid's exchange signer uses K256. Standard HTTP also selects Tokio for cancellation/backoff timers and httpdate for RFC 9110 Retry-After dates. Core contracts still have zero dependencies.
+Core contracts have no dependencies. Hyperliquid directly adds core, Serde, Serde JSON, K256 (secp256k1), SHA3 (Keccak), rmp-serde (MessagePack), and zeroize (temporary secret buffers). Hex encoding/decoding is shared local code. Standard transports add their selected I/O and TLS stacks; Reqwest brings transitive Tower and tracing crates, but the SDK has no direct middleware or tracing dependency. Ring is the selected TLS crypto provider; Hyperliquid's exchange signer uses K256. Standard HTTP also selects Tokio for cancellation/backoff timers and httpdate for RFC 9110 Retry-After dates. Core contracts still have zero dependencies.
 
-Lighter directly adds core, Serde/Serde JSON, goldilocks-crypto 0.1.2 (ECgFp5/Schnorr primitives), poseidon-hash 0.1.4 (original Poseidon2), hex, base64 (native wire signatures), zeroize, getrandom (OS-backed Schnorr randomness), and futures-util (runtime-independent async nonce mutex). The two cryptographic primitive versions are pinned and unaudited; see crates/exchanges/lighter/SIGNING.md for compatibility evidence and review limits. The Plonky2 transaction permutation is ported with attribution; no existing exchange client, Go runtime, subprocess, Python runtime, or Alloy umbrella package is used. Python's profile is listed separately; PyO3 is forbidden in all Rust-only profiles below. Review feature activation separately with `cargo tree -e features`.
+Lighter directly adds core, Serde/Serde JSON, goldilocks-crypto 0.1.2 (ECgFp5/Schnorr primitives), poseidon-hash 0.1.4 (original Poseidon2), zeroize, getrandom (OS-backed Schnorr randomness), and futures-util (runtime-independent async nonce mutex). Native wire signatures use shared local hex helpers and a private Base64 encoder. Hex and Base64 can remain transitive dependencies of third-party crates. The two cryptographic primitive versions are pinned and unaudited; see crates/exchanges/lighter/SIGNING.md for compatibility evidence and review limits. The Plonky2 transaction permutation is ported with attribution; no existing exchange client, Go runtime, subprocess, Python runtime, or Alloy umbrella package is used. Python's profile is listed separately; PyO3 is forbidden in all Rust-only profiles below. Review feature activation separately with `cargo tree -e features`.
 
 ## Core contracts
 
@@ -20,7 +20,7 @@ Direct dependencies: 0. Total unique dependencies: 0.
 
 ## Hyperliquid with custom transports
 
-Direct dependencies: 2. Total unique dependencies: 46.
+Direct dependencies: 2. Total unique dependencies: 45.
 
 ```text
 autocfg v1.5.1
@@ -40,7 +40,6 @@ elliptic-curve v0.13.8
 ff v0.13.1
 generic-array v0.14.7
 group v0.13.0
-hex v0.4.3
 hmac v0.12.1
 itoa v1.0.18
 k256 v0.13.4
@@ -73,7 +72,7 @@ zmij v1.0.23
 
 ## Hyperliquid with standard HTTP
 
-Direct dependencies: 2. Total unique dependencies: 123.
+Direct dependencies: 2. Total unique dependencies: 122.
 
 ```text
 atomic-waker v1.1.2
@@ -107,7 +106,6 @@ futures-util v0.3.34
 generic-array v0.14.7
 getrandom v0.2.17
 group v0.13.0
-hex v0.4.3
 hmac v0.12.1
 http v1.5.0
 http-body v1.1.0
@@ -203,7 +201,7 @@ zmij v1.0.23
 
 ## Hyperliquid with standard WebSockets
 
-Direct dependencies: 2. Total unique dependencies: 85.
+Direct dependencies: 2. Total unique dependencies: 84.
 
 ```text
 autocfg v1.5.1
@@ -233,7 +231,6 @@ generic-array v0.14.7
 getrandom v0.2.17
 getrandom v0.3.4
 group v0.13.0
-hex v0.4.3
 hmac v0.12.1
 http v1.5.0
 httparse v1.10.1
@@ -295,7 +292,7 @@ zmij v1.0.23
 
 ## Hyperliquid with both standard transports
 
-Direct dependencies: 2. Total unique dependencies: 137.
+Direct dependencies: 2. Total unique dependencies: 136.
 
 ```text
 atomic-waker v1.1.2
@@ -332,7 +329,6 @@ generic-array v0.14.7
 getrandom v0.2.17
 getrandom v0.3.4
 group v0.13.0
-hex v0.4.3
 hmac v0.12.1
 http v1.5.0
 http-body v1.1.0
@@ -439,13 +435,12 @@ zmij v1.0.23
 
 ## Lighter with custom transports
 
-Direct dependencies: 2. Total unique dependencies: 41.
+Direct dependencies: 2. Total unique dependencies: 40.
 
 ```text
 autocfg v1.5.1
 aux-rs-core v0.0.0
 aux-rs-lighter v0.0.0
-base64 v0.22.1
 cfg-if v1.0.5
 futures-core v0.3.34
 futures-sink v0.3.34
@@ -605,13 +600,12 @@ zmij v1.0.23
 
 ## Lighter with standard WebSockets
 
-Direct dependencies: 2. Total unique dependencies: 78.
+Direct dependencies: 2. Total unique dependencies: 77.
 
 ```text
 autocfg v1.5.1
 aux-rs-core v0.0.0
 aux-rs-lighter v0.0.0
-base64 v0.22.1
 block-buffer v0.10.4
 bytes v1.12.1
 cc v1.10.0
@@ -826,7 +820,7 @@ zmij v1.0.23
 
 ## Hyperliquid and Lighter with custom transports
 
-Direct dependencies: 3. Total unique dependencies: 67.
+Direct dependencies: 3. Total unique dependencies: 66.
 
 ```text
 autocfg v1.5.1
@@ -834,7 +828,6 @@ aux-rs-core v0.0.0
 aux-rs-hyperliquid v0.0.0
 aux-rs-lighter v0.0.0
 base16ct v0.2.0
-base64 v0.22.1
 block-buffer v0.10.4
 cfg-if v1.0.5
 const-oid v0.9.6
@@ -1055,7 +1048,7 @@ zmij v1.0.23
 
 ## QFEX with custom transports
 
-Direct dependencies: 2. Total unique dependencies: 28.
+Direct dependencies: 2. Total unique dependencies: 27.
 
 ```text
 aux-rs-core v0.0.0
@@ -1067,7 +1060,6 @@ crypto-common v0.1.7
 digest v0.10.7
 generic-array v0.14.7
 getrandom v0.2.17
-hex v0.4.3
 hmac v0.12.1
 itoa v1.0.18
 libc v0.2.191
@@ -1090,7 +1082,7 @@ zmij v1.0.23
 
 ## QFEX with standard HTTP
 
-Direct dependencies: 2. Total unique dependencies: 104.
+Direct dependencies: 2. Total unique dependencies: 103.
 
 ```text
 atomic-waker v1.1.2
@@ -1115,7 +1107,6 @@ futures-task v0.3.34
 futures-util v0.3.34
 generic-array v0.14.7
 getrandom v0.2.17
-hex v0.4.3
 hmac v0.12.1
 http v1.5.0
 http-body v1.1.0
@@ -1201,7 +1192,7 @@ zmij v1.0.23
 
 ## QFEX with standard WebSockets
 
-Direct dependencies: 2. Total unique dependencies: 66.
+Direct dependencies: 2. Total unique dependencies: 65.
 
 ```text
 aux-rs-core v0.0.0
@@ -1222,7 +1213,6 @@ futures-util v0.3.34
 generic-array v0.14.7
 getrandom v0.2.17
 getrandom v0.3.4
-hex v0.4.3
 hmac v0.12.1
 http v1.5.0
 httparse v1.10.1
@@ -1274,7 +1264,7 @@ zmij v1.0.23
 
 ## QFEX with both standard transports
 
-Direct dependencies: 2. Total unique dependencies: 118.
+Direct dependencies: 2. Total unique dependencies: 117.
 
 ```text
 atomic-waker v1.1.2
@@ -1302,7 +1292,6 @@ futures-util v0.3.34
 generic-array v0.14.7
 getrandom v0.2.17
 getrandom v0.3.4
-hex v0.4.3
 hmac v0.12.1
 http v1.5.0
 http-body v1.1.0
@@ -1399,7 +1388,7 @@ zmij v1.0.23
 
 ## Arcus with custom transports
 
-Direct dependencies: 2. Total unique dependencies: 32.
+Direct dependencies: 2. Total unique dependencies: 31.
 
 ```text
 aux-rs-arcus v0.0.0
@@ -1413,7 +1402,6 @@ digest v0.10.7
 ed25519 v2.2.3
 ed25519-dalek v2.2.0
 generic-array v0.14.7
-hex v0.4.3
 itoa v1.0.18
 libc v0.2.191
 memchr v2.8.3
@@ -1438,7 +1426,7 @@ zmij v1.0.23
 
 ## Arcus with standard HTTP
 
-Direct dependencies: 2. Total unique dependencies: 109.
+Direct dependencies: 2. Total unique dependencies: 108.
 
 ```text
 atomic-waker v1.1.2
@@ -1466,7 +1454,6 @@ futures-task v0.3.34
 futures-util v0.3.34
 generic-array v0.14.7
 getrandom v0.2.17
-hex v0.4.3
 http v1.5.0
 http-body v1.1.0
 http-body-util v0.1.5
@@ -1554,7 +1541,7 @@ zmij v1.0.23
 
 ## Arcus with standard WebSockets
 
-Direct dependencies: 2. Total unique dependencies: 71.
+Direct dependencies: 2. Total unique dependencies: 70.
 
 ```text
 aux-rs-arcus v0.0.0
@@ -1578,7 +1565,6 @@ futures-util v0.3.34
 generic-array v0.14.7
 getrandom v0.2.17
 getrandom v0.3.4
-hex v0.4.3
 http v1.5.0
 httparse v1.10.1
 itoa v1.0.18
@@ -1632,7 +1618,7 @@ zmij v1.0.23
 
 ## Arcus with both standard transports
 
-Direct dependencies: 2. Total unique dependencies: 123.
+Direct dependencies: 2. Total unique dependencies: 122.
 
 ```text
 atomic-waker v1.1.2
@@ -1663,7 +1649,6 @@ futures-util v0.3.34
 generic-array v0.14.7
 getrandom v0.2.17
 getrandom v0.3.4
-hex v0.4.3
 http v1.5.0
 http-body v1.1.0
 http-body-util v0.1.5
@@ -1762,7 +1747,7 @@ zmij v1.0.23
 
 ## QFEX and Arcus with custom transports
 
-Direct dependencies: 3. Total unique dependencies: 35.
+Direct dependencies: 3. Total unique dependencies: 34.
 
 ```text
 aux-rs-arcus v0.0.0
@@ -1778,7 +1763,6 @@ ed25519 v2.2.3
 ed25519-dalek v2.2.0
 generic-array v0.14.7
 getrandom v0.2.17
-hex v0.4.3
 hmac v0.12.1
 itoa v1.0.18
 libc v0.2.191
@@ -1804,7 +1788,7 @@ zmij v1.0.23
 
 ## All four exchanges with custom transports
 
-Direct dependencies: 5. Total unique dependencies: 74.
+Direct dependencies: 5. Total unique dependencies: 73.
 
 ```text
 autocfg v1.5.1
@@ -1814,7 +1798,6 @@ aux-rs-hyperliquid v0.0.0
 aux-rs-lighter v0.0.0
 aux-rs-qfex v0.0.0
 base16ct v0.2.0
-base64 v0.22.1
 block-buffer v0.10.4
 cfg-if v1.0.5
 const-oid v0.9.6
@@ -2047,7 +2030,7 @@ zmij v1.0.23
 
 ## Python binding (separate opt-in crate)
 
-Direct dependencies: 8. Total unique dependencies: 165.
+Direct dependencies: 7. Total unique dependencies: 165.
 
 ```text
 atomic-waker v1.1.2

@@ -1,6 +1,7 @@
 use crate::{
     Error, Lighter, Signer, SigningPayload, signing::SigningPurpose, trading::validate_identity,
 };
+use aux_rs_core::hex;
 use futures_util::lock::{Mutex as AsyncMutex, MutexGuard};
 use std::{
     collections::BTreeMap,

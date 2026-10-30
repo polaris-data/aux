@@ -18,7 +18,6 @@ serde_json.workspace = true
 k256.workspace = true
 sha3.workspace = true
 rmp-serde.workspace = true
-hex.workspace = true
 zeroize.workspace = true
 
 [dev-dependencies]

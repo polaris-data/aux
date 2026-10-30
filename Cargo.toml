@@ -21,7 +21,6 @@ aux-rs-hyperliquid = { path = "crates/exchanges/hyperliquid", default-features =
 aux-rs-lighter = { path = "crates/exchanges/lighter", default-features = false }
 goldilocks-crypto = { version = "=0.1.2", default-features = false }
 poseidon-hash = { version = "=0.1.4", default-features = false }
-base64 = { version = "0.22", default-features = false, features = ["alloc"] }
 getrandom = { version = "0.2", default-features = false }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["arbitrary_precision"] }
@@ -36,7 +35,6 @@ futures-util = { version = "0.3", default-features = false, features = ["sink", 
 k256 = { version = "0.13.4", default-features = false, features = ["ecdsa"] }
 sha3 = { version = "0.10", default-features = false }
 rmp-serde = "1.3"
-hex = { version = "0.4", default-features = false, features = ["alloc"] }
 zeroize = { version = "1", default-features = false, features = ["alloc"] }
 
 [workspace.lints.rust]

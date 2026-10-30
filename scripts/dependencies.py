@@ -67,7 +67,7 @@ def render(target):
         "connections use the shared opt-in WebSocket stack and never replay commands.\n",
         "Core contracts have no dependencies. Hyperliquid directly adds core, Serde, "
         "Serde JSON, K256 (secp256k1), SHA3 (Keccak), rmp-serde (MessagePack), "
-        "hex (native addresses/signatures), and zeroize (temporary secret buffers). "
+        "and zeroize (temporary secret buffers). Hex encoding/decoding is shared local code. "
         "Standard transports add their selected I/O and "
         "TLS stacks; Reqwest brings transitive Tower and tracing crates, but the "
         "SDK has no direct middleware or tracing dependency. Ring is the selected "
@@ -76,9 +76,11 @@ def render(target):
         "9110 Retry-After dates. Core contracts still have zero dependencies.\n",
         "Lighter directly adds core, Serde/Serde JSON, goldilocks-crypto 0.1.2 "
         "(ECgFp5/Schnorr primitives), poseidon-hash 0.1.4 (original Poseidon2), "
-        "hex, base64 (native wire signatures), zeroize, getrandom (OS-backed "
+        "zeroize, getrandom (OS-backed "
         "Schnorr randomness), and futures-util (runtime-independent async nonce "
-        "mutex). The two cryptographic primitive versions are pinned and unaudited; "
+        "mutex). Native wire signatures use shared local hex helpers and a private Base64 encoder. "
+        "Hex and Base64 can remain transitive dependencies of third-party crates. "
+        "The two cryptographic primitive versions are pinned and unaudited; "
         "see crates/exchanges/lighter/SIGNING.md for compatibility evidence and review limits. "
         "The Plonky2 transaction permutation is ported with attribution; no existing "
         "exchange client, Go runtime, subprocess, Python runtime, or Alloy umbrella "

@@ -1,4 +1,5 @@
 use crate::Error;
+use aux_rs_core::hex;
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use std::{fmt, str::FromStr};
 

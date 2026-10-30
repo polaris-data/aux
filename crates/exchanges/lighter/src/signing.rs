@@ -1,5 +1,6 @@
 //! ECgFp5/Schnorr contracts, independent of HTTP and the async runtime.
 use crate::Error;
+use aux_rs_core::hex;
 use goldilocks_crypto::{Point, ScalarField};
 use std::{fmt, future::Future};
 use zeroize::Zeroizing;

@@ -37,7 +37,6 @@ dependencies = [
  "aux-rs-core",
  "ed25519-dalek",
  "futures-util",
- "hex",
  "serde",
  "serde_json",
  "tokio",
@@ -63,7 +62,6 @@ name = "aux-rs-hyperliquid"
 version = "0.0.0"
 dependencies = [
  "aux-rs-core",
- "hex",
  "k256",
  "rmp-serde",
  "serde",
@@ -78,11 +76,9 @@ name = "aux-rs-lighter"
 version = "0.0.0"
 dependencies = [
  "aux-rs-core",
- "base64 0.22.1",
  "futures-util",
  "getrandom 0.2.17",
  "goldilocks-crypto",
- "hex",
  "poseidon-hash",
  "serde",
  "serde_json",
@@ -95,7 +91,6 @@ name = "aux-rs-python"
 version = "0.0.0"
 dependencies = [
  "aux-rs",
- "hex",
  "pyo3",
  "pyo3-async-runtimes",
  "serde",
@@ -111,7 +106,6 @@ dependencies = [
  "aux-rs-core",
  "futures-util",
  "getrandom 0.2.17",
- "hex",
  "hmac",
  "serde",
  "serde_json",

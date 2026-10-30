@@ -1,3 +1,4 @@
+use aux_rs_core::hex;
 use aux_rs_lighter::*;
 use serde_json::Value;
 use zeroize::Zeroizing;
@@ -32,6 +33,45 @@ fn prepare(v: &Value) -> PreparedTransaction {
             },
         )
         .unwrap()
+}
+
+// Replay official signatures through the production transaction encoder: local
+// Schnorr signatures use fresh randomness, so they cannot be compared bytewise.
+#[tokio::test]
+async fn pinned_signature_wire_encodings_match_reference() {
+    struct ReferenceSigner {
+        public_key: PublicKey,
+        signature: Signature,
+        digest: [u8; 40],
+    }
+    impl Signer for ReferenceSigner {
+        fn public_key(&self) -> PublicKey {
+            self.public_key
+        }
+        async fn sign(&self, payload: &SigningPayload) -> Result<Signature, Error> {
+            assert_eq!(payload.digest(), &self.digest);
+            Ok(self.signature.clone())
+        }
+    }
+
+    let fixtures: Value =
+        serde_json::from_str(include_str!("fixtures/signing_vectors.json")).unwrap();
+    let mut transactions = 0;
+    for vector in fixtures["vectors"].as_array().unwrap() {
+        if vector["kind"] == "auth" {
+            continue;
+        }
+        let signer = ReferenceSigner {
+            public_key: PublicKey::from_bytes(array(&vector["public_key"])).unwrap(),
+            signature: Signature::from_bytes(array(&vector["signature"])).unwrap(),
+            digest: array(&vector["digest"]),
+        };
+        let signed = prepare(vector).sign(&signer).await.unwrap();
+        let actual: Value = serde_json::from_str(signed.tx_info()).unwrap();
+        assert_eq!(actual, vector["tx_info"]);
+        transactions += 1;
+    }
+    assert_eq!(transactions, 60);
 }
 
 #[tokio::test]

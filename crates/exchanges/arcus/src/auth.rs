@@ -1,4 +1,5 @@
 use crate::*;
+use aux_rs_core::hex;
 use aux_rs_core::{Error as ClientError, Exchange, HttpMethod, HttpRequest, HttpTransport};
 use serde_json::{Value, json};
 use std::{
