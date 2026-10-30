@@ -2,6 +2,7 @@
 //! EIP-712 encoding is protocol logic; K256 and SHA3 supply cryptography.
 
 use crate::{Address, Error, Network};
+use aux_rs_core::hex;
 use k256::ecdsa::{RecoveryId, SigningKey, VerifyingKey};
 use serde::{Deserialize, Serialize};
 use sha3::{Digest, Keccak256};

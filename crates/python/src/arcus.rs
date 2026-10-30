@@ -5,6 +5,7 @@ use crate::{
 };
 use aux_rs::StandardTransport;
 use aux_rs::arcus as a;
+use aux_rs::hex;
 use pyo3::prelude::*;
 use std::sync::Arc;
 use zeroize::Zeroizing;

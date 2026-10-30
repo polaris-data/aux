@@ -1,3 +1,4 @@
+use aux_rs_core::hex;
 use aux_rs_hyperliquid::{
     Action, Address, LocalSigner, Network, Signature, Signer,
     signing::{REFERENCE_REVISION, UserSignedAction, action_hash, l1_signing_payload},

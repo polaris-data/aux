@@ -9,6 +9,8 @@ use crate::{RequestOutcome, TransportConfig, TransportError, TransportErrorKind}
 mod connection;
 #[cfg(feature = "http")]
 mod http;
+#[cfg(feature = "http")]
+mod httpdate;
 #[cfg(feature = "ws")]
 mod ws;
 #[cfg(feature = "ws")]

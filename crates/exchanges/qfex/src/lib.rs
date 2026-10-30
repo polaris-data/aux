@@ -3,6 +3,7 @@ mod auth;
 mod client;
 mod endpoints;
 mod error;
+mod hmac;
 mod types;
 mod ws;
 pub use auth::*;

@@ -20,7 +20,6 @@ tokio = { workspace = true, features = ["rt-multi-thread", "sync", "macros"] }
 serde_json.workspace = true
 serde.workspace = true
 zeroize.workspace = true
-hex.workspace = true
 
 [lints]
 workspace = true

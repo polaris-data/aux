@@ -3,6 +3,7 @@
 mod encoding;
 mod endpoint;
 mod error;
+pub mod hex;
 mod transport;
 
 #[cfg(any(feature = "http", feature = "ws"))]

@@ -11,6 +11,7 @@
 //! ```
 mod auth;
 mod client;
+mod encoding;
 mod endpoints;
 mod error;
 mod poseidon;

@@ -1,10 +1,10 @@
 use crate::LighterClient;
+use crate::encoding::base64_encode;
 use crate::{
     AuthHandler, Error, ExtraFields, Lighter, Signer, SigningPayload, endpoints,
     signing::SigningPurpose,
 };
 use aux_rs_core::{Error as ClientError, Exchange, HttpMethod, HttpRequest, HttpTransport};
-use base64::{Engine, engine::general_purpose::STANDARD};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
@@ -282,7 +282,7 @@ impl PreparedTransaction {
             },
         );
         object.insert("ExpiredAt".into(), self.options.expired_at.into());
-        object.insert("Sig".into(), STANDARD.encode(sig.as_bytes()).into());
+        object.insert("Sig".into(), base64_encode(sig.as_bytes()).into());
         object.insert(
             "L2TxAttributes".into(),
             if self.options.attributes.0.is_empty() {

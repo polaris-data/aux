@@ -1,4 +1,5 @@
 use crate::{convert, errors};
+use aux_rs::hex;
 use aux_rs::{hyperliquid as hl, lighter as lt};
 use hl::Signer as _;
 use lt::Signer as _;

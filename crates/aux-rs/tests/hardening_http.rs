@@ -131,6 +131,8 @@ async fn retry_after_is_honored_and_not_clamped_to_an_earlier_retry() {
         "1",
         "9999999999999999999999999999999",
         "Fri, 01 Jan 2100 00:00:00 GMT",
+        "Tuesday, 31-Dec-69 23:59:59 GMT",
+        "Tue Dec 31 23:59:59 2069",
     ] {
         let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();
         let addr = listener.local_addr().unwrap();

@@ -61,24 +61,29 @@ def render(target):
         "crates and build dependencies.\n",
         f"Target: `{target}`. This is a target-specific inventory, not a count "
         "for every platform. Pass `--target` to inspect a different target.\n",
-        "QFEX adds HMAC-SHA256, OS-backed authentication nonces, and exact JSON numbers. "
+        "QFEX adds a private HMAC-SHA256 helper backed by sha2, OS-backed authentication "
+        "nonces, and exact JSON numbers. HMAC key padding and hashing order are adapted "
+        "with attribution from RustCrypto; hmac remains transitive through Hyperliquid's signer. "
         "Arcus adds Ed25519 signing with ed25519-dalek; market price ticks and size "
         "quantums are derived exactly without floating point. Dedicated QFEX trade "
         "connections use the shared opt-in WebSocket stack and never replay commands.\n",
         "Core contracts have no dependencies. Hyperliquid directly adds core, Serde, "
         "Serde JSON, K256 (secp256k1), SHA3 (Keccak), rmp-serde (MessagePack), "
-        "hex (native addresses/signatures), and zeroize (temporary secret buffers). "
+        "and zeroize (temporary secret buffers). Hex encoding/decoding is shared local code. "
         "Standard transports add their selected I/O and "
         "TLS stacks; Reqwest brings transitive Tower and tracing crates, but the "
         "SDK has no direct middleware or tracing dependency. Ring is the selected "
         "TLS crypto provider; Hyperliquid's exchange signer uses K256. Standard HTTP "
-        "also selects Tokio for cancellation/backoff timers and httpdate for RFC "
-        "9110 Retry-After dates. Core contracts still have zero dependencies.\n",
+        "also selects Tokio for cancellation/backoff timers and uses a private parser "
+        "adapted with attribution from httpdate for RFC 9110 Retry-After dates. "
+        "Core contracts still have zero dependencies.\n",
         "Lighter directly adds core, Serde/Serde JSON, goldilocks-crypto 0.1.2 "
         "(ECgFp5/Schnorr primitives), poseidon-hash 0.1.4 (original Poseidon2), "
-        "hex, base64 (native wire signatures), zeroize, getrandom (OS-backed "
+        "zeroize, getrandom (OS-backed "
         "Schnorr randomness), and futures-util (runtime-independent async nonce "
-        "mutex). The two cryptographic primitive versions are pinned and unaudited; "
+        "mutex). Native wire signatures use shared local hex helpers and a private Base64 encoder. "
+        "Hex and Base64 can remain transitive dependencies of third-party crates. "
+        "The two cryptographic primitive versions are pinned and unaudited; "
         "see crates/exchanges/lighter/SIGNING.md for compatibility evidence and review limits. "
         "The Plonky2 transaction permutation is ported with attribution; no existing "
         "exchange client, Go runtime, subprocess, Python runtime, or Alloy umbrella "
@@ -89,6 +94,8 @@ def render(target):
     for name, package, features in PROFILES:
         packages = inventory(package, features, target)
         names = {dependency.split()[0] for dependency in packages}
+        if "httpdate" in names:
+            raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
         exchanges = {"hyperliquid", "lighter", "qfex", "arcus"}
         if package == "aux-rs":
@@ -96,7 +103,7 @@ def render(target):
                 if f"aux-rs-{exchange}" in names:
                     raise SystemExit(f"Unselected {exchange} adapter leaked into profile: {name}")
             exclusive = {
-                "hyperliquid": {"k256", "sha3", "rmp-serde"},
+                "hyperliquid": {"k256", "sha3", "rmp-serde", "hmac"},
                 "lighter": {"goldilocks-crypto", "poseidon-hash"},
                 "arcus": {"ed25519-dalek", "curve25519-dalek"},
             }
