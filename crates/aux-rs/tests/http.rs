@@ -13,7 +13,7 @@ use tokio::{
     time::timeout,
 };
 
-const META: &str = include_str!("../crates/exchanges/hyperliquid/tests/fixtures/meta.json");
+const META: &str = include_str!("../../exchanges/hyperliquid/tests/fixtures/meta.json");
 
 async fn read_request(stream: &mut TcpStream) -> (String, Vec<u8>) {
     let mut buffer = Vec::new();

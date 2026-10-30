@@ -15,9 +15,8 @@ use tokio::{
     time::{Instant, timeout},
 };
 use tokio_tungstenite::{WebSocketStream as Socket, tungstenite::Message};
-const BOOK: &str = include_str!("../crates/exchanges/hyperliquid/tests/fixtures/book.json");
-const LIGHTER_BOOK: &str =
-    include_str!("../crates/exchanges/lighter/tests/fixtures/book_stream.json");
+const BOOK: &str = include_str!("../../exchanges/hyperliquid/tests/fixtures/book.json");
+const LIGHTER_BOOK: &str = include_str!("../../exchanges/lighter/tests/fixtures/book_stream.json");
 fn config() -> TransportConfig {
     TransportConfig {
         timeout: Duration::from_millis(500),

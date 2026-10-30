@@ -16,8 +16,8 @@ use tokio::{
 };
 use tokio_tungstenite::{WebSocketStream, tungstenite::Message};
 
-const BOOK: &str = include_str!("../crates/exchanges/hyperliquid/tests/fixtures/book.json");
-const TRADES: &str = include_str!("../crates/exchanges/hyperliquid/tests/fixtures/trades.json");
+const BOOK: &str = include_str!("../../exchanges/hyperliquid/tests/fixtures/book.json");
+const TRADES: &str = include_str!("../../exchanges/hyperliquid/tests/fixtures/trades.json");
 
 async fn next_json(socket: &mut WebSocketStream<TcpStream>) -> Value {
     let message = timeout(Duration::from_secs(3), socket.next())

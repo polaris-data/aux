@@ -12,8 +12,8 @@ use tokio::{
 use tokio_tungstenite::{WebSocketStream, tungstenite::Message};
 use zeroize::Zeroizing;
 
-const BOOK: &str = include_str!("../crates/exchanges/lighter/tests/fixtures/book_stream.json");
-const TRADES: &str = include_str!("../crates/exchanges/lighter/tests/fixtures/trades_stream.json");
+const BOOK: &str = include_str!("../../exchanges/lighter/tests/fixtures/book_stream.json");
+const TRADES: &str = include_str!("../../exchanges/lighter/tests/fixtures/trades_stream.json");
 async fn send(socket: &mut WebSocketStream<TcpStream>, text: impl Into<String>) {
     socket
         .send(Message::Text(text.into().into()))

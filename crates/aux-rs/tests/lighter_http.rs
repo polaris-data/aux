@@ -55,7 +55,7 @@ async fn pooled_lighter_http_preserves_paths_form_body_and_auth_header() {
         assert!(headers.starts_with("GET /proxy/api/v1/orderBooks "));
         reply(
             &mut socket,
-            include_str!("../crates/exchanges/lighter/tests/fixtures/markets.json"),
+            include_str!("../../exchanges/lighter/tests/fixtures/markets.json"),
         )
         .await;
         let (headers, _) = request(&mut socket).await;

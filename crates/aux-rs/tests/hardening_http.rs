@@ -16,7 +16,7 @@ use tokio::{
 };
 use zeroize::Zeroizing;
 
-const META: &str = include_str!("../crates/exchanges/hyperliquid/tests/fixtures/meta.json");
+const META: &str = include_str!("../../exchanges/hyperliquid/tests/fixtures/meta.json");
 async fn request(socket: &mut TcpStream) -> (String, Vec<u8>) {
     let mut bytes = Vec::new();
     let end = loop {
