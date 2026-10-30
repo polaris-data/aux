@@ -14,7 +14,7 @@ contains the Cargo workspace configuration and committed lockfile.
 
 Read the [architecture](PLANNING.md) and [domain terminology](CONTEXT.md) before
 changing shared interfaces. Exchange guides are linked from the
-[SDK overview](README.md#overview); recovery and lifecycle contracts live in
+[SDK features](README.md#features); recovery and lifecycle contracts live in
 the [transport guide](HARDENING.md).
 
 ## Rust checks

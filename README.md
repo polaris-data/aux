@@ -24,6 +24,27 @@ Import the Rust package as `aux_rs`. HTTP and WebSocket transports are enabled
 by default; select each exchange explicitly with its feature flag. Unselected
 adapters and Python bindings are excluded from Rust consumers.
 
+### Features
+
+Each client exposes its exchange's native operations and response types.
+Prices and sizes preserve exact native values, and exchange-specific errors
+remain distinguishable from transport failures.
+
+| Feature | Default | Provides |
+| --- | --- | --- |
+| `http` | Yes | Built-in HTTP transport using Reqwest |
+| `ws` | Yes | Built-in WebSocket transport using Tokio Tungstenite |
+| `hyperliquid` | No | [Native Hyperliquid client and signing](crates/exchanges/hyperliquid/README.md) |
+| `lighter` | No | [Native Lighter client and signing](crates/exchanges/lighter/README.md) |
+| `qfex` | No | [Native QFEX client and HMAC authentication](crates/exchanges/qfex/README.md) |
+| `arcus` | No | [Native Arcus client and Ed25519 signing](crates/exchanges/arcus/README.md) |
+
+Exchange features do not activate networking. Disable default features to use
+custom I/O; see the [custom transport guide](HARDENING.md#custom-transports).
+The [transport guide](HARDENING.md) covers configuration, recovery gaps,
+subscription lifecycle, and shutdown. Production dependencies are recorded in
+the [dependency inventory](DEPENDENCIES.md).
+
 ## Examples
 
 ### Market data and streams
@@ -73,17 +94,6 @@ native units, signing, and supported operations.
 
 ## Overview
 
-Each client exposes its exchange's native operations and response types.
-Prices and sizes preserve exact native values, and exchange-specific errors
-remain distinguishable from transport failures.
-
-| Exchange | Feature | Guide |
-| --- | --- | --- |
-| Hyperliquid | `hyperliquid` | [Reads, streams, and signing](crates/exchanges/hyperliquid/README.md) |
-| Lighter | `lighter` | [Reads, streams, and signing](crates/exchanges/lighter/README.md) |
-| QFEX | `qfex` | [Market data and WebSocket trading](crates/exchanges/qfex/README.md) |
-| Arcus | `arcus` | [Perpetuals data and REST trading](crates/exchanges/arcus/README.md) |
-
 The workspace contains:
 
 - [`aux-rs`](crates/aux-rs): public Rust SDK facade, examples, and integration tests.
@@ -92,23 +102,6 @@ The workspace contains:
 - [Python bindings](crates/python/README.md): asyncio clients backed by the Rust SDK.
 
 See the [architecture and roadmap](PLANNING.md) for design and remaining work.
-
-## Features
-
-| Feature | Default | Provides |
-| --- | --- | --- |
-| `http` | Yes | Pooled Reqwest HTTP transport |
-| `ws` | Yes | Tokio Tungstenite WebSocket sessions |
-| `hyperliquid` | No | Native Hyperliquid client and signing |
-| `lighter` | No | Native Lighter client and signing |
-| `qfex` | No | Native QFEX client and HMAC authentication |
-| `arcus` | No | Native Arcus client and Ed25519 signing |
-
-Exchange features do not activate networking. Disable default features to use
-custom I/O; see the [custom transport guide](HARDENING.md#custom-transports).
-The [transport guide](HARDENING.md) covers configuration, recovery gaps,
-subscription lifecycle, and shutdown. Production dependencies are recorded in
-the [dependency inventory](DEPENDENCIES.md).
 
 ## Contributing
 
