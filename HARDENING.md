@@ -1,8 +1,31 @@
 # Transport recovery and lifecycle
 
-Milestone 5 implements bounded safe-read retries, WebSocket recovery with explicit discontinuities, fresh snapshot enforcement, cancellation/shutdown and credential-safe diagnostics. These mechanisms use the standard Rust transports; injected transports own their recovery/lifecycle policies. Native codecs, error codes, decimals and batch outcomes remain exchange-specific.
+The standard Rust transports provide bounded safe-read retries, WebSocket
+recovery with explicit discontinuities, fresh snapshot enforcement,
+cancellation/shutdown, and credential-safe diagnostics. Injected transports own
+their recovery/lifecycle policies. Native codecs, error codes, decimals, and
+batch outcomes remain exchange-specific.
 
 ## Defaults and controls
+
+Configure the built-in transport when constructing the client:
+
+```rust,ignore
+use aux_rs::{
+    TransportConfig,
+    hyperliquid::{Hyperliquid, HyperliquidClient},
+};
+use std::time::Duration;
+
+let client = HyperliquidClient::with_config(
+    Hyperliquid::testnet(),
+    TransportConfig {
+        timeout: Duration::from_secs(5),
+        subscription_capacity: 64,
+        ..TransportConfig::default()
+    },
+)?;
+```
 
 | Setting | Default |
 |---|---|
@@ -17,7 +40,45 @@ Milestone 5 implements bounded safe-read retries, WebSocket recovery with explic
 
 Rust configures `TransportConfig.read_retry` and `.reconnect` separately with `BackoffConfig { max_retries, initial_delay, max_delay }`. `BackoffConfig::disabled()` disables either mechanism. Positive timeouts/capacities, `idle_timeout > heartbeat_interval`, and a positive stability period are required. Enabled backoff policies allow at most 16 retries and require `0 < initial_delay <= max_delay <= 60 seconds`. Heartbeat/idle deadlines that cannot be represented by the platform clock are rejected.
 
+`StandardTransport::with_tls` supplies a common custom TLS policy for HTTP and WebSockets. The standard stack shares a Rustls trust policy and Ring provider across both protocols.
+
 Python clients expose `read_retries`, `reconnect_retries`, `initial_backoff_ms`, `max_backoff_ms`, `reconnect_stable_ms`, `heartbeat_interval_ms`, `idle_timeout_ms`, `max_message_bytes`, `timeout_ms`, and `subscription_capacity`. Python's initial/max backoff values configure both policies. Set either retry count to zero for one-attempt/terminal behavior.
+
+## Custom transports
+
+No exchange is selected by default. The `http` and `ws` features select standard
+transports independently of exchange features. Each adapter includes its native
+signing code without enabling standard transports or an async runtime.
+Without features, `aux-rs-core` has zero dependencies.
+
+For custom I/O:
+
+```toml
+aux-rs = { path = "../connectors/crates/aux-rs", default-features = false, features = ["hyperliquid"] }
+```
+
+Implement `HttpTransport` and/or `WebSocketTransport`, then pass the implementation to `HyperliquidClient::with_transport(exchange, my_transport)`. The [protocol tests](crates/exchanges/hyperliquid/tests/protocol.rs) include a working custom HTTP transport. These contracts use `Send` futures without `async-trait`. Custom transports own their configuration and resource lifecycle.
+
+## Connections and subscriptions
+
+Cloned clients share their HTTP connection pool and WebSocket sessions per URL
+and protocol scope. Hyperliquid public book/trade streams share one scope.
+Account streams are isolated by account because order updates omit the user
+address. Aggregated fills have a separate scope because their events omit the
+aggregation parameter. Custom transports must honor `connection_scope` when
+pooling.
+
+Subscription creation waits for the send or local attachment, without waiting
+for a remote acknowledgement. Native `SubscriptionResponse` events and API
+errors expose the remote result. A late consumer of an existing subscription
+may receive data without a new acknowledgement.
+
+Late Hyperliquid consumers start with live data; earlier snapshots are not
+replayed from a client cache. Lighter duplicate consumers get a fresh native
+snapshot over a separate session. The SDK does not maintain an application order
+book. A handle routes only matching native channel/coin data. Unknown channels
+and malformed frames are exposed explicitly; application-level heartbeat pongs
+are handled internally.
 
 ## Safe reads and submission outcomes
 
@@ -74,9 +135,9 @@ Lighter private order subscriptions can reconnect while their original auth toke
 
 ## Close, shutdown and diagnostics
 
-`unsubscribe()`/`close()` removes a logical consumer; the final consumer sends a remote unsubscribe. The last subscription closes its socket. During an outage, removing the last consumer cancels pending recovery rather than dialing again. Drop schedules local/remote cleanup without waiting; explicit close awaits bounded cleanup, not a server acknowledgement.
+`next()` is cancellation-safe. `unsubscribe()`/`close()` removes a logical consumer; the final consumer sends a remote unsubscribe. The last subscription closes its socket. During an outage, removing the last consumer cancels pending recovery rather than dialing again. Drop schedules local/remote cleanup without waiting; explicit close awaits bounded cleanup, not a server acknowledgement.
 
-`StandardTransport.request_shutdown()` synchronously marks all clones closed and signals cancellation. `await transport.shutdown()` also waits for initial handshakes, HTTP operations and socket drivers, clears the session registry and releases the HTTP pool. New operations on any clone return `Closed`/`NotSent`. In-flight writes can return `Closed`/`Unknown`; they are not replayed. Shutdown attempts native unsubscribe for active keys within one aggregate deadline before bounded socket close. Offline or failed connections cannot guarantee remote acknowledgement.
+`StandardTransport.request_shutdown()` synchronously marks all clones closed and signals cancellation. `await transport.shutdown()` also waits for initial handshakes, HTTP operations and socket drivers, clears the session registry and releases the HTTP pool. New operations on any clone return `Closed`/`NotSent`. New trading calls fail before nonce allocation/signing. In-flight writes can return `Closed`/`Unknown`; they are not replayed. Shutdown attempts native unsubscribe for active keys within one aggregate deadline before bounded socket close. Offline or failed connections cannot guarantee remote acknowledgement.
 
 Python `aclose()` closes owned subscriptions, cancels pending reads/trading/signing callbacks, signals the shared transport, and waits for its cleanup. Cleanup continues if a close await is cancelled. Cancellation of a stream read closes that iterator; a recoverable gap does not. Transport/native error formatting excludes endpoint URLs, headers, raw bodies, server credential echoes and callback secrets. Native response details remain explicitly inspectable in structured fields.
 
