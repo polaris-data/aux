@@ -306,11 +306,9 @@ class BindingTests(unittest.IsolatedAsyncioTestCase):
     async def test_overflow_is_explicit_and_terminal(self):
         client = self.make_client(subscription_capacity=1)
         stream, peer = await self.subscribe(client=client)
-        try:
-            for _ in range(3):
-                await peer.book()
-        except ConnectionClosed:
-            pass
+        # The unread subscription acknowledgement already fills the mailbox.
+        # One book triggers overflow; extra sends can race with socket cleanup.
+        await peer.book()
         await self.assert_cleaned_up(peer)
         with self.assertRaises(TransportError) as caught:
             await bounded(anext(stream))
