@@ -1,0 +1,21 @@
+{
+  "channel": "order_book:4099",
+  "last_updated_at": 1793143089986673,
+  "offset": 20,
+  "order_book": {
+    "code": 0,
+    "asks": [],
+    "bids": [
+      {
+        "price": "3.0000",
+        "size": "11.68"
+      }
+    ],
+    "offset": 20,
+    "nonce": 3650251,
+    "last_updated_at": 1793143089986673,
+    "begin_nonce": 0
+  },
+  "timestamp": 1793297622522,
+  "type": "subscribed/order_book"
+}

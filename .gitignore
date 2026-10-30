@@ -1,1 +1,6 @@
 /target/
+/.venv-oracle/
+/.venv-python/
+__pycache__/
+/crates/python/python/aux_py/_native*.so
+/crates/python/python/aux_py/_native*.pyd

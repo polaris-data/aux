@@ -1,0 +1,1511 @@
+{
+  "repository": "https://github.com/elliottech/lighter-go",
+  "revision": "ebae8edecfee9986b0a5fcde3cb9a06bd4af3a3a",
+  "poseidon_crypto": "v0.0.15",
+  "source_sha256": {
+    "go.mod": "0434bb902f52e0f236fca4d893af15a1f121eaba1e8cde1e32e4425cad56870f",
+    "go.sum": "b551f8b590a4f0f6537ee3ea36b246296ee3c48368bafa3935269887154d41ca",
+    "signer/key_manager.go": "9cf7d1cc6610d1aa92595997e5fcc1c7cff60ba6532a8072b49ff0963fe9a7ce",
+    "types/tx_request.go": "b1db43eb6a974dc6787f0acaf2faef9db16043258bf12b97f620a41a9523a797",
+    "types/txtypes/create_order.go": "981103ecc213335c849d8c4f92ea52b76461dba7c2642826a717780a3978e7f2",
+    "types/txtypes/cancel_order.go": "45c5db03fa64c0a63ac4a58711fdacfa761f8352ff4f72ba706e38f954c11621",
+    "types/txtypes/tx_attributes.go": "8bf1a090444449b2abcb6d0093c3675497fb05efe461083f1167078fd6f18886",
+    "types/txtypes/constants.go": "543555a041834ed7bb160e7c8b4431173e74499882324ba5baa5ef657b324f01"
+  },
+  "vectors": [
+    {
+      "chain_id": 300,
+      "digest": "7f73617b0f1a02623f8bcb8b00f8f2fe99ac0dcd8330ddf1f6c7472c3fed142b6a2b13d013d54f20",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "6f3a319b5c0e39e391677d59bef760876d9129e25d7de365b1defe62aa7b6253029d90f36c117d4579c55af939cbd6040b39a77d7b642761cc748eed88821c1a6521019d46849d2c05636f8c90ee823a",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "bzoxm1wOOeORZ31Zvvdgh22RKeJdfeNlsd7+Yqp7YlMCnZDzbBF9RXnFWvk5y9YECzmnfXtkJ2HMdI7tiIIcGmUhAZ1GhJ0sBWNvjJDugjo=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "2c27717bcde837652d24a207ffb7bdc6b57b95c4b9d47226c9290a273f90f04badcb595107dd5b2f",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "c14842203ea2eb3dfaff5789a7be13ed4ed4c1b041a87b9dc493d044e9a6132f8f88c63bc4ca0c4b84b74974583724aaa2a0cc4d929d74fbea31f61ea55784e2516c2fbb0759ec50787739443935f334",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "wUhCID6i6z36/1eJp74T7U7UwbBBqHudxJPQROmmEy+PiMY7xMoMS4S3SXRYNySqoqDMTZKddPvqMfYepVeE4lFsL7sHWexQeHc5RDk18zQ=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "30cc7c9e612a37371a75a6e9dac5c6237996d24f100d87ce8e8fce9f99d6772d136f030034aef9c5",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "1befd4d042d941ab5d9a5600153705efbc9edc2b411a5c5a4614ae0224a9934e0d72914f642b6952ce10b7c35300ce3c3f06ced6242583f97c67dba3a5e5a325d0eb51fdcc566c31fa8d6e3099d4962d",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "G+/U0ELZQatdmlYAFTcF77ye3CtBGlxaRhSuAiSpk04NcpFPZCtpUs4Qt8NTAM48PwbO1iQlg/l8Z9ujpeWjJdDrUf3MVmwx+o1uMJnUli0=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "8c6d189e56a6744b8880480cf2a820a58051c96723c46803aae4fa66558d873b433f3113069a0143",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "e2537b6f6c8244f5b8ac0488767b34900c91209be9b945f7bbe7fda5110d7eb99463ec7e87573c4064ac10252a57cbf2e3f31f4fc3e053582d759734fd45ba885a18025adff281c6729c130176a8c33f",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "4lN7b2yCRPW4rASIdns0kAyRIJvpuUX3u+f9pRENfrmUY+x+h1c8QGSsECUqV8vy4/MfT8PgU1gtdZc0/UW6iFoYAlrf8oHGcpwTAXaowz8=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "8c990931b601cb1205b6b6b35c5c7fb27fe8c1e97375c19499fd197d83a692ea9add853585ac3c01",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "3a7fbd459d707d75332aacb1753e14bd789df37fe99227c81d1404cb033ece355fe7e54012f9052cb080ce4ef968927269767825c41d742bc168c44ffd6cd8b7f8ebfb34edc1314aa8181a3feb06fa53",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "On+9RZ1wfXUzKqyxdT4UvXid83/pkifIHRQEywM+zjVf5+VAEvkFLLCAzk75aJJyaXZ4JcQddCvBaMRP/WzYt/jr+zTtwTFKqBgaP+sG+lM=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "847b870e7c2a93960b0e93b1442264dde0320ce4e86e22cb9fd5d2e63e61c2c081a2a18e740c6d89",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "11f79b876e224851b6489e3b974d74e2eae9a3b74a12b61bdd4be72ca254f41599d25ca621519b633609f00c28b7c796e657869ba20e14064f1c14189ced496439b418d34eab0b6a6e2da3d9dbae641c",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "Efebh24iSFG2SJ47l0104urpo7dKErYb3UvnLKJU9BWZ0lymIVGbYzYJ8Awot8eW5leGm6IOFAZPHBQYnO1JZDm0GNNOqwtqbi2j2duuZBw=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "35ab4b4bf037282e095eb63fe46af0e9b22342eefbe682e1b4391600018883622935d7b2b379a0f4",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "314db7b6155741990743e5bf1446526f6bdf744792d551231719bc9630f419d5f97ca98719bb8f6ebab2d4dd8082ce4e955d3f1725163679ce264388542aae5cffe64369c00be6aa0d8356f8e3447011",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 281474976710655,
+        "BaseAmount": 281474976710655,
+        "Price": 4294967295,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 9223372036854775807,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "MU23thVXQZkHQ+W/FEZSb2vfdEeS1VEjFxm8ljD0GdX5fKmHGbuPbrqy1N2Ags5OlV0/FyUWNnnOJkOIVCquXP/mQ2nAC+aqDYNW+ONEcBE=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "01972addbedd162e1f0079a1c364cacfadfded2d061a1d598059a16278d2a895fcbb11199d28612f",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "e0a1212b8de2122001bd4708c73a14064fa4ac0f4d67ed146b7af62a871f860ac2264a397463130d685e6a6909f7fcc79be3dcce722174e2ea610bc09998126bab8509d569e0797545d9b546899cec72",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "4KEhK43iEiABvUcIxzoUBk+krA9NZ+0Ua3r2KocfhgrCJko5dGMTDWheamkJ9/zHm+PcznIhdOLqYQvAmZgSa6uFCdVp4Hl1Rdm1Romc7HI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "e8fa88053049bb0248d646349f208ed47902d864e7f182f5ab9511f1b1a0f079e2cb20e0060ba365",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "080bb71c6c69c83ca0cef6dbbbfbecef55e3bc2d19e9f6c2f49492e5bf0e2925f9ecb2bbb177dc29e4f4d4772a7047abfcd12dfb7d609bf8e322fba1cd1609bd216b6d1a31f1d65a0e134dc44b882356",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 2,
+        "TimeInForce": 0,
+        "ReduceOnly": 1,
+        "TriggerPrice": 123456,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "CAu3HGxpyDygzvbbu/vs71XjvC0Z6fbC9JSS5b8OKSX57LK7sXfcKeT01HcqcEer/NEt+31gm/jjIvuhzRYJvSFrbRox8dZaDhNNxEuII1Y=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "2c27717bcde837652d24a207ffb7bdc6b57b95c4b9d47226c9290a273f90f04badcb595107dd5b2f",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "9842a769c9d14941232eeca23488915334bbb4a84c2c75192b7c0939d7e07abbbfebe1e16d2e4b2bb1bde42acd07c6a67972383405d4f694054b03279ad38a66eb83f6c6191f85c447141e9e8fd1b454",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "mEKnacnRSUEjLuyiNIiRUzS7tKhMLHUZK3wJOdfgeru/6+HhbS5LK7G95CrNB8ameXI4NAXU9pQFSwMnmtOKZuuD9sYZH4XERxQeno/RtFQ=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "cb9615364038e40bc93032fcc7cd0c67be0f9e4100c56d95545755c5d9235007af7da1d805c1d879",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "452bc2d440c4a64fedd0f5cb7a08ddb15f3b46352e6a9d6559c85defd079cfb5a64f3d94768dac7ea3d4c9bf55156998afcf2e0bbf53ab36daca719ab895621abd37a210208630ca60b0c2eb86725301",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "RSvC1EDEpk/t0PXLegjdsV87RjUuap1lWchd79B5z7WmTz2Udo2sfqPUyb9VFWmYr88uC79TqzbaynGauJViGr03ohAghjDKYLDC64ZyUwE=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "fc807d470741fc715a540b59b822fd2ef777c875d48a46329fe86183fec5a1524ee01ebac92f9c7b",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "ded9441370ed61f8a5fa78a98076c85ed8045fd0928707b57ddf0772a91591d98d5b600eb477b9786726478126ecadeff6a5ab2db9e5bf89610159ff5378f8ca9820f88d47ea6ea679a49f7149884607",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "3tlEE3DtYfil+nipgHbIXtgEX9CShwe1fd8HcqkVkdmNW2AOtHe5eGcmR4Em7K3v9qWrLbnlv4lhAVn/U3j4ypgg+I1H6m6meaSfcUmIRgc=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "942b91d8af7183e48f69f57aed4c0659a3c2938209c9ebd2e97b593b129b6773862a06f44d2a9bd5",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "039a297009e8ef93d354ffb15eda6383734fe48ae58e0c3b360ebd0931b405c8430fbf7223dff57de66562248df11f54c94b2525db812465c6b6d3440171f344e0f142f6bf4bfab7c3f0400dda200a02",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "A5opcAno75PTVP+xXtpjg3NP5Irljgw7Ng69CTG0BchDD79yI9/1feZlYiSN8R9UyUslJduBJGXGttNEAXHzRODxQva/S/q3w/BADdogCgI=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "2fbfcdb0f7db5942a09860a0e6891be489a15b988942e1982346b35ac24968561f7a10e4f19d29ae",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "51fd4154abcc68e3aafde4b9fec16213e46febc8f45d46e3d8fbee58f83fd10933a1afb3f1b8607ff5024a40eb0ca704f2a23f1d3b9a25d55596cc06f2a1b99c3d0411a7f8bf2e76d45e50cc0b479f00",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "Uf1BVKvMaOOq/eS5/sFiE+Rv68j0XUbj2PvuWPg/0Qkzoa+z8bhgf/UCSkDrDKcE8qI/HTuaJdVVlswG8qG5nD0EEaf4vy521F5QzAtHnwA=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "f3fc88e99c413b574de412ba5fb547f55fb27fd44e6e5122ddfa79f1d156d77558c5fe57d315df58",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "1b609ac7cdab1e5dc61508aceab5743b13d9f420d1fdfdd64cc259f9347baf34f2ffe376c2bee42ccf9ff1ccc82df18ad68a1c2b4fa613ad262dc3ae150202a9c93da606bc84504b15001c093b411b53",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "G2Cax82rHl3GFQis6rV0OxPZ9CDR/f3WTMJZ+TR7rzTy/+N2wr7kLM+f8czILfGK1oocK0+mE60mLcOuFQICqck9pga8hFBLFQAcCTtBG1M=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "b448d83cc3b00073ae02c2fb204ee69a083a2acbba15a2798fae7ea362c24bd5fa152faaf14c3ef6",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "783d5721a8fdfa3d3933aba0c5dc2202398a1e51f1e3ae4eecc72e053550bc842d0546ef33cc7903cfc23473eedb14aa636d7936747f65e6007c997ef51b51312a38d1fabbaf43fbd9fab990c933867c",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "eD1XIaj9+j05M6ugxdwiAjmKHlHx465O7McuBTVQvIQtBUbvM8x5A8/CNHPu2xSqY215NnR/ZeYAfJl+9RtRMSo40fq7r0P72fq5kMkzhnw=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "65acfef586cba971aba2112c90c33621d5679078b88863dc218d792513bfe0db27e8ffd981cbb4d5",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "2d635a930157da1f7063932ee93d044b3eb1b4954d4d163d8c4528486128153497233293245f4b26be9c3101958235c82c3d91a8501e849dfb54033a99b2e9428abad7b78fd7ea4b70dccdecd8a0b459",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 281474976710655,
+        "BaseAmount": 281474976710655,
+        "Price": 4294967295,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 9223372036854775807,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "LWNakwFX2h9wY5Mu6T0ESz6xtJVNTRY9jEUoSGEoFTSXIzKTJF9LJr6cMQGVgjXILD2RqFAehJ37VAM6mbLpQoq617eP1+pLcNzN7NigtFk=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "3c048a13d2bd67b2130fe2971c1701eb8caac9decf2f10ace1eb97bfcb1d9566ad3d6ac110da359b",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "eea6b07a5fda632f92095a24fce9a78e83a30264c47ad494012f6ba760bd5fe317220f88251d09155a59db1937ffabb80a97cab23d72e059b662b56b22852beb14d194589042a09cefddf0f7d7e2f66a",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "7qawel/aYy+SCVok/OmnjoOjAmTEetSUAS9rp2C9X+MXIg+IJR0JFVpZ2xk3/6u4CpfKsj1y4Fm2YrVrIoUr6xTRlFiQQqCc793w99fi9mo=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "977beaa726b6841066c0625b942ff230b77e9b917a4dff1bd4842dbcefd1005236b1b80ea0c4ce08",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "create",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "a450fa413659a6471b64a277c4ec80b368613f4908cfe852afe921e6799f76b3457f8ad859658b1448af9152608069a0813c825f756f0735d1a47886de30172d6716de19776089ccc18075a7a39a746b",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 2,
+        "TimeInForce": 0,
+        "ReduceOnly": 1,
+        "TriggerPrice": 123456,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "pFD6QTZZpkcbZKJ3xOyAs2hhP0kIz+hSr+kh5nmfdrNFf4rYWWWLFEivkVJggGmggTyCX3VvBzXRpHiG3jAXLWcW3hl3YInMwYB1p6OadGs=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "fc807d470741fc715a540b59b822fd2ef777c875d48a46329fe86183fec5a1524ee01ebac92f9c7b",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "cancel",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "85400cccf2f47b2f57f463e4741657af5bd2a1d12aa399bdd903df7ca61e8a98c263c8f2ba1b9e5dc4bf7fc8a3e493b845acc0f2c4453139de3316febb5c66c23cfc20834ae175e7449c378d42e46122",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "hUAMzPL0ey9X9GPkdBZXr1vSodEqo5m92QPffKYeipjCY8jyuhueXcS/f8ij5JO4RazA8sRFMTneMxb+u1xmwjz8IINK4XXnRJw3jULkYSI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "account_index": 37,
+      "api_key_index": 3,
+      "chain_id": 300,
+      "deadline": 1800000000,
+      "digest": "17d96815418e0386203c9f4d5cc0fa5026b9f3c6a3b3dd3cc84cb237ebf3586168c46b18f663d29d",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "auth",
+      "message": "1800000000:37:3",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "05218e326ebff48afded41c4e9cf4fce9461081f2dd96bb94282f1da27caffcbe1a0d87d1c85f003a4dffd61281a1b5d9fb2e212508c381aa5a4afb0b92694c6d37d0e25c93500b4255f2702e17a0f7c",
+      "token": "1800000000:37:3:05218e326ebff48afded41c4e9cf4fce9461081f2dd96bb94282f1da27caffcbe1a0d87d1c85f003a4dffd61281a1b5d9fb2e212508c381aa5a4afb0b92694c6d37d0e25c93500b4255f2702e17a0f7c"
+    },
+    {
+      "account_index": 37,
+      "api_key_index": 3,
+      "chain_id": 300,
+      "deadline": 1800028800,
+      "digest": "1c32a0e183d76d5adef7ac3baba506b4af03d01ceb3843a126a4e30cb3da91428292f37e4d0f7cd1",
+      "key": "01000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "kind": "auth",
+      "message": "1800028800:37:3",
+      "public_key": "04000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "6eba25147d3adbde7f9d280049375efa7667feb4940082f751429519efe5396f517d435642c9c7713c466680199f34091d03fcd6f0242aeec29eb91a52ff7d88c4bd6ae6011ac610b682bc29bb36380e",
+      "token": "1800028800:37:3:6eba25147d3adbde7f9d280049375efa7667feb4940082f751429519efe5396f517d435642c9c7713c466680199f34091d03fcd6f0242aeec29eb91a52ff7d88c4bd6ae6011ac610b682bc29bb36380e"
+    },
+    {
+      "chain_id": 300,
+      "digest": "7f73617b0f1a02623f8bcb8b00f8f2fe99ac0dcd8330ddf1f6c7472c3fed142b6a2b13d013d54f20",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "0aec478db7e97d0220a0448b109a4564c6eef51b1fbdf6aaca63585182ccca78099e79cdc23c4f2e1412bb0012a4db9bff4c07aa8ef597601d186eca38e076f38e259859142e4912dd1aa690e5245c52",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "CuxHjbfpfQIgoESLEJpFZMbu9RsfvfaqymNYUYLMyngJnnnNwjxPLhQSuwASpNub/0wHqo71l2AdGG7KOOB2844lmFkULkkS3RqmkOUkXFI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "2c27717bcde837652d24a207ffb7bdc6b57b95c4b9d47226c9290a273f90f04badcb595107dd5b2f",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "a75b27b91b8367c05b857b04df2720f0e120c8138cf8911caf1912d2810c0a36943ad1d00df91467f26813bef407cb98c0535788d2f0fc15e1adfc6c38cc4db0a4ddba4790a2fdfdd7f4055b93e76502",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "p1snuRuDZ8BbhXsE3ycg8OEgyBOM+JEcrxkS0oEMCjaUOtHQDfkUZ/JoE770B8uYwFNXiNLw/BXhrfxsOMxNsKTdukeQov391/QFW5PnZQI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "30cc7c9e612a37371a75a6e9dac5c6237996d24f100d87ce8e8fce9f99d6772d136f030034aef9c5",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "9baf0308f6f4fb2f2ec2adbc1ee52feb6af340101b5b1b1008c76b0c8c97443a08d5db549e354424b418abab48de88f4cd422e28e35551ddc467d656bd20dbb8db991fde07f1030af34f588134044e3e",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "m68DCPb0+y8uwq28HuUv62rzQBAbWxsQCMdrDIyXRDoI1dtUnjVEJLQYq6tI3oj0zUIuKONVUd3EZ9ZWvSDbuNuZH94H8QMK809YgTQETj4=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "8c6d189e56a6744b8880480cf2a820a58051c96723c46803aae4fa66558d873b433f3113069a0143",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "21c61dc9cebb8816d3f052d298d805489da8767a42616bb8fcf3b5e12e2d469d82be685d88830f72eebbdef7a1126ac6ea9f1c817eac8b5e8929b2c417216d7612bc41dd5bc1d2a495eab7b98fec3a00",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "IcYdyc67iBbT8FLSmNgFSJ2odnpCYWu4/PO14S4tRp2CvmhdiIMPcu673vehEmrG6p8cgX6si16JKbLEFyFtdhK8Qd1bwdKkleq3uY/sOgA=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "8c990931b601cb1205b6b6b35c5c7fb27fe8c1e97375c19499fd197d83a692ea9add853585ac3c01",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "4055412ae2b9477db6f6b86306ff6f6373befbc2d918a9577f87d5d32b73db17a1752d6527782d519d224c3e4fb7cf806f3f7b3b585d91b77c59eaf1b382133d4d6367af217e4fdbcab7b6209617e405",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "QFVBKuK5R3229rhjBv9vY3O++8LZGKlXf4fV0ytz2xehdS1lJ3gtUZ0iTD5Pt8+Abz97O1hdkbd8Werxs4ITPU1jZ68hfk/byre2IJYX5AU=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "847b870e7c2a93960b0e93b1442264dde0320ce4e86e22cb9fd5d2e63e61c2c081a2a18e740c6d89",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "1277829fab8fa745afc4bc20a1661c30d4a71455c2ddd91c4d72c20c21464dc3d47c8867360adb7871d70825ab6664774b53579ffbe21e5c517fae1e73a65a9b0b43df82c23b98882bee544d8f61db0a",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "EneCn6uPp0WvxLwgoWYcMNSnFFXC3dkcTXLCDCFGTcPUfIhnNgrbeHHXCCWrZmR3S1NXn/viHlxRf64ec6ZamwtD34LCO5iIK+5UTY9h2wo=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "35ab4b4bf037282e095eb63fe46af0e9b22342eefbe682e1b4391600018883622935d7b2b379a0f4",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "13af748821b5b9684a28a962742d68de186da29ea377456abf1f636768f2520098bb328909cc9c1f4dc4bdd077c7654e165ed0bab84a7a68d98aeaa5884986c6fe71f26961d49502641462fc84c82a18",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 281474976710655,
+        "BaseAmount": 281474976710655,
+        "Price": 4294967295,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 9223372036854775807,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "E690iCG1uWhKKKlidC1o3hhtop6jd0Vqvx9jZ2jyUgCYuzKJCcycH03EvdB3x2VOFl7QurhKemjZiuqliEmGxv5x8mlh1JUCZBRi/ITIKhg=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "01972addbedd162e1f0079a1c364cacfadfded2d061a1d598059a16278d2a895fcbb11199d28612f",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "21f64a56bb283ba8a79d1813215cc2f7d7a7d8503c670c37c80c3342c4b1e7c9352499127657934c75b30fe6b047344907636c6db7419a1074f24728e8b7f95750510331ef2177d2e24e14e97e146548",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "IfZKVrsoO6innRgTIVzC99en2FA8Zww3yAwzQsSx58k1JJkSdleTTHWzD+awRzRJB2NsbbdBmhB08kco6Lf5V1BRAzHvIXfS4k4U6X4UZUg=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "e8fa88053049bb0248d646349f208ed47902d864e7f182f5ab9511f1b1a0f079e2cb20e0060ba365",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "79559ba889aefe53ee94b261a2e808295b0d3456ddb05ee347114c05fb1b6aafd1375226ad23be185e214804c3197d7d9e3006d2305730ba88347e43d575763f5b8049d02b6b1d914baf73f562fa2f4d",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 2,
+        "TimeInForce": 0,
+        "ReduceOnly": 1,
+        "TriggerPrice": 123456,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "eVWbqImu/lPulLJhougIKVsNNFbdsF7jRxFMBfsbaq/RN1ImrSO+GF4hSATDGX19njAG0jBXMLqINH5D1XV2P1uASdArax2RS69z9WL6L00=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "2c27717bcde837652d24a207ffb7bdc6b57b95c4b9d47226c9290a273f90f04badcb595107dd5b2f",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "e6e9d397ff12169f154bc0a610b8eac97127bba0acfb2e74cdccceb3cc858ba3fcc7792e8e1adf4f5165816e9932ac822e0643d0c2af1d5b3e94cf481d9aea6e7328f6298c55e0235699b35f5ec73c2e",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "5unTl/8SFp8VS8CmELjqyXEnu6Cs+y50zczOs8yFi6P8x3kujhrfT1FlgW6ZMqyCLgZD0MKvHVs+lM9IHZrqbnMo9imMVeAjVpmzX17HPC4=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "cb9615364038e40bc93032fcc7cd0c67be0f9e4100c56d95545755c5d9235007af7da1d805c1d879",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "06ab6374782a0e2c2dcfe19deb98ad2283fce96b4dfa66a436db42cda4dc9b514850c30597840e698e230ec0712c6817f62f6d7d7edb5e682f52f06ac6a958d4a809863a1346d65c84eee6448dc2e827",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "BqtjdHgqDiwtz+Gd65itIoP86WtN+makNttCzaTcm1FIUMMFl4QOaY4jDsBxLGgX9i9tfX7bXmgvUvBqxqlY1KgJhjoTRtZchO7mRI3C6Cc=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "fc807d470741fc715a540b59b822fd2ef777c875d48a46329fe86183fec5a1524ee01ebac92f9c7b",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "cf9c4e77192a7eac0f6b49e476ba27eadaaf4ef71aa0c3b4e525141aceb91accacbb3f7e008c381d902086615f0e4249df26de05684561ccced0b31e0f052045bbba537a4631b282c18c0c526811da02",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "z5xOdxkqfqwPa0nkdron6tqvTvcaoMO05SUUGs65Gsysuz9+AIw4HZAghmFfDkJJ3ybeBWhFYczO0LMeDwUgRbu6U3pGMbKCwYwMUmgR2gI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "942b91d8af7183e48f69f57aed4c0659a3c2938209c9ebd2e97b593b129b6773862a06f44d2a9bd5",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "b82e36ef01e84118d7974fa616519a20d8c9e14ae48479facc697ef2df123f34638a6d491c2d764527e78bc63434f7ed6f93ace6bef0dfbc08506478c013e4f883d444ff4d203b93b77bfe0147ba021f",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "uC427wHoQRjXl0+mFlGaINjJ4UrkhHn6zGl+8t8SPzRjim1JHC12RSfni8Y0NPftb5Os5r7w37wIUGR4wBPk+IPURP9NIDuTt3v+AUe6Ah8=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "2fbfcdb0f7db5942a09860a0e6891be489a15b988942e1982346b35ac24968561f7a10e4f19d29ae",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "6c9601e3b9a934fc4d4f63d26e916bce7521054e80f11d21de2929d3e7be9765f745ea370aeeeb78e0a262af7b56d619b36ceb72ab142397d337fa1ad269c44fb325047301d39248ad7b79ff2277c122",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "bJYB47mpNPxNT2PSbpFrznUhBU6A8R0h3ikp0+e+l2X3Reo3Cu7reOCiYq97VtYZs2zrcqsUI5fTN/oa0mnET7MlBHMB05JIrXt5/yJ3wSI=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "f3fc88e99c413b574de412ba5fb547f55fb27fd44e6e5122ddfa79f1d156d77558c5fe57d315df58",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "b310aa89ffe0f1a74382e36186014533ee3a441311b80a8a6602d866a4ee80b34b96aec6c9869005f546e7b9780b73c57feaac4838bd616132dd328cc76c3a0fd6c93df70eb704171580bca9c39bf269",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "sxCqif/g8adDguNhhgFFM+46RBMRuAqKZgLYZqTugLNLlq7GyYaQBfVG57l4C3PFf+qsSDi9YWEy3TKMx2w6D9bJPfcOtwQXFYC8qcOb8mk=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "b448d83cc3b00073ae02c2fb204ee69a083a2acbba15a2798fae7ea362c24bd5fa152faaf14c3ef6",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "7a442f07432e6d8b9cd835a29db5f70a96dd9ad875a5e0091ab1c61de132149ad7537dc98c09b0337ca1434fde8b99a7196bbd87fe79a8a512aa8d34f3288f8ff51bb0c24afb3d4f47f123f04dfd6354",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "ekQvB0MubYuc2DWinbX3Cpbdmth1peAJGrHGHeEyFJrXU33JjAmwM3yhQ0/ei5mnGWu9h/55qKUSqo008yiPj/UbsMJK+z1PR/Ej8E39Y1Q=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "65acfef586cba971aba2112c90c33621d5679078b88863dc218d792513bfe0db27e8ffd981cbb4d5",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "3a00bc8650e2e38c7aa1a92446f55c2dd5ad5e3a06e67ec8c0cf9affa5c09dffe5ceb22e9e76d6162d7b14e1f00c09d456ff91eb4ecb9a69a68ecda3dd21df4c34fb9880dc93f9539c44b9b5b74a4715",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 281474976710655,
+        "BaseAmount": 281474976710655,
+        "Price": 4294967295,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 9223372036854775807,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "OgC8hlDi44x6oakkRvVcLdWtXjoG5n7IwM+a/6XAnf/lzrIunnbWFi17FOHwDAnUVv+R607Lmmmmjs2j3SHfTDT7mIDck/lTnES5tbdKRxU=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "3c048a13d2bd67b2130fe2971c1701eb8caac9decf2f10ace1eb97bfcb1d9566ad3d6ac110da359b",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "9d084d153b42efc5e5b32be4143415503345485b3a6c271f7b5a956d2ac469328ac089b730d9be49072be39d40296fae5caff4a18c77e93e337eaa3deab0f189d2a52985fd87f69448b2cb1361db3609",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "nQhNFTtC78XlsyvkFDQVUDNFSFs6bCcfe1qVbSrEaTKKwIm3MNm+SQcr451AKW+uXK/0oYx36T4zfqo96rDxidKlKYX9h/aUSLLLE2HbNgk=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "977beaa726b6841066c0625b942ff230b77e9b917a4dff1bd4842dbcefd1005236b1b80ea0c4ce08",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "create",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "e0896fc302c7bb7832b8eb1bc4dc156a27873521040e94e182268bb64b2b76c9643914f8f0673942b931656d1e5cba5723ff1a0cff34ce3dc60058efe275af1decf6877b23ec4492f89034b7b0e78476",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 2,
+        "TimeInForce": 0,
+        "ReduceOnly": 1,
+        "TriggerPrice": 123456,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "4IlvwwLHu3gyuOsbxNwVaieHNSEEDpThgiaLtksrdslkORT48Gc5QrkxZW0eXLpXI/8aDP80zj3GAFjv4nWvHez2h3sj7ESS+JA0t7DnhHY=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "fc807d470741fc715a540b59b822fd2ef777c875d48a46329fe86183fec5a1524ee01ebac92f9c7b",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "cancel",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "3eea69ba2f4b149eb59328e56aa4601149546fc388a6ad143335d3c88242ecd244ed2aded2758a5f09023a7b8a419ccb305ab296a7f481adc83cb60e1812e13cb71a45e5168eb3b4eac7a5c246599222",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "Puppui9LFJ61kyjlaqRgEUlUb8OIpq0UMzXTyIJC7NJE7Sre0nWKXwkCOnuKQZzLMFqylqf0ga3IPLYOGBLhPLcaReUWjrO06selwkZZkiI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "account_index": 37,
+      "api_key_index": 3,
+      "chain_id": 300,
+      "deadline": 1800000000,
+      "digest": "17d96815418e0386203c9f4d5cc0fa5026b9f3c6a3b3dd3cc84cb237ebf3586168c46b18f663d29d",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "auth",
+      "message": "1800000000:37:3",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "a5e54ab9e0eda29e8518f10b27377a5385ccccc1b58b2754de318b8248436518638719ca14c65a7a084325f90ccffc1c16fde0e3d25de1494b09d46da5316bd60209c51548f9aa275c8fbd09316c2333",
+      "token": "1800000000:37:3:a5e54ab9e0eda29e8518f10b27377a5385ccccc1b58b2754de318b8248436518638719ca14c65a7a084325f90ccffc1c16fde0e3d25de1494b09d46da5316bd60209c51548f9aa275c8fbd09316c2333"
+    },
+    {
+      "account_index": 37,
+      "api_key_index": 3,
+      "chain_id": 300,
+      "deadline": 1800028800,
+      "digest": "1c32a0e183d76d5adef7ac3baba506b4af03d01ceb3843a126a4e30cb3da91428292f37e4d0f7cd1",
+      "key": "1234567890abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd34",
+      "kind": "auth",
+      "message": "1800028800:37:3",
+      "public_key": "21fca161346d22a9ce54788523e6b9b5b3cf68043a3b6ae407b38b760d7d81a86747f735f8822dc1",
+      "signature": "843eaf9851ab93848246beb32525b0af9c445a7df851cc25bde2e245f77af11c86ebc53d8525dd53bfb4d465bb20a557e62c9bf30f352271f47b1e1984f32d40e18a256a7f9c0eab35dd95ae589da416",
+      "token": "1800028800:37:3:843eaf9851ab93848246beb32525b0af9c445a7df851cc25bde2e245f77af11c86ebc53d8525dd53bfb4d465bb20a557e62c9bf30f352271f47b1e1984f32d40e18a256a7f9c0eab35dd95ae589da416"
+    },
+    {
+      "chain_id": 300,
+      "digest": "7f73617b0f1a02623f8bcb8b00f8f2fe99ac0dcd8330ddf1f6c7472c3fed142b6a2b13d013d54f20",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "4d5f71cf00a43479a31274e7618fa9d2e8f4e9016397005285507d84830a72c6ab0c0159ce44320c1e5f71cf00a43479a31274e7618fa9d2e8f4e9016397005285507d84830a72c6ab0c0159ce44320c",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "TV9xzwCkNHmjEnTnYY+p0uj06QFjlwBShVB9hIMKcsarDAFZzkQyDB5fcc8ApDR5oxJ052GPqdLo9OkBY5cAUoVQfYSDCnLGqwwBWc5EMgw=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "2c27717bcde837652d24a207ffb7bdc6b57b95c4b9d47226c9290a273f90f04badcb595107dd5b2f",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "3977b749d21bb53b2e047c25e551fa851d2c24acbc0a29bf519dc768b43e6062be855c90bb40ce18ad76b749d21bb53b2e047c25e551fa851d2c24acbc0a29bf519dc768b43e6062be855c90bb40ce18",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "OXe3SdIbtTsuBHwl5VH6hR0sJKy8Cim/UZ3HaLQ+YGK+hVyQu0DOGK12t0nSG7U7LgR8JeVR+oUdLCSsvAopv1Gdx2i0PmBivoVckLtAzhg=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "30cc7c9e612a37371a75a6e9dac5c6237996d24f100d87ce8e8fce9f99d6772d136f030034aef9c5",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "a9f0f2e2309255bd9574d61d0016d9e0a6b22252a5e073a8283d70f294c89c223b2bb5d66c85130779f0f2e2309255bd9574d61d0016d9e0a6b22252a5e073a8283d70f294c89c223b2bb5d66c851307",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "qfDy4jCSVb2VdNYdABbZ4KayIlKl4HOoKD1w8pTInCI7K7XWbIUTB3nw8uIwklW9lXTWHQAW2eCmsiJSpeBzqCg9cPKUyJwiOyu11myFEwc=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "8c6d189e56a6744b8880480cf2a820a58051c96723c46803aae4fa66558d873b433f3113069a0143",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "f05ccc7c3a82f2b8384d6e945083de0a0589483e50e486155878c60a980584d77ddb14317fd48c58635ccc7c3a82f2b8384d6e945083de0a0589483e50e486155878c60a980584d77ddb14317fd48c58",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "8FzMfDqC8rg4TW6UUIPeCgWJSD5Q5IYVWHjGCpgFhNd92xQxf9SMWGNczHw6gvK4OE1ulFCD3goFiUg+UOSGFVh4xgqYBYTXfdsUMX/UjFg=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "8c990931b601cb1205b6b6b35c5c7fb27fe8c1e97375c19499fd197d83a692ea9add853585ac3c01",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "e9e731fe6a55376e806a0ca30650b0f0544f2e56a8c77b6cf1e473efeb6b5e3315dcefed57f22330b8e731fe6a55376e806a0ca30650b0f0544f2e56a8c77b6cf1e473efeb6b5e3315dcefed57f22330",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "6ecx/mpVN26AagyjBlCw8FRPLlaox3ts8eRz7+trXjMV3O/tV/IjMLjnMf5qVTdugGoMowZQsPBUTy5WqMd7bPHkc+/ra14zFdzv7VfyIzA=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "847b870e7c2a93960b0e93b1442264dde0320ce4e86e22cb9fd5d2e63e61c2c081a2a18e740c6d89",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "a7b3b7f5c3685d5e4666ff0d8be5b2218f7896db26359432feb0a41ac5398664c8c1f6313b08e64b19b3b7f5c3685d5e4666ff0d8be5b2218f7896db26359432feb0a41ac5398664c8c1f6313b08e64b",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "p7O39cNoXV5GZv8Ni+WyIY94ltsmNZQy/rCkGsU5hmTIwfYxOwjmSxmzt/XDaF1eRmb/DYvlsiGPeJbbJjWUMv6wpBrFOYZkyMH2MTsI5ks=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "35ab4b4bf037282e095eb63fe46af0e9b22342eefbe682e1b4391600018883622935d7b2b379a0f4",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "075cf610e27c349fa32c6856ef7da984320ff79670ffa55cc0e94bbe20818a495d9e5c170905f912d55bf610e27c349fa32c6856ef7da984320ff79670ffa55cc0e94bbe20818a495d9e5c170905f912",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 281474976710655,
+        "BaseAmount": 281474976710655,
+        "Price": 4294967295,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 9223372036854775807,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "B1z2EOJ8NJ+jLGhW732phDIP95Zw/6VcwOlLviCBikldnlwXCQX5EtVb9hDifDSfoyxoVu99qYQyD/eWcP+lXMDpS74ggYpJXZ5cFwkF+RI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "01972addbedd162e1f0079a1c364cacfadfded2d061a1d598059a16278d2a895fcbb11199d28612f",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "292c0d459601745dbc8e8ff2bb79ca385d06418c7b41e9b88faed14cafbcad45bbc651f0b9ca672e9a2b0d459601745dbc8e8ff2bb79ca385d06418c7b41e9b88faed14cafbcad45bbc651f0b9ca672e",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "KSwNRZYBdF28jo/yu3nKOF0GQYx7Qem4j67RTK+8rUW7xlHwucpnLporDUWWAXRdvI6P8rt5yjhdBkGMe0HpuI+u0UyvvK1Fu8ZR8LnKZy4=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "e8fa88053049bb0248d646349f208ed47902d864e7f182f5ab9511f1b1a0f079e2cb20e0060ba365",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "eff71513405ffe2221d4b2cf083e32f56c5ec7afdc06d419de544a83c03d276398a6c28ff8a61202bcf71513405ffe2221d4b2cf083e32f56c5ec7afdc06d419de544a83c03d276398a6c28ff8a61202",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 2,
+        "TimeInForce": 0,
+        "ReduceOnly": 1,
+        "TriggerPrice": 123456,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "7/cVE0Bf/iIh1LLPCD4y9Wxex6/cBtQZ3lRKg8A9J2OYpsKP+KYSArz3FRNAX/4iIdSyzwg+MvVsXsev3AbUGd5USoPAPSdjmKbCj/imEgI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 300,
+      "digest": "2c27717bcde837652d24a207ffb7bdc6b57b95c4b9d47226c9290a273f90f04badcb595107dd5b2f",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "6eab9cda466d5e5971922fb476b97e69f61b0aff2035e2fbe41421aec82fea34c8aea4bef32b2943deaa9cda466d5e5971922fb476b97e69f61b0aff2035e2fbe41421aec82fea34c8aea4bef32b2943",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "bquc2kZtXllxki+0drl+afYbCv8gNeL75BQhrsgv6jTIrqS+8yspQ96qnNpGbV5ZcZIvtHa5fmn2Gwr/IDXi++QUIa7IL+o0yK6kvvMrKUM=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "cb9615364038e40bc93032fcc7cd0c67be0f9e4100c56d95545755c5d9235007af7da1d805c1d879",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "f0a3977b05bbdb7a25e05186743964771153c5f88705c5b0ada7bbb962d47ee7f67095cb96d80349c1a3977b05bbdb7a25e05186743964771153c5f88705c5b0ada7bbb962d47ee7f67095cb96d80349",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "8KOXewW723ol4FGGdDlkdxFTxfiHBcWwrae7uWLUfuf2cJXLltgDScGjl3sFu9t6JeBRhnQ5ZHcRU8X4hwXFsK2nu7li1H7n9nCVy5bYA0k=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "fc807d470741fc715a540b59b822fd2ef777c875d48a46329fe86183fec5a1524ee01ebac92f9c7b",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "13cb31d678269567f103504c9d00e5d0024be9f8716b74909971d8847e4708c7fa7bd9f4cd340c4287ca31d678269567f103504c9d00e5d0024be9f8716b74909971d8847e4708c7fa7bd9f4cd340c42",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "E8sx1ngmlWfxA1BMnQDl0AJL6fhxa3SQmXHYhH5HCMf6e9n0zTQMQofKMdZ4JpVn8QNQTJ0A5dACS+n4cWt0kJlx2IR+RwjH+nvZ9M00DEI=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "942b91d8af7183e48f69f57aed4c0659a3c2938209c9ebd2e97b593b129b6773862a06f44d2a9bd5",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "e2a25d3a2f2301bc4042834f8a763b9a3eca6986d475c0545766fa0adba5bf3d4dafc6d4daa19d63b2a25d3a2f2301bc4042834f8a763b9a3eca6986d475c0545766fa0adba5bf3d4dafc6d4daa19d63",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "4qJdOi8jAbxAQoNPinY7mj7KaYbUdcBUV2b6Ctulvz1Nr8bU2qGdY7KiXTovIwG8QEKDT4p2O5o+ymmG1HXAVFdm+grbpb89Ta/G1NqhnWM=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "2fbfcdb0f7db5942a09860a0e6891be489a15b988942e1982346b35ac24968561f7a10e4f19d29ae",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "f6eaa5a44d4cf9b6bd3cef97b84df98d44dbe2b9005c39f3f018d574e2cb63d390dfc343e9659e6069eaa5a44d4cf9b6bd3cef97b84df98d44dbe2b9005c39f3f018d574e2cb63d390dfc343e9659e60",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "9uqlpE1M+ba9PO+XuE35jUTb4rkAXDnz8BjVdOLLY9OQ38ND6WWeYGnqpaRNTPm2vTzvl7hN+Y1E2+K5AFw58/AY1XTiy2PTkN/DQ+llnmA=",
+        "L2TxAttributes": {
+          "1": 42,
+          "2": 50,
+          "3": 25
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "f3fc88e99c413b574de412ba5fb547f55fb27fd44e6e5122ddfa79f1d156d77558c5fe57d315df58",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "84824f09eb0c041602e0b30804494831f89fe2b08172414fa056285e17611804e843d93bec1e6b3953824f09eb0c041602e0b30804494831f89fe2b08172414fa056285e17611804e843d93bec1e6b39",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "hIJPCesMBBYC4LMIBElIMfif4rCBckFPoFYoXhdhGAToQ9k77B5rOVOCTwnrDAQWAuCzCARJSDH4n+KwgXJBT6BWKF4XYRgE6EPZO+weazk=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "b448d83cc3b00073ae02c2fb204ee69a083a2acbba15a2798fae7ea362c24bd5fa152faaf14c3ef6",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "b6eb660562ef15aa0b59836f51549d3e1bc31136c98c072257b8bb379526e228aa496b7819bb944d28eb660562ef15aa0b59836f51549d3e1bc31136c98c072257b8bb379526e228aa496b7819bb944d",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "tutmBWLvFaoLWYNvUVSdPhvDETbJjAciV7i7N5Um4iiqSWt4GbuUTSjrZgVi7xWqC1mDb1FUnT4bwxE2yYwHIle4uzeVJuIoqklreBm7lE0=",
+        "L2TxAttributes": {
+          "6": 2,
+          "7": 1,
+          "8": 1799999999000
+        }
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "65acfef586cba971aba2112c90c33621d5679078b88863dc218d792513bfe0db27e8ffd981cbb4d5",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "ab0fc5637318266aebef9c25f090c5d2a933184598b603173f8908a32d37a9557ce13d68c2fb4f5e790fc5637318266aebef9c25f090c5d2a933184598b603173f8908a32d37a9557ce13d68c2fb4f5e",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 281474976710655,
+        "BaseAmount": 281474976710655,
+        "Price": 4294967295,
+        "IsAsk": 1,
+        "Type": 0,
+        "TimeInForce": 2,
+        "ReduceOnly": 0,
+        "TriggerPrice": 0,
+        "OrderExpiry": 9223372036854775807,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "qw/FY3MYJmrr75wl8JDF0qkzGEWYtgMXP4kIoy03qVV84T1owvtPXnkPxWNzGCZq6++cJfCQxdKpMxhFmLYDFz+JCKMtN6lVfOE9aML7T14=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "3c048a13d2bd67b2130fe2971c1701eb8caac9decf2f10ace1eb97bfcb1d9566ad3d6ac110da359b",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "5195277d26f1d144dda9080b7d5c619d5582bdb1d23b45338d29db8bece68184bbf1e7ef60001329c294277d26f1d144dda9080b7d5c619d5582bdb1d23b45338d29db8bece68184bbf1e7ef60001329",
+      "tx_info": {
+        "AccountIndex": 281474976710654,
+        "ApiKeyIndex": 254,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 281474976710655,
+        "Nonce": 9223372036854775807,
+        "Sig": "UZUnfSbx0UTdqQgLfVxhnVWCvbHSO0UzjSnbi+zmgYS78efvYAATKcKUJ30m8dFE3akIC31cYZ1Vgr2x0jtFM40p24vs5oGEu/Hn72AAEyk=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "977beaa726b6841066c0625b942ff230b77e9b917a4dff1bd4842dbcefd1005236b1b80ea0c4ce08",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "create",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "88ead21ee182960aaef4ff2342f24071fe9633d14beb9c70db3252b366864683d748d51e151d4d3455ead21ee182960aaef4ff2342f24071fe9633d14beb9c70db3252b366864683d748d51e151d4d34",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4096,
+        "ClientOrderIndex": 123,
+        "BaseAmount": 123456789,
+        "Price": 345678,
+        "IsAsk": 1,
+        "Type": 2,
+        "TimeInForce": 0,
+        "ReduceOnly": 1,
+        "TriggerPrice": 123456,
+        "OrderExpiry": 1800086400000,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "iOrSHuGClgqu9P8jQvJAcf6WM9FL65xw2zJSs2aGRoPXSNUeFR1NNFXq0h7hgpYKrvT/I0LyQHH+ljPRS+uccNsyUrNmhkaD10jVHhUdTTQ=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "chain_id": 304,
+      "digest": "fc807d470741fc715a540b59b822fd2ef777c875d48a46329fe86183fec5a1524ee01ebac92f9c7b",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "cancel",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "a3d9984eb076da48d55bc57ab32c6b37844062932d5ce6f0fcbb3e528d579b0799eb8c7b0920f96013d9984eb076da48d55bc57ab32c6b37844062932d5ce6f0fcbb3e528d579b0799eb8c7b0920f960",
+      "tx_info": {
+        "AccountIndex": 37,
+        "ApiKeyIndex": 3,
+        "MarketIndex": 4099,
+        "Index": 577305177233555425,
+        "ExpiredAt": 1800000600000,
+        "Nonce": 42,
+        "Sig": "o9mYTrB22kjVW8V6syxrN4RAYpMtXObw/Ls+Uo1XmweZ64x7CSD5YBPZmE6wdtpI1VvFerMsazeEQGKTLVzm8Py7PlKNV5sHmeuMewkg+WA=",
+        "L2TxAttributes": null
+      }
+    },
+    {
+      "account_index": 37,
+      "api_key_index": 3,
+      "chain_id": 300,
+      "deadline": 1800000000,
+      "digest": "17d96815418e0386203c9f4d5cc0fa5026b9f3c6a3b3dd3cc84cb237ebf3586168c46b18f663d29d",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "auth",
+      "message": "1800000000:37:3",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "d1d84a7872328b9528e64dc55e322d5850bcddc1384c76bb2744d96a5d587e48808eaa373b8aa950e1d74a7872328b9528e64dc55e322d5850bcddc1384c76bb2744d96a5d587e48808eaa373b8aa950",
+      "token": "1800000000:37:3:d1d84a7872328b9528e64dc55e322d5850bcddc1384c76bb2744d96a5d587e48808eaa373b8aa950e1d74a7872328b9528e64dc55e322d5850bcddc1384c76bb2744d96a5d587e48808eaa373b8aa950"
+    },
+    {
+      "account_index": 37,
+      "api_key_index": 3,
+      "chain_id": 300,
+      "deadline": 1800028800,
+      "digest": "1c32a0e183d76d5adef7ac3baba506b4af03d01ceb3843a126a4e30cb3da91428292f37e4d0f7cd1",
+      "key": "e0ff8b9496d90fe89ca024d7395c88e83906b8cfe6ffff7f16000000f1ffff7f07000080fdffff7f",
+      "kind": "auth",
+      "message": "1800028800:37:3",
+      "public_key": "fdfffffffeffffff0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "b614c8c26b6baf5ba2a28651fc10041e1065f43c5be6b9b77c41b0fca02337a6cd28c0972697f33fc513c8c26b6baf5ba2a28651fc10041e1065f43c5be6b9b77c41b0fca02337a6cd28c0972697f33f",
+      "token": "1800028800:37:3:b614c8c26b6baf5ba2a28651fc10041e1065f43c5be6b9b77c41b0fca02337a6cd28c0972697f33fc513c8c26b6baf5ba2a28651fc10041e1065f43c5be6b9b77c41b0fca02337a6cd28c0972697f33f"
+    }
+  ]
+}

@@ -1,9 +1,94 @@
 [package]
 name = "aux-rs"
-version = "0.0.0"
-edition = "2024"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
 description = "Exchange connectors for Rust"
 repository = "https://github.com/polaris-data/connectors"
 license = "MIT"
 readme = "README.md"
 include = ["Cargo.toml", "src/**", "README.md", "LICENSE"]
+
+[features]
+default = ["http", "ws"]
+http = ["aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http"]
+ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws"]
+hyperliquid = ["dep:aux-rs-hyperliquid"]
+lighter = ["dep:aux-rs-lighter"]
+
+[dependencies]
+aux-rs-core.workspace = true
+aux-rs-hyperliquid = { workspace = true, optional = true }
+aux-rs-lighter = { workspace = true, optional = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "net", "io-util", "time", "sync"] }
+tokio-tungstenite.workspace = true
+futures-util.workspace = true
+serde_json.workspace = true
+zeroize.workspace = true
+
+[[example]]
+name = "hyperliquid_public"
+required-features = ["hyperliquid", "http", "ws"]
+
+[[example]]
+name = "hyperliquid_account"
+required-features = ["hyperliquid", "http", "ws"]
+
+[[example]]
+name = "hyperliquid_testnet_trade"
+required-features = ["hyperliquid", "http", "ws"]
+
+[[example]]
+name = "lighter_public"
+required-features = ["lighter", "http", "ws"]
+
+[[example]]
+name = "lighter_testnet_trade"
+required-features = ["lighter", "http", "ws"]
+
+[lints]
+workspace = true
+
+[workspace]
+members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/python"]
+default-members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter"]
+resolver = "3"
+
+[workspace.package]
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.92"
+publish = false
+
+[workspace.dependencies]
+aux-rs-core = { path = "crates/core", default-features = false }
+aux-rs = { path = ".", default-features = false }
+aux-rs-hyperliquid = { path = "crates/exchanges/hyperliquid", default-features = false }
+aux-rs-lighter = { path = "crates/exchanges/lighter", default-features = false }
+goldilocks-crypto = { version = "=0.1.2", default-features = false }
+poseidon-hash = { version = "=0.1.4", default-features = false }
+base64 = { version = "0.22", default-features = false, features = ["alloc"] }
+getrandom = { version = "0.2", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["arbitrary_precision"] }
+reqwest = { version = "0.12.28", default-features = false, features = ["rustls-tls-manual-roots-no-provider"] }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }
+webpki-roots = "1"
+httpdate = "1"
+tokio = { version = "1", default-features = false }
+tokio-tungstenite = { version = "0.29", default-features = false, features = ["connect", "rustls-tls-webpki-roots"] }
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+
+k256 = { version = "0.13.4", default-features = false, features = ["ecdsa"] }
+sha3 = { version = "0.10", default-features = false }
+rmp-serde = "1.3"
+hex = { version = "0.4", default-features = false, features = ["alloc"] }
+zeroize = { version = "1", default-features = false, features = ["alloc"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = "warn"
