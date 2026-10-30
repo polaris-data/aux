@@ -235,7 +235,7 @@ One coordinator per chain/account/API-key identity serializes nonce lookup throu
 
 Add Lighter-native types, metadata, book snapshots, public streams, account reads, order submission, cancellation, and account streams. Implement signing and auth-token generation in Rust. Do not wrap the official Go shared library or invoke a Python SDK at runtime.
 
-Pin the [official Go signing and hashing reference](https://github.com/elliottech/lighter-go) to a specific revision. Reuse reviewed Rust primitives where available and port missing protocol logic with provenance and license attribution. The reference is a development/test oracle, not a shipped runtime dependency.
+Pin the [official Go signing and hashing reference](https://github.com/elliottech/lighter-go) to a specific revision. Reuse reviewed Rust primitives where available and port missing protocol logic with provenance and license attribution. Committed fixtures record the pinned reference revision and source hashes; normal tests use those fixtures offline. Reference-generation tools are not included in this repository.
 
 Validate encodings, hashes, signatures, token expiry, network separation, and account/API-key nonce sequencing before enabling trading. Compare deterministic outputs exactly; for nondeterministic signatures, verify reference acceptance rather than requiring identical signature bytes. Treat signer compatibility as a separate milestone gate, not an assumption about generic EVM signing.
 
@@ -319,7 +319,7 @@ Python bindings cover the implemented exchange operations for both venues. Gener
 
 Use offline fixtures and local mock servers for normal CI. Authenticated testnet checks require explicit credentials and invocation; their availability must not determine whether the offline suite passes. Once the crates exist, run formatting, Clippy, and tests for the supported feature combinations.
 
-Run `bash scripts/check.sh` for Rust formatting, Clippy, offline protocol/signing/trading tests, feature combinations, and dependency baselines. Run `bash scripts/check-python.sh` with a configured Python venv for binding checks and local-server tests. Public testnet verification explicitly invokes the Rust public/account examples (`hyperliquid_public`, `hyperliquid_account`, `lighter_public`) or `crates/python/examples/public_testnet.py`. Authenticated testnet submit/cancel verification explicitly invokes `hyperliquid_testnet_trade -- --execute` or `lighter_testnet_trade -- --execute` with credentials. None of these live checks run in offline CI. Automatic reconnection and fault checks run offline in milestone 5; Lighter's optional Go oracle is documented separately in its signing notes.
+Run `bash scripts/check.sh` for Rust formatting, Clippy, offline protocol/signing/trading tests, feature combinations, and dependency baselines. Run `bash scripts/check-python.sh` with a configured Python venv for binding checks and local-server tests. Public testnet verification explicitly invokes the Rust public/account examples (`hyperliquid_public`, `hyperliquid_account`, `lighter_public`) or `crates/python/examples/public_testnet.py`. Authenticated testnet submit/cancel verification explicitly invokes `hyperliquid_testnet_trade -- --execute` or `lighter_testnet_trade -- --execute` with credentials. None of these live checks run in offline CI. Automatic reconnection and fault checks run offline in milestone 5; Lighter's fixture provenance is documented separately in its signing notes.
 
 ## Chosen defaults
 

@@ -1,6 +1,6 @@
 # Lighter signing compatibility
 
-The SDK performs hashing, ECgFp5/Schnorr signing and auth-token generation in Rust. Go is a development oracle only. No Go FFI, shared library, subprocess, Python SDK or exchange client package ships with this adapter.
+The SDK performs hashing, ECgFp5/Schnorr signing and auth-token generation in Rust. Compatibility fixtures were generated from the pinned official Go implementation. No Go FFI, shared library, subprocess, Python SDK or exchange client package ships with this adapter.
 
 The local signer is **experimental and unaudited**. `goldilocks-crypto` and `poseidon-hash` explicitly describe themselves as unaudited prototypes. Reference compatibility is not a security audit or a constant-time guarantee. Their scalar/point operations use variable-time arithmetic, and internal temporary copies are not guaranteed to be zeroized. A cryptographic review is required before production use. The replaceable native `Signer` boundary also supports application-owned signing services.
 
@@ -49,16 +49,8 @@ Normal tests run offline and need only Rust:
 cargo test --locked -p aux-rs-lighter
 ```
 
-The 66 Go fixtures cover create/cancel on both networks, three keys including the scalar-order boundary, maximum integer fields, fee/self-trade/version attributes, trigger orders, and auth tokens. Rust checks native fields, exact hashes, public keys, Go signatures and negative mutations. Signature bytes vary with fresh randomness. An explicit oracle run also verifies Rust-generated signatures with Go:
+The 66 Go fixtures cover create/cancel on both networks, three keys including the scalar-order boundary, maximum integer fields, fee/self-trade/version attributes, trigger orders, and auth tokens. Rust checks native fields, exact hashes, public keys, Go signatures, locally generated signatures, and negative mutations. Signature bytes vary with fresh randomness.
 
-```sh
-# From connectors/. Requires Go 1.26 and network access; never normal CI.
-python3 scripts/lighter_vectors.py
-CONNECTORS_LIGHTER_SIGNATURE_OUTPUT=/tmp/lighter-rust-signatures.json \
-  cargo test --locked -p aux-rs-lighter --test signing pinned_go_hashes
-python3 scripts/lighter_vectors.py --verify-rust /tmp/lighter-rust-signatures.json
-```
-
-`--reference /path/to/lighter-go` reuses a checkout only if its HEAD matches the pin and tracked files are unchanged. The fixed private keys and ephemeral nonces in that generator are public test data and must never be used for accounts.
+Reference-generation tools and the Go verification harness are not included in this repository. Tests use the committed fixtures, whose metadata records the official source revision and hashes. Their fixed keys and signatures are public test data and must never be used for accounts.
 
 On 2026-10-29, all 66 Go signatures passed Rust verification and all 66 Rust-generated signatures passed the official Go verifier. Public HTTP and book/trade/account WebSocket smoke checks passed testnet. Funded authenticated testnet submit/cancel and real private order-stream verification remain pending because credentials are not configured. Those checks and a cryptographic review remain release gates.

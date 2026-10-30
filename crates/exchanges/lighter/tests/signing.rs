@@ -1,5 +1,5 @@
 use aux_rs_lighter::*;
-use serde_json::{Value, json};
+use serde_json::Value;
 use zeroize::Zeroizing;
 
 fn array<const N: usize>(v: &Value) -> [u8; N] {
@@ -35,7 +35,7 @@ fn prepare(v: &Value) -> PreparedTransaction {
 }
 
 #[tokio::test]
-async fn pinned_go_hashes_encodings_and_signatures_in_both_directions() {
+async fn pinned_reference_hashes_encodings_and_signatures() {
     let fixtures: Value =
         serde_json::from_str(include_str!("fixtures/signing_vectors.json")).unwrap();
     assert_eq!(
@@ -43,7 +43,6 @@ async fn pinned_go_hashes_encodings_and_signatures_in_both_directions() {
         "ebae8edecfee9986b0a5fcde3cb9a06bd4af3a3a"
     );
     assert_eq!(fixtures["vectors"].as_array().unwrap().len(), 66);
-    let mut rust_output = Vec::new();
     for vector in fixtures["vectors"].as_array().unwrap() {
         let signer =
             LocalSigner::from_hex(Zeroizing::new(vector["key"].as_str().unwrap().into())).unwrap();
@@ -70,7 +69,7 @@ async fn pinned_go_hashes_encodings_and_signatures_in_both_directions() {
         let signature = Signature::from_bytes(array::<80>(&vector["signature"])).unwrap();
         signature.verify(&payload, signer.public_key()).unwrap();
         let rust_sig = signer.sign(&payload).await.unwrap();
-        rust_output.push(json!({"public_key":hex::encode(signer.public_key().as_bytes()),"digest":hex::encode(payload.digest()),"signature":hex::encode(rust_sig.as_bytes())}));
+        rust_sig.verify(&payload, signer.public_key()).unwrap();
         if vector["kind"] != "auth" {
             let signed = prepare(vector).sign(&signer).await.unwrap();
             let mut actual: Value = serde_json::from_str(signed.tx_info()).unwrap();
@@ -89,9 +88,6 @@ async fn pinned_go_hashes_encodings_and_signatures_in_both_directions() {
                 )
             );
         }
-    }
-    if let Some(path) = std::env::var_os("CONNECTORS_LIGHTER_SIGNATURE_OUTPUT") {
-        std::fs::write(path, serde_json::to_vec_pretty(&rust_output).unwrap()).unwrap();
     }
 }
 

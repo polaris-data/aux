@@ -19,7 +19,7 @@ Select `features = ["lighter"]`, or `["hyperliquid", "lighter"]` for both adapte
 cargo run --locked -p aux-rs --features lighter --example lighter_public
 ```
 
-The read-only example selects an active testnet market, checks metadata/book/recent-trade/account HTTP reads, and receives native book/trade/account stream snapshots. See [the Lighter guide](crates/exchanges/lighter/README.md) for native units, authenticated examples, custom signers, nonce recovery, and the opt-in `lighter_testnet_trade -- --execute` flow. It uses Rust hashing/signing throughout; the pinned Go oracle is development-only.
+The read-only example selects an active testnet market, checks metadata/book/recent-trade/account HTTP reads, and receives native book/trade/account stream snapshots. See [the Lighter guide](crates/exchanges/lighter/README.md) for native units, authenticated examples, custom signers, nonce recovery, and the opt-in `lighter_testnet_trade -- --execute` flow. It uses Rust hashing/signing throughout; compatibility tests use committed reference fixtures.
 
 ## Run the public testnet example
 
@@ -114,7 +114,7 @@ The account passed to `agent` is query context. Hyperliquid derives the master a
 - Signed envelopes are immutable, and signer recovery is checked before submission. Custom endpoints require `.with_network(Network::Testnet)` or `Mainnet`; signing context is never inferred from a URL.
 - Implement `Signer` to use a remote signing service, or `AuthHandler` to replace request preparation/nonce management. `SignedRequest::from_signature` validates a custom handler's envelope. These contracts use `Send` futures without a runtime dependency or `async-trait`.
 
-Native L1 action signing and offline user-signed primitives are covered by 44 vectors from the [pinned official SDK reference](https://github.com/hyperliquid-dex/hyperliquid-python-sdk/blob/2fdb18f9517675ea03695a0962bd19eece9c83f0/hyperliquid/utils/signing.py). The latter cover `UsdSend` and `ApproveAgent` hashing/signing only; there are no transfer or provisioning submission workflows. See [fixture provenance and regeneration](crates/exchanges/hyperliquid/tests/fixtures/README.md).
+Native L1 action signing and offline user-signed primitives are covered by 44 vectors from the [pinned official SDK reference](https://github.com/hyperliquid-dex/hyperliquid-python-sdk/blob/2fdb18f9517675ea03695a0962bd19eece9c83f0/hyperliquid/utils/signing.py). The latter cover `UsdSend` and `ApproveAgent` hashing/signing only; there are no transfer or provisioning submission workflows. See [fixture provenance](crates/exchanges/hyperliquid/tests/fixtures/README.md).
 
 ### Opt-in authenticated testnet smoke check
 
@@ -205,7 +205,7 @@ Defaults are a 10-second operation timeout, 20-second heartbeat interval, 60-sec
 bash scripts/check.sh
 ```
 
-This runs formatting, Clippy with warnings denied, feature-isolated compilation/tests, offline fixture and local-server tests, and dependency-baseline checks for Rust. Tests include 44 Hyperliquid and 66 Lighter signing vectors, altered-context negatives, public/private account reads, native Hyperliquid batch errors, custom signers/handlers, concurrent nonces, ambiguous/cancelled submissions, stream isolation, fresh snapshots, retries/rate limits, gaps, reconnect exhaustion/stability, expiry, malformed/oversized frames and shutdown. Compile-fail checks verify that unsigned clients cannot trade. `scripts/check-python.sh` separately runs 42 Python tests, including the same 110 reference vectors and recovery/cleanup scenarios. Normal checks make no exchange requests or invoke signing oracles.
+This runs formatting, Clippy with warnings denied, feature-isolated compilation/tests, offline fixture and local-server tests, and dependency-baseline checks for Rust. Tests include 44 Hyperliquid and 66 Lighter signing vectors, altered-context negatives, public/private account reads, native Hyperliquid batch errors, custom signers/handlers, concurrent nonces, ambiguous/cancelled submissions, stream isolation, fresh snapshots, retries/rate limits, gaps, reconnect exhaustion/stability, expiry, malformed/oversized frames and shutdown. Compile-fail checks verify that unsigned clients cannot trade. `scripts/check-python.sh` separately runs 42 Python tests, including the same 110 reference vectors and recovery/cleanup scenarios. Normal checks use committed fixtures and local servers without exchange requests.
 
 To review a dependency change:
 
