@@ -1,0 +1,16 @@
+{
+  "assetPositions": [{
+    "type": "oneWay",
+    "position": {
+      "coin": "ETH", "szi": "-0.0335", "entryPx": "3000.10",
+      "cumFunding": {"allTime": "1.0000", "sinceChange": "0.0", "sinceOpen": "0.0"},
+      "leverage": {"type": "isolated", "value": 5, "rawUsd": "-10.0000"},
+      "liquidationPx": null, "marginUsed": "20.0000", "maxLeverage": 25,
+      "positionValue": "100.0000", "returnOnEquity": "-0.0020", "unrealizedPnl": "-0.0400"
+    }
+  }],
+  "crossMaintenanceMarginUsed": "0.0",
+  "crossMarginSummary": {"accountValue": "1000.0000", "totalMarginUsed": "0.0", "totalNtlPos": "0.0", "totalRawUsd": "1000.0000"},
+  "marginSummary": {"accountValue": "1000.0000", "totalMarginUsed": "20.0000", "totalNtlPos": "100.0000", "totalRawUsd": "980.0000"},
+  "withdrawable": "980.0000", "time": 1754450974231
+}

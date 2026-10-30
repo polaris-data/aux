@@ -1,0 +1,16 @@
+[build-system]
+requires = ["maturin>=1.16,<2"]
+build-backend = "maturin"
+
+[project]
+name = "aux-py"
+version = "0.0.0"
+description = "Native exchange APIs backed by Rust"
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = []
+
+[tool.maturin]
+python-source = "python"
+module-name = "aux_py._native"
+bindings = "pyo3"

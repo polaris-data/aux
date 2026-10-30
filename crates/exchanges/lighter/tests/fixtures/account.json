@@ -1,0 +1,70 @@
+{
+  "code": 200,
+  "total": 1,
+  "accounts": [
+    {
+      "code": 0,
+      "account_type": 0,
+      "index": 1,
+      "l1_address": "0x0000000000000000000000000000000000000000",
+      "cancel_all_time": 0,
+      "total_order_count": 0,
+      "total_isolated_order_count": 0,
+      "pending_order_count": 0,
+      "available_balance": "3000000000.000000",
+      "status": 1,
+      "collateral": "3000000000.000000",
+      "transaction_time": 1792789704500242,
+      "account_trading_mode": 0,
+      "account_index": 1,
+      "name": "",
+      "description": "",
+      "can_invite": true,
+      "referral_points_percentage": "",
+      "can_rfq": true,
+      "can_rfq_market_ids": [],
+      "agent_enabled": false,
+      "created_at": 0,
+      "metadata": {
+        "color": ""
+      },
+      "positions": [],
+      "bo_positions": [],
+      "assets": [
+        {
+          "symbol": "ETH",
+          "asset_id": 1,
+          "balance": "0.00100000",
+          "locked_balance": "0.00000000",
+          "margin_mode": "disabled",
+          "margin_balance": "0.00000000",
+          "multiplier": "1.000000000000000000"
+        },
+        {
+          "symbol": "LIT",
+          "asset_id": 2,
+          "balance": "100000000.00000000",
+          "locked_balance": "0.00000000",
+          "margin_mode": "disabled",
+          "margin_balance": "0.00000000",
+          "multiplier": "1.000000000000000000"
+        },
+        {
+          "symbol": "USDC",
+          "asset_id": 3,
+          "balance": "3000000000.000000",
+          "locked_balance": "0.000000",
+          "margin_mode": "disabled",
+          "margin_balance": "3000000000.000000",
+          "multiplier": "1.000000000000000000"
+        }
+      ],
+      "total_asset_value": "3000000000",
+      "cross_asset_value": "3000000000",
+      "cross_initial_margin_requirement": "0.000000",
+      "cross_maintenance_margin_requirement": "0.000000",
+      "shares": [],
+      "pending_unlocks": []
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "universe": [
+    {"name": "ETH", "szDecimals": 4, "maxLeverage": 25, "marginTableId": 10},
+    {"name": "xyz:SAMPLE", "szDecimals": 2, "maxLeverage": 3, "onlyIsolated": true, "isDelisted": false, "marginMode": "strictIsolated", "futureField": "preserved"}
+  ],
+  "marginTables": [[10, {"description": "sample", "marginTiers": [{"lowerBound": "0.0", "maxLeverage": 25}]}]],
+  "collateralToken": 0
+}

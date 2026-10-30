@@ -1,0 +1,6 @@
+{
+  "payload": "{\"ad\":\"0xabcdef0000000000000000000000000000000001\",\"ai\":2,\"c\":\"MixedCaseId\",\"ct\":1770000000000000000,\"g\":4102444800000000000,\"m\":1,\"op\":1,\"p\":500005,\"q\":100000,\"r\":0,\"s\":0,\"t\":3,\"v\":1}",
+  "public_key": "ea4a6c63e29c520abef5507b132ec5f9954776aebebe7b92421eea691446d22c",
+  "signature": "55795cb36752978d02ee0cf2c2b0c5bb60f878ee08dd5a5be41e36c83a0b3623c6d3b50e6648fd8041baf3e6bad7ed969c27b82e2d4c9c09aa523fe7ac587f0a",
+  "provenance": "Public seed 07 repeated 32 times; independently signed with Python cryptography Ed25519. Canonical fields follow Arcus authentication documentation."
+}
