@@ -141,7 +141,7 @@ fn retry_after(response: &HttpResponse) -> Option<Duration> {
                 .unwrap_or(Duration::MAX),
         );
     }
-    httpdate::parse_http_date(value).ok().map(|deadline| {
+    super::httpdate::parse_http_date(value).map(|deadline| {
         deadline
             .duration_since(SystemTime::now())
             .unwrap_or_default()

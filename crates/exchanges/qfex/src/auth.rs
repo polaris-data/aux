@@ -1,8 +1,6 @@
 use crate::{Error, Qfex};
 use aux_rs_core::hex;
-use hmac::{Hmac, Mac};
 use serde_json::{Value, json};
-use sha2::Sha256;
 use std::{
     future::Future,
     sync::Arc,
@@ -64,10 +62,10 @@ impl QfexAuth {
                 "nonce must be 1 to 100 hex characters",
             ));
         }
-        let mut mac = Hmac::<Sha256>::new_from_slice(self.secret.as_bytes())
-            .map_err(|_| Error::Signing("invalid HMAC key"))?;
-        mac.update(format!("{nonce}:{unix_ts}").as_bytes());
-        Ok(hex::encode(mac.finalize().into_bytes()))
+        Ok(hex::encode(crate::hmac::sha256(
+            self.secret.as_bytes(),
+            format!("{nonce}:{unix_ts}").as_bytes(),
+        )))
     }
     fn fresh(&self) -> Result<(String, u64, String), Error> {
         let mut bytes = [0u8; 16];

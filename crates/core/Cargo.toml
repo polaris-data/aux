@@ -8,14 +8,13 @@ description = "Runtime-independent exchange endpoint and transport contracts"
 
 [features]
 default = []
-http = ["dep:reqwest", "dep:rustls", "dep:webpki-roots", "dep:tokio", "dep:httpdate"]
+http = ["dep:reqwest", "dep:rustls", "dep:webpki-roots", "dep:tokio"]
 ws = ["dep:tokio", "dep:tokio-tungstenite", "dep:futures-util", "dep:rustls", "dep:webpki-roots"]
 
 [dependencies]
 reqwest = { workspace = true, optional = true }
 rustls = { workspace = true, optional = true }
 webpki-roots = { workspace = true, optional = true }
-httpdate = { workspace = true, optional = true }
 tokio = { workspace = true, optional = true, features = ["net", "sync", "time", "rt", "macros"] }
 tokio-tungstenite = { workspace = true, optional = true }
 futures-util = { workspace = true, optional = true }
