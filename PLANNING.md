@@ -74,11 +74,13 @@ This repository is a self-contained Cargo workspace, independent of frontend and
 connectors/
   PLANNING.md
   README.md
-  Cargo.toml                    # aux-rs facade and workspace
-  src/lib.rs                    # facade and re-exports
-  examples/
-  tests/
+  Cargo.toml                    # workspace configuration
   crates/
+    aux-rs/                     # aux-rs: public SDK facade
+      Cargo.toml
+      src/lib.rs                # facade and re-exports
+      examples/
+      tests/
     core/                       # aux-rs-core: contracts, clients, shared errors
     exchanges/
       hyperliquid/              # aux-rs-hyperliquid: native adapter and signer
@@ -124,7 +126,7 @@ For a consumer whose relative directory layout matches this repository:
 
 ```toml
 [dependencies]
-aux-rs = { path = "../connectors", features = ["hyperliquid"] }
+aux-rs = { path = "../connectors/crates/aux-rs", features = ["hyperliquid"] }
 # Select both exchanges with features = ["hyperliquid", "lighter"].
 ```
 

@@ -3,8 +3,9 @@
 The Rust package is `aux-rs` (import `aux_rs`). Python bindings are distributed as
 `aux-py` (import `aux_py`); see [the Python guide](crates/python/README.md).
 
-The repository root contains the Rust facade, examples, and integration tests.
-Shared client and transport code lives in `crates/core/`, exchange adapters in
+The repository root contains the Cargo workspace configuration. The public Rust
+SDK facade, examples, and integration tests live in `crates/aux-rs/`. Shared client
+and transport code lives in `crates/core/`, exchange adapters in
 `crates/exchanges/`, and Python bindings in `crates/python/`.
 
 A standalone Rust SDK for native exchange APIs, with composable clients and opt-in exchanges. See [PLANNING.md](PLANNING.md) for the architecture and remaining milestones.
@@ -17,7 +18,7 @@ Enable `qfex` or `arcus` to select their concrete clients. Each exchange is opti
 Rust consumers do not compile unselected adapters or Python bindings.
 
 ```toml
-aux-rs = { path = "../connectors", features = ["qfex", "arcus"] }
+aux-rs = { path = "../connectors/crates/aux-rs", features = ["qfex", "arcus"] }
 ```
 
 ```rust,ignore
@@ -67,7 +68,7 @@ The crates are local workspace packages and are not published. Adjust the path f
 
 ```toml
 [dependencies]
-aux-rs = { path = "../connectors", features = ["hyperliquid"] }
+aux-rs = { path = "../connectors/crates/aux-rs", features = ["hyperliquid"] }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
 
@@ -132,7 +133,7 @@ let request = OrderRequest::new(vec![Order::limit(asset_id, true, "1670.1", "0.0
 let result = client.order(request).await?;
 ```
 
-This is an API snippet with caller-supplied key, account, and native asset ID. Use [the opt-in testnet example](examples/hyperliquid_testnet_trade.rs) for a complete executable flow. Asset IDs are native exchange IDs, not symbols; default perpetual IDs come from metadata universe indices. Account registration, funding, and agent approval are not performed automatically.
+This is an API snippet with caller-supplied key, account, and native asset ID. Use [the opt-in testnet example](crates/aux-rs/examples/hyperliquid_testnet_trade.rs) for a complete executable flow. Asset IDs are native exchange IDs, not symbols; default perpetual IDs come from metadata universe indices. Account registration, funding, and agent approval are not performed automatically.
 
 The account passed to `agent` is query context. Hyperliquid derives the master account for trading from the key's existing authorization; changing that context does not retarget a trade. Use `.with_vault(vault_or_subaccount)` to set the actual native `vaultAddress`; this also changes the handler's query account while keeping signer identity and nonce state intact.
 
@@ -172,7 +173,7 @@ No exchange is selected by default. Exchange features do not activate networking
 For custom I/O:
 
 ```toml
-aux-rs = { path = "../connectors", default-features = false, features = ["hyperliquid"] }
+aux-rs = { path = "../connectors/crates/aux-rs", default-features = false, features = ["hyperliquid"] }
 ```
 
 Implement `HttpTransport` and/or `WebSocketTransport`, then pass the implementation to `HyperliquidClient::with_transport(exchange, my_transport)`. The [protocol tests](crates/exchanges/hyperliquid/tests/protocol.rs) include a working custom HTTP transport. These contracts use `Send` futures without `async-trait`. Custom transports own their configuration and resource lifecycle.

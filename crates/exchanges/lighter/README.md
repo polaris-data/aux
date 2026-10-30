@@ -7,7 +7,7 @@ The SDK is local and unpublished. [SIGNING.md](SIGNING.md) records the pinned of
 ## Public reads and streams
 
 ```toml
-aux-rs = { path = "../connectors", features = ["lighter"] }
+aux-rs = { path = "../connectors/crates/aux-rs", features = ["lighter"] }
 # Both: features = ["hyperliquid", "lighter"]
 ```
 

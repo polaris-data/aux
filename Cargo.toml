@@ -1,71 +1,6 @@
-[package]
-name = "aux-rs"
-version.workspace = true
-edition.workspace = true
-rust-version.workspace = true
-description = "Exchange connectors for Rust"
-repository = "https://github.com/polaris-data/connectors"
-license = "MIT"
-readme = "README.md"
-include = ["Cargo.toml", "src/**", "README.md", "LICENSE"]
-
-[features]
-default = ["http", "ws"]
-http = ["aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http"]
-ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws"]
-qfex = ["dep:aux-rs-qfex"]
-arcus = ["dep:aux-rs-arcus"]
-hyperliquid = ["dep:aux-rs-hyperliquid"]
-lighter = ["dep:aux-rs-lighter"]
-
-[dependencies]
-aux-rs-arcus = { workspace = true, optional = true }
-aux-rs-qfex = { workspace = true, optional = true }
-aux-rs-core.workspace = true
-aux-rs-hyperliquid = { workspace = true, optional = true }
-aux-rs-lighter = { workspace = true, optional = true }
-
-[dev-dependencies]
-tokio = { workspace = true, features = ["macros", "rt-multi-thread", "net", "io-util", "time", "sync"] }
-tokio-tungstenite.workspace = true
-futures-util.workspace = true
-serde_json.workspace = true
-zeroize.workspace = true
-
-[[example]]
-name = "hyperliquid_public"
-required-features = ["hyperliquid", "http", "ws"]
-
-[[example]]
-name = "hyperliquid_account"
-required-features = ["hyperliquid", "http", "ws"]
-
-[[example]]
-name = "hyperliquid_testnet_trade"
-required-features = ["hyperliquid", "http", "ws"]
-
-[[example]]
-name = "lighter_public"
-required-features = ["lighter", "http", "ws"]
-
-[[example]]
-name = "lighter_testnet_trade"
-required-features = ["lighter", "http", "ws"]
-
-[[example]]
-name = "qfex_public"
-required-features = ["qfex", "http", "ws"]
-
-[[example]]
-name = "arcus_public"
-required-features = ["arcus", "http", "ws"]
-
-[lints]
-workspace = true
-
 [workspace]
-members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/python"]
-default-members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex"]
+members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/python"]
+default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex"]
 resolver = "3"
 
 [workspace.package]
@@ -81,7 +16,7 @@ ed25519-dalek = { version = "2.2", default-features = false, features = ["std", 
 aux-rs-arcus = { path = "crates/exchanges/arcus", default-features = false }
 aux-rs-qfex = { path = "crates/exchanges/qfex", default-features = false }
 aux-rs-core = { path = "crates/core", default-features = false }
-aux-rs = { path = ".", default-features = false }
+aux-rs = { path = "crates/aux-rs", default-features = false }
 aux-rs-hyperliquid = { path = "crates/exchanges/hyperliquid", default-features = false }
 aux-rs-lighter = { path = "crates/exchanges/lighter", default-features = false }
 goldilocks-crypto = { version = "=0.1.2", default-features = false }
