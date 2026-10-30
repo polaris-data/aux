@@ -9,7 +9,37 @@ Shared client and transport code lives in `crates/core/`, exchange adapters in
 
 A standalone Rust SDK for native exchange APIs, with composable clients and opt-in exchanges. See [PLANNING.md](PLANNING.md) for the architecture and remaining milestones.
 
-**Implemented: Hyperliquid and Lighter Rust APIs with Python bindings for the implemented exchange operations.** Both languages expose native market/account reads and streams, local/custom signing, and order/cancel submission. Hyperliquid supports batches and signer-scoped nonces; Lighter serializes single transactions per chain/account/API-key identity. Python also covers offline signing/verification, exact numeric conversion and cancellable async iterators. Public Rust and Python smoke checks have passed both testnets. Funded authenticated submit/cancel verification remains pending for both venues. Lighter's local signing primitives are experimental and unaudited; see [compatibility evidence and review limits](crates/exchanges/lighter/SIGNING.md).
+**Implemented: Hyperliquid, Lighter, QFEX, and Arcus Rust clients with Python bindings for their supported exchange operations.** Both languages expose native market/account reads and streams, local/custom signing, and order/cancel submission. Hyperliquid supports batches and signer-scoped nonces; Lighter serializes single transactions per chain/account/API-key identity. Python also covers offline signing/verification, exact numeric conversion and cancellable async iterators. Public Rust and Python smoke checks have passed all four testnets. Funded authenticated submit/cancel verification remains pending for all venues. Lighter's local signing primitives are experimental and unaudited; see [compatibility evidence and review limits](crates/exchanges/lighter/SIGNING.md).
+
+## QFEX and Arcus
+
+Enable `qfex` or `arcus` to select their concrete clients. Each exchange is optional;
+Rust consumers do not compile unselected adapters or Python bindings.
+
+```toml
+aux-rs = { path = "../connectors", features = ["qfex", "arcus"] }
+```
+
+```rust,ignore
+use aux_rs::{qfex::QfexClient, arcus::ArcusClient};
+let qfex = QfexClient::testnet()?; // QFEX UAT
+let arcus = ArcusClient::testnet()?;
+```
+
+[QFEX](crates/exchanges/qfex/README.md) exposes public REST/MDS data,
+HMAC-authenticated account reads, and authenticated WebSocket add/cancel commands.
+[Arcus](crates/exchanges/arcus/README.md) exposes perpetuals market/account reads,
+public streams, and Ed25519-signed REST place/cancel operations with exact native
+price/size conversion. Both have Python clients and fixture/local-peer tests;
+funded authenticated testnet verification remains pending.
+
+```sh
+cargo run --locked -p aux-rs --features qfex --example qfex_public
+cargo run --locked -p aux-rs --features arcus --example arcus_public
+```
+
+These examples only read public testnet data. See the exchange guides for
+credentials, native units, supported operations, and current coverage limits.
 
 ## Lighter
 
@@ -134,6 +164,8 @@ The example validates market precision, places one post-only buy with a fresh cl
 | `ws` | Yes | Tokio Tungstenite WebSocket sessions |
 | `hyperliquid` | No | Native Hyperliquid types, Rust signing, auth, trading, and public/account methods |
 | `lighter` | No | Native Lighter types, Rust signing, auth, trading, and public/account methods |
+| `qfex` | No | Native QFEX data, HMAC authentication, and WebSocket trading |
+| `arcus` | No | Native Arcus perpetuals data and Ed25519-signed REST trading |
 
 No exchange is selected by default. Exchange features do not activate networking. Each adapter includes its native signing code without enabling standard transports or an async runtime.
 
@@ -205,7 +237,7 @@ Defaults are a 10-second operation timeout, 20-second heartbeat interval, 60-sec
 bash scripts/check.sh
 ```
 
-This runs formatting, Clippy with warnings denied, feature-isolated compilation/tests, offline fixture and local-server tests, and dependency-baseline checks for Rust. Tests include 44 Hyperliquid and 66 Lighter signing vectors, altered-context negatives, public/private account reads, native Hyperliquid batch errors, custom signers/handlers, concurrent nonces, ambiguous/cancelled submissions, stream isolation, fresh snapshots, retries/rate limits, gaps, reconnect exhaustion/stability, expiry, malformed/oversized frames and shutdown. Compile-fail checks verify that unsigned clients cannot trade. `scripts/check-python.sh` separately runs 42 Python tests, including the same 110 reference vectors and recovery/cleanup scenarios. Normal checks use committed fixtures and local servers without exchange requests.
+This runs formatting, Clippy with warnings denied, feature-isolated compilation/tests, offline fixture and local-server tests, and dependency-baseline checks for Rust. Tests include 44 Hyperliquid and 66 Lighter signing vectors, altered-context negatives, public/private account reads, native Hyperliquid batch errors, custom signers/handlers, concurrent nonces, ambiguous/cancelled submissions, stream isolation, fresh snapshots, retries/rate limits, gaps, reconnect exhaustion/stability, expiry, malformed/oversized frames and shutdown. Compile-fail checks verify that unsigned clients cannot trade. `scripts/check-python.sh` separately runs 49 Python tests, including the same 110 reference vectors and recovery/cleanup scenarios. Normal checks use committed fixtures and local servers without exchange requests.
 
 To review a dependency change:
 
@@ -214,6 +246,6 @@ cargo tree -p aux-rs --features hyperliquid -e features
 python3 scripts/dependencies.py --write
 ```
 
-Review the baseline diff before committing it. The baseline target is explicitly recorded; use `--target` to inspect another platform. Core, each exchange, both exchanges, custom/standard transport profiles, and the separate Python binding are recorded. Automated checks reject cross-exchange signing and Rust-only Python dependency leaks.
+Review the baseline diff before committing it. The baseline target is explicitly recorded; use `--target` to inspect another platform. Core, each exchange, combined exchanges, custom/standard transport profiles, and the separate Python binding are recorded. Automated checks reject cross-exchange signing and Rust-only Python dependency leaks.
 
 Milestones 1–5 and Python operation parity are implemented. Funded authenticated testnet verification and Lighter cryptographic review remain outstanding release gates. Python wheel distribution and a broader interpreter/platform matrix follow separately.

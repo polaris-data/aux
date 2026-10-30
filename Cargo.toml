@@ -11,12 +11,16 @@ include = ["Cargo.toml", "src/**", "README.md", "LICENSE"]
 
 [features]
 default = ["http", "ws"]
-http = ["aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http"]
-ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws"]
+http = ["aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http"]
+ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws"]
+qfex = ["dep:aux-rs-qfex"]
+arcus = ["dep:aux-rs-arcus"]
 hyperliquid = ["dep:aux-rs-hyperliquid"]
 lighter = ["dep:aux-rs-lighter"]
 
 [dependencies]
+aux-rs-arcus = { workspace = true, optional = true }
+aux-rs-qfex = { workspace = true, optional = true }
 aux-rs-core.workspace = true
 aux-rs-hyperliquid = { workspace = true, optional = true }
 aux-rs-lighter = { workspace = true, optional = true }
@@ -48,12 +52,20 @@ required-features = ["lighter", "http", "ws"]
 name = "lighter_testnet_trade"
 required-features = ["lighter", "http", "ws"]
 
+[[example]]
+name = "qfex_public"
+required-features = ["qfex", "http", "ws"]
+
+[[example]]
+name = "arcus_public"
+required-features = ["arcus", "http", "ws"]
+
 [lints]
 workspace = true
 
 [workspace]
-members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/python"]
-default-members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter"]
+members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/python"]
+default-members = [".", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex"]
 resolver = "3"
 
 [workspace.package]
@@ -63,6 +75,11 @@ rust-version = "1.92"
 publish = false
 
 [workspace.dependencies]
+hmac = { version = "0.12", default-features = false }
+sha2 = { version = "0.10", default-features = false }
+ed25519-dalek = { version = "2.2", default-features = false, features = ["std", "zeroize", "fast"] }
+aux-rs-arcus = { path = "crates/exchanges/arcus", default-features = false }
+aux-rs-qfex = { path = "crates/exchanges/qfex", default-features = false }
 aux-rs-core = { path = "crates/core", default-features = false }
 aux-rs = { path = ".", default-features = false }
 aux-rs-hyperliquid = { path = "crates/exchanges/hyperliquid", default-features = false }

@@ -19,8 +19,19 @@ PROFILES = [
     ("Lighter with standard HTTP", "aux-rs", "lighter,http"),
     ("Lighter with standard WebSockets", "aux-rs", "lighter,ws"),
     ("Lighter with both standard transports", "aux-rs", "lighter,http,ws"),
-    ("Both exchanges with custom transports", "aux-rs", "hyperliquid,lighter"),
-    ("Both exchanges with both standard transports", "aux-rs", "hyperliquid,lighter,http,ws"),
+    ("Hyperliquid and Lighter with custom transports", "aux-rs", "hyperliquid,lighter"),
+    ("Hyperliquid and Lighter with both standard transports", "aux-rs", "hyperliquid,lighter,http,ws"),
+    ("QFEX with custom transports", "aux-rs", "qfex"),
+    ("QFEX with standard HTTP", "aux-rs", "qfex,http"),
+    ("QFEX with standard WebSockets", "aux-rs", "qfex,ws"),
+    ("QFEX with both standard transports", "aux-rs", "qfex,http,ws"),
+    ("Arcus with custom transports", "aux-rs", "arcus"),
+    ("Arcus with standard HTTP", "aux-rs", "arcus,http"),
+    ("Arcus with standard WebSockets", "aux-rs", "arcus,ws"),
+    ("Arcus with both standard transports", "aux-rs", "arcus,http,ws"),
+    ("QFEX and Arcus with custom transports", "aux-rs", "qfex,arcus"),
+    ("All four exchanges with custom transports", "aux-rs", "hyperliquid,lighter,qfex,arcus"),
+    ("All four exchanges with both standard transports", "aux-rs", "hyperliquid,lighter,qfex,arcus,http,ws"),
     ("Python binding (separate opt-in crate)", "aux-rs-python", ""),
 ]
 
@@ -50,6 +61,10 @@ def render(target):
         "crates and build dependencies.\n",
         f"Target: `{target}`. This is a target-specific inventory, not a count "
         "for every platform. Pass `--target` to inspect a different target.\n",
+        "QFEX adds HMAC-SHA256, OS-backed authentication nonces, and exact JSON numbers. "
+        "Arcus adds Ed25519 signing with ed25519-dalek; market price ticks and size "
+        "quantums are derived exactly without floating point. Dedicated QFEX trade "
+        "connections use the shared opt-in WebSocket stack and never replay commands.\n",
         "Core contracts have no dependencies. Hyperliquid directly adds core, Serde, "
         "Serde JSON, K256 (secp256k1), SHA3 (Keccak), rmp-serde (MessagePack), "
         "hex (native addresses/signatures), and zeroize (temporary secret buffers). "
@@ -75,18 +90,21 @@ def render(target):
         packages = inventory(package, features, target)
         names = {dependency.split()[0] for dependency in packages}
         selected = set(features.split(","))
-        if "hyperliquid" in selected and "lighter" not in selected and names & {
-            "goldilocks-crypto", "poseidon-hash", "aux-rs-lighter"
-        }:
-            raise SystemExit(f"Lighter signing leaked into Hyperliquid profile: {name}")
-        if "lighter" in selected and "hyperliquid" not in selected and names & {
-            "k256", "sha3", "rmp-serde", "aux-rs-hyperliquid"
-        }:
-            raise SystemExit(f"Hyperliquid signing leaked into Lighter profile: {name}")
-        if features in {"lighter", "hyperliquid", "hyperliquid,lighter"} and names & {
-            "tokio", "reqwest", "tokio-tungstenite", "rustls"
-        }:
-            raise SystemExit(f"Standard stack leaked into custom transport profile: {name}")
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus"}
+        if package == "aux-rs":
+            for exchange in exchanges - selected:
+                if f"aux-rs-{exchange}" in names:
+                    raise SystemExit(f"Unselected {exchange} adapter leaked into profile: {name}")
+            exclusive = {
+                "hyperliquid": {"k256", "sha3", "rmp-serde"},
+                "lighter": {"goldilocks-crypto", "poseidon-hash"},
+                "arcus": {"ed25519-dalek", "curve25519-dalek"},
+            }
+            for exchange, primitives in exclusive.items():
+                if exchange not in selected and names & primitives:
+                    raise SystemExit(f"Unselected {exchange} crypto leaked into profile: {name}")
+            if not selected & {"http", "ws"} and names & {"tokio", "reqwest", "tokio-tungstenite", "rustls"}:
+                raise SystemExit(f"Standard stack leaked into custom transport profile: {name}")
         if package != "aux-rs-python" and any(
             dependency.split()[0].startswith("pyo3")
             or dependency.split()[0] == "aux-rs-python"

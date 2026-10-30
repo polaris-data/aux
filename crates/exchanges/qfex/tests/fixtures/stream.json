@@ -1,0 +1,25 @@
+[
+  {
+    "type": "subscribed",
+    "channels": [
+      "level2"
+    ],
+    "symbols": [
+      "AAPL-USD"
+    ]
+  },
+  {
+    "sequence": 1,
+    "type": "level2",
+    "time": "2026-10-30T13:34:26.788823356Z",
+    "symbol": "AAPL-USD",
+    "bid": [
+      [
+        "300",
+        "0.01"
+      ]
+    ],
+    "ask": [],
+    "sig_figs": 0
+  }
+]

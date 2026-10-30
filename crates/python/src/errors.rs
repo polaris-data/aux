@@ -4,6 +4,8 @@ use aux_rs::{
 use pyo3::{create_exception, exceptions::PyException, prelude::*};
 
 pub enum ClientError {
+    Qfex(NativeError<aux_rs::qfex::Error>),
+    Arcus(NativeError<aux_rs::arcus::Error>),
     Hyperliquid(NativeError<hl::Error>),
     Lighter(NativeError<lt::Error>),
     Conversion,
@@ -16,7 +18,9 @@ impl ClientError {
     pub fn is_gap(&self) -> bool {
         match self {
             Self::Hyperliquid(NativeError::Transport(e))
-            | Self::Lighter(NativeError::Transport(e)) => e.is_gap(),
+            | Self::Lighter(NativeError::Transport(e))
+            | Self::Qfex(NativeError::Transport(e))
+            | Self::Arcus(NativeError::Transport(e)) => e.is_gap(),
             _ => false,
         }
     }
@@ -29,6 +33,7 @@ create_exception!(aux_py, BusyError, ConnectorError);
 create_exception!(aux_py, AuthenticationError, ConnectorError);
 create_exception!(aux_py, SigningError, ConnectorError);
 create_exception!(aux_py, NonceUncertainError, ConnectorError);
+create_exception!(aux_py, OutcomeUncertainError, ConnectorError);
 
 pub fn transport(native: &aux_rs::TransportError) -> PyErr {
     Python::attach(|py| -> PyResult<PyErr> {
@@ -103,7 +108,9 @@ pub fn lt_native(error: lt::Error) -> PyErr {
 pub fn map_error(error: &ClientError) -> PyErr {
     match error {
         ClientError::Hyperliquid(NativeError::Transport(e))
-        | ClientError::Lighter(NativeError::Transport(e)) => transport(e),
+        | ClientError::Lighter(NativeError::Transport(e))
+        | ClientError::Qfex(NativeError::Transport(e))
+        | ClientError::Arcus(NativeError::Transport(e)) => transport(e),
         ClientError::Hyperliquid(NativeError::Exchange(e)) => match e {
             hl::Error::Http { status, body } => {
                 exchange("Hyperliquid", Some(*status), Some(body), None, None, None)
@@ -150,6 +157,54 @@ pub fn map_error(error: &ClientError) -> PyErr {
             }
             _ => ConnectorError::new_err("Lighter operation failed"),
         },
+        ClientError::Qfex(NativeError::Exchange(e)) => match e {
+            aux_rs::qfex::Error::InvalidRequest(message) => ValidationError::new_err(*message),
+            aux_rs::qfex::Error::Decode(_) => DecodeError::new_err("QFEX decoding failed"),
+            aux_rs::qfex::Error::Signing(_) => SigningError::new_err("QFEX signing failed"),
+            aux_rs::qfex::Error::PendingOutcome => OutcomeUncertainError::new_err(
+                "QFEX command outcome is unresolved; reconcile before another command",
+            ),
+            aux_rs::qfex::Error::Api { status, body } => exchange(
+                "QFEX",
+                *status,
+                Some(&body.to_string()),
+                body.get("error")
+                    .or_else(|| body.get("message"))
+                    .and_then(serde_json::Value::as_str),
+                None,
+                body.as_object()
+                    .map(|m| {
+                        m.iter()
+                            .map(|(k, v)| (k.clone(), v.clone()))
+                            .collect::<lt::ExtraFields>()
+                    })
+                    .as_ref(),
+            ),
+        },
+        ClientError::Arcus(NativeError::Exchange(e)) => match e {
+            aux_rs::arcus::Error::InvalidRequest(message) => ValidationError::new_err(*message),
+            aux_rs::arcus::Error::Decode(_) => DecodeError::new_err("Arcus decoding failed"),
+            aux_rs::arcus::Error::Signing(_) => SigningError::new_err("Arcus signing failed"),
+            aux_rs::arcus::Error::PendingOutcome => OutcomeUncertainError::new_err(
+                "Arcus command outcome is unresolved; reconcile before another command",
+            ),
+            aux_rs::arcus::Error::Api { status, body } => exchange(
+                "Arcus",
+                *status,
+                Some(&body.to_string()),
+                body.get("error")
+                    .or_else(|| body.get("message"))
+                    .and_then(serde_json::Value::as_str),
+                None,
+                body.as_object()
+                    .map(|m| {
+                        m.iter()
+                            .map(|(k, v)| (k.clone(), v.clone()))
+                            .collect::<lt::ExtraFields>()
+                    })
+                    .as_ref(),
+            ),
+        },
         ClientError::Conversion => {
             DecodeError::new_err("unexpected or unrepresentable native stream event")
         }
@@ -169,7 +224,16 @@ pub fn add_to_module(module: &Bound<'_, PyModule>) -> PyResult<()> {
         BusyError,
         AuthenticationError,
         SigningError,
-        NonceUncertainError
+        NonceUncertainError,
+        OutcomeUncertainError
     );
     Ok(())
+}
+
+pub fn qfex(error: NativeError<aux_rs::qfex::Error>) -> PyErr {
+    map_error(&ClientError::Qfex(error))
+}
+
+pub fn arcus(error: NativeError<aux_rs::arcus::Error>) -> PyErr {
+    map_error(&ClientError::Arcus(error))
 }

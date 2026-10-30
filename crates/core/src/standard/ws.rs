@@ -21,7 +21,7 @@ use tokio_tungstenite::{
     tungstenite::{Error as WsError, Message, protocol::WebSocketConfig},
 };
 
-type Socket = SocketStream<MaybeTlsStream<TcpStream>>;
+pub(super) type Socket = SocketStream<MaybeTlsStream<TcpStream>>;
 type Completion = oneshot::Sender<Result<(), TransportError>>;
 enum Attachment {
     Attached,
@@ -221,7 +221,7 @@ impl Drop for StandardSubscription {
     }
 }
 
-async fn connect(
+pub(super) async fn connect(
     url: &str,
     tls: Arc<rustls::ClientConfig>,
     config: &TransportConfig,

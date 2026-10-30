@@ -274,9 +274,9 @@ Target venues are listed in the requested order. Checked items have implemented 
 - [ ] **Aster**
 - [ ] **GRVT**
 - [ ] **Antarctic**
-- [ ] **QFEX**
+- [x] **QFEX** — core native Rust/Python operations implemented; funded UAT trading verification pending.
 - [ ] **EdgeX**
-- [ ] **Arcus**
+- [x] **Arcus** — core perpetuals Rust/Python operations implemented; funded testnet trading verification pending.
 - [ ] **Ondo Perps**
 - [ ] **Extended**
 - [ ] **Pacifica**
@@ -287,23 +287,22 @@ For each new venue, track protocol/authentication research, a native Rust adapte
 
 ## Venue coverage checklist
 
-Only completed capabilities with corresponding acceptance checks are marked. Other items remain pending.
+The new adapters cover core native operations; extended workflows are listed in each exchange guide.
 
-| Capability | Hyperliquid | Lighter |
-|---|---|---|
-| Market metadata and book snapshots | [x] | [x] |
-| Public trades and book streams | [x] | [x] |
-| Account state, positions, and open orders | [x] | [x] |
-| Rust signing and native authentication | [x] | [x] |
-| Order submission and cancellation | [x] | [x] |
-| Account streams | [x] | [x] |
-| Nonce concurrency and sequencing checks | [x] | [x] |
-| Reconnect, overflow, and cleanup checks | [x] | [x] |
-| Explicit testnet trading verification | [ ] | [ ] |
+| Capability | Hyperliquid | Lighter | QFEX | Arcus |
+|---|---|---|---|---|
+| Market metadata and book snapshots | [x] | [x] | [x] | [x] |
+| Public trades and book streams | [x] | [x] | [x] | [x] |
+| Account state and positions | [x] | [x] | [x] | [x] |
+| Native order reads | [x] | [x] | [x] | [x] |
+| Rust signing and native authentication | [x] | [x] | [x] | [x] |
+| Order submission and cancellation | [x] | [x] | [x] | [x] |
+| Account streams | [x] | [x] | [x] | [x] |
+| Authenticated live testnet trading | Pending | Pending | Pending | Pending |
 
-Checks for implemented signing/trading/private order streams include offline/reference verification; they do not imply funded testnet validation or a cryptographic audit. The explicit testnet-trading row remains unchecked for both venues. Recovery uses valid existing credentials and terminates explicitly when private replay credentials expire; background token refresh is not implemented.
+QFEX uses isolated authenticated WebSocket trade sessions. No commands replay on reconnect; an interrupted command remains pending until its native response is reconciled. Public MDS streams reuse the standard subscription transport. Arcus uses native Ed25519 typed order payloads, exact market tick/quantum conversion, monotonic nanosecond timestamps, and single-attempt REST writes. Public account subscriptions are scoped by address and account index; delta books require fresh snapshots after gaps.
 
-Python bindings cover the implemented exchange operations for both venues. Generic Rust transport/auth traits remain Rust extension points; custom async signing is exposed in Python. See `crates/python/README.md` for the validated interpreter/platform and remaining wheel/distribution scope.
+Both new exchanges have Rust protocol/signing tests, local connection lifecycle tests, Python bindings, and offline Python parity tests. Public testnet fixtures were captured on 2026-10-30. The source contracts and narrower current coverage are recorded in their exchange READMEs. Live funded trading remains unverified for all venues; reference compatibility does not imply a cryptographic audit. No signing reference-generation scripts were reintroduced.
 
 ## Acceptance checks
 

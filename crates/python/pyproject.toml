@@ -5,7 +5,7 @@ build-backend = "maturin"
 [project]
 name = "aux-py"
 version = "0.0.0"
-description = "Native Hyperliquid and Lighter APIs backed by Rust"
+description = "Native exchange APIs backed by Rust"
 requires-python = ">=3.10"
 readme = "README.md"
 dependencies = []

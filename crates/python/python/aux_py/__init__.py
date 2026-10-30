@@ -1,4 +1,4 @@
-"""Native Hyperliquid and Lighter APIs backed by the same Rust providers."""
+"""Native exchange APIs backed by the same Rust clients."""
 
 from __future__ import annotations
 
@@ -7,6 +7,8 @@ from typing import Any
 
 from . import _native
 from ._native import (
+    ArcusSigner,
+    OutcomeUncertainError,
     BusyError,
     ClosedError,
     ConnectorError,
@@ -41,6 +43,7 @@ __all__ = [
     "hyperliquid_action_hash", "validate_hyperliquid_order", "scale_lighter_decimal",
     "hyperliquid_signing_payload", "hyperliquid_user_signing_payload",
     "lighter_auth_signing_payload", "lighter_transaction_signing_payload",
+    "QfexClient", "ArcusClient", "ArcusSigner", "OutcomeUncertainError",
     "__version__",
 ]
 
@@ -296,3 +299,111 @@ async def _call_signer(callback: Any, payload: Any) -> Any:
 
 async def _await_signer(future: Any) -> Any:
     return await asyncio.wrap_future(future)
+
+
+class _ExchangeClient:
+    @property
+    def closed(self) -> bool:
+        return self._inner.closed
+
+    @property
+    def authenticated(self) -> bool:
+        return self._inner.authenticated
+
+    async def aclose(self) -> None:
+        await self._inner.aclose()
+
+    async def __aenter__(self):
+        if self.closed:
+            raise ClosedError("client is closed")
+        return self
+
+    async def __aexit__(self, *_: Any) -> None:
+        await self.aclose()
+
+
+class QfexClient(_ExchangeClient):
+    """Native QFEX REST/MDS/trade APIs; testnet selects the UAT exchange."""
+
+    def __init__(self, *, network: str = "testnet", http_url: str | None = None,
+                 ws_url: str | None = None, trade_ws_url: str | None = None,
+                 public_key: str | None = None, secret_key: str | None = None,
+                 account_id: str | None = None, builder_code: str | None = None,
+                 timeout_ms: int = 10_000, subscription_capacity: int = 128) -> None:
+        self._inner = _native.QfexClient(
+            network=network, http_url=http_url, ws_url=ws_url, trade_ws_url=trade_ws_url,
+            public_key=public_key, secret_key=secret_key, account_id=account_id,
+            builder_code=builder_code, timeout_ms=timeout_ms,
+            subscription_capacity=subscription_capacity,
+        )
+
+    async def refdata(self, *, ticker: str | None = None) -> dict[str, Any]:
+        return await self._inner.refdata(ticker=ticker)
+
+    async def contracts(self, *, symbol: str | None = None) -> dict[str, Any]:
+        return await self._inner.contracts(symbol=symbol)
+
+    async def order_book(self, symbol: str) -> dict[str, Any]:
+        return await self._inner.order_book(symbol)
+
+    async def positions(self) -> dict[str, Any]:
+        return await self._inner.positions()
+
+    async def account_balances(self) -> dict[str, Any]:
+        return await self._inner.account_balances()
+
+    async def user_orders(self, *, symbol: str | None = None, limit: int = 100, offset: int = 0) -> dict[str, Any]:
+        return await self._inner.user_orders(symbol=symbol, limit=limit, offset=offset)
+
+    async def add_order(self, request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.add_order(request)
+
+    async def cancel_order(self, request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.cancel_order(request)
+
+    async def subscribe(self, channel: str, symbol: str) -> Subscription:
+        return Subscription(await self._inner.subscribe(channel, symbol))
+
+    async def subscribe_account(self) -> Subscription:
+        return Subscription(await self._inner.subscribe_account())
+
+
+class ArcusClient(_ExchangeClient):
+    """Native Arcus perpetuals APIs with optional registered Ed25519 credentials."""
+
+    def __init__(self, *, network: str = "testnet", http_url: str | None = None,
+                 ws_url: str | None = None, signer: ArcusSigner | None = None,
+                 address: str | None = None, account_index: int = 0,
+                 timeout_ms: int = 10_000, subscription_capacity: int = 128) -> None:
+        self._inner = _native.ArcusClient(
+            network=network, http_url=http_url, ws_url=ws_url, signer=signer,
+            address=address, account_index=account_index, timeout_ms=timeout_ms,
+            subscription_capacity=subscription_capacity,
+        )
+
+    async def markets(self, *, market: str | None = None) -> dict[str, Any]:
+        return await self._inner.markets(market=market)
+
+    async def order_book(self, market: str, *, n_levels: int = 20) -> dict[str, Any]:
+        return await self._inner.order_book(market, n_levels=n_levels)
+
+    async def trades(self, market: str, *, limit: int = 100) -> dict[str, Any]:
+        return await self._inner.trades(market, limit=limit)
+
+    async def account(self, address: str, *, account_index: int = 0) -> dict[str, Any]:
+        return await self._inner.account(address, account_index=account_index)
+
+    async def positions(self, address: str, *, account_index: int = 0) -> dict[str, Any]:
+        return await self._inner.positions(address, account_index=account_index)
+
+    async def open_orders(self, address: str, *, account_index: int = 0) -> dict[str, Any]:
+        return await self._inner.open_orders(address, account_index=account_index)
+
+    async def place_order(self, market: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.place_order(market, request)
+
+    async def cancel_order(self, request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.cancel_order(request)
+
+    async def subscribe(self, specification: dict[str, Any]) -> Subscription:
+        return Subscription(await self._inner.subscribe(specification))

@@ -63,6 +63,31 @@ pub trait HttpTransport: Send + Sync {
     }
 }
 
+/// A dedicated, ordered WebSocket connection. Trading connections must never
+/// reconnect or replay writes automatically. Cancelling `next` must not consume
+/// a message; a failed send may have reached the exchange.
+pub trait WebSocketConnection: Send {
+    /// Wait for one message within the supplied response budget. Timeout must
+    /// not consume a later message; callers reconcile ambiguous writes explicitly.
+    fn next_with_timeout(
+        &mut self,
+        timeout: Duration,
+    ) -> impl Future<Output = Option<Result<String, TransportError>>> + Send;
+    fn send(&mut self, text: String) -> impl Future<Output = Result<(), TransportError>> + Send;
+    fn next(&mut self) -> impl Future<Output = Option<Result<String, TransportError>>> + Send;
+    fn close(&mut self) -> impl Future<Output = Result<(), TransportError>> + Send;
+}
+
+/// Opens isolated WebSocket connections for protocols with session authentication
+/// and order commands. Subscription pooling remains a separate transport contract.
+pub trait WebSocketConnector: Send + Sync {
+    type Connection: WebSocketConnection;
+    fn connect(
+        &self,
+        url: &str,
+    ) -> impl Future<Output = Result<Self::Connection, TransportError>> + Send;
+}
+
 /// Wire-level subscription behavior supplied by the exchange adapter.
 ///
 /// Keys must include all subscription parameters. Equal keys normally share one

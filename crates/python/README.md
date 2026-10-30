@@ -1,6 +1,6 @@
 # Python bindings
 
-The `aux-py` distribution (import `aux_py`) exposes the implemented Hyperliquid and Lighter Rust SDK operations. Owned concrete PyO3 clients wrap the same Rust clients, signing, nonce coordination and transports. Python contains asyncio/context-manager glue, not exchange protocol implementations. Rust SDK crates have no PyO3 dependency.
+The `aux-py` distribution (import `aux_py`) exposes the implemented Hyperliquid, Lighter, QFEX, and Arcus Rust SDK operations. Owned concrete PyO3 clients wrap the same Rust clients, signing, nonce coordination and transports. Python contains asyncio/context-manager glue, not exchange protocol implementations. Rust SDK crates have no PyO3 dependency.
 
 ## Coverage
 
@@ -20,6 +20,41 @@ The `aux-py` distribution (import `aux_py`) exposes the implemented Hyperliquid 
 | Nonce recovery | Rust signer-scoped coordinator and explicit nonce options | Rust coordinator, public `next_nonce`, explicit `resync_nonce` |
 
 This is parity with the operations currently implemented in Rust. Funding/withdrawal submissions, Lighter key registration/grouped batches and other unimplemented Rust operations remain outside scope. Python wraps concrete standard transports and default native auth handlers; generic Rust transport/auth traits are not Python subclass interfaces. Custom signing is available through explicit async callbacks.
+
+## QFEX and Arcus
+
+`QfexClient` and `ArcusClient` are included in the Python distribution. Each wraps
+the same native Rust implementation and shares the existing exact conversion,
+error mapping, cancellable subscription, and client shutdown infrastructure.
+
+```python
+from aux_py import QfexClient, ArcusClient, ArcusSigner
+
+async with QfexClient(network="testnet") as qfex:
+    metadata = await qfex.refdata(ticker="AAPL-USD")
+    book = await qfex.order_book("AAPL-USD")
+
+async with ArcusClient(network="testnet") as arcus:
+    markets = await arcus.markets(market="BTC-USD")
+    book = await arcus.order_book("BTC-USD")
+```
+
+QFEX authentication takes `public_key` and `secret_key`, optionally `account_id`
+and `builder_code`. Authenticated methods are `positions`, `account_balances`,
+`user_orders`, `add_order`, `cancel_order`, and `subscribe_account`; `subscribe(channel, symbol)`
+selects public MDS channels. One-shot add/cancel methods authenticate a fresh
+trade connection, send once, and close it. Quantity/price inputs accept exact
+decimal strings or integers; floating-point inputs are rejected.
+
+Arcus writes take `signer=ArcusSigner(seed_hex)`, `address`, and `account_index`.
+`place_order(market_metadata, request)` and `cancel_order(request)` accept native
+dictionaries. Markets, books, trades, account, positions, and open orders are
+public reads. `subscribe(specification)` preserves native channel envelopes.
+
+See the [QFEX guide](../exchanges/qfex/README.md) and
+[Arcus guide](../exchanges/arcus/README.md) for native units, credentials,
+supported methods, and pending authenticated testnet verification. The Python
+suite has 49 tests, including local authenticated peers for both new exchanges.
 
 ## Build and verify
 
@@ -148,4 +183,4 @@ Milestone 5 adds safe-read retry and reconnect policies. Defaults are two extra 
 
 `GapError` derives from `TransportError`. Catch it within the stream's context manager, invalidate/reconcile derived state and call `anext()` again; the iterator stays open. Old buffered frames are cleared before recovery data. Terminal overflow, protocol/size errors, expired replay credentials or exhausted recovery close the iterator. Private Lighter token refresh requires a new authenticated subscription. A plain `async for` does not suppress gap exceptions.
 
-Client `aclose()` also shuts down the shared Rust transport and waits for its handshakes, requests and socket drivers. Safe reads honor bounded `Retry-After` handling; signed trading is never automatically retried, even after timeout/shutdown. All 42 Python tests cover the existing 110 signing vectors and recovery, budget, backoff cancellation and no-replay cases. See [HARDENING.md](../../HARDENING.md) for Rust/Python examples and detailed lifecycle contracts.
+Client `aclose()` also shuts down the shared Rust transport and waits for its handshakes, requests and socket drivers. Safe reads honor bounded `Retry-After` handling; signed trading is never automatically retried, even after timeout/shutdown. The 49-test Python suite covers the existing 110 signing vectors, both new exchange adapters, recovery, budget, backoff cancellation, and no-replay cases. See [HARDENING.md](../../HARDENING.md) for Rust/Python examples and detailed lifecycle contracts.

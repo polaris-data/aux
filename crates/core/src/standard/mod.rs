@@ -5,10 +5,14 @@ use tokio::sync::watch;
 
 use crate::{RequestOutcome, TransportConfig, TransportError, TransportErrorKind};
 
+#[cfg(feature = "ws")]
+mod connection;
 #[cfg(feature = "http")]
 mod http;
 #[cfg(feature = "ws")]
 mod ws;
+#[cfg(feature = "ws")]
+pub use connection::StandardConnection;
 #[cfg(feature = "ws")]
 pub use ws::StandardSubscription;
 

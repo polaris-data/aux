@@ -1,10 +1,12 @@
 //! The only crate that depends on Python. Protocol adaptation stays in Rust's
 //! existing client/adapter crates; owned concrete wrappers cross this boundary.
 
+mod arcus;
 mod client;
 mod convert;
 mod errors;
 mod lighter;
+mod qfex;
 mod signers;
 mod state;
 mod subscription;
@@ -14,6 +16,9 @@ use pyo3::prelude::*;
 #[pymodule]
 fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<client::HyperliquidClient>()?;
+    module.add_class::<qfex::QfexClient>()?;
+    module.add_class::<arcus::ArcusClient>()?;
+    module.add_class::<arcus::ArcusSigner>()?;
     module.add_class::<lighter::LighterClient>()?;
     module.add_class::<subscription::Subscription>()?;
     module.add(

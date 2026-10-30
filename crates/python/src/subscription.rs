@@ -8,6 +8,9 @@ use std::sync::{Arc, Mutex};
 use tokio::sync::watch;
 
 pub enum NativeHandle {
+    Qfex(aux_rs::qfex::SubscriptionHandle<StandardSubscription>),
+    Arcus(aux_rs::arcus::SubscriptionHandle<StandardSubscription>),
+    QfexTrade(aux_rs::qfex::TradingSession<aux_rs::standard::StandardConnection>),
     Hyperliquid {
         handle: hl::SubscriptionHandle<StandardSubscription>,
         book_only: bool,
@@ -17,6 +20,9 @@ pub enum NativeHandle {
 impl NativeHandle {
     async fn close(&mut self) -> Result<(), ClientError> {
         match self {
+            Self::Qfex(handle) => handle.close().await.map_err(ClientError::Qfex),
+            Self::Arcus(handle) => handle.close().await.map_err(ClientError::Arcus),
+            Self::QfexTrade(handle) => handle.close().await.map_err(ClientError::Qfex),
             Self::Hyperliquid { handle, .. } => {
                 handle.close().await.map_err(ClientError::Hyperliquid)
             }
@@ -26,6 +32,27 @@ impl NativeHandle {
     async fn next(&mut self) -> Option<Result<serde_json::Value, ClientError>> {
         use serde_json::json;
         match self {
+            Self::Qfex(handle) => Some(
+                handle
+                    .next()
+                    .await?
+                    .map_err(ClientError::Qfex)
+                    .and_then(|e| serde_json::to_value(e).map_err(|_| ClientError::Conversion)),
+            ),
+            Self::Arcus(handle) => Some(
+                handle
+                    .next()
+                    .await?
+                    .map_err(ClientError::Arcus)
+                    .and_then(|e| serde_json::to_value(e).map_err(|_| ClientError::Conversion)),
+            ),
+            Self::QfexTrade(handle) => Some(
+                handle
+                    .next()
+                    .await?
+                    .map_err(ClientError::Qfex)
+                    .and_then(|e| serde_json::to_value(e).map_err(|_| ClientError::Conversion)),
+            ),
             Self::Hyperliquid { handle, book_only } => loop {
                 let event = match handle.next().await? {
                     Ok(e) => e,

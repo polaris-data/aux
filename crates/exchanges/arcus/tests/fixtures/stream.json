@@ -1,0 +1,36 @@
+[
+  {
+    "type": "connected",
+    "connection_id": "1793367269064870961"
+  },
+  {
+    "type": "subscribed",
+    "channel": "l2Orderbook",
+    "id": "BTC-USD",
+    "contents": {
+      "bids": [
+        [
+          "70072",
+          "0.00142614"
+        ],
+        [
+          "70000",
+          "0.00044546"
+        ]
+      ],
+      "asks": [
+        [
+          "70166.1",
+          "0.00152614"
+        ],
+        [
+          "70269.1",
+          "0.00028503"
+        ]
+      ],
+      "lastSequenceId": 38766720,
+      "globalSequenceId": 2680446236,
+      "timestamp": 1793367269214473
+    }
+  }
+]
