@@ -47,8 +47,9 @@ build, Python tests, and dependency checks. It uses fixtures and local mock
 servers. Set `AUX_PYTHON=/path/to/venv/bin/python` to select another environment.
 
 See the [Python guide](crates/python/README.md) for API coverage, examples, and
-platform limits. CPython 3.12.7 on macOS arm64 has been validated; release wheels
-and a broader interpreter/platform matrix remain separate work.
+platform limits. CPython 3.12.7 on macOS arm64 has been validated locally; the
+[release workflow](crates/python/README.md#releases) checks the wheel matrix and
+source distribution before publishing to PyPI.
 
 ## Dependency changes
 

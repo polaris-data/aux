@@ -1,15 +1,10 @@
 # aux
 
-`aux` is an SDK for connecting to DeFi-native exchange and data APIs, with
-composable clients and opt-in exchange adapters. Written in Rust, it provides
-market data, account reads, streams, and trading, with
-[Python bindings](crates/python/README.md) available as `aux-py` (`aux_py`).
-
-The packages are unpublished, and funded authenticated testnet verification is
-pending for all exchanges. Lighter's local signing primitives are experimental
-and unaudited; see the [signing notes](crates/exchanges/lighter/SIGNING.md).
+`aux` connects you to DeFi-native exchange APIs, external trading infrastructure and market data vendors, through SDKs in Rust and Python.
 
 ## Installation
+
+### Rust
 
 Requires **Rust 1.92 or later**. The crates are local workspace packages; add a
 path dependency and adjust the path to your checkout:
@@ -24,7 +19,7 @@ Import the Rust package as `aux_rs`. HTTP and WebSocket transports are enabled
 by default; select each exchange explicitly with its feature flag. Unselected
 adapters and Python bindings are excluded from Rust consumers.
 
-### Features
+#### Features
 
 Each client exposes its exchange's native operations and response types.
 Prices and sizes preserve exact native values, and exchange-specific errors
@@ -44,6 +39,21 @@ custom I/O; see the [custom transport guide](HARDENING.md#custom-transports).
 The [transport guide](HARDENING.md) covers configuration, recovery gaps,
 subscription lifecycle, and shutdown. Production dependencies are recorded in
 the [dependency inventory](DEPENDENCIES.md).
+
+### Python
+
+Requires **Python 3.10 or later** and **Rust 1.92 or later**. From the repository
+root, create a virtual environment and build the SDK locally:
+
+```sh
+python3 -m venv .venv-python
+source .venv-python/bin/activate
+python -m pip install "maturin==1.16.0"
+python -m maturin develop --locked --manifest-path crates/python/Cargo.toml
+```
+
+Import the Python package as `aux_py`. See the [Python guide](crates/python/README.md)
+for usage examples and verification instructions.
 
 ## Examples
 
