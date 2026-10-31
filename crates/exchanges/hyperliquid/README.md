@@ -82,13 +82,12 @@ Funded authenticated testnet submit/cancel verification remains pending.
 
 ## Transports and recovery
 
-Use the [transport guide](../../../HARDENING.md) for custom I/O, pooling,
-subscription acknowledgements, recovery gaps, and shutdown behavior. Hyperliquid
-book events are full native snapshots; the SDK does not build an application
-order book or replay cached snapshots to late subscribers.
+Built-in transports support pooling, subscription acknowledgements, explicit
+recovery gaps, and shutdown. Hyperliquid book events are full native snapshots;
+the SDK does not build an application order book or replay cached snapshots to
+late subscribers.
 
 With built-in transports disabled, the adapter has no runtime or networking
 dependencies. It uses K256 for secp256k1, SHA3 for Keccak, and rmp-serde for
 MessagePack. K256 clears private-key storage on drop; temporary secret buffers
 use zeroize, and private keys are excluded from debug/error output.
-See the [dependency inventory](../../../DEPENDENCIES.md) for the full profile.

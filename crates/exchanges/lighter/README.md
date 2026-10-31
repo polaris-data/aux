@@ -2,7 +2,7 @@
 
 Implemented Rust APIs: market metadata, native order-book snapshots, recent trades, public account/position reads, authenticated active-order reads, create/cancel submission, Rust auth tokens, and public book/trade/account plus private order streams. Select `lighter` on the facade; no exchange is selected by default.
 
-The SDK is local and unpublished. [SIGNING.md](SIGNING.md) records the pinned official reference, cryptographic limitations, reproduction commands and outstanding funded testnet checks. The local signer is experimental and unaudited. [Python bindings](../../python/README.md) cover the implemented Lighter operations. [Transport hardening](../../../HARDENING.md) includes safe-read retries, explicit reconnect gaps and shutdown. Python wheel distribution remains later work.
+The SDK is local and unpublished. [SIGNING.md](SIGNING.md) records the pinned official reference, cryptographic limitations, reproduction commands and outstanding funded testnet checks. The local signer is experimental and unaudited. [Python bindings](../../python/README.md) cover the implemented Lighter operations. Built-in transports support safe-read retries, explicit reconnect gaps and shutdown. Python wheel distribution remains later work.
 
 ## Public reads and streams
 
