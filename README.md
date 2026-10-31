@@ -35,10 +35,8 @@ remain distinguishable from transport failures.
 | `arcus` | No | [Native Arcus client and Ed25519 signing](crates/exchanges/arcus/README.md) |
 
 Exchange features do not activate networking. Disable default features to use
-custom I/O; see the [custom transport guide](HARDENING.md#custom-transports).
-The [transport guide](HARDENING.md) covers configuration, recovery gaps,
-subscription lifecycle, and shutdown. Production dependencies are recorded in
-the [dependency inventory](DEPENDENCIES.md).
+custom I/O. Built-in transports support configurable timeouts, safe-read retries,
+explicit recovery gaps, and shutdown.
 
 ### Python
 
@@ -111,7 +109,8 @@ The workspace contains:
 - [Exchange adapters](crates/exchanges): native clients, types, and signing.
 - [Python bindings](crates/python/README.md): asyncio clients backed by the Rust SDK.
 
-See the [architecture and roadmap](PLANNING.md) for design and remaining work.
+See the [architecture](CONTRIBUTING.md#architecture) and
+[roadmap](CONTRIBUTING.md#roadmap-and-release-gates) for design and remaining work.
 
 ## Contributing
 
