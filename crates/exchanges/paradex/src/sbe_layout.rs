@@ -1,4 +1,4 @@
-// Generated from reference/paradex_1_0.xml by scripts/generate-paradex-sbe.py.
+// Generated from the pinned Paradex SBE 1:3 XML by scripts/generate-paradex-sbe.py.
 use super::{Field, Kind, Layout};
 pub const TRADE_EVENT: Layout = Layout {
     template: 1,

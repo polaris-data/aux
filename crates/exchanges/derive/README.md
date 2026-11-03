@@ -2,7 +2,7 @@
 
 Enable `features = ["derive"]` on `aux-rs`. This adapter targets the Derive **v3** API, with 128 typed REST methods, the same methods over an isolated WebSocket RPC session, all four WebSocket control methods, and all 13 documented subscription channels. It covers spot, perps, options, RFQ, account/session administration, transfers, withdrawal requests, liquidations, vaults, history, and rewards/referral reads.
 
-[coverage.json](coverage.json) maps every operation/channel to its Rust and Python surface, fixture, and contract test. [Coverage tables](COVERAGE.md) provide the browsable inventory. The [pinned specifications](reference) define the coverage baseline; the generator does not introduce an exchange SDK dependency.
+[coverage.json](coverage.json) maps every operation/channel to its Rust and Python surface, fixture, and contract test. [Coverage tables](COVERAGE.md) provide the browsable inventory. [Source pins](API_SOURCES.json) record the coverage baseline. Schemas are external generation inputs; they are not bundled in the repository.
 
 ```rust
 use aux_rs::derive::{DeriveClient, GetInstrumentRequest, Subscription};

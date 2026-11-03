@@ -4,7 +4,7 @@ Recorded 2026-11-03 on macOS arm64, Rust workspace toolchain and CPython 3.12.7.
 
 | Check | Evidence |
 | --- | --- |
-| API coverage | 139 Swagger operations plus three documented additions; 30 WebSocket entries and 12 SBE templates; hashes and Rust/Python fixture parity checked by `scripts/check-native-coverage.py` |
+| API coverage | 139 Swagger operations plus three documented additions; 30 WebSocket entries and 12 SBE templates; inventory hashes and Rust/Python fixture parity checked by `scripts/check-native-coverage.py`. External pinned inputs support an additional regeneration check with `--reference-root` |
 | Signing | 14 native typed-message cases across two appchains, Starknet and Argent/EVM signatures, ten administrative hashes, four SIWE auth/onboarding vectors and deterministic EVM account address; altered payloads, network/domain separation and exact precision |
 | REST and Python | Every operation through local HTTP peers, native error details and exact large numbers, explicit JWT authentication, read-only/expired credentials, rate-limit errors and disconnected writes without replay |
 | SBE | All 12 official schema 1:3 templates; authoritative full trade IDs; exact decimals/microseconds; nullable fields, groups, extended block lengths, truncated/malformed frames, unsupported schema/template/version rejection |

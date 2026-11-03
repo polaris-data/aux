@@ -1,7 +1,8 @@
 # Derive v3 signing provenance
 
-The [provenance record](reference/provenance.json) pins source commits, API hashes,
-and license notices. The local signer uses `k256` for secp256k1 and `sha3` for
+The [provenance record](API_SOURCES.json) pins source commits, API hashes,
+and licenses. Required upstream notices are retained in [NOTICE](NOTICE).
+The local signer uses `k256` for secp256k1 and `sha3` for
 Keccak, with zeroized private-key storage. Official SDKs are compatibility
 references and are absent from runtime dependencies.
 
@@ -43,3 +44,20 @@ submission ordering, and deliberate caller-supplied nonces remain caller-owned.
 These checks establish reference compatibility. Funded delegated-key, scope,
 withdrawal, liquidation, and vault verification remains pending without suitable
 credentials. They do not constitute a cryptographic audit.
+
+## Schema generation
+
+Schema snapshots are not bundled in this repository. Normal builds and coverage
+checks use committed generated APIs, fixtures, and inventory hashes. Regeneration
+requires external inputs matching `API_SOURCES.json`, supplied in `derive/` and
+`paradex/` subdirectories:
+
+```sh
+python3 scripts/generate-native-apis.py --reference-root /path/to/api-inputs
+python3 scripts/generate-paradex-sbe.py --reference-root /path/to/api-inputs
+python3 scripts/check-native-coverage.py --reference-root /path/to/api-inputs
+```
+
+The original snapshots can be recovered into an external directory from commit
+`4dd9e1e` using `git archive <commit>:crates/exchanges/<venue>/reference`.
+The generators verify input hashes before use; they never download schemas.

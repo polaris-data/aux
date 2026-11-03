@@ -1,6 +1,6 @@
 # Paradex API coverage
 
-Generated from the pinned specification and documentation union. See [provenance](reference/provenance.json) and [verification](VERIFICATION.md). Fixtures are synthetic offline contracts; coverage does not imply funded verification.
+Generated from the pinned specification and documentation union. See [source pins](API_SOURCES.json) and [verification](VERIFICATION.md). Fixtures are synthetic offline contracts; coverage does not imply funded verification.
 
 142 REST operations; 30 WebSocket entries.
 

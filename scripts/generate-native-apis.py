@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Generate native declarations from the committed Derive/Paradex specifications.
+"""Generate native declarations from pinned external Derive/Paradex specifications.
 
-Offline, deterministic, standard-library only. Does not generate authentication,
-signing, transport, or lifecycle implementations. Run from any directory.
+Deterministic, standard-library only. Schemas are supplied externally through
+--reference-root, with derive/ and paradex/ subdirectories. Does not generate
+authentication, signing, transport, or lifecycle implementations.
 """
 
+import argparse
 import hashlib
 import json
 import re
@@ -17,6 +19,23 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 KEYWORDS = set("type ref self Self match loop move async await use mod fn pub impl where in as crate super dyn enum struct const static return default box abstract final override virtual try yield gen".split())
 CHECK = '--check' in sys.argv
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--reference-root', type=Path, help='external schema directory containing derive/ and paradex/ inputs')
+parser.add_argument('--check', action='store_true', help='verify generated output without writing it')
+ARGS = parser.parse_args()
+
+
+def reference_root(venue):
+    if ARGS.reference_root is None:
+        raise SystemExit('Generation requires --reference-root PATH; schemas are not bundled in the repository.')
+    directory = ARGS.reference_root.expanduser().resolve() / venue
+    metadata = json.loads((ROOT/'crates/exchanges'/venue/'API_SOURCES.json').read_text())
+    for name, expected in metadata['input_sha256'].items():
+        path = directory/name
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            raise SystemExit(f'{venue}: missing or changed external schema input: {path}')
+    return directory
 
 
 def write_file(path, contents):
@@ -49,8 +68,9 @@ class Generator:
     def __init__(self, venue):
         self.venue = venue
         self.base = ROOT / "crates/exchanges" / venue
-        self.spec = json.loads((self.base / "reference/openapi.json").read_text())
-        supplement = self.base / 'reference/supplemental.json'
+        self.references = reference_root(venue)
+        self.spec = json.loads((self.references / "openapi.json").read_text())
+        supplement = self.references / 'supplemental.json'
         if supplement.exists():
             for path, methods in json.loads(supplement.read_text())['paths'].items():
                 self.spec['paths'].setdefault(path, {}).update(methods)
@@ -58,12 +78,12 @@ class Generator:
         self.ws_documents = []
         if venue == 'derive':
             for filename in ['websocket.asyncapi.json', 'subscriptions.asyncapi.json']:
-                document = json.loads((self.base / 'reference' / filename).read_text())
+                document = json.loads((self.references / filename).read_text())
                 for key, schema in document.get('components', {}).get('schemas', {}).items():
                     self.defs.setdefault(key, schema)
                 self.ws_documents.append((filename, document))
         else:
-            for path in sorted((self.base / 'reference/ws').glob('*.json')):
+            for path in sorted((self.references / 'ws').glob('*.json')):
                 doc = json.loads(path.read_text())
                 schemas = doc.get('components', {}).get('schemas', {})
                 prefix = 'Ws' + pascal(path.stem)
@@ -452,12 +472,12 @@ class Generator:
             inventory.append({k: o[k] for k in ['method','request','response','path','verb','private','family']})
         for row in inventory:
             row.update(rust=f'{venue}Client::{row["method"]}',python=f'aux_py.{venue}Client.{row["method"]}',fixture=f'tests/fixtures/contracts.json#{row["method"]}',test=f'contract_{row["method"]}')
-        manifest = {"spec_sha256": hashlib.sha256((self.base / "reference/openapi.json").read_bytes()).hexdigest(), "rest": inventory, "websocket": ws_inventory, "websocket_documents": [name for name, _ in self.ws_documents]}
+        manifest = {"spec_sha256": hashlib.sha256((self.references / "openapi.json").read_bytes()).hexdigest(), "rest": inventory, "websocket": ws_inventory, "websocket_documents": [name for name, _ in self.ws_documents]}
         if self.venue == 'paradex':
-            schema=ET.parse(self.base/'reference/paradex_1_0.xml').getroot()
-            manifest['sbe']={'schema':'1:3','sha256':hashlib.sha256((self.base/'reference/paradex_1_0.xml').read_bytes()).hexdigest(),'templates':[{'id':int(m.attrib['id']),'rust':'sbe::'+m.attrib['name'],'fixture':'tests/fixtures/sbe.json#'+m.attrib['id'],'test':'all_templates_preserve_native_wire_values'} for m in schema.findall('{*}message')]}
+            schema=ET.parse(self.references/'paradex_1_0.xml').getroot()
+            manifest['sbe']={'schema':'1:3','sha256':hashlib.sha256((self.references/'paradex_1_0.xml').read_bytes()).hexdigest(),'templates':[{'id':int(m.attrib['id']),'rust':'sbe::'+m.attrib['name'],'fixture':'tests/fixtures/sbe.json#'+m.attrib['id'],'test':'all_templates_preserve_native_wire_values'} for m in schema.findall('{*}message')]}
         write_file(self.base / "coverage.json", json.dumps(manifest, indent=2) + "\n")
-        table = [f'# {venue} API coverage', '', 'Generated from the pinned specification and documentation union. See [provenance](reference/provenance.json) and [verification](VERIFICATION.md). Fixtures are synthetic offline contracts; coverage does not imply funded verification.', '', f'{len(inventory)} REST operations; {len(ws_inventory)} WebSocket entries.', '', '| REST operation | Rust method | Python method | Fixture / test |', '| --- | --- | --- | --- |']
+        table = [f'# {venue} API coverage', '', 'Generated from the pinned specification and documentation union. See [source pins](API_SOURCES.json) and [verification](VERIFICATION.md). Fixtures are synthetic offline contracts; coverage does not imply funded verification.', '', f'{len(inventory)} REST operations; {len(ws_inventory)} WebSocket entries.', '', '| REST operation | Rust method | Python method | Fixture / test |', '| --- | --- | --- | --- |']
         for row in inventory:
             table.append(f'| `{row["verb"].upper()} {row["path"]}` | `{row["rust"]}` | `{row["python"]}` | [{row["test"]}](tests/contracts.rs) / [fixture](tests/fixtures/contracts.json) |')
         table += ['', '| WebSocket command/channel | Rust API | Python API | Fixture / test |', '| --- | --- | --- | --- |']
@@ -471,12 +491,10 @@ class Generator:
         # The generated binding calls the same typed Rust methods; Python performs
         # no protocol encoding, signing, or numerical coercion.
         py = ['// Generated by scripts/generate-native-apis.py. Do not edit.', 'use super::*;', '#[pymethods]', f'impl {venue}Client {{']
-        stub = []
         for o in self.ops:
             m = o['method']
             client = 'self.state.client()?.authenticated(py)?' if o['private'] else 'self.state.client()?.public'
             py += [f'    #[pyo3(signature=(request=None))]',f'    fn {m}<\'py>(&self, py: Python<\'py>, request: Option<Bound<\'py, PyAny>>) -> PyResult<Bound<\'py, PyAny>> {{',f'        let request: v::{o["request"]} = input(request)?;', f'        let client = {client};',f'        self.state.run(py, async move {{ client.{m}(request).await.map_err(native) }})','    }']
-            stub.append(f'    async def {m}(self, request: Mapping[str, Any] | None = None) -> Any: ...')
         py += ['}']
         binding = ROOT / "crates/python/src" / self.venue
         binding.mkdir(exist_ok=True)
@@ -492,7 +510,6 @@ class Generator:
             folder=binding/'rpc'
             folder.mkdir(exist_ok=True)
             write_file(folder/'operations.rs', '\n'.join(lines)+'\n')
-        write_file(self.base / 'reference/python-methods.pyi', "\n".join(stub) + "\n")
         wrapper = ['# Generated by scripts/generate-native-apis.py.', 'from __future__ import annotations', 'from typing import Any, Mapping', 'from . import _native, _ExchangeClient, Subscription', f'class {venue}Client(_ExchangeClient):', f'    """Native {venue} APIs; defaults to testnet."""', '    def __init__(self, **configuration: Any) -> None:',f'        self._inner = _native.{venue}Client(**configuration)', '    async def subscribe(self, specification: Mapping[str, Any]) -> Subscription:', '        return Subscription(await self._inner.subscribe(specification))']
         if self.venue == 'derive':
             wrapper += ['    async def sign_action(self, action: Mapping[str, Any]) -> str:', '        return await self._inner.sign_action(action)']
@@ -514,12 +531,14 @@ class Generator:
         print(self.venue, len(self.ops), 'operations;',len(self.done),'native declarations')
 
 
-def native_stubs():
+def native_stubs(generators):
     path = ROOT/'crates/python/python/aux_py/_native.pyi'
     prefix = path.read_text().split('# Generated native exchange declarations.')[0].split('class DeriveSigner:')[0].rstrip()
     prefix = prefix.replace('    code: int | None\n', '    code: str | int | None\n    native: Native | None\n')
     sections = [prefix, '# Generated native exchange declarations. See generate-native-apis.py.']
-    for venue in ['derive', 'paradex']:
+    for generator in generators:
+        venue = generator.venue
+        method_stubs = '\n'.join(f'    async def {op["method"]}(self, request: Mapping[str, Any] | None = None) -> Any: ...' for op in generator.ops)
         name = venue.title()
         extra = '' if venue == 'derive' else ', kind: str = "starknet"'
         identity = 'address' if venue == 'derive' else 'public_key'
@@ -530,10 +549,10 @@ def native_stubs():
         else:
             sections += ['    async def authenticate(self) -> None: ...', '    def set_token(self, token: str, *, read_only: bool = True) -> None: ...', '    async def sign_typed_data(self, data: Mapping[str, Any]) -> list[str]: ...', '    async def block_signature(self, nonce: str, expiration: int, trades: Mapping[str, Any], *, parent: str | None = None) -> Any: ...']
             sections += ['    def onboarding_typed_data(self) -> Mapping[str, Any]: ...', '    async def sign_siwe(self, statement: str, nonce: str, issued_at: str, expiration: str | None = None) -> Any: ...', '    async def evm_account_address(self, address: str, class_hash: str) -> str: ...']
-        sections.append((ROOT/'crates/exchanges'/venue/'reference/python-methods.pyi').read_text().rstrip())
+        sections.append(method_stubs)
         sections += ['', f'class {name}RpcSession:', '    @property', '    def pending(self) -> Mapping[str, Any] | None: ...', '    async def reconcile(self) -> Any: ...', '    async def next_event(self) -> Any: ...', '    async def aclose(self) -> None: ...']
         if venue == 'derive':
-            sections += [(ROOT/'crates/exchanges'/venue/'reference/python-methods.pyi').read_text().rstrip()]
+            sections += [method_stubs]
             for method in ['set_cancel_on_disconnect','subscribe_channels','unsubscribe_channels']:
                 sections += [f'    async def {method}(self, request: Mapping[str, Any] | None = None) -> Any: ...']
         else:
@@ -549,6 +568,9 @@ def native_stubs():
 
 
 if __name__ == '__main__':
+    generators = []
     for venue in ['derive', 'paradex']:
-        Generator(venue).run()
-    native_stubs()
+        generator = Generator(venue)
+        generator.run()
+        generators.append(generator)
+    native_stubs(generators)

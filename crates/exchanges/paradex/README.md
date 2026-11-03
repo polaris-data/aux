@@ -2,7 +2,7 @@
 
 Enable `features = ["paradex"]` on `aux-rs`. The adapter exposes 142 typed REST operations: 139 in the pinned production/testnet Swagger specifications plus the documented subkey JWT, referral-configuration, and legacy testnet max-slippage routes. It covers every published API family, including spot/perps/options, RFQ and block trades, algos, MMP, keys/tokens, account settings, vaults, transfers/history, staking, rewards, and system data.
 
-[coverage.json](coverage.json) maps the REST operations, 30 documented/reference WebSocket entries, and all 12 SBE templates to their native interfaces and tests. [Coverage tables](COVERAGE.md) provide the browsable inventory. [Pinned references](reference) include the schema, documentation-only additions, and provenance.
+[coverage.json](coverage.json) maps the REST operations, 30 documented/reference WebSocket entries, and all 12 SBE templates to their native interfaces and tests. [Coverage tables](COVERAGE.md) provide the browsable inventory. [Source pins](API_SOURCES.json) record schema hashes and upstream commits. Schemas are external generation inputs; they are not bundled in the repository.
 
 ```rust
 use aux_rs::paradex::{ParadexClient, Subscription};

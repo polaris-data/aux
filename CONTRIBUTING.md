@@ -308,7 +308,9 @@ Derive v3 and Paradex have native Rust and Python coverage of the pinned publish
 API union: 128 and 142 REST operations respectively, plus 17 and 30 WebSocket
 entries. Paradex includes all 12 SBE 1:3 templates. Generated coverage manifests
 map named methods to fixtures and tests; `scripts/check-native-coverage.py`
-checks parity and reproducible generation offline. Consult the
+checks inventory hashes and fixture parity offline. Schema snapshots are external
+generation inputs; pass `--reference-root PATH` to also check reproducible
+generation against them. Consult the
 [Derive guide](crates/exchanges/derive/README.md) and
 [Paradex guide](crates/exchanges/paradex/README.md) for signing provenance,
 explicit token renewal, isolated RPC reconciliation, and verification limits.

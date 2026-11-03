@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile the pinned Paradex SBE XML into safe decoder layouts (offline)."""
+"""Compile external pinned Paradex SBE XML into safe decoder layouts."""
 import importlib.util
 import json
 import xml.etree.ElementTree as ET
@@ -10,10 +10,10 @@ BASE = ROOT / 'crates/exchanges/paradex'
 module = importlib.util.spec_from_file_location('native_apis', ROOT / 'scripts/generate-native-apis.py')
 native = importlib.util.module_from_spec(module)
 module.loader.exec_module(native)
-root = ET.parse(BASE / 'reference/paradex_1_0.xml').getroot()
+root = ET.parse(native.reference_root('paradex') / 'paradex_1_0.xml').getroot()
 types = {x.attrib['name']: x for x in root.find('types')}
 sizes = {'int64': 8, 'uint64': 8, 'uint32': 4, 'int32': 4, 'uint16': 2, 'int16': 2, 'uint8': 1, 'int8': 1}
-out = ['// Generated from reference/paradex_1_0.xml by scripts/generate-paradex-sbe.py.', 'use super::{Field, Kind, Layout};']
+out = ['// Generated from the pinned Paradex SBE 1:3 XML by scripts/generate-paradex-sbe.py.', 'use super::{Field, Kind, Layout};']
 models = []
 variants = []
 

@@ -1,8 +1,8 @@
 # Paradex signing provenance
 
-The [provenance record](reference/provenance.json) pins the official
+The [provenance record](API_SOURCES.json) pins the official
 [`paradex-py@4ae46b5`](https://github.com/tradeparadex/paradex-py/tree/4ae46b533fc99dbf5fbf33b46611c829fa38b12a)
-reference (0.8.2), schema hashes, and MIT notice. No exchange SDK is used at
+reference (0.8.2) and schema hashes. The MIT notice is retained in [NOTICE](NOTICE). No exchange SDK is used at
 runtime. Focused primitives are `starknet-crypto`, `starknet-core`, `k256`, and
 `sha3`; key bytes are zeroized.
 
@@ -45,3 +45,11 @@ The tests establish reference compatibility, not an audit. Funded onboarding,
 subkey permissions, administrative actions, and trading verification remain
 pending without suitable credentials. The exchange validates account access,
 JWT authenticity, and authorization scopes.
+
+## Schema generation
+
+Schema snapshots are external generation inputs, identified by hashes in
+`API_SOURCES.json`. Normal builds and inventory/fixture checks do not need them.
+See the [generation instructions](../derive/SIGNING.md#schema-generation) for
+supplying pinned inputs and checking reproducible output. License notices are
+retained in [NOTICE](NOTICE).
