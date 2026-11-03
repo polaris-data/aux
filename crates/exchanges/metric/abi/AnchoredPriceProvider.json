@@ -1,0 +1,663 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_factory",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_oracle",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_baseFeedId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_quoteFeedId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "_minMargin",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_maxRefStaleness",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_maxSpreadMult",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_mutableParams",
+        "type": "bool",
+        "internalType": "bool"
+      },
+      {
+        "name": "_marginStep",
+        "type": "int256",
+        "internalType": "int256"
+      },
+      {
+        "name": "_baseToken",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_quoteToken",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_init",
+        "type": "tuple",
+        "internalType": "struct IAnchoredProviderFactory.InitialConfig",
+        "components": [
+          {
+            "name": "source",
+            "type": "address",
+            "internalType": "address"
+          },
+          {
+            "name": "baseMaxStaleness",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "quoteMaxStaleness",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "baseSpreadMult",
+            "type": "uint256",
+            "internalType": "uint256"
+          },
+          {
+            "name": "quoteSpreadMult",
+            "type": "uint256",
+            "internalType": "uint256"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "BPS_BASE",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "int256",
+        "internalType": "int256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "BPS_BASE_U",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "CONFIDENCE_COOLDOWN",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "CONFIDENCE_MAX",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "MAX_REF_STALENESS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "MUTABLE_PARAMS",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool",
+        "internalType": "bool"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "SOURCE_GAS_LIMIT",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "baseFeedId",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "baseMaxStaleness",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "baseSpreadMult",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "baseToken",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "confidenceParam",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "factory",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "getQuote",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "bid",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "ask",
+        "type": "uint128",
+        "internalType": "uint128"
+      },
+      {
+        "name": "referencePrice",
+        "type": "uint128",
+        "internalType": "uint128"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "lastConfidenceUpdate",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "lastSpreadMultUpdate",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "lastStalenessUpdate",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "marginStep",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "int256",
+        "internalType": "int256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "maxSpreadMult",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "minMargin",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "offchainOracle",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "contract IOffchainOracle"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quoteFeedId",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quoteMaxStaleness",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quoteSpreadMult",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "quoteToken",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "setConfidenceParam",
+    "inputs": [
+      {
+        "name": "newValue",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setMaxStaleness",
+    "inputs": [
+      {
+        "name": "newBase",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "newQuote",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setSource",
+    "inputs": [
+      {
+        "name": "newSource",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "setSpreadMultipliers",
+    "inputs": [
+      {
+        "name": "newBase",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "newQuote",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "source",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "token0",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "token1",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "version",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "ConfidenceParamSet",
+    "inputs": [
+      {
+        "name": "newValue",
+        "type": "uint256",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "MaxStalenessSet",
+    "inputs": [
+      {
+        "name": "baseMaxStaleness",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "quoteMaxStaleness",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SourceSet",
+    "inputs": [
+      {
+        "name": "source",
+        "type": "address",
+        "indexed": true,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "SpreadMultipliersSet",
+    "inputs": [
+      {
+        "name": "baseSpreadMult",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "quoteSpreadMult",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "error",
+    "name": "ConfidenceParamOutOfBounds",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "CooldownNotElapsed",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "FeedStalled",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "ImmutableProvider",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MarginStepOutOfBounds",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MaxRefStalenessOutOfBounds",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MaxSpreadMultOutOfBounds",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "MinMarginZero",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "OnlyFactory",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "SpreadMultOutOfBounds",
+    "inputs": []
+  },
+  {
+    "type": "error",
+    "name": "StalenessOutOfBounds",
+    "inputs": []
+  }
+]

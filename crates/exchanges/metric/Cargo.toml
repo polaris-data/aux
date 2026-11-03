@@ -1,0 +1,35 @@
+[package]
+name = "aux-rs-metric"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+description = "Native Metric exchange client"
+
+[features]
+default = []
+http = ["aux-rs-core/http"]
+
+[dependencies]
+aux-rs-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+zeroize.workspace = true
+k256.workspace = true
+getrandom.workspace = true
+sha3.workspace = true
+url.workspace = true
+alloy-primitives.workspace = true
+alloy-sol-types.workspace = true
+alloy-sol-type-parser.workspace = true
+alloy-json-abi.workspace = true
+alloy-dyn-abi.workspace = true
+alloy-consensus.workspace = true
+alloy-eips.workspace = true
+alloy-tx-macros.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "net", "io-util", "time", "sync"] }
+
+[lints]
+workspace = true

@@ -564,3 +564,6 @@ class MonacoClient:
 
 from ._derive import DeriveClient, DeriveRpcSession
 from ._paradex import ParadexClient, ParadexRpcSession
+
+from ._metric import MetricClient, MetricChainClient, MetricSigner
+__all__ += ["MetricClient", "MetricChainClient", "MetricSigner"]

@@ -1,0 +1,73 @@
+{
+  "lanes": [
+    {
+      "price": "1234567890123456",
+      "spread0": 13,
+      "spread1": 27
+    },
+    null,
+    {
+      "price": "0",
+      "spread0": 10000,
+      "spread1": 9
+    },
+    {
+      "price": "1",
+      "spread0": 0,
+      "spread1": 0
+    }
+  ],
+  "timestampMs": 1700000000123,
+  "slotId": 255,
+  "word": "0xc462d53c0b1200000000ffff00000000fb0900000001000000018bcfe5687bff",
+  "decoded": {
+    "lanes": [
+      {
+        "empty": false,
+        "pRaw": 3294811452,
+        "s0": 11,
+        "s1": 18,
+        "price": "1234567881031680",
+        "spread0": 14,
+        "spread1": 28
+      },
+      {
+        "empty": true,
+        "pRaw": 0,
+        "s0": 255,
+        "s1": 255,
+        "price": "0",
+        "spread0": 65535,
+        "spread1": 65535
+      },
+      {
+        "empty": false,
+        "pRaw": 0,
+        "s0": 251,
+        "s1": 9,
+        "price": "0",
+        "spread0": 10000,
+        "spread1": 9
+      },
+      {
+        "empty": false,
+        "pRaw": 1,
+        "s0": 0,
+        "s1": 0,
+        "price": "1",
+        "spread0": 0,
+        "spread1": 0
+      }
+    ],
+    "timestampMs": "1700000000123",
+    "slotId": 255
+  },
+  "feedId": "0x111111111111111111111111111111111111111100000000000000000001ff03",
+  "creator": "0x1111111111111111111111111111111111111111",
+  "oracle": "0xE844701934D9C6085B292e428F41b911cC0b3872",
+  "pusher": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "deadline": 1700000000,
+  "updateDigest": "0xd664fc7f020eb570262686ff1a8d918dd6f677fbf3869f725424959257a00966",
+  "consentDigest": "0x15a799e8a3d7aeb24a2017fc346390d5aa31e9aff67e6b178a701868b51cd941",
+  "signature": "0x07db125fc0fd64ed2eee3dd279f84e70c1bcc3549516b722922ea2bab2a8021d5b453ff6d502f5fc8ba464b2101bee12a581893a097319de3b3cd295b6c668a51c"
+}

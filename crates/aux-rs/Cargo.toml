@@ -11,8 +11,9 @@ include = ["Cargo.toml", "src/**"]
 
 [features]
 default = ["http", "ws"]
-http = ["aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
+http = ["aux-rs-metric?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
 ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]
+metric = ["dep:aux-rs-metric"]
 qfex = ["dep:aux-rs-qfex"]
 arcus = ["dep:aux-rs-arcus"]
 monaco = ["dep:aux-rs-monaco"]
@@ -22,6 +23,7 @@ hyperliquid = ["dep:aux-rs-hyperliquid"]
 lighter = ["dep:aux-rs-lighter"]
 
 [dependencies]
+aux-rs-metric = { workspace = true, optional = true }
 aux-rs-derive = { workspace = true, optional = true }
 aux-rs-paradex = { workspace = true, optional = true }
 aux-rs-monaco = { workspace = true, optional = true }
@@ -89,6 +91,14 @@ required-features = ["derive", "http", "ws"]
 [[example]]
 name = "paradex_testnet_trade"
 required-features = ["paradex", "http", "ws"]
+
+[[example]]
+name = "metric_public"
+required-features = ["metric", "http"]
+
+[[example]]
+name = "metric_contract"
+required-features = ["metric", "http"]
 
 [lints]
 workspace = true

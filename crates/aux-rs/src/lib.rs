@@ -25,3 +25,6 @@ pub use aux_rs_derive as derive;
 
 #[cfg(feature = "paradex")]
 pub use aux_rs_paradex as paradex;
+
+#[cfg(feature = "metric")]
+pub use aux_rs_metric as metric;
