@@ -1,0 +1,51 @@
+{
+  "feePolicyVersion": 1791922794717,
+  "generatedAtMs": 1793740447253,
+  "chains": {
+    "1": {
+      "v1": {
+        "factoryAddress": "0x2a53833cc95548cf52c7b159110e22d3a9018f32",
+        "spreadProtocolFeeE6": 150000,
+        "protocolNotionalFeeE8": 0,
+        "maxProtocolSpreadFeeE6": 150000,
+        "maxAdminSpreadFeeE6": 150000,
+        "maxProtocolNotionalFeeE8": 1000000,
+        "maxAdminNotionalFeeE8": 0,
+        "onCreationMaxBidAskRefAsymmetryX8": 512,
+        "blockNumber": 26185907,
+        "timestamp": 1791922655,
+        "txHash": "0x669570605b79e3e18bdefe582fe1f016cceb3a0093f5b5030670819ead3bbb0a"
+      }
+    },
+    "4663": {
+      "v1": {
+        "factoryAddress": "0x2a53833cc95548cf52c7b159110e22d3a9018f32",
+        "spreadProtocolFeeE6": 150000,
+        "protocolNotionalFeeE8": 0,
+        "maxProtocolSpreadFeeE6": 150000,
+        "maxAdminSpreadFeeE6": 150000,
+        "maxProtocolNotionalFeeE8": 1000000,
+        "maxAdminNotionalFeeE8": 0,
+        "onCreationMaxBidAskRefAsymmetryX8": 512,
+        "blockNumber": 87791410,
+        "timestamp": 1791922696,
+        "txHash": "0xfbfa016cb651a3553e445453212c9cf7b753b20196bc205596f1ce9510cef494"
+      }
+    },
+    "56": {
+      "v1": {
+        "factoryAddress": "0x2a53833cc95548cf52c7b159110e22d3a9018f32",
+        "spreadProtocolFeeE6": 150000,
+        "protocolNotionalFeeE8": 0,
+        "maxProtocolSpreadFeeE6": 150000,
+        "maxAdminSpreadFeeE6": 150000,
+        "maxProtocolNotionalFeeE8": 1000000,
+        "maxAdminNotionalFeeE8": 0,
+        "onCreationMaxBidAskRefAsymmetryX8": 512,
+        "blockNumber": 127465452,
+        "timestamp": 1791922725,
+        "txHash": "0xfea90a3274293a686636d05094e5c7df03dba73699a5c9a16170cb7899bc5562"
+      }
+    }
+  }
+}

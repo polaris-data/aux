@@ -1,6 +1,6 @@
 [workspace]
-members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python"]
-default-members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex"]
+members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric"]
+default-members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
 resolver = "3"
 
 [workspace.package]
@@ -15,6 +15,16 @@ aux-rs-tardis = { path = "crates/data/tardis", default-features = false }
 aux-rs-databento = { path = "crates/data/databento", default-features = false }
 async-compression = { version = "0.4", default-features = false, features = ["futures-io", "gzip", "zstd"] }
 dbn = { version = "=0.73.0", default-features = false, features = ["serde"] }
+aux-rs-metric = { path = "crates/exchanges/metric", default-features = false }
+alloy-primitives = { version = "=1.4.1", default-features = false, features = ["std", "serde", "k256"] }
+alloy-sol-type-parser = { version = "=1.4.1", default-features = false }
+alloy-sol-types = { version = "=1.4.1", default-features = false, features = ["std", "json"] }
+alloy-json-abi = { version = "=1.4.1", default-features = false, features = ["std", "serde_json"] }
+alloy-dyn-abi = { version = "=1.4.1", default-features = false, features = ["std"] }
+alloy-consensus = { version = "=1.0.42", default-features = false, features = ["std", "k256"] }
+alloy-eips = { version = "=1.0.42", default-features = false }
+alloy-tx-macros = { version = "=1.0.42", default-features = false }
+
 time = { version = "0.3", default-features = false, features = ["std", "formatting"] }
 aux-rs-derive = { path = "crates/exchanges/derive", default-features = false }
 aux-rs-paradex = { path = "crates/exchanges/paradex", default-features = false }

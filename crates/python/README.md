@@ -1,6 +1,6 @@
 # Python bindings
 
-The `aux-py` distribution (import `aux_py`) exposes the implemented Hyperliquid, Lighter, QFEX, and Arcus Rust SDK operations. Owned concrete PyO3 clients wrap the same Rust clients, signing, nonce coordination and transports. Python contains asyncio/context-manager glue, not exchange protocol implementations. Rust SDK crates have no PyO3 dependency.
+The `aux-py` distribution (import `aux_py`) exposes the implemented Hyperliquid, Lighter, QFEX, Arcus, Monaco, Derive, Paradex and Metric Rust SDK operations. Owned concrete PyO3 clients wrap the same Rust clients, signing, nonce coordination and transports. Python contains asyncio/context-manager glue, not exchange protocol implementations. Rust SDK crates have no PyO3 dependency.
 
 ## Coverage
 
@@ -270,3 +270,23 @@ Cancellation closes the stream and parent closure also closes live TCP sessions.
 `DataVendorError` retains sanitized `.native` details, `.http_status` and `.kind`.
 Normal tests use local HTTP/WebSocket/TCP servers and synthetic codec fixtures;
 no paid data requests run in the check scripts.
+
+## Metric
+
+`MetricClient(chain_id=...)` exposes all eight documented HTTP endpoints. `MetricChainClient(chain_id=..., read_rpc=..., signer=...)` provides typed contract reads, named transaction builders, EVM signing/submission, logs, receipts and explicit nonce recovery. Both support async context managers. `MetricSigner.remote(address, async_callback)` uses the initiating asyncio context and verifies returned signatures in Rust.
+
+```python
+from aux_py import MetricClient, MetricChainClient
+
+async with MetricClient(chain_id=1) as client:
+    pools = await client.metadata({"count": 1})
+
+async with MetricChainClient(chain_id=1, read_rpc=rpc_url) as chain:
+    pool = chain.contract("MetricOmmPool", pool_address)
+    immutables = await pool.get_immutables()
+    prepared = pool.prepare_set_pause([1])
+```
+
+The [workflow guide](../exchanges/metric/WORKFLOWS.md) documents pool-creation preparation, native ETH liquidity, external-swap fallbacks and combined stop-loss evaluation, including `oracle_stop_loss_status` for reads anchored to one block.
+
+The second builder returns inspectable calldata; explicit `send_transaction()` performs the write. The `aux_py.metric` module exposes the same Rust packing, oracle, liquidity-planning and native-payment helpers. Rust retains the ABI and protocol logic. See the [Metric guide](../exchanges/metric/README.md) for native units, API-key versus wallet authentication, the contract inventory and verification results.

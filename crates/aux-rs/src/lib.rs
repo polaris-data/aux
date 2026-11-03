@@ -31,3 +31,5 @@ pub use aux_rs_tardis as tardis;
 
 #[cfg(feature = "databento")]
 pub use aux_rs_databento as databento;
+#[cfg(feature = "metric")]
+pub use aux_rs_metric as metric;

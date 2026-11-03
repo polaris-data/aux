@@ -1,0 +1,35 @@
+[
+  {
+    "accepted": true,
+    "providers": [
+      {
+        "provider": "titan:wss://eu.rpc.titanbuilder.xyz/ws/sendquoteupdate",
+        "accepted": true,
+        "timestampNs": 1790508439123456789
+      },
+      {
+        "provider": "bombora:wss://direct-tyo-1.bombora.build/ws/sendquoteupdate",
+        "accepted": false,
+        "pending": true
+      }
+    ]
+  },
+  {
+    "accepted": true,
+    "providers": [
+      {
+        "provider": "club48:wss://pamm.48.club",
+        "accepted": true,
+        "timestampNs": 1790508439123456789
+      },
+      {
+        "provider": "blockrazor:https://tokyo.builder.blockrazor.io",
+        "accepted": true,
+        "bundleHash": "0x9c1e\u2026"
+      }
+    ]
+  },
+  {
+    "error": ""
+  }
+]

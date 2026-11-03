@@ -573,3 +573,5 @@ from ._data import (
 __all__ += ["TardisClient", "TardisMachineClient", "DatabentoHistoricalClient",
             "DatabentoReferenceClient", "DatabentoLiveClient", "DatabentoLiveSession",
             "DataStream", "ByteStream", "DataVendorError"]
+from ._metric import MetricClient, MetricChainClient, MetricSigner
+__all__ += ["MetricClient", "MetricChainClient", "MetricSigner"]

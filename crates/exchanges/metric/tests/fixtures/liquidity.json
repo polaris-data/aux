@@ -1,0 +1,642 @@
+[
+  {
+    "request": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0x7fffffffffffffffffffffffff",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          }
+        ],
+        "block": "0x1"
+      },
+      "targets": [
+        {
+          "bin": -1,
+          "targetValueInToken": "0x12c",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 0,
+          "targetValueInToken": "0x64",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 1,
+          "targetValueInToken": "0x32",
+          "targetValueInToken0": true
+        }
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "bufferBps": 0
+    },
+    "expected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x32",
+          "0x10",
+          "0x19"
+        ]
+      },
+      "maxAmountToken0": "0x43",
+      "maxAmountToken1": "0x15c"
+    },
+    "weightedRequest": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0x7fffffffffffffffffffffffff",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x0"
+          }
+        ],
+        "block": "0x1"
+      },
+      "bins": [
+        -1,
+        0,
+        1
+      ],
+      "weights": [
+        "0x1",
+        "0x2",
+        "0x3"
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    },
+    "weightedExpected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x7a120",
+          "0xf4240",
+          "0x16e360"
+        ]
+      },
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    }
+  },
+  {
+    "request": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0x7fffffffffffffffffffffffff",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x64",
+            "token1BalanceScaled": "0x12c",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          }
+        ],
+        "block": "0x1"
+      },
+      "targets": [
+        {
+          "bin": -1,
+          "targetValueInToken": "0x12c",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 0,
+          "targetValueInToken": "0x64",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 1,
+          "targetValueInToken": "0x32",
+          "targetValueInToken0": true
+        }
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "bufferBps": 0
+    },
+    "expected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x1f4",
+          "0xa6",
+          "0xfa"
+        ]
+      },
+      "maxAmountToken0": "0x43",
+      "maxAmountToken1": "0x15e"
+    },
+    "weightedRequest": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0x7fffffffffffffffffffffffff",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x64",
+            "token1BalanceScaled": "0x12c",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          }
+        ],
+        "block": "0x1"
+      },
+      "bins": [
+        -1,
+        0,
+        1
+      ],
+      "weights": [
+        "0x1",
+        "0x2",
+        "0x3"
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    },
+    "weightedExpected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x4c4b40",
+          "0x989680",
+          "0xe4e1c0"
+        ]
+      },
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    }
+  },
+  {
+    "request": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0x0",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x64",
+            "token1BalanceScaled": "0x12c",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          }
+        ],
+        "block": "0x1"
+      },
+      "targets": [
+        {
+          "bin": -1,
+          "targetValueInToken": "0x12c",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 0,
+          "targetValueInToken": "0x64",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 1,
+          "targetValueInToken": "0x32",
+          "targetValueInToken0": true
+        }
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "bufferBps": 0
+    },
+    "expected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x1f4",
+          "0x14a",
+          "0xfa"
+        ]
+      },
+      "maxAmountToken0": "0x53",
+      "maxAmountToken1": "0x18f"
+    },
+    "weightedRequest": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0x0",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x64",
+            "token1BalanceScaled": "0x12c",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          }
+        ],
+        "block": "0x1"
+      },
+      "bins": [
+        -1,
+        0,
+        1
+      ],
+      "weights": [
+        "0x1",
+        "0x2",
+        "0x3"
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    },
+    "weightedExpected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x4c4b40",
+          "0x1312d00",
+          "0xe4e1c0"
+        ]
+      },
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    }
+  },
+  {
+    "request": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0xffffffffffffffffffffffffff",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x64",
+            "token1BalanceScaled": "0x12c",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          }
+        ],
+        "block": "0x1"
+      },
+      "targets": [
+        {
+          "bin": -1,
+          "targetValueInToken": "0x12c",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 0,
+          "targetValueInToken": "0x64",
+          "targetValueInToken0": false
+        },
+        {
+          "bin": 1,
+          "targetValueInToken": "0x32",
+          "targetValueInToken0": true
+        }
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "bufferBps": 0
+    },
+    "expected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x1f4",
+          "0x14e",
+          "0xfa"
+        ]
+      },
+      "maxAmountToken0": "0x54",
+      "maxAmountToken1": "0x191"
+    },
+    "weightedRequest": {
+      "snapshot": {
+        "token0ScaleMultiplier": "0x1",
+        "token1ScaleMultiplier": "0x1",
+        "initialScaledToken0PerShareE18": "0x1bc16d674ec80000",
+        "initialScaledToken1PerShareE18": "0x53444835ec580000",
+        "lowestBin": -2,
+        "highestBin": 2,
+        "curBinIdx": 0,
+        "curPosInBin": "0xffffffffffffffffffffffffff",
+        "bins": [
+          {
+            "bin": -2,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": -1,
+            "token0BalanceScaled": "0x0",
+            "token1BalanceScaled": "0x258",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 0,
+            "token0BalanceScaled": "0x64",
+            "token1BalanceScaled": "0x12c",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 1,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          },
+          {
+            "bin": 2,
+            "token0BalanceScaled": "0xc8",
+            "token1BalanceScaled": "0x0",
+            "totalShares": "0x3e8"
+          }
+        ],
+        "block": "0x1"
+      },
+      "bins": [
+        -1,
+        0,
+        1
+      ],
+      "weights": [
+        "0x1",
+        "0x2",
+        "0x3"
+      ],
+      "priceE18": "0x29a2241af62c0000",
+      "salt": "0x7",
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    },
+    "weightedExpected": {
+      "salt": "0x7",
+      "deltas": {
+        "binIdxs": [
+          -1,
+          0,
+          1
+        ],
+        "shares": [
+          "0x4c4b40",
+          "0x1312d00",
+          "0xe4e1c0"
+        ]
+      },
+      "maxAmountToken0": "0x186a0",
+      "maxAmountToken1": "0x186a0"
+    }
+  }
+]

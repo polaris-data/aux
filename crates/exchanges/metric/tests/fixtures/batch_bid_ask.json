@@ -1,0 +1,27 @@
+[
+  {
+    "results": [
+      {
+        "poolAddress": "0xF85AfbADeCC7F23Dd173ed706f07d9C7e2473e24",
+        "quote": {
+          "pair": "WETH/USDC",
+          "poolAddress": "0xF85AfbADeCC7F23Dd173ed706f07d9C7e2473e24",
+          "priceProviderStatus": "healthy",
+          "bidAdj": "49940417631045696435290",
+          "askAdj": "49945012360825322506424",
+          "totalToken0Available": "24503618827789131821",
+          "totalToken1Available": "49785157539",
+          "serverTs": 1790508850,
+          "depth": null
+        }
+      },
+      {
+        "poolAddress": "0x0000000000000000000000000000000000000001",
+        "error": {
+          "status": 404,
+          "error": "Pair metadata not found for 0x0000000000000000000000000000000000000001"
+        }
+      }
+    ]
+  }
+]

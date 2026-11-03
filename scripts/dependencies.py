@@ -41,18 +41,21 @@ PROFILES = [
 ]
 
 
-for venue in ("derive", "paradex"):
+for venue in ("derive", "paradex", "metric"):
     for stack in ("", ",http", ",ws", ",http,ws"):
         PROFILES.append((f"{venue.title()} with {stack or 'custom transports'}", "aux-rs", venue + stack))
 for stack in ("", ",http,ws"):
     PROFILES.append(("Derive and Paradex" + stack, "aux-rs", "derive,paradex" + stack))
     PROFILES.append(("All seven exchanges" + stack, "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex" + stack))
 
+for stack in ("", ",http,ws"):
+    PROFILES.append(("All eight exchanges" + stack, "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric" + stack))
+
 
 for vendor in ("tardis", "databento"):
     for stack in ("", ",http", ",ws", ",http,ws"):
         PROFILES.append((f"{vendor.title()} with {stack or 'custom transports'}", "aux-rs", vendor + stack))
-for features in ("tardis,files", "databento,files", "databento,tcp", "databento,http,tcp", "tardis,databento", "tardis,databento,http,ws,tcp", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws,tcp", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,tardis,databento,http,ws,tcp"):
+for features in ("tardis,files", "databento,files", "databento,tcp", "databento,http,tcp", "tardis,databento", "tardis,databento,http,ws,tcp", "metric,tardis,databento", "metric,tardis,databento,http,ws,tcp", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws,tcp", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,tardis,databento,http,ws,tcp"):
     PROFILES.append(("Data/exchange integration: " + features, "aux-rs", features))
 
 
@@ -77,20 +80,20 @@ def check(target):
         if "httpdate" in names:
             raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
-        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "tardis", "databento"}
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "tardis", "databento"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
                 if f"aux-rs-{exchange}" in names:
                     raise SystemExit(f"Unselected {exchange} adapter leaked into profile: {name}")
             # Primitives may be owned by several selected adapters.
             owners = {
-                "k256": {"hyperliquid", "monaco", "derive", "paradex"},
-                "sha3": {"hyperliquid", "monaco", "derive", "paradex"},
+                "k256": {"hyperliquid", "monaco", "derive", "paradex", "metric"},
+                "sha3": {"hyperliquid", "monaco", "derive", "paradex", "metric"},
                 "rmp-serde": {"hyperliquid"},
                 "starknet-core": {"paradex"},
                 "starknet-crypto": {"paradex"},
                 "starknet-types-core": {"paradex"},
-                "hmac": {"hyperliquid", "monaco", "derive", "paradex"},
+                "hmac": {"hyperliquid", "monaco", "derive", "paradex", "metric"},
                 "goldilocks-crypto": {"lighter"},
                 "poseidon-hash": {"lighter"},
                 "ed25519-dalek": {"arcus", "monaco"},
@@ -109,6 +112,8 @@ def check(target):
                 raise SystemExit(f"WebSockets leaked into profile: {name}")
             if not selected & {"http", "ws", "tcp", "files"} and names & {"tokio", "reqwest", "tokio-tungstenite", "rustls"}:
                 raise SystemExit(f"Standard stack leaked into custom transport profile: {name}")
+        if package == "aux-rs" and "metric" not in selected and any(n.startswith("alloy-") for n in names):
+            raise SystemExit(f"Metric ABI/EVM dependencies leaked into profile: {name}")
         if package != "aux-rs-python" and any(
             dependency.split()[0].startswith("pyo3")
             or dependency.split()[0] == "aux-rs-python"

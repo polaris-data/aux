@@ -1,0 +1,120 @@
+{
+  "bins": [
+    {
+      "lengthE6": 10000,
+      "addFeeBuyE6": 500,
+      "addFeeSellE6": 200
+    },
+    {
+      "lengthE6": 5000,
+      "addFeeBuyE6": 10,
+      "addFeeSellE6": 15
+    }
+  ],
+  "packed": [
+    "18134073169035917295626000"
+  ],
+  "stoploss": [
+    {
+      "priceE18": "1000000000000000000",
+      "initialScaledAmount0PerE18Shares": "4503599627370495999",
+      "initialScaledAmount1PerE18Shares": "4503599627370495999"
+    },
+    {
+      "priceE18": "3000000000000000000000",
+      "initialScaledAmount0PerE18Shares": "82224103529422705",
+      "initialScaledAmount1PerE18Shares": "246672310588268117580"
+    },
+    {
+      "priceE18": "10000000000000000",
+      "initialScaledAmount0PerE18Shares": "45035996273704959999",
+      "initialScaledAmount1PerE18Shares": "450359962737049599"
+    }
+  ],
+  "cursor": [
+    {
+      "input": {
+        "curBinIdx": 0,
+        "curPosInBin": "12345678901234567890",
+        "lowestBin": -1,
+        "highestBin": 1,
+        "binLengthsE6": [
+          10000,
+          5000,
+          1000
+        ],
+        "maxOracleDistanceChangePercent": 0
+      },
+      "distanceE12": "0",
+      "output": {
+        "minimalCurBin": 0,
+        "minimalPosition": "12345678901234567890",
+        "maximalCurBin": 0,
+        "maximalPosition": "12345678901234567890"
+      }
+    },
+    {
+      "input": {
+        "curBinIdx": 0,
+        "curPosInBin": "12345678901234567890",
+        "lowestBin": -1,
+        "highestBin": 1,
+        "binLengthsE6": [
+          10000,
+          5000,
+          1000
+        ],
+        "maxOracleDistanceChangePercent": 0.01
+      },
+      "distanceE12": "100000000",
+      "output": {
+        "minimalCurBin": -1,
+        "minimalPosition": "20079585507621326559158396057100",
+        "maximalCurBin": 0,
+        "maximalPosition": "405648192085379087380179593610"
+      }
+    },
+    {
+      "input": {
+        "curBinIdx": 0,
+        "curPosInBin": "12345678901234567890",
+        "lowestBin": -1,
+        "highestBin": 1,
+        "binLengthsE6": [
+          10000,
+          5000,
+          1000
+        ],
+        "maxOracleDistanceChangePercent": 1
+      },
+      "distanceE12": "10000000000",
+      "output": {
+        "minimalCurBin": -1,
+        "minimalPosition": "6172839450617283945",
+        "maximalCurBin": 1,
+        "maximalPosition": "20282409603651670423947251286015"
+      }
+    },
+    {
+      "input": {
+        "curBinIdx": 0,
+        "curPosInBin": "12345678901234567890",
+        "lowestBin": -1,
+        "highestBin": 1,
+        "binLengthsE6": [
+          10000,
+          5000,
+          1000
+        ],
+        "maxOracleDistanceChangePercent": 100
+      },
+      "distanceE12": "1000000000000",
+      "output": {
+        "minimalCurBin": -1,
+        "minimalPosition": "0",
+        "maximalCurBin": 1,
+        "maximalPosition": "20282409603651670423947251286015"
+      }
+    }
+  ]
+}

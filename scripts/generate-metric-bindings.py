@@ -1,0 +1,87 @@
+#!/usr/bin/env python3
+"""Generate typed Solidity bindings, named Python contract methods and their inventory.
+
+ABI snapshots are compile inputs. API_SOURCES.json records upstream source and hashes.
+Normal generation is offline; fixtures were generated independently with viem.
+"""
+import argparse
+import json
+import re
+import subprocess
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+BASE = ROOT / 'crates/exchanges/metric'
+
+
+def snake(name):
+    return re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', re.sub(r'([A-Z]+)([A-Z][a-z])', r'\1_\2', name)).lower()
+
+
+def signature(item):
+    def typ(p):
+        return '(' + ','.join(typ(c) for c in p['components']) + ')' + p['type'][5:] if p['type'].startswith('tuple') else p['type']
+    return item['name'] + '(' + ','.join(typ(p) for p in item.get('inputs', [])) + ')'
+
+
+def render():
+    rust = ['//! Generated typed bindings from pinned official ABI snapshots.\n']
+    python = ['"""Generated native contract interfaces; protocol work stays in Rust."""\nfrom __future__ import annotations\n\n']
+    inventory = []
+    typed = ['// Generated public type availability checks.\n#[test] fn typed_contract_operations_are_public(){\n']
+    files = sorted((BASE / 'abi').glob('*.json'))
+    for file in files:
+        name = file.stem
+        module = snake(name)
+        rust.append(f'pub mod {module} {{ alloy_sol_types::sol!({name}, "abi/{file.name}"); }}\npub use {module}::{name};\n')
+        abi = json.loads(file.read_text())
+        functions = [x for x in abi if x['type'] == 'function']
+        python.append(f'class {name}:\n    def __init__(self, client, address):\n        self._client = client\n        self.address = address\n')
+        for item in abi:
+            if item['type'] not in ('function', 'event', 'error', 'fallback', 'receive'):
+                continue
+            sig = signature(item) if 'name' in item else item['type']
+            row = dict(contract=name, kind=item['type'], signature=sig)
+            if item['type'] == 'function':
+                method = snake(item['name'])
+                if sum(x['name'] == item['name'] for x in functions) > 1:
+                    # Canonical signatures remain accepted by the generic ABI interface.
+                    method += '_overload_' + str([signature(x) for x in functions if x['name'] == item['name']].index(sig) + 1)
+                read = item['stateMutability'] in ('pure', 'view') or (name == 'MetricOmmSwapQuoter' and item['name'].startswith('quote'))
+                if not read:
+                    method = 'prepare_' + method
+                row['python'] = f'{name}.{method}'
+                overloads = [x for x in functions if x['name'] == item['name']]
+                rust_name = item['name'] + ('_' + str([signature(x) for x in overloads].index(sig)) if len(overloads) > 1 else '')
+                row['rust'] = f'contracts::{name}::{rust_name}Call'
+                row['access'] = item['stateMutability']
+                typed.append(f'let _:Option<aux_rs_metric::{row["rust"]}>=None;\n')
+                if read:
+                    python.append(f'\n    async def {method}(self, args=(), *, block="latest", from_address=None, value="0x0"):\n        return await self._client.call("{name}", "{sig}", self.address, args, block=block, from_address=from_address, value=value)\n')
+                else:
+                    python.append(f'\n    def {method}(self, args=(), *, value="0x0"):\n        return self._client.prepare_call("{name}", "{sig}", self.address, args, value=value)\n')
+            inventory.append(row)
+        python.append('\n\n')
+    rust.append('pub const ABI_NAMES:&[&str]=&[' + ','.join(json.dumps(f.stem) for f in files) + '];\n')
+    rust.append("pub fn abi_json(name:&str)->Option<&'static str>{match name{" + ''.join(f'"{f.stem}"=>Some(include_str!("../abi/{f.name}")),' for f in files) + '_=>None}}\n')
+    python.append('CONTRACTS = {' + ','.join(f'"{f.stem}":{f.stem}' for f in files) + '}\n')
+    rust = subprocess.check_output(['rustfmt', '--edition', '2024'], input=''.join(rust), text=True)
+    typed.append('}\n')
+    typed = subprocess.check_output(['rustfmt', '--edition', '2024'], input=''.join(typed), text=True)
+    return {BASE / 'src/contracts.rs': rust, ROOT / 'crates/python/python/aux_py/_metric_contracts.py': ''.join(python), BASE / 'contracts.json': json.dumps(inventory, indent=2) + '\n', BASE / 'tests/typed_bindings.rs': typed}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--check', action='store_true')
+    args = parser.parse_args()
+    for path, content in render().items():
+        if args.check:
+            if not path.exists() or path.read_text() != content:
+                raise SystemExit(f'{path.relative_to(ROOT)} needs regeneration')
+        else:
+            path.write_text(content)
+
+
+if __name__ == '__main__':
+    main()
