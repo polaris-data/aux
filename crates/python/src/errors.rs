@@ -4,6 +4,7 @@ use aux_rs::{
 use pyo3::{create_exception, exceptions::PyException, prelude::*};
 
 pub enum ClientError {
+    Metric(NativeError<aux_rs::metric::Error>),
     Derive(NativeError<aux_rs::derive::Error>),
     Paradex(NativeError<aux_rs::paradex::Error>),
     Monaco(NativeError<aux_rs::monaco::Error>),
@@ -20,7 +21,8 @@ create_exception!(aux_py, GapError, TransportError);
 impl ClientError {
     pub fn is_gap(&self) -> bool {
         match self {
-            Self::Hyperliquid(NativeError::Transport(e))
+            Self::Metric(NativeError::Transport(e))
+            | Self::Hyperliquid(NativeError::Transport(e))
             | Self::Derive(NativeError::Transport(e))
             | Self::Paradex(NativeError::Transport(e))
             | Self::Lighter(NativeError::Transport(e))
@@ -113,13 +115,15 @@ pub fn lt_native(error: lt::Error) -> PyErr {
 }
 pub fn map_error(error: &ClientError) -> PyErr {
     match error {
-        ClientError::Hyperliquid(NativeError::Transport(e))
+        ClientError::Metric(NativeError::Transport(e))
+        | ClientError::Hyperliquid(NativeError::Transport(e))
         | ClientError::Derive(NativeError::Transport(e))
         | ClientError::Paradex(NativeError::Transport(e))
         | ClientError::Lighter(NativeError::Transport(e))
         | ClientError::Qfex(NativeError::Transport(e))
         | ClientError::Arcus(NativeError::Transport(e))
         | ClientError::Monaco(NativeError::Transport(e)) => transport(e),
+        ClientError::Metric(NativeError::Exchange(e)) => metric_native(e),
         ClientError::Derive(NativeError::Exchange(e)) => match e {
             aux_rs::derive::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
             aux_rs::derive::Error::Decode(_)=>DecodeError::new_err("Derive decoding failed"),
@@ -311,4 +315,46 @@ fn native_body(venue: &str, status: Option<u16>, body: &serde_json::Value) -> Py
         }
     });
     error
+}
+
+pub fn metric(error: NativeError<aux_rs::metric::Error>) -> PyErr {
+    map_error(&ClientError::Metric(error))
+}
+
+fn metric_native(e: &aux_rs::metric::Error) -> PyErr {
+    match e {
+        aux_rs::metric::Error::InvalidRequest(s) => ValidationError::new_err(*s),
+        aux_rs::metric::Error::Decode(_) | aux_rs::metric::Error::Abi(_) => {
+            DecodeError::new_err("Metric codec failed")
+        }
+        aux_rs::metric::Error::Signing(_) => SigningError::new_err("Metric signing failed"),
+        aux_rs::metric::Error::Authentication(s) => AuthenticationError::new_err(*s),
+        aux_rs::metric::Error::PendingOutcome => {
+            OutcomeUncertainError::new_err("Metric submission outcome is unresolved")
+        }
+        aux_rs::metric::Error::Api { status, body } => native_body("Metric", Some(*status), body),
+        aux_rs::metric::Error::Rpc {
+            code,
+            message,
+            data,
+        } => native_body(
+            "Metric",
+            None,
+            &serde_json::json!({"code":code,"message":message,"data":data}),
+        ),
+        aux_rs::metric::Error::UncertainSubmission { hash, cause } => {
+            Python::attach(|py| -> PyResult<PyErr> {
+                let error = OutcomeUncertainError::new_err(
+                    "Metric submission response is uncertain; reconcile the transaction hash",
+                );
+                error.value(py).setattr("hash", format!("{hash:#x}"))?;
+                error.value(py).setattr("outcome", "unknown")?;
+                error
+                    .value(py)
+                    .setattr("cause", metric_native(cause).value(py))?;
+                Ok(error)
+            })
+            .unwrap_or_else(std::convert::identity)
+        }
+    }
 }

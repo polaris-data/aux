@@ -7,6 +7,7 @@ mod convert;
 mod derive;
 mod errors;
 mod lighter;
+mod metric;
 mod monaco;
 mod paradex;
 mod qfex;
@@ -18,6 +19,10 @@ use pyo3::prelude::*;
 
 #[pymodule]
 fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_class::<metric::MetricClient>()?;
+    module.add_class::<metric::MetricChainClient>()?;
+    module.add_class::<metric::MetricSigner>()?;
+    module.add_function(wrap_pyfunction!(metric::metric_tool, module)?)?;
     module.add_class::<derive::DeriveClient>()?;
     module.add_class::<derive::DeriveSigner>()?;
     module.add_class::<derive::DeriveRpcSession>()?;

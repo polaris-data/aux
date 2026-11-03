@@ -1,0 +1,145 @@
+[
+  {
+    "data": [
+      {
+        "pair": "WETH/USDC",
+        "chain": "ethereum",
+        "contractVersion": "v1",
+        "poolAddress": "0xF85AfbADeCC7F23Dd173ed706f07d9C7e2473e24",
+        "priceProviderAddress": "0xa07A8Aa6D5311eCfc01C01eC9Eefd17b0A8A9445",
+        "priceProviderDetails": {
+          "providerType": "anchored",
+          "oracle": "0x30a88bf894D1b806125a23ebf23D715496fD7102",
+          "feedMode": "synthetic",
+          "marginStep": "0",
+          "minMargin": "5000000000000",
+          "maxRefStaleness": "15",
+          "maxSpreadMult": "1000000000000000000",
+          "mutableParams": false,
+          "source": "0x599b0027942fC98BadC121cB789fE0D4a11A0879",
+          "confidenceParam": null,
+          "baseMaxStaleness": "15",
+          "quoteMaxStaleness": "15",
+          "baseSpreadMult": "0",
+          "quoteSpreadMult": "0"
+        },
+        "token0": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "token1": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token0Symbol": "WETH",
+        "token1Symbol": "USDC",
+        "token0Name": "WETH",
+        "token1Name": "USDC",
+        "token0Decimals": 18,
+        "token1Decimals": 6,
+        "token0LogoUrl": "https://cdn.metric.xyz/tokens/1/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2.png",
+        "token1LogoUrl": "https://cdn.metric.xyz/tokens/1/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png",
+        "token0BrandColor": "#101010",
+        "token1BrandColor": "#0050b0",
+        "token0FiatPrice": 2709.4,
+        "token1FiatPrice": 0.999853,
+        "tvlFiat": 115757.94,
+        "creator": "0x80f0A7d148729CcEdb6cD07FBaAEfC5A16f33D4f",
+        "admin": "0x80f0A7d148729CcEdb6cD07FBaAEfC5A16f33D4f",
+        "adminUsername": "Carcosa",
+        "verifiedAdmin": true,
+        "adminFeeDestination": "0x53F0ACE6156DAF7F6b50B395F6DD66C9d2f50c8c",
+        "spreadProtocolFeeE6": 150000,
+        "spreadAdminFeeE6": 200000,
+        "protocolNotionalFeeE8": 0,
+        "adminNotionalFeeE8": 0,
+        "analytics24h": {
+          "fromTs": 1790422039,
+          "toTs": 1790508439,
+          "generatedAtTs": 1790508439,
+          "fiatAvailable": true,
+          "fiatCoveragePct": 100,
+          "fiatStatus": "active",
+          "fiatCurrency": "USD",
+          "fromBlock": 26061325,
+          "toBlock": 26068435,
+          "swapTxCount": 493,
+          "liquidityEventCount": 0,
+          "liquidityAddEventCount": 0,
+          "liquidityRemoveEventCount": 0,
+          "transfers": 493,
+          "token0": {
+            "liquidityRaw": "24431277185857724312",
+            "volumeRaw": "287082472219069397624",
+            "inflowRaw": "144190709723083426314",
+            "outflowRaw": "142891762495985971310",
+            "netRaw": "1298947227097455004",
+            "liquidityFiat": 66194.1,
+            "volumeFiat": 777821.25,
+            "inflowFiat": 390670.31,
+            "outflowFiat": 387150.94,
+            "netFiat": 3519.37
+          },
+          "token1": {
+            "liquidityRaw": "49571124074",
+            "volumeRaw": "773469090135",
+            "inflowRaw": "385002290049",
+            "outflowRaw": "388466800086",
+            "netRaw": "-3464510037",
+            "liquidityFiat": 49563.84,
+            "volumeFiat": 773355.39,
+            "inflowFiat": 384945.69,
+            "outflowFiat": 388409.7,
+            "netFiat": -3464
+          },
+          "pricingMode": "estimated_spot",
+          "usdCoveragePct": 0,
+          "aprBps": 843,
+          "feesFiat": 26.89,
+          "tvlFiat": 115757.94,
+          "volumeFiat": 775588.32
+        },
+        "aprBps7d": 2805,
+        "lockedPricing": true,
+        "pauseLevel": 0,
+        "priceProviderCooldownSecs": 18446744073709551615,
+        "depositWhitelistingEnabled": false,
+        "createdBlockNumber": 25984907,
+        "createdTimestamp": 1789499963,
+        "priceProviderSinceBlock": 25984907,
+        "extensions": [
+          "0x599b0027942fC98BadC121cB789fE0D4a11A0879",
+          "0xE4038fA09f0bB9963068afaF97BE0c045155090D",
+          "0xEbc53e61078976118E384f110c262A263decB84B"
+        ],
+        "extensionDetails": {
+          "stopLoss": {
+            "phases": [
+              "afterSwap"
+            ],
+            "drawdownE6": "150000",
+            "decayPerSecondE18": "1736111111111",
+            "timelockSecs": "3600"
+          },
+          "priceVelocity": {
+            "phases": [
+              "beforeSwap"
+            ],
+            "maxChangePerBlockE18": "100000000000000000"
+          }
+        },
+        "classificationSummary": {
+          "tierQualification": "red",
+          "reasonCodes": [
+            "stop_loss_mutable"
+          ]
+        },
+        "poolFactoryAddress": "0x2a53833cc95548cf52c7b159110e22D3a9018f32",
+        "poolDeployerAddress": "0x2E0A99A2E352043d1CA489cF45bf7B511BCcC738",
+        "liquidityAdderAddress": "0x06Cb6C245Cd9219262442A7730D9484B3CfdD901",
+        "dataProviderAddress": "0x83d66c5934b1525ee82e6E772c76c7acC778bBB7",
+        "depositAllowlistAddress": "0x65FBa4Ee8f50772aB384f19e5520DdA420B1B47D",
+        "oracleValueStopLossAddress": "0xE4038fA09f0bB9963068afaF97BE0c045155090D",
+        "priceVelocityGuardAddress": "0xEbc53e61078976118E384f110c262A263decB84B",
+        "quoterAddress": "0x3B9ea79f482094323d06064E637a7F4528560fcb",
+        "priceProviderStatus": "healthy"
+      }
+    ],
+    "total": 9,
+    "nextOffset": 1
+  }
+]

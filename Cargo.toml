@@ -1,6 +1,6 @@
 [workspace]
-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python"]
-default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex"]
+members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric", "crates/python"]
+default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
 resolver = "3"
 
 [workspace.package]
@@ -10,6 +10,16 @@ rust-version = "1.92"
 publish = false
 
 [workspace.dependencies]
+aux-rs-metric = { path = "crates/exchanges/metric", default-features = false }
+alloy-primitives = { version = "=1.4.1", default-features = false, features = ["std", "serde", "k256"] }
+alloy-sol-type-parser = { version = "=1.4.1", default-features = false }
+alloy-sol-types = { version = "=1.4.1", default-features = false, features = ["std", "json"] }
+alloy-json-abi = { version = "=1.4.1", default-features = false, features = ["std", "serde_json"] }
+alloy-dyn-abi = { version = "=1.4.1", default-features = false, features = ["std"] }
+alloy-consensus = { version = "=1.0.42", default-features = false, features = ["std", "k256"] }
+alloy-eips = { version = "=1.0.42", default-features = false }
+alloy-tx-macros = { version = "=1.0.42", default-features = false }
+
 time = { version = "0.3", default-features = false, features = ["std", "formatting"] }
 aux-rs-derive = { path = "crates/exchanges/derive", default-features = false }
 aux-rs-paradex = { path = "crates/exchanges/paradex", default-features = false }

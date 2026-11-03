@@ -1,0 +1,143 @@
+{
+  "recorded_at": "2026-11-03",
+  "http_operations": 8,
+  "contract_abis": 26,
+  "contract_operations": {
+    "function": 504,
+    "event": 151,
+    "error": 332,
+    "fallback": 3,
+    "receive": 5
+  },
+  "sdk": {
+    "package": "@metric.xyz/metric-omm-sdk-v1",
+    "version": "0.7.0",
+    "tarball": "https://registry.npmjs.org/@metric.xyz/metric-omm-sdk-v1/-/metric-omm-sdk-v1-0.7.0.tgz",
+    "sha256": "0fb806eeb4727b8b52da7c43a8201f2c953cff30cab57785bfc52b4e3299dafa",
+    "license": "MIT"
+  },
+  "repositories": [
+    {
+      "repository": "https://github.com/Metricxyz/oracle-contracts",
+      "commit": "7525bbd6b536bcd0c283de18af256fe54d629456",
+      "license": "BUSL-1.1 and MIT; see contract SPDX headers",
+      "use": "published ABI and/or packet format reference"
+    },
+    {
+      "repository": "https://github.com/Metricxyz/mm-pusher-ts",
+      "commit": "5c452fc5c934bf7f9c25199ea4a85692c678972d",
+      "license": "MIT",
+      "use": "published ABI and/or packet format reference"
+    },
+    {
+      "repository": "https://github.com/Metricxyz/periphery-contracts",
+      "commit": "53cbe784f1a0db07c48790d27828d452b31c2978",
+      "license": "MIT",
+      "use": "published ABI and/or packet format reference"
+    },
+    {
+      "repository": "https://github.com/Metricxyz/pool-contracts",
+      "commit": "ddf8ae0cdb2ad0041c3ff3aebc200cf488d5b0d3",
+      "license": "BUSL-1.1 and MIT; see contract SPDX headers",
+      "use": "published ABI and/or packet format reference"
+    }
+  ],
+  "documentation": {
+    "index": "https://docs.metric.xyz/llms.txt",
+    "contracts": "https://docs.metric.xyz/reference/smart-contracts",
+    "deployments": "https://docs.metric.xyz/reference/supported-chains-and-deployments",
+    "page_sha256": {
+      "reference_api.md": "f0a36cba9e08bd0dad470028d06d3ca0de36672eedec89143626f6c64f486402",
+      "reference_api_find-best-route.md": "7a8c1a29d727ed5ae54ac94de83e7520c6871b3b5fe331af740668063c0cb1ad",
+      "reference_api_metadata.md": "8f81ac6287b936c20d4f6169371ade646093abdc12ace1da4c72dc6d8e236e90",
+      "reference_api_pamm-quote.md": "d1869e7f711a692b3ab3f0a9bd8edb4ec7bf710333310e1b2c3f6fb2437e3369",
+      "reference_api_retrieve-batch-bid-and-ask.md": "7c363c26a1a4b490f8fb078d84ce2dca53f37cd0e414640792a773e4f49a3ae9",
+      "reference_api_retrieve-current-bid-and-ask.md": "e99cb5e6119b05ac885beff40e027ce8445ce71ae0ab9bcb33641fd20bf00fae",
+      "reference_supported-chains-and-deployments.md": "173c31b73cf08ad0349cd73c17d19bb0b0d519ba4ebb36ea72cb5d09838c0bae"
+    }
+  },
+  "snapshot_sha256": {
+    "abi/AnchoredPriceProvider.json": "67e78670c4cb90ce0c82bd075598abc19fc628163e967198c9eea760eb493b8e",
+    "abi/AnchoredProviderFactory.json": "dbb5b6bc0e5d2a4ceec4f1c5934b8ce4f32b908758afa5d675a85306e15ada75",
+    "abi/B20AssetParams.json": "67f0b5e16a9d0f814d249dae13bdeb4a988b36698645d21b3894d55354f49f9e",
+    "abi/ChainlinkOracle.json": "9876d0a3f1e4ebe71ea46bb72453708ce8771e3d47bbf3d77a1c72e94ad7b77d",
+    "abi/CompressedOracleV1.json": "938155ae2d219b012344c7ed0feb0d3a6c9acf5ed0b49063e1747b0fe4bb1746",
+    "abi/DepositAllowlistExtension.json": "853a9e26917e4c72beb1d5b0bc14fc9ef54500319d9df942172575927ba32ee2",
+    "abi/ExternalSwapExecutor.json": "3ac38de4a6ee0c34890f1f671b80e716e82d7b008f68d52182ada69ba5a8dc03",
+    "abi/IERC20.json": "00ed6ce9a746aaf0c8413a9795113be0d2fcc4363ea20f7cd97f15af2a2c3b7d",
+    "abi/ImmutableAppPoolHelper.json": "5ee0453e0a7f8a820c9a0ac638005b324529c678ddee8d5b7eccbbc3e5161be6",
+    "abi/MetricOmmPool.json": "288bb0b07629fe418e449494cf5fb41ea317b3c12c5aaeef12874585214f021f",
+    "abi/MetricOmmPoolDataProvider.json": "def4d3968c5c9af74d03078c043aa9985a165230862022709891d24432e1d180",
+    "abi/MetricOmmPoolDeployer.json": "4c474ce0040e53f350e81e72c1a1e0a3c3c90cb98848f53da3b6cf0eac487b93",
+    "abi/MetricOmmPoolFactory.json": "9c9bf736d9108ae07e8deb3954d18c0fd24318cf35ffc278f2315ca56c5e0247",
+    "abi/MetricOmmPoolLiquidityAdder.json": "1f31f519b772be8e0dd9598d635a2fc933a5a621888c791f0f974146ba0e57dc",
+    "abi/MetricOmmSimpleRouter.json": "6dc186ad93aa59e72ef8d3a51b959d25dcfdf20c7c636d299a2a3eb9e1dae859",
+    "abi/MetricOmmSwapQuoter.json": "7ed1d1046eb67f5f0d7ee461677bf4fbecbff16b251abf84d411d99b02e320f8",
+    "abi/Multicall3.json": "c5106b3bf4cf70286a9483497b738bbaa22379d0c18dc955108436f2b6a2c68f",
+    "abi/MultiplierOracle.json": "10de3f74d202c38eee7cba82961fbf3c253ce47a3e09f1c2da96ec7987a7b24b",
+    "abi/OracleProvider.json": "1f9cbb5162abff1c4323e79a5923e475cdf4607213a29e3f06c814c612d6690b",
+    "abi/OracleValueStopLossExtension.json": "496b485d138d10e305ee1ce5154f09fb35ac6130b68d62901463f0560f0ce522",
+    "abi/PriceProvider.json": "51d97c71d0b8eb779474183ecb386e8cfc2b4961cabf0e731866ae834dc730a4",
+    "abi/PriceProviderFactory.json": "b9499cd874d78cf7bbc3c78e8d66dee8c5850a189f8ff949df84fcdcf723d6ac",
+    "abi/PriceVelocityGuardExtension.json": "70c72280966c4670ab4aa3acab564dc4ec6c7217b25e836dc2b7d2cd5ca5b28b",
+    "abi/PythOracle.json": "5656b4cfd26723e6e58bf4127d71679bef06d18d7f55985914c70d1d2f187cb7",
+    "abi/RobinhoodStockTokenParams.json": "128099a4dd5a6650dce7f1a85bd6a5ecb0d3ae1a604645ea9cbde4e80d1d16c6",
+    "abi/SwapAllowlistExtension.json": "94aafd7a85fc1f770f42f09e6307adc7c2c0cb36b4e5843fe35ff14d6dd1db68",
+    "schema/codebook.json": "e15b9376cfe0c74262f95cc965d2981d1fc8db46e9d5ecc976221a6983f20e64"
+  },
+  "inventory_sha256": "f39884897ae78fd87016837aaa6ca12d3335f5561c5f45604bd5afdf49529f2a",
+  "coverage_sha256": "5dd4c39db0427a7ae15dd01b6ae5b3fc403c26fc29e8e518cc47d173fdeb41ae",
+  "fixture_sha256": {
+    "tests/fixtures/abi.json": "871117a7f28b760aabf3cc781ee7318074ac94f629bf1c9392375e5027630527",
+    "tests/fixtures/batch_bid_ask.json": "1e5cce7939ee2f40d7bf8837b65a09efe4d4ee9a09bef1a5a34b8095a9f3f3e6",
+    "tests/fixtures/bid_ask.json": "d6b53598e69b8b6fbaa1d5682f373d9a9751fad042b993fda01aa102e5ecbedc",
+    "tests/fixtures/chains.json": "f37b42b31351a02a1f189874e8c76b907ac617ab1af8bb2ba2382ee27568c148",
+    "tests/fixtures/factory_settings.json": "325fabdd44eb2ecab11a5c1cb62eb4f432bf651b0a0f2bdca042b798b5951538",
+    "tests/fixtures/helpers.json": "5a522c04617fab697eb0b01022f9e4475d49b393a05a0b7da5bf1139049690e4",
+    "tests/fixtures/liquidity.json": "707ee95eb35edd8b5f2ea4185b5f47132ad1b75276887d0a1ef6c94883f67363",
+    "tests/fixtures/math.json": "bcf60f954317fa69377271c8818b8551eb7a6bf01de90edf32d5ce82e333c088",
+    "tests/fixtures/metadata.json": "f8fa5d446fcd9486c61ea06442670fb0fd7d4b57de20368bb0c157a70cf07df8",
+    "tests/fixtures/oracle.json": "de8e6bea9c73c8738ad4dd41032da2d51a7324669a5b664d461e58e89152de63",
+    "tests/fixtures/pamm_quote.json": "00b892a790496afd89a309490c81278d481ff1ed4e50e9706cdb9195cfed02ce",
+    "tests/fixtures/route.json": "f98d0e2b713e7ad6f9df34fde59bb16684f58a567aeab11a6cfaf629bf753e7e",
+    "tests/fixtures/signing.json": "c8d8a2cdf6df633dc498df819c406906ce59035061d9cf7ec2f8b2baf0a15628"
+  },
+  "reference_tools": {
+    "viem": "2.38.5",
+    "ethers": "6.16.0",
+    "tsx": "4.20.6",
+    "abi_generator_sha256": "e860b5331c5b9f91fdbe224ded25fad80da412a732041e25dfff35f2959f2bdc",
+    "oracle_generator_sha256": "1f6714556546a7afd818960e093c480be5f22c404eefa63973ee9573ae33e222",
+    "liquidity_generator_sha256": "9e5a33d72f168986578f903f436d2070196448a77b3cc7909cb9685e5758c4ef",
+    "helper_generator_sha256": "f4d5a2856e951450038483e0881025adcd1d9f1a18e99cc5b9931eec7284207e"
+  },
+  "normalization": "ABIs from the five documentation attachments take precedence over SDK entries. Supplemental contracts use pinned source artifacts. Underlying integer aliases replace custom internalType names for Rust code generation without changing any wire types. Duplicate inherited entries with identical wire signatures are deduplicated.",
+  "known_differences": [
+    "Deployment docs liquidityAdder is 0x49A0dcb8dBD304B80aA475026cC558d4baE54382; npm SDK 0.7.0 uses 0xfFc65b3bef0544B2dbFa40dEea02C61F60397958. Use documentation defaults or an explicit override.",
+    "Documentation attachments add InvalidPriceLimitForDirection(bool,uint128) to router and quoter beyond npm SDK 0.7.0.",
+    "Historical commits advertised in the npm SDK README were not retrievable from the current public contract repositories; the npm tarball hash is the SDK binding source pin. Supplemental contracts have separate public commit pins.",
+    "Pool-creation percentages use exact decimal strings with at most four significant fractional places; excess precision is rejected instead of SDK floating-point Math.round. An omitted salt uses OS entropy and the resolved salt is returned with the calldata.",
+    "High-level weighted liquidity preparation requires explicit cursor bounds; callers can explicitly supply the SDK unconstrained bounds. No implicit slippage disabling is added."
+  ],
+  "attached_abi_sha256": {
+    "MetricOmmPool.json": "eb25f700f7ac105cca5938c4d7b3025df5add3e83400bbfb5bc07a00dd5c66ef",
+    "MetricOmmPoolDataProvider.json": "def4d3968c5c9af74d03078c043aa9985a165230862022709891d24432e1d180",
+    "MetricOmmPoolFactory.json": "1c514199814d6639da7b92861746c10e6bd4d44312e48c8ed4534d85d5628574",
+    "MetricOmmSimpleRouter.json": "6728119616ab15e90e52626eae3220aa58543b049c03e66939364cae4508297b",
+    "MetricOmmSwapQuoter.json": "ae579f5c362c4b52e769770dec65186957f7d761c8e4972b265a0f1639ce8c3e"
+  },
+  "local_integration_artifact": {
+    "url": "https://github.com/Metricxyz/mm-pusher-ts/blob/5c452fc5c934bf7f9c25199ea4a85692c678972d/demo/artifacts/CompressedOracleV1.json",
+    "sha256": "c61d23cf86b906d0d909d5e1ec90b59bd1d2a61a0e2360ebf841b9a21568e0e8",
+    "use": "local Anvil oracle deployment; external verification input, not a runtime dependency"
+  },
+  "sdk_workflow_groups": {
+    "poolCreation": 8,
+    "uniformBins": 5,
+    "liquidity": 8,
+    "fallbackSwaps": 12,
+    "externalSwaps": 12,
+    "stopLoss": 12,
+    "stopLossStatus": 1
+  }
+}

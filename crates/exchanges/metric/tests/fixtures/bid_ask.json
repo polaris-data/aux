@@ -1,0 +1,55 @@
+[
+  {
+    "pair": "WETH/USDC",
+    "poolAddress": "0xF85AfbADeCC7F23Dd173ed706f07d9C7e2473e24",
+    "priceProviderStatus": "healthy",
+    "bidAdj": "49940417631045696435290",
+    "askAdj": "49945012360825322506424",
+    "totalToken0Available": "24503618827789131821",
+    "totalToken1Available": "49785157539",
+    "serverTs": 1790508850,
+    "depth": {
+      "bids": [
+        {
+          "binIdx": -1,
+          "price": "49937913286041055521250",
+          "cumulativeVolume": "7430706558",
+          "cumulativeInputVolume": "2744786401520641763",
+          "priceImpactE6": "51"
+        },
+        {
+          "binIdx": -2,
+          "price": "49932918995283375647711",
+          "cumulativeVolume": "21731301391",
+          "cumulativeInputVolume": "8027598362225637937",
+          "priceImpactE6": "151"
+        }
+      ],
+      "asks": [
+        {
+          "binIdx": -1,
+          "price": "49947502535663908680680",
+          "cumulativeVolume": "2727338310371559766",
+          "cumulativeInputVolume": "7384519505",
+          "priceImpactE6": "49"
+        },
+        {
+          "binIdx": 0,
+          "price": "49952497285917475071548",
+          "cumulativeVolume": "8169278436813730931",
+          "cumulativeInputVolume": "22120177339",
+          "priceImpactE6": "149"
+        }
+      ]
+    }
+  },
+  {
+    "priceProviderStatus": "feed_down",
+    "bidAdj": "0",
+    "askAdj": "340282366920938463463374607431768211455",
+    "depth": {
+      "bids": [],
+      "asks": []
+    }
+  }
+]

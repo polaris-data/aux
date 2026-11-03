@@ -36,6 +36,7 @@ remain distinguishable from transport failures.
 | `monaco` | No | [Native Monaco spot/perps client and wallet/session signing](crates/exchanges/monaco/README.md) |
 | `derive` | No | [Native Derive v3 client, wallet/session signing, and RPC sessions](crates/exchanges/derive/README.md) |
 | `paradex` | No | [Native Paradex v1/v2 client, Starknet/EVM signing, and SBE streams](crates/exchanges/paradex/README.md) |
+| `metric` | No | [Metric liquidity/routing HTTP APIs, native EVM contracts and transaction signing](crates/exchanges/metric/README.md) |
 
 Exchange features do not activate networking. Disable default features to use
 custom I/O. Built-in transports support configurable timeouts, safe-read retries,

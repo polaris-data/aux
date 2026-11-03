@@ -1,0 +1,41 @@
+[
+  {
+    "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "tokenOut": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "tradeType": "exact_in",
+    "amountIn": "50000000000000000",
+    "amountOut": "136120897",
+    "effectivePriceX64": "50219747000",
+    "priceImpactBestRoute": "0.000082",
+    "candidatesConsidered": 8,
+    "routes": [
+      {
+        "tradeType": "exact_in",
+        "routeType": "direct",
+        "amountIn": "50000000000000000",
+        "amountOut": "136120897",
+        "effectivePriceX64": "50219747000",
+        "priceImpactE6": "82",
+        "legs": [
+          {
+            "tradeType": "exact_in",
+            "poolAddress": "0xF85AfbADeCC7F23Dd173ed706f07d9C7e2473e24",
+            "pair": "WETH/USDC",
+            "zeroForOne": true,
+            "tokenIn": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "tokenOut": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+            "amountIn": "50000000000000000",
+            "amountOut": "136120897",
+            "effectivePriceX64": "50219747000",
+            "priceImpactE6": "82",
+            "priceLimitX64": "0"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "insufficient_liquidity",
+    "error": "no candidate route had enough depth to fill the requested amount"
+  }
+]

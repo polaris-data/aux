@@ -25,7 +25,7 @@ members exclude the Python crate.
 The SDK preserves each exchange's native operations, request types, responses,
 errors, identifiers, and batching semantics. It owns protocol adaptation,
 connection handling, request preparation, and Rust signing. Strategies, order
-routing, risk management, portfolio accounting, persistent storage, funding and
+routing, risk management, portfolio accounting, persistent storage, application orchestration of funding and
 withdrawal workflows, and frontend integration are outside v1. It does not
 normalize venues into a common trading model or maintain an application order book.
 
@@ -204,7 +204,7 @@ source distribution before publishing to PyPI.
 ## Dependency changes
 
 Default facade features are `http` and `ws`; no exchange is selected automatically.
-Exchange features (`hyperliquid`, `lighter`, `qfex`, `arcus`, `monaco`, `derive`, and `paradex`) are additive and
+Exchange features (`hyperliquid`, `lighter`, `qfex`, `arcus`, `monaco`, `derive`, `paradex`, and `metric`) are additive and
 must not force standard transport features. Keep internal adapter dependencies'
 default features disabled. With `default-features = false`, selected adapters
 remain usable with caller-supplied transports. Core contracts must not require
@@ -315,6 +315,8 @@ generation against them. Consult the
 [Paradex guide](crates/exchanges/paradex/README.md) for signing provenance,
 explicit token renewal, isolated RPC reconciliation, and verification limits.
 
+Metric exposes eight native HTTP operations and the pinned callable contract interfaces through separate API and EVM clients. Its contract layer includes swaps, liquidity, pool/oracle administration and explicit funding-related calls; callers own workflow orchestration. Rust/Python ABI codecs share independently generated reference vectors, and local/remote EVM signers share process-wide nonce coordination. See the [Metric guide](crates/exchanges/metric/README.md) for provenance, deployment differences and live verification limits.
+
 Remaining release gates and work:
 
 - Funded authenticated submit/cancel verification remains pending for every venue,
@@ -352,3 +354,4 @@ additional venues is undecided.
 - [x] Paradex
 - [x] Monaco
 - [x] Derive v3
+- [ ] Metric (native core and four workflow helper groups implemented; full SDK export audit pending)
