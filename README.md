@@ -33,6 +33,7 @@ remain distinguishable from transport failures.
 | `lighter` | No | [Native Lighter client and signing](crates/exchanges/lighter/README.md) |
 | `qfex` | No | [Native QFEX client and HMAC authentication](crates/exchanges/qfex/README.md) |
 | `arcus` | No | [Native Arcus client and Ed25519 signing](crates/exchanges/arcus/README.md) |
+| `monaco` | No | [Native Monaco spot/perps client and wallet/session signing](crates/exchanges/monaco/README.md) |
 
 Exchange features do not activate networking. Disable default features to use
 custom I/O. Built-in transports support configurable timeouts, safe-read retries,

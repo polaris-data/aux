@@ -342,6 +342,56 @@ async fn send(
         .map_err(|_| timed_out())?
         .map_err(|_| disconnected())
 }
+// Called once before the first subscription, and again before reconnect replay.
+// One deadline covers signer callbacks, sending, and acknowledgement; shutdown
+// cancels the entire operation, including caller-supplied signing futures.
+async fn authenticate(
+    socket: &mut Socket,
+    spec: &dyn WebSocketSubscription,
+    config: &TransportConfig,
+    shutdown: &mut watch::Receiver<bool>,
+) -> Result<Option<String>, TransportError> {
+    let setup = async {
+        let Some(message) = spec.authentication_message().await? else {
+            return Ok(None);
+        };
+        send(socket, message, config).await?;
+        loop {
+            match socket.next().await {
+                Some(Ok(Message::Text(text))) => {
+                    if let Some(reply) = spec.response_message(&text) {
+                        send(socket, reply, config).await?;
+                    }
+                    if let Some(result) = spec.authentication_result(&text) {
+                        result?;
+                        if !spec.resubscribe_allowed() {
+                            return Err(auth_expired());
+                        }
+                        return Ok(Some(text.to_string()));
+                    }
+                }
+                Some(Ok(Message::Ping(_))) => {
+                    socket.flush().await.map_err(|_| disconnected())?;
+                }
+                Some(Ok(Message::Pong(_))) => {}
+                Some(Ok(Message::Close(_))) | None => return Err(disconnected()),
+                Some(Err(WsError::Capacity(_))) => {
+                    return Err(TransportError::new(
+                        TransportErrorKind::ResponseTooLarge,
+                        RequestOutcome::Unknown,
+                        "authentication frame exceeded limit",
+                    ));
+                }
+                Some(Err(_)) => return Err(disconnected()),
+                _ => return Err(protocol("invalid authentication frame")),
+            }
+        }
+    };
+    tokio::select! { biased;
+        _ = shutdown.changed() => Err(closed(RequestOutcome::NotSent)),
+        result = timeout(config.timeout, setup) => result.map_err(|_| timed_out())?,
+    }
+}
 fn detach(entries: &mut HashMap<String, Entry>, id: u64) -> Option<Arc<dyn WebSocketSubscription>> {
     let key = entries
         .iter()
@@ -400,6 +450,7 @@ async fn connected(
     shutdown: &mut watch::Receiver<bool>,
 ) -> (Option<TransportError>, bool, Option<Completion>) {
     let mut healthy = false;
+    let mut initialized = !entries.is_empty();
     let mut last_received = Instant::now();
     let mut heartbeat = tokio::time::interval_at(
         Instant::now() + config.heartbeat_interval,
@@ -407,13 +458,56 @@ async fn connected(
     );
     heartbeat.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Delay);
     loop {
+        let owner = entries.values().next().map(|e| e.spec.clone());
+        let changed = async {
+            if let Some(spec) = &owner {
+                let changed = spec.authentication_changed();
+                // Register before checking validity to avoid missing a revoke
+                // between construction of this wait and its first poll.
+                if !spec.resubscribe_allowed() {
+                    return;
+                }
+                if let Some(future) = changed {
+                    future.await;
+                    return;
+                }
+            }
+            std::future::pending::<()>().await;
+        };
+        let expiry = entries
+            .values()
+            .filter_map(|e| e.spec.authentication_expires_at())
+            .min();
+        let expired = async {
+            if let Some(deadline) = expiry {
+                tokio::time::sleep(
+                    deadline
+                        .duration_since(std::time::SystemTime::now())
+                        .unwrap_or_default(),
+                )
+                .await;
+            } else {
+                std::future::pending::<()>().await;
+            }
+        };
         tokio::select! {biased;
             _=shutdown.changed()=>return (Some(closed(RequestOutcome::Unknown)),healthy,None),
+            _=changed=>{ prune_expired(entries); if entries.is_empty(){return(None,healthy,None);} },
+            _=expired=>{ prune_expired(entries); if entries.is_empty(){return(None,healthy,None);} },
             command=commands.recv()=>match command {
                 Some(Command::Add{id,spec,peer,done})=>{
+                    if done.is_closed() { continue; }
                     let key=spec.key();
                     if entries.contains_key(&key)&&spec.requires_fresh_snapshot(){let _=done.send(Ok(Attachment::FreshConnection));continue;}
                     if !spec.resubscribe_allowed(){let _=done.send(Err(auth_expired()));continue;}
+                    if !initialized {
+                        match authenticate(socket, &*spec, config, shutdown).await {
+                            Ok(Some(ack)) => { peer.push(&ack); }
+                            Ok(None) => {}
+                            Err(error) => { let _=done.send(Err(error.clone())); return(Some(error),healthy,None); }
+                        }
+                        initialized=true;
+                    }
                     if !entries.contains_key(&key){
                         if let Err(error)=send(socket,spec.subscribe_message(),config).await{let _=done.send(Err(error.clone()));return(Some(error),healthy,None);}
                         entries.insert(key.clone(),Entry{awaiting_snapshot:spec.requires_fresh_snapshot(),spec,peers:HashMap::new()});
@@ -428,6 +522,9 @@ async fn connected(
                 None=>return(None,healthy,None),
             },
             message=socket.next()=>{
+                let previously_active=!entries.is_empty();
+                prune_expired(entries);
+                if previously_active && entries.is_empty() { return(None,healthy,None); }
                 last_received=Instant::now();
                 let text=match message {
                     Some(Ok(Message::Text(text)))=>text.to_string(),
@@ -444,10 +541,10 @@ async fn connected(
                 let mut removed=Vec::new();
                 for entry in entries.values_mut(){
                     if !entry.spec.matches(&text){continue;}
-                    if entry.awaiting_snapshot&&!entry.spec.is_initial_snapshot(&text){
+                    if entry.awaiting_snapshot&&!entry.spec.is_snapshot_control(&text)&&!entry.spec.is_initial_snapshot(&text){
                         for (id,peer) in &entry.peers{peer.finish(Some(protocol("native delta arrived before subscription snapshot")));removed.push(*id);}continue;
                     }
-                    entry.awaiting_snapshot=false;
+                    if !entry.spec.is_snapshot_control(&text) { entry.awaiting_snapshot=false; }
                     for (id,peer) in &entry.peers{if !peer.push(&text){removed.push(*id);}else if entry.spec.is_data_message(&text){healthy=true;}}
                 }
                 for id in removed{if let Some(spec)=detach(entries,id) && let Err(error)=send(socket,spec.unsubscribe_message(),config).await{return(Some(error),healthy,None);}}
@@ -548,6 +645,28 @@ async fn run(
                 socket = candidate;
                 break 'session None;
             }
+            let spec = entries
+                .values()
+                .next()
+                .expect("nonempty entries")
+                .spec
+                .clone();
+            let authenticated_ack =
+                match authenticate(&mut candidate, &*spec, &config, &mut shutdown).await {
+                    Ok(ack) => ack,
+                    Err(error)
+                        if matches!(
+                            error.kind,
+                            TransportErrorKind::Authentication
+                                | TransportErrorKind::Protocol
+                                | TransportErrorKind::ResponseTooLarge
+                                | TransportErrorKind::Closed
+                        ) =>
+                    {
+                        break 'session Some(error);
+                    }
+                    Err(_) => continue,
+                };
             let restore = timeout(config.timeout, async {
                 for entry in entries.values() {
                     candidate
@@ -559,6 +678,13 @@ async fn run(
             let restored = tokio::select! {biased;_=shutdown.changed()=>break 'session Some(closed(RequestOutcome::Unknown)),result=restore=>matches!(result,Ok(Ok(())))};
             if !restored {
                 continue;
+            }
+            if let Some(ack) = authenticated_ack {
+                for entry in entries.values() {
+                    for peer in entry.peers.values() {
+                        peer.push(&ack);
+                    }
+                }
             }
             socket = candidate;
             break;

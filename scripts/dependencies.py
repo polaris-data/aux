@@ -31,6 +31,12 @@ PROFILES = [
     ("QFEX and Arcus with custom transports", "aux-rs", "qfex,arcus"),
     ("All four exchanges with custom transports", "aux-rs", "hyperliquid,lighter,qfex,arcus"),
     ("All four exchanges with both standard transports", "aux-rs", "hyperliquid,lighter,qfex,arcus,http,ws"),
+    ("Monaco with custom transports", "aux-rs", "monaco"),
+    ("Monaco with standard HTTP", "aux-rs", "monaco,http"),
+    ("Monaco with standard WebSockets", "aux-rs", "monaco,ws"),
+    ("Monaco with both standard transports", "aux-rs", "monaco,http,ws"),
+    ("All five exchanges with custom transports", "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco"),
+    ("All five exchanges with both standard transports", "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco,http,ws"),
     ("Python binding (separate opt-in crate)", "aux-rs-python", ""),
 ]
 
@@ -56,19 +62,25 @@ def check(target):
         if "httpdate" in names:
             raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
-        exchanges = {"hyperliquid", "lighter", "qfex", "arcus"}
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
                 if f"aux-rs-{exchange}" in names:
                     raise SystemExit(f"Unselected {exchange} adapter leaked into profile: {name}")
-            exclusive = {
-                "hyperliquid": {"k256", "sha3", "rmp-serde", "hmac"},
-                "lighter": {"goldilocks-crypto", "poseidon-hash"},
-                "arcus": {"ed25519-dalek", "curve25519-dalek"},
+            # Primitives may be owned by several selected adapters.
+            owners = {
+                "k256": {"hyperliquid", "monaco"},
+                "sha3": {"hyperliquid", "monaco"},
+                "rmp-serde": {"hyperliquid"},
+                "hmac": {"hyperliquid", "monaco"},
+                "goldilocks-crypto": {"lighter"},
+                "poseidon-hash": {"lighter"},
+                "ed25519-dalek": {"arcus", "monaco"},
+                "curve25519-dalek": {"arcus", "monaco"},
             }
-            for exchange, primitives in exclusive.items():
-                if exchange not in selected and names & primitives:
-                    raise SystemExit(f"Unselected {exchange} crypto leaked into profile: {name}")
+            for primitive, venues in owners.items():
+                if not selected & venues and primitive in names:
+                    raise SystemExit(f"Unselected signing primitive {primitive} leaked into profile: {name}")
             if not selected & {"http", "ws"} and names & {"tokio", "reqwest", "tokio-tungstenite", "rustls"}:
                 raise SystemExit(f"Standard stack leaked into custom transport profile: {name}")
         if package != "aux-rs-python" and any(

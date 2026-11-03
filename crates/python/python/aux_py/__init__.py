@@ -8,6 +8,8 @@ from typing import Any
 from . import _native
 from ._native import (
     ArcusSigner,
+    MonacoWalletSigner,
+    MonacoSessionSigner,
     OutcomeUncertainError,
     BusyError,
     ClosedError,
@@ -44,6 +46,7 @@ __all__ = [
     "hyperliquid_signing_payload", "hyperliquid_user_signing_payload",
     "lighter_auth_signing_payload", "lighter_transaction_signing_payload",
     "QfexClient", "ArcusClient", "ArcusSigner", "OutcomeUncertainError",
+    "MonacoClient", "MonacoWalletSigner", "MonacoSessionSigner",
     "__version__",
 ]
 
@@ -407,3 +410,151 @@ class ArcusClient(_ExchangeClient):
 
     async def subscribe(self, specification: dict[str, Any]) -> Subscription:
         return Subscription(await self._inner.subscribe(specification))
+
+
+class MonacoClient:
+    """Native Monaco spot/perps APIs. Defaults to testnet; sessions are explicit."""
+
+    def __init__(
+        self, *, network: str = "testnet", http_url: str | None = None,
+        ws_url: str | None = None, chain_id: int | None = None,
+        timeout_ms: int = 10_000, subscription_capacity: int = 128,
+        read_retries: int = 2, reconnect_retries: int = 3,
+        initial_backoff_ms: int = 100, max_backoff_ms: int = 2000,
+        heartbeat_interval_ms: int = 20_000, idle_timeout_ms: int = 60_000,
+        max_message_bytes: int = 8_388_608, reconnect_stable_ms: int = 30_000,
+    ) -> None:
+        self._inner = _native.MonacoClient(
+            network=network, http_url=http_url, ws_url=ws_url, chain_id=chain_id,
+            timeout_ms=timeout_ms, subscription_capacity=subscription_capacity,
+            read_retries=read_retries, reconnect_retries=reconnect_retries,
+            initial_backoff_ms=initial_backoff_ms, max_backoff_ms=max_backoff_ms,
+            heartbeat_interval_ms=heartbeat_interval_ms, idle_timeout_ms=idle_timeout_ms,
+            max_message_bytes=max_message_bytes, reconnect_stable_ms=reconnect_stable_ms,
+        )
+
+    @property
+    def closed(self) -> bool:
+        return self._inner.closed
+
+    @property
+    def authenticated(self) -> bool:
+        return self._inner.authenticated
+
+    @property
+    def session_info(self) -> dict[str, Any]:
+        """Nonsecret identity and expiry; the session seed is never included."""
+        return self._inner.session_info
+
+    @property
+    def session_signer(self) -> MonacoSessionSigner:
+        return self._inner.session_signer
+
+    async def login(
+        self, wallet: MonacoWalletSigner, client_id: str, *,
+        session_signer: MonacoSessionSigner | None = None,
+        invite_code: str | None = None, referral_code: str | None = None,
+        request_signing: str = "legacy",
+    ) -> dict[str, Any]:
+        return await self._inner.login(
+            wallet, client_id, session_signer=session_signer,
+            invite_code=invite_code, referral_code=referral_code,
+            request_signing=request_signing,
+        )
+
+    def restore_session(self, signer: MonacoSessionSigner, info: dict[str, Any], *,
+                        request_signing: str = "legacy") -> None:
+        self._inner.restore_session(signer, info, request_signing=request_signing)
+
+    async def refresh_session(self) -> dict[str, Any]:
+        return await self._inner.refresh_session()
+
+    async def revoke_session(self) -> dict[str, Any]:
+        return await self._inner.revoke_session()
+
+    async def create_challenge(self, request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.create_challenge(request)
+
+    async def verify_signature(self, request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.verify_signature(request)
+
+    async def trading_pairs(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.trading_pairs(request)
+
+    async def trading_pair(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.trading_pair(request)
+
+    async def market_metadata(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.market_metadata(request)
+
+    async def order_book(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.order_book(request)
+
+    async def trades(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.trades(request)
+
+    async def mark_price(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.mark_price(request)
+
+    async def index_price(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.index_price(request)
+
+    async def funding(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.funding(request)
+
+    async def funding_history(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.funding_history(request)
+
+    async def balances(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.balances(request)
+
+    async def parent_margin_account(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.parent_margin_account(request)
+
+    async def margin_accounts(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.margin_accounts(request)
+
+    async def positions(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.positions(request)
+
+    async def orders(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.orders(request)
+
+    async def order(self, request: dict[str, Any] | None = None) -> dict[str, Any]:
+        return await self._inner.order(request)
+
+    async def place_order(self, market: dict[str, Any], request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.place_order(market, request)
+
+    async def replace_order(self, market: dict[str, Any], order_id: str,
+                            request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.replace_order(market, order_id, request)
+
+    async def cancel_order(self, request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.cancel_order(request)
+
+    async def batch_create(self, markets: list[dict[str, Any]], request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.batch_create(markets, request)
+
+    async def batch_replace(self, markets: list[dict[str, Any]], request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.batch_replace(markets, request)
+
+    async def batch_cancel(self, request: dict[str, Any]) -> dict[str, Any]:
+        return await self._inner.batch_cancel(request)
+
+    async def cancel_all(self, trading_pair_id: str | None = None) -> dict[str, Any]:
+        return await self._inner.cancel_all(trading_pair_id)
+
+    async def subscribe(self, specification: dict[str, Any]) -> Subscription:
+        return Subscription(await self._inner.subscribe(specification))
+
+    async def aclose(self) -> None:
+        await self._inner.aclose()
+
+    async def __aenter__(self) -> MonacoClient:
+        if self.closed:
+            raise ClosedError("client is closed")
+        return self
+
+    async def __aexit__(self, *_: Any) -> None:
+        await self.aclose()

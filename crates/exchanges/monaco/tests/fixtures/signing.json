@@ -1,0 +1,71 @@
+{
+  "reference": "@0xmonaco/core@1.1.5",
+  "seed": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "publicKey": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+  "timestampMs": 1788868800123,
+  "http": [
+    {
+      "method": "GET",
+      "target": "/api/v1/orders",
+      "body": "",
+      "legacyBase": "GET\n/api/v1/orders\n1788868800123\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "legacySignature": "d39c340d9a97ec227bd9834c29c1dbb3d9679ba2afc458ed40499a0e7e79c0d62f26ceae184ef988d33d5a62fead8729691b9a43cc10a09c0781a886609feb04",
+      "rfc9421": {
+        "Signature-Input": "monaco=(\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8\";alg=\"ed25519\"",
+        "Signature": "monaco=:vkqIZAvTlGQ3Y9hRU2wcVpPbxXI+IZrj750isGsFaallA2UHJdqpIbJZe3xA/6oSpNpWEakG+rapoVUHKoKaAg==:",
+        "Content-Digest": "sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:"
+      }
+    },
+    {
+      "method": "GET",
+      "target": "/api/v1/orders?status=FILLED%2CPARTIALLY_FILLED&tag=a%2Fb&tag=a+b&tag=%E2%82%AC",
+      "body": "",
+      "legacyBase": "GET\n/api/v1/orders?status=FILLED%2CPARTIALLY_FILLED&tag=a%2Fb&tag=a+b&tag=%E2%82%AC\n1788868800123\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "legacySignature": "2f640fcbbca4c3e041d8473ff350a692ea0772f6bc90b140948997f9598400c4b70083617554334b3d915f88d9f11a62a4149613268d463e67ddb291afcc510b",
+      "rfc9421": {
+        "Signature-Input": "monaco=(\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8\";alg=\"ed25519\"",
+        "Signature": "monaco=:6xhsCugwDHXAKZAQoujLliszEXRg6/D4Wc6JXnKRCOwnsZLX8AKJLW1NpeNL/i/EODogaC/sxClIPQgH15xxDg==:",
+        "Content-Digest": "sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:"
+      }
+    },
+    {
+      "method": "POST",
+      "target": "/api/v1/orders",
+      "body": "{ \"price\":\"100.0100\", \"quantity\":\"0.500\", \"idempotencyKey\":\"fixture-1\" }",
+      "legacyBase": "POST\n/api/v1/orders\n1788868800123\n0a775871f6a0d27f235ea3450ad1953dbe36365561521c4c16c8b9613549803d",
+      "legacySignature": "706ec37bde3026ffce21781712dbd4ead4b55a2b428d0e5a63c5a059883883cb9490b2744fda6975102b35983bc45765724ea4b83206069a08035380d4f21c0b",
+      "rfc9421": {
+        "Signature-Input": "monaco=(\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8\";alg=\"ed25519\"",
+        "Signature": "monaco=:NoIPWI/RUEcwl8LO2mZKDkc5b/NrW1Z35g92/PSx96S8RYavRQPPLsnQoSN8EIVLfyKk9IXJ6GdAB06iU+eLAw==:",
+        "Content-Digest": "sha-256=:CndYcfag0n8jXqNFCtGVPb42NlVhUhxMFsi5YTVJgD0=:"
+      }
+    }
+  ],
+  "websocket": {
+    "message": "WS-AUTH\n03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8\n1788868800123",
+    "signature": "1b903d73ca7728f1ee2d39eba8cb8dd5c13e4a6583f36024829351a5d952a93df6af54322e4e6b9dab05ccb9f72603d52b72181d3860254e6f890a692bd7e608"
+  },
+  "wallet": {
+    "privateKey": "0x0000000000000000000000000000000000000000000000000000000000000001",
+    "address": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+    "messages": [
+      {
+        "message": "Authorize Monaco session 03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8 for fixture-client on Sei 1328",
+        "signature": "0xc55d995449f2852967b360e4f81ab9570f36acfb4a19f13e9dce7c709bfccb1a5d2775c1a92c4fd829fe26438b817d240850f9fd4e256f3513f8a5904fcccf3c1b"
+      },
+      {
+        "message": "Unicode challenge € — session 03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+        "signature": "0x7f4dba8b51c5fc56c63c80212723948b8bc05ffe75e7a39eb145c1d432abf6d35f9e05849a31a5595e94081ed3b9d78c259a714c7a4957b582baffefe970c29f1b"
+      }
+    ]
+  },
+  "sources": {
+    "package/dist/crypto/session.js": "66692421717c31923fdad44ba2e62579b44333375f2948f15ddc878691ba7c7a",
+    "package/dist/crypto/http-signatures.js": "aebb8b5fb02d1618b32a0c28d8b59db4b1263bfcc22728856c495591fe750d2c",
+    "package/dist/api/auth/api.js": "3b7aabb1e2bf204a970190f81870e90062cfb0223c40482cafef8219b0fd2489",
+    "package/dist/api/websocket/websocket.js": "cda03f894a49ead0527d857af053865a78eb6277befe72cc799e346313fdf6ff",
+    "openapi.yaml": "d068ab22934796c22491e2171582efeac0a6037fe07a1f623b85e54a75f35cf6",
+    "websockets.md": "eebf1dd07ffe1ddc6e90a8f5f2eb112325af4dff5e9e799cb3d6cc5be28076be",
+    "signatures.md": "0221aec4495698d5fba71a7a3adf446afcf604d1dfc80b4d22514220ea09cc28"
+  }
+}

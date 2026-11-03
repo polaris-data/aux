@@ -1,0 +1,13 @@
+{
+  "tradingPairId": "9e5e7125-0c80-547a-a9d0-33564b77c705",
+  "indexPrice": "324.65099",
+  "components": [
+    {
+      "provider": "SEDA",
+      "price": "324.65099",
+      "weight": "1",
+      "updatedAt": "1793709717475"
+    }
+  ],
+  "updatedAt": "1793709717475"
+}

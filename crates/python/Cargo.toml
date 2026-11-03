@@ -13,7 +13,7 @@ test = false
 doctest = false
 
 [dependencies]
-aux-rs = { workspace = true, features = ["hyperliquid", "lighter", "qfex", "arcus", "http", "ws"] }
+aux-rs = { workspace = true, features = ["hyperliquid", "lighter", "qfex", "arcus", "monaco", "http", "ws"] }
 pyo3 = { version = "0.30.1", default-features = false, features = ["macros"] }
 pyo3-async-runtimes = { version = "0.30", default-features = false, features = ["tokio-runtime"] }
 tokio = { workspace = true, features = ["rt-multi-thread", "sync", "macros"] }

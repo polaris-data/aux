@@ -6,6 +6,7 @@ mod client;
 mod convert;
 mod errors;
 mod lighter;
+mod monaco;
 mod qfex;
 mod signers;
 mod state;
@@ -20,6 +21,9 @@ fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<arcus::ArcusClient>()?;
     module.add_class::<arcus::ArcusSigner>()?;
     module.add_class::<lighter::LighterClient>()?;
+    module.add_class::<monaco::MonacoClient>()?;
+    module.add_class::<monaco::MonacoSessionSigner>()?;
+    module.add_class::<monaco::MonacoWalletSigner>()?;
     module.add_class::<subscription::Subscription>()?;
     module.add(
         "BookSubscription",

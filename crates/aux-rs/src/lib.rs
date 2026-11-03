@@ -16,3 +16,6 @@ pub use aux_rs_qfex as qfex;
 
 #[cfg(feature = "arcus")]
 pub use aux_rs_arcus as arcus;
+
+#[cfg(feature = "monaco")]
+pub use aux_rs_monaco as monaco;

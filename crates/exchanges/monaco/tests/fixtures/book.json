@@ -1,0 +1,43 @@
+{
+  "baseDecimals": 8,
+  "baseToken": "BTC",
+  "data": {
+    "bids": [
+      {
+        "price": "77304.34",
+        "quantity": "0.02235",
+        "orderCount": 2
+      },
+      {
+        "price": "77304.32",
+        "quantity": "0.02645",
+        "orderCount": 2
+      }
+    ],
+    "asks": [
+      {
+        "price": "77304.42",
+        "quantity": "0.00964",
+        "orderCount": 1
+      },
+      {
+        "price": "77304.45",
+        "quantity": "0.01715",
+        "orderCount": 1
+      }
+    ],
+    "bestBid": "77304.34",
+    "bestAsk": "77304.42",
+    "bidVolume": "0.04880",
+    "askVolume": "0.02679",
+    "priceChange": null
+  },
+  "eventType": "orderbook_snapshot",
+  "symbol": "BTC/USDC",
+  "tradingPairId": "893d2add-2f36-4ee7-b660-893d2add2f36",
+  "quoteDecimals": 6,
+  "quoteToken": "USDC",
+  "sequenceNumber": 0,
+  "timestamp": "2026-11-03T12:41:56.496795161+00:00",
+  "tradingMode": "Spot"
+}

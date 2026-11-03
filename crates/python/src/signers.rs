@@ -149,9 +149,19 @@ impl Drop for CallbackLease {
         }
     }
 }
-async fn callback(callback: &Py<PyAny>, payload: Py<PyAny>) -> PyResult<Py<PyAny>> {
+pub(crate) async fn callback(callback: &Py<PyAny>, payload: Py<PyAny>) -> PyResult<Py<PyAny>> {
+    callback_with_locals(callback, payload, None).await
+}
+pub(crate) async fn callback_with_locals(
+    callback: &Py<PyAny>,
+    payload: Py<PyAny>,
+    initiating_locals: Option<&pyo3_async_runtimes::TaskLocals>,
+) -> PyResult<Py<PyAny>> {
     let (mut lease, future) = Python::attach(|py| -> PyResult<_> {
-        let locals = pyo3_async_runtimes::tokio::get_current_locals(py)?;
+        let locals = match initiating_locals {
+            Some(locals) => locals.clone(),
+            None => pyo3_async_runtimes::tokio::get_current_locals(py)?,
+        };
         let package = py.import("aux_py")?;
         let coroutine = package
             .getattr("_call_signer")?
