@@ -1,0 +1,351 @@
+> For clean Markdown of any page, append .md to the page URL.
+> For a complete documentation index, see https://docs.paradex.trade/llms.txt.
+> For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://docs.paradex.trade/_mcp/server.
+
+# rfq[.{rfq_id}]
+
+GET /rfq[.{rfq_id}]
+
+Reference: https://docs.paradex.trade/ws/web-socket-channels/rfq-rfq-id/rfq-rfq-id
+
+## AsyncAPI Specification
+
+```yaml
+asyncapi: 2.6.0
+info:
+  title: rfq[.{rfq_id}]
+  version: subpackage_rfqRfqId.rfqRfqId
+channels:
+  /rfq[.{rfq_id}]:
+    parameters:
+      rfq_id:
+        description: Paradigm-issued RFQ id; scopes the subscription to a single RFQ
+        schema:
+          type: string
+    publish:
+      operationId: rfq-rfq-id-publish
+      summary: subscribe
+      message:
+        name: subscribe
+        title: subscribe
+        payload:
+          $ref: '#/components/schemas/RfqRfqIdSubscribe'
+servers:
+  production:
+    url: wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=1
+    protocol: wss
+    x-default: true
+components:
+  schemas:
+    ChannelsRfqRfqIdSubscribeDeribitCostBuyStatus:
+      type: string
+      enum:
+        - PRICED
+        - NOT_LISTED
+        - NO_SIZE
+        - INSUFFICIENT_SIZE
+        - NO_DATA
+      description: >-
+        Why this direction has no cost. NO_SIZE, INSUFFICIENT_SIZE and PRICED
+        are one scale: nothing resting, some but not enough, enough. NOT_LISTED
+        means Deribit does not list the instrument. NO_DATA means it does and no
+        price has reached us, which is not an empty book and must not be drawn
+        as one
+      title: ChannelsRfqRfqIdSubscribeDeribitCostBuyStatus
+    ChannelsRfqRfqIdSubscribeDeribitCostSellStatus:
+      type: string
+      enum:
+        - PRICED
+        - NOT_LISTED
+        - NO_SIZE
+        - INSUFFICIENT_SIZE
+        - NO_DATA
+      description: As buy_status, for selling the structure instead of buying it
+      title: ChannelsRfqRfqIdSubscribeDeribitCostSellStatus
+    ChannelsRfqRfqIdSubscribeDeribitCost:
+      type: object
+      properties:
+        buy_available:
+          type: string
+          description: >-
+            Structure units resting at Deribit's top of book: the smallest,
+            across premium legs, of that leg's available amount over its ratio.
+            Travels with INSUFFICIENT_SIZE so a client can name the gap rather
+            than only assert one
+        buy_cost:
+          type: string
+          description: >-
+            Signed USD total for the whole quantity, oriented like a structure
+            price: positive is a debit, negative a net credit. Absent unless
+            this direction's status is PRICED. A zero is a real price, for a
+            structure whose legs offset, and is not the same as an absent figure
+        buy_status:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeDeribitCostBuyStatus'
+          description: >-
+            Why this direction has no cost. NO_SIZE, INSUFFICIENT_SIZE and
+            PRICED are one scale: nothing resting, some but not enough, enough.
+            NOT_LISTED means Deribit does not list the instrument. NO_DATA means
+            it does and no price has reached us, which is not an empty book and
+            must not be drawn as one
+        last_updated_at:
+          type: integer
+          description: >-
+            Unix ms of the OLDEST leg tick behind the figure, since a structure
+            is as stale as its worst leg. Absent whenever no tick backs it,
+            which is every NOT_LISTED and NO_DATA. Use it to tell a live figure
+            from a frozen feed, not to tell whether the reference is still
+            arriving
+        sell_available:
+          type: string
+          description: As buy_available, for selling the structure instead of buying it
+        sell_cost:
+          type: string
+          description: As buy_cost, for selling the structure instead of buying it
+        sell_status:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeDeribitCostSellStatus'
+          description: As buy_status, for selling the structure instead of buying it
+      description: >-
+        What the same structure would cost crossing Deribit's public book, when
+        type is DERIBIT_COST. A reference only: nothing here is executable, and
+        it repeats on a timer while the RFQ is open
+      title: ChannelsRfqRfqIdSubscribeDeribitCost
+    ChannelsRfqRfqIdSubscribeQuoteRole:
+      type: string
+      enum:
+        - TAKER
+        - MAKER
+      description: TAKER for your own order, MAKER for a counterparty quote
+      title: ChannelsRfqRfqIdSubscribeQuoteRole
+    ChannelsRfqRfqIdSubscribeQuoteSide:
+      type: string
+      enum:
+        - BUY
+        - SELL
+      title: ChannelsRfqRfqIdSubscribeQuoteSide
+    ChannelsRfqRfqIdSubscribeQuoteState:
+      type: string
+      enum:
+        - PENDING
+        - OPENED
+        - CLOSED
+      title: ChannelsRfqRfqIdSubscribeQuoteState
+    ChannelsRfqRfqIdSubscribeQuote:
+      type: object
+      properties:
+        close_reason:
+          type: string
+          description: >-
+            Venue close reason on CLOSED (e.g. NO_MATCH, EXPIRED); empty
+            otherwise
+        counterparty:
+          type: string
+        label:
+          type: string
+          description: User label on the order; echoes your own label on TAKER orders
+        order_id:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeQuoteRole'
+          description: TAKER for your own order, MAKER for a counterparty quote
+        side:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeQuoteSide'
+        state:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeQuoteState'
+      required:
+        - order_id
+        - state
+      description: Maker or taker quote payload when type is QUOTE
+      title: ChannelsRfqRfqIdSubscribeQuote
+    ChannelsRfqRfqIdSubscribeResultAllowedSide:
+      type: string
+      enum:
+        - BUY
+        - SELL
+        - TWO_WAY
+      description: >-
+        Directions the risk check granted this RFQ, on the create result only;
+        executing the other way is refused
+      title: ChannelsRfqRfqIdSubscribeResultAllowedSide
+    ChannelsRfqRfqIdSubscribeResultOperation:
+      type: string
+      enum:
+        - RFQ_CREATE
+        - RFQ_DELETE
+        - RFQ_EXECUTE
+      description: REST command answered by this result
+      title: ChannelsRfqRfqIdSubscribeResultOperation
+    ChannelsRfqRfqIdSubscribeResultStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - FAILED
+      description: Whether the RFQ venue accepted the command
+      title: ChannelsRfqRfqIdSubscribeResultStatus
+    ChannelsRfqRfqIdSubscribeResult:
+      type: object
+      properties:
+        allowed_side:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeResultAllowedSide'
+          description: >-
+            Directions the risk check granted this RFQ, on the create result
+            only; executing the other way is refused
+        http_status:
+          type: integer
+          description: Venue HTTP status, 0 when no response was received
+        label:
+          type: string
+          description: User label echoed from the request
+        message:
+          type: string
+          description: Human-readable error, empty on SUCCESS
+        never_sent:
+          type: boolean
+          description: >-
+            FAILED only: refused before reaching the venue, so it cannot have
+            taken effect there. Absent on a failed forward, including
+            http_status 0, which the venue may still have received
+        operation:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeResultOperation'
+          description: REST command answered by this result
+        order_id:
+          type: string
+          description: Venue-issued order id, present only for successful RFQ executions
+        request_id:
+          type: string
+          description: >-
+            Paradex-issued id returned by the REST 202 and echoed here for
+            correlation
+        status:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeResultStatus'
+          description: Whether the RFQ venue accepted the command
+      required:
+        - operation
+        - status
+      description: Asynchronous REST command outcome when type is RESULT
+      title: ChannelsRfqRfqIdSubscribeResult
+    ChannelsRfqRfqIdSubscribeRfqCloseReason:
+      type: string
+      enum:
+        - FILLED
+        - EXPIRED
+        - CANCELLED
+      title: ChannelsRfqRfqIdSubscribeRfqCloseReason
+    ChannelsRfqRfqIdSubscribeRfqState:
+      type: string
+      enum:
+        - OPENED
+        - CLOSED
+      title: ChannelsRfqRfqIdSubscribeRfqState
+    ChannelsRfqRfqIdSubscribeRfq:
+      type: object
+      properties:
+        close_reason:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeRfqCloseReason'
+        expires_at:
+          type: integer
+        quantity:
+          type: string
+        state:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeRfqState'
+      required:
+        - state
+      description: RFQ lifecycle payload when type is RFQ
+      title: ChannelsRfqRfqIdSubscribeRfq
+    ChannelsRfqRfqIdSubscribeTradeSide:
+      type: string
+      enum:
+        - BUY
+        - SELL
+      title: ChannelsRfqRfqIdSubscribeTradeSide
+    ChannelsRfqRfqIdSubscribeTradeState:
+      type: string
+      enum:
+        - STARTED
+        - EXECUTED
+        - REJECTED
+        - PROGRESS
+      title: ChannelsRfqRfqIdSubscribeTradeState
+    ChannelsRfqRfqIdSubscribeTrade:
+      type: object
+      properties:
+        counterparty:
+          type: string
+        price:
+          type: string
+        quantity:
+          type: string
+        reason:
+          type: string
+          description: >-
+            Taker-facing rejection reason on REJECTED (e.g. risk check, invalid
+            credentials); empty otherwise
+        side:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeTradeSide'
+        state:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeTradeState'
+        trade_id:
+          type: string
+      required:
+        - state
+        - trade_id
+      description: Block-trade payload when type is TRADE
+      title: ChannelsRfqRfqIdSubscribeTrade
+    ChannelsRfqRfqIdSubscribeType:
+      type: string
+      enum:
+        - RFQ
+        - QUOTE
+        - TRADE
+        - RESULT
+        - DERIBIT_COST
+      description: Event variant; exactly one matching payload field is populated
+      title: ChannelsRfqRfqIdSubscribeType
+    RfqRfqIdSubscribe:
+      type: object
+      properties:
+        account:
+          type: string
+          description: Paradex account that owns the RFQ
+        created_at:
+          type: integer
+          description: Event time in Unix milliseconds
+        deribit_cost:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeDeribitCost'
+          description: >-
+            What the same structure would cost crossing Deribit's public book,
+            when type is DERIBIT_COST. A reference only: nothing here is
+            executable, and it repeats on a timer while the RFQ is open
+        quote:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeQuote'
+          description: Maker or taker quote payload when type is QUOTE
+        result:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeResult'
+          description: Asynchronous REST command outcome when type is RESULT
+        rfq:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeRfq'
+          description: RFQ lifecycle payload when type is RFQ
+        rfq_id:
+          type: string
+          description: Venue-issued RFQ id; empty on a failed create result
+        seq:
+          type: integer
+          description: Monotonic delivery sequence for this account partition
+        trade:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeTrade'
+          description: Block-trade payload when type is TRADE
+        type:
+          $ref: '#/components/schemas/ChannelsRfqRfqIdSubscribeType'
+          description: Event variant; exactly one matching payload field is populated
+      required:
+        - account
+        - created_at
+        - rfq_id
+        - seq
+        - type
+      title: RfqRfqIdSubscribe
+
+```

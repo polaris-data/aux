@@ -8,6 +8,8 @@ use std::sync::{Arc, Mutex};
 use tokio::sync::watch;
 
 pub enum NativeHandle {
+    Derive(aux_rs::derive::SubscriptionHandle<StandardSubscription>),
+    Paradex(aux_rs::paradex::SubscriptionHandle<StandardSubscription>),
     Monaco(aux_rs::monaco::SubscriptionHandle<StandardSubscription>),
     Qfex(aux_rs::qfex::SubscriptionHandle<StandardSubscription>),
     Arcus(aux_rs::arcus::SubscriptionHandle<StandardSubscription>),
@@ -21,6 +23,8 @@ pub enum NativeHandle {
 impl NativeHandle {
     async fn close(&mut self) -> Result<(), ClientError> {
         match self {
+            Self::Derive(handle) => handle.close().await.map_err(ClientError::Derive),
+            Self::Paradex(handle) => handle.close().await.map_err(ClientError::Paradex),
             Self::Monaco(handle) => handle.close().await.map_err(ClientError::Monaco),
             Self::Qfex(handle) => handle.close().await.map_err(ClientError::Qfex),
             Self::Arcus(handle) => handle.close().await.map_err(ClientError::Arcus),
@@ -34,6 +38,20 @@ impl NativeHandle {
     async fn next(&mut self) -> Option<Result<serde_json::Value, ClientError>> {
         use serde_json::json;
         match self {
+            Self::Derive(handle) => Some(
+                handle
+                    .next()
+                    .await?
+                    .map_err(ClientError::Derive)
+                    .and_then(|e| serde_json::to_value(e).map_err(|_| ClientError::Conversion)),
+            ),
+            Self::Paradex(handle) => Some(
+                handle
+                    .next()
+                    .await?
+                    .map_err(ClientError::Paradex)
+                    .and_then(|e| serde_json::to_value(e).map_err(|_| ClientError::Conversion)),
+            ),
             Self::Monaco(handle) => Some(
                 handle
                     .next()

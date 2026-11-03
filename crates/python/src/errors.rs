@@ -4,6 +4,8 @@ use aux_rs::{
 use pyo3::{create_exception, exceptions::PyException, prelude::*};
 
 pub enum ClientError {
+    Derive(NativeError<aux_rs::derive::Error>),
+    Paradex(NativeError<aux_rs::paradex::Error>),
     Monaco(NativeError<aux_rs::monaco::Error>),
     Qfex(NativeError<aux_rs::qfex::Error>),
     Arcus(NativeError<aux_rs::arcus::Error>),
@@ -19,6 +21,8 @@ impl ClientError {
     pub fn is_gap(&self) -> bool {
         match self {
             Self::Hyperliquid(NativeError::Transport(e))
+            | Self::Derive(NativeError::Transport(e))
+            | Self::Paradex(NativeError::Transport(e))
             | Self::Lighter(NativeError::Transport(e))
             | Self::Qfex(NativeError::Transport(e))
             | Self::Arcus(NativeError::Transport(e))
@@ -110,10 +114,28 @@ pub fn lt_native(error: lt::Error) -> PyErr {
 pub fn map_error(error: &ClientError) -> PyErr {
     match error {
         ClientError::Hyperliquid(NativeError::Transport(e))
+        | ClientError::Derive(NativeError::Transport(e))
+        | ClientError::Paradex(NativeError::Transport(e))
         | ClientError::Lighter(NativeError::Transport(e))
         | ClientError::Qfex(NativeError::Transport(e))
         | ClientError::Arcus(NativeError::Transport(e))
         | ClientError::Monaco(NativeError::Transport(e)) => transport(e),
+        ClientError::Derive(NativeError::Exchange(e)) => match e {
+            aux_rs::derive::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
+            aux_rs::derive::Error::Decode(_)=>DecodeError::new_err("Derive decoding failed"),
+            aux_rs::derive::Error::Signing(_)=>SigningError::new_err("Derive signing failed"),
+            aux_rs::derive::Error::Authentication(s)=>AuthenticationError::new_err(*s),
+            aux_rs::derive::Error::PendingOutcome=>OutcomeUncertainError::new_err("Derive command outcome is unresolved; reconcile before another command"),
+            aux_rs::derive::Error::Api{status,body}=>native_body("Derive",*status,body),
+        },
+        ClientError::Paradex(NativeError::Exchange(e)) => match e {
+            aux_rs::paradex::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
+            aux_rs::paradex::Error::Decode(_)=>DecodeError::new_err("Paradex decoding failed"),
+            aux_rs::paradex::Error::Signing(_)=>SigningError::new_err("Paradex signing failed"),
+            aux_rs::paradex::Error::Authentication(s)=>AuthenticationError::new_err(*s),
+            aux_rs::paradex::Error::PendingOutcome=>OutcomeUncertainError::new_err("Paradex command outcome is unresolved; reconcile before another command"),
+            aux_rs::paradex::Error::Api{status,body}=>native_body("Paradex",*status,body),
+        },
         ClientError::Hyperliquid(NativeError::Exchange(e)) => match e {
             hl::Error::Http { status, body } => {
                 exchange("Hyperliquid", Some(*status), Some(body), None, None, None)
@@ -265,4 +287,28 @@ pub fn arcus(error: NativeError<aux_rs::arcus::Error>) -> PyErr {
 
 pub fn monaco(error: NativeError<aux_rs::monaco::Error>) -> PyErr {
     map_error(&ClientError::Monaco(error))
+}
+pub fn derive(error: NativeError<aux_rs::derive::Error>) -> PyErr {
+    map_error(&ClientError::Derive(error))
+}
+pub fn paradex(error: NativeError<aux_rs::paradex::Error>) -> PyErr {
+    map_error(&ClientError::Paradex(error))
+}
+fn native_body(venue: &str, status: Option<u16>, body: &serde_json::Value) -> PyErr {
+    let native = body.get("error").unwrap_or(body);
+    let code = native.get("code").and_then(serde_json::Value::as_i64);
+    let message = native
+        .get("message")
+        .or_else(|| body.get("message"))
+        .and_then(serde_json::Value::as_str);
+    let error = exchange(venue, status, None, message, code, None);
+    Python::attach(|py| {
+        if let Ok(value) = crate::convert::output(body) {
+            let _ = error.value(py).setattr("native", value);
+        }
+        if let Some(code) = native.as_str() {
+            let _ = error.value(py).setattr("code", code);
+        }
+    });
+    error
 }

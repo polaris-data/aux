@@ -107,6 +107,16 @@ pub type AuthenticationChanged<'a> = Pin<Box<dyn Future<Output = ()> + Send + 'a
 /// must route malformed or error messages for explicit
 /// handling rather than silently discarding them.
 pub trait WebSocketSubscription: Send + Sync + 'static {
+    /// Adapter-owned binary codec. Returns native text for the existing routing
+    /// and delivery pipeline. All subscriptions sharing a connection scope must
+    /// use the same codec. The default preserves text-only protocol validation.
+    fn decode_binary_message(&self, _bytes: &[u8]) -> Result<String, TransportError> {
+        Err(TransportError::new(
+            TransportErrorKind::Protocol,
+            crate::RequestOutcome::Unknown,
+            "expected a text WebSocket frame",
+        ))
+    }
     fn authentication_message(&self) -> AuthenticationMessage<'_> {
         Box::pin(std::future::ready(Ok(None)))
     }

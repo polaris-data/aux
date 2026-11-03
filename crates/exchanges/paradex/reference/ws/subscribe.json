@@ -1,0 +1,76 @@
+{
+  "asyncapi": "2.6.0",
+  "info": {
+    "title": "subscribe",
+    "version": "subpackage_subscribe.subscribe"
+  },
+  "channels": {
+    "/subscribe": {
+      "publish": {
+        "operationId": "subscribe-publish",
+        "summary": "subscribe",
+        "message": {
+          "name": "subscribe",
+          "title": "subscribe",
+          "payload": {
+            "$ref": "#/components/schemas/SubscribeSubscribe"
+          }
+        }
+      },
+      "subscribe": {
+        "operationId": "subscribe-subscribe",
+        "summary": "publish",
+        "description": "Starts receiving real-time messages for the given channel. Private channels (orders, fills, positions, account, etc.) require prior authentication. See the WebSocket Channels reference for all available channel names.",
+        "message": {
+          "name": "publish",
+          "title": "publish",
+          "description": "Starts receiving real-time messages for the given channel. Private channels (orders, fills, positions, account, etc.) require prior authentication. See the WebSocket Channels reference for all available channel names.",
+          "payload": {
+            "$ref": "#/components/schemas/SubscribePublish"
+          }
+        }
+      }
+    }
+  },
+  "servers": {
+    "production": {
+      "url": "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=1",
+      "protocol": "wss",
+      "x-default": true
+    }
+  },
+  "components": {
+    "schemas": {
+      "SubscribeSubscribe": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "Channel name that was subscribed"
+          }
+        },
+        "title": "SubscribeSubscribe"
+      },
+      "SubscribePublish": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "Channel name to subscribe to (e.g. trades.BTC-USD-PERP)"
+          },
+          "markets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "For markets_summary only: the initial set of markets to scope the subscription to (may be empty). Present selects scoped mutable-filter mode whose set is changed via modify_subscription; omit for the all-markets firehose."
+          }
+        },
+        "required": [
+          "channel"
+        ],
+        "title": "SubscribePublish"
+      }
+    }
+  }
+}

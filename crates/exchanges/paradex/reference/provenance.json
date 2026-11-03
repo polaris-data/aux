@@ -1,0 +1,439 @@
+{
+  "recorded_at": "2026-11-03",
+  "repositories": [
+    {
+      "repository": "https://github.com/tradeparadex/paradex-py",
+      "commit": "4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+      "version": "0.8.2",
+      "license": "MIT",
+      "notice": "reference/LICENSE.reference",
+      "use": "Starknet/EVM auth, native typed data, signing vectors, WebSocket commands and official SBE schema/decoder"
+    },
+    {
+      "repository": "https://github.com/tradeparadex/starknet-crypto-py",
+      "tag": "v0.2.0",
+      "license": "No explicit license declaration found in reference wrapper; consulted for RFC6979 seed only, no code copied",
+      "use": "RFC6979 extra seed 32 compatibility reference; no runtime dependency",
+      "commit": "8ddf6ae1cfda9c878d4bae84b6ecfb203ada8b77"
+    }
+  ],
+  "files": [
+    {
+      "file": "reference/openapi.json",
+      "source": "https://api.prod.paradex.trade/swagger/doc.json",
+      "sha256": "caa15b331977cd79a744630a387d406074f955ba66d39e8e1119e5465d3f9a36",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/testnet.openapi.json",
+      "source": "https://api.testnet.paradex.trade/swagger/doc.json",
+      "sha256": "db3a5a14e3991d40736244de11d00be728ba6dd338b639446d86127312e719eb",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/paradex_1_0.xml",
+      "source": "https://raw.githubusercontent.com/tradeparadex/paradex-py/4ae46b533fc99dbf5fbf33b46611c829fa38b12a/paradex_py/api/sbe/paradex_1_0.xml",
+      "sha256": "a66f2f48e5f43c6c032f4a2b3cf7b76aa6232375b3736f4c19671133dc8ef166",
+      "license": "MIT; reference/LICENSE.reference"
+    },
+    {
+      "file": "reference/ws/account.md",
+      "source": "https://docs.paradex.trade/api/ws/account",
+      "sha256": "c1bab18ede07fc08a6ecfd28ff48121d22956c1def97adb3f20f39f8b394703c",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/auth.md",
+      "source": "https://docs.paradex.trade/api/ws/auth",
+      "sha256": "28c3e9706a1bf913e39b1fad51f45ed597757bbf4edb979185d11ae735b760d9",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/balance-events.md",
+      "source": "https://docs.paradex.trade/api/ws/balance-events",
+      "sha256": "f42cd3f1958cfaf0317170ffcad222a74808a879e68d211182643fd2466d8951",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/bbo-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/bbo-market-symbol",
+      "sha256": "8e70c1aa3219eb38a15a0a67be0adc02604f37d4645936ac8cd7317fde2e17d0",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/fills-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/fills-market-symbol",
+      "sha256": "f260966cda246e48a807ebfae8a6a7ae560a7786022ccc31f2dba50894b33dda",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/funding-data-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/funding-data-market-symbol",
+      "sha256": "bc2f5c809307848e462a4cb62872b956409363918c77abcade23157656a57c39",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/funding-payments-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/funding-payments-market-symbol",
+      "sha256": "b88f441b287f1b5e801e796516d45de888623d4ffee0055d9e7244edc8df45c8",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/markets-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/markets-market-symbol",
+      "sha256": "fd521adbc3a3bab0b9dc4473fd7f51698e92f2a71deae5fa1a99de013cedb57f",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/markets-summary-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/markets-summary-market-symbol",
+      "sha256": "793841460b35be52073e9bdaa038e7330f8b5b27bd7c371e0d137d0b29521315",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/mmp.md",
+      "source": "https://docs.paradex.trade/api/ws/mmp",
+      "sha256": "7694b5a8e8bc6515511397a0c28b910c110595243cc61f828732a4dc128dc065",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/modify-subscription.md",
+      "source": "https://docs.paradex.trade/api/ws/modify-subscription",
+      "sha256": "144b98dc5dda2b16b15d064c2e30ec8e172fa1038f1a5ecfd6711e06e743882d",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-book-market-symbol-feed-type-15-refresh-rate-price-tick.md",
+      "source": "https://docs.paradex.trade/api/ws/order-book-market-symbol-feed-type-15-refresh-rate-price-tick",
+      "sha256": "9223b436f3423905210b0fd700d03ce55bb235593d20bad19dc1aa32af1fcc94",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel-all.md",
+      "source": "https://docs.paradex.trade/api/ws/order-cancel-all",
+      "sha256": "a0df3696e67a71d5130ed7a029fd74b4a6920859b51adbbdec4a778a343660aa",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel-batch.md",
+      "source": "https://docs.paradex.trade/api/ws/order-cancel-batch",
+      "sha256": "531c7e1baca44211bda7d1377c03d01163bedd33356579ac2a8ff1a298897e48",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel-on-disconnect.md",
+      "source": "https://docs.paradex.trade/api/ws/order-cancel-on-disconnect",
+      "sha256": "12c0412a79008881be7d8e7fb79cc211551a43039fdab722d9f215105036c33a",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel.md",
+      "source": "https://docs.paradex.trade/api/ws/order-cancel",
+      "sha256": "d17814ea4881486921b1a910f55090215c70bbead7771351a59d257cdfa931fe",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-create-batch.md",
+      "source": "https://docs.paradex.trade/api/ws/order-create-batch",
+      "sha256": "4b88a416f2f65e147f2d7728494593bd6f190b9d8e63fc253854a2f7710fa779",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-create.md",
+      "source": "https://docs.paradex.trade/api/ws/order-create",
+      "sha256": "05363c4b53d007fcb47db3daf5ca2d133918872efd64ab42e8dbdb5eee063d86",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-modify.md",
+      "source": "https://docs.paradex.trade/api/ws/order-modify",
+      "sha256": "d0682881b197484e7f4bdeae4e0a26e811b35eb81763d9eee9bac815eb27ced7",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/orders-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/orders-market-symbol",
+      "sha256": "c0b0740545c214f1ed6d6169f9db178293b6f18d47047de6045852720bde2263",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/positions.md",
+      "source": "https://docs.paradex.trade/api/ws/positions",
+      "sha256": "5620746e7a677c07965fe908006bd077af46c57e8646d4503042d58e2f912954",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/rfq-rfq-id.md",
+      "source": "https://docs.paradex.trade/api/ws/rfq-rfq-id",
+      "sha256": "0f565158e25f6b3068e0901f0c9199ac3560f31a16e5a81e05684701ce0e7851",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/subscribe.md",
+      "source": "https://docs.paradex.trade/api/ws/subscribe",
+      "sha256": "c0bd1d3c799b1eba0774a60f2a8abadf84a58ade174de868d8658ec251efa221",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/tradebusts.md",
+      "source": "https://docs.paradex.trade/api/ws/tradebusts",
+      "sha256": "732c2989540cef367c26b6589eee26bc3ebd63e3036c623073f8698d85a5bd9f",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/trades-market-symbol.md",
+      "source": "https://docs.paradex.trade/api/ws/trades-market-symbol",
+      "sha256": "ee586a48157f9c78254b97d0b73db353ac0f65752521712644ac48850dbc5beb",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/transaction.md",
+      "source": "https://docs.paradex.trade/api/ws/transaction",
+      "sha256": "93ca3643f096b618ce69c05be53edf61aa53a1ecd082281f265b85840a928d7d",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/transfers.md",
+      "source": "https://docs.paradex.trade/api/ws/transfers",
+      "sha256": "65b29858e50a91bbd80ac590385d6b83ce6161482f57e40539ec4e208a4b2ab6",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/unsubscribe.md",
+      "source": "https://docs.paradex.trade/api/ws/unsubscribe",
+      "sha256": "b7e051b17863af3f03ed83ea9fd1256f50122c433b3f39ef47b6de33fcf2917d",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/supplemental.json",
+      "source": "Documentation links embedded in this file",
+      "sha256": "af1714d0c0560d078cb282576bc89bc4c0f3abdd68ed29b041860b4e03c187f5",
+      "license": "Locally transcribed API inventory; original documentation license unspecified"
+    },
+    {
+      "file": "tests/fixtures/signing.json",
+      "source": "https://github.com/tradeparadex/paradex-py/tree/4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+      "sha256": "059249f41ed54150b28e529cfdbeb26877b0deed410ae45a092b4a98df5f28e6",
+      "license": "MIT reference; synthetic public inputs"
+    },
+    {
+      "file": "tests/fixtures/administrative.json",
+      "source": "https://github.com/tradeparadex/paradex-py/tree/4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+      "sha256": "9e9145890eec89393a2e4d3010b51e2b69ba0ccc33daffaaeddbb3fd010cb877",
+      "license": "MIT reference; synthetic public inputs"
+    },
+    {
+      "file": "tests/fixtures/sbe.json",
+      "source": "https://github.com/tradeparadex/paradex-py/tree/4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+      "sha256": "2ab6731c99a21fd378e7701feb32c45aa283eb9742cae0f7d55aa0495ecf6c78",
+      "license": "MIT reference; synthetic public inputs"
+    },
+    {
+      "file": "reference/LICENSE.reference",
+      "sha256": "c67cd170ba689f9d700be7b6c4b076f085c7ba4841f3832037f2526e3cb29f13",
+      "source": "https://docs.paradex.trade/LICENSE.reference",
+      "license": "MIT; source repository notices above"
+    },
+    {
+      "file": "reference/llms.txt",
+      "sha256": "fb8945a9be70b8265223508bba1017f9658455dd5984a986a1a687a3ce98acd6",
+      "source": "https://docs.paradex.trade/llms.txt",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/prod__referrals__get-config.md",
+      "sha256": "544b56bc5b0b0987cd99706ee648c73303081924b37a21fe497b1c634d83f7df",
+      "source": "https://docs.paradex.trade/prod__referrals__get-config.md",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/testnet__account__updates-account-max-slippage.md",
+      "sha256": "ff18452b233d582d34de518ac36446e18af06cfa888ae2dcbdc2d86ec070289d",
+      "source": "https://docs.paradex.trade/testnet__account__updates-account-max-slippage.md",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/account.json",
+      "sha256": "92bc35255513ff7287e7a54bc6cc3b5d4eb7f777c8371ca8aa2182b5346c9a03",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/auth.json",
+      "sha256": "7c10e94a265b98f555d0fa1db2ba0f3a82e0a06a039d562122738d39181a6cfc",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/balance-events.json",
+      "sha256": "a6cd789015e8fea8a9f148f543dbe5b1ae16f702993d4a585d04b8218ef25ec6",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/bbo-market-symbol.json",
+      "sha256": "bc26947b489dd5bd72d675b97687ee4553da91fe2cf7a058d4cedc53087aee5f",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/fills-market-symbol.json",
+      "sha256": "65266cb1deaec7d9f6432aea2a9fdb6681eaef7bbbd455031448fe731ecd38a9",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/funding-data-market-symbol.json",
+      "sha256": "0aaafda5972b9ec32ffc8e1fe01747268810dfc3773ec888567b4bc155e73484",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/funding-payments-market-symbol.json",
+      "sha256": "2dfa7f47d1f0a9702031d447ff92cf4cea47dd2bb343a22f2c1ac3766f8dc471",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/markets-market-symbol.json",
+      "sha256": "5c9ba69734fdbb232a4474758c6671dff95a20e71f3577497fcc394a043bf1bd",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/markets-summary-market-symbol.json",
+      "sha256": "88a2d8aebf81a827d0d3a4416ecc554cf12bdefbcc67ddfe7d3124f993065530",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/mmp.json",
+      "sha256": "ce06e8299538c5c453bb2356d44af1b58a0b5a5e911eb2b24a97f67431eede46",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/modify-subscription.json",
+      "sha256": "1c4f82b2c2d7ac80ea27ff9b0e00542543ad7467040f12356dfe0c9d8fdbeb50",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-book-market-symbol-feed-type-15-refresh-rate-price-tick.json",
+      "sha256": "c0c9c78c69f9112975e985f34a03502aec02737449e8668ec96ba04a74cbd862",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel-all.json",
+      "sha256": "aa7700786f75373c4792626cf3c5e126453f4855ffe02f731dd4e43dde0ad394",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel-batch.json",
+      "sha256": "c57f23d80c958bf4c436bc15de8cc16c8db0a33ec1152a025fb11e95feb4825f",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel-on-disconnect.json",
+      "sha256": "980da9f69e9748556a3774cfce18e3471b5fd6511c5c610ec28338d109fe470f",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-cancel.json",
+      "sha256": "ae7bc6b2dc52051bfdd758f709f2a0c6ac4623ecccfb2f35af330dd08ee73922",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-create-batch.json",
+      "sha256": "eefc46f9658ac371fcef8fa1ff1216a1e91090b5e588d80ecf82b61a3de11c01",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-create.json",
+      "sha256": "8554587447d499e006c440fc1e62521eb3859f72ca52de13754e2278aed9b1a1",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/order-modify.json",
+      "sha256": "8a1238764940fb2a08fa48a6508ca3c86fb2fbae25b6cbc2817428c999540e2f",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/orders-market-symbol.json",
+      "sha256": "b6a62b564f00a228d532341ca5047ba2508366e2048dbbc50d7c1080425e2a29",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/positions.json",
+      "sha256": "3f952b2584e7a976cac1c5931a09bcd8527f3a7c32d0f5d49d54098f8178099a",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/rfq-rfq-id.json",
+      "sha256": "c7a197841aa33bb12cc810b6f9604026d1573941cc40e2ae87a9e3752249ca3c",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/subscribe.json",
+      "sha256": "f0ab1c960549bc2c02eeabcfb89208295a4a4127a036ec5368b721210fab5771",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/tradebusts.json",
+      "sha256": "e7093ee41f9c54dd5f688341a4c1af792fa20e3dba671dfc2204cc11460ad84f",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/trades-market-symbol.json",
+      "sha256": "69c87bccb677cb9d8fe9ff6c01e7c9ce09a97ac7a6d45495b5cf494526fbd8f1",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/transaction.json",
+      "sha256": "ffdf2dbebad75ef473f2c88bddf707bd43e683668a1325e2aa38e97700884223",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/transfers.json",
+      "sha256": "245138e885d25c3fa761bc897d23dcbe23e8f69745b6f908ce69cec33d4438b7",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "reference/ws/unsubscribe.json",
+      "sha256": "b88ba714ce68f05745bcdc07915e80c0723148def79eaa2537970f41f6366e25",
+      "source": "Extracted schema from adjacent Markdown documentation",
+      "license": "No explicit license in published API document; reference snapshot"
+    },
+    {
+      "file": "tests/fixtures/siwe.json",
+      "sha256": "2f7a50c941b53ace06b8490ff965698b59f6437d033052ca1db18faaab12d5fb",
+      "source": "https://github.com/tradeparadex/paradex-py/tree/4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+      "license": "MIT reference; synthetic public inputs"
+    }
+  ],
+  "notes": [
+    "139 operations in production Swagger; testnet has the same paths and operation set. Three documentation-only operations extend the union to 142.",
+    "28 documented WebSocket entries plus SDK channels block_trades and funding_rate_comparison = 30 entries. All 12 templates of SBE schema 1:3 are supported.",
+    "Production/testnet Swagger differ only in host; legacy testnet max_slippage is retained separately. Native /v2 auth/onboarding routes use origin /v2, matching SDK/auth guide and public testnet validation, despite Swagger UI nesting them below /v1.",
+    "Published appchain IDs independently checked via system/config; TESTNET suffix, not SEPOLIA.",
+    "SBE fixtures contain raw XML-native expected values and official SDK decoded references; SDK timestamp normalization is intentionally not applied to native values."
+  ],
+  "fixture_policy": "Contract fixtures are deterministic synthetic schema instances, not successful live account actions. Private keys and tokens are public fixture material; never fund them. Reference tooling is not a runtime dependency.",
+  "verification": "See VERIFICATION.md. Funded authenticated actions pending."
+}

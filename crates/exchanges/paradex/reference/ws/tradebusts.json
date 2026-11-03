@@ -1,0 +1,56 @@
+{
+  "asyncapi": "2.6.0",
+  "info": {
+    "title": "tradebusts",
+    "version": "subpackage_tradebusts.tradebusts"
+  },
+  "channels": {
+    "/tradebusts": {
+      "publish": {
+        "operationId": "tradebusts-publish",
+        "summary": "subscribe",
+        "message": {
+          "name": "subscribe",
+          "title": "subscribe",
+          "payload": {
+            "$ref": "#/components/schemas/TradebustsSubscribe"
+          }
+        }
+      }
+    }
+  },
+  "servers": {
+    "production": {
+      "url": "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=1",
+      "protocol": "wss",
+      "x-default": true
+    }
+  },
+  "components": {
+    "schemas": {
+      "TradebustsSubscribe": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "description": "Paradex Account"
+          },
+          "busted_fill_id": {
+            "type": "string",
+            "description": "Unique ID of the busted fill"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "Unix timestamp in milliseconds when bust was created"
+          }
+        },
+        "required": [
+          "account",
+          "busted_fill_id",
+          "created_at"
+        ],
+        "title": "TradebustsSubscribe"
+      }
+    }
+  }
+}

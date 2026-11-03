@@ -1,0 +1,160 @@
+> For clean Markdown of any page, append .md to the page URL.
+> For a complete documentation index, see https://docs.paradex.trade/llms.txt.
+> For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://docs.paradex.trade/_mcp/server.
+
+# transfers
+
+GET /transfers
+
+Reference: https://docs.paradex.trade/ws/web-socket-channels/transfers/transfers
+
+## AsyncAPI Specification
+
+```yaml
+asyncapi: 2.6.0
+info:
+  title: transfers
+  version: subpackage_transfers.transfers
+channels:
+  /transfers:
+    publish:
+      operationId: transfers-publish
+      summary: subscribe
+      message:
+        name: subscribe
+        title: subscribe
+        payload:
+          $ref: '#/components/schemas/TransfersSubscribe'
+servers:
+  production:
+    url: wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=1
+    protocol: wss
+    x-default: true
+components:
+  schemas:
+    ChannelsTransfersSubscribeBridge:
+      type: string
+      enum:
+        - ''
+        - STARKGATE
+        - LAYERSWAP
+        - RHINOFI
+        - HYPERLANE
+        - ORBITER
+      description: Bridge used for the transfer
+      title: ChannelsTransfersSubscribeBridge
+    ChannelsTransfersSubscribeDirection:
+      type: string
+      enum:
+        - IN
+        - OUT
+      description: Transfer direction (IN, OUT)
+      title: ChannelsTransfersSubscribeDirection
+    ChannelsTransfersSubscribeKind:
+      type: string
+      enum:
+        - DEPOSIT
+        - WITHDRAWAL
+        - UNWINDING
+        - VAULT_DEPOSIT
+        - VAULT_WITHDRAWAL
+        - AUTO_WITHDRAWAL
+        - AIRDROP
+      description: Transfer Kind (DEPOSIT, WITHDRAWAL)
+      title: ChannelsTransfersSubscribeKind
+    ChannelsTransfersSubscribeStatus:
+      type: string
+      enum:
+        - PENDING
+        - AVAILABLE
+        - COMPLETED
+        - FAILED
+      description: Transfer External State (PENDING, AVAILABLE, COMPLETED, FAILED)
+      title: ChannelsTransfersSubscribeStatus
+    TransfersSubscribe:
+      type: object
+      properties:
+        account:
+          type: string
+          description: Starknet Account address
+        amount:
+          type: string
+          description: Transferred amount
+        auto_withdrawal_fee:
+          type: string
+          description: Fee for auto withdrawal in USDC
+        bridge:
+          $ref: '#/components/schemas/ChannelsTransfersSubscribeBridge'
+          description: Bridge used for the transfer
+        counterparty:
+          type: string
+          description: Counterparty address
+        created_at:
+          type: integer
+          description: Unix Millis timestamp transfer was created on L2
+        direction:
+          $ref: '#/components/schemas/ChannelsTransfersSubscribeDirection'
+          description: Transfer direction (IN, OUT)
+        external_account:
+          type: string
+          description: External chain account address
+        external_chain:
+          type: string
+          description: External chain used for the transfer
+        external_txn_hash:
+          type: string
+          description: Transaction hash on the external chain
+        failure_reason:
+          type: string
+          description: Reason for transfer failure
+        id:
+          type: string
+          description: Transfer auto-generated ID
+        kind:
+          $ref: '#/components/schemas/ChannelsTransfersSubscribeKind'
+          description: Transfer Kind (DEPOSIT, WITHDRAWAL)
+        last_updated_at:
+          type: integer
+          description: Unix Millis timestamp transfer was last updated on L2
+        socialized_loss_factor:
+          type: string
+          description: Withdrawal's socialized loss factor
+        status:
+          $ref: '#/components/schemas/ChannelsTransfersSubscribeStatus'
+          description: Transfer External State (PENDING, AVAILABLE, COMPLETED, FAILED)
+        token:
+          type: string
+          description: Transferred token name
+        txn_hash:
+          type: string
+          description: Transaction hash on Paradex chain
+        vault_address:
+          type: string
+          description: Vault address
+        vault_unwind_completion_percentage:
+          type: string
+          description: Vault unwind completion percentage
+      required:
+        - account
+        - amount
+        - auto_withdrawal_fee
+        - bridge
+        - counterparty
+        - created_at
+        - direction
+        - external_account
+        - external_chain
+        - external_txn_hash
+        - failure_reason
+        - id
+        - kind
+        - last_updated_at
+        - socialized_loss_factor
+        - status
+        - token
+        - txn_hash
+        - vault_address
+        - vault_unwind_completion_percentage
+      title: TransfersSubscribe
+
+```

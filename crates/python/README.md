@@ -217,6 +217,34 @@ Milestone 5 adds safe-read retry and reconnect policies. Defaults are two extra 
 
 Client `aclose()` also shuts down the shared Rust transport and waits for its handshakes, requests and socket drivers. Safe reads honor bounded `Retry-After` handling; signed trading is never automatically retried, even after timeout/shutdown. The 49-test Python suite covers the existing 110 signing vectors, both new exchange adapters, recovery, budget, backoff cancellation, and no-replay cases.
 
+## Derive v3 and Paradex
+
+`DeriveClient` and `ParadexClient` expose every named REST operation in their
+committed coverage manifests (128 and 142), native subscriptions, local or async
+remote signers, and isolated RPC sessions. `DeriveSigner` accepts an EVM key;
+`ParadexSigner` accepts Starknet or EVM keys. Both default to testnet. Decimal
+strings remain strings, JSON numbers decode to exact `Decimal`/`int` values,
+and remote callbacks run in the initiating asyncio context.
+
+```python
+from aux_py import DeriveClient, ParadexClient
+
+async with DeriveClient() as derive:
+    instrument = await derive.public_get_instrument({"instrument_name": "ETH-PERP"})
+async with ParadexClient() as paradex:
+    config = await paradex.get_system_config()
+```
+
+See the [Derive guide](../exchanges/derive/README.md) and
+[Paradex guide](../exchanges/paradex/README.md) for authentication, signing,
+all operation names, subscriptions, RPC commands, and native request bodies.
+`open_rpc()` returns `DeriveRpcSession` or `ParadexRpcSession`; an uncertain
+submission remains in `pending` until `reconcile()` resolves its response.
+Paradex `authenticate()` explicitly replaces shared JWT state. Active sockets
+retain their established permissions, while reconnects require valid credentials.
+`examples/derive_paradex_public.py` runs public network checks separately from CI.
+Funded submit/cancel verification remains pending without credentials.
+
 ## Monaco
 
 `MonacoClient`, `MonacoWalletSigner` and `MonacoSessionSigner` expose the native

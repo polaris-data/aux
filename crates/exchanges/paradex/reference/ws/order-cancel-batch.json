@@ -1,0 +1,103 @@
+{
+  "asyncapi": "2.6.0",
+  "info": {
+    "title": "order.cancel_batch",
+    "version": "subpackage_orderCancelBatch.orderCancelBatch"
+  },
+  "channels": {
+    "/order.cancel_batch": {
+      "publish": {
+        "operationId": "order-cancel-batch-publish",
+        "summary": "subscribe",
+        "message": {
+          "name": "subscribe",
+          "title": "subscribe",
+          "payload": {
+            "$ref": "#/components/schemas/OrderCancelBatchSubscribe"
+          }
+        }
+      },
+      "subscribe": {
+        "operationId": "order-cancel-batch-subscribe",
+        "summary": "publish",
+        "description": "Cancels a list of orders by their exchange IDs. Returns a per-order status; the request does not fail if individual orders are not found or already closed.",
+        "message": {
+          "name": "publish",
+          "title": "publish",
+          "description": "Cancels a list of orders by their exchange IDs. Returns a per-order status; the request does not fail if individual orders are not found or already closed.",
+          "payload": {
+            "$ref": "#/components/schemas/OrderCancelBatchPublish"
+          }
+        }
+      }
+    }
+  },
+  "servers": {
+    "production": {
+      "url": "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=1",
+      "protocol": "wss",
+      "x-default": true
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChannelsOrderCancelBatchSubscribeResultsItemsStatus": {
+        "type": "string",
+        "enum": [
+          "QUEUED_FOR_CANCELLATION",
+          "ALREADY_CLOSED",
+          "NOT_FOUND"
+        ],
+        "description": "Outcome for this order",
+        "title": "ChannelsOrderCancelBatchSubscribeResultsItemsStatus"
+      },
+      "ChannelsOrderCancelBatchSubscribeResultsItems": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Order ID"
+          },
+          "market": {
+            "type": "string",
+            "description": "Market symbol (absent when status is NOT_FOUND)"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ChannelsOrderCancelBatchSubscribeResultsItemsStatus",
+            "description": "Outcome for this order"
+          }
+        },
+        "title": "ChannelsOrderCancelBatchSubscribeResultsItems"
+      },
+      "OrderCancelBatchSubscribe": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelsOrderCancelBatchSubscribeResultsItems"
+            },
+            "description": "Per-order outcomes in the same order as order_ids"
+          }
+        },
+        "title": "OrderCancelBatchSubscribe"
+      },
+      "OrderCancelBatchPublish": {
+        "type": "object",
+        "properties": {
+          "order_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of order IDs to cancel"
+          }
+        },
+        "required": [
+          "order_ids"
+        ],
+        "title": "OrderCancelBatchPublish"
+      }
+    }
+  }
+}

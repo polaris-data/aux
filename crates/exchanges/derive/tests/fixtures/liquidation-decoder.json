@@ -1,0 +1,18 @@
+{
+  "source": "https://testnet.api.derive.xyz/v3/public/decode_action",
+  "captured": "2026-11-03",
+  "request": {
+    "action_type": "liquidation",
+    "encoded_data": "0x000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000003782dace9d90000000000000000000000000000000000000000000000000006aaf7c8516d0c0000"
+  },
+  "response": {
+    "result": {
+      "action_type": "liquidation",
+      "decoded": {
+        "liquidate_subaccount_id": 9,
+        "percent_of_acc": 250000000000,
+        "price_limit": 123000000000000
+      }
+    }
+  }
+}

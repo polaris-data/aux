@@ -1,0 +1,166 @@
+{
+  "asyncapi": "2.6.0",
+  "info": {
+    "title": "mmp",
+    "version": "subpackage_mmp.mmp"
+  },
+  "channels": {
+    "/mmp": {
+      "publish": {
+        "operationId": "mmp-publish",
+        "summary": "subscribe",
+        "message": {
+          "name": "subscribe",
+          "title": "subscribe",
+          "payload": {
+            "$ref": "#/components/schemas/MmpSubscribe"
+          }
+        }
+      }
+    }
+  },
+  "servers": {
+    "production": {
+      "url": "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=1",
+      "protocol": "wss",
+      "x-default": true
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChannelsMmpSubscribeConfig": {
+        "type": "object",
+        "properties": {
+          "base_asset": {
+            "type": "string",
+            "description": "Base asset the config applies to, across its dated options and perpetual futures"
+          },
+          "delta_limit": {
+            "type": "string",
+            "description": "Delta limit in base asset units; 0 = check disabled"
+          },
+          "frozen_time_ms": {
+            "type": "integer",
+            "description": "How long a trip freezes MMP orders, in milliseconds. 0 freezes until a manual reset"
+          },
+          "interval_ms": {
+            "type": "integer",
+            "description": "Sliding window length in milliseconds. 0 when MMP was removed"
+          },
+          "protect_block_trades": {
+            "type": "boolean",
+            "description": "Whether block trade legs, RFQ executions included, are protected"
+          },
+          "removed": {
+            "type": "boolean",
+            "description": "True when MMP was removed for this base asset; the limits above are then zero"
+          },
+          "size_limit": {
+            "type": "string",
+            "description": "Size limit in base asset units; 0 = check disabled"
+          },
+          "updated_at": {
+            "type": "integer",
+            "description": "Unix milliseconds the config was last written"
+          },
+          "vega_limit": {
+            "type": "string",
+            "description": "Vega limit in USD; 0 = check disabled"
+          }
+        },
+        "required": [
+          "base_asset",
+          "delta_limit",
+          "frozen_time_ms",
+          "interval_ms",
+          "protect_block_trades",
+          "removed",
+          "size_limit",
+          "updated_at",
+          "vega_limit"
+        ],
+        "description": "The new config, CONFIG_UPDATED only",
+        "title": "ChannelsMmpSubscribeConfig"
+      },
+      "ChannelsMmpSubscribeKind": {
+        "type": "string",
+        "enum": [
+          "TRIGGERED",
+          "UNFROZEN",
+          "RESET",
+          "CONFIG_UPDATED"
+        ],
+        "description": "TRIGGERED: a limit tripped. UNFROZEN: the freeze expired. RESET: MMP was reset. CONFIG_UPDATED: the config changed",
+        "title": "ChannelsMmpSubscribeKind"
+      },
+      "ChannelsMmpSubscribeTripReason": {
+        "type": "string",
+        "enum": [
+          "SIZE",
+          "DELTA",
+          "VEGA",
+          "INVALID_FILL"
+        ],
+        "description": "Limit that tripped, TRIGGERED only",
+        "title": "ChannelsMmpSubscribeTripReason"
+      },
+      "MmpSubscribe": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "description": "Account the event belongs to"
+          },
+          "base_asset": {
+            "type": "string",
+            "description": "Base asset the event applies to"
+          },
+          "config": {
+            "$ref": "#/components/schemas/ChannelsMmpSubscribeConfig",
+            "description": "The new config, CONFIG_UPDATED only"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "Unix milliseconds the event occurred"
+          },
+          "frozen_until": {
+            "type": "integer",
+            "description": "Unix milliseconds the freeze ends on TRIGGERED, where 0 means until a manual reset. Always 0 on other kinds, which says nothing about freeze state"
+          },
+          "kind": {
+            "$ref": "#/components/schemas/ChannelsMmpSubscribeKind",
+            "description": "TRIGGERED: a limit tripped. UNFROZEN: the freeze expired. RESET: MMP was reset. CONFIG_UPDATED: the config changed"
+          },
+          "trigger_market": {
+            "type": "string",
+            "description": "Market of the fill that tripped, TRIGGERED only"
+          },
+          "trip_reason": {
+            "$ref": "#/components/schemas/ChannelsMmpSubscribeTripReason",
+            "description": "Limit that tripped, TRIGGERED only"
+          },
+          "window_delta": {
+            "type": "string",
+            "description": "Signed sum of fill delta in the window when the limit tripped, TRIGGERED only"
+          },
+          "window_size": {
+            "type": "string",
+            "description": "Sum of fill size in the window when the limit tripped, TRIGGERED only"
+          },
+          "window_vega": {
+            "type": "string",
+            "description": "Signed sum of fill vega in USD in the window when the limit tripped, TRIGGERED only"
+          }
+        },
+        "required": [
+          "account",
+          "base_asset",
+          "created_at",
+          "frozen_until",
+          "kind"
+        ],
+        "title": "MmpSubscribe"
+      }
+    }
+  }
+}

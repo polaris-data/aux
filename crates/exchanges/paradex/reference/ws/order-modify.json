@@ -1,0 +1,267 @@
+{
+  "asyncapi": "2.6.0",
+  "info": {
+    "title": "order.modify",
+    "version": "subpackage_orderModify.orderModify"
+  },
+  "channels": {
+    "/order.modify": {
+      "publish": {
+        "operationId": "order-modify-publish",
+        "summary": "subscribe",
+        "message": {
+          "name": "subscribe",
+          "title": "subscribe",
+          "payload": {
+            "$ref": "#/components/schemas/OrderModifySubscribe"
+          }
+        }
+      },
+      "subscribe": {
+        "operationId": "order-modify-subscribe",
+        "summary": "publish",
+        "description": "Updates the price and/or size of an open order. A new Starknet signature over the updated order payload is required.",
+        "message": {
+          "name": "publish",
+          "title": "publish",
+          "description": "Updates the price and/or size of an open order. A new Starknet signature over the updated order payload is required.",
+          "payload": {
+            "$ref": "#/components/schemas/OrderModifyPublish"
+          }
+        }
+      }
+    }
+  },
+  "servers": {
+    "production": {
+      "url": "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=1",
+      "protocol": "wss",
+      "x-default": true
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChannelsOrderModifySubscribeOrderInstruction": {
+        "type": "string",
+        "enum": [
+          "GTC",
+          "IOC",
+          "POST_ONLY",
+          "RPI"
+        ],
+        "description": "Time-in-force instruction",
+        "title": "ChannelsOrderModifySubscribeOrderInstruction"
+      },
+      "ChannelsOrderModifySubscribeOrderSide": {
+        "type": "string",
+        "enum": [
+          "BUY",
+          "SELL"
+        ],
+        "description": "Order side",
+        "title": "ChannelsOrderModifySubscribeOrderSide"
+      },
+      "ChannelsOrderModifySubscribeOrderStatus": {
+        "type": "string",
+        "enum": [
+          "NEW",
+          "OPEN",
+          "CLOSED"
+        ],
+        "description": "Order status",
+        "title": "ChannelsOrderModifySubscribeOrderStatus"
+      },
+      "ChannelsOrderModifySubscribeOrderType": {
+        "type": "string",
+        "enum": [
+          "LIMIT",
+          "MARKET",
+          "STOP_LIMIT",
+          "STOP_MARKET"
+        ],
+        "description": "Order type",
+        "title": "ChannelsOrderModifySubscribeOrderType"
+      },
+      "ChannelsOrderModifySubscribeOrder": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string",
+            "description": "Account address that owns the order"
+          },
+          "avg_fill_price": {
+            "type": "string",
+            "description": "Volume-weighted average fill price; \"0\" if unfilled"
+          },
+          "cancel_reason": {
+            "type": "string",
+            "description": "Reason for cancellation (populated when status=CLOSED)"
+          },
+          "client_id": {
+            "type": "string",
+            "description": "Client-assigned order ID"
+          },
+          "created_at": {
+            "type": "integer",
+            "description": "Order creation time in milliseconds"
+          },
+          "flags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Order flags applied"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique order identifier assigned by exchange"
+          },
+          "instruction": {
+            "$ref": "#/components/schemas/ChannelsOrderModifySubscribeOrderInstruction",
+            "description": "Time-in-force instruction"
+          },
+          "last_updated_at": {
+            "type": "integer",
+            "description": "Order last update time in milliseconds"
+          },
+          "market": {
+            "type": "string",
+            "description": "Market symbol"
+          },
+          "price": {
+            "type": "string",
+            "description": "Limit price"
+          },
+          "published_at": {
+            "type": "integer",
+            "description": "Exchange publish time in milliseconds"
+          },
+          "received_at": {
+            "type": "integer",
+            "description": "Exchange receipt time in milliseconds"
+          },
+          "remaining_size": {
+            "type": "string",
+            "description": "Remaining unfilled size"
+          },
+          "seq_no": {
+            "type": "integer",
+            "description": "Monotonically increasing sequence number for this order's updates"
+          },
+          "side": {
+            "$ref": "#/components/schemas/ChannelsOrderModifySubscribeOrderSide",
+            "description": "Order side"
+          },
+          "size": {
+            "type": "string",
+            "description": "Order size"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ChannelsOrderModifySubscribeOrderStatus",
+            "description": "Order status"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Signature timestamp supplied at creation"
+          },
+          "trigger_price": {
+            "type": "string",
+            "description": "Trigger price for stop orders"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ChannelsOrderModifySubscribeOrderType",
+            "description": "Order type"
+          }
+        },
+        "description": "Modified order",
+        "title": "ChannelsOrderModifySubscribeOrder"
+      },
+      "OrderModifySubscribe": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/ChannelsOrderModifySubscribeOrder",
+            "description": "Modified order"
+          }
+        },
+        "title": "OrderModifySubscribe"
+      },
+      "ChannelsOrderModifyPublishSide": {
+        "type": "string",
+        "enum": [
+          "BUY",
+          "SELL"
+        ],
+        "description": "Existing side of the order",
+        "title": "ChannelsOrderModifyPublishSide"
+      },
+      "ChannelsOrderModifyPublishType": {
+        "type": "string",
+        "enum": [
+          "LIMIT",
+          "MARKET",
+          "STOP_LIMIT",
+          "STOP_MARKET"
+        ],
+        "description": "Existing type of the order",
+        "title": "ChannelsOrderModifyPublishType"
+      },
+      "OrderModifyPublish": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Order ID to modify"
+          },
+          "market": {
+            "type": "string",
+            "description": "Market symbol of the existing order"
+          },
+          "on_behalf_of_account": {
+            "type": "string",
+            "description": "Isolated margin account address"
+          },
+          "price": {
+            "type": "string",
+            "description": "New (or unchanged) limit price"
+          },
+          "side": {
+            "$ref": "#/components/schemas/ChannelsOrderModifyPublishSide",
+            "description": "Existing side of the order"
+          },
+          "signature": {
+            "type": "string",
+            "description": "Starknet signature \"[r,s]\" over the modified order payload"
+          },
+          "signature_timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp in milliseconds used for signature verification"
+          },
+          "size": {
+            "type": "string",
+            "description": "New (or unchanged) size"
+          },
+          "trigger_price": {
+            "type": "string",
+            "description": "New (or unchanged) trigger price for TPSL orders"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ChannelsOrderModifyPublishType",
+            "description": "Existing type of the order"
+          }
+        },
+        "required": [
+          "id",
+          "market",
+          "price",
+          "side",
+          "signature",
+          "signature_timestamp",
+          "size",
+          "type"
+        ],
+        "title": "OrderModifyPublish"
+      }
+    }
+  }
+}
