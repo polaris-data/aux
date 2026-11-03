@@ -18,6 +18,7 @@ from ._native import (
     ConnectorError,
     DecodeError,
     ExchangeError,
+    DataVendorError,
     TransportError,
     GapError,
     ValidationError,
@@ -564,3 +565,11 @@ class MonacoClient:
 
 from ._derive import DeriveClient, DeriveRpcSession
 from ._paradex import ParadexClient, ParadexRpcSession
+
+from ._data import (
+    TardisClient, TardisMachineClient, DatabentoHistoricalClient,
+    DatabentoReferenceClient, DatabentoLiveClient, DatabentoLiveSession, DataStream, ByteStream,
+)
+__all__ += ["TardisClient", "TardisMachineClient", "DatabentoHistoricalClient",
+            "DatabentoReferenceClient", "DatabentoLiveClient", "DatabentoLiveSession",
+            "DataStream", "ByteStream", "DataVendorError"]

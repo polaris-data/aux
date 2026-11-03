@@ -8,6 +8,20 @@ use std::sync::{Arc, Mutex};
 use tokio::sync::watch;
 
 pub enum NativeHandle {
+    DataFeed(Box<aux_rs::tardis::FeedStream>),
+    DataReplay(Box<aux_rs::tardis::Replay<aux_rs::StandardTransport>>),
+    DataMachine(Box<aux_rs::tardis::MachineStream<aux_rs::standard::StandardConnection>>),
+    DataDbn(Box<aux_rs::databento::DbnStream>),
+    DataReference(Box<aux_rs::databento::ReferenceStream>),
+    DataDownload(aux_rs::tardis::DecodedBody),
+    DataLive(
+        Box<
+            aux_rs::databento::LiveSession<
+                aux_rs::databento::TcpReader,
+                aux_rs::databento::TcpWriter,
+            >,
+        >,
+    ),
     Derive(aux_rs::derive::SubscriptionHandle<StandardSubscription>),
     Paradex(aux_rs::paradex::SubscriptionHandle<StandardSubscription>),
     Monaco(aux_rs::monaco::SubscriptionHandle<StandardSubscription>),
@@ -23,6 +37,13 @@ pub enum NativeHandle {
 impl NativeHandle {
     async fn close(&mut self) -> Result<(), ClientError> {
         match self {
+            Self::DataFeed(h) => h.close().await.map_err(ClientError::Data),
+            Self::DataReplay(h) => h.close().await.map_err(ClientError::Data),
+            Self::DataMachine(h) => h.close().await.map_err(ClientError::Data),
+            Self::DataDbn(h) => h.close().await.map_err(ClientError::Data),
+            Self::DataReference(h) => h.close().await.map_err(ClientError::Data),
+            Self::DataDownload(h) => h.close().await.map_err(ClientError::Data),
+            Self::DataLive(h) => h.close().await.map_err(ClientError::Data),
             Self::Derive(handle) => handle.close().await.map_err(ClientError::Derive),
             Self::Paradex(handle) => handle.close().await.map_err(ClientError::Paradex),
             Self::Monaco(handle) => handle.close().await.map_err(ClientError::Monaco),
@@ -35,9 +56,22 @@ impl NativeHandle {
             Self::Lighter(handle) => handle.unsubscribe().await.map_err(ClientError::Lighter),
         }
     }
-    async fn next(&mut self) -> Option<Result<serde_json::Value, ClientError>> {
+    async fn next_json(&mut self) -> Option<Result<serde_json::Value, ClientError>> {
         use serde_json::json;
         match self {
+            Self::DataFeed(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),
+            Self::DataReplay(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),
+            Self::DataMachine(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),
+            Self::DataReference(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),
+            Self::DataDbn(h) => h
+                .next()
+                .await
+                .map(|r| r.and_then(|e| e.to_json()).map_err(ClientError::Data)),
+            Self::DataLive(h) => h
+                .next()
+                .await
+                .map(|r| r.and_then(|e| e.to_json()).map_err(ClientError::Data)),
+            Self::DataDownload(_) => unreachable!("byte downloads use next_item"),
             Self::Derive(handle) => Some(
                 handle
                     .next()
@@ -132,6 +166,66 @@ impl NativeHandle {
         }
     }
 }
+enum NativeItem {
+    Json(serde_json::Value),
+    Bytes(Vec<u8>),
+}
+impl NativeItem {
+    fn into_python(self, py: Python<'_>) -> PyResult<Py<PyAny>> {
+        match self {
+            Self::Json(v) => to_python(py, v),
+            Self::Bytes(v) => Ok(pyo3::types::PyBytes::new(py, &v).into_any().unbind()),
+        }
+    }
+}
+impl NativeHandle {
+    async fn next(&mut self) -> Option<Result<NativeItem, ClientError>> {
+        if let Self::DataDownload(body) = self {
+            body.next()
+                .await
+                .map(|v| v.map(NativeItem::Bytes).map_err(ClientError::Data))
+        } else {
+            self.next_json().await.map(|v| v.map(NativeItem::Json))
+        }
+    }
+}
+impl NativeHandle {
+    async fn read_batch(&mut self, limit: usize) -> Result<Vec<NativeItem>, ClientError> {
+        let values: Result<Vec<serde_json::Value>, aux_rs::tardis::Error> = match self {
+            Self::DataFeed(h) => h.read_batch(limit).await,
+            Self::DataReplay(h) => h.read_batch(limit).await,
+            Self::DataMachine(h) => h.read_batch(limit).await,
+            Self::DataReference(h) => h.read_batch(limit).await,
+            Self::DataDbn(h) => h
+                .read_batch(limit)
+                .await
+                .and_then(|v| v.into_iter().map(|e| e.to_json()).collect()),
+            Self::DataLive(h) => h
+                .read_batch(limit)
+                .await
+                .and_then(|v| v.into_iter().map(|e| e.to_json()).collect()),
+            Self::DataDownload(h) => {
+                let mut out = Vec::new();
+                while out.len() < limit {
+                    match h.next().await {
+                        Some(Ok(bytes)) => out.push(NativeItem::Bytes(bytes)),
+                        Some(Err(e)) => return Err(ClientError::Data(e)),
+                        None => break,
+                    }
+                }
+                return Ok(out);
+            }
+            _ => {
+                return Err(ClientError::Data(aux_rs::tardis::Error::InvalidRequest(
+                    "batch reads require a data stream",
+                )));
+            }
+        };
+        values
+            .map(|v| v.into_iter().map(NativeItem::Json).collect())
+            .map_err(ClientError::Data)
+    }
+}
 type CloseResult = Result<(), Arc<ClientError>>;
 
 #[derive(Clone)]
@@ -144,13 +238,19 @@ enum Phase {
 pub(crate) struct SubscriptionState {
     handle: Mutex<Option<NativeHandle>>,
     phase: watch::Sender<Phase>,
+    session_id: Option<String>,
 }
 
 impl SubscriptionState {
     pub fn new(handle: NativeHandle) -> Arc<Self> {
+        let session_id = match &handle {
+            NativeHandle::DataLive(session) => Some(session.session_id.clone()),
+            _ => None,
+        };
         Arc::new(Self {
             handle: Mutex::new(Some(handle)),
             phase: watch::channel(Phase::Open).0,
+            session_id,
         })
     }
     pub fn is_closed(&self) -> bool {
@@ -246,6 +346,10 @@ pub struct Subscription {
 #[pymethods]
 impl Subscription {
     #[getter]
+    fn session_id(&self) -> Option<String> {
+        self.state.session_id.clone()
+    }
+    #[getter]
     fn closed(&self) -> bool {
         self.state.is_closed()
     }
@@ -274,7 +378,7 @@ impl Subscription {
                 };
                 match event {
                     Some(Ok(value)) => {
-                        let result = Python::attach(|py| to_python(py, value))?;
+                        let result = Python::attach(|py| value.into_python(py))?;
                         if !lease.restore() {
                             state.wait_closed().await?;
                             return Err(PyStopAsyncIteration::new_err(()));
@@ -304,6 +408,70 @@ impl Subscription {
         })
     }
 
+    fn read_batch<'py>(&self, py: Python<'py>, limit: usize) -> PyResult<Bound<'py, PyAny>> {
+        if limit == 0 || limit > 4096 {
+            return Err(errors::ValidationError::new_err(
+                "batch size must be between 1 and 4096",
+            ));
+        }
+        let lease = self.state.lease()?;
+        let state = self.state.clone();
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let Some(mut lease) = lease else {
+                return Python::attach(|py| Ok(pyo3::types::PyList::empty(py).into_any().unbind()));
+            };
+            let mut phase = state.phase.subscribe();
+            let result = tokio::select! {biased;
+                _=phase.changed()=>{lease.close();state.wait_closed().await?;return Err(PyStopAsyncIteration::new_err(()));},
+                result=lease.handle.as_mut().expect("lease owns handle").read_batch(limit)=>result,
+            };
+            match result {
+                Ok(values) => {
+                    let empty = values.is_empty();
+                    let result = Python::attach(|py| {
+                        let list = pyo3::types::PyList::empty(py);
+                        for v in values {
+                            list.append(v.into_python(py)?)?;
+                        }
+                        Ok::<_, PyErr>(list.into_any().unbind())
+                    })?;
+                    if empty {
+                        lease.close();
+                        state.wait_closed().await?;
+                    } else if !lease.restore() {
+                        state.wait_closed().await?;
+                        return Err(PyStopAsyncIteration::new_err(()));
+                    }
+                    Ok(result)
+                }
+                Err(e) => {
+                    lease.close();
+                    let _ = state.wait_closed().await;
+                    Err(errors::map_error(&e))
+                }
+            }
+        })
+    }
+    fn live_subscribe<'py>(
+        &self,
+        py: Python<'py>,
+        request: &Bound<'py, PyAny>,
+        unsubscribe: bool,
+    ) -> PyResult<Bound<'py, PyAny>> {
+        let request = crate::convert::parse(request)?;
+        self.live_command(py, move |h| {
+            Box::pin(async move {
+                if unsubscribe {
+                    h.unsubscribe(request).await
+                } else {
+                    h.subscribe(request).await
+                }
+            })
+        })
+    }
+    fn live_start<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
+        self.live_command(py, |h| Box::pin(h.start_session()))
+    }
     fn aclose<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyAny>> {
         self.state.request_close();
         let state = self.state.clone();
@@ -314,5 +482,54 @@ impl Subscription {
 impl Drop for Subscription {
     fn drop(&mut self) {
         self.state.request_close();
+    }
+}
+
+type LiveHandle =
+    aux_rs::databento::LiveSession<aux_rs::databento::TcpReader, aux_rs::databento::TcpWriter>;
+impl Subscription {
+    fn live_command<'py, F>(&self, py: Python<'py>, command: F) -> PyResult<Bound<'py, PyAny>>
+    where
+        F: for<'a> FnOnce(
+                &'a mut LiveHandle,
+            ) -> std::pin::Pin<
+                Box<dyn std::future::Future<Output = aux_rs::databento::Result<()>> + Send + 'a>,
+            > + Send
+            + 'static,
+    {
+        let lease = self.state.lease()?;
+        let state = self.state.clone();
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            let Some(mut lease) = lease else {
+                return Err(errors::ClosedError::new_err("session is closed"));
+            };
+            let mut phase = state.phase.subscribe();
+            let handle = match lease.handle.as_mut().expect("lease owns handle") {
+                NativeHandle::DataLive(h) => h,
+                _ => {
+                    return Err(errors::ValidationError::new_err(
+                        "not a Databento live session",
+                    ));
+                }
+            };
+            let result = tokio::select! {biased;
+                _=phase.changed()=>Err(errors::ClosedError::new_err("session is closed")),
+                result=command(handle)=>result.map_err(errors::data),
+            };
+            match result {
+                Ok(()) => {
+                    if !lease.restore() {
+                        state.wait_closed().await?;
+                        return Err(errors::ClosedError::new_err("session is closed"));
+                    }
+                    Ok(())
+                }
+                Err(e) => {
+                    lease.close();
+                    let _ = state.wait_closed().await;
+                    Err(e)
+                }
+            }
+        })
     }
 }

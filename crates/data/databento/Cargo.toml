@@ -1,0 +1,37 @@
+[package]
+name = "aux-rs-databento"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+description = "Native Databento data connector"
+
+[features]
+default = []
+http = ["aux-rs-core/http", "files"]
+files = ["aux-rs-data/files"]
+tcp = ["dep:tokio"]
+
+[dependencies]
+aux-rs-core.workspace = true
+aux-rs-data.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+url.workspace = true
+futures-util.workspace = true
+dbn.workspace = true
+sha2.workspace = true
+base64.workspace = true
+zeroize.workspace = true
+
+[dependencies.tokio]
+workspace = true
+optional = true
+features = ["net", "io-util", "time", "sync", "rt", "macros"]
+
+[dev-dependencies]
+async-compression.workspace = true
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "net", "io-util", "time", "sync"] }
+
+[lints]
+workspace = true

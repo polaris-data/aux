@@ -1,6 +1,6 @@
 [workspace]
-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python"]
-default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex"]
+members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python"]
+default-members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex"]
 resolver = "3"
 
 [workspace.package]
@@ -10,6 +10,11 @@ rust-version = "1.92"
 publish = false
 
 [workspace.dependencies]
+aux-rs-data = { path = "crates/data/common", default-features = false }
+aux-rs-tardis = { path = "crates/data/tardis", default-features = false }
+aux-rs-databento = { path = "crates/data/databento", default-features = false }
+async-compression = { version = "0.4", default-features = false, features = ["futures-io", "gzip", "zstd"] }
+dbn = { version = "=0.73.0", default-features = false, features = ["serde"] }
 time = { version = "0.3", default-features = false, features = ["std", "formatting"] }
 aux-rs-derive = { path = "crates/exchanges/derive", default-features = false }
 aux-rs-paradex = { path = "crates/exchanges/paradex", default-features = false }
@@ -36,7 +41,7 @@ rustls = { version = "0.23", default-features = false, features = ["ring", "std"
 webpki-roots = "1"
 tokio = { version = "1", default-features = false }
 tokio-tungstenite = { version = "0.29", default-features = false, features = ["connect", "rustls-tls-webpki-roots"] }
-futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std", "io", "async-await"] }
 
 k256 = { version = "0.13.4", default-features = false, features = ["ecdsa"] }
 sha3 = { version = "0.10", default-features = false }

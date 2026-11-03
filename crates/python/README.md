@@ -255,3 +255,18 @@ and refresh/revoke update shared session state. Public and private streams use
 for exact schemas, signing, trading and uncertain-outcome behavior. The explicit
 read-only network example is `examples/monaco_public.py`. Offline tests cover
 native parity, exact values, callback context/reconnect/cancellation and lifecycle.
+
+## Data vendors
+
+`aux_py` also exports `TardisClient`, `TardisMachineClient`,
+`DatabentoHistoricalClient`, `DatabentoReferenceClient` and `DatabentoLiveClient`.
+These use the same Rust data clients and native schemas. See the
+[Tardis guide](../data/tardis/README.md) and
+[Databento guide](../data/databento/README.md) for API coverage and examples.
+
+Record streams support async iteration, `read_batch(limit=256)` and `aclose()`;
+byte streams yield `bytes`. Async context managers provide deterministic cleanup.
+Cancellation closes the stream and parent closure also closes live TCP sessions.
+`DataVendorError` retains sanitized `.native` details, `.http_status` and `.kind`.
+Normal tests use local HTTP/WebSocket/TCP servers and synthetic codec fixtures;
+no paid data requests run in the check scripts.

@@ -23,5 +23,14 @@ for exchange in qfex arcus monaco derive paradex; do
 done
 cargo check --locked -p aux-rs --no-default-features --features hyperliquid,lighter,qfex,arcus,monaco,derive,paradex
 cargo test --locked --workspace --exclude aux-rs-python --all-features
+for vendor in tardis databento; do
+    cargo test --locked -p "aux-rs-$vendor" --no-default-features
+    cargo test --locked -p aux-rs --no-default-features --features "$vendor"
+    cargo check --locked -p aux-rs --no-default-features --features "$vendor,http"
+    cargo check --locked -p aux-rs --no-default-features --features "$vendor,ws"
+done
+cargo check --locked -p aux-rs --no-default-features --features databento,tcp
+cargo check --locked -p aux-rs --no-default-features --features tardis,databento,http,ws,tcp
+python3 scripts/check-data-coverage.py
 python3 scripts/check-native-coverage.py
 python3 scripts/dependencies.py --check

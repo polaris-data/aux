@@ -1,0 +1,47 @@
+[
+  {
+    "schema": "csv:book_snapshot_25",
+    "data_type": "book_snapshot_25",
+    "file": "datasets/book_snapshot_25.csv.gz"
+  },
+  {
+    "schema": "csv:book_snapshot_5",
+    "data_type": "book_snapshot_5",
+    "file": "datasets/book_snapshot_5.csv.gz"
+  },
+  {
+    "schema": "csv:book_ticker",
+    "data_type": "book_ticker",
+    "file": "datasets/book_ticker.csv.gz"
+  },
+  {
+    "schema": "csv:derivative_ticker",
+    "data_type": "derivative_ticker",
+    "file": "datasets/derivative_ticker.csv.gz"
+  },
+  {
+    "schema": "csv:incremental_book_L2",
+    "data_type": "incremental_book_L2",
+    "file": "datasets/incremental_book_L2.csv.gz"
+  },
+  {
+    "schema": "csv:liquidations",
+    "data_type": "liquidations",
+    "file": "datasets/liquidations.csv.gz"
+  },
+  {
+    "schema": "csv:options_chain",
+    "data_type": "options_chain",
+    "file": "datasets/options_chain.csv.gz"
+  },
+  {
+    "schema": "csv:quotes",
+    "data_type": "quotes",
+    "file": "datasets/quotes.csv.gz"
+  },
+  {
+    "schema": "csv:trades",
+    "data_type": "trades",
+    "file": "datasets/trades.csv.gz"
+  }
+]

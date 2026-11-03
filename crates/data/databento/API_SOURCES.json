@@ -1,0 +1,48 @@
+{
+  "recorded_at": "2026-11-03",
+  "scope": "Published data-service API inventory; account/billing administration excluded.",
+  "documentation": [
+    "https://databento.com/docs/api-historical",
+    "https://databento.com/docs/api-live",
+    "https://docs.rs/databento/0.64.0/databento/reference/",
+    "https://docs.rs/dbn/0.73.0/dbn/"
+  ],
+  "repositories": [
+    {
+      "repository": "https://github.com/databento/databento-rs",
+      "commit": "d75ab48a63732d70d6943e319e986c601bf0dc4f",
+      "version": "0.64.0",
+      "license": "Apache-2.0",
+      "use": "HTTP endpoints, forms and CRAM/control-message protocol reference; no runtime dependency"
+    },
+    {
+      "repository": "https://github.com/databento/dbn",
+      "commit": "a77693030595b8f29f6b4c58e63b1b1a9d899b3f",
+      "version": "0.73.0",
+      "license": "Apache-2.0",
+      "use": "Focused native DBN codec runtime dependency, synthetic fixture generation"
+    }
+  ],
+  "inventory_sha256": "bddb66b0ff61cf9c250faf2a22f0e52cc7c821f0f15ae27acd502b1b40404f9c",
+  "fixture_sha256": {
+    "tests/fixtures/http.json": "b7c945412ec8553c7343ffa6714884686e7bb346f4127f9316ab86c5e8871703",
+    "tests/fixtures/live.json": "0e8ffda391179b099091d537f7c713c0a9160d2fa3ef629dcac901841933993f",
+    "tests/fixtures/schemas.dbn": "fb19db47422516ffecc16d3eb4744c3980b3b16ff0b04b5993fbb74175308b81",
+    "tests/fixtures/schemas.dbn.zst": "cb8cb65fd20b03211499deb4eb1ce9e61ada52766d63f14b6d4cbc092b46b990",
+    "tests/fixtures/schemas.json": "3f9067be4ff187fa923f3e51600cd9920580963af9d9a8fb91dbb8d4cb3272d5",
+    "tests/fixtures/ts_out.dbn": "328e46f7e1daed5e5fc430d5b20df3a77306cac8533eca7f33eeb82fe4ae575d"
+  },
+  "reference_source_sha256": {
+    "db-historical-batch.rs": "34f073ce5da814a0ae014d6e9c33a21cf9768e95d6e2537ab3a2cc7cd382ea54",
+    "db-historical-metadata.rs": "295542746203551ba1b95626f25e9794a04d4831c451adc99c9223694154deca",
+    "db-historical-symbology.rs": "c9d7bfdac3c9ef00bc12095fb481c69aec9087554ff0f0f3332f5122f3652e92",
+    "db-historical-timeseries.rs": "04e275b6e4e768b274c005685fb32dc6e4067dcc77d83c040acefd2aabad247f",
+    "db-historical.rs": "e0d0a20cf7b2f0afcaa00f5cf05934f32ff354b21692443c1e770d57e90c0839",
+    "db-live-protocol.rs": "51faeb429dc3affb2ed9876c97624dfaab6a768b015a160951c33b128e708585",
+    "db-live.rs": "f55c6a0301f3e0abc3f0773aa5996a161e820ae4658d046afd7bba82294929c6",
+    "db-reference-adjustment.rs": "2a0144521015fb3ae40d3202bea42c90b95a905d466786b40d0a6c97656c7561",
+    "db-reference-corporate.rs": "1c298d2db339f9673042bdd513e697eca7571cee98d954f683db1d66a453ff1b",
+    "db-reference-security.rs": "193ba63a6258239d663e2984be92aa1756b236a55892509ab0261beb0ce66401",
+    "db-reference.rs": "8de7d6482b60c225d6493602acfa23f66bb35e5dbf0427a6244b78dcbaaf5555"
+  }
+}

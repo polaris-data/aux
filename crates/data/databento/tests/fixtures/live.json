@@ -1,0 +1,10 @@
+{
+  "key": "aaaaaaaaaaaaaaaaaaaaaaaaaaa12345",
+  "challenge": "fixture-challenge",
+  "commands": [
+    "auth=1b08b80e7e68c79bd8b4a419ece0898afe4114d5691ffa956fc7d8b77aae4f3f-12345|dataset=GLBX.MDP3|encoding=dbn|compression=none|ts_out=1|client=aux-rs/0.0.0|heartbeat_interval_s=5|slow_reader_behavior=warn\n",
+    "schema=trades|stype_in=raw_symbol|symbols=ESZ4|snapshot=0|is_last=1|id=7\n",
+    "start_session\n",
+    "unsubscribe|schema=trades|stype_in=raw_symbol|symbols=ESZ4|is_last=1\n"
+  ]
+}

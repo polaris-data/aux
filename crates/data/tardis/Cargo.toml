@@ -1,0 +1,28 @@
+[package]
+name = "aux-rs-tardis"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+description = "Native Tardis data connector"
+
+[features]
+default = []
+http = ["aux-rs-core/http", "files"]
+files = ["aux-rs-data/files"]
+ws = ["aux-rs-core/ws"]
+
+[dependencies]
+aux-rs-core.workspace = true
+aux-rs-data.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+url.workspace = true
+futures-util.workspace = true
+time = { workspace = true, features = ["parsing"] }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "net", "io-util", "time", "sync"] }
+
+[lints]
+workspace = true

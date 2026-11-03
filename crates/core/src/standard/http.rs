@@ -5,7 +5,7 @@ use crate::{
 };
 use std::time::{Duration, SystemTime};
 
-fn map_error(error: reqwest::Error) -> TransportError {
+pub(super) fn map_error(error: reqwest::Error) -> TransportError {
     let (kind, outcome, message) = if error.is_builder() {
         (
             TransportErrorKind::Configuration,

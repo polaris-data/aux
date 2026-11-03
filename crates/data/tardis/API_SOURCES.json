@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-11-03",
+  "scope": "Published data-service API inventory; account/billing administration excluded.",
+  "documentation": [
+    "https://docs.tardis.dev/api/http-api-reference.md",
+    "https://docs.tardis.dev/api/instruments-metadata-api.md",
+    "https://docs.tardis.dev/downloadable-csv-files/api.md",
+    "https://docs.tardis.dev/tardis-machine/replaying-historical-data",
+    "https://docs.tardis.dev/tardis-machine/streaming-real-time-data",
+    "https://docs.tardis.dev/tardis-machine/data-types",
+    "https://docs.tardis.dev/downloadable-csv-files/data-types"
+  ],
+  "repositories": [
+    {
+      "repository": "https://github.com/tardis-dev/tardis-machine",
+      "commit": "5efcfb0b0c544165d9df06e8e0d5edbfe1abb80f",
+      "use": "Machine HTTP/WebSocket protocol reference; caller-managed external service"
+    }
+  ],
+  "inventory_sha256": "ca00c8e937c75a1752240b668a00c86e149ab25c00a9abc0e8a444eacbb8b945",
+  "fixture_sha256": {
+    "tests/fixtures/datasets/book_snapshot_25.csv.gz": "a081d7bc6ae524cb8728c474ddb14f6adc472e1b0bb3e31c69120b02cc3d8c8a",
+    "tests/fixtures/datasets/book_snapshot_5.csv.gz": "182e6b55c10125ca043660c314707586ddf986dc3f93cb8a12279fca22995054",
+    "tests/fixtures/datasets/book_ticker.csv.gz": "5e7cc2b0a374d41345f87ed7f72a835d6c86f999ed1aae77714a2e41ffe4dffd",
+    "tests/fixtures/datasets/derivative_ticker.csv.gz": "57a4cebb0ff16999d762d12af9cff384cc1d48293aa1c8aaa3e23f207808099a",
+    "tests/fixtures/datasets/incremental_book_L2.csv.gz": "d2303420922dd662d168ae50812c269ee1682f6195d1bee4eea2a315832f2d9e",
+    "tests/fixtures/datasets/liquidations.csv.gz": "71171dc2629b1a576675d0127d785647cd9bbb025e439d6fc5f305d23e85d237",
+    "tests/fixtures/datasets/options_chain.csv.gz": "b248349be0a28380850a70cc264e5734726b9f1cc26a44f8256ae0b09ac8a348",
+    "tests/fixtures/datasets/quotes.csv.gz": "5e7cc2b0a374d41345f87ed7f72a835d6c86f999ed1aae77714a2e41ffe4dffd",
+    "tests/fixtures/datasets/trades.csv.gz": "71171dc2629b1a576675d0127d785647cd9bbb025e439d6fc5f305d23e85d237",
+    "tests/fixtures/datasets.json": "7fc4a4dd1c5a3f2b51a1ebdc5fdf65ae672310b3663a8113d6e03ab956ce2ec0",
+    "tests/fixtures/feed.ndjson": "4a1c1b9bd0c7199ce41be5c4b4b045240e179b453e668851bf09a764abcec6fc",
+    "tests/fixtures/feed.ndjson.gz": "af963cc2db085f909ca5f65f1bbb491304781e58c6c240baae23d72bf0a335f5",
+    "tests/fixtures/http.json": "1bbc4c19791fb8ccb89817b4e48365acae1901c8c65bbbbcbb6a1c0ffdd7e4e1",
+    "tests/fixtures/normalized.json": "26b19222a547fb0a265a0395238d20a4dbca482de9182998f40f18d91fe9e594"
+  }
+}

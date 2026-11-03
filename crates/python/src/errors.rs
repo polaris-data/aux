@@ -4,6 +4,7 @@ use aux_rs::{
 use pyo3::{create_exception, exceptions::PyException, prelude::*};
 
 pub enum ClientError {
+    Data(aux_rs::tardis::Error),
     Derive(NativeError<aux_rs::derive::Error>),
     Paradex(NativeError<aux_rs::paradex::Error>),
     Monaco(NativeError<aux_rs::monaco::Error>),
@@ -32,6 +33,7 @@ impl ClientError {
     }
 }
 create_exception!(aux_py, ExchangeError, ConnectorError);
+create_exception!(aux_py, DataVendorError, ConnectorError);
 create_exception!(aux_py, DecodeError, ConnectorError);
 create_exception!(aux_py, ValidationError, ConnectorError);
 create_exception!(aux_py, ClosedError, ConnectorError);
@@ -113,6 +115,7 @@ pub fn lt_native(error: lt::Error) -> PyErr {
 }
 pub fn map_error(error: &ClientError) -> PyErr {
     match error {
+        ClientError::Data(error) => data_ref(error),
         ClientError::Hyperliquid(NativeError::Transport(e))
         | ClientError::Derive(NativeError::Transport(e))
         | ClientError::Paradex(NativeError::Transport(e))
@@ -265,6 +268,7 @@ pub fn add_to_module(module: &Bound<'_, PyModule>) -> PyResult<()> {
         GapError,
         TransportError,
         ExchangeError,
+        DataVendorError,
         DecodeError,
         ValidationError,
         ClosedError,
@@ -311,4 +315,35 @@ fn native_body(venue: &str, status: Option<u16>, body: &serde_json::Value) -> Py
         }
     });
     error
+}
+
+pub fn data(error: aux_rs::tardis::Error) -> PyErr {
+    data_ref(&error)
+}
+fn data_ref(error: &aux_rs::tardis::Error) -> PyErr {
+    use aux_rs::tardis::Error;
+    match error {
+        Error::Transport(e) => transport(e),
+        Error::InvalidRequest(s) => ValidationError::new_err(*s),
+        Error::Decode(s) => DecodeError::new_err(*s),
+        Error::Io(_) => ConnectorError::new_err("data stream I/O failed"),
+        Error::Api { status, body } => Python::attach(|py| -> PyResult<PyErr> {
+            let mapped = DataVendorError::new_err(error.to_string());
+            mapped.value(py).setattr("http_status", status)?;
+            mapped.value(py).setattr("kind", error.kind())?;
+            mapped
+                .value(py)
+                .setattr("native", crate::convert::output(body)?)?;
+            Ok(mapped)
+        })
+        .unwrap_or_else(std::convert::identity),
+        Error::Authentication { body } => Python::attach(|py| -> PyResult<PyErr> {
+            let mapped = AuthenticationError::new_err("data vendor authentication failed");
+            mapped
+                .value(py)
+                .setattr("native", crate::convert::output(body)?)?;
+            Ok(mapped)
+        })
+        .unwrap_or_else(std::convert::identity),
+    }
 }

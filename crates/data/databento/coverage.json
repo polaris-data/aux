@@ -1,0 +1,488 @@
+{
+  "operations": [
+    {
+      "id": "list_publishers",
+      "protocol": "GET",
+      "address": "/v0/metadata.list_publishers",
+      "rust": "HistoricalClient::list_publishers",
+      "python": "DatabentoHistoricalClient.list_publishers",
+      "fixture": "tests/fixtures/http.json#list_publishers",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_datasets",
+      "protocol": "GET",
+      "address": "/v0/metadata.list_datasets",
+      "rust": "HistoricalClient::list_datasets",
+      "python": "DatabentoHistoricalClient.list_datasets",
+      "fixture": "tests/fixtures/http.json#list_datasets",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_schemas",
+      "protocol": "GET",
+      "address": "/v0/metadata.list_schemas",
+      "rust": "HistoricalClient::list_schemas",
+      "python": "DatabentoHistoricalClient.list_schemas",
+      "fixture": "tests/fixtures/http.json#list_schemas",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_fields",
+      "protocol": "GET",
+      "address": "/v0/metadata.list_fields",
+      "rust": "HistoricalClient::list_fields",
+      "python": "DatabentoHistoricalClient.list_fields",
+      "fixture": "tests/fixtures/http.json#list_fields",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_unit_prices",
+      "protocol": "GET",
+      "address": "/v0/metadata.list_unit_prices",
+      "rust": "HistoricalClient::list_unit_prices",
+      "python": "DatabentoHistoricalClient.list_unit_prices",
+      "fixture": "tests/fixtures/http.json#list_unit_prices",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "get_dataset_condition",
+      "protocol": "GET",
+      "address": "/v0/metadata.get_dataset_condition",
+      "rust": "HistoricalClient::get_dataset_condition",
+      "python": "DatabentoHistoricalClient.get_dataset_condition",
+      "fixture": "tests/fixtures/http.json#get_dataset_condition",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "get_dataset_range",
+      "protocol": "GET",
+      "address": "/v0/metadata.get_dataset_range",
+      "rust": "HistoricalClient::get_dataset_range",
+      "python": "DatabentoHistoricalClient.get_dataset_range",
+      "fixture": "tests/fixtures/http.json#get_dataset_range",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "get_record_count",
+      "protocol": "POST",
+      "address": "/v0/metadata.get_record_count",
+      "rust": "HistoricalClient::get_record_count",
+      "python": "DatabentoHistoricalClient.get_record_count",
+      "fixture": "tests/fixtures/http.json#get_record_count",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "get_billable_size",
+      "protocol": "POST",
+      "address": "/v0/metadata.get_billable_size",
+      "rust": "HistoricalClient::get_billable_size",
+      "python": "DatabentoHistoricalClient.get_billable_size",
+      "fixture": "tests/fixtures/http.json#get_billable_size",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "get_cost",
+      "protocol": "POST",
+      "address": "/v0/metadata.get_cost",
+      "rust": "HistoricalClient::get_cost",
+      "python": "DatabentoHistoricalClient.get_cost",
+      "fixture": "tests/fixtures/http.json#get_cost",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "resolve",
+      "protocol": "POST",
+      "address": "/v0/symbology.resolve",
+      "rust": "HistoricalClient::resolve",
+      "python": "DatabentoHistoricalClient.resolve",
+      "fixture": "tests/fixtures/http.json#resolve",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "submit_job",
+      "protocol": "POST",
+      "address": "/v0/batch.submit_job",
+      "rust": "HistoricalClient::submit_job",
+      "python": "DatabentoHistoricalClient.submit_job",
+      "fixture": "tests/fixtures/http.json#submit_job",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_jobs",
+      "protocol": "GET",
+      "address": "/v0/batch.list_jobs",
+      "rust": "HistoricalClient::list_jobs",
+      "python": "DatabentoHistoricalClient.list_jobs",
+      "fixture": "tests/fixtures/http.json#list_jobs",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "get_job_details",
+      "protocol": "GET",
+      "address": "/v0/batch.get_job_details",
+      "rust": "HistoricalClient::get_job_details",
+      "python": "DatabentoHistoricalClient.get_job_details",
+      "fixture": "tests/fixtures/http.json#get_job_details",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_files",
+      "protocol": "GET",
+      "address": "/v0/batch.list_files",
+      "rust": "HistoricalClient::list_files",
+      "python": "DatabentoHistoricalClient.list_files",
+      "fixture": "tests/fixtures/http.json#list_files",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_events",
+      "protocol": "GET",
+      "address": "/v0/corporate_actions.list_events",
+      "rust": "ReferenceClient::list_events",
+      "python": "DatabentoReferenceClient.list_events",
+      "fixture": "tests/fixtures/http.json#list_events",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "list_enums",
+      "protocol": "GET",
+      "address": "/v0/corporate_actions.list_enums",
+      "rust": "ReferenceClient::list_enums",
+      "python": "DatabentoReferenceClient.list_enums",
+      "fixture": "tests/fixtures/http.json#list_enums",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "security_master_get_range",
+      "protocol": "POST",
+      "address": "/v0/security_master.get_range",
+      "rust": "ReferenceClient::security_master_get_range",
+      "python": "DatabentoReferenceClient.security_master_get_range",
+      "fixture": "tests/fixtures/http.json#security_master_get_range",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "security_master_get_last",
+      "protocol": "POST",
+      "address": "/v0/security_master.get_last",
+      "rust": "ReferenceClient::security_master_get_last",
+      "python": "DatabentoReferenceClient.security_master_get_last",
+      "fixture": "tests/fixtures/http.json#security_master_get_last",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "corporate_actions_get_range",
+      "protocol": "POST",
+      "address": "/v0/corporate_actions.get_range",
+      "rust": "ReferenceClient::corporate_actions_get_range",
+      "python": "DatabentoReferenceClient.corporate_actions_get_range",
+      "fixture": "tests/fixtures/http.json#corporate_actions_get_range",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "adjustment_factors_get_range",
+      "protocol": "POST",
+      "address": "/v0/adjustment_factors.get_range",
+      "rust": "ReferenceClient::adjustment_factors_get_range",
+      "python": "DatabentoReferenceClient.adjustment_factors_get_range",
+      "fixture": "tests/fixtures/http.json#adjustment_factors_get_range",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_databento_http_inventory"
+    },
+    {
+      "id": "get_range",
+      "protocol": "POST",
+      "address": "/v0/timeseries.get_range",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.dbn",
+      "test": "tests/contracts.rs#timeseries_downloads_and_no_batch_submission_retry",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "id": "timeseries",
+      "protocol": "POST",
+      "address": "/v0/timeseries.get_range",
+      "rust": "HistoricalClient::timeseries",
+      "python": "DatabentoHistoricalClient.timeseries",
+      "fixture": "tests/fixtures/schemas.dbn",
+      "test": "tests/contracts.rs#timeseries_downloads_and_no_batch_submission_retry",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "id": "download",
+      "protocol": "GET",
+      "address": "batch file URL",
+      "rust": "HistoricalClient::download",
+      "python": "DatabentoHistoricalClient.download",
+      "fixture": "tests/fixtures/schemas.dbn",
+      "test": "tests/contracts.rs#timeseries_downloads_and_no_batch_submission_retry",
+      "python_test": "test_databento_downloads"
+    },
+    {
+      "id": "download_to",
+      "protocol": "GET",
+      "address": "batch file URL",
+      "rust": "HistoricalClient::download_to",
+      "python": "DatabentoHistoricalClient.download_to",
+      "fixture": "tests/fixtures/schemas.dbn",
+      "test": "tests/contracts.rs#native_file_helper",
+      "python_test": "test_databento_downloads"
+    },
+    {
+      "id": "live_connect",
+      "protocol": "TCP",
+      "address": "connect",
+      "rust": "LiveClient::connect",
+      "python": "DatabentoLiveClient.connect",
+      "fixture": "tests/fixtures/live.json",
+      "test": "tests/live.rs#live_protocol_inventory",
+      "python_test": "test_live_tcp_protocol_and_parent_cleanup"
+    },
+    {
+      "id": "live_subscribe",
+      "protocol": "TCP",
+      "address": "subscribe",
+      "rust": "LiveSession::subscribe",
+      "python": "DatabentoLiveSession.subscribe",
+      "fixture": "tests/fixtures/live.json",
+      "test": "tests/live.rs#live_protocol_inventory",
+      "python_test": "test_live_tcp_protocol_and_parent_cleanup"
+    },
+    {
+      "id": "live_unsubscribe",
+      "protocol": "TCP",
+      "address": "unsubscribe",
+      "rust": "LiveSession::unsubscribe",
+      "python": "DatabentoLiveSession.unsubscribe",
+      "fixture": "tests/fixtures/live.json",
+      "test": "tests/live.rs#live_protocol_inventory",
+      "python_test": "test_live_tcp_protocol_and_parent_cleanup"
+    },
+    {
+      "id": "live_start_session",
+      "protocol": "TCP",
+      "address": "start_session",
+      "rust": "LiveSession::start_session",
+      "python": "DatabentoLiveSession.start_session",
+      "fixture": "tests/fixtures/live.json",
+      "test": "tests/live.rs#live_protocol_inventory",
+      "python_test": "test_live_tcp_protocol_and_parent_cleanup"
+    }
+  ],
+  "schemas": [
+    {
+      "name": "mbo",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#mbo",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "trades",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#trades",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "mbp-1",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#mbp-1",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "mbp-10",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#mbp-10",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "tbbo",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#tbbo",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "definition",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#definition",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "statistics",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#statistics",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "status",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#status",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "imbalance",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#imbalance",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "cmbp-1",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#cmbp-1",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "tcbbo",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#tcbbo",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "error",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#error",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "system",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#system",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "symbol_mapping",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#symbol_mapping",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "ohlcv-1s",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#ohlcv-1s",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "ohlcv-1m",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#ohlcv-1m",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "ohlcv-1h",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#ohlcv-1h",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "ohlcv-1d",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#ohlcv-1d",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "ohlcv-eod",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#ohlcv-eod",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "bbo-1s",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#bbo-1s",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "bbo-1m",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#bbo-1m",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "cbbo-1s",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#cbbo-1s",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "cbbo-1m",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/schemas.json#cbbo-1m",
+      "test": "tests/contracts.rs#all_dbn_schemas_and_control_records",
+      "python_test": "test_dbn_schema_parity_and_raw_timeseries"
+    },
+    {
+      "name": "ts_out",
+      "rust": "HistoricalClient::get_range",
+      "python": "DatabentoHistoricalClient.get_range",
+      "fixture": "tests/fixtures/ts_out.dbn",
+      "test": "tests/contracts.rs#ts_out_and_truncation",
+      "python_test": "test_live_tcp_protocol_and_parent_cleanup"
+    }
+  ]
+}
