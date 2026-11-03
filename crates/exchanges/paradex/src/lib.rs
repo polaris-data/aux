@@ -1,0 +1,21 @@
+//! Exchange-native APIs. Protocol and signing stay independent of networking.
+mod auth;
+mod client;
+mod error;
+mod legacy;
+mod models;
+mod operations;
+mod revision_one;
+mod rpc;
+mod rpc_operations;
+mod signing;
+mod ws;
+pub use auth::*;
+pub use client::*;
+pub use error::Error;
+pub use models::*;
+pub use operations::*;
+pub use rpc::*;
+pub use signing::*;
+pub use ws::*;
+pub mod sbe;

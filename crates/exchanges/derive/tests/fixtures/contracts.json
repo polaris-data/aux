@@ -1,0 +1,6524 @@
+{
+  "private_change_subaccount_label": {
+    "request": {
+      "label": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "label": "fixture",
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/change_subaccount_label",
+    "body": {
+      "label": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_delete_subaccount": {
+    "request": {
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/delete_subaccount",
+    "body": {
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_all_portfolios": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": [
+      {
+        "collaterals": [
+          {
+            "amount": "fixture",
+            "amount_step": "fixture",
+            "asset_name": "fixture",
+            "asset_type": "fixture",
+            "average_price": "fixture",
+            "average_price_excl_fees": "fixture",
+            "creation_timestamp": 1,
+            "cumulative_interest": "fixture",
+            "currency": "fixture",
+            "delta": "fixture",
+            "delta_currency": "fixture",
+            "initial_margin": "fixture",
+            "maintenance_margin": "fixture",
+            "mark_price": "fixture",
+            "mark_value": "fixture",
+            "open_orders_margin": "fixture",
+            "pending_interest": "fixture",
+            "realized_pnl": "fixture",
+            "realized_pnl_excl_fees": "fixture",
+            "total_fees": "fixture",
+            "unrealized_pnl": "fixture",
+            "unrealized_pnl_excl_fees": "fixture"
+          }
+        ],
+        "collaterals_initial_margin": "fixture",
+        "collaterals_maintenance_margin": "fixture",
+        "collaterals_value": "fixture",
+        "currency": [
+          "fixture"
+        ],
+        "failed_to_fetch": true,
+        "initial_margin": "fixture",
+        "is_under_liquidation": true,
+        "label": "fixture",
+        "maintenance_margin": "fixture",
+        "manager_id": 1,
+        "margin_type": "fixture",
+        "mm_credits": "fixture",
+        "open_orders": [
+          {
+            "algo_duration_sec": 1,
+            "algo_num_slices": 1,
+            "algo_slices_completed": 1,
+            "algo_type": "twap",
+            "amount": "0.12345678",
+            "average_price": "0.12345678",
+            "cancel_reason": "",
+            "creation_timestamp": 1,
+            "direction": "buy",
+            "extra_fee": "0.12345678",
+            "filled_amount": "0.12345678",
+            "instrument_name": "fixture",
+            "is_transfer": true,
+            "label": "fixture",
+            "last_update_timestamp": 1,
+            "limit_price": "0.12345678",
+            "max_fee": "0.12345678",
+            "mmp": true,
+            "nonce": "fixture",
+            "order_fee": "0.12345678",
+            "order_id": "fixture",
+            "order_status": "open",
+            "order_type": "limit",
+            "quote_id": "fixture",
+            "replaced_order_id": "fixture",
+            "signature": "fixture",
+            "signature_expiry_sec": 1,
+            "signed_limit_price": "0.12345678",
+            "signer": "fixture",
+            "subaccount_id": 1,
+            "time_in_force": "gtc",
+            "trigger_price": "0.12345678",
+            "trigger_price_type": "mark",
+            "trigger_reject_message": "fixture",
+            "trigger_type": "stoploss"
+          }
+        ],
+        "open_orders_margin": "fixture",
+        "positions": [
+          {
+            "amount": "fixture",
+            "amount_step": "fixture",
+            "average_price": "fixture",
+            "average_price_excl_fees": "fixture",
+            "creation_timestamp": 1,
+            "cumulative_funding": "fixture",
+            "delta": "fixture",
+            "gamma": "fixture",
+            "index_price": "fixture",
+            "initial_margin": "fixture",
+            "instrument_name": "fixture",
+            "instrument_type": "option",
+            "leverage": "fixture",
+            "liquidation_price": "fixture",
+            "maintenance_margin": "fixture",
+            "mark_price": "fixture",
+            "mark_value": "fixture",
+            "net_settlements": "fixture",
+            "open_orders_margin": "fixture",
+            "pending_funding": "fixture",
+            "realized_pnl": "fixture",
+            "realized_pnl_excl_fees": "fixture",
+            "theta": "fixture",
+            "total_fees": "fixture",
+            "unrealized_pnl": "fixture",
+            "unrealized_pnl_excl_fees": "fixture",
+            "vega": "fixture"
+          }
+        ],
+        "positions_initial_margin": "fixture",
+        "positions_maintenance_margin": "fixture",
+        "positions_value": "fixture",
+        "projected_margin_change": "fixture",
+        "risk_universe_id": 1,
+        "subaccount_id": 1,
+        "subaccount_value": "fixture",
+        "vault_deposit_holds": [
+          {
+            "amount": "fixture",
+            "asset_name": "fixture",
+            "currency": "fixture",
+            "vault_id": 1
+          }
+        ]
+      }
+    ],
+    "route": "/v3/private/get_all_portfolios",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_collaterals": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": {
+      "collaterals": [
+        {
+          "amount": "fixture",
+          "amount_step": "fixture",
+          "asset_name": "fixture",
+          "asset_type": "fixture",
+          "average_price": "fixture",
+          "average_price_excl_fees": "fixture",
+          "creation_timestamp": 1,
+          "cumulative_interest": "fixture",
+          "currency": "fixture",
+          "delta": "fixture",
+          "delta_currency": "fixture",
+          "initial_margin": "fixture",
+          "maintenance_margin": "fixture",
+          "mark_price": "fixture",
+          "mark_value": "fixture",
+          "open_orders_margin": "fixture",
+          "pending_interest": "fixture",
+          "realized_pnl": "fixture",
+          "realized_pnl_excl_fees": "fixture",
+          "total_fees": "fixture",
+          "unrealized_pnl": "fixture",
+          "unrealized_pnl_excl_fees": "fixture"
+        }
+      ],
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_collaterals",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_margin": {
+    "request": {
+      "is_delayed_liquidation": true,
+      "simulated_collateral_changes": [
+        {
+          "amount": "0.12345678",
+          "asset_name": "fixture"
+        }
+      ],
+      "simulated_position_changes": [
+        {
+          "amount": "0.12345678",
+          "entry_price": "0.12345678",
+          "instrument_name": "fixture"
+        }
+      ],
+      "subaccount_id": 1
+    },
+    "response": {
+      "is_valid_trade": true,
+      "post_initial_margin": "fixture",
+      "post_maintenance_margin": "fixture",
+      "pre_initial_margin": "fixture",
+      "pre_maintenance_margin": "fixture",
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_margin",
+    "body": {
+      "is_delayed_liquidation": true,
+      "simulated_collateral_changes": [
+        {
+          "amount": "0.12345678",
+          "asset_name": "fixture"
+        }
+      ],
+      "simulated_position_changes": [
+        {
+          "amount": "0.12345678",
+          "entry_price": "0.12345678",
+          "instrument_name": "fixture"
+        }
+      ],
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_positions": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": {
+      "positions": [
+        {
+          "amount": "fixture",
+          "amount_step": "fixture",
+          "average_price": "fixture",
+          "average_price_excl_fees": "fixture",
+          "creation_timestamp": 1,
+          "cumulative_funding": "fixture",
+          "delta": "fixture",
+          "gamma": "fixture",
+          "index_price": "fixture",
+          "initial_margin": "fixture",
+          "instrument_name": "fixture",
+          "instrument_type": "option",
+          "leverage": "fixture",
+          "liquidation_price": "fixture",
+          "maintenance_margin": "fixture",
+          "mark_price": "fixture",
+          "mark_value": "fixture",
+          "net_settlements": "fixture",
+          "open_orders_margin": "fixture",
+          "pending_funding": "fixture",
+          "realized_pnl": "fixture",
+          "realized_pnl_excl_fees": "fixture",
+          "theta": "fixture",
+          "total_fees": "fixture",
+          "unrealized_pnl": "fixture",
+          "unrealized_pnl_excl_fees": "fixture",
+          "vega": "fixture"
+        }
+      ],
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_positions",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_subaccount": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": {
+      "collaterals": [
+        {
+          "amount": "fixture",
+          "amount_step": "fixture",
+          "asset_name": "fixture",
+          "asset_type": "fixture",
+          "average_price": "fixture",
+          "average_price_excl_fees": "fixture",
+          "creation_timestamp": 1,
+          "cumulative_interest": "fixture",
+          "currency": "fixture",
+          "delta": "fixture",
+          "delta_currency": "fixture",
+          "initial_margin": "fixture",
+          "maintenance_margin": "fixture",
+          "mark_price": "fixture",
+          "mark_value": "fixture",
+          "open_orders_margin": "fixture",
+          "pending_interest": "fixture",
+          "realized_pnl": "fixture",
+          "realized_pnl_excl_fees": "fixture",
+          "total_fees": "fixture",
+          "unrealized_pnl": "fixture",
+          "unrealized_pnl_excl_fees": "fixture"
+        }
+      ],
+      "collaterals_initial_margin": "fixture",
+      "collaterals_maintenance_margin": "fixture",
+      "collaterals_value": "fixture",
+      "currency": [
+        "fixture"
+      ],
+      "failed_to_fetch": true,
+      "initial_margin": "fixture",
+      "is_under_liquidation": true,
+      "label": "fixture",
+      "maintenance_margin": "fixture",
+      "manager_id": 1,
+      "margin_type": "fixture",
+      "mm_credits": "fixture",
+      "open_orders": [
+        {
+          "algo_duration_sec": 1,
+          "algo_num_slices": 1,
+          "algo_slices_completed": 1,
+          "algo_type": "twap",
+          "amount": "0.12345678",
+          "average_price": "0.12345678",
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "direction": "buy",
+          "extra_fee": "0.12345678",
+          "filled_amount": "0.12345678",
+          "instrument_name": "fixture",
+          "is_transfer": true,
+          "label": "fixture",
+          "last_update_timestamp": 1,
+          "limit_price": "0.12345678",
+          "max_fee": "0.12345678",
+          "mmp": true,
+          "nonce": "fixture",
+          "order_fee": "0.12345678",
+          "order_id": "fixture",
+          "order_status": "open",
+          "order_type": "limit",
+          "quote_id": "fixture",
+          "replaced_order_id": "fixture",
+          "signature": "fixture",
+          "signature_expiry_sec": 1,
+          "signed_limit_price": "0.12345678",
+          "signer": "fixture",
+          "subaccount_id": 1,
+          "time_in_force": "gtc",
+          "trigger_price": "0.12345678",
+          "trigger_price_type": "mark",
+          "trigger_reject_message": "fixture",
+          "trigger_type": "stoploss"
+        }
+      ],
+      "open_orders_margin": "fixture",
+      "positions": [
+        {
+          "amount": "fixture",
+          "amount_step": "fixture",
+          "average_price": "fixture",
+          "average_price_excl_fees": "fixture",
+          "creation_timestamp": 1,
+          "cumulative_funding": "fixture",
+          "delta": "fixture",
+          "gamma": "fixture",
+          "index_price": "fixture",
+          "initial_margin": "fixture",
+          "instrument_name": "fixture",
+          "instrument_type": "option",
+          "leverage": "fixture",
+          "liquidation_price": "fixture",
+          "maintenance_margin": "fixture",
+          "mark_price": "fixture",
+          "mark_value": "fixture",
+          "net_settlements": "fixture",
+          "open_orders_margin": "fixture",
+          "pending_funding": "fixture",
+          "realized_pnl": "fixture",
+          "realized_pnl_excl_fees": "fixture",
+          "theta": "fixture",
+          "total_fees": "fixture",
+          "unrealized_pnl": "fixture",
+          "unrealized_pnl_excl_fees": "fixture",
+          "vega": "fixture"
+        }
+      ],
+      "positions_initial_margin": "fixture",
+      "positions_maintenance_margin": "fixture",
+      "positions_value": "fixture",
+      "projected_margin_change": "fixture",
+      "risk_universe_id": 1,
+      "subaccount_id": 1,
+      "subaccount_value": "fixture",
+      "vault_deposit_holds": [
+        {
+          "amount": "fixture",
+          "asset_name": "fixture",
+          "currency": "fixture",
+          "vault_id": 1
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_subaccount",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_subaccounts": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "subaccount_ids": [
+        1
+      ],
+      "wallet": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_subaccounts",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_margin": {
+    "request": {
+      "margin_type": "fixture",
+      "market": "fixture",
+      "simulated_collateral_changes": [
+        {
+          "amount": "0.12345678",
+          "asset_name": "fixture"
+        }
+      ],
+      "simulated_collaterals": [
+        {
+          "amount": "0.12345678",
+          "asset_name": "fixture"
+        }
+      ],
+      "simulated_position_changes": [
+        {
+          "amount": "0.12345678",
+          "entry_price": "0.12345678",
+          "instrument_name": "fixture"
+        }
+      ],
+      "simulated_positions": [
+        {
+          "amount": "0.12345678",
+          "entry_price": "0.12345678",
+          "instrument_name": "fixture"
+        }
+      ]
+    },
+    "response": {
+      "is_valid_trade": true,
+      "post_initial_margin": "fixture",
+      "post_maintenance_margin": "fixture",
+      "pre_initial_margin": "fixture",
+      "pre_maintenance_margin": "fixture",
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_margin",
+    "body": {
+      "margin_type": "fixture",
+      "market": "fixture",
+      "simulated_collateral_changes": [
+        {
+          "amount": "0.12345678",
+          "asset_name": "fixture"
+        }
+      ],
+      "simulated_collaterals": [
+        {
+          "amount": "0.12345678",
+          "asset_name": "fixture"
+        }
+      ],
+      "simulated_position_changes": [
+        {
+          "amount": "0.12345678",
+          "entry_price": "0.12345678",
+          "instrument_name": "fixture"
+        }
+      ],
+      "simulated_positions": [
+        {
+          "amount": "0.12345678",
+          "entry_price": "0.12345678",
+          "instrument_name": "fixture"
+        }
+      ]
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_subaccounts": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "subaccount_ids": [
+        1
+      ],
+      "wallet": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_subaccounts",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_wallet": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": {
+      "subaccount_id": 1,
+      "wallet": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_wallet",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_edit_session_key": {
+    "request": {
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "wallet": "fixture"
+    },
+    "response": {
+      "expiry_sec": 1,
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "protocol_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "registered_sec": 1,
+      "subaccount_ids": [
+        1
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/edit_session_key",
+    "body": {
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_session_keys": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "public_session_keys": [
+        {
+          "expiry_sec": 1,
+          "ip_whitelist": [
+            "fixture"
+          ],
+          "label": "fixture",
+          "offchain_scopes": [
+            "fixture"
+          ],
+          "protocol_scopes": [
+            "fixture"
+          ],
+          "public_session_key": "fixture",
+          "registered_sec": 1,
+          "subaccount_ids": [
+            1
+          ]
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/session_keys",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_set_session_key": {
+    "request": {
+      "expiry_sec": 1,
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "nonce": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "protocol_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_ids": [
+        1
+      ],
+      "wallet": "fixture"
+    },
+    "response": {
+      "expiry_sec": 1,
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "protocol_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "subaccount_ids": [
+        1
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/set_session_key",
+    "body": {
+      "expiry_sec": 1,
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "nonce": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "protocol_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_ids": [
+        1
+      ],
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_set_session_key_debug": {
+    "request": {
+      "expiry_sec": 1,
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "nonce": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "protocol_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_ids": [
+        1
+      ],
+      "wallet": "fixture"
+    },
+    "response": {
+      "action_hash": "fixture",
+      "action_typehash": "fixture",
+      "domain_separator": "fixture",
+      "encoded_data": "fixture",
+      "encoded_data_hashed": "fixture",
+      "expected_signer": "fixture",
+      "input_data": {
+        "data": {
+          "expiry_sec": 1,
+          "scopes": [
+            "fixture"
+          ],
+          "session_key": "fixture",
+          "subaccounts": [
+            1
+          ]
+        },
+        "expiry": 1,
+        "module": "fixture",
+        "nonce": "fixture",
+        "owner": "fixture",
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "module": "fixture",
+      "owner": "fixture",
+      "recovered_signer": "fixture",
+      "typed_data_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/set_session_key_debug",
+    "body": {
+      "expiry_sec": 1,
+      "ip_whitelist": [
+        "fixture"
+      ],
+      "label": "fixture",
+      "nonce": "fixture",
+      "offchain_scopes": [
+        "fixture"
+      ],
+      "protocol_scopes": [
+        "fixture"
+      ],
+      "public_session_key": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_ids": [
+        1
+      ],
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_wallets_from_session_key": {
+    "request": {
+      "public_session_key": "fixture",
+      "scope": "account_info"
+    },
+    "response": {
+      "wallets": [
+        "fixture"
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_wallets_from_session_key",
+    "body": {
+      "public_session_key": "fixture",
+      "scope": "account_info"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_account": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "cancel_on_disconnect": true,
+      "creation_timestamp_sec": 1,
+      "fallback_subaccount_id": 1,
+      "fee_info": {
+        "base_fee_discount": "fixture",
+        "option_maker_fee": "fixture",
+        "option_taker_fee": "fixture",
+        "perp_maker_fee": "fixture",
+        "perp_taker_fee": "fixture",
+        "rfq_maker_discount": "fixture",
+        "rfq_taker_discount": "fixture",
+        "spot_maker_fee": "fixture",
+        "spot_taker_fee": "fixture"
+      },
+      "is_rfq_maker": true,
+      "per_endpoint_tps": {
+        "fixture": 1
+      },
+      "referral_code": "fixture",
+      "subaccount_ids": [
+        1
+      ],
+      "wallet": "fixture",
+      "websocket_matching_tps": 1,
+      "websocket_non_matching_tps": 1,
+      "websocket_option_tps": 1,
+      "websocket_perp_tps": 1,
+      "whitelisted_recipients": [
+        "fixture"
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_account",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel": {
+    "request": {
+      "instrument_name": "fixture",
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_slices_completed": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "average_price": "0.12345678",
+      "cancel_reason": "",
+      "creation_timestamp": 1,
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "filled_amount": "0.12345678",
+      "instrument_name": "fixture",
+      "is_transfer": true,
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_fee": "0.12345678",
+      "order_id": "fixture",
+      "order_status": "open",
+      "order_type": "limit",
+      "quote_id": "fixture",
+      "replaced_order_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signed_limit_price": "0.12345678",
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_reject_message": "fixture",
+      "trigger_type": "stoploss",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel",
+    "body": {
+      "instrument_name": "fixture",
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_algo_order": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_slices_completed": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "average_price": "0.12345678",
+      "cancel_reason": "",
+      "creation_timestamp": 1,
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "filled_amount": "0.12345678",
+      "instrument_name": "fixture",
+      "is_transfer": true,
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_fee": "0.12345678",
+      "order_id": "fixture",
+      "order_status": "open",
+      "order_type": "limit",
+      "quote_id": "fixture",
+      "replaced_order_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signed_limit_price": "0.12345678",
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_reject_message": "fixture",
+      "trigger_type": "stoploss",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_algo_order",
+    "body": {
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_all": {
+    "request": {
+      "cancel_algo_orders": true,
+      "cancel_trigger_orders": true,
+      "subaccount_id": 1
+    },
+    "response": "ok",
+    "route": "/v3/private/cancel_all",
+    "body": {
+      "cancel_algo_orders": true,
+      "cancel_trigger_orders": true,
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_all_algo_orders": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": "ok",
+    "route": "/v3/private/cancel_all_algo_orders",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_all_trigger_orders": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": "ok",
+    "route": "/v3/private/cancel_all_trigger_orders",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_by_instrument": {
+    "request": {
+      "instrument_name": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "cancelled_orders": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_by_instrument",
+    "body": {
+      "instrument_name": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_by_label": {
+    "request": {
+      "instrument_name": "fixture",
+      "label": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "cancelled_orders": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_by_label",
+    "body": {
+      "instrument_name": "fixture",
+      "label": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_by_nonce": {
+    "request": {
+      "instrument_name": "fixture",
+      "nonce": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "cancelled_orders": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_by_nonce",
+    "body": {
+      "instrument_name": "fixture",
+      "nonce": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_trigger_order": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_slices_completed": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "average_price": "0.12345678",
+      "cancel_reason": "",
+      "creation_timestamp": 1,
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "filled_amount": "0.12345678",
+      "instrument_name": "fixture",
+      "is_transfer": true,
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_fee": "0.12345678",
+      "order_id": "fixture",
+      "order_status": "open",
+      "order_type": "limit",
+      "quote_id": "fixture",
+      "replaced_order_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signed_limit_price": "0.12345678",
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_reject_message": "fixture",
+      "trigger_type": "stoploss",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_trigger_order",
+    "body": {
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_algo_orders": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": [
+      {
+        "algo_duration_sec": 1,
+        "algo_num_slices": 1,
+        "algo_slices_completed": 1,
+        "algo_type": "twap",
+        "amount": "0.12345678",
+        "average_price": "0.12345678",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "filled_amount": "0.12345678",
+        "instrument_name": "fixture",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "limit_price": "0.12345678",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "order_fee": "0.12345678",
+        "order_id": "fixture",
+        "order_status": "open",
+        "order_type": "limit",
+        "quote_id": "fixture",
+        "replaced_order_id": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signed_limit_price": "0.12345678",
+        "signer": "fixture",
+        "subaccount_id": 1,
+        "time_in_force": "gtc",
+        "trigger_price": "0.12345678",
+        "trigger_price_type": "mark",
+        "trigger_reject_message": "fixture",
+        "trigger_type": "stoploss"
+      }
+    ],
+    "route": "/v3/private/get_algo_orders",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_open_orders": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": {
+      "orders": [
+        {
+          "algo_duration_sec": 1,
+          "algo_num_slices": 1,
+          "algo_slices_completed": 1,
+          "algo_type": "twap",
+          "amount": "0.12345678",
+          "average_price": "0.12345678",
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "direction": "buy",
+          "extra_fee": "0.12345678",
+          "filled_amount": "0.12345678",
+          "instrument_name": "fixture",
+          "is_transfer": true,
+          "label": "fixture",
+          "last_update_timestamp": 1,
+          "limit_price": "0.12345678",
+          "max_fee": "0.12345678",
+          "mmp": true,
+          "nonce": "fixture",
+          "order_fee": "0.12345678",
+          "order_id": "fixture",
+          "order_status": "open",
+          "order_type": "limit",
+          "quote_id": "fixture",
+          "replaced_order_id": "fixture",
+          "signature": "fixture",
+          "signature_expiry_sec": 1,
+          "signed_limit_price": "0.12345678",
+          "signer": "fixture",
+          "subaccount_id": 1,
+          "time_in_force": "gtc",
+          "trigger_price": "0.12345678",
+          "trigger_price_type": "mark",
+          "trigger_reject_message": "fixture",
+          "trigger_type": "stoploss"
+        }
+      ],
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_open_orders",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_order": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_slices_completed": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "average_price": "0.12345678",
+      "cancel_reason": "",
+      "creation_timestamp": 1,
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "filled_amount": "0.12345678",
+      "instrument_name": "fixture",
+      "is_transfer": true,
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_fee": "0.12345678",
+      "order_id": "fixture",
+      "order_status": "open",
+      "order_type": "limit",
+      "quote_id": "fixture",
+      "replaced_order_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signed_limit_price": "0.12345678",
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_reject_message": "fixture",
+      "trigger_type": "stoploss",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_order",
+    "body": {
+      "order_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_trigger_orders": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": {
+      "orders": [
+        {
+          "algo_duration_sec": 1,
+          "algo_num_slices": 1,
+          "algo_slices_completed": 1,
+          "algo_type": "twap",
+          "amount": "0.12345678",
+          "average_price": "0.12345678",
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "direction": "buy",
+          "extra_fee": "0.12345678",
+          "filled_amount": "0.12345678",
+          "instrument_name": "fixture",
+          "is_transfer": true,
+          "label": "fixture",
+          "last_update_timestamp": 1,
+          "limit_price": "0.12345678",
+          "max_fee": "0.12345678",
+          "mmp": true,
+          "nonce": "fixture",
+          "order_fee": "0.12345678",
+          "order_id": "fixture",
+          "order_status": "open",
+          "order_type": "limit",
+          "quote_id": "fixture",
+          "replaced_order_id": "fixture",
+          "signature": "fixture",
+          "signature_expiry_sec": 1,
+          "signed_limit_price": "0.12345678",
+          "signer": "fixture",
+          "subaccount_id": 1,
+          "time_in_force": "gtc",
+          "trigger_price": "0.12345678",
+          "trigger_price_type": "mark",
+          "trigger_reject_message": "fixture",
+          "trigger_type": "stoploss"
+        }
+      ],
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_trigger_orders",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_order": {
+    "request": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "response": {
+      "order": {
+        "algo_duration_sec": 1,
+        "algo_num_slices": 1,
+        "algo_slices_completed": 1,
+        "algo_type": "twap",
+        "amount": "0.12345678",
+        "average_price": "0.12345678",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "filled_amount": "0.12345678",
+        "instrument_name": "fixture",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "limit_price": "0.12345678",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "order_fee": "0.12345678",
+        "order_id": "fixture",
+        "order_status": "open",
+        "order_type": "limit",
+        "quote_id": "fixture",
+        "replaced_order_id": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signed_limit_price": "0.12345678",
+        "signer": "fixture",
+        "subaccount_id": 1,
+        "time_in_force": "gtc",
+        "trigger_price": "0.12345678",
+        "trigger_price_type": "mark",
+        "trigger_reject_message": "fixture",
+        "trigger_type": "stoploss"
+      },
+      "trades": [
+        {
+          "batch_status": "Batching",
+          "direction": "buy",
+          "expected_rebate": "0.12345678",
+          "extra_fee": "0.12345678",
+          "index_price": "0.12345678",
+          "instrument_name": "fixture",
+          "is_transfer": true,
+          "label": "fixture",
+          "liquidity_role": "maker",
+          "mark_price": "0.12345678",
+          "op_uuid": "fixture",
+          "order_id": "fixture",
+          "quote_id": "fixture",
+          "realized_pnl": "0.12345678",
+          "realized_pnl_excl_fees": "0.12345678",
+          "rfq_id": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "trade_amount": "0.12345678",
+          "trade_fee": "0.12345678",
+          "trade_id": "fixture",
+          "trade_price": "0.12345678",
+          "tx_hash": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/order",
+    "body": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_order_debug": {
+    "request": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "response": {
+      "action_hash": "fixture",
+      "action_typehash": "fixture",
+      "domain_separator": "fixture",
+      "encoded_data": "fixture",
+      "encoded_data_hashed": "fixture",
+      "expected_signer": "fixture",
+      "input_data": {
+        "data": {
+          "asset_address": "fixture",
+          "asset_sub_id": "fixture",
+          "desired_amount": "0.12345678",
+          "is_bid": true,
+          "limit_price": "0.12345678",
+          "recipient_id": 1,
+          "worst_fee": "0.12345678"
+        },
+        "expiry": 1,
+        "module": "fixture",
+        "nonce": "fixture",
+        "owner": "fixture",
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "module": "fixture",
+      "owner": "fixture",
+      "recovered_signer": "fixture",
+      "typed_data_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/order_debug",
+    "body": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_order_quote": {
+    "request": {
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "response": {
+      "estimated_fee": "fixture",
+      "estimated_fill_amount": "fixture",
+      "estimated_fill_price": "fixture",
+      "estimated_order_status": "open",
+      "estimated_realized_pnl": "fixture",
+      "estimated_realized_pnl_excl_fees": "fixture",
+      "invalid_reason": "fixture",
+      "is_valid": true,
+      "max_amount": "fixture",
+      "post_initial_margin": "fixture",
+      "post_liquidation_price": "fixture",
+      "pre_initial_margin": "fixture",
+      "suggested_max_fee": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/order_quote",
+    "body": {
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_replace": {
+    "request": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "expected_filled_amount": "0.12345678",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "nonce_to_cancel": "fixture",
+      "order_id_to_cancel": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "response": {
+      "cancelled_order": {
+        "algo_duration_sec": 1,
+        "algo_num_slices": 1,
+        "algo_slices_completed": 1,
+        "algo_type": "twap",
+        "amount": "0.12345678",
+        "average_price": "0.12345678",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "filled_amount": "0.12345678",
+        "instrument_name": "fixture",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "limit_price": "0.12345678",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "order_fee": "0.12345678",
+        "order_id": "fixture",
+        "order_status": "open",
+        "order_type": "limit",
+        "quote_id": "fixture",
+        "replaced_order_id": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signed_limit_price": "0.12345678",
+        "signer": "fixture",
+        "subaccount_id": 1,
+        "time_in_force": "gtc",
+        "trigger_price": "0.12345678",
+        "trigger_price_type": "mark",
+        "trigger_reject_message": "fixture",
+        "trigger_type": "stoploss"
+      },
+      "create_order_error": {
+        "code": 1,
+        "data": "fixture",
+        "message": "fixture"
+      },
+      "order": {
+        "algo_duration_sec": 1,
+        "algo_num_slices": 1,
+        "algo_slices_completed": 1,
+        "algo_type": "twap",
+        "amount": "0.12345678",
+        "average_price": "0.12345678",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "filled_amount": "0.12345678",
+        "instrument_name": "fixture",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "limit_price": "0.12345678",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "order_fee": "0.12345678",
+        "order_id": "fixture",
+        "order_status": "open",
+        "order_type": "limit",
+        "quote_id": "fixture",
+        "replaced_order_id": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signed_limit_price": "0.12345678",
+        "signer": "fixture",
+        "subaccount_id": 1,
+        "time_in_force": "gtc",
+        "trigger_price": "0.12345678",
+        "trigger_price_type": "mark",
+        "trigger_reject_message": "fixture",
+        "trigger_type": "stoploss"
+      },
+      "trades": [
+        {
+          "batch_status": "Batching",
+          "direction": "buy",
+          "expected_rebate": "0.12345678",
+          "extra_fee": "0.12345678",
+          "index_price": "0.12345678",
+          "instrument_name": "fixture",
+          "is_transfer": true,
+          "label": "fixture",
+          "liquidity_role": "maker",
+          "mark_price": "0.12345678",
+          "op_uuid": "fixture",
+          "order_id": "fixture",
+          "quote_id": "fixture",
+          "realized_pnl": "0.12345678",
+          "realized_pnl_excl_fees": "0.12345678",
+          "rfq_id": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "trade_amount": "0.12345678",
+          "trade_fee": "0.12345678",
+          "trade_id": "fixture",
+          "trade_price": "0.12345678",
+          "tx_hash": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/replace",
+    "body": {
+      "algo_duration_sec": 1,
+      "algo_num_slices": 1,
+      "algo_type": "twap",
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "expected_filled_amount": "0.12345678",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "nonce_to_cancel": "fixture",
+      "order_id_to_cancel": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_order_quote": {
+    "request": {
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "response": {
+      "estimated_fee": "fixture",
+      "estimated_fill_amount": "fixture",
+      "estimated_fill_price": "fixture",
+      "estimated_order_status": "open",
+      "estimated_realized_pnl": "fixture",
+      "estimated_realized_pnl_excl_fees": "fixture",
+      "invalid_reason": "fixture",
+      "is_valid": true,
+      "max_amount": "fixture",
+      "post_initial_margin": "fixture",
+      "post_liquidation_price": "fixture",
+      "pre_initial_margin": "fixture",
+      "suggested_max_fee": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/order_quote",
+    "body": {
+      "amount": "0.12345678",
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "instrument_name": "fixture",
+      "is_atomic_signing": true,
+      "label": "fixture",
+      "limit_price": "0.12345678",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "order_type": "limit",
+      "reduce_only": true,
+      "referral_code": "fixture",
+      "reject_post_only": true,
+      "reject_timestamp": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "time_in_force": "gtc",
+      "trigger_price": "0.12345678",
+      "trigger_price_type": "mark",
+      "trigger_type": "stoploss"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_batch_quotes": {
+    "request": {
+      "label": "fixture",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "cancelled_ids": [
+        "fixture"
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_batch_quotes",
+    "body": {
+      "label": "fixture",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_batch_rfqs": {
+    "request": {
+      "label": "fixture",
+      "nonce": "fixture",
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "cancelled_ids": [
+        "fixture"
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_batch_rfqs",
+    "body": {
+      "label": "fixture",
+      "nonce": "fixture",
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_quote": {
+    "request": {
+      "label": "fixture",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "batch_status": "Batching",
+      "cancel_reason": "",
+      "creation_timestamp": 1,
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "fee": "0.12345678",
+      "fill_pct": "0.12345678",
+      "is_transfer": true,
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "legs_hash": "fixture",
+      "liquidity_role": "maker",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "signature_expiry_sec": 1,
+      "status": "open",
+      "subaccount_id": 1,
+      "tx_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_quote",
+    "body": {
+      "label": "fixture",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_rfq": {
+    "request": {
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": "ok",
+    "route": "/v3/private/cancel_rfq",
+    "body": {
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_execute_quote": {
+    "request": {
+      "client": "fixture",
+      "direction": "buy",
+      "enable_taker_protection": true,
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "referral_code": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "cancel_reason": "",
+      "creation_timestamp": 1,
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "fee": "0.12345678",
+      "fill_pct": "0.12345678",
+      "is_transfer": true,
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "legs_hash": "fixture",
+      "liquidity_role": "maker",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_filled_pct": "0.12345678",
+      "rfq_id": "fixture",
+      "signature_expiry_sec": 1,
+      "status": "open",
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/execute_quote",
+    "body": {
+      "client": "fixture",
+      "direction": "buy",
+      "enable_taker_protection": true,
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "referral_code": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_maker_rfq_history": {
+    "request": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "rfq_id": "fixture",
+      "rfq_subaccount_id": 1,
+      "status": "open",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "rfqs": [
+        {
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "fill_rate": "0.12345678",
+          "filled_direction": "buy",
+          "filled_pct": "0.12345678",
+          "last_update_timestamp": 1,
+          "legs": [
+            {
+              "amount": "0.12345678",
+              "direction": "buy",
+              "instrument_name": "fixture"
+            }
+          ],
+          "partial_fill_step": "0.12345678",
+          "recent_fill_rate": "0.12345678",
+          "rfq_id": "fixture",
+          "status": "open",
+          "subaccount_id": 1,
+          "total_cost": "0.12345678",
+          "valid_until": 1,
+          "wallet": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_maker_rfq_history",
+    "body": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "rfq_id": "fixture",
+      "rfq_subaccount_id": 1,
+      "status": "open",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_quotes": {
+    "request": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "quotes": [
+        {
+          "batch_status": "Batching",
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "direction": "buy",
+          "extra_fee": "0.12345678",
+          "fee": "0.12345678",
+          "fill_pct": "0.12345678",
+          "is_transfer": true,
+          "label": "fixture",
+          "last_update_timestamp": 1,
+          "legs": [
+            {
+              "amount": "0.12345678",
+              "direction": "buy",
+              "instrument_name": "fixture",
+              "price": "0.12345678"
+            }
+          ],
+          "legs_hash": "fixture",
+          "liquidity_role": "maker",
+          "max_fee": "0.12345678",
+          "mmp": true,
+          "nonce": "fixture",
+          "quote_id": "fixture",
+          "rfq_id": "fixture",
+          "signature_expiry_sec": 1,
+          "status": "open",
+          "subaccount_id": 1,
+          "tx_hash": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_quotes",
+    "body": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_rfqs": {
+    "request": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "rfq_id": "fixture",
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "rfqs": [
+        {
+          "ask_total_cost": "0.12345678",
+          "bid_total_cost": "0.12345678",
+          "cancel_reason": "",
+          "counterparties": [
+            "fixture"
+          ],
+          "creation_timestamp": 1,
+          "filled_direction": "buy",
+          "filled_pct": "0.12345678",
+          "label": "fixture",
+          "last_update_timestamp": 1,
+          "legs": [
+            {
+              "amount": "0.12345678",
+              "direction": "buy",
+              "instrument_name": "fixture"
+            }
+          ],
+          "mark_total_cost": "0.12345678",
+          "max_total_cost": "0.12345678",
+          "min_total_cost": "0.12345678",
+          "partial_fill_step": "0.12345678",
+          "rfq_id": "fixture",
+          "status": "open",
+          "subaccount_id": 1,
+          "total_cost": "0.12345678",
+          "valid_until": 1,
+          "wallet": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_rfqs",
+    "body": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "rfq_id": "fixture",
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_poll_quotes": {
+    "request": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "quotes": [
+        {
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "direction": "buy",
+          "fill_pct": "0.12345678",
+          "last_update_timestamp": 1,
+          "legs": [
+            {
+              "amount": "0.12345678",
+              "direction": "buy",
+              "instrument_name": "fixture",
+              "price": "0.12345678"
+            }
+          ],
+          "legs_hash": "fixture",
+          "liquidity_role": "maker",
+          "quote_id": "fixture",
+          "rfq_id": "fixture",
+          "status": "open",
+          "subaccount_id": 1,
+          "wallet": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/poll_quotes",
+    "body": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_poll_rfqs": {
+    "request": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "rfq_id": "fixture",
+      "rfq_subaccount_id": 1,
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "rfqs": [
+        {
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "fill_rate": "0.12345678",
+          "filled_direction": "buy",
+          "filled_pct": "0.12345678",
+          "last_update_timestamp": 1,
+          "legs": [
+            {
+              "amount": "0.12345678",
+              "direction": "buy",
+              "instrument_name": "fixture"
+            }
+          ],
+          "partial_fill_step": "0.12345678",
+          "recent_fill_rate": "0.12345678",
+          "rfq_id": "fixture",
+          "status": "open",
+          "subaccount_id": 1,
+          "total_cost": "0.12345678",
+          "valid_until": 1,
+          "wallet": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/poll_rfqs",
+    "body": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "rfq_id": "fixture",
+      "rfq_subaccount_id": 1,
+      "status": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_replace_quote": {
+    "request": {
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "nonce_to_cancel": "fixture",
+      "quote_id_to_cancel": "fixture",
+      "referral_code": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "cancelled_quote": {
+        "batch_status": "Batching",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "fee": "0.12345678",
+        "fill_pct": "0.12345678",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "legs_hash": "fixture",
+        "liquidity_role": "maker",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "quote_id": "fixture",
+        "rfq_id": "fixture",
+        "signature_expiry_sec": 1,
+        "status": "open",
+        "subaccount_id": 1,
+        "tx_hash": "fixture"
+      },
+      "create_quote_error": {
+        "code": 1,
+        "data": "fixture",
+        "message": "fixture"
+      },
+      "quote": {
+        "batch_status": "Batching",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "fee": "0.12345678",
+        "fill_pct": "0.12345678",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "legs_hash": "fixture",
+        "liquidity_role": "maker",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "quote_id": "fixture",
+        "rfq_id": "fixture",
+        "signature_expiry_sec": 1,
+        "status": "open",
+        "subaccount_id": 1,
+        "tx_hash": "fixture"
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/replace_quote",
+    "body": {
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "nonce_to_cancel": "fixture",
+      "quote_id_to_cancel": "fixture",
+      "referral_code": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_rfq_get_best_quote": {
+    "request": {
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture"
+        }
+      ],
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "best_quote": {
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "fill_pct": "0.12345678",
+        "last_update_timestamp": 1,
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "legs_hash": "fixture",
+        "liquidity_role": "maker",
+        "quote_id": "fixture",
+        "rfq_id": "fixture",
+        "status": "open",
+        "subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "direction": "buy",
+      "down_liquidation_price": "0.12345678",
+      "estimated_fee": "0.12345678",
+      "estimated_realized_pnl": "0.12345678",
+      "estimated_realized_pnl_excl_fees": "0.12345678",
+      "estimated_total_cost": "0.12345678",
+      "filled_pct": "0.12345678",
+      "invalid_reason": "fixture",
+      "is_valid": true,
+      "orderbook_total_cost": "0.12345678",
+      "post_initial_margin": "0.12345678",
+      "post_liquidation_price": "0.12345678",
+      "pre_initial_margin": "0.12345678",
+      "suggested_max_fee": "0.12345678",
+      "up_liquidation_price": "0.12345678",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/rfq_get_best_quote",
+    "body": {
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture"
+        }
+      ],
+      "rfq_id": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_send_quote": {
+    "request": {
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "referral_code": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "batch_status": "Batching",
+      "cancel_reason": "",
+      "creation_timestamp": 1,
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "fee": "0.12345678",
+      "fill_pct": "0.12345678",
+      "is_transfer": true,
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "legs_hash": "fixture",
+      "liquidity_role": "maker",
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "signature_expiry_sec": 1,
+      "status": "open",
+      "subaccount_id": 1,
+      "tx_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/send_quote",
+    "body": {
+      "client": "fixture",
+      "direction": "buy",
+      "extra_fee": "0.12345678",
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "mmp": true,
+      "nonce": "fixture",
+      "referral_code": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_send_rfq": {
+    "request": {
+      "client": "fixture",
+      "counterparties": [
+        "fixture"
+      ],
+      "extra_fee": "0.12345678",
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture"
+        }
+      ],
+      "max_total_cost": "0.12345678",
+      "min_total_cost": "0.12345678",
+      "partial_fill_step": "0.12345678",
+      "referral_code": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "ask_total_cost": "0.12345678",
+      "bid_total_cost": "0.12345678",
+      "cancel_reason": "",
+      "counterparties": [
+        "fixture"
+      ],
+      "creation_timestamp": 1,
+      "filled_direction": "buy",
+      "filled_pct": "0.12345678",
+      "label": "fixture",
+      "last_update_timestamp": 1,
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture"
+        }
+      ],
+      "mark_total_cost": "0.12345678",
+      "max_total_cost": "0.12345678",
+      "min_total_cost": "0.12345678",
+      "partial_fill_step": "0.12345678",
+      "rfq_id": "fixture",
+      "status": "open",
+      "subaccount_id": 1,
+      "total_cost": "0.12345678",
+      "valid_until": 1,
+      "wallet": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/send_rfq",
+    "body": {
+      "client": "fixture",
+      "counterparties": [
+        "fixture"
+      ],
+      "extra_fee": "0.12345678",
+      "label": "fixture",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture"
+        }
+      ],
+      "max_total_cost": "0.12345678",
+      "min_total_cost": "0.12345678",
+      "partial_fill_step": "0.12345678",
+      "referral_code": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_execute_quote_debug": {
+    "request": {
+      "direction": "buy",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "action_hash": "fixture",
+      "encoded_data": "fixture",
+      "encoded_data_hashed": "fixture",
+      "encoded_legs": "fixture",
+      "legs_hash": "fixture",
+      "typed_data_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/execute_quote_debug",
+    "body": {
+      "direction": "buy",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "nonce": "fixture",
+      "quote_id": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_send_quote_debug": {
+    "request": {
+      "direction": "buy",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "nonce": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "action_hash": "fixture",
+      "encoded_data": "fixture",
+      "encoded_data_hashed": "fixture",
+      "typed_data_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/send_quote_debug",
+    "body": {
+      "direction": "buy",
+      "legs": [
+        {
+          "amount": "0.12345678",
+          "direction": "buy",
+          "instrument_name": "fixture",
+          "price": "0.12345678"
+        }
+      ],
+      "max_fee": "0.12345678",
+      "nonce": "fixture",
+      "rfq_id": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_liquidate": {
+    "request": {
+      "liquidate_subaccount_id": 1,
+      "nonce": "fixture",
+      "percent_of_acc": "0.12345678",
+      "price_limit": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/liquidate",
+    "body": {
+      "liquidate_subaccount_id": 1,
+      "nonce": "fixture",
+      "percent_of_acc": "0.12345678",
+      "price_limit": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_liquidation_history": {
+    "request": {
+      "end_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1
+    },
+    "response": {
+      "auctions": [
+        {
+          "auction_id": "fixture",
+          "auction_type": "solvent",
+          "bids": [
+            {
+              "amounts_liquidated": {
+                "fixture": "fixture"
+              },
+              "bidder_id": 1,
+              "cash_received": "fixture",
+              "discount_pnl": "fixture",
+              "operation_id": "fixture",
+              "percent_liquidated": "fixture",
+              "positions_realized_pnl": {
+                "fixture": "fixture"
+              },
+              "positions_realized_pnl_excl_fees": {
+                "fixture": "fixture"
+              },
+              "realized_pnl": "fixture",
+              "realized_pnl_excl_fees": "fixture",
+              "risk_universe_id": 1,
+              "timestamp": 1,
+              "tx_hash": "fixture",
+              "unit_price": "fixture"
+            }
+          ],
+          "end_timestamp": 1,
+          "fee": "fixture",
+          "risk_universe_id": 1,
+          "start_timestamp": 1,
+          "subaccount_id": 1,
+          "tx_hash": "fixture"
+        }
+      ],
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_liquidation_history",
+    "body": {
+      "end_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_live_auctions": {
+    "request": {},
+    "response": {
+      "auctions": [
+        {
+          "currency": "fixture",
+          "estimated_bid_price": "fixture",
+          "estimated_discount_pnl": "fixture",
+          "estimated_mtm": "fixture",
+          "estimated_percent_bid": "fixture",
+          "margin_type": "fixture",
+          "min_price_limit": "fixture",
+          "risk_universe_id": 1,
+          "subaccount_balances": {
+            "fixture": "fixture"
+          },
+          "subaccount_id": 1,
+          "timestamp": 1
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_live_auctions",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_margin_watch": {
+    "request": {
+      "is_delayed_liquidation": true,
+      "subaccount_id": 1
+    },
+    "response": {
+      "collaterals": [
+        {
+          "amount": "fixture",
+          "amount_step": "fixture",
+          "asset_name": "fixture",
+          "asset_type": "fixture",
+          "average_price": "fixture",
+          "average_price_excl_fees": "fixture",
+          "creation_timestamp": 1,
+          "cumulative_interest": "fixture",
+          "currency": "fixture",
+          "delta": "fixture",
+          "delta_currency": "fixture",
+          "initial_margin": "fixture",
+          "maintenance_margin": "fixture",
+          "mark_price": "fixture",
+          "mark_value": "fixture",
+          "open_orders_margin": "fixture",
+          "pending_interest": "fixture",
+          "realized_pnl": "fixture",
+          "realized_pnl_excl_fees": "fixture",
+          "total_fees": "fixture",
+          "unrealized_pnl": "fixture",
+          "unrealized_pnl_excl_fees": "fixture"
+        }
+      ],
+      "currency": [
+        "fixture"
+      ],
+      "has_delayed_liquidation": true,
+      "initial_margin": "fixture",
+      "is_delayed_liquidation": true,
+      "maintenance_margin": "fixture",
+      "margin_type": "fixture",
+      "positions": [
+        {
+          "amount": "fixture",
+          "amount_step": "fixture",
+          "average_price": "fixture",
+          "average_price_excl_fees": "fixture",
+          "creation_timestamp": 1,
+          "cumulative_funding": "fixture",
+          "delta": "fixture",
+          "gamma": "fixture",
+          "index_price": "fixture",
+          "initial_margin": "fixture",
+          "instrument_name": "fixture",
+          "instrument_type": "option",
+          "leverage": "fixture",
+          "liquidation_price": "fixture",
+          "maintenance_margin": "fixture",
+          "mark_price": "fixture",
+          "mark_value": "fixture",
+          "net_settlements": "fixture",
+          "open_orders_margin": "fixture",
+          "pending_funding": "fixture",
+          "realized_pnl": "fixture",
+          "realized_pnl_excl_fees": "fixture",
+          "theta": "fixture",
+          "total_fees": "fixture",
+          "unrealized_pnl": "fixture",
+          "unrealized_pnl_excl_fees": "fixture",
+          "vega": "fixture"
+        }
+      ],
+      "regular_margin_flagged_sec": 1,
+      "risk_universe_id": 1,
+      "subaccount_id": 1,
+      "subaccount_value": "fixture",
+      "valuation_timestamp": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/margin_watch",
+    "body": {
+      "is_delayed_liquidation": true,
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_cancel_all_vault_requests": {
+    "request": {
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "vault_subaccount_id": 1
+    },
+    "response": {
+      "cancelled_request_ids": [
+        {
+          "vault_nonce": "fixture",
+          "vault_subaccount_id": 1,
+          "wallet": "fixture"
+        }
+      ],
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/cancel_all_vault_requests",
+    "body": {
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "vault_subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_live_vault_requests": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "requests": [
+        {
+          "creation_timestamp_ms": 1,
+          "id": {
+            "vault_nonce": "fixture",
+            "vault_subaccount_id": 1,
+            "wallet": "fixture"
+          },
+          "signed_action": {
+            "action": {
+              "data": [
+                1
+              ],
+              "expiry": 1,
+              "module": "fixture",
+              "nonce": 1,
+              "owner": "fixture",
+              "signer": "fixture",
+              "subaccount_id": 1
+            },
+            "signature": [
+              1
+            ]
+          },
+          "subaccount_id": 1,
+          "user_action_hash": "fixture",
+          "wallet": "fixture"
+        }
+      ],
+      "total": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_live_vault_requests",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_shareholder_vaults": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "subaccount_ids": [
+        1
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_shareholder_vaults",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_vault_request_history": {
+    "request": {
+      "page": 1,
+      "page_size": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "actions": [
+        {
+          "after_shares": "0.12345678",
+          "amount": "0.12345678",
+          "before_shares": "0.12345678",
+          "creation_timestamp_ms": 1,
+          "entry_price": "0.12345678",
+          "error_reason": "fixture",
+          "event_ts": 1,
+          "event_type": "fixture",
+          "exit_price": "0.12345678",
+          "operation_id": 1,
+          "operation_uuid": "fixture",
+          "share_price": "0.12345678",
+          "shares_delta": "0.12345678",
+          "shares_requested": "0.12345678",
+          "status": "fixture",
+          "user_action_hash": "fixture",
+          "vault_nonce": "fixture",
+          "vault_subaccount_id": 1,
+          "wallet": "fixture"
+        }
+      ],
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "wallet": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_vault_request_history",
+    "body": {
+      "page": 1,
+      "page_size": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_vault_shares": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "vaults": [
+        {
+          "shares": "0.12345678",
+          "vault": {
+            "benchmark_price": "0.12345678",
+            "curator": "fixture",
+            "curator_shares": "0.12345678",
+            "description": "fixture",
+            "mtm_cap": "0.12345678",
+            "name": "fixture",
+            "nav_benchmark": "0.12345678",
+            "nav_usd": "0.12345678",
+            "protocol": {
+              "closed": true,
+              "config": {
+                "benchmark_asset": null,
+                "cooldown_sec": 1,
+                "deposit_spot_asset": "fixture",
+                "management_fee_bps": 1,
+                "max_slippage_bps": 1,
+                "performance_fee_bps": 1
+              },
+              "global_hwm": "0.12345678",
+              "last_fee_settled_at_sec": 1,
+              "protocol_fee_share_bps": 1,
+              "subaccount_id": 1,
+              "total_shares": "0.12345678"
+            },
+            "simulated_share_price_usd": "0.12345678",
+            "whitelist_only": true
+          }
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_vault_shares",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_request_vault_deposit": {
+    "request": {
+      "amount": "0.12345678",
+      "deposit_spot_asset": "fixture",
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "vault_subaccount_id": 1
+    },
+    "response": {
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/request_vault_deposit",
+    "body": {
+      "amount": "0.12345678",
+      "deposit_spot_asset": "fixture",
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "vault_subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_request_vault_withdraw": {
+    "request": {
+      "nonce": "fixture",
+      "shares_to_burn": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "vault_subaccount_id": 1
+    },
+    "response": {
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/request_vault_withdraw",
+    "body": {
+      "nonce": "fixture",
+      "shares_to_burn": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "vault_subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_vault": {
+    "request": {
+      "subaccount_id": 1
+    },
+    "response": {
+      "benchmark_price": "0.12345678",
+      "curator": "fixture",
+      "curator_shares": "0.12345678",
+      "description": "fixture",
+      "mtm_cap": "0.12345678",
+      "name": "fixture",
+      "nav_benchmark": "0.12345678",
+      "nav_usd": "0.12345678",
+      "protocol": {
+        "closed": true,
+        "config": {
+          "benchmark_asset": "fixture",
+          "cooldown_sec": 1,
+          "deposit_spot_asset": "fixture",
+          "management_fee_bps": 1,
+          "max_slippage_bps": 1,
+          "performance_fee_bps": 1
+        },
+        "global_hwm": "0.12345678",
+        "last_fee_settled_at_sec": 1,
+        "protocol_fee_share_bps": 1,
+        "subaccount_id": 1,
+        "total_shares": "0.12345678"
+      },
+      "simulated_share_price_usd": "0.12345678",
+      "whitelist_only": true,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_vault",
+    "body": {
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_vault_action_history": {
+    "request": {
+      "event_type": "fixture",
+      "page": 1,
+      "page_size": 1,
+      "subaccount_id": 1
+    },
+    "response": {
+      "events": [
+        {
+          "curator_shares_minted": "0.12345678",
+          "event_ts": 1,
+          "event_type": "fixture",
+          "holder": "fixture",
+          "management_shares_minted": "0.12345678",
+          "nav": "0.12345678",
+          "new_high_water_mark": "0.12345678",
+          "old_high_water_mark": "0.12345678",
+          "operation_uuid": "fixture",
+          "performance_shares_minted": "0.12345678",
+          "protocol_shares_minted": "0.12345678",
+          "share_price": "0.12345678",
+          "shares_delta": "0.12345678",
+          "status": "fixture",
+          "subaccount_id": 1,
+          "total_shares": "0.12345678"
+        }
+      ],
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_vault_action_history",
+    "body": {
+      "event_type": "fixture",
+      "page": 1,
+      "page_size": 1,
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_vault_performance_history": {
+    "request": {
+      "from": 1,
+      "limit": 1,
+      "resolution": "1h",
+      "subaccount_id": 1,
+      "to": 1
+    },
+    "response": {
+      "points": [
+        {
+          "benchmark_price": "0.12345678",
+          "curator_shares": "0.12345678",
+          "global_hwm": "0.12345678",
+          "nav": "0.12345678",
+          "nav_benchmark": "0.12345678",
+          "share_price": "0.12345678",
+          "total_shares": "0.12345678",
+          "ts": 1
+        }
+      ],
+      "resolution": "1h",
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_vault_performance_history",
+    "body": {
+      "from": 1,
+      "limit": 1,
+      "resolution": "1h",
+      "subaccount_id": 1,
+      "to": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_vaults": {
+    "request": {
+      "page": 1,
+      "page_size": 1
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "vaults": [
+        {
+          "benchmark_price": "0.12345678",
+          "curator": "fixture",
+          "curator_shares": "0.12345678",
+          "description": "fixture",
+          "mtm_cap": "0.12345678",
+          "name": "fixture",
+          "nav_benchmark": "0.12345678",
+          "nav_usd": "0.12345678",
+          "protocol": {
+            "closed": true,
+            "config": {
+              "benchmark_asset": "fixture",
+              "cooldown_sec": 1,
+              "deposit_spot_asset": "fixture",
+              "management_fee_bps": 1,
+              "max_slippage_bps": 1,
+              "performance_fee_bps": 1
+            },
+            "global_hwm": "0.12345678",
+            "last_fee_settled_at_sec": 1,
+            "protocol_fee_share_bps": 1,
+            "subaccount_id": 1,
+            "total_shares": "0.12345678"
+          },
+          "simulated_share_price_usd": "0.12345678",
+          "whitelist_only": true
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_vaults",
+    "body": {
+      "page": 1,
+      "page_size": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_burn_vault_shares": {
+    "request": {
+      "nonce": "fixture",
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "share_price": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "withdraw_hash": "fixture"
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/burn_vault_shares",
+    "body": {
+      "nonce": "fixture",
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "share_price": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1,
+      "withdraw_hash": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_create_vault": {
+    "request": {
+      "benchmark_asset": "fixture",
+      "cooldown_sec": 1,
+      "deposit_spot_asset": "fixture",
+      "initial_deposit": "0.12345678",
+      "initial_share_price_usd": "0.12345678",
+      "management_fee_bps": 1,
+      "manager_id": 1,
+      "max_fee_usd": "0.12345678",
+      "max_slippage_bps": 1,
+      "nonce": "fixture",
+      "performance_fee_bps": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/create_vault",
+    "body": {
+      "benchmark_asset": "fixture",
+      "cooldown_sec": 1,
+      "deposit_spot_asset": "fixture",
+      "initial_deposit": "0.12345678",
+      "initial_share_price_usd": "0.12345678",
+      "management_fee_bps": 1,
+      "manager_id": 1,
+      "max_fee_usd": "0.12345678",
+      "max_slippage_bps": 1,
+      "nonce": "fixture",
+      "performance_fee_bps": 1,
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_force_burn": {
+    "request": {
+      "holder": "fixture",
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/force_burn",
+    "body": {
+      "holder": "fixture",
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_curated_vaults": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "subaccount_ids": [
+        1
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_curated_vaults",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_live_burn_requests": {
+    "request": {
+      "limit": 1,
+      "subaccount_id": 1
+    },
+    "response": {
+      "requests": [
+        {
+          "creation_timestamp_ms": 1,
+          "id": {
+            "vault_nonce": "fixture",
+            "vault_subaccount_id": 1,
+            "wallet": "fixture"
+          },
+          "signed_action": {
+            "action": {
+              "data": [
+                1
+              ],
+              "expiry": 1,
+              "module": "fixture",
+              "nonce": 1,
+              "owner": "fixture",
+              "signer": "fixture",
+              "subaccount_id": 1
+            },
+            "signature": [
+              1
+            ]
+          },
+          "subaccount_id": 1,
+          "user_action_hash": "fixture",
+          "wallet": "fixture"
+        }
+      ],
+      "total": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_live_burn_requests",
+    "body": {
+      "limit": 1,
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_live_mint_requests": {
+    "request": {
+      "limit": 1,
+      "subaccount_id": 1
+    },
+    "response": {
+      "requests": [
+        {
+          "creation_timestamp_ms": 1,
+          "id": {
+            "vault_nonce": "fixture",
+            "vault_subaccount_id": 1,
+            "wallet": "fixture"
+          },
+          "signed_action": {
+            "action": {
+              "data": [
+                1
+              ],
+              "expiry": 1,
+              "module": "fixture",
+              "nonce": 1,
+              "owner": "fixture",
+              "signer": "fixture",
+              "subaccount_id": 1
+            },
+            "signature": [
+              1
+            ]
+          },
+          "subaccount_id": 1,
+          "user_action_hash": "fixture",
+          "wallet": "fixture"
+        }
+      ],
+      "total": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_live_mint_requests",
+    "body": {
+      "limit": 1,
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_mint_vault_shares": {
+    "request": {
+      "deposit_hash": "fixture",
+      "nonce": "fixture",
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "share_price": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/mint_vault_shares",
+    "body": {
+      "deposit_hash": "fixture",
+      "nonce": "fixture",
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "share_price": "0.12345678",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_reject_deposit_request": {
+    "request": {
+      "reason": "fixture",
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "subaccount_id": 1
+    },
+    "response": {
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/reject_deposit_request",
+    "body": {
+      "reason": "fixture",
+      "request_id": {
+        "vault_nonce": "fixture",
+        "vault_subaccount_id": 1,
+        "wallet": "fixture"
+      },
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_update_vault_info": {
+    "request": {
+      "description": "fixture",
+      "mtm_cap": "0.12345678",
+      "name": "fixture",
+      "subaccount_id": 1,
+      "whitelist_only": true
+    },
+    "response": {
+      "status": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/update_vault_info",
+    "body": {
+      "description": "fixture",
+      "mtm_cap": "0.12345678",
+      "name": "fixture",
+      "subaccount_id": 1,
+      "whitelist_only": true
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_deposit_history": {
+    "request": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "deposits": [
+        {
+          "action_id": 1,
+          "amount": "0.12345678",
+          "asset": "fixture",
+          "batch_status": "Batching",
+          "batch_uuid": "fixture",
+          "bridge_origin": {
+            "rail": "fixture",
+            "source_address": "fixture",
+            "source_chain_id": 1,
+            "source_tx_hash": "fixture"
+          },
+          "fallback_error_code": 1,
+          "fallback_error_data": "fixture",
+          "fallback_error_message": "fixture",
+          "fee": "0.12345678",
+          "is_fallback": true,
+          "l1_sender": "fixture",
+          "l1_tx_hash": "fixture",
+          "new_subaccount": true,
+          "operation_id": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "tx_hash": "fixture",
+          "wallet": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_deposit_history",
+    "body": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_erc20_transfer_history": {
+    "request": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "transfers": [
+        {
+          "amount": "0.12345678",
+          "asset": "fixture",
+          "batch_status": "Batching",
+          "batch_uuid": "fixture",
+          "fee": "0.12345678",
+          "from_subaccount_id": 1,
+          "from_wallet": "fixture",
+          "is_outgoing": true,
+          "operation_id": "fixture",
+          "timestamp": 1,
+          "to_subaccount_id": 1,
+          "to_wallet": "fixture",
+          "tx_hash": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_erc20_transfer_history",
+    "body": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_funding_history": {
+    "request": {
+      "end_timestamp": 1,
+      "instrument_name": "fixture",
+      "page": 1,
+      "page_size": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "events": [
+        {
+          "batch_status": "Batching",
+          "batch_uuid": "fixture",
+          "funding": "fixture",
+          "instrument_name": "fixture",
+          "pnl": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "tx_hash": "fixture"
+        }
+      ],
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_funding_history",
+    "body": {
+      "end_timestamp": 1,
+      "instrument_name": "fixture",
+      "page": 1,
+      "page_size": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_interest_history": {
+    "request": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "events": [
+        {
+          "interest": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_interest_history",
+    "body": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_option_settlement_history": {
+    "request": {
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "settlements": [
+        {
+          "amount": "0.12345678",
+          "expiry": 1,
+          "instrument_name": "fixture",
+          "option_settlement_pnl": "0.12345678",
+          "option_settlement_pnl_excl_fees": "0.12345678",
+          "settlement_price": "0.12345678",
+          "settlement_value": "0.12345678",
+          "subaccount_id": 1
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_option_settlement_history",
+    "body": {
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_order_history": {
+    "request": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "subaccount_id": 1,
+      "to_timestamp": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "orders": [
+        {
+          "algo_duration_sec": 1,
+          "algo_num_slices": 1,
+          "algo_slices_completed": 1,
+          "algo_type": "twap",
+          "amount": "0.12345678",
+          "average_price": "0.12345678",
+          "cancel_reason": "",
+          "creation_timestamp": 1,
+          "direction": "buy",
+          "extra_fee": "0.12345678",
+          "filled_amount": "0.12345678",
+          "instrument_name": "fixture",
+          "is_transfer": true,
+          "label": "fixture",
+          "last_update_timestamp": 1,
+          "limit_price": "0.12345678",
+          "max_fee": "0.12345678",
+          "mmp": true,
+          "nonce": "fixture",
+          "order_fee": "0.12345678",
+          "order_id": "fixture",
+          "order_status": "open",
+          "order_type": "limit",
+          "quote_id": "fixture",
+          "replaced_order_id": "fixture",
+          "signature": "fixture",
+          "signature_expiry_sec": 1,
+          "signed_limit_price": "0.12345678",
+          "signer": "fixture",
+          "subaccount_id": 1,
+          "time_in_force": "gtc",
+          "trigger_price": "0.12345678",
+          "trigger_price_type": "mark",
+          "trigger_reject_message": "fixture",
+          "trigger_type": "stoploss"
+        }
+      ],
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_order_history",
+    "body": {
+      "from_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "subaccount_id": 1,
+      "to_timestamp": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_trade_history": {
+    "request": {
+      "from_timestamp": 1,
+      "instrument_name": "fixture",
+      "order_id": "fixture",
+      "page": 1,
+      "page_size": 1,
+      "quote_id": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "subaccount_id": 1,
+      "trades": [
+        {
+          "batch_status": "Batching",
+          "direction": "buy",
+          "expected_rebate": "0.12345678",
+          "extra_fee": "0.12345678",
+          "index_price": "0.12345678",
+          "instrument_name": "fixture",
+          "is_transfer": true,
+          "label": "fixture",
+          "liquidity_role": "maker",
+          "mark_price": "0.12345678",
+          "op_uuid": "fixture",
+          "order_id": "fixture",
+          "quote_id": "fixture",
+          "realized_pnl": "0.12345678",
+          "realized_pnl_excl_fees": "0.12345678",
+          "rfq_id": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "trade_amount": "0.12345678",
+          "trade_fee": "0.12345678",
+          "trade_id": "fixture",
+          "trade_price": "0.12345678",
+          "tx_hash": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_trade_history",
+    "body": {
+      "from_timestamp": 1,
+      "instrument_name": "fixture",
+      "order_id": "fixture",
+      "page": 1,
+      "page_size": 1,
+      "quote_id": "fixture",
+      "subaccount_id": 1,
+      "to_timestamp": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_withdrawal_history": {
+    "request": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "withdrawals": [
+        {
+          "amount": "0.12345678",
+          "asset": "fixture",
+          "batch_status": "Batching",
+          "batch_uuid": "fixture",
+          "erc20_address": "fixture",
+          "fee": "0.12345678",
+          "forward": {
+            "amount_forwarded": "0.12345678",
+            "chain_id": 1,
+            "destination_tx": "fixture",
+            "forward_tx": "fixture",
+            "hold_reason": "fixture",
+            "message_id": "fixture",
+            "rail": "fixture",
+            "recipient": "fixture",
+            "status": "delivered"
+          },
+          "operation_id": "fixture",
+          "recipient": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "tx_hash": "fixture",
+          "wallet": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_withdrawal_history",
+    "body": {
+      "end_timestamp": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_mmp_config": {
+    "request": {
+      "currency": "fixture",
+      "subaccount_id": 1
+    },
+    "response": [
+      {
+        "currency": "fixture",
+        "is_frozen": true,
+        "mmp_amount_limit": "fixture",
+        "mmp_delta_limit": "fixture",
+        "mmp_frozen_time": 1,
+        "mmp_interval": 1,
+        "mmp_unfreeze_time": 1,
+        "subaccount_id": 1
+      }
+    ],
+    "route": "/v3/private/get_mmp_config",
+    "body": {
+      "currency": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_reset_mmp": {
+    "request": {
+      "currency": "fixture",
+      "subaccount_id": 1
+    },
+    "response": "ok",
+    "route": "/v3/private/reset_mmp",
+    "body": {
+      "currency": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_set_mmp_config": {
+    "request": {
+      "currency": "fixture",
+      "mmp_amount_limit": "0.12345678",
+      "mmp_delta_limit": "0.12345678",
+      "mmp_frozen_time": 1,
+      "mmp_interval": 1,
+      "subaccount_id": 1
+    },
+    "response": {
+      "currency": "fixture",
+      "mmp_amount_limit": "fixture",
+      "mmp_delta_limit": "fixture",
+      "mmp_frozen_time": 1,
+      "mmp_interval": 1,
+      "subaccount_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/set_mmp_config",
+    "body": {
+      "currency": "fixture",
+      "mmp_amount_limit": "0.12345678",
+      "mmp_delta_limit": "0.12345678",
+      "mmp_frozen_time": 1,
+      "mmp_interval": 1,
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_transfer_positions": {
+    "request": {
+      "maker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "taker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "wallet": "fixture"
+    },
+    "response": {
+      "maker_quote": {
+        "batch_status": "Batching",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "fee": "0.12345678",
+        "fill_pct": "0.12345678",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "legs_hash": "fixture",
+        "liquidity_role": "maker",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "quote_id": "fixture",
+        "rfq_id": "fixture",
+        "signature_expiry_sec": 1,
+        "status": "open",
+        "subaccount_id": 1,
+        "tx_hash": "fixture"
+      },
+      "taker_quote": {
+        "batch_status": "Batching",
+        "cancel_reason": "",
+        "creation_timestamp": 1,
+        "direction": "buy",
+        "extra_fee": "0.12345678",
+        "fee": "0.12345678",
+        "fill_pct": "0.12345678",
+        "is_transfer": true,
+        "label": "fixture",
+        "last_update_timestamp": 1,
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "legs_hash": "fixture",
+        "liquidity_role": "maker",
+        "max_fee": "0.12345678",
+        "mmp": true,
+        "nonce": "fixture",
+        "quote_id": "fixture",
+        "rfq_id": "fixture",
+        "signature_expiry_sec": 1,
+        "status": "open",
+        "subaccount_id": 1,
+        "tx_hash": "fixture"
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/transfer_positions",
+    "body": {
+      "maker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "taker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_transfer_positions_debug": {
+    "request": {
+      "maker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "taker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "wallet": "fixture"
+    },
+    "response": {
+      "maker_result": {
+        "action_hash": "fixture",
+        "action_typehash": "fixture",
+        "domain_separator": "fixture",
+        "encoded_data": "fixture",
+        "encoded_data_hashed": "fixture",
+        "expected_signer": "fixture",
+        "input_data": {
+          "data": {
+            "max_fee": "0.12345678",
+            "trades": [
+              {
+                "amount": "0.12345678",
+                "asset_address": "fixture",
+                "asset_sub_id": "fixture",
+                "price": "0.12345678"
+              }
+            ]
+          },
+          "expiry": 1,
+          "module": "fixture",
+          "nonce": "fixture",
+          "owner": "fixture",
+          "signer": "fixture",
+          "subaccount_id": 1
+        },
+        "module": "fixture",
+        "owner": "fixture",
+        "recovered_signer": "fixture",
+        "typed_data_hash": "fixture"
+      },
+      "taker_result": {
+        "action_hash": "fixture",
+        "action_typehash": "fixture",
+        "domain_separator": "fixture",
+        "encoded_data": "fixture",
+        "encoded_data_hashed": "fixture",
+        "expected_signer": "fixture",
+        "input_data": {
+          "data": {
+            "max_fee": "0.12345678",
+            "order_hash": "fixture"
+          },
+          "expiry": 1,
+          "module": "fixture",
+          "nonce": "fixture",
+          "owner": "fixture",
+          "signer": "fixture",
+          "subaccount_id": 1
+        },
+        "module": "fixture",
+        "owner": "fixture",
+        "recovered_signer": "fixture",
+        "typed_data_hash": "fixture"
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/transfer_positions_debug",
+    "body": {
+      "maker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "taker_params": {
+        "direction": "buy",
+        "legs": [
+          {
+            "amount": "0.12345678",
+            "direction": "buy",
+            "instrument_name": "fixture",
+            "price": "0.12345678"
+          }
+        ],
+        "max_fee": "0.12345678",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "signature_expiry_sec": 1,
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_transfer_spot": {
+    "request": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/transfer_spot",
+    "body": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_transfer_spot_debug": {
+    "request": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "response": {
+      "action_hash": "fixture",
+      "action_typehash": "fixture",
+      "domain_separator": "fixture",
+      "encoded_data": "fixture",
+      "encoded_data_hashed": "fixture",
+      "expected_signer": "fixture",
+      "input_data": {
+        "data": {
+          "amount": "0.12345678",
+          "asset": "fixture",
+          "max_fee_usd": "0.12345678",
+          "new_subaccount_manager": 1,
+          "sub_id": "fixture",
+          "to_subaccount_id": 1
+        },
+        "expiry": 1,
+        "module": "fixture",
+        "nonce": "fixture",
+        "owner": "fixture",
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "module": "fixture",
+      "owner": "fixture",
+      "recovered_signer": "fixture",
+      "typed_data_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/transfer_spot_debug",
+    "body": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_transfer_spot_external": {
+    "request": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "recipient_address": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/transfer_spot_external",
+    "body": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "recipient_address": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_transfer_spot_external_debug": {
+    "request": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "recipient_address": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "response": {
+      "action_hash": "fixture",
+      "action_typehash": "fixture",
+      "domain_separator": "fixture",
+      "encoded_data": "fixture",
+      "encoded_data_hashed": "fixture",
+      "expected_signer": "fixture",
+      "input_data": {
+        "data": {
+          "amount": "0.12345678",
+          "asset": "fixture",
+          "max_fee_usd": "0.12345678",
+          "new_subaccount_manager": 1,
+          "recipient_address": "fixture",
+          "sub_id": "fixture",
+          "to_subaccount_id": 1
+        },
+        "expiry": 1,
+        "module": "fixture",
+        "nonce": "fixture",
+        "owner": "fixture",
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "module": "fixture",
+      "owner": "fixture",
+      "recovered_signer": "fixture",
+      "typed_data_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/transfer_spot_external_debug",
+    "body": {
+      "amount": "0.12345678",
+      "asset_name": "fixture",
+      "max_fee_usd": "0.12345678",
+      "new_subaccount_manager": 1,
+      "nonce": "fixture",
+      "recipient_address": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "sub_id": 18446744073709551617,
+      "subaccount_id": 1,
+      "to_subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_update_whitelisted_recipients": {
+    "request": {
+      "add": [
+        "fixture"
+      ],
+      "nonce": "fixture",
+      "remove": [
+        "fixture"
+      ],
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "wallet": "fixture"
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "whitelisted_recipients": [
+        "fixture"
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/update_whitelisted_recipients",
+    "body": {
+      "add": [
+        "fixture"
+      ],
+      "nonce": "fixture",
+      "remove": [
+        "fixture"
+      ],
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_update_whitelisted_recipients_debug": {
+    "request": {
+      "add": [
+        "fixture"
+      ],
+      "nonce": "fixture",
+      "remove": [
+        "fixture"
+      ],
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "wallet": "fixture"
+    },
+    "response": {
+      "action_hash": "fixture",
+      "action_typehash": "fixture",
+      "domain_separator": "fixture",
+      "encoded_data": "fixture",
+      "encoded_data_hashed": "fixture",
+      "expected_signer": "fixture",
+      "input_data": {
+        "data": {
+          "add": [
+            "fixture"
+          ],
+          "remove": [
+            "fixture"
+          ]
+        },
+        "expiry": 1,
+        "module": "fixture",
+        "nonce": "fixture",
+        "owner": "fixture",
+        "signer": "fixture",
+        "subaccount_id": 1
+      },
+      "module": "fixture",
+      "owner": "fixture",
+      "recovered_signer": "fixture",
+      "typed_data_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/update_whitelisted_recipients_debug",
+    "body": {
+      "add": [
+        "fixture"
+      ],
+      "nonce": "fixture",
+      "remove": [
+        "fixture"
+      ],
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_withdraw": {
+    "request": {
+      "amount_in_underlying": "fixture",
+      "asset_name": "fixture",
+      "force_batch": true,
+      "max_fee_usd": "0.12345678",
+      "nonce": "fixture",
+      "recipient": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": {
+      "op_uuid": "fixture",
+      "operation_id": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/withdraw",
+    "body": {
+      "amount_in_underlying": "fixture",
+      "asset_name": "fixture",
+      "force_batch": true,
+      "max_fee_usd": "0.12345678",
+      "nonce": "fixture",
+      "recipient": "fixture",
+      "signature": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_withdraw_debug": {
+    "request": {
+      "amount_in_underlying": "fixture",
+      "asset_name": "fixture",
+      "force_batch": true,
+      "max_fee_usd": "0.12345678",
+      "nonce": "fixture",
+      "recipient": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "response": null,
+    "route": "/v3/public/withdraw_debug",
+    "body": {
+      "amount_in_underlying": "fixture",
+      "asset_name": "fixture",
+      "force_batch": true,
+      "max_fee_usd": "0.12345678",
+      "nonce": "fixture",
+      "recipient": "fixture",
+      "signature_expiry_sec": 1,
+      "signer": "fixture",
+      "subaccount_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_withdraw_addresses": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "withdraw_addresses": [
+        {
+          "address_kind": "evm",
+          "chain_id": 1,
+          "recipient": "fixture",
+          "recipient_display": "fixture",
+          "whitelisted": true,
+          "withdraw_address": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_withdraw_addresses",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_register_bridge_deposit": {
+    "request": {
+      "bridge_token": "fixture",
+      "bridge_token_decimals": 1,
+      "deposit_address": "fixture",
+      "expected_amount": "fixture",
+      "provider_transfer_id": "fixture",
+      "rail": "fixture",
+      "source_chain_id": 1,
+      "source_token": "fixture",
+      "source_tx_hash": "fixture",
+      "tool": "fixture",
+      "wallet": "fixture"
+    },
+    "response": {
+      "bridge_id": "fixture",
+      "bridge_status": "fixture",
+      "delivered_at_ms": 1,
+      "deposit_address": "fixture",
+      "expected_amount": "fixture",
+      "expires_at_ms": 1,
+      "provider_transfer_id": "fixture",
+      "rail": "fixture",
+      "receiving_amount": "fixture",
+      "receiving_token": "fixture",
+      "receiving_tx_hash": "fixture",
+      "source_address": "fixture",
+      "source_chain_id": 1,
+      "source_tx_hash": "fixture",
+      "substatus": "fixture",
+      "token": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/register_bridge_deposit",
+    "body": {
+      "bridge_token": "fixture",
+      "bridge_token_decimals": 1,
+      "deposit_address": "fixture",
+      "expected_amount": "fixture",
+      "provider_transfer_id": "fixture",
+      "rail": "fixture",
+      "source_chain_id": 1,
+      "source_token": "fixture",
+      "source_tx_hash": "fixture",
+      "tool": "fixture",
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_register_withdraw_address": {
+    "request": {
+      "chain_id": 1,
+      "recipient": "fixture",
+      "wallet": "fixture"
+    },
+    "response": {
+      "chain_id": 1,
+      "recipient": "fixture",
+      "recipient_display": "fixture",
+      "routes": [
+        {
+          "bridge_type": "fixture",
+          "symbol": "fixture",
+          "token": "fixture"
+        }
+      ],
+      "withdraw_address": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/register_withdraw_address",
+    "body": {
+      "chain_id": 1,
+      "recipient": "fixture",
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_onchain_action_history": {
+    "request": {
+      "action_type": 1,
+      "end_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "start_timestamp": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "actions": [
+        {
+          "acc": "fixture",
+          "action_id": 1,
+          "action_type": 1,
+          "action_type_label": "fixture",
+          "block_number": 1,
+          "data": "fixture",
+          "error_code": 1,
+          "error_data": "fixture",
+          "error_message": "fixture",
+          "fallback_at": 1,
+          "first_failed_at": 1,
+          "l1_sender": "fixture",
+          "last_failed_at": 1,
+          "op_uuid": "fixture",
+          "queue": "fixture",
+          "skip_reason": "fixture",
+          "skip_reason_code": "fixture",
+          "status": "fixture",
+          "tx_hash": "fixture",
+          "updated_at": 1
+        }
+      ],
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_onchain_action_history",
+    "body": {
+      "action_type": 1,
+      "end_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "start_timestamp": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_pending_deposits": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "pending_deposits": [
+        {
+          "action_id": 1,
+          "action_type": "fixture",
+          "amount": "fixture",
+          "asset": "fixture",
+          "block_number": 1,
+          "bridge_to_l1": {
+            "bridge_id": "fixture",
+            "bridge_status": "fixture",
+            "delivered_at_ms": 1,
+            "deposit_address": "fixture",
+            "expected_amount": "fixture",
+            "expires_at_ms": 1,
+            "provider_transfer_id": "fixture",
+            "rail": "fixture",
+            "receiving_amount": "fixture",
+            "receiving_token": "fixture",
+            "receiving_tx_hash": "fixture",
+            "source_address": "fixture",
+            "source_chain_id": 1,
+            "source_tx_hash": "fixture",
+            "substatus": "fixture",
+            "token": "fixture"
+          },
+          "deposit_type": "fixture",
+          "log_index": 1,
+          "manager_id": 1,
+          "status": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "tx_hash": "fixture",
+          "updated_at_ms": 1
+        }
+      ],
+      "wallet": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_pending_deposits",
+    "body": {
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_register_deposit_address": {
+    "request": {
+      "manager_id": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "deposit_address": "fixture",
+      "manager_id": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/register_deposit_address",
+    "body": {
+      "manager_id": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_decode_action": {
+    "request": {
+      "action_type": "order",
+      "encoded_data": "fixture"
+    },
+    "response": {
+      "action_type": "order",
+      "decoded": null,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/decode_action",
+    "body": {
+      "action_type": "order",
+      "encoded_data": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_rate_limits": {
+    "request": {},
+    "response": {
+      "remaining_connections": {
+        "consumedPoints": 1,
+        "isFirstInDuration": true,
+        "msBeforeNext": 1,
+        "remainingPoints": 1
+      },
+      "remaining_matching": {
+        "consumedPoints": 1,
+        "isFirstInDuration": true,
+        "msBeforeNext": 1,
+        "remainingPoints": 1
+      },
+      "remaining_non_matching": {
+        "consumedPoints": 1,
+        "isFirstInDuration": true,
+        "msBeforeNext": 1,
+        "remainingPoints": 1
+      },
+      "remaining_per_endpoint": {
+        "fixture": {
+          "consumedPoints": 1,
+          "isFirstInDuration": true,
+          "msBeforeNext": 1,
+          "remainingPoints": 1
+        }
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/getRateLimits",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_live_incidents": {
+    "request": {},
+    "response": {
+      "incidents": [
+        {
+          "creation_timestamp_sec": 1,
+          "label": "fixture",
+          "message": "fixture",
+          "monitor_type": "manual",
+          "severity": "low"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_live_incidents",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_time": {
+    "request": {},
+    "response": 1,
+    "route": "/v3/public/get_time",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_transaction": {
+    "request": {
+      "op_uuid": "fixture"
+    },
+    "response": {
+      "data": "fixture",
+      "error_log": "fixture",
+      "status": "Batching",
+      "transaction_hash": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_transaction",
+    "body": {
+      "op_uuid": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_all_currencies": {
+    "request": {},
+    "response": [
+      {
+        "currency": "fixture",
+        "managers": [
+          {
+            "pm": 1,
+            "risk_universe_id": 1,
+            "risk_universe_name": "fixture",
+            "sm": 1
+          }
+        ],
+        "market_type": "ALL",
+        "option": {
+          "address": "fixture",
+          "name": "fixture",
+          "universes": [
+            {
+              "oi": {
+                "current_open_interest": "fixture",
+                "interest_cap": "fixture"
+              },
+              "risk_universe_id": 1,
+              "risk_universe_name": "fixture",
+              "srm_perp_margin_requirements": {
+                "im_perp_req": "fixture",
+                "max_leverage": "fixture",
+                "mm_perp_req": "fixture"
+              }
+            }
+          ]
+        },
+        "perp": {
+          "address": "fixture",
+          "name": "fixture",
+          "universes": [
+            {
+              "oi": {
+                "current_open_interest": "fixture",
+                "interest_cap": "fixture"
+              },
+              "risk_universe_id": 1,
+              "risk_universe_name": "fixture",
+              "srm_perp_margin_requirements": {
+                "im_perp_req": "fixture",
+                "max_leverage": "fixture",
+                "mm_perp_req": "fixture"
+              }
+            }
+          ]
+        },
+        "spot": [
+          {
+            "address": "fixture",
+            "erc20": {
+              "decimals": 1,
+              "underlying_erc20": "fixture"
+            },
+            "min_deposit_usd": "fixture",
+            "name": "fixture",
+            "universes": [
+              {
+                "lending": {
+                  "borrow_apy": "fixture",
+                  "supply_apy": "fixture",
+                  "total_borrow": "fixture",
+                  "total_borrow_cap": "fixture"
+                },
+                "oi": {
+                  "current_open_interest": "fixture",
+                  "interest_cap": "fixture"
+                },
+                "pm2_im_discount": "fixture",
+                "pm2_mm_discount": "fixture",
+                "risk_universe_id": 1,
+                "srm_im_discount": "fixture",
+                "srm_mm_discount": "fixture"
+              }
+            ]
+          }
+        ],
+        "spot_price": "fixture",
+        "spot_price_24h": "fixture"
+      }
+    ],
+    "route": "/v3/public/get_all_currencies",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_all_instruments": {
+    "request": {
+      "currency": "fixture",
+      "expired": true,
+      "instrument_type": "option",
+      "page": 1,
+      "page_size": 1,
+      "risk_universe_id": 1
+    },
+    "response": {
+      "instruments": [
+        {
+          "amount_step": "fixture",
+          "base_asset_address": "fixture",
+          "base_asset_sub_id": "fixture",
+          "base_currency": "fixture",
+          "base_fee": "fixture",
+          "erc20_details": {
+            "borrow_index": "fixture",
+            "decimals": 1,
+            "supply_index": "fixture",
+            "underlying_erc20_address": "fixture"
+          },
+          "fifo_min_allocation": "fixture",
+          "instrument_name": "fixture",
+          "instrument_type": "option",
+          "is_active": true,
+          "maker_fee_rate": "fixture",
+          "mark_price_fee_rate_cap": "fixture",
+          "maximum_amount": "fixture",
+          "minimum_amount": "fixture",
+          "option_details": {
+            "expiry": 1,
+            "index": "fixture",
+            "option_type": "fixture",
+            "settlement_price": "fixture",
+            "strike": "fixture"
+          },
+          "perp_details": {
+            "aggregate_funding": "fixture",
+            "funding_rate": "fixture",
+            "index": "fixture",
+            "max_rate_per_hour": "fixture",
+            "min_rate_per_hour": "fixture",
+            "srm_perp_margin_requirements": {
+              "im_perp_req": "fixture",
+              "max_leverage": "fixture",
+              "mm_perp_req": "fixture"
+            }
+          },
+          "pro_rata_amount_step": "fixture",
+          "pro_rata_fraction": "fixture",
+          "quote_currency": "fixture",
+          "risk_universe_id": 1,
+          "scheduled_activation": 1,
+          "scheduled_deactivation": 1,
+          "taker_fee_rate": "fixture",
+          "tick_size": "fixture"
+        }
+      ],
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_all_instruments",
+    "body": {
+      "currency": "fixture",
+      "expired": true,
+      "instrument_type": "option",
+      "page": 1,
+      "page_size": 1,
+      "risk_universe_id": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_all_live_instruments": {
+    "request": {},
+    "response": [
+      "fixture"
+    ],
+    "route": "/v3/public/get_all_live_instruments",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_currency": {
+    "request": {
+      "currency": "fixture"
+    },
+    "response": {
+      "currency": "fixture",
+      "managers": [
+        {
+          "pm": 1,
+          "risk_universe_id": 1,
+          "risk_universe_name": "fixture",
+          "sm": 1
+        }
+      ],
+      "market_type": "ALL",
+      "option": {
+        "address": "fixture",
+        "name": "fixture",
+        "universes": [
+          {
+            "oi": {
+              "current_open_interest": "fixture",
+              "interest_cap": "fixture"
+            },
+            "risk_universe_id": 1,
+            "risk_universe_name": "fixture",
+            "srm_perp_margin_requirements": {
+              "im_perp_req": "fixture",
+              "max_leverage": "fixture",
+              "mm_perp_req": "fixture"
+            }
+          }
+        ]
+      },
+      "perp": {
+        "address": "fixture",
+        "name": "fixture",
+        "universes": [
+          {
+            "oi": {
+              "current_open_interest": "fixture",
+              "interest_cap": "fixture"
+            },
+            "risk_universe_id": 1,
+            "risk_universe_name": "fixture",
+            "srm_perp_margin_requirements": {
+              "im_perp_req": "fixture",
+              "max_leverage": "fixture",
+              "mm_perp_req": "fixture"
+            }
+          }
+        ]
+      },
+      "spot": [
+        {
+          "address": "fixture",
+          "erc20": {
+            "decimals": 1,
+            "underlying_erc20": "fixture"
+          },
+          "min_deposit_usd": "fixture",
+          "name": "fixture",
+          "universes": [
+            {
+              "lending": {
+                "borrow_apy": "fixture",
+                "supply_apy": "fixture",
+                "total_borrow": "fixture",
+                "total_borrow_cap": "fixture"
+              },
+              "oi": {
+                "current_open_interest": "fixture",
+                "interest_cap": "fixture"
+              },
+              "pm2_im_discount": "fixture",
+              "pm2_mm_discount": "fixture",
+              "risk_universe_id": 1,
+              "srm_im_discount": "fixture",
+              "srm_mm_discount": "fixture"
+            }
+          ]
+        }
+      ],
+      "spot_price": "fixture",
+      "spot_price_24h": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_currency",
+    "body": {
+      "currency": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_funding_rate_history": {
+    "request": {
+      "end_timestamp": 1,
+      "instrument_name": "fixture",
+      "period": 1,
+      "start_timestamp": 1
+    },
+    "response": {
+      "funding_rate_history": [
+        {
+          "close": "fixture",
+          "currency": "fixture",
+          "funding_rate": "fixture",
+          "high": "fixture",
+          "low": "fixture",
+          "open": "fixture",
+          "risk_universe_id": 1,
+          "timestamp": 1
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_funding_rate_history",
+    "body": {
+      "end_timestamp": 1,
+      "instrument_name": "fixture",
+      "period": 1,
+      "start_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_index_chart_data": {
+    "request": {
+      "currency": "fixture",
+      "end_timestamp": 1,
+      "period": 1,
+      "start_timestamp": 1
+    },
+    "response": [
+      {
+        "close_price": "fixture",
+        "high_price": "fixture",
+        "low_price": "fixture",
+        "open_price": "fixture",
+        "price": "fixture",
+        "timestamp": 1,
+        "timestamp_bucket": 1
+      }
+    ],
+    "route": "/v3/public/get_index_chart_data",
+    "body": {
+      "currency": "fixture",
+      "end_timestamp": 1,
+      "period": 1,
+      "start_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_instrument": {
+    "request": {
+      "instrument_name": "fixture"
+    },
+    "response": {
+      "amount_step": "fixture",
+      "base_asset_address": "fixture",
+      "base_asset_sub_id": "fixture",
+      "base_currency": "fixture",
+      "base_fee": "fixture",
+      "erc20_details": {
+        "borrow_index": "fixture",
+        "decimals": 1,
+        "supply_index": "fixture",
+        "underlying_erc20_address": "fixture"
+      },
+      "fifo_min_allocation": "fixture",
+      "instrument_name": "fixture",
+      "instrument_type": "option",
+      "is_active": true,
+      "maker_fee_rate": "fixture",
+      "mark_price_fee_rate_cap": "fixture",
+      "maximum_amount": "fixture",
+      "minimum_amount": "fixture",
+      "option_details": {
+        "expiry": 1,
+        "index": "fixture",
+        "option_type": "fixture",
+        "settlement_price": "fixture",
+        "strike": "fixture"
+      },
+      "perp_details": {
+        "aggregate_funding": "fixture",
+        "funding_rate": "fixture",
+        "index": "fixture",
+        "max_rate_per_hour": "fixture",
+        "min_rate_per_hour": "fixture",
+        "srm_perp_margin_requirements": {
+          "im_perp_req": "fixture",
+          "max_leverage": "fixture",
+          "mm_perp_req": "fixture"
+        }
+      },
+      "pro_rata_amount_step": "fixture",
+      "pro_rata_fraction": "fixture",
+      "quote_currency": "fixture",
+      "risk_universe_id": 1,
+      "scheduled_activation": 1,
+      "scheduled_deactivation": 1,
+      "taker_fee_rate": "fixture",
+      "tick_size": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_instrument",
+    "body": {
+      "instrument_name": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_interest_rate_history": {
+    "request": {
+      "currency": "fixture",
+      "end_timestamp": 1,
+      "period": 1,
+      "risk_universe_id": 1,
+      "start_timestamp": 1
+    },
+    "response": {
+      "interest_rate_history": [
+        {
+          "borrow_apy": {
+            "close": "fixture",
+            "high": "fixture",
+            "low": "fixture",
+            "open": "fixture"
+          },
+          "risk_universe_id": 1,
+          "supply_apy": {
+            "close": "fixture",
+            "high": "fixture",
+            "low": "fixture",
+            "open": "fixture"
+          },
+          "timestamp": 1,
+          "total_borrow": "fixture",
+          "total_supply": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_interest_rate_history",
+    "body": {
+      "currency": "fixture",
+      "end_timestamp": 1,
+      "period": 1,
+      "risk_universe_id": 1,
+      "start_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_latest_signed_feeds": {
+    "request": {
+      "currency": "fixture",
+      "expiry": 1
+    },
+    "response": {
+      "funding_data": {
+        "fixture": {
+          "confidence": "fixture",
+          "currency": "fixture",
+          "deadline": 1,
+          "funding_rate": "fixture",
+          "signatures": {
+            "signatures": [
+              "fixture"
+            ],
+            "signers": [
+              "fixture"
+            ]
+          },
+          "timestamp": 1
+        }
+      },
+      "fwd_data": {
+        "fixture": {
+          "fixture": {
+            "confidence": "fixture",
+            "currency": "fixture",
+            "deadline": 1,
+            "expiry": 1,
+            "fwd_diff": "fixture",
+            "signatures": {
+              "signatures": [
+                "fixture"
+              ],
+              "signers": [
+                "fixture"
+              ]
+            },
+            "spot_aggregate_latest": "fixture",
+            "spot_aggregate_start": "fixture",
+            "timestamp": 1
+          }
+        }
+      },
+      "perp_data": {
+        "fixture": {
+          "fixture": {
+            "confidence": "fixture",
+            "currency": "fixture",
+            "deadline": 1,
+            "signatures": {
+              "signatures": [
+                "fixture"
+              ],
+              "signers": [
+                "fixture"
+              ]
+            },
+            "spot_diff_value": "fixture",
+            "timestamp": 1,
+            "type": "fixture"
+          }
+        }
+      },
+      "rate_data": {
+        "fixture": {
+          "fixture": {
+            "confidence": "fixture",
+            "currency": "fixture",
+            "deadline": 1,
+            "expiry": 1,
+            "rate": "fixture",
+            "signatures": {
+              "signatures": [
+                "fixture"
+              ],
+              "signers": [
+                "fixture"
+              ]
+            },
+            "timestamp": 1
+          }
+        }
+      },
+      "spot_data": {
+        "fixture": {
+          "confidence": "fixture",
+          "currency": "fixture",
+          "deadline": 1,
+          "feed_source_type": "fixture",
+          "price": "fixture",
+          "signatures": {
+            "signatures": [
+              "fixture"
+            ],
+            "signers": [
+              "fixture"
+            ]
+          },
+          "timestamp": 1
+        }
+      },
+      "vol_data": {
+        "fixture": {
+          "fixture": {
+            "confidence": "fixture",
+            "currency": "fixture",
+            "deadline": 1,
+            "expiry": 1,
+            "signatures": {
+              "signatures": [
+                "fixture"
+              ],
+              "signers": [
+                "fixture"
+              ]
+            },
+            "timestamp": 1,
+            "vol_data": {
+              "SVI_a": "fixture",
+              "SVI_b": "fixture",
+              "SVI_fwd": "fixture",
+              "SVI_m": "fixture",
+              "SVI_refTau": "fixture",
+              "SVI_rho": "fixture",
+              "SVI_sigma": "fixture"
+            }
+          }
+        }
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_latest_signed_feeds",
+    "body": {
+      "currency": "fixture",
+      "expiry": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_option_settlement_prices": {
+    "request": {
+      "currency": "fixture"
+    },
+    "response": {
+      "expiries": [
+        {
+          "expiry_date": "fixture",
+          "price": "fixture",
+          "utc_expiry_sec": 1
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_option_settlement_prices",
+    "body": {
+      "currency": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_perp_impact_twap": {
+    "request": {
+      "currency": "fixture",
+      "end_time": 1,
+      "start_time": 1
+    },
+    "response": {
+      "ask_impact_diff_twap": "fixture",
+      "bid_impact_diff_twap": "fixture",
+      "currency": "fixture",
+      "mid_price_diff_twap": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_perp_impact_twap",
+    "body": {
+      "currency": "fixture",
+      "end_time": 1,
+      "start_time": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_risk_universes": {
+    "request": {},
+    "response": [
+      {
+        "description": "fixture",
+        "managers": [
+          {
+            "collaterals": [
+              {
+                "address": "fixture",
+                "erc20": {
+                  "decimals": 1,
+                  "underlying_erc20": "fixture"
+                },
+                "im_discount": "fixture",
+                "min_deposit_usd": "fixture",
+                "mm_discount": "fixture",
+                "name": "fixture"
+              }
+            ],
+            "instruments": [
+              "fixture"
+            ],
+            "manager_id": 1,
+            "margin_type": "SM"
+          }
+        ],
+        "name": "fixture",
+        "risk_universe_id": 1,
+        "security_module": {
+          "cash_asset": "fixture",
+          "cash_currency": "fixture",
+          "subaccount_id": 1
+        }
+      }
+    ],
+    "route": "/v3/public/get_risk_universes",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_ticker": {
+    "request": {
+      "instrument_name": "fixture"
+    },
+    "response": {
+      "A": "fixture",
+      "B": "fixture",
+      "I": "fixture",
+      "M": "fixture",
+      "a": "fixture",
+      "b": "fixture",
+      "f": "fixture",
+      "maxp": "fixture",
+      "minp": "fixture",
+      "option_pricing": {
+        "ai": "fixture",
+        "bi": "fixture",
+        "d": "fixture",
+        "df": "fixture",
+        "f": "fixture",
+        "g": "fixture",
+        "i": "fixture",
+        "m": "fixture",
+        "r": "fixture",
+        "t": "fixture",
+        "v": "fixture"
+      },
+      "stats": {
+        "c": "0.12345678",
+        "h": "0.12345678",
+        "l": "0.12345678",
+        "n": 1,
+        "oi": "0.12345678",
+        "p": "0.12345678",
+        "pr": "0.12345678",
+        "v": "0.12345678"
+      },
+      "t": 1,
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_ticker",
+    "body": {
+      "instrument_name": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_tickers": {
+    "request": {
+      "currency": "fixture",
+      "expiry_date": 1,
+      "instrument_type": "option"
+    },
+    "response": {
+      "tickers": {
+        "fixture": {
+          "A": "fixture",
+          "B": "fixture",
+          "I": "fixture",
+          "M": "fixture",
+          "a": "fixture",
+          "b": "fixture",
+          "f": "fixture",
+          "maxp": "fixture",
+          "minp": "fixture",
+          "option_pricing": {
+            "ai": "fixture",
+            "bi": "fixture",
+            "d": "fixture",
+            "df": "fixture",
+            "f": "fixture",
+            "g": "fixture",
+            "i": "fixture",
+            "m": "fixture",
+            "r": "fixture",
+            "t": "fixture",
+            "v": "fixture"
+          },
+          "stats": {
+            "c": "0.12345678",
+            "h": "0.12345678",
+            "l": "0.12345678",
+            "n": 1,
+            "oi": "0.12345678",
+            "p": "0.12345678",
+            "pr": "0.12345678",
+            "v": "0.12345678"
+          },
+          "t": 1
+        }
+      },
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_tickers",
+    "body": {
+      "currency": "fixture",
+      "expiry_date": 1,
+      "instrument_type": "option"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_trade_history": {
+    "request": {
+      "batch_status": "Batching",
+      "currency": "fixture",
+      "from_timestamp": 1,
+      "instrument_name": "fixture",
+      "instrument_type": "option",
+      "page": 1,
+      "page_size": 1,
+      "subaccount_id": 1,
+      "to_timestamp": 1,
+      "trade_id": "fixture"
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "trades": [
+        {
+          "batch_status": "Batching",
+          "direction": "buy",
+          "expected_rebate": "0.12345678",
+          "extra_fee": "0.12345678",
+          "index_price": "0.12345678",
+          "instrument_name": "fixture",
+          "liquidity_role": "maker",
+          "mark_price": "0.12345678",
+          "quote_id": "fixture",
+          "realized_pnl": "0.12345678",
+          "realized_pnl_excl_fees": "0.12345678",
+          "rfq_id": "fixture",
+          "subaccount_id": 1,
+          "timestamp": 1,
+          "trade_amount": "0.12345678",
+          "trade_fee": "0.12345678",
+          "trade_id": "fixture",
+          "trade_price": "0.12345678",
+          "tx_hash": "fixture",
+          "wallet": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_trade_history",
+    "body": {
+      "batch_status": "Batching",
+      "currency": "fixture",
+      "from_timestamp": 1,
+      "instrument_name": "fixture",
+      "instrument_type": "option",
+      "page": 1,
+      "page_size": 1,
+      "subaccount_id": 1,
+      "to_timestamp": 1,
+      "trade_id": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_tradingview_chart_data": {
+    "request": {
+      "end_timestamp": 1,
+      "instrument_name": "fixture",
+      "period": 1,
+      "start_timestamp": 1
+    },
+    "response": [
+      {
+        "close_price": "fixture",
+        "high_price": "fixture",
+        "low_price": "fixture",
+        "open_price": "fixture",
+        "timestamp": 1,
+        "timestamp_bucket": 1,
+        "volume_contracts": "fixture",
+        "volume_usd": "fixture"
+      }
+    ],
+    "route": "/v3/public/get_tradingview_chart_data",
+    "body": {
+      "end_timestamp": 1,
+      "instrument_name": "fixture",
+      "period": 1,
+      "start_timestamp": 1
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_maker_program_scores": {
+    "request": {
+      "epoch_start_timestamp": 1,
+      "program_name": "fixture"
+    },
+    "response": {
+      "program": {
+        "asset_types": [
+          "fixture"
+        ],
+        "currencies": [
+          "fixture"
+        ],
+        "end_timestamp": 1,
+        "min_notional": "fixture",
+        "name": "fixture",
+        "rewards": {
+          "fixture": "fixture"
+        },
+        "start_timestamp": 1
+      },
+      "scores": [
+        {
+          "coverage_score": "fixture",
+          "holder_boost": "fixture",
+          "quality_score": "fixture",
+          "total_score": "fixture",
+          "volume": "fixture",
+          "volume_multiplier": "fixture",
+          "wallet": "fixture"
+        }
+      ],
+      "total_score": "fixture",
+      "total_volume": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_maker_program_scores",
+    "body": {
+      "epoch_start_timestamp": 1,
+      "program_name": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_maker_programs": {
+    "request": {},
+    "response": [
+      {
+        "asset_types": [
+          "fixture"
+        ],
+        "currencies": [
+          "fixture"
+        ],
+        "end_timestamp": 1,
+        "min_notional": "fixture",
+        "name": "fixture",
+        "rewards": {
+          "fixture": "fixture"
+        },
+        "start_timestamp": 1
+      }
+    ],
+    "route": "/v3/public/get_maker_programs",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_all_referral_codes": {
+    "request": {},
+    "response": [
+      {
+        "receiving_wallet": "fixture",
+        "referral_code": "fixture",
+        "wallet": "fixture"
+      }
+    ],
+    "route": "/v3/public/get_all_referral_codes",
+    "body": {},
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "public_get_referral_performance": {
+    "request": {
+      "end_ms": 1,
+      "referral_code": "fixture",
+      "start_ms": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "fee_share_percentage": "fixture",
+      "referral_code": "fixture",
+      "rewards": {
+        "fixture": {
+          "fixture": {
+            "fixture": {
+              "builder_fee": "fixture",
+              "fee_reward": "fixture",
+              "notional_volume": "fixture",
+              "referred_fee": "fixture",
+              "unique_traders_referred": 1
+            }
+          }
+        }
+      },
+      "stdrv_balance": "fixture",
+      "total_builder_fee_collected": "fixture",
+      "total_fee_rewards": "fixture",
+      "total_notional_volume": "fixture",
+      "total_referred_fees": "fixture",
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/public/get_referral_performance",
+    "body": {
+      "end_ms": 1,
+      "referral_code": "fixture",
+      "start_ms": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "private_get_subaccount_value_history": {
+    "request": {
+      "end_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "period": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "response": {
+      "pagination": {
+        "count": 1,
+        "num_pages": 1
+      },
+      "subaccount_value_history": [
+        {
+          "currency": "fixture",
+          "initial_margin": "0.12345678",
+          "maintenance_margin": "0.12345678",
+          "margin_type": "fixture",
+          "subaccount_id": 1,
+          "subaccount_value": "0.12345678",
+          "timestamp": 1
+        }
+      ],
+      "future_field": {
+        "exact": "123456789012345678901234567890.12345678"
+      }
+    },
+    "route": "/v3/private/get_subaccount_value_history",
+    "body": {
+      "end_timestamp": 1,
+      "page": 1,
+      "page_size": 1,
+      "period": 1,
+      "start_timestamp": 1,
+      "subaccount_id": 1,
+      "wallet": "fixture"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

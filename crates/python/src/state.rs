@@ -20,6 +20,24 @@ pub trait ClientResources: Clone + Send + Sync + 'static {
     fn transport(&self) -> &aux_rs::StandardTransport;
 }
 impl<P: ClientResources> ClientState<P> {
+    /// Lifecycle-aware work returning an owned Python resource rather than JSON.
+    pub fn object<'py, F>(
+        self: &Arc<Self>,
+        py: Python<'py>,
+        future: F,
+    ) -> PyResult<Bound<'py, PyAny>>
+    where
+        F: Future<Output = PyResult<Py<PyAny>>> + Send + 'static,
+    {
+        let state = self.clone();
+        let mut closing = self.closing.subscribe();
+        pyo3_async_runtimes::tokio::future_into_py(py, async move {
+            if state.is_closed() {
+                return Err(errors::ClosedError::new_err("client is closed"));
+            }
+            tokio::select! {biased;_=closing.changed()=>Err(errors::ClosedError::new_err("client is closed")),result=future=>result}
+        })
+    }
     pub fn new(client: P) -> Arc<Self> {
         Arc::new(Self {
             transport: client.transport().clone(),

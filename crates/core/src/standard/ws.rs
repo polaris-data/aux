@@ -370,6 +370,21 @@ async fn authenticate(
                         return Ok(Some(text.to_string()));
                     }
                 }
+                Some(Ok(Message::Binary(bytes))) => {
+                    let text = spec.decode_binary_message(&bytes)?;
+                    if text.len() > config.max_message_bytes {
+                        return Err(TransportError::new(
+                            TransportErrorKind::ResponseTooLarge,
+                            RequestOutcome::Unknown,
+                            "decoded authentication frame exceeded limit",
+                        ));
+                    }
+                    if spec.is_data_message(&text) {
+                        return Err(protocol(
+                            "channel data arrived before authentication completed",
+                        ));
+                    }
+                }
                 Some(Ok(Message::Ping(_))) => {
                     socket.flush().await.map_err(|_| disconnected())?;
                 }
@@ -530,7 +545,12 @@ async fn connected(
                     Some(Ok(Message::Text(text)))=>text.to_string(),
                     Some(Ok(Message::Ping(_)))=>{if timeout(config.timeout,socket.flush()).await.map_or(true,|r|r.is_err()){return(Some(disconnected()),healthy,None);}continue;},
                     Some(Ok(Message::Pong(_)))=>continue,
-                    Some(Ok(Message::Binary(_)))|Some(Ok(Message::Frame(_)))=>return(Some(protocol("expected a text WebSocket frame")),healthy,None),
+                    Some(Ok(Message::Binary(bytes)))=>match owner.as_ref().map(|s|s.decode_binary_message(&bytes)) {
+                        Some(Ok(text))=>{if text.len()>config.max_message_bytes{return(Some(TransportError::new(TransportErrorKind::ResponseTooLarge,RequestOutcome::Unknown,"decoded WebSocket frame exceeded configured limit")),healthy,None);}text},
+                        Some(Err(error))=>return(Some(error),healthy,None),
+                        None=>return(Some(protocol("binary frame without a subscription codec")),healthy,None),
+                    },
+                    Some(Ok(Message::Frame(_)))=>return(Some(protocol("unexpected raw WebSocket frame")),healthy,None),
                     Some(Err(WsError::Capacity(_)))=>return(Some(TransportError::new(TransportErrorKind::ResponseTooLarge,RequestOutcome::Unknown,"WebSocket frame exceeded configured limit")),healthy,None),
                     Some(Err(WsError::Protocol(_)))|Some(Err(WsError::Utf8(_)))=>return(Some(protocol("invalid WebSocket protocol frame")),healthy,None),
                     Some(Ok(Message::Close(_)))|Some(Err(_))|None=>return(Some(disconnected()),healthy,None),

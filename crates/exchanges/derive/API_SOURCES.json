@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-11-03",
+  "rest_operations": 128,
+  "websocket_entries": 17,
+  "inventory_sha256": "24edfe51a30a61675c83c837b01d48f6cc137d0905df65013a4dc60103058200",
+  "repositories": [
+    {
+      "repository": "https://github.com/derivexyz/derive-rs",
+      "commit": "8735ff5b3b91efefbe0b5b06bc6cc45d92c97dbe",
+      "license": "MIT",
+      "use": "v3 schemas and authentication reference"
+    },
+    {
+      "repository": "https://github.com/derivexyz/derive-ts",
+      "commit": "f15f1b8776a7535f2609bf9130265d1a67704077",
+      "license": "MIT",
+      "use": "module codecs and EIP-712 signing vectors; ethers 6.16.0, tsx 4.20.6"
+    }
+  ],
+  "input_sha256": {
+    "openapi.json": "db04922415bba95bc849e4c9953a3e90a1bc3696cd9064288c8681c420303c58",
+    "subscriptions.asyncapi.json": "8b90e34b6e5685c6c70c79d55743668902585c66dfc0ca4830db2e5f9a4f37f9",
+    "websocket.asyncapi.json": "d77698045f9feb82bbbbdd9b75e77fb60946bcf58ce28bf4a76bdc28bc240478"
+  },
+  "generation": "Schemas are external generation inputs, not repository files. See SIGNING.md and scripts/generate-native-apis.py --help.",
+  "websocket_inventory_sha256": "231e218fdd3b296067e57304b0c25da969eefe8421e4dbaaad4ecd05cfd13cd1",
+  "schema_sources": {
+    "openapi.json": "https://docs.derive.xyz/openapi.json",
+    "subscriptions.asyncapi.json": "https://docs.derive.xyz/subscriptions.asyncapi.json",
+    "websocket.asyncapi.json": "https://docs.derive.xyz/websocket.asyncapi.json"
+  }
+}

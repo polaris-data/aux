@@ -1,6 +1,6 @@
 [workspace]
-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/python"]
-default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco"]
+members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python"]
+default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex"]
 resolver = "3"
 
 [workspace.package]
@@ -10,6 +10,11 @@ rust-version = "1.92"
 publish = false
 
 [workspace.dependencies]
+time = { version = "0.3", default-features = false, features = ["std", "formatting"] }
+aux-rs-derive = { path = "crates/exchanges/derive", default-features = false }
+aux-rs-paradex = { path = "crates/exchanges/paradex", default-features = false }
+starknet-core = { version = "=0.16.0", default-features = false }
+starknet-crypto = { version = "=0.8.1", default-features = false }
 aux-rs-monaco = { path = "crates/exchanges/monaco", default-features = false }
 base64 = "0.22"
 url = "2.5"

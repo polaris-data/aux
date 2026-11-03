@@ -204,7 +204,7 @@ source distribution before publishing to PyPI.
 ## Dependency changes
 
 Default facade features are `http` and `ws`; no exchange is selected automatically.
-Exchange features (`hyperliquid`, `lighter`, `qfex`, `arcus`, and `monaco`) are additive and
+Exchange features (`hyperliquid`, `lighter`, `qfex`, `arcus`, `monaco`, `derive`, and `paradex`) are additive and
 must not force standard transport features. Keep internal adapter dependencies'
 default features disabled. With `default-features = false`, selected adapters
 remain usable with caller-supplied transports. Core contracts must not require
@@ -304,6 +304,17 @@ subscriptions and reconnect replay. Public staging REST and orderbook snapshots
 were verified; staging rejected the documented depth channel. See the
 [Monaco guide](crates/exchanges/monaco/README.md) for coverage and release gates.
 
+Derive v3 and Paradex have native Rust and Python coverage of the pinned published
+API union: 128 and 142 REST operations respectively, plus 17 and 30 WebSocket
+entries. Paradex includes all 12 SBE 1:3 templates. Generated coverage manifests
+map named methods to fixtures and tests; `scripts/check-native-coverage.py`
+checks inventory hashes and fixture parity offline. Schema snapshots are external
+generation inputs; pass `--reference-root PATH` to also check reproducible
+generation against them. Consult the
+[Derive guide](crates/exchanges/derive/README.md) and
+[Paradex guide](crates/exchanges/paradex/README.md) for signing provenance,
+explicit token renewal, isolated RPC reconciliation, and verification limits.
+
 Remaining release gates and work:
 
 - Funded authenticated submit/cancel verification remains pending for every venue,
@@ -338,5 +349,6 @@ additional venues is undecided.
 - [ ] Extended
 - [ ] Pacifica
 - [ ] Bulk
-- [ ] Paradex
+- [x] Paradex
 - [x] Monaco
+- [x] Derive v3

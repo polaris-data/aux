@@ -8,6 +8,8 @@ from typing import Any
 from . import _native
 from ._native import (
     ArcusSigner,
+    DeriveSigner,
+    ParadexSigner,
     MonacoWalletSigner,
     MonacoSessionSigner,
     OutcomeUncertainError,
@@ -47,6 +49,7 @@ __all__ = [
     "lighter_auth_signing_payload", "lighter_transaction_signing_payload",
     "QfexClient", "ArcusClient", "ArcusSigner", "OutcomeUncertainError",
     "MonacoClient", "MonacoWalletSigner", "MonacoSessionSigner",
+    "DeriveClient", "DeriveSigner", "DeriveRpcSession", "ParadexClient", "ParadexSigner", "ParadexRpcSession",
     "__version__",
 ]
 
@@ -558,3 +561,6 @@ class MonacoClient:
 
     async def __aexit__(self, *_: Any) -> None:
         await self.aclose()
+
+from ._derive import DeriveClient, DeriveRpcSession
+from ._paradex import ParadexClient, ParadexRpcSession

@@ -19,3 +19,9 @@ pub use aux_rs_arcus as arcus;
 
 #[cfg(feature = "monaco")]
 pub use aux_rs_monaco as monaco;
+
+#[cfg(feature = "derive")]
+pub use aux_rs_derive as derive;
+
+#[cfg(feature = "paradex")]
+pub use aux_rs_paradex as paradex;

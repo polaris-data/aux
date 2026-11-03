@@ -4,9 +4,11 @@
 mod arcus;
 mod client;
 mod convert;
+mod derive;
 mod errors;
 mod lighter;
 mod monaco;
+mod paradex;
 mod qfex;
 mod signers;
 mod state;
@@ -16,6 +18,12 @@ use pyo3::prelude::*;
 
 #[pymodule]
 fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_class::<derive::DeriveClient>()?;
+    module.add_class::<derive::DeriveSigner>()?;
+    module.add_class::<derive::DeriveRpcSession>()?;
+    module.add_class::<paradex::ParadexClient>()?;
+    module.add_class::<paradex::ParadexSigner>()?;
+    module.add_class::<paradex::ParadexRpcSession>()?;
     module.add_class::<client::HyperliquidClient>()?;
     module.add_class::<qfex::QfexClient>()?;
     module.add_class::<arcus::ArcusClient>()?;

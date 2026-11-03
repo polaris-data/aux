@@ -1,0 +1,797 @@
+{
+  "account": {
+    "address": "account",
+    "specification": {
+      "type": "account"
+    },
+    "payload": {
+      "account": "fixture",
+      "account_value": "fixture",
+      "free_collateral": "fixture",
+      "initial_margin_requirement": "fixture",
+      "last_seen_notification": 1,
+      "maintenance_margin_requirement": "fixture",
+      "margin_cushion": "fixture",
+      "seq_no": 1,
+      "settlement_asset": "fixture",
+      "status": "fixture",
+      "total_collateral": "fixture",
+      "updated_at": 1,
+      "withdrawal_lock": {
+        "amount": "fixture",
+        "expires_at": 1,
+        "request_id": "fixture",
+        "status": "PENDING"
+      },
+      "withdrawal_lock_rejection": {
+        "amount": "fixture",
+        "reason": "fixture",
+        "rejected_at": 1,
+        "request_id": "fixture"
+      }
+    }
+  },
+  "auth": {
+    "address": "auth",
+    "specification": null,
+    "payload": {
+      "bearer": "fixture"
+    },
+    "response": {
+      "node_id": "fixture"
+    }
+  },
+  "balance_events": {
+    "address": "balance_events",
+    "specification": {
+      "type": "balance_events"
+    },
+    "payload": {
+      "created_at": 1,
+      "fees": "fixture",
+      "fill_id": "fixture",
+      "funding_index": "fixture",
+      "market": "fixture",
+      "realized_funding": "fixture",
+      "realized_pnl": "fixture",
+      "settlement_asset_address": "fixture",
+      "settlement_asset_balance_after": "fixture",
+      "settlement_asset_balance_before": "fixture",
+      "settlement_asset_name": "fixture",
+      "settlement_asset_price": "fixture",
+      "status": "fixture",
+      "type": "fixture"
+    }
+  },
+  "bbo_market_symbol": {
+    "address": "bbo.ETH-USD-PERP",
+    "specification": {
+      "type": "bbo",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "ask": "fixture",
+      "ask_size": "fixture",
+      "bid": "fixture",
+      "bid_size": "fixture",
+      "last_updated_at": 1,
+      "market": "fixture",
+      "seq_no": 1
+    }
+  },
+  "fills_market_symbol": {
+    "address": "fills.ETH-USD-PERP",
+    "specification": {
+      "type": "fills",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "account": "fixture",
+      "client_id": "fixture",
+      "created_at": 1,
+      "fee": "fixture",
+      "fee_currency": "fixture",
+      "fill_type": "LIQUIDATION",
+      "flags": [
+        "fixture"
+      ],
+      "id": "fixture",
+      "leverage": "fixture",
+      "liquidity": "TAKER",
+      "market": "fixture",
+      "order_id": "fixture",
+      "orderbook_seq_no": 1,
+      "price": "fixture",
+      "realized_funding": "fixture",
+      "realized_pnl": "fixture",
+      "remaining_size": "fixture",
+      "side": "BUY",
+      "size": "fixture",
+      "underlying_price": "fixture"
+    }
+  },
+  "funding_data_market_symbol": {
+    "address": "funding_data.ETH-USD-PERP",
+    "specification": {
+      "type": "funding_data",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "created_at": 1,
+      "funding_index": "fixture",
+      "funding_period_hours": 1,
+      "funding_premium": "fixture",
+      "funding_rate": "fixture",
+      "funding_rate_8h": "fixture",
+      "impact_premium_rate": "fixture",
+      "market": "fixture"
+    }
+  },
+  "funding_payments_market_symbol": {
+    "address": "funding_payments.ETH-USD-PERP",
+    "specification": {
+      "type": "funding_payments",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "account": "fixture",
+      "created_at": 1,
+      "fill_id": "fixture",
+      "id": "fixture",
+      "index": "fixture",
+      "market": "fixture",
+      "payment": "fixture"
+    }
+  },
+  "markets_market_symbol": {
+    "address": "markets.ETH-USD-PERP",
+    "specification": {
+      "type": "markets",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "changed_fields": {
+        "asset_kind": "fixture",
+        "base_currency": "fixture",
+        "clamp_rate": 1,
+        "delta1_cross_margin_params": {},
+        "expiry_at": 1,
+        "fee_config": {},
+        "funding_multiplier": 1,
+        "funding_period_hours": 1,
+        "interest_rate": 1,
+        "market_kind": "fixture",
+        "max_funding_rate": 1,
+        "max_funding_rate_change": 1,
+        "max_open_orders": 1,
+        "max_order_size": "fixture",
+        "max_slippage": 1,
+        "max_tob_spread": 1,
+        "min_notional": "fixture",
+        "open_at": 1,
+        "option_cross_margin_params": {},
+        "option_type": "fixture",
+        "oracle_ewma_factor": 1,
+        "order_size_increment": "fixture",
+        "position_limit": "fixture",
+        "price_bands_width": 1,
+        "price_tick_size": "fixture",
+        "quote_currency": "fixture",
+        "settlement_currency": "fixture",
+        "settlement_price": 1,
+        "strike_price": "fixture",
+        "underlying_twap_price": 1
+      },
+      "event_type": "CREATED",
+      "symbol": "fixture",
+      "updated_at": 1
+    }
+  },
+  "markets_summary_market_symbol": {
+    "address": "markets_summary.ETH-USD-PERP",
+    "specification": {
+      "type": "markets_summary",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "ask": "fixture",
+      "ask_iv": "fixture",
+      "ask_size": "fixture",
+      "bid": "fixture",
+      "bid_iv": "fixture",
+      "bid_size": "fixture",
+      "created_at": 1,
+      "delta": "fixture",
+      "external_fair_price": "fixture",
+      "forward_rate": "fixture",
+      "funding_rate": "fixture",
+      "future_funding_rate": "fixture",
+      "greeks": {
+        "delta": "fixture",
+        "gamma": "fixture",
+        "rho": "fixture",
+        "theta": "fixture",
+        "vanna": "fixture",
+        "vega": "fixture",
+        "volga": "fixture"
+      },
+      "last_iv": "fixture",
+      "last_traded_price": "fixture",
+      "mark_iv": "fixture",
+      "mark_price": "fixture",
+      "open_interest": "fixture",
+      "price_change_rate_24h": "fixture",
+      "risk_free_rate": "fixture",
+      "rolling_details": {
+        "current_active_contract_symbol": "fixture",
+        "current_active_contract_weight": "fixture",
+        "next_active_contract_symbol": "fixture",
+        "period_end": 1,
+        "period_start": 1
+      },
+      "settlement_twap_estimate": "fixture",
+      "symbol": "fixture",
+      "total_volume": "fixture",
+      "underlying_price": "fixture",
+      "volume_24h": "fixture"
+    }
+  },
+  "mmp": {
+    "address": "mmp",
+    "specification": {
+      "type": "mmp"
+    },
+    "payload": {
+      "account": "fixture",
+      "base_asset": "fixture",
+      "config": {
+        "base_asset": "fixture",
+        "delta_limit": "fixture",
+        "frozen_time_ms": 1,
+        "interval_ms": 1,
+        "protect_block_trades": true,
+        "removed": true,
+        "size_limit": "fixture",
+        "updated_at": 1,
+        "vega_limit": "fixture"
+      },
+      "created_at": 1,
+      "frozen_until": 1,
+      "kind": "TRIGGERED",
+      "trigger_market": "fixture",
+      "trip_reason": "SIZE",
+      "window_delta": "fixture",
+      "window_size": "fixture",
+      "window_vega": "fixture"
+    }
+  },
+  "modify_subscription": {
+    "address": "modify_subscription",
+    "specification": null,
+    "payload": {
+      "add": [
+        "fixture"
+      ],
+      "channel": "fixture",
+      "remove": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "add": [
+        "fixture"
+      ],
+      "channel": "fixture",
+      "remove": [
+        "fixture"
+      ]
+    }
+  },
+  "order_book_market_symbol_feed_type_15_refresh_rate_price_tick": {
+    "address": "order_book.ETH-USD-PERP.snapshot@15@100ms@1",
+    "specification": {
+      "type": "order_book",
+      "market": "ETH-USD-PERP",
+      "feed_type": "snapshot",
+      "refresh_rate": "100ms",
+      "price_tick": "1"
+    },
+    "payload": {
+      "best_ask_api": {
+        "price": "fixture",
+        "side": "BUY",
+        "size": "fixture"
+      },
+      "best_ask_interactive": {
+        "price": "fixture",
+        "side": "BUY",
+        "size": "fixture"
+      },
+      "best_bid_api": {
+        "price": "fixture",
+        "side": "BUY",
+        "size": "fixture"
+      },
+      "best_bid_interactive": {
+        "price": "fixture",
+        "side": "BUY",
+        "size": "fixture"
+      },
+      "deletes": [
+        {
+          "price": "fixture",
+          "side": "BUY",
+          "size": "fixture"
+        }
+      ],
+      "inserts": [
+        {
+          "price": "fixture",
+          "side": "BUY",
+          "size": "fixture"
+        }
+      ],
+      "last_updated_at": 1,
+      "market": "fixture",
+      "relative_spread": "fixture",
+      "seq_no": 1,
+      "update_type": "s",
+      "updates": [
+        {
+          "price": "fixture",
+          "side": "BUY",
+          "size": "fixture"
+        }
+      ]
+    }
+  },
+  "order_cancel_all": {
+    "address": "order.cancel_all",
+    "specification": null,
+    "payload": {
+      "market": "fixture"
+    },
+    "response": {
+      "status": "fixture"
+    }
+  },
+  "order_cancel_batch": {
+    "address": "order.cancel_batch",
+    "specification": null,
+    "payload": {
+      "order_ids": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "results": [
+        {
+          "id": "fixture",
+          "market": "fixture",
+          "status": "QUEUED_FOR_CANCELLATION"
+        }
+      ]
+    }
+  },
+  "order_cancel_on_disconnect": {
+    "address": "order.cancel_on_disconnect",
+    "specification": null,
+    "payload": {
+      "enabled": true
+    },
+    "response": {
+      "enabled": true
+    }
+  },
+  "order_cancel": {
+    "address": "order.cancel",
+    "specification": null,
+    "payload": {
+      "client_id": "fixture",
+      "id": "fixture",
+      "market": "fixture"
+    },
+    "response": {
+      "order_id": "fixture",
+      "status": "QUEUED_FOR_CANCELLATION"
+    }
+  },
+  "order_create_batch": {
+    "address": "order.create_batch",
+    "specification": null,
+    "payload": {
+      "orders": [
+        {
+          "client_id": "fixture",
+          "flags": [
+            "REDUCE_ONLY"
+          ],
+          "instruction": "GTC",
+          "market": "fixture",
+          "on_behalf_of_account": "fixture",
+          "price": "fixture",
+          "recv_window": 1,
+          "side": "BUY",
+          "signature": "fixture",
+          "signature_timestamp": 1,
+          "size": "fixture",
+          "stp": "EXPIRE_MAKER",
+          "trigger_price": "fixture",
+          "type": "LIMIT"
+        }
+      ]
+    },
+    "response": {
+      "results": [
+        {
+          "created_at": 1,
+          "error": "fixture",
+          "order": {
+            "account": "fixture",
+            "avg_fill_price": "fixture",
+            "cancel_reason": "fixture",
+            "client_id": "fixture",
+            "created_at": 1,
+            "flags": [
+              "fixture"
+            ],
+            "id": "fixture",
+            "instruction": "GTC",
+            "last_updated_at": 1,
+            "market": "fixture",
+            "price": "fixture",
+            "published_at": 1,
+            "received_at": 1,
+            "remaining_size": "fixture",
+            "seq_no": 1,
+            "side": "BUY",
+            "size": "fixture",
+            "status": "NEW",
+            "timestamp": 1,
+            "trigger_price": "fixture",
+            "type": "LIMIT"
+          },
+          "received_at": 1
+        }
+      ]
+    }
+  },
+  "order_create": {
+    "address": "order.create",
+    "specification": null,
+    "payload": {
+      "client_id": "fixture",
+      "flags": [
+        "REDUCE_ONLY"
+      ],
+      "instruction": "GTC",
+      "market": "fixture",
+      "on_behalf_of_account": "fixture",
+      "price": "fixture",
+      "recv_window": 1,
+      "side": "BUY",
+      "signature": "fixture",
+      "signature_timestamp": 1,
+      "size": "fixture",
+      "stp": "EXPIRE_MAKER",
+      "trigger_price": "fixture",
+      "type": "LIMIT"
+    },
+    "response": {
+      "created_at": 1,
+      "order": {
+        "account": "fixture",
+        "avg_fill_price": "fixture",
+        "cancel_reason": "fixture",
+        "client_id": "fixture",
+        "created_at": 1,
+        "flags": [
+          "fixture"
+        ],
+        "id": "fixture",
+        "instruction": "GTC",
+        "last_updated_at": 1,
+        "market": "fixture",
+        "price": "fixture",
+        "published_at": 1,
+        "received_at": 1,
+        "remaining_size": "fixture",
+        "seq_no": 1,
+        "side": "BUY",
+        "size": "fixture",
+        "status": "NEW",
+        "timestamp": 1,
+        "trigger_price": "fixture",
+        "type": "LIMIT"
+      },
+      "received_at": 1
+    }
+  },
+  "order_modify": {
+    "address": "order.modify",
+    "specification": null,
+    "payload": {
+      "id": "fixture",
+      "market": "fixture",
+      "on_behalf_of_account": "fixture",
+      "price": "fixture",
+      "side": "BUY",
+      "signature": "fixture",
+      "signature_timestamp": 1,
+      "size": "fixture",
+      "trigger_price": "fixture",
+      "type": "LIMIT"
+    },
+    "response": {
+      "order": {
+        "account": "fixture",
+        "avg_fill_price": "fixture",
+        "cancel_reason": "fixture",
+        "client_id": "fixture",
+        "created_at": 1,
+        "flags": [
+          "fixture"
+        ],
+        "id": "fixture",
+        "instruction": "GTC",
+        "last_updated_at": 1,
+        "market": "fixture",
+        "price": "fixture",
+        "published_at": 1,
+        "received_at": 1,
+        "remaining_size": "fixture",
+        "seq_no": 1,
+        "side": "BUY",
+        "size": "fixture",
+        "status": "NEW",
+        "timestamp": 1,
+        "trigger_price": "fixture",
+        "type": "LIMIT"
+      }
+    }
+  },
+  "orders_market_symbol": {
+    "address": "orders.ETH-USD-PERP",
+    "specification": {
+      "type": "orders",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "account": "fixture",
+      "avg_fill_price": "fixture",
+      "cancel_reason": "fixture",
+      "client_id": "fixture",
+      "created_at": 1,
+      "flags": [
+        "fixture"
+      ],
+      "id": "fixture",
+      "instruction": "GTC",
+      "last_updated_at": 1,
+      "market": "fixture",
+      "price": "fixture",
+      "published_at": 1,
+      "received_at": 1,
+      "remaining_size": "fixture",
+      "request_info": {
+        "id": "fixture",
+        "message": "fixture",
+        "request_type": "fixture",
+        "status": "fixture"
+      },
+      "seq_no": 1,
+      "side": "BUY",
+      "size": "fixture",
+      "status": "NEW",
+      "stp": "EXPIRE_MAKER",
+      "timestamp": 1,
+      "trigger_price": "fixture",
+      "type": "MARKET"
+    }
+  },
+  "positions": {
+    "address": "positions",
+    "specification": {
+      "type": "positions"
+    },
+    "payload": {
+      "account": "fixture",
+      "average_entry_price": "fixture",
+      "average_entry_price_usd": "fixture",
+      "average_exit_price": "fixture",
+      "cached_funding_index": "fixture",
+      "closed_at": 1,
+      "cost": "fixture",
+      "cost_usd": "fixture",
+      "created_at": 1,
+      "id": "fixture",
+      "last_fill_id": "fixture",
+      "last_updated_at": 1,
+      "leverage": "fixture",
+      "liquidation_price": "fixture",
+      "market": "fixture",
+      "realized_positional_funding_pnl": "fixture",
+      "realized_positional_pnl": "fixture",
+      "seq_no": 1,
+      "side": "SHORT",
+      "size": "fixture",
+      "status": "OPEN",
+      "unrealized_funding_pnl": "fixture",
+      "unrealized_pnl": "fixture"
+    }
+  },
+  "rfq_rfq_id": {
+    "address": "rfq.1",
+    "specification": {
+      "type": "rfq",
+      "rfq_id": "1"
+    },
+    "payload": {
+      "account": "fixture",
+      "created_at": 1,
+      "deribit_cost": {
+        "buy_available": "fixture",
+        "buy_cost": "fixture",
+        "buy_status": "PRICED",
+        "last_updated_at": 1,
+        "sell_available": "fixture",
+        "sell_cost": "fixture",
+        "sell_status": "PRICED"
+      },
+      "quote": {
+        "close_reason": "fixture",
+        "counterparty": "fixture",
+        "label": "fixture",
+        "order_id": "fixture",
+        "price": "fixture",
+        "quantity": "fixture",
+        "role": "TAKER",
+        "side": "BUY",
+        "state": "PENDING"
+      },
+      "result": {
+        "allowed_side": "BUY",
+        "http_status": 1,
+        "label": "fixture",
+        "message": "fixture",
+        "never_sent": true,
+        "operation": "RFQ_CREATE",
+        "order_id": "fixture",
+        "request_id": "fixture",
+        "status": "SUCCESS"
+      },
+      "rfq": {
+        "close_reason": "FILLED",
+        "expires_at": 1,
+        "quantity": "fixture",
+        "state": "OPENED"
+      },
+      "rfq_id": "fixture",
+      "seq": 1,
+      "trade": {
+        "counterparty": "fixture",
+        "price": "fixture",
+        "quantity": "fixture",
+        "reason": "fixture",
+        "side": "BUY",
+        "state": "STARTED",
+        "trade_id": "fixture"
+      },
+      "type": "RFQ"
+    }
+  },
+  "subscribe": {
+    "address": "subscribe",
+    "specification": null,
+    "payload": {
+      "channel": "fixture",
+      "markets": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "channel": "fixture"
+    }
+  },
+  "tradebusts": {
+    "address": "tradebusts",
+    "specification": {
+      "type": "tradebusts"
+    },
+    "payload": {
+      "account": "fixture",
+      "busted_fill_id": "fixture",
+      "created_at": 1
+    }
+  },
+  "trades_market_symbol": {
+    "address": "trades.ETH-USD-PERP",
+    "specification": {
+      "type": "trades",
+      "market": "ETH-USD-PERP"
+    },
+    "payload": {
+      "block_id": "fixture",
+      "created_at": 1,
+      "id": "fixture",
+      "market": "fixture",
+      "price": "fixture",
+      "side": "BUY",
+      "size": "fixture",
+      "trade_type": "LIQUIDATION"
+    }
+  },
+  "transaction": {
+    "address": "transaction",
+    "specification": {
+      "type": "transaction"
+    },
+    "payload": {
+      "completed_at": 1,
+      "created_at": 1,
+      "hash": "fixture",
+      "id": "fixture",
+      "state": "ACCEPTED_ON_L1",
+      "type": "TRANSACTION_FILL"
+    }
+  },
+  "transfers": {
+    "address": "transfers",
+    "specification": {
+      "type": "transfers"
+    },
+    "payload": {
+      "account": "fixture",
+      "amount": "fixture",
+      "auto_withdrawal_fee": "fixture",
+      "bridge": "",
+      "counterparty": "fixture",
+      "created_at": 1,
+      "direction": "IN",
+      "external_account": "fixture",
+      "external_chain": "fixture",
+      "external_txn_hash": "fixture",
+      "failure_reason": "fixture",
+      "id": "fixture",
+      "kind": "DEPOSIT",
+      "last_updated_at": 1,
+      "socialized_loss_factor": "fixture",
+      "status": "PENDING",
+      "token": "fixture",
+      "txn_hash": "fixture",
+      "vault_address": "fixture",
+      "vault_unwind_completion_percentage": "fixture"
+    }
+  },
+  "unsubscribe": {
+    "address": "unsubscribe",
+    "specification": null,
+    "payload": {
+      "channel": "fixture"
+    },
+    "response": {
+      "channel": "fixture"
+    }
+  },
+  "funding_rate_comparison": {
+    "address": "funding_rate_comparison.ALL@1000ms",
+    "specification": {
+      "type": "funding_rate_comparison",
+      "refresh_rate": "1000ms"
+    },
+    "payload": {
+      "market": "ETH-USD-PERP",
+      "funding_rate": "0.000000123456"
+    }
+  },
+  "block_trades": {
+    "address": "block_trades",
+    "specification": {
+      "type": "block_trades"
+    },
+    "payload": {
+      "block_id": "123",
+      "status": "OPEN"
+    }
+  }
+}

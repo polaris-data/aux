@@ -1,0 +1,1492 @@
+{
+  "reference": "tradeparadex/paradex-py@4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+  "key": "0x1",
+  "public_key": "0x1ef15c18599971b7beced415a40f0c7deacfd9b0d1819e03d723d8bc943cfca",
+  "account": "0x1234",
+  "evm_key": "0x0000000000000000000000000000000000000000000000000000000000000001",
+  "evm_address": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "vectors": [
+    {
+      "name": "auth",
+      "network": "PRIVATE_SN_PARACLEAR_TESTNET",
+      "typed_data": {
+        "message": {
+          "method": "POST",
+          "path": "/v1/auth",
+          "body": "",
+          "timestamp": 1793710000,
+          "expiration": 1793710300
+        },
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f544553544e4554",
+          "version": "1"
+        },
+        "primaryType": "Request",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Request": [
+            {
+              "name": "method",
+              "type": "felt"
+            },
+            {
+              "name": "path",
+              "type": "felt"
+            },
+            {
+              "name": "body",
+              "type": "felt"
+            },
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "expiration",
+              "type": "felt"
+            }
+          ]
+        }
+      },
+      "digest": "0x3c8f39166329a6766aaa5eb48b1dba6bedb76ac995508284d947e3c30b1f84",
+      "signature": [
+        "1154183141323667323280265752925798550773463557984282764477476921993358429864",
+        "727620137390441845403436438575639177860900042916183862179820125017775962094"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "40349781184364426116862056846256422772",
+        "81039064657683592991308778902611941832",
+        "192681135952576797795479337452472266482",
+        "118211696440810395391821850699552127724",
+        "0"
+      ],
+      "inputs": null
+    },
+    {
+      "name": "onboarding",
+      "network": "PRIVATE_SN_PARACLEAR_TESTNET",
+      "typed_data": {
+        "message": {
+          "action": "Onboarding"
+        },
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f544553544e4554",
+          "version": "1"
+        },
+        "primaryType": "Constant",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Constant": [
+            {
+              "name": "action",
+              "type": "felt"
+            }
+          ]
+        }
+      },
+      "digest": "0x57984e080c4010f6f5797416eadff23e779b75157a5303cdfe2dfb560650d6b",
+      "signature": [
+        "838593110106510843115126117189118069122050374625972074997600152613160642031",
+        "2421150397331618674908229733606957185905389975787947065795219725683546851083"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "321611839252997242215108162784238220792",
+        "26059957150916542265001057983533825260",
+        "168813517359996391803407276767246854967",
+        "49500578298727755411598193372595970411",
+        "1"
+      ],
+      "inputs": null
+    },
+    {
+      "name": "order_LIMIT",
+      "network": "PRIVATE_SN_PARACLEAR_TESTNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f544553544e4554",
+          "version": "1"
+        },
+        "primaryType": "Order",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Order": [
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "market",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "felt"
+            },
+            {
+              "name": "orderType",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "timestamp": "1793710000123",
+          "market": "ETH-USD-PERP",
+          "side": "1",
+          "orderType": "LIMIT",
+          "size": "12345678",
+          "price": "310025000000"
+        }
+      },
+      "digest": "0x7e58e5723593419fabb017190f1f835fcc66494385183eaed84ac6cf7e822d8",
+      "signature": [
+        "1441834724595121072497411637744790536566465078518344174910608545629585638560",
+        "1847229233600101584044698397490095013710342512324442107532991222693872108753"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "265037924285430022830819233322498432364",
+        "65438624076579612413954009114786606552",
+        "10971481380310869697596947931124303828",
+        "14208338675464069197822132636066308541",
+        "1"
+      ],
+      "inputs": {
+        "market": "ETH-USD-PERP",
+        "type": "LIMIT",
+        "side": "BUY",
+        "size": "0.12345678",
+        "price": "3100.25",
+        "signature_timestamp": 1793710000123
+      }
+    },
+    {
+      "name": "modify",
+      "network": "PRIVATE_SN_PARACLEAR_TESTNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f544553544e4554",
+          "version": "1"
+        },
+        "primaryType": "ModifyOrder",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "ModifyOrder": [
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "market",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "felt"
+            },
+            {
+              "name": "orderType",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            },
+            {
+              "name": "id",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "timestamp": "1793710000123",
+          "market": "ETH-USD-PERP",
+          "side": "1",
+          "orderType": "LIMIT",
+          "size": "12345678",
+          "price": "310025000000",
+          "id": "123456"
+        }
+      },
+      "digest": "0xbb54d4289121ef9446ee08c3b94f05b9cc2c5216d79a0a6eb4194782b6159c",
+      "signature": [
+        "1807883519654750635580900637390880502446781162998491553423006773459630765159",
+        "1484038107297104440654561908953768325239705701631155613618949323659176687351"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "211398494622581140165829532182260125750",
+        "132618037817004477707935564618594368887",
+        "332238994261242157487406659466291289908",
+        "153652837130474022709692350770231913256",
+        "0"
+      ],
+      "inputs": {
+        "market": "ETH-USD-PERP",
+        "type": "LIMIT",
+        "side": "BUY",
+        "size": "0.12345678",
+        "price": "3100.25",
+        "signature_timestamp": 1793710000123
+      }
+    },
+    {
+      "name": "order_MARKET",
+      "network": "PRIVATE_SN_PARACLEAR_TESTNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f544553544e4554",
+          "version": "1"
+        },
+        "primaryType": "Order",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Order": [
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "market",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "felt"
+            },
+            {
+              "name": "orderType",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "timestamp": "1793710000123",
+          "market": "ETH-USD-PERP",
+          "side": "1",
+          "orderType": "MARKET",
+          "size": "12345678",
+          "price": "0"
+        }
+      },
+      "digest": "0x4b088a0221c6cf166be1e812827d4e6e4d5fd263bc51ec3a1ad4a788a6fb9c4",
+      "signature": [
+        "332086137223517699246610396696381208628278788649215589559021975724146212126",
+        "3179977415656485627065807181442275334347553552862067015020832957758846189936"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "113224145484942283158445440173774777448",
+        "158157528165186264966902981719833331605",
+        "45283208495871128315839460176902527183",
+        "165405324399598385475922028241212563837",
+        "0"
+      ],
+      "inputs": {
+        "market": "ETH-USD-PERP",
+        "type": "MARKET",
+        "side": "BUY",
+        "size": "0.12345678",
+        "price": "3100.25",
+        "signature_timestamp": 1793710000123
+      }
+    },
+    {
+      "name": "block",
+      "network": "PRIVATE_SN_PARACLEAR_TESTNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f544553544e4554",
+          "version": "1",
+          "revision": "1"
+        },
+        "primaryType": "BlockTrade",
+        "types": {
+          "StarknetDomain": [
+            {
+              "name": "name",
+              "type": "shortstring"
+            },
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "chainId",
+              "type": "shortstring"
+            },
+            {
+              "name": "revision",
+              "type": "shortstring"
+            }
+          ],
+          "BlockTrade": [
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "nonce",
+              "type": "felt"
+            },
+            {
+              "name": "expiration",
+              "type": "felt"
+            },
+            {
+              "name": "trades",
+              "type": "merkletree",
+              "contains": "Trade"
+            }
+          ],
+          "Trade": [
+            {
+              "name": "market",
+              "type": "shortstring"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "maker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "taker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "min_size",
+              "type": "felt"
+            },
+            {
+              "name": "max_size",
+              "type": "felt"
+            },
+            {
+              "name": "min_price",
+              "type": "felt"
+            },
+            {
+              "name": "max_price",
+              "type": "felt"
+            },
+            {
+              "name": "oracle_tolerance",
+              "type": "felt"
+            }
+          ],
+          "BlockTradeOrder": [
+            {
+              "name": "account",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "shortstring"
+            },
+            {
+              "name": "type",
+              "type": "shortstring"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "version": "2",
+          "nonce": "123456",
+          "expiration": "1793710300000",
+          "trades": [
+            {
+              "market": "BTC-USD-PERP",
+              "price": "0",
+              "size": "0",
+              "maker_order": {
+                "account": "0",
+                "side": "0",
+                "type": "0",
+                "size": "0",
+                "price": "0"
+              },
+              "taker_order": {
+                "account": "0",
+                "side": "0",
+                "type": "0",
+                "size": "0",
+                "price": "0"
+              },
+              "min_size": "1000000",
+              "max_size": "100000000",
+              "min_price": "6000000000000",
+              "max_price": "7000000000000",
+              "oracle_tolerance": "0"
+            },
+            {
+              "market": "ETH-USD-PERP",
+              "price": "310000000000",
+              "size": "100000000",
+              "maker_order": {
+                "account": "0x1234",
+                "side": "1",
+                "type": "LIMIT",
+                "size": "100000000",
+                "price": "310000000000"
+              },
+              "taker_order": {
+                "account": "0x5678",
+                "side": "2",
+                "type": "LIMIT",
+                "size": "100000000",
+                "price": "310000000000"
+              },
+              "min_size": "0",
+              "max_size": "0",
+              "min_price": "0",
+              "max_price": "0",
+              "oracle_tolerance": "0"
+            }
+          ]
+        }
+      },
+      "digest": "0x7f3342f5f3f9a46b559b553ed547e2bb52036fc19abbcbe28fc2d01878f8d4d",
+      "signature": [
+        "182893778194139379426171645934196661402348061399462392978128539428096012635",
+        "2261067055465043246070253271821082831004144234043258263617448984231450714279"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "17908898785146114909482502959892102138",
+        "260288322125808303162648838603798780240",
+        "253167866290649115954862665338508522780",
+        "148155377558529832069346267912264479842",
+        "1"
+      ],
+      "inputs": null
+    },
+    {
+      "name": "offer",
+      "network": "PRIVATE_SN_PARACLEAR_TESTNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f544553544e4554",
+          "version": "1",
+          "revision": "1"
+        },
+        "primaryType": "BlockTradeOffer",
+        "types": {
+          "StarknetDomain": [
+            {
+              "name": "name",
+              "type": "shortstring"
+            },
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "chainId",
+              "type": "shortstring"
+            },
+            {
+              "name": "revision",
+              "type": "shortstring"
+            }
+          ],
+          "BlockTradeOffer": [
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "nonce",
+              "type": "felt"
+            },
+            {
+              "name": "expiration",
+              "type": "felt"
+            },
+            {
+              "name": "block_trade_id",
+              "type": "felt"
+            },
+            {
+              "name": "trades",
+              "type": "merkletree",
+              "contains": "Trade"
+            }
+          ],
+          "Trade": [
+            {
+              "name": "market",
+              "type": "shortstring"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "maker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "taker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "min_size",
+              "type": "felt"
+            },
+            {
+              "name": "max_size",
+              "type": "felt"
+            },
+            {
+              "name": "min_price",
+              "type": "felt"
+            },
+            {
+              "name": "max_price",
+              "type": "felt"
+            },
+            {
+              "name": "oracle_tolerance",
+              "type": "felt"
+            }
+          ],
+          "BlockTradeOrder": [
+            {
+              "name": "account",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "shortstring"
+            },
+            {
+              "name": "type",
+              "type": "shortstring"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "version": "2",
+          "nonce": "123456",
+          "expiration": "1793710300000",
+          "block_trade_id": "654321",
+          "trades": [
+            {
+              "market": "ETH-USD-PERP",
+              "price": "310000000000",
+              "size": "100000000",
+              "maker_order": {
+                "account": "0x1234",
+                "side": "1",
+                "type": "LIMIT",
+                "size": "100000000",
+                "price": "310000000000"
+              },
+              "taker_order": {
+                "account": "0",
+                "side": "0",
+                "type": "0",
+                "size": "0",
+                "price": "0"
+              },
+              "min_size": "0",
+              "max_size": "0",
+              "min_price": "0",
+              "max_price": "0",
+              "oracle_tolerance": "0"
+            }
+          ]
+        }
+      },
+      "digest": "0x65af7eafea51d249ce8ce9b45ab01e3a46ad057b2ff8830b84b185e7ddaa1d1",
+      "signature": [
+        "1722461277756115927677349942412638962253480887528461742855609281478864001437",
+        "1811143917179335338085795324868007952083787846988512128369780769361938884535"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "231775666142430392525430073833294167866",
+        "110887447275033833752936715044836644098",
+        "207307263451901215647485306842531195898",
+        "46466427447091602006541697522792561766",
+        "1"
+      ],
+      "inputs": null
+    },
+    {
+      "name": "auth",
+      "network": "PRIVATE_SN_PARACLEAR_MAINNET",
+      "typed_data": {
+        "message": {
+          "method": "POST",
+          "path": "/v1/auth",
+          "body": "",
+          "timestamp": 1793710000,
+          "expiration": 1793710300
+        },
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f4d41494e4e4554",
+          "version": "1"
+        },
+        "primaryType": "Request",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Request": [
+            {
+              "name": "method",
+              "type": "felt"
+            },
+            {
+              "name": "path",
+              "type": "felt"
+            },
+            {
+              "name": "body",
+              "type": "felt"
+            },
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "expiration",
+              "type": "felt"
+            }
+          ]
+        }
+      },
+      "digest": "0x58a0cb34dffcbcf27b9621b2e57c3b1787d91754292cdc6ebf3abe7f6c42204",
+      "signature": [
+        "524945703240719174529681064503346576719747292552794639021989816527658920678",
+        "1191878062636534162782581694999985475082186171309366084715609126685983947608"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "149813660021314662372432666758581604401",
+        "73774917437878921299372447880572220970",
+        "242367049468346430879195493646691354893",
+        "36995968186566779557951106661141771562",
+        "0"
+      ],
+      "inputs": null
+    },
+    {
+      "name": "onboarding",
+      "network": "PRIVATE_SN_PARACLEAR_MAINNET",
+      "typed_data": {
+        "message": {
+          "action": "Onboarding"
+        },
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f4d41494e4e4554",
+          "version": "1"
+        },
+        "primaryType": "Constant",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Constant": [
+            {
+              "name": "action",
+              "type": "felt"
+            }
+          ]
+        }
+      },
+      "digest": "0x7cdcf1f3ce77a61fcf66c8b568ccdddb988de384855245c195595ae3e887ce",
+      "signature": [
+        "2254744855873813488143085055719232507169175231015965744429882382119240271398",
+        "1526230849930688581160115172484290022234443927297360782654121945739288137390"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "115976881747688652336911575536212126994",
+        "229543740882408206655418248211814819633",
+        "162101684226936942291221972677525333523",
+        "33278590422532306451611413118259174622",
+        "0"
+      ],
+      "inputs": null
+    },
+    {
+      "name": "order_LIMIT",
+      "network": "PRIVATE_SN_PARACLEAR_MAINNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f4d41494e4e4554",
+          "version": "1"
+        },
+        "primaryType": "Order",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Order": [
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "market",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "felt"
+            },
+            {
+              "name": "orderType",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "timestamp": "1793710000123",
+          "market": "ETH-USD-PERP",
+          "side": "1",
+          "orderType": "LIMIT",
+          "size": "12345678",
+          "price": "310025000000"
+        }
+      },
+      "digest": "0x7b7c3be05c1a1943fa6a2dd614ce1098e0dcfbe0c297535bdf9d5997e64da01",
+      "signature": [
+        "3109089344284022119957031479238717067815802171942019529248366674189620801831",
+        "3141315284765682113080592414738142668733521355672195643108117782636532709128"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "67727184011423645344597088795141036879",
+        "13887881830293654368634948575900072074",
+        "335836803432033581030800042257403331748",
+        "149571804919937872277190242589294524801",
+        "1"
+      ],
+      "inputs": {
+        "market": "ETH-USD-PERP",
+        "type": "LIMIT",
+        "side": "BUY",
+        "size": "0.12345678",
+        "price": "3100.25",
+        "signature_timestamp": 1793710000123
+      }
+    },
+    {
+      "name": "modify",
+      "network": "PRIVATE_SN_PARACLEAR_MAINNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f4d41494e4e4554",
+          "version": "1"
+        },
+        "primaryType": "ModifyOrder",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "ModifyOrder": [
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "market",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "felt"
+            },
+            {
+              "name": "orderType",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            },
+            {
+              "name": "id",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "timestamp": "1793710000123",
+          "market": "ETH-USD-PERP",
+          "side": "1",
+          "orderType": "LIMIT",
+          "size": "12345678",
+          "price": "310025000000",
+          "id": "123456"
+        }
+      },
+      "digest": "0x281c3a5ef9a23041a2038b8509c8955a63010fd6de4119f647a62f224ab6625",
+      "signature": [
+        "958949920597733116737457206071652432740889408217141175275580445331546806919",
+        "1344653106738788139750055583408273289585537999432477570098770396235558919848"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "22607695587375657191283500791030885499",
+        "43528771456034777064342726089006297524",
+        "134796559586964772003134102947042574008",
+        "16854085464250808259510456859002422518",
+        "1"
+      ],
+      "inputs": {
+        "market": "ETH-USD-PERP",
+        "type": "LIMIT",
+        "side": "BUY",
+        "size": "0.12345678",
+        "price": "3100.25",
+        "signature_timestamp": 1793710000123
+      }
+    },
+    {
+      "name": "order_MARKET",
+      "network": "PRIVATE_SN_PARACLEAR_MAINNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f4d41494e4e4554",
+          "version": "1"
+        },
+        "primaryType": "Order",
+        "types": {
+          "StarkNetDomain": [
+            {
+              "name": "name",
+              "type": "felt"
+            },
+            {
+              "name": "chainId",
+              "type": "felt"
+            },
+            {
+              "name": "version",
+              "type": "felt"
+            }
+          ],
+          "Order": [
+            {
+              "name": "timestamp",
+              "type": "felt"
+            },
+            {
+              "name": "market",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "felt"
+            },
+            {
+              "name": "orderType",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "timestamp": "1793710000123",
+          "market": "ETH-USD-PERP",
+          "side": "1",
+          "orderType": "MARKET",
+          "size": "12345678",
+          "price": "0"
+        }
+      },
+      "digest": "0x4ae9e1a3de53e44a464ff2372e98e74f5db5ab95d21592e5ed576630911d6d3",
+      "signature": [
+        "2862812251259553651611850054004361571646938162820983846938708979478920323763",
+        "89615253790784767345944738521458993570505945921663940548240632569754380201"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "106175295983590625261250838010405405278",
+        "189302356710015058655688567687639801068",
+        "182442473954915218767686464274772288040",
+        "129969416163481094267501454965155053704",
+        "1"
+      ],
+      "inputs": {
+        "market": "ETH-USD-PERP",
+        "type": "MARKET",
+        "side": "BUY",
+        "size": "0.12345678",
+        "price": "3100.25",
+        "signature_timestamp": 1793710000123
+      }
+    },
+    {
+      "name": "block",
+      "network": "PRIVATE_SN_PARACLEAR_MAINNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f4d41494e4e4554",
+          "version": "1",
+          "revision": "1"
+        },
+        "primaryType": "BlockTrade",
+        "types": {
+          "StarknetDomain": [
+            {
+              "name": "name",
+              "type": "shortstring"
+            },
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "chainId",
+              "type": "shortstring"
+            },
+            {
+              "name": "revision",
+              "type": "shortstring"
+            }
+          ],
+          "BlockTrade": [
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "nonce",
+              "type": "felt"
+            },
+            {
+              "name": "expiration",
+              "type": "felt"
+            },
+            {
+              "name": "trades",
+              "type": "merkletree",
+              "contains": "Trade"
+            }
+          ],
+          "Trade": [
+            {
+              "name": "market",
+              "type": "shortstring"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "maker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "taker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "min_size",
+              "type": "felt"
+            },
+            {
+              "name": "max_size",
+              "type": "felt"
+            },
+            {
+              "name": "min_price",
+              "type": "felt"
+            },
+            {
+              "name": "max_price",
+              "type": "felt"
+            },
+            {
+              "name": "oracle_tolerance",
+              "type": "felt"
+            }
+          ],
+          "BlockTradeOrder": [
+            {
+              "name": "account",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "shortstring"
+            },
+            {
+              "name": "type",
+              "type": "shortstring"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "version": "2",
+          "nonce": "123456",
+          "expiration": "1793710300000",
+          "trades": [
+            {
+              "market": "BTC-USD-PERP",
+              "price": "0",
+              "size": "0",
+              "maker_order": {
+                "account": "0",
+                "side": "0",
+                "type": "0",
+                "size": "0",
+                "price": "0"
+              },
+              "taker_order": {
+                "account": "0",
+                "side": "0",
+                "type": "0",
+                "size": "0",
+                "price": "0"
+              },
+              "min_size": "1000000",
+              "max_size": "100000000",
+              "min_price": "6000000000000",
+              "max_price": "7000000000000",
+              "oracle_tolerance": "0"
+            },
+            {
+              "market": "ETH-USD-PERP",
+              "price": "310000000000",
+              "size": "100000000",
+              "maker_order": {
+                "account": "0x1234",
+                "side": "1",
+                "type": "LIMIT",
+                "size": "100000000",
+                "price": "310000000000"
+              },
+              "taker_order": {
+                "account": "0x5678",
+                "side": "2",
+                "type": "LIMIT",
+                "size": "100000000",
+                "price": "310000000000"
+              },
+              "min_size": "0",
+              "max_size": "0",
+              "min_price": "0",
+              "max_price": "0",
+              "oracle_tolerance": "0"
+            }
+          ]
+        }
+      },
+      "digest": "0x82098bdd4f42c38baa52bcccb83245940d4a6e7924e594d6ec6ffe46c66388",
+      "signature": [
+        "2711091245068165792874647694392459201250783187560864742321723782340332124376",
+        "2527666763233605782476923564810989142277560663681456945599413150927913475552"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "309507340603634604596721210812433818080",
+        "332247995783976833170859151086556919788",
+        "298366786968403901033039407014413765549",
+        "167989455802256027640262378232798203660",
+        "0"
+      ],
+      "inputs": null
+    },
+    {
+      "name": "offer",
+      "network": "PRIVATE_SN_PARACLEAR_MAINNET",
+      "typed_data": {
+        "domain": {
+          "name": "Paradex",
+          "chainId": "0x505249564154455f534e5f50415241434c4541525f4d41494e4e4554",
+          "version": "1",
+          "revision": "1"
+        },
+        "primaryType": "BlockTradeOffer",
+        "types": {
+          "StarknetDomain": [
+            {
+              "name": "name",
+              "type": "shortstring"
+            },
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "chainId",
+              "type": "shortstring"
+            },
+            {
+              "name": "revision",
+              "type": "shortstring"
+            }
+          ],
+          "BlockTradeOffer": [
+            {
+              "name": "version",
+              "type": "shortstring"
+            },
+            {
+              "name": "nonce",
+              "type": "felt"
+            },
+            {
+              "name": "expiration",
+              "type": "felt"
+            },
+            {
+              "name": "block_trade_id",
+              "type": "felt"
+            },
+            {
+              "name": "trades",
+              "type": "merkletree",
+              "contains": "Trade"
+            }
+          ],
+          "Trade": [
+            {
+              "name": "market",
+              "type": "shortstring"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "maker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "taker_order",
+              "type": "BlockTradeOrder"
+            },
+            {
+              "name": "min_size",
+              "type": "felt"
+            },
+            {
+              "name": "max_size",
+              "type": "felt"
+            },
+            {
+              "name": "min_price",
+              "type": "felt"
+            },
+            {
+              "name": "max_price",
+              "type": "felt"
+            },
+            {
+              "name": "oracle_tolerance",
+              "type": "felt"
+            }
+          ],
+          "BlockTradeOrder": [
+            {
+              "name": "account",
+              "type": "felt"
+            },
+            {
+              "name": "side",
+              "type": "shortstring"
+            },
+            {
+              "name": "type",
+              "type": "shortstring"
+            },
+            {
+              "name": "size",
+              "type": "felt"
+            },
+            {
+              "name": "price",
+              "type": "felt"
+            }
+          ]
+        },
+        "message": {
+          "version": "2",
+          "nonce": "123456",
+          "expiration": "1793710300000",
+          "block_trade_id": "654321",
+          "trades": [
+            {
+              "market": "ETH-USD-PERP",
+              "price": "310000000000",
+              "size": "100000000",
+              "maker_order": {
+                "account": "0x1234",
+                "side": "1",
+                "type": "LIMIT",
+                "size": "100000000",
+                "price": "310000000000"
+              },
+              "taker_order": {
+                "account": "0",
+                "side": "0",
+                "type": "0",
+                "size": "0",
+                "price": "0"
+              },
+              "min_size": "0",
+              "max_size": "0",
+              "min_price": "0",
+              "max_price": "0",
+              "oracle_tolerance": "0"
+            }
+          ]
+        }
+      },
+      "digest": "0x30676bb938e6c46e183aca617fd58642b2a89ab5bff1cf37584e43693eabe52",
+      "signature": [
+        "792852307547726801488561129910387772614016093799913901881547576012808652743",
+        "153195702577571442968712187606027891506933592488313458513489683203910630536"
+      ],
+      "evm_signature": [
+        "1",
+        "3",
+        "721457446580647751014191829380889690493307935711",
+        "253563279764455568481508072101343973614",
+        "85500527406204524953917986131205863180",
+        "239697653922994952876984932600894166060",
+        "36974569807199972262158112901850339095",
+        "0"
+      ],
+      "inputs": null
+    }
+  ]
+}

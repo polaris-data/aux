@@ -41,6 +41,14 @@ PROFILES = [
 ]
 
 
+for venue in ("derive", "paradex"):
+    for stack in ("", ",http", ",ws", ",http,ws"):
+        PROFILES.append((f"{venue.title()} with {stack or 'custom transports'}", "aux-rs", venue + stack))
+for stack in ("", ",http,ws"):
+    PROFILES.append(("Derive and Paradex" + stack, "aux-rs", "derive,paradex" + stack))
+    PROFILES.append(("All seven exchanges" + stack, "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex" + stack))
+
+
 def inventory(package, features, target):
     command = [
         "cargo", "tree", "--locked", "--package", package,
@@ -62,17 +70,20 @@ def check(target):
         if "httpdate" in names:
             raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
-        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco"}
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
                 if f"aux-rs-{exchange}" in names:
                     raise SystemExit(f"Unselected {exchange} adapter leaked into profile: {name}")
             # Primitives may be owned by several selected adapters.
             owners = {
-                "k256": {"hyperliquid", "monaco"},
-                "sha3": {"hyperliquid", "monaco"},
+                "k256": {"hyperliquid", "monaco", "derive", "paradex"},
+                "sha3": {"hyperliquid", "monaco", "derive", "paradex"},
                 "rmp-serde": {"hyperliquid"},
-                "hmac": {"hyperliquid", "monaco"},
+                "starknet-core": {"paradex"},
+                "starknet-crypto": {"paradex"},
+                "starknet-types-core": {"paradex"},
+                "hmac": {"hyperliquid", "monaco", "derive", "paradex"},
                 "goldilocks-crypto": {"lighter"},
                 "poseidon-hash": {"lighter"},
                 "ed25519-dalek": {"arcus", "monaco"},

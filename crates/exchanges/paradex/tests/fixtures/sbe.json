@@ -1,0 +1,477 @@
+{
+  "reference": "tradeparadex/paradex-py@4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+  "schema": "1:3",
+  "frames": [
+    {
+      "template": 1,
+      "name": "TradeEvent",
+      "hex": "3200010001000300402e63a75e5f06007b0000000000000085ffffffffffffff0115cd5b070000000015cd5b0700000000402e63a75e5f0600010c4554482d5553442d504552501c31323334353637383930313233343536373839303132333435363738",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "tradeId": -123,
+        "side": "BUY",
+        "price": "1.23456789",
+        "size": "1.23456789",
+        "createdAt": 1793710000123456,
+        "tradeType": "FILL",
+        "market": "ETH-USD-PERP",
+        "tradeIdStr": "1234567890123456789012345678"
+      },
+      "reference_channel": "trades.ETH-USD-PERP",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "trade_id": -123,
+        "side": "BUY",
+        "price": "1.23456789",
+        "size": "1.23456789",
+        "created_at": 1793710000123,
+        "trade_type": "FILL",
+        "market": "ETH-USD-PERP",
+        "trade_id_str": "1234567890123456789012345678"
+      }
+    },
+    {
+      "template": 2,
+      "name": "BboEvent",
+      "hex": "3000020001000300402e63a75e5f06007b00000000000000000000000000008015cd5b0700000000000000000000008015cd5b07000000000c4554482d5553442d50455250",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "bidPrice": null,
+        "bidSize": "1.23456789",
+        "askPrice": null,
+        "askSize": "1.23456789",
+        "market": "ETH-USD-PERP"
+      },
+      "reference_channel": "bbo.ETH-USD-PERP",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "bid_price": null,
+        "bid_size": "1.23456789",
+        "ask_price": null,
+        "ask_size": "1.23456789",
+        "market": "ETH-USD-PERP"
+      }
+    },
+    {
+      "template": 3,
+      "name": "BookEvent",
+      "hex": "5900030001000300402e63a75e5f06007b000000000000000015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b07000000001000010015cd5b070000000015cd5b07000000001000010015cd5b070000000015cd5b07000000000c4554482d5553442d50455250",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "pkgType": "SNAPSHOT",
+        "bestBidPrice": "1.23456789",
+        "bestBidSize": null,
+        "bestAskPrice": "1.23456789",
+        "bestAskSize": null,
+        "relativeSpread": "1.23456789",
+        "bestBidApiPrice": null,
+        "bestBidApiSize": "1.23456789",
+        "bestAskApiPrice": null,
+        "bestAskApiSize": "1.23456789",
+        "bids": [
+          {
+            "price": "1.23456789",
+            "size": "1.23456789"
+          }
+        ],
+        "asks": [
+          {
+            "price": "1.23456789",
+            "size": "1.23456789"
+          }
+        ],
+        "market": "ETH-USD-PERP"
+      },
+      "reference_channel": "order_book.ETH-USD-PERP",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "pkg_type": "SNAPSHOT",
+        "best_bid_price": "1.23456789",
+        "best_bid_size": null,
+        "best_ask_price": "1.23456789",
+        "best_ask_size": null,
+        "relative_spread": "1.23456789",
+        "best_bid_api_price": null,
+        "best_bid_api_size": "1.23456789",
+        "best_ask_api_price": null,
+        "best_ask_api_size": "1.23456789",
+        "bids": [
+          [
+            "1.23456789",
+            "1.23456789"
+          ]
+        ],
+        "asks": [
+          [
+            "1.23456789",
+            "1.23456789"
+          ]
+        ],
+        "market": "ETH-USD-PERP"
+      }
+    },
+    {
+      "template": 4,
+      "name": "MarketSummaryEvent",
+      "hex": "f800040001000300402e63a75e5f06007b0000000000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b0700000000000000000000008015cd5b070000000015cd5b070000000015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b0700000000000000000000008015cd5b07000000000000000000000080141a99be1c00000000000000000000800c4554482d5553442d50455250",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "markPrice": "1.23456789",
+        "indexPrice": "1.23456789",
+        "lastPrice": "1.23456789",
+        "volumeUsd24h": "1.23456789",
+        "openInterest": "1.23456789",
+        "fundingRate": "1.23456789",
+        "bid": null,
+        "ask": "1.23456789",
+        "totalVolume": "1.23456789",
+        "priceChangeRate24h": "1.23456789",
+        "markIv": null,
+        "bidIv": "1.23456789",
+        "askIv": null,
+        "lastIv": "1.23456789",
+        "delta": null,
+        "gamma": "1.23456789",
+        "vega": null,
+        "theta": "1.23456789",
+        "rho": null,
+        "volga": "1.23456789",
+        "vanna": null,
+        "futureFundingRate": "1.23456789",
+        "externalFairPrice": null,
+        "bidSize": "1.23456789",
+        "askSize": null,
+        "forwardRate": "1.23456789",
+        "riskFreeRate": null,
+        "fundingRatePrecise": "0.123456789012",
+        "settlementTwapEstimate": null,
+        "market": "ETH-USD-PERP"
+      },
+      "reference_channel": "markets_summary.ETH-USD-PERP",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "mark_price": "1.23456789",
+        "index_price": "1.23456789",
+        "last_price": "1.23456789",
+        "volume_usd24h": "1.23456789",
+        "open_interest": "1.23456789",
+        "funding_rate": "1.23456789",
+        "bid": null,
+        "ask": "1.23456789",
+        "total_volume": "1.23456789",
+        "price_change_rate24h": "1.23456789",
+        "mark_iv": null,
+        "bid_iv": "1.23456789",
+        "ask_iv": null,
+        "last_iv": "1.23456789",
+        "delta": null,
+        "gamma": "1.23456789",
+        "vega": null,
+        "theta": "1.23456789",
+        "rho": null,
+        "volga": "1.23456789",
+        "vanna": null,
+        "future_funding_rate": "1.23456789",
+        "external_fair_price": null,
+        "bid_size": "1.23456789",
+        "ask_size": null,
+        "forward_rate": "1.23456789",
+        "risk_free_rate": null,
+        "funding_rate_precise": "0.123456789012",
+        "settlement_twap_estimate": null,
+        "market": "ETH-USD-PERP"
+      }
+    },
+    {
+      "template": 5,
+      "name": "FundingDataEvent",
+      "hex": "4200050001000300402e63a75e5f06007b0000000000000015cd5b070000000015cd5b0700000000402e63a75e5f060015cd5b070000000015cd5b0700000000010000000000000000800c4554482d5553442d50455250",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "fundingRate": "1.23456789",
+        "fundingIndex": "1.23456789",
+        "createdAt": 1793710000123456,
+        "fundingPremium": "1.23456789",
+        "fundingRate8h": "1.23456789",
+        "fundingPeriodHours": 1,
+        "impactPremiumRate": null,
+        "market": "ETH-USD-PERP"
+      },
+      "reference_channel": "funding_data.ETH-USD-PERP",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "funding_rate": "1.23456789",
+        "funding_index": "1.23456789",
+        "created_at": 1793710000123,
+        "funding_premium": "1.23456789",
+        "funding_rate8h": "1.23456789",
+        "funding_period_hours": 1,
+        "impact_premium_rate": null,
+        "market": "ETH-USD-PERP"
+      }
+    },
+    {
+      "template": 6,
+      "name": "FundingRateComparisonEvent",
+      "hex": "1a00060001000300402e63a75e5f0600402e63a75e5f0600141a99be1c00000000000c4554482d5553442d50455250",
+      "native": {
+        "ts": 1793710000123456,
+        "lastUpdatedAt": 1793710000123456,
+        "hourlyFundingRate": "0.123456789012",
+        "assetKind": "UNSPECIFIED",
+        "source": "UNSPECIFIED",
+        "market": "ETH-USD-PERP"
+      },
+      "reference_channel": "funding_rate_comparison",
+      "reference": {
+        "timestamp": 1793710000123,
+        "last_updated_at": 1793710000123,
+        "hourly_funding_rate": "0.123456789012",
+        "asset_kind": "ASSET_KIND_UNSPECIFIED",
+        "source": "SOURCE_UNSPECIFIED",
+        "market": "ETH-USD-PERP"
+      }
+    },
+    {
+      "template": 20,
+      "name": "OrderEvent",
+      "hex": "8000140001000300402e63a75e5f06007b0000000000000001010101000000000000008015cd5b070000000015cd5b070000000015cd5b07000000000000000000000080402e63a75e5f0600402e63a75e5f06000000000000000000000000000000000000000000000000000000000000001234402e63a75e5f0600402e63a75e5f060000010000076669787475726507666978747572650c4554482d5553442d50455250076669787475726507666978747572650766697874757265",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "status": "NEW",
+        "side": "BUY",
+        "orderType": "LIMIT",
+        "timeInForce": "GTC",
+        "price": null,
+        "triggerPrice": "1.23456789",
+        "size": "1.23456789",
+        "sizeOpen": "1.23456789",
+        "avgFillPrice": null,
+        "createdAt": 1793710000123456,
+        "updatedAt": 1793710000123456,
+        "account": "0x1234",
+        "receivedAt": 1793710000123456,
+        "publishedAt": 1793710000123456,
+        "stp": "NONE",
+        "flags": [
+          "REDUCE_ONLY"
+        ],
+        "requestStatus": "UNSPECIFIED",
+        "requestType": "UNSPECIFIED",
+        "orderId": "fixture",
+        "clientOrderId": "fixture",
+        "market": "ETH-USD-PERP",
+        "cancelReason": "fixture",
+        "requestId": "fixture",
+        "requestMessage": "fixture"
+      },
+      "reference_channel": "orders.ETH-USD-PERP",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "status": "NEW",
+        "side": "BUY",
+        "order_type": "LIMIT",
+        "time_in_force": "GTC",
+        "price": null,
+        "trigger_price": "1.23456789",
+        "size": "1.23456789",
+        "size_open": "1.23456789",
+        "avg_fill_price": null,
+        "created_at": 1793710000123,
+        "updated_at": 1793710000123,
+        "account": "0x1234",
+        "received_at": 1793710000123,
+        "published_at": 1793710000123,
+        "stp": "NONE",
+        "flags": [
+          "REDUCE_ONLY"
+        ],
+        "order_id": "fixture",
+        "client_order_id": "fixture",
+        "market": "ETH-USD-PERP",
+        "cancel_reason": "fixture",
+        "request_info": null
+      }
+    },
+    {
+      "template": 21,
+      "name": "FillEvent",
+      "hex": "7400150001000300402e63a75e5f0600000000000000008001010115cd5b070000000015cd5b070000000015cd5b07000000000000000000000080402e63a75e5f0600000000000000000000000000000000000000000000000000000000000000123415cd5b070000000015cd5b07000000000101000000000000000766697874757265076669787475726507666978747572651c313233343536373839303132333435363738393031323334353637380c4554482d5553442d504552500766697874757265",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": null,
+        "fillType": "FILL",
+        "side": "BUY",
+        "liquidity": "MAKER",
+        "price": "1.23456789",
+        "size": "1.23456789",
+        "fee": "1.23456789",
+        "realizedPnl": null,
+        "createdAt": 1793710000123456,
+        "account": "0x1234",
+        "underlyingPrice": "1.23456789",
+        "realizedFunding": "1.23456789",
+        "flags": [
+          "INTERACTIVE"
+        ],
+        "orderbookSeqNo": 1,
+        "fillId": "fixture",
+        "orderId": "fixture",
+        "clientOrderId": "fixture",
+        "tradeId": "1234567890123456789012345678",
+        "market": "ETH-USD-PERP",
+        "feeCurrency": "fixture"
+      },
+      "reference_channel": "fills.ETH-USD-PERP",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": null,
+        "fill_type": "FILL",
+        "side": "BUY",
+        "liquidity": "MAKER",
+        "price": "1.23456789",
+        "size": "1.23456789",
+        "fee": "1.23456789",
+        "realized_pnl": null,
+        "created_at": 1793710000123,
+        "account": "0x1234",
+        "underlying_price": "1.23456789",
+        "realized_funding": "1.23456789",
+        "flags": [
+          "interactive"
+        ],
+        "orderbook_seq_no": 1,
+        "fill_id": "fixture",
+        "order_id": "fixture",
+        "client_order_id": "fixture",
+        "trade_id": "1234567890123456789012345678",
+        "market": "ETH-USD-PERP",
+        "fee_currency": "fixture"
+      }
+    },
+    {
+      "template": 22,
+      "name": "PositionEvent",
+      "hex": "9a00160001000300402e63a75e5f06007b000000000000000115cd5b070000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b0700000000000000000000008015cd5b0700000000402e63a75e5f0600000000000000000000000000000000000000000000000000000000000000123415cd5b070000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b0700000000010c4554482d5553442d504552500766697874757265",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "side": "BUY",
+        "size": "1.23456789",
+        "avgEntryPrice": "1.23456789",
+        "unrealizedPnl": "1.23456789",
+        "realizedPnl": "1.23456789",
+        "markPrice": "1.23456789",
+        "liquidationPrice": null,
+        "leverage": "1.23456789",
+        "updatedAt": 1793710000123456,
+        "account": "0x1234",
+        "avgEntryPriceUsd": "1.23456789",
+        "cost": "1.23456789",
+        "costUsd": "1.23456789",
+        "cachedFundingIndex": "1.23456789",
+        "unrealizedFundingPnl": "1.23456789",
+        "status": "OPEN",
+        "market": "ETH-USD-PERP",
+        "lastFillId": "fixture"
+      },
+      "reference_channel": "positions",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "side": "LONG",
+        "size": "1.23456789",
+        "avg_entry_price": "1.23456789",
+        "unrealized_pnl": "1.23456789",
+        "realized_pnl": "1.23456789",
+        "mark_price": "1.23456789",
+        "liquidation_price": null,
+        "leverage": "1.23456789",
+        "updated_at": 1793710000123,
+        "account": "0x1234",
+        "avg_entry_price_usd": "1.23456789",
+        "cost": "1.23456789",
+        "cost_usd": "1.23456789",
+        "cached_funding_index": "1.23456789",
+        "unrealized_funding_pnl": "1.23456789",
+        "status": "OPEN",
+        "market": "ETH-USD-PERP",
+        "last_fill_id": "fixture"
+      }
+    },
+    {
+      "template": 23,
+      "name": "AccountEvent",
+      "hex": "7900170001000300402e63a75e5f06007b0000000000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b070000000015cd5b0700000000402e63a75e5f0600000000000000000000000000000000000000000000000000000000000000123415cd5b070000000001402e63a75e5f06000455534443",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "totalCollateral": "1.23456789",
+        "freeCollateral": "1.23456789",
+        "initialMarginReq": "1.23456789",
+        "maintenanceMarginReq": "1.23456789",
+        "accountValue": "1.23456789",
+        "unrealizedPnl": "1.23456789",
+        "updatedAt": 1793710000123456,
+        "account": "0x1234",
+        "marginCushion": "1.23456789",
+        "status": "ACTIVE",
+        "lastSeenNotification": 1793710000123456,
+        "settlementAsset": "USDC"
+      },
+      "reference_channel": "account",
+      "reference": {
+        "timestamp": 1793710000123,
+        "seq_no": 123,
+        "total_collateral": "1.23456789",
+        "free_collateral": "1.23456789",
+        "initial_margin_req": "1.23456789",
+        "maintenance_margin_req": "1.23456789",
+        "account_value": "1.23456789",
+        "unrealized_pnl": "1.23456789",
+        "updated_at": 1793710000123,
+        "account": "0x1234",
+        "margin_cushion": "1.23456789",
+        "status": "ACTIVE",
+        "last_seen_notification": 1793710000123,
+        "settlement_asset": "USDC"
+      }
+    },
+    {
+      "template": 40,
+      "name": "HeartbeatEvent",
+      "hex": "1000280001000300402e63a75e5f06007b00000000000000",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123
+      },
+      "reference_channel": null,
+      "reference": null
+    },
+    {
+      "template": 41,
+      "name": "SubscribedEvent",
+      "hex": "1100290001000300402e63a75e5f06007b00000000000000010766697874757265",
+      "native": {
+        "ts": 1793710000123456,
+        "seq": 123,
+        "status": 1,
+        "channel": "fixture"
+      },
+      "reference_channel": null,
+      "reference": null
+    }
+  ]
+}
