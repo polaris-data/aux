@@ -22,6 +22,7 @@ dependencies = [
  "aux-rs-core",
  "aux-rs-hyperliquid",
  "aux-rs-lighter",
+ "aux-rs-monaco",
  "aux-rs-qfex",
  "futures-util",
  "serde_json",
@@ -82,6 +83,26 @@ dependencies = [
  "serde",
  "serde_json",
  "tokio",
+ "zeroize",
+]
+
+[[package]]
+name = "aux-rs-monaco"
+version = "0.0.0"
+dependencies = [
+ "aux-rs-core",
+ "base64 0.22.1",
+ "ed25519-dalek",
+ "futures-util",
+ "getrandom 0.2.17",
+ "k256",
+ "serde",
+ "serde_json",
+ "sha2",
+ "sha3",
+ "tokio",
+ "tokio-tungstenite",
+ "url",
  "zeroize",
 ]
 

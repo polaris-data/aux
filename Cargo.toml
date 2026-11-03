@@ -1,6 +1,6 @@
 [workspace]
-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/python"]
-default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex"]
+members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/python"]
+default-members = ["crates/aux-rs", "crates/core", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco"]
 resolver = "3"
 
 [workspace.package]
@@ -10,6 +10,9 @@ rust-version = "1.92"
 publish = false
 
 [workspace.dependencies]
+aux-rs-monaco = { path = "crates/exchanges/monaco", default-features = false }
+base64 = "0.22"
+url = "2.5"
 sha2 = { version = "0.10", default-features = false }
 ed25519-dalek = { version = "2.2", default-features = false, features = ["std", "zeroize", "fast"] }
 aux-rs-arcus = { path = "crates/exchanges/arcus", default-features = false }

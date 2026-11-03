@@ -1,0 +1,44 @@
+{
+  "trades": [
+    {
+      "data": {
+        "executedAt": "2026-11-03T12:41:56.687336+00:00",
+        "makerSide": "SELL",
+        "price": "77304.42",
+        "quantity": "0.00012",
+        "quantityRaw": "12000",
+        "tradeId": "01a1a16e-34cf-7321-9b90-f54726988f5f",
+        "executionSource": "CLOB",
+        "makerAddress": "0x1736cf5bb4313599af61aa26973be5276664e721",
+        "takerAddress": "0xfd060d6a5266fcc8f1c07dd52bd8d523092d5d77",
+        "takerFeeRaw": "6029",
+        "quoteVolumeRaw": "9276530",
+        "takerApplicationId": "dec502a9-1cfb-4c6d-9b9b-5c694465eea4"
+      },
+      "eventType": "trade",
+      "tradingPairId": "893d2add-2f36-4ee7-b660-893d2add2f36",
+      "tradingMode": "SPOT"
+    },
+    {
+      "data": {
+        "executedAt": "2026-11-03T12:41:56.682410+00:00",
+        "makerSide": "BUY",
+        "price": "77304.34",
+        "quantity": "0.00012",
+        "quantityRaw": "12000",
+        "tradeId": "01a1a16e-34ca-7262-987f-a0d1b99d1185",
+        "executionSource": "CLOB",
+        "makerAddress": "0xb12f262b2c9a74025087790c4028bd7457dc907d",
+        "takerAddress": "0xfd060d6a5266fcc8f1c07dd52bd8d523092d5d77",
+        "takerFeeRaw": "6029",
+        "quoteVolumeRaw": "9276520",
+        "takerApplicationId": "dec502a9-1cfb-4c6d-9b9b-5c694465eea4"
+      },
+      "eventType": "trade",
+      "tradingPairId": "893d2add-2f36-4ee7-b660-893d2add2f36",
+      "tradingMode": "SPOT"
+    }
+  ],
+  "pageSize": 2,
+  "nextPageToken": "eyJ2IjoxLCJ0cyI6MTc5MzcwOTcxNjY4MjQxMCwiaWQiOiIwMWExYTE2ZS0zNGNhLTcyNjItOTg3Zi1hMGQxYjk5ZDExODUiLCJmIjoibGlzdD1wdWJsaWNfdHJhZGVzfHBhaXI9ODkzZDJhZGQtMmYzNi00ZWU3LWI2NjAtODkzZDJhZGQyZjM2fGRpcj1kZXNjIn0"
+}

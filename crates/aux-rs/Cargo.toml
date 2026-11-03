@@ -11,14 +11,16 @@ include = ["Cargo.toml", "src/**"]
 
 [features]
 default = ["http", "ws"]
-http = ["aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http"]
-ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws"]
+http = ["aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http"]
+ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws"]
 qfex = ["dep:aux-rs-qfex"]
 arcus = ["dep:aux-rs-arcus"]
+monaco = ["dep:aux-rs-monaco"]
 hyperliquid = ["dep:aux-rs-hyperliquid"]
 lighter = ["dep:aux-rs-lighter"]
 
 [dependencies]
+aux-rs-monaco = { workspace = true, optional = true }
 aux-rs-arcus = { workspace = true, optional = true }
 aux-rs-qfex = { workspace = true, optional = true }
 aux-rs-core.workspace = true
@@ -59,6 +61,14 @@ required-features = ["qfex", "http", "ws"]
 [[example]]
 name = "arcus_public"
 required-features = ["arcus", "http", "ws"]
+
+[[example]]
+name = "monaco_public"
+required-features = ["monaco", "http", "ws"]
+
+[[example]]
+name = "monaco_testnet_trade"
+required-features = ["monaco", "http", "ws"]
 
 [lints]
 workspace = true

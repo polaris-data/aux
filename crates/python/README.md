@@ -216,3 +216,14 @@ Milestone 5 adds safe-read retry and reconnect policies. Defaults are two extra 
 `GapError` derives from `TransportError`. Catch it within the stream's context manager, invalidate/reconcile derived state and call `anext()` again; the iterator stays open. Old buffered frames are cleared before recovery data. Terminal overflow, protocol/size errors, expired replay credentials or exhausted recovery close the iterator. Private Lighter token refresh requires a new authenticated subscription. A plain `async for` does not suppress gap exceptions.
 
 Client `aclose()` also shuts down the shared Rust transport and waits for its handshakes, requests and socket drivers. Safe reads honor bounded `Retry-After` handling; signed trading is never automatically retried, even after timeout/shutdown. The 49-test Python suite covers the existing 110 signing vectors, both new exchange adapters, recovery, budget, backoff cancellation, and no-replay cases.
+
+## Monaco
+
+`MonacoClient`, `MonacoWalletSigner` and `MonacoSessionSigner` expose the native
+Rust spot/perps connector. Read methods accept native request dictionaries;
+`login` authorizes a session, `restore_session` accepts caller-persisted credentials,
+and refresh/revoke update shared session state. Public and private streams use
+`subscribe` with native channel parameters. See the [Monaco guide](../exchanges/monaco/README.md)
+for exact schemas, signing, trading and uncertain-outcome behavior. The explicit
+read-only network example is `examples/monaco_public.py`. Offline tests cover
+native parity, exact values, callback context/reconnect/cancellation and lifecycle.

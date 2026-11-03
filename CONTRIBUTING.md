@@ -204,7 +204,7 @@ source distribution before publishing to PyPI.
 ## Dependency changes
 
 Default facade features are `http` and `ws`; no exchange is selected automatically.
-Exchange features (`hyperliquid`, `lighter`, `qfex`, and `arcus`) are additive and
+Exchange features (`hyperliquid`, `lighter`, `qfex`, `arcus`, and `monaco`) are additive and
 must not force standard transport features. Keep internal adapter dependencies'
 default features disabled. With `default-features = false`, selected adapters
 remain usable with caller-supplied transports. Core contracts must not require
@@ -284,7 +284,7 @@ checks never run in offline CI.
 
 ## Roadmap and release gates
 
-Hyperliquid, Lighter, QFEX, and Arcus have native Rust adapters and Python bindings
+Hyperliquid, Lighter, QFEX, Arcus, and Monaco have native Rust adapters and Python bindings
 for core market metadata, book snapshots, public trades/book streams, account
 state/positions, native order reads, signing/authentication, order submission and
 cancellation, and account streams. Coverage is limited to each adapter's documented
@@ -296,10 +296,18 @@ nanosecond timestamps with single-attempt REST writes. Its public account stream
 are scoped by address and account index; delta books require fresh snapshots after
 gaps. Both adapters have protocol/signing, lifecycle, and Python parity tests.
 
+Monaco covers spot and perps through REST, wallet-authorized Ed25519 sessions,
+legacy/RFC 9421 signing, and authenticated account streams. Session refresh and
+revocation propagate through cloned clients and stream handles. The shared
+WebSocket contract supports optional asynchronous authentication before initial
+subscriptions and reconnect replay. Public staging REST and orderbook snapshots
+were verified; staging rejected the documented depth channel. See the
+[Monaco guide](crates/exchanges/monaco/README.md) for coverage and release gates.
+
 Remaining release gates and work:
 
 - Funded authenticated submit/cancel verification remains pending for every venue,
-  including QFEX UAT and Arcus testnet. Real authenticated Lighter order-stream
+  including QFEX UAT, Arcus testnet, and Monaco staging. Real authenticated Lighter order-stream
   verification also needs credentials.
 - Lighter's local ECgFp5/Poseidon primitives remain experimental and unaudited;
   cryptographic review is required before production use. See its
@@ -331,3 +339,4 @@ additional venues is undecided.
 - [ ] Pacifica
 - [ ] Bulk
 - [ ] Paradex
+- [x] Monaco

@@ -8,6 +8,7 @@ use std::sync::{Arc, Mutex};
 use tokio::sync::watch;
 
 pub enum NativeHandle {
+    Monaco(aux_rs::monaco::SubscriptionHandle<StandardSubscription>),
     Qfex(aux_rs::qfex::SubscriptionHandle<StandardSubscription>),
     Arcus(aux_rs::arcus::SubscriptionHandle<StandardSubscription>),
     QfexTrade(aux_rs::qfex::TradingSession<aux_rs::standard::StandardConnection>),
@@ -20,6 +21,7 @@ pub enum NativeHandle {
 impl NativeHandle {
     async fn close(&mut self) -> Result<(), ClientError> {
         match self {
+            Self::Monaco(handle) => handle.close().await.map_err(ClientError::Monaco),
             Self::Qfex(handle) => handle.close().await.map_err(ClientError::Qfex),
             Self::Arcus(handle) => handle.close().await.map_err(ClientError::Arcus),
             Self::QfexTrade(handle) => handle.close().await.map_err(ClientError::Qfex),
@@ -32,6 +34,13 @@ impl NativeHandle {
     async fn next(&mut self) -> Option<Result<serde_json::Value, ClientError>> {
         use serde_json::json;
         match self {
+            Self::Monaco(handle) => Some(
+                handle
+                    .next()
+                    .await?
+                    .map_err(ClientError::Monaco)
+                    .and_then(|e| serde_json::to_value(e).map_err(|_| ClientError::Conversion)),
+            ),
             Self::Qfex(handle) => Some(
                 handle
                     .next()

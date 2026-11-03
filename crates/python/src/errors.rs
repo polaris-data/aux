@@ -4,6 +4,7 @@ use aux_rs::{
 use pyo3::{create_exception, exceptions::PyException, prelude::*};
 
 pub enum ClientError {
+    Monaco(NativeError<aux_rs::monaco::Error>),
     Qfex(NativeError<aux_rs::qfex::Error>),
     Arcus(NativeError<aux_rs::arcus::Error>),
     Hyperliquid(NativeError<hl::Error>),
@@ -20,7 +21,8 @@ impl ClientError {
             Self::Hyperliquid(NativeError::Transport(e))
             | Self::Lighter(NativeError::Transport(e))
             | Self::Qfex(NativeError::Transport(e))
-            | Self::Arcus(NativeError::Transport(e)) => e.is_gap(),
+            | Self::Arcus(NativeError::Transport(e))
+            | Self::Monaco(NativeError::Transport(e)) => e.is_gap(),
             _ => false,
         }
     }
@@ -110,7 +112,8 @@ pub fn map_error(error: &ClientError) -> PyErr {
         ClientError::Hyperliquid(NativeError::Transport(e))
         | ClientError::Lighter(NativeError::Transport(e))
         | ClientError::Qfex(NativeError::Transport(e))
-        | ClientError::Arcus(NativeError::Transport(e)) => transport(e),
+        | ClientError::Arcus(NativeError::Transport(e))
+        | ClientError::Monaco(NativeError::Transport(e)) => transport(e),
         ClientError::Hyperliquid(NativeError::Exchange(e)) => match e {
             hl::Error::Http { status, body } => {
                 exchange("Hyperliquid", Some(*status), Some(body), None, None, None)
@@ -205,6 +208,28 @@ pub fn map_error(error: &ClientError) -> PyErr {
                     .as_ref(),
             ),
         },
+        ClientError::Monaco(NativeError::Exchange(e)) => match e {
+            aux_rs::monaco::Error::InvalidRequest(m) => ValidationError::new_err(*m),
+            aux_rs::monaco::Error::Decode(_) => DecodeError::new_err("Monaco decoding failed"),
+            aux_rs::monaco::Error::Signing(_) => SigningError::new_err("Monaco signing failed"),
+            aux_rs::monaco::Error::Authentication(m) => AuthenticationError::new_err(*m),
+            aux_rs::monaco::Error::OutcomeUncertain {status,body} => Python::attach(|py| -> PyResult<PyErr> {
+                let error=OutcomeUncertainError::new_err("Monaco submission outcome unknown; retain the original payload and idempotency key");
+                error.value(py).setattr("http_status",status)?;
+                error.value(py).setattr("outcome","unknown")?;
+                error.value(py).setattr("body",crate::convert::output(body)?)?;
+                Ok(error)
+            }).unwrap_or_else(std::convert::identity),
+            aux_rs::monaco::Error::Api {status,body} => Python::attach(|py| -> PyResult<PyErr> {
+                let error=ExchangeError::new_err("Monaco rejected request");
+                error.value(py).setattr("venue","Monaco")?;
+                error.value(py).setattr("http_status",status)?;
+                error.value(py).setattr("body",crate::convert::output(body)?)?;
+                error.value(py).setattr("code",crate::convert::output(body.get("code"))?)?;
+                error.value(py).setattr("native_message",crate::convert::output(body.get("message"))?)?;
+                Ok(error)
+            }).unwrap_or_else(std::convert::identity),
+        },
         ClientError::Conversion => {
             DecodeError::new_err("unexpected or unrepresentable native stream event")
         }
@@ -236,4 +261,8 @@ pub fn qfex(error: NativeError<aux_rs::qfex::Error>) -> PyErr {
 
 pub fn arcus(error: NativeError<aux_rs::arcus::Error>) -> PyErr {
     map_error(&ClientError::Arcus(error))
+}
+
+pub fn monaco(error: NativeError<aux_rs::monaco::Error>) -> PyErr {
+    map_error(&ClientError::Monaco(error))
 }

@@ -1,4 +1,9 @@
-use std::{fmt, future::Future, time::Duration};
+use std::{
+    fmt,
+    future::Future,
+    pin::Pin,
+    time::{Duration, SystemTime},
+};
 
 use crate::{RequestOutcome, TransportError, TransportErrorKind};
 
@@ -88,6 +93,13 @@ pub trait WebSocketConnector: Send + Sync {
     ) -> impl Future<Output = Result<Self::Connection, TransportError>> + Send;
 }
 
+/// Asynchronous connection setup; custom transports must await its acknowledgement
+/// before subscribing and prepare a fresh message on every reconnect.
+pub type AuthenticationMessage<'a> =
+    Pin<Box<dyn Future<Output = Result<Option<String>, TransportError>> + Send + 'a>>;
+/// Wakes a pooled session when shared credentials are refreshed or invalidated.
+pub type AuthenticationChanged<'a> = Pin<Box<dyn Future<Output = ()> + Send + 'a>>;
+
 /// Wire-level subscription behavior supplied by the exchange adapter.
 ///
 /// Keys must include all subscription parameters. Equal keys normally share one
@@ -95,6 +107,20 @@ pub trait WebSocketConnector: Send + Sync {
 /// must route malformed or error messages for explicit
 /// handling rather than silently discarding them.
 pub trait WebSocketSubscription: Send + Sync + 'static {
+    fn authentication_message(&self) -> AuthenticationMessage<'_> {
+        Box::pin(std::future::ready(Ok(None)))
+    }
+    /// None means this is not an authentication response; Err is terminal.
+    fn authentication_result(&self, _text: &str) -> Option<Result<(), TransportError>> {
+        None
+    }
+    fn authentication_expires_at(&self) -> Option<SystemTime> {
+        None
+    }
+    fn authentication_changed(&self) -> Option<AuthenticationChanged<'_>> {
+        None
+    }
+
     /// Fixed native credentials can forbid replay after expiry. Applications
     /// then open a new subscription with fresh credentials.
     fn resubscribe_allowed(&self) -> bool {
@@ -103,6 +129,10 @@ pub trait WebSocketSubscription: Send + Sync + 'static {
     /// For delta feeds, reject updates that precede a new native snapshot.
     fn is_initial_snapshot(&self, _text: &str) -> bool {
         true
+    }
+    /// Control frames may be delivered while still awaiting the baseline.
+    fn is_snapshot_control(&self, _text: &str) -> bool {
+        false
     }
     /// Only meaningful native data resets a consecutive reconnect budget.
     fn is_data_message(&self, _text: &str) -> bool {
@@ -146,6 +176,7 @@ pub trait WebSocketTransport: Send + Sync {
     type Stream: WebSocketStream;
 
     /// Implementations that pool connections must honor `connection_scope` to
+    /// complete session authentication before subscribing and on reconnect,
     /// keep messages without account identity isolated from other accounts,
     /// and `requires_fresh_snapshot` so late consumers do not start with deltas.
     fn subscribe<S: WebSocketSubscription>(

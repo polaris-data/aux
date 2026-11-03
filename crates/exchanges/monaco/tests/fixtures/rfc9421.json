@@ -1,0 +1,38 @@
+[
+  {
+    "method": "POST",
+    "target": "/api/v1/orders?tag=a%2Fb&tag=a+b",
+    "body": "{\"quantity\":\"1.00\",\"note\":\"é\"}",
+    "created": 1788868800,
+    "privateKey": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60",
+    "publicKey": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+    "contentDigest": "sha-256=:43vxeIHr6sOEuIeS1LMLgZPyuLNl3pS6awgJ6F3FPg0=:",
+    "signatureInput": "monaco=(\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\";alg=\"ed25519\"",
+    "signatureBase": "\"@method\": POST\n\"@path\": /api/v1/orders\n\"@query\": ?tag=a%2Fb&tag=a+b\n\"content-digest\": sha-256=:43vxeIHr6sOEuIeS1LMLgZPyuLNl3pS6awgJ6F3FPg0=:\n\"@signature-params\": (\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\";alg=\"ed25519\"",
+    "signature": "monaco=:oVw8X6YjZ9zXovcAV6RRPSSZ15WCAMl2VU3w8I30BwxXtkWwx36Ky0pOLkiMis3EORXSuMH1e2KdlJBUEY+HBw==:"
+  },
+  {
+    "method": "GET",
+    "target": "/api/v1/accounts/profile",
+    "body": "",
+    "created": 1788868800,
+    "privateKey": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60",
+    "publicKey": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+    "contentDigest": "sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:",
+    "signatureInput": "monaco=(\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\";alg=\"ed25519\"",
+    "signatureBase": "\"@method\": GET\n\"@path\": /api/v1/accounts/profile\n\"@query\": ?\n\"content-digest\": sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:\n\"@signature-params\": (\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\";alg=\"ed25519\"",
+    "signature": "monaco=:Z6QZup1jS9B5gf4Na8qzC7sEbnD11ml05yNG3eCVdhjrd1NwbcbeNAqmyo/PzfpARzcmsd/2TjQjlQW13Vt7BA==:"
+  },
+  {
+    "method": "GET",
+    "target": "/api/v1/orders?",
+    "body": "",
+    "created": 1788868800,
+    "privateKey": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60",
+    "publicKey": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+    "contentDigest": "sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:",
+    "signatureInput": "monaco=(\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\";alg=\"ed25519\"",
+    "signatureBase": "\"@method\": GET\n\"@path\": /api/v1/orders\n\"@query\": ?\n\"content-digest\": sha-256=:47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=:\n\"@signature-params\": (\"@method\" \"@path\" \"@query\" \"content-digest\");created=1788868800;keyid=\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\";alg=\"ed25519\"",
+    "signature": "monaco=:K7Qx5npU8O+NB0Y0dXd6xMxvbknh5ViZwwEU6zB07a1TkQAmMjKkvxt6RM4f7IFuzo7g5ZpK6rtZmko79Dq5CA==:"
+  }
+]

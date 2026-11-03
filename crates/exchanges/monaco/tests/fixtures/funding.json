@@ -1,0 +1,9 @@
+{
+  "tradingPairId": "9e5e7125-0c80-547a-a9d0-33564b77c705",
+  "currentFundingRate": "-0.0000000579846594793948471935",
+  "estimatedNextFundingRate": "-0.0000000156160018462040918297",
+  "nextFundingTime": "1793710800000",
+  "fundingIntervalSeconds": 3600,
+  "lastFundingTime": "1793707200000",
+  "updatedAt": "1793709717253"
+}
