@@ -2,6 +2,8 @@
 use crate::{Error, U256};
 use alloy_primitives::U512;
 use serde::{Deserialize, Serialize};
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BinData {
@@ -44,10 +46,14 @@ pub fn unpack_bin_data_array(words: &[U256]) -> Vec<BinData> {
     }
     bins
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BinState {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token0_balance_scaled: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token1_balance_scaled: U256,
     pub length_e6: u16,
     pub add_fee_buy_e6: u16,
@@ -84,11 +90,14 @@ pub fn unpack_two_int128(word: U256) -> (i128, i128) {
     let (h, l) = unpack_two_uint128(word);
     (h as i128, l as i128)
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SwapDetails {
     pub exact_input: bool,
     pub bin_idx: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub pos_in_bin: U256,
 }
 pub fn unpack_swap_details(word: U256) -> SwapDetails {

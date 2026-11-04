@@ -10,6 +10,7 @@ readme = "../../README.md"
 include = ["Cargo.toml", "src/**"]
 
 [features]
+typescript = ["aux-rs-hyperliquid?/typescript", "aux-rs-arcus?/typescript", "aux-rs-derive?/typescript", "aux-rs-qfex?/typescript", "aux-rs-monaco?/typescript", "aux-rs-paradex?/typescript", "aux-rs-lighter?/typescript", "aux-rs-metric?/typescript"]
 default = ["http", "ws"]
 http = ["aux-rs-metric?/http", "aux-rs-tardis?/http", "aux-rs-databento?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
 ws = ["aux-rs-tardis?/ws", "aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]

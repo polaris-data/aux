@@ -1,6 +1,8 @@
 //! Native module payloads. Inputs are human-unit decimal strings except IDs.
 use crate::*;
 use serde::{Deserialize, Serialize};
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SigningLeg {
     pub instrument_name: String,
@@ -10,6 +12,8 @@ pub struct SigningLeg {
     pub amount: String,
     pub direction: String,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum ModuleData {

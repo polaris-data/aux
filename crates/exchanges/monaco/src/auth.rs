@@ -134,6 +134,8 @@ pub fn wallet_address(s: &str) -> Result<String, Error> {
     }
     Ok(s.to_ascii_lowercase())
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum RequestSigning {
@@ -141,14 +143,19 @@ pub enum RequestSigning {
     Legacy,
     Rfc9421,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct LoginOptions {
     pub invite_code: Option<String>,
     pub referral_code: Option<String>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub request_signing: RequestSigning,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct SessionInfo {

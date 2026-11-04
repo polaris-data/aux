@@ -13,10 +13,13 @@ fn wad() -> U256 {
 fn metric_max() -> U256 {
     (U256::from(1) << 104usize) - U256::from(1)
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct LiquidityDeltas {
     pub bin_idxs: Vec<i16>,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub shares: Vec<U256>,
 }
 impl LiquidityDeltas {
@@ -108,14 +111,22 @@ pub fn stop_loss_threshold(hwm: U256, drawdown_e6: u32) -> Result<U256, Error> {
 pub fn stop_loss_breached(metric: U256, hwm: U256, drawdown_e6: u32) -> Result<bool, Error> {
     Ok(drawdown_e6 != 0 && metric < stop_loss_threshold(hwm, drawdown_e6)?)
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct StopLossInput {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub bid_price_x64: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub ask_price_x64: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token0_balance_scaled: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token1_balance_scaled: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub total_shares: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub minimal_operational_liquidity: U256,
 }
 pub fn stop_loss_metrics(input: &StopLossInput) -> Result<(U256, U256), Error> {
@@ -208,22 +219,30 @@ pub fn extension_order(slots: &[u8]) -> Result<U256, Error> {
         .enumerate()
         .fold(U256::ZERO, |w, (i, s)| w | (U256::from(*s) << (i * 3))))
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct CursorInput {
     pub cur_bin_idx: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub cur_pos_in_bin: U256,
     pub lowest_bin: i16,
     pub highest_bin: i16,
     pub bin_lengths_e6: Vec<u16>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub distance_e12: U256,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CursorBounds {
     pub minimal_cur_bin: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub minimal_position: U256,
     pub maximal_cur_bin: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub maximal_position: U256,
 }
 pub fn liquidity_cursor_bounds(input: &CursorInput) -> Result<CursorBounds, Error> {

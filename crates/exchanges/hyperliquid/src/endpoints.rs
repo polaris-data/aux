@@ -8,12 +8,16 @@ use serde::{Deserialize, Serialize, de::DeserializeOwned};
 
 use crate::{Error, Hyperliquid, L2Book, Meta};
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct MetaRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub dex: Option<String>,
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct L2BookRequest {
@@ -56,6 +60,8 @@ pub(crate) fn validate_coin(coin: &str) -> Result<(), Error> {
     Ok(())
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Serialize)]
 #[serde(tag = "type")]
 enum InfoRequest<'a> {

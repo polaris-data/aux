@@ -1,12 +1,17 @@
 // Generated from the pinned SBE schema.
 #![allow(clippy::derivable_impls)]
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct TradeEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "tradeId")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub trade_id: serde_json::Number,
     #[serde(rename = "side")]
     pub side: Option<String>,
@@ -15,6 +20,7 @@ pub struct TradeEvent {
     #[serde(rename = "size")]
     pub size: String,
     #[serde(rename = "createdAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub created_at: serde_json::Number,
     #[serde(rename = "tradeType")]
     pub trade_type: Option<String>,
@@ -23,6 +29,7 @@ pub struct TradeEvent {
     #[serde(rename = "tradeIdStr")]
     pub trade_id_str: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for TradeEvent {
@@ -44,13 +51,18 @@ impl Default for TradeEvent {
 }
 impl<'de> serde::Deserialize<'de> for TradeEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "tradeId")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub trade_id: serde_json::Number,
             #[serde(rename = "side")]
             pub side: Option<String>,
@@ -59,6 +71,7 @@ impl<'de> serde::Deserialize<'de> for TradeEvent {
             #[serde(rename = "size")]
             pub size: String,
             #[serde(rename = "createdAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub created_at: serde_json::Number,
             #[serde(rename = "tradeType")]
             pub trade_type: Option<String>,
@@ -103,11 +116,15 @@ impl<'de> serde::Deserialize<'de> for TradeEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct BboEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "bidPrice")]
     pub bid_price: Option<String>,
@@ -120,6 +137,7 @@ pub struct BboEvent {
     #[serde(rename = "market")]
     pub market: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for BboEvent {
@@ -138,11 +156,15 @@ impl Default for BboEvent {
 }
 impl<'de> serde::Deserialize<'de> for BboEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "bidPrice")]
             pub bid_price: Option<String>,
@@ -179,6 +201,8 @@ impl<'de> serde::Deserialize<'de> for BboEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct BookEventBidsItem {
     #[serde(rename = "price")]
@@ -186,6 +210,7 @@ pub struct BookEventBidsItem {
     #[serde(rename = "size")]
     pub size: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for BookEventBidsItem {
@@ -199,6 +224,8 @@ impl Default for BookEventBidsItem {
 }
 impl<'de> serde::Deserialize<'de> for BookEventBidsItem {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "price")]
@@ -223,6 +250,8 @@ impl<'de> serde::Deserialize<'de> for BookEventBidsItem {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct BookEventAsksItem {
     #[serde(rename = "price")]
@@ -230,6 +259,7 @@ pub struct BookEventAsksItem {
     #[serde(rename = "size")]
     pub size: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for BookEventAsksItem {
@@ -243,6 +273,8 @@ impl Default for BookEventAsksItem {
 }
 impl<'de> serde::Deserialize<'de> for BookEventAsksItem {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "price")]
@@ -267,11 +299,15 @@ impl<'de> serde::Deserialize<'de> for BookEventAsksItem {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct BookEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "pkgType")]
     pub pkg_type: Option<String>,
@@ -300,6 +336,7 @@ pub struct BookEvent {
     #[serde(rename = "market")]
     pub market: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for BookEvent {
@@ -326,11 +363,15 @@ impl Default for BookEvent {
 }
 impl<'de> serde::Deserialize<'de> for BookEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "pkgType")]
             pub pkg_type: Option<String>,
@@ -405,11 +446,15 @@ impl<'de> serde::Deserialize<'de> for BookEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct MarketSummaryEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "markPrice")]
     pub mark_price: String,
@@ -472,6 +517,7 @@ pub struct MarketSummaryEvent {
     #[serde(rename = "market")]
     pub market: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for MarketSummaryEvent {
@@ -515,11 +561,15 @@ impl Default for MarketSummaryEvent {
 }
 impl<'de> serde::Deserialize<'de> for MarketSummaryEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "markPrice")]
             pub mark_price: String,
@@ -662,29 +712,36 @@ impl<'de> serde::Deserialize<'de> for MarketSummaryEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct FundingDataEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "fundingRate")]
     pub funding_rate: String,
     #[serde(rename = "fundingIndex")]
     pub funding_index: String,
     #[serde(rename = "createdAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub created_at: serde_json::Number,
     #[serde(rename = "fundingPremium")]
     pub funding_premium: String,
     #[serde(rename = "fundingRate8h")]
     pub funding_rate8h: String,
     #[serde(rename = "fundingPeriodHours")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub funding_period_hours: serde_json::Number,
     #[serde(rename = "impactPremiumRate")]
     pub impact_premium_rate: Option<String>,
     #[serde(rename = "market")]
     pub market: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for FundingDataEvent {
@@ -706,23 +763,29 @@ impl Default for FundingDataEvent {
 }
 impl<'de> serde::Deserialize<'de> for FundingDataEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "fundingRate")]
             pub funding_rate: String,
             #[serde(rename = "fundingIndex")]
             pub funding_index: String,
             #[serde(rename = "createdAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub created_at: serde_json::Number,
             #[serde(rename = "fundingPremium")]
             pub funding_premium: String,
             #[serde(rename = "fundingRate8h")]
             pub funding_rate8h: String,
             #[serde(rename = "fundingPeriodHours")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub funding_period_hours: serde_json::Number,
             #[serde(rename = "impactPremiumRate")]
             pub impact_premium_rate: Option<String>,
@@ -765,11 +828,15 @@ impl<'de> serde::Deserialize<'de> for FundingDataEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct FundingRateComparisonEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "lastUpdatedAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub last_updated_at: serde_json::Number,
     #[serde(rename = "hourlyFundingRate")]
     pub hourly_funding_rate: String,
@@ -780,6 +847,7 @@ pub struct FundingRateComparisonEvent {
     #[serde(rename = "market")]
     pub market: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for FundingRateComparisonEvent {
@@ -797,11 +865,15 @@ impl Default for FundingRateComparisonEvent {
 }
 impl<'de> serde::Deserialize<'de> for FundingRateComparisonEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "lastUpdatedAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub last_updated_at: serde_json::Number,
             #[serde(rename = "hourlyFundingRate")]
             pub hourly_funding_rate: String,
@@ -840,11 +912,15 @@ impl<'de> serde::Deserialize<'de> for FundingRateComparisonEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct OrderEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "status")]
     pub status: Option<String>,
@@ -865,14 +941,18 @@ pub struct OrderEvent {
     #[serde(rename = "avgFillPrice")]
     pub avg_fill_price: Option<String>,
     #[serde(rename = "createdAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub created_at: serde_json::Number,
     #[serde(rename = "updatedAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub updated_at: serde_json::Number,
     #[serde(rename = "account")]
     pub account: String,
     #[serde(rename = "receivedAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub received_at: serde_json::Number,
     #[serde(rename = "publishedAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub published_at: serde_json::Number,
     #[serde(rename = "stp")]
     pub stp: Option<String>,
@@ -895,6 +975,7 @@ pub struct OrderEvent {
     #[serde(rename = "requestMessage")]
     pub request_message: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for OrderEvent {
@@ -932,11 +1013,15 @@ impl Default for OrderEvent {
 }
 impl<'de> serde::Deserialize<'de> for OrderEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "status")]
             pub status: Option<String>,
@@ -957,14 +1042,18 @@ impl<'de> serde::Deserialize<'de> for OrderEvent {
             #[serde(rename = "avgFillPrice")]
             pub avg_fill_price: Option<String>,
             #[serde(rename = "createdAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub created_at: serde_json::Number,
             #[serde(rename = "updatedAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub updated_at: serde_json::Number,
             #[serde(rename = "account")]
             pub account: String,
             #[serde(rename = "receivedAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub received_at: serde_json::Number,
             #[serde(rename = "publishedAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub published_at: serde_json::Number,
             #[serde(rename = "stp")]
             pub stp: Option<String>,
@@ -1055,11 +1144,15 @@ impl<'de> serde::Deserialize<'de> for OrderEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct FillEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "(number | bigint | string) | null", optional = nullable))]
     pub seq: Option<serde_json::Number>,
     #[serde(rename = "fillType")]
     pub fill_type: Option<String>,
@@ -1076,6 +1169,7 @@ pub struct FillEvent {
     #[serde(rename = "realizedPnl")]
     pub realized_pnl: Option<String>,
     #[serde(rename = "createdAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub created_at: serde_json::Number,
     #[serde(rename = "account")]
     pub account: String,
@@ -1086,6 +1180,7 @@ pub struct FillEvent {
     #[serde(rename = "flags")]
     pub flags: Vec<String>,
     #[serde(rename = "orderbookSeqNo")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub orderbook_seq_no: serde_json::Number,
     #[serde(rename = "fillId")]
     pub fill_id: String,
@@ -1100,6 +1195,7 @@ pub struct FillEvent {
     #[serde(rename = "feeCurrency")]
     pub fee_currency: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for FillEvent {
@@ -1132,11 +1228,15 @@ impl Default for FillEvent {
 }
 impl<'de> serde::Deserialize<'de> for FillEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "(number | bigint | string) | null", optional = nullable))]
             pub seq: Option<serde_json::Number>,
             #[serde(rename = "fillType")]
             pub fill_type: Option<String>,
@@ -1153,6 +1253,7 @@ impl<'de> serde::Deserialize<'de> for FillEvent {
             #[serde(rename = "realizedPnl")]
             pub realized_pnl: Option<String>,
             #[serde(rename = "createdAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub created_at: serde_json::Number,
             #[serde(rename = "account")]
             pub account: String,
@@ -1163,6 +1264,7 @@ impl<'de> serde::Deserialize<'de> for FillEvent {
             #[serde(rename = "flags")]
             pub flags: Vec<String>,
             #[serde(rename = "orderbookSeqNo")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub orderbook_seq_no: serde_json::Number,
             #[serde(rename = "fillId")]
             pub fill_id: String,
@@ -1235,11 +1337,15 @@ impl<'de> serde::Deserialize<'de> for FillEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct PositionEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "side")]
     pub side: Option<String>,
@@ -1258,6 +1364,7 @@ pub struct PositionEvent {
     #[serde(rename = "leverage")]
     pub leverage: String,
     #[serde(rename = "updatedAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub updated_at: serde_json::Number,
     #[serde(rename = "account")]
     pub account: String,
@@ -1278,6 +1385,7 @@ pub struct PositionEvent {
     #[serde(rename = "lastFillId")]
     pub last_fill_id: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for PositionEvent {
@@ -1309,11 +1417,15 @@ impl Default for PositionEvent {
 }
 impl<'de> serde::Deserialize<'de> for PositionEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "side")]
             pub side: Option<String>,
@@ -1332,6 +1444,7 @@ impl<'de> serde::Deserialize<'de> for PositionEvent {
             #[serde(rename = "leverage")]
             pub leverage: String,
             #[serde(rename = "updatedAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub updated_at: serde_json::Number,
             #[serde(rename = "account")]
             pub account: String,
@@ -1408,11 +1521,15 @@ impl<'de> serde::Deserialize<'de> for PositionEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct AccountEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "totalCollateral")]
     pub total_collateral: String,
@@ -1427,6 +1544,7 @@ pub struct AccountEvent {
     #[serde(rename = "unrealizedPnl")]
     pub unrealized_pnl: Option<String>,
     #[serde(rename = "updatedAt")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub updated_at: serde_json::Number,
     #[serde(rename = "account")]
     pub account: String,
@@ -1435,10 +1553,12 @@ pub struct AccountEvent {
     #[serde(rename = "status")]
     pub status: Option<String>,
     #[serde(rename = "lastSeenNotification")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub last_seen_notification: serde_json::Number,
     #[serde(rename = "settlementAsset")]
     pub settlement_asset: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for AccountEvent {
@@ -1464,11 +1584,15 @@ impl Default for AccountEvent {
 }
 impl<'de> serde::Deserialize<'de> for AccountEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "totalCollateral")]
             pub total_collateral: String,
@@ -1483,6 +1607,7 @@ impl<'de> serde::Deserialize<'de> for AccountEvent {
             #[serde(rename = "unrealizedPnl")]
             pub unrealized_pnl: Option<String>,
             #[serde(rename = "updatedAt")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub updated_at: serde_json::Number,
             #[serde(rename = "account")]
             pub account: String,
@@ -1491,6 +1616,7 @@ impl<'de> serde::Deserialize<'de> for AccountEvent {
             #[serde(rename = "status")]
             pub status: Option<String>,
             #[serde(rename = "lastSeenNotification")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub last_seen_notification: serde_json::Number,
             #[serde(rename = "settlementAsset")]
             pub settlement_asset: String,
@@ -1539,13 +1665,18 @@ impl<'de> serde::Deserialize<'de> for AccountEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct HeartbeatEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for HeartbeatEvent {
@@ -1559,11 +1690,15 @@ impl Default for HeartbeatEvent {
 }
 impl<'de> serde::Deserialize<'de> for HeartbeatEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
         }
         let mut extra = serde_json::Map::<String, serde_json::Value>::deserialize(deserializer)?;
@@ -1583,17 +1718,23 @@ impl<'de> serde::Deserialize<'de> for HeartbeatEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize)]
 pub struct SubscribedEvent {
     #[serde(rename = "ts")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub ts: serde_json::Number,
     #[serde(rename = "seq")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub seq: serde_json::Number,
     #[serde(rename = "status")]
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub status: serde_json::Number,
     #[serde(rename = "channel")]
     pub channel: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: serde_json::Map<String, serde_json::Value>,
 }
 impl Default for SubscribedEvent {
@@ -1609,13 +1750,18 @@ impl Default for SubscribedEvent {
 }
 impl<'de> serde::Deserialize<'de> for SubscribedEvent {
     fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
         #[derive(serde::Deserialize)]
         struct Known {
             #[serde(rename = "ts")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub ts: serde_json::Number,
             #[serde(rename = "seq")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub seq: serde_json::Number,
             #[serde(rename = "status")]
+            #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
             pub status: serde_json::Number,
             #[serde(rename = "channel")]
             pub channel: String,
@@ -1639,6 +1785,8 @@ impl<'de> serde::Deserialize<'de> for SubscribedEvent {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 #[serde(tag = "template", content = "data")]
 pub enum SbeMessage {

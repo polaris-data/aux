@@ -111,6 +111,8 @@ impl Signer for LocalSigner {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Signature {
     pub r: String,
@@ -209,6 +211,8 @@ pub fn l1_signing_payload<A: Serialize>(
 
 /// Offline primitives for the second native signing scheme. This SDK does not
 /// submit transfers or agent approvals; those workflows remain outside v1.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(
     tag = "type",
@@ -217,11 +221,13 @@ pub fn l1_signing_payload<A: Serialize>(
 )]
 pub enum UserSignedAction {
     UsdSend {
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         destination: Address,
         amount: String,
         time: u64,
     },
     ApproveAgent {
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         agent_address: Address,
         agent_name: String,
         nonce: u64,

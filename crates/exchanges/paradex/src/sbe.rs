@@ -29,6 +29,8 @@ struct Layout {
     fields: &'static [Field],
     variable: &'static [Variable],
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct DecodedFrame {
     pub schema_id: u16,

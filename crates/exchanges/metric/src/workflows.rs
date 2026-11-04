@@ -7,6 +7,8 @@ use crate::{
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum LiquidityAdditionKind {
@@ -22,25 +24,38 @@ fn unconstrained_cursor() -> CursorBounds {
         maximal_position: (U256::from(1) << 104usize) - U256::from(1),
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct LiquidityAdditionRequest {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub liquidity_adder: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub pool: Address,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub owner: Option<Address>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub salt: U256,
     pub deltas: LiquidityDeltas,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub max_amount_token0: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub max_amount_token1: U256,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub bin_position_bounds: Option<CursorBounds>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub extension_data: Bytes,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub kind: LiquidityAdditionKind,
     /// Some(value) selects native payment and appends refundETH, including for zero contribution.
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub native_value: Option<U256>,
 }
 fn liquidity_signature(kind: LiquidityAdditionKind, owner: bool) -> &'static str {
@@ -144,6 +159,8 @@ pub fn liquidity_native_payment(call: &PreparedCall, value: U256) -> Result<Prep
         value,
     })
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "camelCase", deny_unknown_fields)]
 pub enum SwapPayment {
@@ -151,34 +168,53 @@ pub enum SwapPayment {
     Wrapped,
     NativeInput {
         #[serde(rename = "wrappedNative")]
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         wrapped_native: Address,
     },
     UnwrapOutput {
         #[serde(rename = "wrappedNative")]
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         wrapped_native: Address,
     },
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ExternalSwapParams {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token_in: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token_out: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub amount_in_maximum: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub amount_out_minimum: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub external_router: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub external_router_calldata: Bytes,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub recipient: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub deadline: U256,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ExternalSwapRequest {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub router: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub executor: Address,
     pub params: ExternalSwapParams,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub payment: SwapPayment,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub value: U256,
 }
 pub fn prepare_external_swap(request: &ExternalSwapRequest) -> Result<PreparedCall, Error> {
@@ -249,13 +285,20 @@ pub fn prepare_external_swap(request: &ExternalSwapRequest) -> Result<PreparedCa
         })
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ExternalSwapFallback {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub external_router: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub external_router_calldata: Bytes,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub executor: Address,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct FallbackSwapRequest {
@@ -263,6 +306,7 @@ pub struct FallbackSwapRequest {
     pub call: PreparedCall,
     pub fallback: ExternalSwapFallback,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub payment: SwapPayment,
 }
 pub fn prepare_swap_with_fallback(request: &FallbackSwapRequest) -> Result<PreparedCall, Error> {

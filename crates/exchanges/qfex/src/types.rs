@@ -64,6 +64,8 @@ pub(crate) fn nullable_vec<'de, D: serde::Deserializer<'de>, T: Deserialize<'de>
 ) -> Result<Vec<T>, D::Error> {
     Ok(Option::<Vec<T>>::deserialize(d)?.unwrap_or_default())
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Symbol {
     #[serde(rename = "clobPairId")]
@@ -72,72 +74,109 @@ pub struct Symbol {
     pub tick_size: String,
     pub lot_size: String,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub min_quantity: String,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub max_quantity: String,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Refdata {
     #[serde(rename = "type")]
     pub kind: String,
     #[serde(default, deserialize_with = "nullable_vec")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub data: Vec<Symbol>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Contracts {
     #[serde(default, deserialize_with = "nullable_vec")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub data: Vec<Value>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct OrderBook {
     pub ticker_id: String,
     pub timestamp: i64,
     #[serde(default, deserialize_with = "nullable_vec")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub bids: Vec<[String; 2]>,
     #[serde(default, deserialize_with = "nullable_vec")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub asks: Vec<[String; 2]>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Position {
     pub symbol: String,
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub position: Number,
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub realised_pnl: Number,
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub unrealised_pnl: Number,
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub average_price: Number,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Balance {
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub available_balance: Number,
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub deposit: Number,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PositionsBalance {
     #[serde(default, deserialize_with = "nullable_vec")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub positions: Vec<Position>,
     pub balance: Balance,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "UPPERCASE")]
 pub enum Side {
     Buy,
     Sell,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "UPPERCASE")]
 pub enum OrderType {
@@ -145,6 +184,8 @@ pub enum OrderType {
     Market,
     Alo,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "UPPERCASE")]
 pub enum TimeInForce {
@@ -152,6 +193,8 @@ pub enum TimeInForce {
     Ioc,
     Fok,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct AddOrder {
@@ -159,11 +202,14 @@ pub struct AddOrder {
     pub side: Side,
     pub order_type: OrderType,
     pub order_time_in_force: TimeInForce,
+    #[cfg_attr(feature = "typescript", ts(type = "number | bigint | string"))]
     pub quantity: Number,
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(type = "(number | bigint | string) | null", optional = nullable))]
     pub price: Option<Number>,
     pub client_order_id: String,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub reduce_only: u8,
 }
 impl AddOrder {
@@ -186,12 +232,16 @@ impl AddOrder {
         Ok(())
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum CancelOrderIdType {
     OrderId,
     ClientOrderId,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct CancelOrder {
@@ -199,28 +249,40 @@ pub struct CancelOrder {
     pub order_id: String,
     pub cancel_order_id_type: CancelOrderIdType,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct OrderResponse {
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_id: String,
     pub symbol: String,
     pub status: String,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub client_order_id: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct OrderBookUpdate {
     pub symbol: String,
     pub time: String,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub bid: Vec<[String; 2]>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub ask: Vec<[String; 2]>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Trade {
     pub symbol: String,
@@ -230,9 +292,12 @@ pub struct Trade {
     pub size: String,
     pub side: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct UserOrdersRequest {
@@ -261,12 +326,17 @@ impl UserOrdersRequest {
         Ok(())
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct UserOrders {
     #[serde(default, deserialize_with = "nullable_vec")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub orders: Vec<OrderResponse>,
     #[serde(default, deserialize_with = "nullable_vec")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub twaps: Vec<Value>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
