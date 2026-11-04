@@ -6,70 +6,114 @@ use serde::{Deserialize, Serialize};
 use serde_json::json;
 
 pub const DISABLED_BID_ASK_REF_ASYMMETRY_X8: u16 = u16::MAX;
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ExtensionOrders {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub before_add_liquidity: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub after_add_liquidity: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub before_remove_liquidity: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub after_remove_liquidity: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub before_swap: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub after_swap: U256,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct CreatePoolParams {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token0: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token1: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub price_provider: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub admin: Address,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub extensions: Vec<Address>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub extension_orders: ExtensionOrders,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub extension_init_data: Vec<Bytes>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price_provider_timelock: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub non_negative_bins: Vec<U256>,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub negative_bins: Vec<U256>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub initial_scaled_amount0_per_e18_shares: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub initial_scaled_amount1_per_e18_shares: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub minimal_operational_liquidity: U256,
     pub protocol_spread_fee_e6: u32,
     pub admin_spread_fee_e6: u32,
     pub protocol_notional_fee_e8: u32,
     pub admin_notional_fee_e8: u32,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub admin_fee_destination: Address,
     /// Exact percentage string, e.g. "-0.0125". Excess precision is rejected.
     pub cur_bin_dist_from_provided_price_percent: String,
     pub bid_ask_ref_asymmetry_x8: u16,
     /// An omitted salt is generated once using OS entropy and returned in the prepared result.
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub salt: Option<B256>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct FactoryPoolParameters {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token0: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token1: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub price_provider: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub extensions: Vec<Address>,
     pub extension_orders: ExtensionOrders,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub extension_init_data: Vec<Bytes>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub price_provider_timelock: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub admin: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub initial_scaled_amount0_per_e18_shares: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub initial_scaled_amount1_per_e18_shares: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub minimal_operational_liquidity: U256,
     pub protocol_spread_fee_e6: u32,
     pub admin_spread_fee_e6: u32,
     pub protocol_notional_fee_e8: u32,
     pub admin_notional_fee_e8: u32,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub admin_fee_destination: Address,
     pub cur_bin_dist_from_provided_price_e6: i32,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub non_negative_bin_data_array: Vec<U256>,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub negative_bin_data_array: Vec<U256>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub salt: B256,
     pub bid_ask_ref_asymmetry_x8: u16,
 }
@@ -184,15 +228,21 @@ pub fn prepare_factory_create_pool_params(
         bid_ask_ref_asymmetry_x8: input.bid_ask_ref_asymmetry_x8,
     })
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PoolCreationRequest {
     /// Factory address, or ImmutableAppPoolHelper address when an override is supplied.
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub target: Address,
     pub params: CreatePoolParams,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub helper_asymmetry_override: Option<u16>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PreparedPoolCreation {
     pub params: FactoryPoolParameters,
@@ -219,14 +269,18 @@ pub fn prepare_create_pool(request: &PoolCreationRequest) -> Result<PreparedPool
         },
     })
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct UniformBinsRequest {
     pub count: u32,
     pub length_e6: u16,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub add_fee_buy_e6: u16,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub add_fee_sell_e6: u16,
 }
 pub fn create_uniform_bins(request: &UniformBinsRequest) -> Result<Vec<U256>, Error> {

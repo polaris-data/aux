@@ -1,14 +1,19 @@
 //! Native Monaco REST schemas, scoped to this adapter; provenance in SIGNING.md.
 use serde::{Deserialize, Serialize};
 pub type ExtraFields = serde_json::Map<String, serde_json::Value>;
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AccountBalance {
     #[serde(rename = "token", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub token: Option<String>,
     #[serde(rename = "symbol", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub symbol: Option<String>,
     #[serde(rename = "decimals", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub decimals: Option<i64>,
     #[serde(
         rename = "availableBalance",
@@ -41,6 +46,7 @@ pub struct AccountBalance {
     )]
     pub locked_balance_raw: Option<String>,
     #[serde(rename = "assetId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub asset_id: Option<String>,
     #[serde(
         rename = "totalBalanceRaw",
@@ -55,10 +61,14 @@ pub struct AccountBalance {
     )]
     pub wrapped_native: Option<bool>,
     #[serde(rename = "version", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub version: Option<u64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelAllResponse {
@@ -81,26 +91,37 @@ pub struct BatchCancelAllResponse {
     )]
     pub total_failed: Option<i64>,
     #[serde(rename = "results", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub results: Option<Vec<BatchCancelResult>>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelError {
     #[serde(rename = "code", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub code: Option<String>,
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BatchCancelOrdersRequest {
     #[serde(rename = "orderIds")]
     pub order_ids: Vec<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelOrdersResponse {
@@ -123,14 +144,19 @@ pub struct BatchCancelOrdersResponse {
     )]
     pub total_failed: Option<i64>,
     #[serde(rename = "results", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub results: Option<Vec<BatchCancelResult>>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCancelResult {
     #[serde(rename = "orderId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_id: Option<String>,
     #[serde(
         rename = "cancelledAt",
@@ -139,20 +165,29 @@ pub struct BatchCancelResult {
     )]
     pub cancelled_at: Option<String>,
     #[serde(rename = "error", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub error: Option<BatchCancelError>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCreateError {
     #[serde(rename = "code", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub code: Option<String>,
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BatchCreateOrderItem {
@@ -163,6 +198,7 @@ pub struct BatchCreateOrderItem {
     #[serde(rename = "side")]
     pub side: String,
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity")]
     pub quantity: String,
@@ -221,6 +257,7 @@ pub struct BatchCreateOrderItem {
     )]
     pub position_side: Option<String>,
     #[serde(rename = "leverage", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub leverage: Option<String>,
     #[serde(
         rename = "reduceOnly",
@@ -241,6 +278,7 @@ pub struct BatchCreateOrderItem {
     )]
     pub margin_mode: Option<String>,
     #[serde(rename = "postOnly", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub post_only: Option<bool>,
     #[serde(
         rename = "clientOrderId",
@@ -261,12 +299,16 @@ pub struct BatchCreateOrderItem {
     )]
     pub self_trade_prevention_mode: Option<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BatchCreateOrdersRequest {
     #[serde(rename = "orders")]
     pub orders: Vec<BatchCreateOrderItem>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCreateOrdersResponse {
@@ -289,14 +331,19 @@ pub struct BatchCreateOrdersResponse {
     )]
     pub total_failed: Option<i64>,
     #[serde(rename = "results", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub results: Option<Vec<BatchCreateResult>>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchCreateResult {
     #[serde(rename = "orderId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_id: Option<String>,
     #[serde(
         rename = "matchResult",
@@ -305,28 +352,39 @@ pub struct BatchCreateResult {
     )]
     pub match_result: Option<MatchResult>,
     #[serde(rename = "error", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub error: Option<BatchCreateError>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchReplaceError {
     #[serde(rename = "code", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub code: Option<String>,
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BatchReplaceOrderItem {
     #[serde(rename = "orderId")]
     pub order_id: String,
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(
         rename = "useMasterBalance",
@@ -335,6 +393,7 @@ pub struct BatchReplaceOrderItem {
     )]
     pub use_master_balance: Option<bool>,
     #[serde(rename = "postOnly", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub post_only: Option<bool>,
     #[serde(
         rename = "clientOrderId",
@@ -349,12 +408,16 @@ pub struct BatchReplaceOrderItem {
     )]
     pub self_trade_prevention_mode: Option<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BatchReplaceOrdersRequest {
     #[serde(rename = "orders")]
     pub orders: Vec<BatchReplaceOrderItem>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchReplaceOrdersResponse {
@@ -377,10 +440,14 @@ pub struct BatchReplaceOrdersResponse {
     )]
     pub total_failed: Option<i64>,
     #[serde(rename = "results", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub results: Option<Vec<BatchReplaceResult>>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BatchReplaceResult {
@@ -409,10 +476,14 @@ pub struct BatchReplaceResult {
     )]
     pub match_result: Option<MatchResult>,
     #[serde(rename = "error", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub error: Option<BatchReplaceError>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct CancelOrderRequest {
@@ -425,42 +496,60 @@ pub struct CancelOrderRequest {
     )]
     pub remaining_quantity_target: Option<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CancelOrderResponse {
     #[serde(rename = "orderId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_id: Option<String>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ChallengeRequest {
     #[serde(rename = "address")]
     pub address: String,
     #[serde(rename = "clientId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub client_id: Option<String>,
     #[serde(rename = "chainId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub chain_id: Option<String>,
     #[serde(rename = "sessionPublicKey")]
     pub session_public_key: String,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ChallengeResponse {
     #[serde(rename = "nonce", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub nonce: Option<String>,
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(rename = "expiresAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub expires_at: Option<i64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct CreateOrderRequest {
@@ -471,6 +560,7 @@ pub struct CreateOrderRequest {
     #[serde(rename = "side")]
     pub side: String,
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity")]
     pub quantity: String,
@@ -529,6 +619,7 @@ pub struct CreateOrderRequest {
     )]
     pub position_side: Option<String>,
     #[serde(rename = "leverage", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub leverage: Option<String>,
     #[serde(
         rename = "reduceOnly",
@@ -543,6 +634,7 @@ pub struct CreateOrderRequest {
     )]
     pub take_profit: Option<ParentTpSlLeg>,
     #[serde(rename = "stopLoss", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub stop_loss: Option<ParentTpSlLeg>,
     #[serde(
         rename = "strategyKey",
@@ -557,6 +649,7 @@ pub struct CreateOrderRequest {
     )]
     pub margin_mode: Option<String>,
     #[serde(rename = "postOnly", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub post_only: Option<bool>,
     #[serde(
         rename = "clientOrderId",
@@ -583,14 +676,19 @@ pub struct CreateOrderRequest {
     )]
     pub trailing_stop: Option<ParentTrailingStopLeg>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CreateOrderResponse {
     #[serde(rename = "orderId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_id: Option<String>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(
         rename = "matchResult",
@@ -641,12 +739,16 @@ pub struct CreateOrderResponse {
     )]
     pub trailing_stop_order_id: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ExecutionPriceRange {
     #[serde(rename = "bestPrice", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub best_price: Option<String>,
     #[serde(
         rename = "worstPrice",
@@ -655,8 +757,11 @@ pub struct ExecutionPriceRange {
     )]
     pub worst_price: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FundingRecord {
@@ -667,6 +772,7 @@ pub struct FundingRecord {
     )]
     pub trading_pair_id: Option<String>,
     #[serde(rename = "epoch", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub epoch: Option<String>,
     #[serde(
         rename = "fundingRate",
@@ -711,20 +817,28 @@ pub struct FundingRecord {
     )]
     pub window_closed_at: Option<String>,
     #[serde(rename = "settledAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub settled_at: Option<String>,
     #[serde(rename = "carried", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub carried: Option<bool>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetBalancesResponse {
     #[serde(rename = "balances", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub balances: Option<Vec<AccountBalance>>,
     #[serde(rename = "total", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(
         rename = "totalPages",
@@ -739,8 +853,11 @@ pub struct GetBalancesResponse {
     )]
     pub next_page_token: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetFundingStateResponse {
@@ -781,10 +898,14 @@ pub struct GetFundingStateResponse {
     )]
     pub last_funding_time: Option<String>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetIndexPriceResponse {
@@ -807,10 +928,14 @@ pub struct GetIndexPriceResponse {
     )]
     pub components: Option<Vec<IndexComponent>>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetMarginAccountSummaryResponse {
@@ -821,6 +946,7 @@ pub struct GetMarginAccountSummaryResponse {
     )]
     pub margin_account_id: Option<String>,
     #[serde(rename = "equity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub equity: Option<String>,
     #[serde(
         rename = "initialMarginRequired",
@@ -865,8 +991,10 @@ pub struct GetMarginAccountSummaryResponse {
     )]
     pub realized_pnl: Option<String>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(rename = "label", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub label: Option<String>,
     #[serde(
         rename = "tradingPairId",
@@ -941,8 +1069,11 @@ pub struct GetMarginAccountSummaryResponse {
     )]
     pub max_removable_collateral: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetMarkPriceResponse {
@@ -953,6 +1084,7 @@ pub struct GetMarkPriceResponse {
     )]
     pub trading_pair_id: Option<String>,
     #[serde(rename = "markPrice", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub mark_price: Option<String>,
     #[serde(
         rename = "oracleProvider",
@@ -967,12 +1099,17 @@ pub struct GetMarkPriceResponse {
     )]
     pub oracle_epoch: Option<String>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(rename = "regime", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub regime: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetMarketMetadataResponse {
@@ -983,8 +1120,10 @@ pub struct GetMarketMetadataResponse {
     )]
     pub base_icon_url: Option<String>,
     #[serde(rename = "high24h", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub high24h: Option<String>,
     #[serde(rename = "lastPrice", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub last_price: Option<String>,
     #[serde(
         rename = "lastPriceTimestamp",
@@ -993,6 +1132,7 @@ pub struct GetMarketMetadataResponse {
     )]
     pub last_price_timestamp: Option<String>,
     #[serde(rename = "low24h", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub low24h: Option<String>,
     #[serde(
         rename = "marketInitializationTimestamp",
@@ -1019,8 +1159,10 @@ pub struct GetMarketMetadataResponse {
     )]
     pub quote_icon_url: Option<String>,
     #[serde(rename = "symbol", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub symbol: Option<String>,
     #[serde(rename = "volume24h", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub volume24h: Option<String>,
     #[serde(
         rename = "minLeverage",
@@ -1035,6 +1177,7 @@ pub struct GetMarketMetadataResponse {
     )]
     pub max_leverage: Option<String>,
     #[serde(rename = "markPrice", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub mark_price: Option<String>,
     #[serde(
         rename = "indexPrice",
@@ -1067,12 +1210,16 @@ pub struct GetMarketMetadataResponse {
     )]
     pub quote_volume24h: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetOrderResponse {
     #[serde(rename = "id", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub id: Option<String>,
     #[serde(
         rename = "tradingPairId",
@@ -1081,12 +1228,16 @@ pub struct GetOrderResponse {
     )]
     pub trading_pair_id: Option<String>,
     #[serde(rename = "orderType", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_type: Option<String>,
     #[serde(rename = "side", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub side: Option<String>,
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(
         rename = "filledQuantity",
@@ -1101,6 +1252,7 @@ pub struct GetOrderResponse {
     )]
     pub average_fill_price: Option<String>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(
         rename = "tradingMode",
@@ -1115,8 +1267,10 @@ pub struct GetOrderResponse {
     )]
     pub time_in_force: Option<String>,
     #[serde(rename = "createdAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub created_at: Option<String>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(
         rename = "expirationDate",
@@ -1173,6 +1327,7 @@ pub struct GetOrderResponse {
     )]
     pub position_side: Option<String>,
     #[serde(rename = "leverage", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub leverage: Option<String>,
     #[serde(
         rename = "reduceOnly",
@@ -1223,8 +1378,10 @@ pub struct GetOrderResponse {
     )]
     pub cancelled_at: Option<String>,
     #[serde(rename = "filledAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub filled_at: Option<String>,
     #[serde(rename = "expiredAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub expired_at: Option<String>,
     #[serde(
         rename = "submittedAt",
@@ -1263,6 +1420,7 @@ pub struct GetOrderResponse {
     )]
     pub parent_order_id: Option<String>,
     #[serde(rename = "batchId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub batch_id: Option<String>,
     #[serde(
         rename = "terminalReason",
@@ -1271,8 +1429,10 @@ pub struct GetOrderResponse {
     )]
     pub terminal_reason: Option<String>,
     #[serde(rename = "postOnly", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub post_only: Option<bool>,
     #[serde(rename = "version", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub version: Option<i64>,
     #[serde(
         rename = "selfTradePreventionMode",
@@ -1287,6 +1447,7 @@ pub struct GetOrderResponse {
     )]
     pub conditional_order_id: Option<String>,
     #[serde(rename = "origin", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub origin: Option<String>,
     #[serde(
         rename = "placementTakerFeeBps",
@@ -1301,8 +1462,11 @@ pub struct GetOrderResponse {
     )]
     pub placement_maker_fee_bps: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetOrderbookResponse {
@@ -1313,12 +1477,16 @@ pub struct GetOrderbookResponse {
     )]
     pub base_decimals: Option<i64>,
     #[serde(rename = "baseToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub base_token: Option<String>,
     #[serde(rename = "data", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub data: Option<OrderbookData>,
     #[serde(rename = "eventType", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub event_type: Option<String>,
     #[serde(rename = "symbol", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub symbol: Option<String>,
     #[serde(
         rename = "tradingPairId",
@@ -1345,6 +1513,7 @@ pub struct GetOrderbookResponse {
     )]
     pub sequence_number: Option<u64>,
     #[serde(rename = "timestamp", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub timestamp: Option<String>,
     #[serde(
         rename = "tradingMode",
@@ -1353,16 +1522,22 @@ pub struct GetOrderbookResponse {
     )]
     pub trading_mode: Option<String>,
     #[serde(rename = "bookSeq", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub book_seq: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTradesResponse {
     #[serde(rename = "trades", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub trades: Option<Vec<PublicTrade>>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(
         rename = "nextPageToken",
@@ -1371,8 +1546,11 @@ pub struct GetTradesResponse {
     )]
     pub next_page_token: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTradingPairResponse {
@@ -1383,30 +1561,43 @@ pub struct GetTradingPairResponse {
     )]
     pub trading_pair: Option<TradingPairData>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IndexComponent {
     #[serde(rename = "provider", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub provider: Option<String>,
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "weight", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub weight: Option<String>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListFundingHistoryResponse {
     #[serde(rename = "records", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub records: Option<Vec<FundingRecord>>,
     #[serde(rename = "total", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(
         rename = "nextPageToken",
@@ -1421,16 +1612,22 @@ pub struct ListFundingHistoryResponse {
     )]
     pub total_capped: Option<bool>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListMarginAccountsResponse {
     #[serde(rename = "accounts", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub accounts: Option<Vec<MarginAccountSummary>>,
     #[serde(rename = "total", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(
         rename = "nextPageToken",
@@ -1439,16 +1636,22 @@ pub struct ListMarginAccountsResponse {
     )]
     pub next_page_token: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListOrdersResponse {
     #[serde(rename = "orders", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub orders: Option<Vec<GetOrderResponse>>,
     #[serde(rename = "total", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(
         rename = "totalPages",
@@ -1469,16 +1672,22 @@ pub struct ListOrdersResponse {
     )]
     pub total_capped: Option<bool>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListPositionsResponse {
     #[serde(rename = "positions", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub positions: Option<Vec<Position>>,
     #[serde(rename = "total", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(
         rename = "nextPageToken",
@@ -1493,8 +1702,11 @@ pub struct ListPositionsResponse {
     )]
     pub total_capped: Option<bool>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ListTradingPairsResponse {
@@ -1505,10 +1717,13 @@ pub struct ListTradingPairsResponse {
     )]
     pub trading_pairs: Option<Vec<TradingPairData>>,
     #[serde(rename = "page", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(rename = "total", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total: Option<u64>,
     #[serde(
         rename = "totalPages",
@@ -1517,8 +1732,11 @@ pub struct ListTradingPairsResponse {
     )]
     pub total_pages: Option<u64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MarginAccountSummary {
@@ -1529,6 +1747,7 @@ pub struct MarginAccountSummary {
     )]
     pub margin_account_id: Option<String>,
     #[serde(rename = "equity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub equity: Option<String>,
     #[serde(
         rename = "initialMarginRequired",
@@ -1573,8 +1792,10 @@ pub struct MarginAccountSummary {
     )]
     pub realized_pnl: Option<String>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(rename = "label", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub label: Option<String>,
     #[serde(
         rename = "tradingPairId",
@@ -1649,8 +1870,11 @@ pub struct MarginAccountSummary {
     )]
     pub max_removable_collateral: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MatchResult {
@@ -1679,6 +1903,7 @@ pub struct MatchResult {
     )]
     pub average_fill_price: Option<String>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(
         rename = "actualSlippageBps",
@@ -1699,22 +1924,31 @@ pub struct MatchResult {
     )]
     pub execution_price_range: Option<ExecutionPriceRange>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderbookData {
     #[serde(rename = "bids", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub bids: Option<Vec<PriceLevel>>,
     #[serde(rename = "asks", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub asks: Option<Vec<PriceLevel>>,
     #[serde(rename = "bestBid", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub best_bid: Option<String>,
     #[serde(rename = "bestAsk", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub best_ask: Option<String>,
     #[serde(rename = "bidVolume", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub bid_volume: Option<String>,
     #[serde(rename = "askVolume", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub ask_volume: Option<String>,
     #[serde(
         rename = "priceChange",
@@ -1723,8 +1957,11 @@ pub struct OrderbookData {
     )]
     pub price_change: Option<PriceChange>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ParentTpSlLeg {
@@ -1735,6 +1972,7 @@ pub struct ParentTpSlLeg {
     )]
     pub trigger_price: Option<String>,
     #[serde(rename = "orderType", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_type: Option<String>,
     #[serde(
         rename = "limitPrice",
@@ -1755,8 +1993,10 @@ pub struct ParentTpSlLeg {
     )]
     pub slippage_tolerance_bps: Option<i64>,
     #[serde(rename = "expiresAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub expires_at: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(
         rename = "closePosition",
@@ -1765,12 +2005,16 @@ pub struct ParentTpSlLeg {
     )]
     pub close_position: Option<bool>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ParentTrailingStopLeg {
     #[serde(rename = "trailBps", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub trail_bps: Option<u64>,
     #[serde(
         rename = "activationPrice",
@@ -1779,6 +2023,7 @@ pub struct ParentTrailingStopLeg {
     )]
     pub activation_price: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(
         rename = "closePosition",
@@ -1793,10 +2038,14 @@ pub struct ParentTrailingStopLeg {
     )]
     pub slippage_tolerance_bps: Option<i64>,
     #[serde(rename = "expiresAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub expires_at: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Position {
@@ -1819,8 +2068,10 @@ pub struct Position {
     )]
     pub trading_pair_id: Option<String>,
     #[serde(rename = "side", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub side: Option<String>,
     #[serde(rename = "size", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub size: Option<String>,
     #[serde(
         rename = "entryPrice",
@@ -1829,6 +2080,7 @@ pub struct Position {
     )]
     pub entry_price: Option<String>,
     #[serde(rename = "markPrice", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub mark_price: Option<String>,
     #[serde(
         rename = "indexPrice",
@@ -1855,6 +2107,7 @@ pub struct Position {
     )]
     pub isolated_margin: Option<String>,
     #[serde(rename = "leverage", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub leverage: Option<String>,
     #[serde(
         rename = "maintenanceMarginRequired",
@@ -1875,8 +2128,10 @@ pub struct Position {
     )]
     pub liquidation_price: Option<String>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(rename = "updatedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub updated_at: Option<String>,
     #[serde(
         rename = "riskBucketId",
@@ -1903,6 +2158,7 @@ pub struct Position {
     )]
     pub realized_roe: Option<String>,
     #[serde(rename = "exitPrice", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub exit_price: Option<String>,
     #[serde(
         rename = "fundingPaid",
@@ -1911,12 +2167,16 @@ pub struct Position {
     )]
     pub funding_paid: Option<String>,
     #[serde(rename = "feesPaid", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub fees_paid: Option<String>,
     #[serde(rename = "cumFees", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub cum_fees: Option<String>,
     #[serde(rename = "version", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub version: Option<u64>,
     #[serde(rename = "openedAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub opened_at: Option<String>,
     #[serde(
         rename = "lifetimeTotalsStatus",
@@ -1925,8 +2185,11 @@ pub struct Position {
     )]
     pub lifetime_totals_status: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PriceChange {
@@ -1949,14 +2212,19 @@ pub struct PriceChange {
     )]
     pub price_change_percent24h: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PriceLevel {
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(
         rename = "orderCount",
@@ -1965,14 +2233,19 @@ pub struct PriceLevel {
     )]
     pub order_count: Option<u64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PublicTrade {
     #[serde(rename = "data", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub data: Option<TradeData>,
     #[serde(rename = "eventType", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub event_type: Option<String>,
     #[serde(
         rename = "tradingPairId",
@@ -1987,19 +2260,28 @@ pub struct PublicTrade {
     )]
     pub trading_mode: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct RefreshRequest {}
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RefreshResponse {
     #[serde(rename = "expiresAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub expires_at: Option<i64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ReplaceOrderRequest {
@@ -2010,8 +2292,10 @@ pub struct ReplaceOrderRequest {
     )]
     pub self_trade_prevention_mode: Option<String>,
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(
         rename = "useMasterBalance",
@@ -2020,6 +2304,7 @@ pub struct ReplaceOrderRequest {
     )]
     pub use_master_balance: Option<bool>,
     #[serde(rename = "postOnly", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub post_only: Option<bool>,
     #[serde(
         rename = "clientOrderId",
@@ -2028,14 +2313,19 @@ pub struct ReplaceOrderRequest {
     )]
     pub client_order_id: Option<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReplaceOrderResponse {
     #[serde(rename = "orderId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_id: Option<String>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(
         rename = "originalOrderId",
@@ -2056,19 +2346,28 @@ pub struct ReplaceOrderResponse {
     )]
     pub match_result: Option<MatchResult>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct RevokeRequest {}
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RevokeResponse {
     #[serde(rename = "message", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub message: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TradeData {
@@ -2079,10 +2378,13 @@ pub struct TradeData {
     )]
     pub executed_at: Option<String>,
     #[serde(rename = "makerSide", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub maker_side: Option<String>,
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(
         rename = "quantityRaw",
@@ -2091,6 +2393,7 @@ pub struct TradeData {
     )]
     pub quantity_raw: Option<String>,
     #[serde(rename = "tradeId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub trade_id: Option<String>,
     #[serde(
         rename = "executionSource",
@@ -2129,8 +2432,11 @@ pub struct TradeData {
     )]
     pub taker_application_id: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TradingPairData {
@@ -2153,6 +2459,7 @@ pub struct TradingPairData {
     )]
     pub base_icon_url: Option<String>,
     #[serde(rename = "baseToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub base_token: Option<String>,
     #[serde(
         rename = "baseTokenContract",
@@ -2161,8 +2468,10 @@ pub struct TradingPairData {
     )]
     pub base_token_contract: Option<String>,
     #[serde(rename = "id", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub id: Option<String>,
     #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub is_active: Option<bool>,
     #[serde(
         rename = "makerFeeBps",
@@ -2219,6 +2528,7 @@ pub struct TradingPairData {
     )]
     pub quote_token_contract: Option<String>,
     #[serde(rename = "symbol", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub symbol: Option<String>,
     #[serde(
         rename = "takerFeeBps",
@@ -2227,6 +2537,7 @@ pub struct TradingPairData {
     )]
     pub taker_fee_bps: Option<i64>,
     #[serde(rename = "tickSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub tick_size: Option<String>,
     #[serde(
         rename = "minLeverage",
@@ -2241,6 +2552,7 @@ pub struct TradingPairData {
     )]
     pub max_leverage: Option<String>,
     #[serde(rename = "category", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub category: Option<String>,
     #[serde(
         rename = "quantityStepSize",
@@ -2267,30 +2579,44 @@ pub struct TradingPairData {
     )]
     pub isolated_only: Option<bool>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdatedFields {
     #[serde(rename = "price", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price: Option<String>,
     #[serde(rename = "quantity", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub quantity: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserInfo {
     #[serde(rename = "id", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub id: Option<String>,
     #[serde(rename = "address", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub address: Option<String>,
     #[serde(rename = "username", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub username: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct VerifyRequest {
@@ -2301,8 +2627,10 @@ pub struct VerifyRequest {
     #[serde(rename = "nonce")]
     pub nonce: String,
     #[serde(rename = "clientId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub client_id: Option<String>,
     #[serde(rename = "chainId", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub chain_id: Option<String>,
     #[serde(rename = "sessionPublicKey")]
     pub session_public_key: String,
@@ -2319,14 +2647,19 @@ pub struct VerifyRequest {
     )]
     pub invite_code: Option<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct VerifyResponse {
     #[serde(rename = "expiresAt", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub expires_at: Option<i64>,
     #[serde(rename = "user", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub user: Option<UserInfo>,
     #[serde(rename = "isNewUser", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub is_new_user: Option<bool>,
     #[serde(
         rename = "referralApplied",
@@ -2341,5 +2674,6 @@ pub struct VerifyResponse {
     )]
     pub referral_not_applied_reason: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }

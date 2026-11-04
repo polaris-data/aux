@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 cargo fmt --all --check
-cargo clippy --locked --workspace --exclude aux-rs-python --all-features --all-targets -- -D warnings
+cargo clippy --locked --workspace --exclude aux-rs-python --exclude aux-rs-node --all-features --all-targets -- -D warnings
 cargo check --locked -p aux-rs-core --no-default-features
 cargo check --locked -p aux-rs --no-default-features
 cargo check --locked -p aux-rs
@@ -22,7 +22,7 @@ for exchange in qfex arcus monaco derive paradex metric polymarket kalshi pascal
     cargo test --locked -p aux-rs --no-default-features --features "$exchange,ws"
 done
 cargo check --locked -p aux-rs --no-default-features --features hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,polymarket,kalshi,pascal
-cargo test --locked --workspace --exclude aux-rs-python --all-features
+cargo test --locked --workspace --exclude aux-rs-python --exclude aux-rs-node --all-features
 for vendor in tardis databento; do
     cargo test --locked -p "aux-rs-$vendor" --no-default-features
     cargo test --locked -p aux-rs --no-default-features --features "$vendor"

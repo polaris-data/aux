@@ -4,6 +4,8 @@ use std::collections::BTreeMap;
 
 pub type Extra = BTreeMap<String, Value>;
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct MetadataRequest {
@@ -12,6 +14,7 @@ pub struct MetadataRequest {
     pub sort_by: Option<String>,
     pub sort_order: Option<String>,
     pub include24h: Option<bool>,
+    #[cfg_attr(feature = "typescript", ts(type = "(number | bigint | string) | null", optional = nullable))]
     pub min_tvl_fiat: Option<Number>,
     pub tier: Option<String>,
     pub locked_pricing_only: Option<bool>,
@@ -23,6 +26,8 @@ pub struct MetadataRequest {
     pub fiat: Option<String>,
     pub chain_ids: Option<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Chain {
     #[serde(rename = "type")]
@@ -31,14 +36,20 @@ pub struct Chain {
     pub chain_id: u64,
     pub name: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ChainsResponse {
     pub chains: Vec<Chain>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PoolMetadata {
@@ -50,10 +61,14 @@ pub struct PoolMetadata {
     pub token0_decimals: u8,
     pub token1_decimals: u8,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub price_provider_address: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MetadataResponse {
@@ -61,14 +76,19 @@ pub struct MetadataResponse {
     pub total: u64,
     pub next_offset: Option<u64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
 /// Factory policy is keyed by native chain/version names; preserve its native envelope.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct FactorySettingsResponse {
     #[serde(flatten)]
     pub fields: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DepthLevel {
@@ -78,35 +98,49 @@ pub struct DepthLevel {
     pub cumulative_input_volume: String,
     pub price_impact_e6: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Depth {
     pub bids: Vec<DepthLevel>,
     pub asks: Vec<DepthLevel>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BidAskResponse {
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub pool_address: Option<String>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub pair: Option<String>,
     pub price_provider_status: String,
     pub bid_adj: Option<String>,
     pub ask_adj: Option<String>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total_token0_available: Option<String>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub total_token1_available: Option<String>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub server_ts: Option<u64>,
     pub depth: Option<Depth>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct BatchBidAskRequest {
@@ -115,12 +149,17 @@ pub struct BatchBidAskRequest {
     pub depth: Option<bool>,
 }
 /// The native batch envelope retains each pool's quote or error without flattening failures.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct BatchBidAskResponse {
     pub results: Vec<PoolQuote>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PoolQuote {
@@ -128,21 +167,29 @@ pub struct PoolQuote {
     pub quote: Option<BidAskResponse>,
     pub error: Option<PoolQuoteError>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PoolQuoteError {
     pub status: u16,
     pub error: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
 pub enum TradeType {
     ExactIn,
     ExactOut,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct RouteRequest {
@@ -159,6 +206,8 @@ pub struct RouteRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub pool_address: Option<String>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RouteLeg {
@@ -174,8 +223,11 @@ pub struct RouteLeg {
     pub amount_out: String,
     pub price_limit_x64: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RouteOption {
@@ -187,8 +239,11 @@ pub struct RouteOption {
     pub amount_out: String,
     pub legs: Vec<RouteLeg>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RouteResponse {
@@ -202,8 +257,11 @@ pub struct RouteResponse {
     pub amount_out: String,
     pub routes: Vec<RouteOption>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PammQuoteRequest {
@@ -226,24 +284,33 @@ pub struct PammQuoteRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub asset_pairs: Option<Vec<String>>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct BuilderOutcome {
     pub provider: String,
     pub accepted: bool,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub pending: bool,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub error: Option<String>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub bundle_hash: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PammQuoteResponse {
     pub accepted: bool,
     pub providers: Vec<BuilderOutcome>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: Extra,
 }

@@ -108,13 +108,19 @@ impl EvmSigner for LocalEvmSigner {
         Ok(Signature::from_signature_and_parity(sig, rec.is_y_odd()))
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PreparedTransaction {
     pub chain_id: u64,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub to: Address,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub value: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub data: Bytes,
     pub nonce: u64,
     pub gas_limit: u64,
@@ -202,16 +208,24 @@ impl PreparedTransaction {
         })
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SignedTransaction {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub hash: B256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub bytes: Bytes,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub signer: Address,
     pub nonce: u64,
     pub chain_id: u64,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PendingTransaction {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub hash: B256,
     pub nonce: u64,
 }

@@ -111,13 +111,18 @@ impl WebSocketSubscription for WireSubscription {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct BookLevel {
     pub price: String,
     pub size: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct StreamBook {
     pub asks: Vec<BookLevel>,
@@ -126,10 +131,14 @@ pub struct StreamBook {
     pub nonce: i64,
     /// Native begin_nonce permits callers to check continuity; no reconstruction.
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub begin_nonce: Option<i64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct BookEvent {
     #[serde(rename = "type")]
@@ -137,8 +146,11 @@ pub struct BookEvent {
     pub channel: String,
     pub order_book: StreamBook,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct TradesEvent {
     #[serde(rename = "type")]
@@ -146,10 +158,14 @@ pub struct TradesEvent {
     pub channel: String,
     pub trades: Vec<Trade>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub liquidation_trades: Vec<Trade>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct AccountAsset {
     pub symbol: String,
@@ -157,8 +173,11 @@ pub struct AccountAsset {
     pub balance: String,
     pub locked_balance: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct AccountEvent {
     #[serde(rename = "type")]
@@ -168,8 +187,11 @@ pub struct AccountEvent {
     pub assets: BTreeMap<String, AccountAsset>,
     pub trades: BTreeMap<String, Vec<Trade>>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct AccountOrdersEvent {
     #[serde(rename = "type")]
@@ -177,6 +199,7 @@ pub struct AccountOrdersEvent {
     pub channel: String,
     pub orders: BTreeMap<String, Vec<Order>>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
 #[derive(Clone, Debug)]

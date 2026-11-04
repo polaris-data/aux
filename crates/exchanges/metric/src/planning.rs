@@ -10,51 +10,76 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::collections::{BTreeMap, HashSet};
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct LiquidityBin {
     pub bin: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token0_balance_scaled: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token1_balance_scaled: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub total_shares: U256,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct LiquiditySnapshot {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token0_scale_multiplier: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token1_scale_multiplier: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub initial_scaled_token0_per_share_e18: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub initial_scaled_token1_per_share_e18: U256,
     pub lowest_bin: i16,
     pub highest_bin: i16,
     pub cur_bin_idx: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub cur_pos_in_bin: U256,
     pub bins: Vec<LiquidityBin>,
     pub block: String,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BinTarget {
     pub bin: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub target_value_in_token: U256,
     pub target_value_in_token0: bool,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct AdditionRequest {
     pub snapshot: LiquiditySnapshot,
     pub targets: Vec<BinTarget>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub price_e18: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub salt: U256,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub buffer_bps: u32,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AdditionPlan {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub salt: U256,
     pub deltas: LiquidityDeltas,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub max_amount_token0: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub max_amount_token1: U256,
 }
 fn wad() -> U256 {
@@ -337,15 +362,22 @@ pub fn addition_plan(request: &AdditionRequest) -> Result<AdditionPlan, Error> {
         max_amount_token1: cap1,
     })
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct WeightedRequest {
     pub snapshot: LiquiditySnapshot,
     pub bins: Vec<i16>,
+    #[cfg_attr(feature = "typescript", ts(type = "Array<string>"))]
     pub weights: Vec<U256>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub price_e18: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub salt: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub max_amount_token0: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub max_amount_token1: U256,
 }
 pub fn weighted_plan(request: &WeightedRequest) -> Result<AdditionPlan, Error> {
@@ -442,17 +474,23 @@ pub fn weighted_plan(request: &WeightedRequest) -> Result<AdditionPlan, Error> {
         ..plan
     })
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct RemovalSpec {
     pub bin: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub shares_to_remove: Option<U256>,
     pub bps: Option<u16>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PositionShares {
     pub bin: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub shares: U256,
 }
 pub fn removal_plan(

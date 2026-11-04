@@ -9,10 +9,12 @@ repository = "https://github.com/polaris-data/connectors"
 description = "Shared explicit EVM transactions, signing and nonce reconciliation"
 
 [features]
+typescript = ["dep:ts-rs"]
 default = []
 http = ["aux-rs-core/http"]
 
 [dependencies]
+ts-rs = { workspace = true, optional = true }
 aux-rs-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true

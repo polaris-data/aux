@@ -9,6 +9,8 @@ use std::{
     collections::VecDeque,
     time::{Duration, Instant},
 };
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Channel {
@@ -87,9 +89,12 @@ impl WebSocketSubscription for Subscription {
     }
 }
 /// Native envelopes are preserved, including sequence IDs and unknown fields.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Event {
     #[serde(rename = "type", default, skip_serializing_if = "String::is_empty")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub kind: String,
     #[serde(flatten)]
     pub data: ExtraFields,

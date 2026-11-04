@@ -1,15 +1,26 @@
 use crate::{Address, Error};
 /// Current v1 defaults from Metric's deployment page, rather than SDK address constants.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 pub struct Addresses {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub factory: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub router: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub external_swap_executor: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub quoter: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub data_provider: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub liquidity_adder: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub compressed_oracle: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub price_provider_factory: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub anchored_provider_factory: Address,
 }
 impl Addresses {

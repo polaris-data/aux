@@ -7,11 +7,13 @@ publish.workspace = true
 description = "Native Metric exchange client"
 
 [features]
+typescript = ["dep:ts-rs", "aux-rs-evm/typescript"]
 default = []
 http = ["aux-rs-core/http", "aux-rs-evm/http"]
 
 [dependencies]
 aux-rs-evm.workspace = true
+ts-rs = { workspace = true, optional = true }
 aux-rs-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true

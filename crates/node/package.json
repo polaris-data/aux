@@ -1,0 +1,45 @@
+{
+  "name": "aux-ts",
+  "version": "0.0.0",
+  "description": "Exchange-native TypeScript SDK backed by Rust",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "js/index.cjs",
+  "module": "js/index.mjs",
+  "types": "js/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./js/index.d.ts",
+      "import": "./js/index.mjs",
+      "require": "./js/index.cjs"
+    }
+  },
+  "files": [
+    "js",
+    "aux.*.node",
+    "README.md"
+  ],
+  "scripts": {
+    "generate": "python3 ../../scripts/generate-node-bindings.py",
+    "build": "napi build --platform --js native.cjs --dts native.d.ts -- --locked",
+    "build:release": "napi build --platform --release --js native.cjs --dts native.d.ts -- --locked",
+    "test": "node --test tests/*.test.cjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "napi": {
+    "binaryName": "aux",
+    "targets": [
+      "aarch64-apple-darwin",
+      "x86_64-apple-darwin",
+      "x86_64-unknown-linux-gnu"
+    ]
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "3.5.1",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3",
+    "ws": "^8.18.0"
+  }
+}

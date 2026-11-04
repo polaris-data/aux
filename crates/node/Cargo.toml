@@ -1,0 +1,45 @@
+[package]
+name = "aux-rs-node"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+description = "Node bindings for the native Rust exchange connectors"
+
+[lib]
+crate-type = ["cdylib"]
+test = false
+doctest = false
+
+[features]
+typescript = ["aux-rs/typescript", "dep:ts-rs"]
+
+[dependencies]
+ts-rs = { workspace = true, optional = true }
+aux-rs = { workspace = true, features = ["hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "http", "ws"] }
+napi = { version = "3", default-features = false, features = ["napi8", "tokio_rt"] }
+napi-derive = "3"
+tokio = { workspace = true, features = ["rt-multi-thread", "sync", "macros"] }
+serde.workspace = true
+serde_json.workspace = true
+serde-value = "0.7"
+zeroize.workspace = true
+
+[build-dependencies]
+napi-build = "2"
+
+# napi-rs emits its own audited unsafe FFI. Handwritten Rust remains denied.
+[lints.rust]
+unsafe_code = "deny"
+
+[lints.clippy]
+all = "warn"
+
+[[bin]]
+name = "export-types"
+path = "src/bin/export-types.rs"
+required-features = ["typescript"]
+
+[[test]]
+name = "values"
+path = "tests/values.rs"

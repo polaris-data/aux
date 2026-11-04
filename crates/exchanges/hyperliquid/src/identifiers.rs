@@ -6,6 +6,8 @@ use std::{fmt, str::FromStr};
 macro_rules! identifier {
     ($name:ident, $length:expr, $message:literal) => {
         #[derive(Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         pub struct $name([u8; $length]);
 
         impl $name {

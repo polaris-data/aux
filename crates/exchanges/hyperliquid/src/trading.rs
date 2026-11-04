@@ -4,6 +4,8 @@ use aux_rs_core::{Error as ClientError, Exchange, HttpMethod, HttpRequest, HttpT
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Tif {
     Alo,
@@ -11,6 +13,8 @@ pub enum Tif {
     Gtc,
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Tpsl {
@@ -18,6 +22,8 @@ pub enum Tpsl {
     Sl,
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum OrderType {
@@ -34,6 +40,8 @@ pub enum OrderType {
 }
 
 /// Declaration order matches the official SDK's signed MessagePack order.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Order {
     #[serde(rename = "a")]
@@ -49,6 +57,7 @@ pub struct Order {
     #[serde(rename = "t")]
     pub order_type: OrderType,
     #[serde(rename = "c", skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub cloid: Option<Cloid>,
 }
 
@@ -139,6 +148,8 @@ pub(crate) fn validate_decimal(value: &str) -> Result<(), Error> {
     Ok(())
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum NamedGrouping {
@@ -148,6 +159,8 @@ pub enum NamedGrouping {
     PositionTpsl,
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum Grouping {
@@ -160,23 +173,32 @@ impl Default for Grouping {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SubBuilder {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub b: Address,
     pub s: u32,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BuilderFee {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub b: Address,
     pub f: u32,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub s: Option<Vec<SubBuilder>>,
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct OrderRequest {
     pub orders: Vec<Order>,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub grouping: Grouping,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub builder: Option<BuilderFee>,
@@ -191,6 +213,8 @@ impl OrderRequest {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Cancel {
     #[serde(rename = "a")]
@@ -198,20 +222,29 @@ pub struct Cancel {
     #[serde(rename = "o")]
     pub oid: u64,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct CancelRequest {
     pub cancels: Vec<Cancel>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct CancelByCloid {
     pub asset: u32,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub cloid: Cloid,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct CancelByCloidRequest {
     pub cancels: Vec<CancelByCloid>,
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "camelCase")]
 pub enum Action {
@@ -259,6 +292,8 @@ pub struct ExecutionOptions {
 }
 
 /// An HTTP success can still contain a rejected request or rejected batch items.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "status", content = "response", rename_all = "lowercase")]
 pub enum ExchangeResponse<T> {
@@ -266,20 +301,28 @@ pub enum ExchangeResponse<T> {
     Err(String),
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BatchResponse {
     #[serde(rename = "type")]
     pub response_type: String,
     pub data: BatchData,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BatchData {
     pub statuses: Vec<ItemStatus>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ItemStatus {
@@ -289,14 +332,20 @@ pub enum ItemStatus {
     Text(String),
     Unknown(Value),
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RestingOrder {
     pub oid: u64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub cloid: Option<Cloid>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FilledOrder {
@@ -304,8 +353,10 @@ pub struct FilledOrder {
     pub avg_px: String,
     pub oid: u64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub cloid: Option<Cloid>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
 

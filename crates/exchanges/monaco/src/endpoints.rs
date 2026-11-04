@@ -5,12 +5,16 @@ use aux_rs_core::{
 use serde::{Deserialize, Serialize};
 /// Access marker for endpoints that require an active Monaco session.
 pub struct SessionRequired;
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct TradingPairsRequest {
     #[serde(rename = "page", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(
         rename = "marketType",
@@ -19,6 +23,7 @@ pub struct TradingPairsRequest {
     )]
     pub market_type: Option<String>,
     #[serde(rename = "baseToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub base_token: Option<String>,
     #[serde(
         rename = "quoteToken",
@@ -27,8 +32,10 @@ pub struct TradingPairsRequest {
     )]
     pub quote_token: Option<String>,
     #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub is_active: Option<bool>,
     #[serde(rename = "category", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub category: Option<String>,
 }
 impl Endpoint<Monaco> for TradingPairsRequest {
@@ -85,6 +92,8 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct TradingPairRequest {
@@ -121,6 +130,8 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct MarketMetadataRequest {
@@ -157,12 +168,15 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct OrderBookRequest {
     #[serde(rename = "tradingPairId")]
     pub trading_pair_id: String,
     #[serde(rename = "levels", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub levels: Option<u64>,
     #[serde(
         rename = "tradingMode",
@@ -171,6 +185,7 @@ pub struct OrderBookRequest {
     )]
     pub trading_mode: Option<String>,
     #[serde(rename = "magnitude", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub magnitude: Option<String>,
     #[serde(
         rename = "denomination",
@@ -228,14 +243,18 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct TradesRequest {
     #[serde(rename = "tradingPairId")]
     pub trading_pair_id: String,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(rename = "pageToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_token: Option<String>,
 }
 impl Endpoint<Monaco> for TradesRequest {
@@ -280,6 +299,8 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct MarkPriceRequest {
@@ -316,6 +337,8 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct IndexPriceRequest {
@@ -352,6 +375,8 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct FundingRequest {
@@ -388,20 +413,27 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct FundingHistoryRequest {
     #[serde(rename = "tradingPairId")]
     pub trading_pair_id: String,
     #[serde(rename = "startTime", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub start_time: Option<u64>,
     #[serde(rename = "endTime", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub end_time: Option<u64>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(rename = "orderBy", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_by: Option<String>,
     #[serde(rename = "pageToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_token: Option<String>,
 }
 impl Endpoint<Monaco> for FundingHistoryRequest {
@@ -461,12 +493,16 @@ impl<T: HttpTransport, A: Sync> MonacoClient<T, A> {
         self.request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct BalancesRequest {
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(rename = "pageToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_token: Option<String>,
 }
 impl Endpoint<Monaco> for BalancesRequest {
@@ -507,6 +543,8 @@ impl<T: HttpTransport, S: SessionSigner> MonacoClient<T, MonacoAuth<S>> {
         self.signed_request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ParentMarginAccountRequest {
@@ -547,12 +585,16 @@ impl<T: HttpTransport, S: SessionSigner> MonacoClient<T, MonacoAuth<S>> {
         self.signed_request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct MarginAccountsRequest {
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(rename = "state", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub state: Option<String>,
     #[serde(
         rename = "tradingPairId",
@@ -561,6 +603,7 @@ pub struct MarginAccountsRequest {
     )]
     pub trading_pair_id: Option<String>,
     #[serde(rename = "pageToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_token: Option<String>,
 }
 impl Endpoint<Monaco> for MarginAccountsRequest {
@@ -602,6 +645,8 @@ impl<T: HttpTransport, S: SessionSigner> MonacoClient<T, MonacoAuth<S>> {
         self.signed_request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PositionsRequest {
@@ -618,10 +663,13 @@ pub struct PositionsRequest {
     )]
     pub trading_pair_id: Option<String>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(rename = "pageToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_token: Option<String>,
 }
 impl Endpoint<Monaco> for PositionsRequest {
@@ -667,12 +715,16 @@ impl<T: HttpTransport, S: SessionSigner> MonacoClient<T, MonacoAuth<S>> {
         self.signed_request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct OrdersRequest {
     #[serde(rename = "pageSize", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_size: Option<u64>,
     #[serde(rename = "status", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub status: Option<String>,
     #[serde(
         rename = "tradingPairId",
@@ -693,8 +745,10 @@ pub struct OrdersRequest {
     )]
     pub margin_account_id: Option<String>,
     #[serde(rename = "orderBy", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub order_by: Option<String>,
     #[serde(rename = "pageToken", default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub page_token: Option<String>,
 }
 impl Endpoint<Monaco> for OrdersRequest {
@@ -747,6 +801,8 @@ impl<T: HttpTransport, S: SessionSigner> MonacoClient<T, MonacoAuth<S>> {
         self.signed_request(request).await
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct OrderRequest {
