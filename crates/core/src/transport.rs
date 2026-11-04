@@ -38,6 +38,31 @@ pub struct HttpResponse {
     pub body: Vec<u8>,
 }
 
+/// Pull-based bytes with explicit cleanup. `next` must be cancellation-safe:
+/// dropping its future must not consume a chunk. EOF and errors are terminal.
+/// Dropping the stream must release its connection and cancel background work.
+pub trait ByteStream: Send {
+    fn next(&mut self) -> impl Future<Output = Option<Result<Vec<u8>, TransportError>>> + Send;
+    fn close(&mut self) -> impl Future<Output = Result<(), TransportError>> + Send;
+}
+
+/// Response metadata is available before any body bytes are consumed.
+pub struct StreamingHttpResponse<B> {
+    pub status: u16,
+    pub headers: Vec<(String, String)>,
+    pub body: B,
+}
+
+/// Independent of buffered HTTP. Implementations execute once and must never
+/// restart a response after handing its body to the caller.
+pub trait StreamingHttpTransport: Send + Sync {
+    type Body: ByteStream + 'static;
+    fn execute_stream(
+        &self,
+        request: HttpRequest,
+    ) -> impl Future<Output = Result<StreamingHttpResponse<Self::Body>, TransportError>> + Send;
+}
+
 impl fmt::Debug for HttpResponse {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.debug_struct("HttpResponse")
@@ -91,6 +116,15 @@ pub trait WebSocketConnector: Send + Sync {
         &self,
         url: &str,
     ) -> impl Future<Output = Result<Self::Connection, TransportError>> + Send;
+    /// Read-only, potentially finite streams may drain received frames and end
+    /// normally after a clean close. Command connections keep their stricter
+    /// discontinuity behavior. Custom implementations may share their connector.
+    fn connect_read(
+        &self,
+        url: &str,
+    ) -> impl Future<Output = Result<Self::Connection, TransportError>> + Send {
+        self.connect(url)
+    }
 }
 
 /// Asynchronous connection setup; custom transports must await its acknowledgement

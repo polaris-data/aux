@@ -15,6 +15,7 @@ contains the Cargo workspace configuration and committed lockfile.
 | `crates/aux-rs/` | Public SDK facade, examples, and integration tests |
 | `crates/core/` | Shared client and transport contracts |
 | `crates/exchanges/` | Native exchange clients, types, and signing |
+| `crates/data/` | Native data clients and shared bounded streaming/download utilities |
 | `crates/python/` | Separate Python bindings |
 
 The workspace is independent of frontend and RFQ services. Rust-only default
@@ -61,6 +62,27 @@ Clones share HTTP connection pools and compatible WebSocket sessions. Transport
 and signer contracts keep explicit `Send` guarantees without requiring
 `async-trait` or boxing every call. Core retains a shared public-endpoint executor;
 there is no generalized client builder or provider type.
+
+### Data vendors
+
+Data adapters live beside exchange adapters and preserve each vendor’s public
+operations and native schemas. They use independent streaming HTTP contracts and
+vendor-specific live protocols rather than implementing `Exchange`. Tardis Machine
+is caller-managed. Databento live uses a dedicated byte connection and the focused
+DBN codec; official SDKs are protocol references rather than client dependencies.
+
+`aux-rs-data` shares bounded decompression, NDJSON parsing, native HTTP errors,
+credential redaction, redirect policy and explicit file downloads. Core contracts
+remain dependency-free without features. Native operations work with custom I/O;
+HTTP, WebSocket, TCP and filesystem implementations are separately selectable.
+File helpers publish complete temporary files without overwriting destinations.
+No data request, paid batch submission or interrupted stream is replayed implicitly.
+
+Each data adapter records pinned sources and an API/schema coverage inventory.
+Run `python3 scripts/check-data-coverage.py` for offline method, fixture, binding
+and test parity. Add fixture/local-server tests and dependency profiles whenever
+extending a vendor. Account administration, billing changes, persistent caches,
+ingestion pipelines and cross-vendor normalization remain application concerns.
 
 ### Request preparation, signing, and nonces
 
@@ -203,7 +225,7 @@ source distribution before publishing to PyPI.
 
 ## Dependency changes
 
-Default facade features are `http` and `ws`; no exchange is selected automatically.
+Default facade features are `http` and `ws`; no exchange or data vendor is selected automatically. `tcp` opts into Databento live networking, and `files` enables data file helpers independently of networking.
 Exchange features (`hyperliquid`, `lighter`, `qfex`, `arcus`, `monaco`, `derive`, `paradex`, and `metric`) are additive and
 must not force standard transport features. Keep internal adapter dependencies'
 default features disabled. With `default-features = false`, selected adapters

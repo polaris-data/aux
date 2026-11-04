@@ -14,5 +14,6 @@ cargo fmt --all --check
 cargo clippy --locked -p aux-rs-python --all-targets -- -D warnings
 VIRTUAL_ENV="$binding_venv" "$binding_python" -m maturin develop --locked --manifest-path crates/python/Cargo.toml
 "$binding_python" -m unittest discover -s crates/python/tests -v
+"$binding_python" scripts/check-data-coverage.py
 "$binding_python" scripts/check-native-coverage.py
 "$binding_python" scripts/dependencies.py --check

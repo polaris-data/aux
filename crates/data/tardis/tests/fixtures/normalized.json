@@ -1,0 +1,119 @@
+[
+  {
+    "type": "trade",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "id": "18446744073709551615",
+    "price": 123,
+    "amount": 1,
+    "side": "buy"
+  },
+  {
+    "type": "book_change",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "isSnapshot": true,
+    "bids": [
+      {
+        "price": 123,
+        "amount": 1
+      }
+    ],
+    "asks": []
+  },
+  {
+    "type": "book_ticker",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "bids": [],
+    "asks": [],
+    "bidPrice": 123,
+    "askPrice": 124
+  },
+  {
+    "type": "derivative_ticker",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "fundingRate": 0.0001,
+    "openInterest": 100
+  },
+  {
+    "type": "quote",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "bids": [],
+    "asks": [],
+    "bidPrice": 123,
+    "askPrice": 124
+  },
+  {
+    "type": "book_snapshot",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "bids": [],
+    "asks": [],
+    "bidPrice": 123,
+    "askPrice": 124
+  },
+  {
+    "type": "trade_bar",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "name": "trade_bar_1s",
+    "open": 123,
+    "high": 124,
+    "low": 122,
+    "close": 123,
+    "volume": 10
+  },
+  {
+    "type": "liquidation",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "price": 123,
+    "amount": 1,
+    "side": "sell"
+  },
+  {
+    "type": "option_summary",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "strikePrice": 123,
+    "markPrice": 1,
+    "openInterest": 10
+  },
+  {
+    "type": "disconnect",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z"
+  },
+  {
+    "type": "error",
+    "exchange": "bitmex",
+    "symbol": "XBTUSD",
+    "timestamp": "2024-01-01T00:00:00.000000123Z",
+    "localTimestamp": "2024-01-01T00:00:00.000000456Z",
+    "message": "fixture failure",
+    "code": 100
+  }
+]

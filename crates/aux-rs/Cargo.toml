@@ -3,7 +3,7 @@ name = "aux-rs"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
-description = "Exchange connectors for Rust"
+description = "Native exchange and data-vendor connectors for Rust"
 repository = "https://github.com/polaris-data/connectors"
 license = "MIT"
 readme = "../../README.md"
@@ -11,8 +11,12 @@ include = ["Cargo.toml", "src/**"]
 
 [features]
 default = ["http", "ws"]
-http = ["aux-rs-metric?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
-ws = ["aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]
+http = ["aux-rs-metric?/http", "aux-rs-tardis?/http", "aux-rs-databento?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
+ws = ["aux-rs-tardis?/ws", "aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]
+files = ["aux-rs-tardis?/files", "aux-rs-databento?/files"]
+tcp = ["aux-rs-databento?/tcp"]
+tardis = ["dep:aux-rs-tardis"]
+databento = ["dep:aux-rs-databento"]
 metric = ["dep:aux-rs-metric"]
 qfex = ["dep:aux-rs-qfex"]
 arcus = ["dep:aux-rs-arcus"]
@@ -23,6 +27,8 @@ hyperliquid = ["dep:aux-rs-hyperliquid"]
 lighter = ["dep:aux-rs-lighter"]
 
 [dependencies]
+aux-rs-tardis = { workspace = true, optional = true }
+aux-rs-databento = { workspace = true, optional = true }
 aux-rs-metric = { workspace = true, optional = true }
 aux-rs-derive = { workspace = true, optional = true }
 aux-rs-paradex = { workspace = true, optional = true }

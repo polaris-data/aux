@@ -1,0 +1,78 @@
+[
+  {
+    "operation": "exchanges",
+    "path": "/v1/exchanges",
+    "response": [
+      {
+        "id": "bitmex",
+        "supportsDatasets": true
+      }
+    ]
+  },
+  {
+    "operation": "exchange_details",
+    "path": "/v1/exchanges/bitmex",
+    "response": {
+      "id": "bitmex",
+      "availableSymbols": [
+        {
+          "id": "XBTUSD",
+          "type": "perpetual"
+        }
+      ]
+    }
+  },
+  {
+    "operation": "exchange_summary",
+    "path": "/v1/exchanges/bitmex/summary",
+    "response": {
+      "id": "bitmex",
+      "datasets": {
+        "exportedUntil": "2024-01-02T00:00:00Z"
+      }
+    }
+  },
+  {
+    "operation": "symbols",
+    "path": "/v1/symbols",
+    "response": {
+      "symbols": [
+        {
+          "id": "XBTUSD",
+          "exchange": "bitmex"
+        }
+      ],
+      "nextCursor": "fixture-cursor"
+    }
+  },
+  {
+    "operation": "api_key_info",
+    "path": "/v1/api-key-info",
+    "response": [
+      {
+        "exchange": "bitmex",
+        "accessType": "pro",
+        "symbols": []
+      }
+    ]
+  },
+  {
+    "operation": "instruments",
+    "path": "/v1/instruments/bitmex",
+    "response": [
+      {
+        "id": "XBTUSD",
+        "priceIncrement": 0.5,
+        "active": true
+      }
+    ]
+  },
+  {
+    "operation": "instrument",
+    "path": "/v1/instruments/bitmex/BTC%2FUSD%3APERP",
+    "response": {
+      "id": "BTC/USD:PERP",
+      "contractMultiplier": 1
+    }
+  }
+]

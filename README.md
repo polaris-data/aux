@@ -21,7 +21,7 @@ adapters and Python bindings are excluded from Rust consumers.
 
 #### Features
 
-Each client exposes its exchange's native operations and response types.
+Each client exposes its exchange or data vendor’s native operations and response types.
 Prices and sizes preserve exact native values, and exchange-specific errors
 remain distinguishable from transport failures.
 
@@ -35,10 +35,14 @@ remain distinguishable from transport failures.
 | `arcus` | No | [Native Arcus client and Ed25519 signing](crates/exchanges/arcus/README.md) |
 | `monaco` | No | [Native Monaco spot/perps client and wallet/session signing](crates/exchanges/monaco/README.md) |
 | `derive` | No | [Native Derive v3 client, wallet/session signing, and RPC sessions](crates/exchanges/derive/README.md) |
+| `tardis` | No | [Tardis hosted data and external Machine replay/live APIs](crates/data/tardis/README.md) |
+| `databento` | No | [Databento historical, reference and live clients](crates/data/databento/README.md) |
+| `tcp` | No | Built-in Databento live TCP connections; select `databento` too |
+| `files` | No | Data download helpers with custom I/O; also enabled by data adapters’ `http` feature |
 | `paradex` | No | [Native Paradex v1/v2 client, Starknet/EVM signing, and SBE streams](crates/exchanges/paradex/README.md) |
 | `metric` | No | [Metric liquidity/routing HTTP APIs, native EVM contracts and transaction signing](crates/exchanges/metric/README.md) |
 
-Exchange features do not activate networking. Disable default features to use
+Exchange and data-vendor features do not activate networking. Disable default features to use
 custom I/O. Built-in transports support configurable timeouts, safe-read retries,
 explicit recovery gaps, and shutdown.
 
@@ -111,6 +115,7 @@ The workspace contains:
 - [`aux-rs`](crates/aux-rs): public Rust SDK facade, examples, and integration tests.
 - [`aux-rs-core`](crates/core): shared client and transport contracts.
 - [Exchange adapters](crates/exchanges): native clients, types, and signing.
+- [Data adapters](crates/data): native Tardis and Databento clients, streaming data and downloads.
 - [Python bindings](crates/python/README.md): asyncio clients backed by the Rust SDK.
 
 See the [architecture](CONTRIBUTING.md#architecture) and

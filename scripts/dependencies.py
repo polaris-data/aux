@@ -52,6 +52,13 @@ for stack in ("", ",http,ws"):
     PROFILES.append(("All eight exchanges" + stack, "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric" + stack))
 
 
+for vendor in ("tardis", "databento"):
+    for stack in ("", ",http", ",ws", ",http,ws"):
+        PROFILES.append((f"{vendor.title()} with {stack or 'custom transports'}", "aux-rs", vendor + stack))
+for features in ("tardis,files", "databento,files", "databento,tcp", "databento,http,tcp", "tardis,databento", "tardis,databento,http,ws,tcp", "metric,tardis,databento", "metric,tardis,databento,http,ws,tcp", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws,tcp", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,tardis,databento,http,ws,tcp"):
+    PROFILES.append(("Data/exchange integration: " + features, "aux-rs", features))
+
+
 def inventory(package, features, target):
     command = [
         "cargo", "tree", "--locked", "--package", package,
@@ -73,7 +80,7 @@ def check(target):
         if "httpdate" in names:
             raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
-        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric"}
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "tardis", "databento"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
                 if f"aux-rs-{exchange}" in names:
@@ -95,7 +102,15 @@ def check(target):
             for primitive, venues in owners.items():
                 if not selected & venues and primitive in names:
                     raise SystemExit(f"Unselected signing primitive {primitive} leaked into profile: {name}")
-            if not selected & {"http", "ws"} and names & {"tokio", "reqwest", "tokio-tungstenite", "rustls"}:
+            if "databento" not in selected and names & {"dbn", "dbn-macros"}:
+                raise SystemExit(f"Unselected DBN codec leaked into profile: {name}")
+            if not selected & {"tardis", "databento"} and names & {"aux-rs-data", "async-compression", "compression-codecs", "zstd"}:
+                raise SystemExit(f"Unselected data support leaked into profile: {name}")
+            if "http" not in selected and "reqwest" in names:
+                raise SystemExit(f"HTTP leaked into profile: {name}")
+            if "ws" not in selected and "tokio-tungstenite" in names:
+                raise SystemExit(f"WebSockets leaked into profile: {name}")
+            if not selected & {"http", "ws", "tcp", "files"} and names & {"tokio", "reqwest", "tokio-tungstenite", "rustls"}:
                 raise SystemExit(f"Standard stack leaked into custom transport profile: {name}")
         if package == "aux-rs" and "metric" not in selected and any(n.startswith("alloy-") for n in names):
             raise SystemExit(f"Metric ABI/EVM dependencies leaked into profile: {name}")

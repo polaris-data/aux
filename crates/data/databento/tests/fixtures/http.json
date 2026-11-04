@@ -1,0 +1,407 @@
+[
+  {
+    "operation": "list_publishers",
+    "verb": "Get",
+    "path": "/v0/metadata.list_publishers",
+    "request": {},
+    "response": [
+      {
+        "publisher_id": 1,
+        "dataset": "GLBX.MDP3",
+        "venue": "GLBX"
+      }
+    ],
+    "wire_params": {}
+  },
+  {
+    "operation": "list_datasets",
+    "verb": "Get",
+    "path": "/v0/metadata.list_datasets",
+    "request": {},
+    "response": [
+      "GLBX.MDP3"
+    ],
+    "wire_params": {}
+  },
+  {
+    "operation": "list_schemas",
+    "verb": "Get",
+    "path": "/v0/metadata.list_schemas",
+    "request": {
+      "dataset": "GLBX.MDP3"
+    },
+    "response": [
+      "trades",
+      "mbo"
+    ],
+    "wire_params": {
+      "dataset": "GLBX.MDP3"
+    }
+  },
+  {
+    "operation": "list_fields",
+    "verb": "Get",
+    "path": "/v0/metadata.list_fields",
+    "request": {
+      "dataset": "GLBX.MDP3"
+    },
+    "response": [
+      {
+        "name": "price",
+        "type": "int64"
+      }
+    ],
+    "wire_params": {
+      "dataset": "GLBX.MDP3"
+    }
+  },
+  {
+    "operation": "list_unit_prices",
+    "verb": "Get",
+    "path": "/v0/metadata.list_unit_prices",
+    "request": {
+      "dataset": "GLBX.MDP3"
+    },
+    "response": [
+      {
+        "mode": "historical",
+        "unit_prices": {
+          "trades": 0.1
+        }
+      }
+    ],
+    "wire_params": {
+      "dataset": "GLBX.MDP3"
+    }
+  },
+  {
+    "operation": "get_dataset_condition",
+    "verb": "Get",
+    "path": "/v0/metadata.get_dataset_condition",
+    "request": {
+      "dataset": "GLBX.MDP3"
+    },
+    "response": [
+      {
+        "date": "2024-01-01",
+        "condition": "available"
+      }
+    ],
+    "wire_params": {
+      "dataset": "GLBX.MDP3"
+    }
+  },
+  {
+    "operation": "get_dataset_range",
+    "verb": "Get",
+    "path": "/v0/metadata.get_dataset_range",
+    "request": {
+      "dataset": "GLBX.MDP3"
+    },
+    "response": {
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    },
+    "wire_params": {
+      "dataset": "GLBX.MDP3"
+    }
+  },
+  {
+    "operation": "get_record_count",
+    "verb": "Post",
+    "path": "/v0/metadata.get_record_count",
+    "request": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": [
+        "ES.c.0"
+      ],
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    },
+    "response": 42,
+    "wire_params": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": "ES.c.0",
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    }
+  },
+  {
+    "operation": "get_billable_size",
+    "verb": "Post",
+    "path": "/v0/metadata.get_billable_size",
+    "request": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": [
+        "ES.c.0"
+      ],
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    },
+    "response": 2048,
+    "wire_params": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": "ES.c.0",
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    }
+  },
+  {
+    "operation": "get_cost",
+    "verb": "Post",
+    "path": "/v0/metadata.get_cost",
+    "request": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": [
+        "ES.c.0"
+      ],
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    },
+    "response": 1e-05,
+    "wire_params": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": "ES.c.0",
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    }
+  },
+  {
+    "operation": "resolve",
+    "verb": "Post",
+    "path": "/v0/symbology.resolve",
+    "request": {
+      "dataset": "GLBX.MDP3",
+      "symbols": [
+        "ES.c.0"
+      ],
+      "stype_in": "continuous",
+      "stype_out": "instrument_id",
+      "start_date": "2024-01-01",
+      "end_date": "2024-01-02"
+    },
+    "response": {
+      "result": {
+        "ES.c.0": [
+          {
+            "d0": "2024-01-01",
+            "d1": "2024-01-02",
+            "s": "123"
+          }
+        ]
+      },
+      "partial": [],
+      "not_found": []
+    },
+    "wire_params": {
+      "dataset": "GLBX.MDP3",
+      "symbols": "ES.c.0",
+      "stype_in": "continuous",
+      "stype_out": "instrument_id",
+      "start_date": "2024-01-01",
+      "end_date": "2024-01-02"
+    }
+  },
+  {
+    "operation": "submit_job",
+    "verb": "Post",
+    "path": "/v0/batch.submit_job",
+    "request": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": [
+        "ES.c.0"
+      ],
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    },
+    "response": {
+      "id": "fixture-job",
+      "state": "queued"
+    },
+    "wire_params": {
+      "dataset": "GLBX.MDP3",
+      "schema": "trades",
+      "symbols": "ES.c.0",
+      "start": "2024-01-01",
+      "end": "2024-01-02"
+    }
+  },
+  {
+    "operation": "list_jobs",
+    "verb": "Get",
+    "path": "/v0/batch.list_jobs",
+    "request": {
+      "states": [
+        "done",
+        "queued"
+      ]
+    },
+    "response": [
+      {
+        "id": "fixture-job",
+        "state": "done"
+      }
+    ],
+    "wire_params": {
+      "states": "done,queued"
+    }
+  },
+  {
+    "operation": "get_job_details",
+    "verb": "Get",
+    "path": "/v0/batch.get_job_details",
+    "request": {
+      "job_id": "fixture-job"
+    },
+    "response": {
+      "id": "fixture-job",
+      "state": "done"
+    },
+    "wire_params": {
+      "job_id": "fixture-job"
+    }
+  },
+  {
+    "operation": "list_files",
+    "verb": "Get",
+    "path": "/v0/batch.list_files",
+    "request": {
+      "job_id": "fixture-job"
+    },
+    "response": [
+      {
+        "filename": "data.dbn.zst",
+        "urls": {
+          "https": "https://hist.databento.com/data.dbn.zst"
+        },
+        "size": 100
+      }
+    ],
+    "wire_params": {
+      "job_id": "fixture-job"
+    }
+  },
+  {
+    "operation": "list_events",
+    "verb": "Get",
+    "path": "/v0/corporate_actions.list_events",
+    "request": {},
+    "response": {
+      "DIV": {
+        "description": "Dividend"
+      }
+    },
+    "wire_params": {}
+  },
+  {
+    "operation": "list_enums",
+    "verb": "Get",
+    "path": "/v0/corporate_actions.list_enums",
+    "request": {},
+    "response": {
+      "ACTION": [
+        {
+          "value": "N",
+          "description": "New"
+        }
+      ]
+    },
+    "wire_params": {}
+  },
+  {
+    "operation": "security_master_get_range",
+    "verb": "Post",
+    "path": "/v0/security_master.get_range",
+    "request": {
+      "symbols": [
+        "AAPL"
+      ],
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01"
+    },
+    "response": {
+      "security_id": "fixture-security",
+      "ts_effective": "2024-01-01T00:00:00Z"
+    },
+    "wire_params": {
+      "symbols": "AAPL",
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01",
+      "compression": "none"
+    }
+  },
+  {
+    "operation": "security_master_get_last",
+    "verb": "Post",
+    "path": "/v0/security_master.get_last",
+    "request": {
+      "symbols": [
+        "AAPL"
+      ],
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01"
+    },
+    "response": {
+      "security_id": "fixture-security",
+      "issuer_name": "Fixture Co"
+    },
+    "wire_params": {
+      "symbols": "AAPL",
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01",
+      "compression": "none"
+    }
+  },
+  {
+    "operation": "corporate_actions_get_range",
+    "verb": "Post",
+    "path": "/v0/corporate_actions.get_range",
+    "request": {
+      "symbols": [
+        "AAPL"
+      ],
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01"
+    },
+    "response": {
+      "event_id": "fixture-event",
+      "event": "DIV",
+      "amount": "0.123456789123456789"
+    },
+    "wire_params": {
+      "symbols": "AAPL",
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01",
+      "compression": "none"
+    }
+  },
+  {
+    "operation": "adjustment_factors_get_range",
+    "verb": "Post",
+    "path": "/v0/adjustment_factors.get_range",
+    "request": {
+      "symbols": [
+        "AAPL"
+      ],
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01"
+    },
+    "response": {
+      "security_id": "fixture-security",
+      "factor": "0.999999999999999999"
+    },
+    "wire_params": {
+      "symbols": "AAPL",
+      "stype_in": "raw_symbol",
+      "start": "2024-01-01",
+      "compression": "none"
+    }
+  }
+]

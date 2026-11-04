@@ -135,3 +135,44 @@ async fn disconnected_command_is_never_replayed() {
     transport.shutdown().await.unwrap();
     server.await.unwrap();
 }
+
+#[tokio::test]
+async fn read_connections_backpressure_and_drain_clean_replay_close() {
+    use tokio_tungstenite::tungstenite::protocol::{CloseFrame, frame::coding::CloseCode};
+    let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let address = listener.local_addr().unwrap();
+    let server = tokio::spawn(async move {
+        let (tcp, _) = listener.accept().await.unwrap();
+        let mut socket = accept_async(tcp).await.unwrap();
+        for i in 0..1000 {
+            socket
+                .send(Message::Text(i.to_string().into()))
+                .await
+                .unwrap();
+        }
+        socket
+            .close(Some(CloseFrame {
+                code: CloseCode::Normal,
+                reason: "replay complete".into(),
+            }))
+            .await
+            .unwrap();
+    });
+    let transport = StandardTransport::new(TransportConfig {
+        subscription_capacity: 2,
+        ..TransportConfig::default()
+    })
+    .unwrap();
+    let mut connection = transport
+        .connect_read(&format!("ws://{address}"))
+        .await
+        .unwrap();
+    tokio::time::sleep(Duration::from_millis(20)).await;
+    for i in 0..1000 {
+        assert_eq!(connection.next().await.unwrap().unwrap(), i.to_string());
+    }
+    assert!(connection.next().await.is_none());
+    connection.close().await.unwrap();
+    transport.shutdown().await.unwrap();
+    server.await.unwrap();
+}

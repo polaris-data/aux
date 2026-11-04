@@ -10,6 +10,10 @@ mod connection;
 #[cfg(feature = "http")]
 mod http;
 #[cfg(feature = "http")]
+mod http_stream;
+#[cfg(feature = "http")]
+pub use http_stream::StandardBody;
+#[cfg(feature = "http")]
 mod httpdate;
 #[cfg(feature = "ws")]
 mod ws;
@@ -24,6 +28,8 @@ pub struct StandardTransport {
     config: TransportConfig,
     #[cfg(feature = "http")]
     client: Arc<std::sync::Mutex<Option<reqwest::Client>>>,
+    #[cfg(feature = "http")]
+    streaming_client: Arc<std::sync::Mutex<Option<reqwest::Client>>>,
     lifecycle: Arc<Lifecycle>,
     #[cfg(feature = "ws")]
     tls: Arc<rustls::ClientConfig>,
@@ -98,6 +104,12 @@ impl StandardTransport {
         {
             let client = self.client.lock().unwrap_or_else(|e| e.into_inner()).take();
             drop(client);
+            let client = self
+                .streaming_client
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .take();
+            drop(client);
         }
     }
     /// Cancel in-flight operations, close pooled sockets and wait for drivers.
@@ -147,10 +159,22 @@ impl StandardTransport {
             .user_agent(concat!("aux-rs/", env!("CARGO_PKG_VERSION")))
             .build()
             .map_err(|_| configuration_error("unable to build HTTP client"))?;
+        #[cfg(feature = "http")]
+        let streaming_client = reqwest::Client::builder()
+            .use_preconfigured_tls(tls.clone())
+            .connect_timeout(config.timeout)
+            .read_timeout(config.timeout)
+            .redirect(reqwest::redirect::Policy::none())
+            .retry(reqwest::retry::never())
+            .user_agent(concat!("aux-rs/", env!("CARGO_PKG_VERSION")))
+            .build()
+            .map_err(|_| configuration_error("unable to build streaming HTTP client"))?;
         Ok(Self {
             config,
             #[cfg(feature = "http")]
             client: Arc::new(std::sync::Mutex::new(Some(client))),
+            #[cfg(feature = "http")]
+            streaming_client: Arc::new(std::sync::Mutex::new(Some(streaming_client))),
             lifecycle: Arc::new(Lifecycle::new()),
             #[cfg(feature = "ws")]
             tls: Arc::new(tls),

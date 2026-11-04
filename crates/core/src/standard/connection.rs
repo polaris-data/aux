@@ -26,9 +26,22 @@ struct Queue {
 struct Inbox {
     queue: Mutex<Queue>,
     ready: Notify,
+    space: Notify,
     capacity: usize,
+    read_only: bool,
 }
 impl Inbox {
+    fn can_read(&self) -> bool {
+        !self.read_only
+            || self
+                .queue
+                .lock()
+                .unwrap_or_else(|e| e.into_inner())
+                .frames
+                .len()
+                < self.capacity
+    }
+
     fn finish(&self, error: Option<TransportError>) {
         let mut q = self.queue.lock().unwrap_or_else(|e| e.into_inner());
         q.closed = true;
@@ -65,6 +78,7 @@ impl Inbox {
                     return Some(Err(e));
                 }
                 if let Some(s) = q.frames.pop_front() {
+                    self.space.notify_one();
                     return Some(Ok(s));
                 }
                 if q.closed {
@@ -153,6 +167,18 @@ impl Drop for StandardConnection {
 impl WebSocketConnector for StandardTransport {
     type Connection = StandardConnection;
     async fn connect(&self, url: &str) -> Result<Self::Connection, TransportError> {
+        self.connect_dedicated(url, false).await
+    }
+    async fn connect_read(&self, url: &str) -> Result<Self::Connection, TransportError> {
+        self.connect_dedicated(url, true).await
+    }
+}
+impl StandardTransport {
+    async fn connect_dedicated(
+        &self,
+        url: &str,
+        read_only: bool,
+    ) -> Result<StandardConnection, TransportError> {
         let guard = OperationGuard::start(&self.lifecycle)?;
         let mut shutdown = self.lifecycle.closed.subscribe();
         self.lifecycle.check()?;
@@ -161,7 +187,9 @@ impl WebSocketConnector for StandardTransport {
         let inbox = Arc::new(Inbox {
             queue: Mutex::default(),
             ready: Notify::new(),
+            space: Notify::new(),
             capacity: self.config.subscription_capacity,
+            read_only,
         });
         let (commands, receiver) = mpsc::unbounded_channel();
         tokio::spawn(run(
@@ -209,12 +237,14 @@ async fn run(
                 Some(Command::Close(done))=> { let r=timeout(config.timeout, socket.close(None)).await; let _=done.send(match r { Ok(Ok(()))=>Ok(()), _=>Err(error(TransportErrorKind::Disconnected,"WebSocket close failed")) }); inbox.finish(None); return; }
                 None=> { inbox.finish(None); break; }
             },
-            frame=socket.next()=> {
+            _=inbox.space.notified(),if inbox.read_only=> {},
+            frame=socket.next(),if inbox.can_read()=> {
                 last_read=Instant::now();
                 match frame {
                     Some(Ok(Message::Text(text)))=> if !inbox.push(text.to_string()) { break; },
                     Some(Ok(Message::Ping(data)))=> if !matches!(timeout(config.timeout,socket.send(Message::Pong(data))).await, Ok(Ok(()))) { inbox.finish(Some(error(TransportErrorKind::Timeout,"WebSocket pong timed out"))); break; },
                     Some(Ok(Message::Pong(_)))=> {},
+                    Some(Ok(Message::Close(Some(frame)))) if inbox.read_only && frame.code==tokio_tungstenite::tungstenite::protocol::frame::coding::CloseCode::Normal=> {inbox.finish(None);break;},
                     Some(Ok(Message::Close(_)))|None=> { inbox.finish(Some(error(TransportErrorKind::Disconnected,"WebSocket disconnected"))); break; },
                     Some(Err(tokio_tungstenite::tungstenite::Error::Capacity(_)))=> { inbox.finish(Some(error(TransportErrorKind::ResponseTooLarge,"WebSocket message exceeds configured size limit"))); break; },
                     Some(Err(_))=> { inbox.finish(Some(error(TransportErrorKind::Disconnected,"WebSocket receive failed"))); break; },
@@ -222,6 +252,7 @@ async fn run(
                 }
             },
             _=heartbeat.tick()=> {
+                if !inbox.can_read(){last_read=Instant::now();continue;}
                 if last_read.elapsed()>=config.idle_timeout { inbox.finish(Some(error(TransportErrorKind::Timeout,"WebSocket idle timeout"))); break; }
                 if !matches!(timeout(config.timeout,socket.send(Message::Ping(Vec::new().into()))).await,Ok(Ok(()))) { inbox.finish(Some(error(TransportErrorKind::Disconnected,"WebSocket heartbeat failed"))); break; }
             }

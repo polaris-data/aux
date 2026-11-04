@@ -1,0 +1,334 @@
+{
+  "operations": [
+    {
+      "id": "exchanges",
+      "protocol": "GET",
+      "address": "/v1/exchanges",
+      "rust": "TardisClient::exchanges",
+      "python": "TardisClient.exchanges",
+      "fixture": "tests/fixtures/http.json#exchanges",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "exchange_details",
+      "protocol": "GET",
+      "address": "/v1/exchanges/bitmex",
+      "rust": "TardisClient::exchange_details",
+      "python": "TardisClient.exchange_details",
+      "fixture": "tests/fixtures/http.json#exchange_details",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "exchange_summary",
+      "protocol": "GET",
+      "address": "/v1/exchanges/bitmex/summary",
+      "rust": "TardisClient::exchange_summary",
+      "python": "TardisClient.exchange_summary",
+      "fixture": "tests/fixtures/http.json#exchange_summary",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "symbols",
+      "protocol": "GET",
+      "address": "/v1/symbols",
+      "rust": "TardisClient::symbols",
+      "python": "TardisClient.symbols",
+      "fixture": "tests/fixtures/http.json#symbols",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "api_key_info",
+      "protocol": "GET",
+      "address": "/v1/api-key-info",
+      "rust": "TardisClient::api_key_info",
+      "python": "TardisClient.api_key_info",
+      "fixture": "tests/fixtures/http.json#api_key_info",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "instruments",
+      "protocol": "GET",
+      "address": "/v1/instruments/bitmex",
+      "rust": "TardisClient::instruments",
+      "python": "TardisClient.instruments",
+      "fixture": "tests/fixtures/http.json#instruments",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "instrument",
+      "protocol": "GET",
+      "address": "/v1/instruments/bitmex/BTC%2FUSD%3APERP",
+      "rust": "TardisClient::instrument",
+      "python": "TardisClient.instrument",
+      "fixture": "tests/fixtures/http.json#instrument",
+      "test": "tests/contracts.rs#native_http_inventory",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "data_feeds",
+      "protocol": "GET",
+      "address": "/v1/data-feeds/:exchange",
+      "rust": "TardisClient::data_feeds",
+      "python": "TardisClient.data_feeds",
+      "fixture": "tests/fixtures/feed.ndjson.gz",
+      "test": "tests/contracts.rs#compressed_raw_feed_and_exclusive_replay",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    },
+    {
+      "id": "replay",
+      "protocol": "helper",
+      "address": "minute-range replay",
+      "rust": "TardisClient::replay",
+      "python": "TardisClient.replay",
+      "fixture": "tests/fixtures/feed.ndjson",
+      "test": "tests/contracts.rs#compressed_raw_feed_and_exclusive_replay",
+      "python_test": "test_replay_empty_minutes_and_exclusive_end"
+    },
+    {
+      "id": "dataset",
+      "protocol": "GET",
+      "address": "/v1/:exchange/:dataType/:year/:month/:day/:symbol.csv.gz",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/feed.ndjson.gz",
+      "test": "tests/contracts.rs#dataset_bytes_and_native_errors",
+      "python_test": "test_download_publication_and_interruption"
+    },
+    {
+      "id": "download_dataset",
+      "protocol": "helper",
+      "address": "atomic file download",
+      "rust": "TardisClient::download_dataset",
+      "python": "TardisClient.download_dataset",
+      "fixture": "tests/fixtures/feed.ndjson.gz",
+      "test": "tests/contracts.rs#native_file_helper",
+      "python_test": "test_download_publication_and_interruption"
+    },
+    {
+      "id": "machine_replay",
+      "protocol": "GET",
+      "address": "/replay",
+      "rust": "TardisMachineClient::replay",
+      "python": "TardisMachineClient.replay",
+      "fixture": "tests/fixtures/normalized.json",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "id": "machine_replay_normalized",
+      "protocol": "GET",
+      "address": "/replay-normalized",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "id": "machine_ws_replay",
+      "protocol": "WS",
+      "address": "/ws-replay",
+      "rust": "TardisMachineClient::ws_replay",
+      "python": "TardisMachineClient.ws_replay",
+      "fixture": "tests/fixtures/normalized.json",
+      "test": "tests/contracts.rs#machine_websocket_inventory",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "id": "machine_ws_replay_normalized",
+      "protocol": "WS",
+      "address": "/ws-replay-normalized",
+      "rust": "TardisMachineClient::ws_replay_normalized",
+      "python": "TardisMachineClient.ws_replay_normalized",
+      "fixture": "tests/fixtures/normalized.json",
+      "test": "tests/contracts.rs#machine_websocket_inventory",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "id": "machine_stream_normalized",
+      "protocol": "WS",
+      "address": "/ws-stream-normalized",
+      "rust": "TardisMachineClient::stream_normalized",
+      "python": "TardisMachineClient.stream_normalized",
+      "fixture": "tests/fixtures/normalized.json",
+      "test": "tests/contracts.rs#machine_websocket_inventory",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    }
+  ],
+  "schemas": [
+    {
+      "name": "trade",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#trade",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "book_change",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#book_change",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "book_ticker",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#book_ticker",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "derivative_ticker",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#derivative_ticker",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "quote",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#quote",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "book_snapshot",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#book_snapshot",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "trade_bar",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#trade_bar",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "liquidation",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#liquidation",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "option_summary",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#option_summary",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "disconnect",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#disconnect",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "error",
+      "rust": "TardisMachineClient::replay_normalized",
+      "python": "TardisMachineClient.replay_normalized",
+      "fixture": "tests/fixtures/normalized.json#error",
+      "test": "tests/contracts.rs#machine_http_and_all_normalized_schemas",
+      "python_test": "test_machine_http_and_websocket_inventory"
+    },
+    {
+      "name": "csv:book_snapshot_25",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:book_snapshot_25",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:book_snapshot_5",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:book_snapshot_5",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:book_ticker",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:book_ticker",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:derivative_ticker",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:derivative_ticker",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:incremental_book_L2",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:incremental_book_L2",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:liquidations",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:liquidations",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:options_chain",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:options_chain",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:quotes",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:quotes",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "csv:trades",
+      "rust": "TardisClient::dataset",
+      "python": "TardisClient.dataset",
+      "fixture": "tests/fixtures/datasets.json#csv:trades",
+      "test": "tests/contracts.rs#all_csv_download_types",
+      "python_test": "test_all_tardis_csv_types"
+    },
+    {
+      "name": "exchange_native",
+      "rust": "TardisClient::data_feeds",
+      "python": "TardisClient.data_feeds",
+      "fixture": "tests/fixtures/feed.ndjson",
+      "test": "tests/contracts.rs#compressed_raw_feed_and_exclusive_replay",
+      "python_test": "test_tardis_http_inventory_and_precision"
+    }
+  ]
+}

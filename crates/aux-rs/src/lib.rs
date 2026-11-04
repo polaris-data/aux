@@ -1,4 +1,4 @@
-//! Native exchange adapters with composable clients and optional transports.
+//! Native exchange and data-vendor adapters with optional transports.
 //!
 //! Enable `hyperliquid`, `lighter`, or both to select exchanges. The default `http` and `ws`
 //! features supply standard transports; disable defaults to bring your own I/O.
@@ -26,5 +26,10 @@ pub use aux_rs_derive as derive;
 #[cfg(feature = "paradex")]
 pub use aux_rs_paradex as paradex;
 
+#[cfg(feature = "tardis")]
+pub use aux_rs_tardis as tardis;
+
+#[cfg(feature = "databento")]
+pub use aux_rs_databento as databento;
 #[cfg(feature = "metric")]
 pub use aux_rs_metric as metric;

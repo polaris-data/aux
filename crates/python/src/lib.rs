@@ -4,6 +4,7 @@
 mod arcus;
 mod client;
 mod convert;
+mod data;
 mod derive;
 mod errors;
 mod lighter;
@@ -19,6 +20,11 @@ use pyo3::prelude::*;
 
 #[pymodule]
 fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_class::<data::TardisClient>()?;
+    module.add_class::<data::TardisMachineClient>()?;
+    module.add_class::<data::DatabentoHistoricalClient>()?;
+    module.add_class::<data::DatabentoReferenceClient>()?;
+    module.add_class::<data::DatabentoLiveClient>()?;
     module.add_class::<metric::MetricClient>()?;
     module.add_class::<metric::MetricChainClient>()?;
     module.add_class::<metric::MetricSigner>()?;
