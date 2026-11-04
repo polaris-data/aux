@@ -167,10 +167,17 @@ impl Drop for StandardConnection {
 impl WebSocketConnector for StandardTransport {
     type Connection = StandardConnection;
     async fn connect(&self, url: &str) -> Result<Self::Connection, TransportError> {
-        self.connect_dedicated(url, false).await
+        self.connect_dedicated(url, false, Vec::new()).await
+    }
+    async fn connect_with_headers(
+        &self,
+        url: &str,
+        headers: Vec<(String, String)>,
+    ) -> Result<Self::Connection, TransportError> {
+        self.connect_dedicated(url, false, headers).await
     }
     async fn connect_read(&self, url: &str) -> Result<Self::Connection, TransportError> {
-        self.connect_dedicated(url, true).await
+        self.connect_dedicated(url, true, Vec::new()).await
     }
 }
 impl StandardTransport {
@@ -178,11 +185,12 @@ impl StandardTransport {
         &self,
         url: &str,
         read_only: bool,
+        headers: Vec<(String, String)>,
     ) -> Result<StandardConnection, TransportError> {
         let guard = OperationGuard::start(&self.lifecycle)?;
         let mut shutdown = self.lifecycle.closed.subscribe();
         self.lifecycle.check()?;
-        let socket = tokio::select! { biased; _=shutdown.changed()=>return Err(closed(RequestOutcome::NotSent)), r=ws::connect(url, self.tls.clone(), &self.config)=>r? };
+        let socket = tokio::select! { biased; _=shutdown.changed()=>return Err(closed(RequestOutcome::NotSent)), r=ws::connect(url, self.tls.clone(), &self.config, headers)=>r? };
         self.lifecycle.check()?;
         let inbox = Arc::new(Inbox {
             queue: Mutex::default(),

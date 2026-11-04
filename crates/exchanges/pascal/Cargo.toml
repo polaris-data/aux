@@ -1,0 +1,36 @@
+[package]
+name = "aux-rs-pascal"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license = "MIT"
+repository = "https://github.com/polaris-data/connectors"
+readme = "README.md"
+description = "Pascal prediction exchange APIs, permits and Solana collateral"
+
+[features]
+default = []
+http = ["aux-rs-core/http"]
+ws = ["aux-rs-core/ws"]
+
+[dependencies]
+aux-rs-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+zeroize.workspace = true
+url.workspace = true
+getrandom.workspace = true
+base64.workspace = true
+sha2.workspace = true
+ed25519-dalek.workspace = true
+bs58 = "0.5"
+solana-pubkey = { version="=3.0.0", default-features=false, features=["std","curve25519","sha2"] }
+
+[dev-dependencies]
+tokio = { workspace=true, features=["macros","rt-multi-thread","net","io-util","time","sync"] }
+tokio-tungstenite.workspace = true
+futures-util.workspace = true
+
+[lints]
+workspace = true

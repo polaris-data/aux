@@ -1,0 +1,50 @@
+[
+  {
+    "source": "docs.html",
+    "channel": "book"
+  },
+  {
+    "source": "docs.html",
+    "channel": "trades"
+  },
+  {
+    "source": "docs.html",
+    "channel": "all_trades"
+  },
+  {
+    "source": "docs.html",
+    "channel": "filtered_trades"
+  },
+  {
+    "source": "docs.html",
+    "channel": "candles"
+  },
+  {
+    "source": "docs.html",
+    "channel": "mark_price_candles"
+  },
+  {
+    "source": "docs.html",
+    "channel": "account"
+  },
+  {
+    "source": "docs.html",
+    "channel": "market_update"
+  },
+  {
+    "source": "docs.html",
+    "channel": "place_orders"
+  },
+  {
+    "source": "docs.html",
+    "channel": "cancel_orders"
+  },
+  {
+    "source": "docs.html",
+    "channel": "mass_cancel"
+  },
+  {
+    "source": "docs.html",
+    "channel": "ping"
+  }
+]

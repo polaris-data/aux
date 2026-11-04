@@ -1,0 +1,9 @@
+{
+  "market": "asyncapi.json",
+  "user": "asyncapi-user.json",
+  "sports": "asyncapi-sports.json",
+  "rfq": "asyncapi-rfq.json",
+  "perps": "asyncapi-perps.json",
+  "polybolt": "polybolt.json",
+  "rtds": "rtds.json"
+}

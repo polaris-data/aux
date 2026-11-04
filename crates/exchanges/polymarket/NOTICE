@@ -1,0 +1,5 @@
+Polymarket reference materials
+
+API_SOURCES.json records source URLs, hashes, version pins and normalized inputs. APIs and protocol formats are independently implemented in Rust. No official SDK is a runtime dependency. Published API tables/examples and sanitized reference vectors are retained solely for interoperability. Upstream documentation/specifications remain attributed to their respective owners; no additional license grant is inferred.
+
+Unified TypeScript SDK commit e44d1846e645d0892fc49de66b78b58a82296f5f (MIT) supplies published client-facing ABI signatures, deployment metadata and supplemental API formats. Its original license is retained in notices/Polymarket-ts-sdk-LICENSE.

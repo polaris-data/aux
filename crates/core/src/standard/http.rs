@@ -49,6 +49,7 @@ impl StandardTransport {
             HttpMethod::Get => reqwest::Method::GET,
             HttpMethod::Post => reqwest::Method::POST,
             HttpMethod::Put => reqwest::Method::PUT,
+            HttpMethod::Patch => reqwest::Method::PATCH,
             HttpMethod::Delete => reqwest::Method::DELETE,
         };
         let mut builder = client.request(method, &request.url);

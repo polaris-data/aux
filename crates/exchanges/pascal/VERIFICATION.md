@@ -1,0 +1,5 @@
+# Verification status
+
+Offline contract compatibility is the release baseline. Named REST/event fixtures, independent signing/transaction vectors, local HTTP/WebSocket peers, request correlation and cancellation checks do not require exchange credentials, institutional roles or funded wallets. Run `scripts/check.sh` and `scripts/check-python.sh` for repository gates. Dependency checks include custom I/O and all venue combinations. CI performs no exchange network calls.
+
+Live verification: **not performed** for this change. Public smoke examples require explicit execution. Account permissions, production schemas beyond the pin, rate limits and matching/settlement execution have not been certified through live trading. Funded examples require explicit environment gates, supplied payloads and credentials. No mainnet order, withdrawal, deposit or token approval runs automatically. Record environment, contract/schema pin, time, request IDs, outcome and reconciliation evidence separately when doing live acceptance.

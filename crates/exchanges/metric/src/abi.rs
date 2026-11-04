@@ -95,6 +95,30 @@ fn value(ty: &DynSolType, v: &Value, depth: usize) -> Result<DynSolValue, Error>
                     .collect::<Result<_, _>>()?,
             )
         }
+        DynSolType::CustomStruct {
+            name,
+            prop_names,
+            tuple,
+        } => {
+            let values = tuple
+                .iter()
+                .enumerate()
+                .map(|(i, ty)| {
+                    let input = if let Some(array) = v.as_array() {
+                        array.get(i)
+                    } else {
+                        prop_names.get(i).and_then(|key| v.get(key))
+                    }
+                    .ok_or_else(invalid)?;
+                    value(ty, input, depth + 1)
+                })
+                .collect::<Result<Vec<_>, _>>()?;
+            DynSolValue::CustomStruct {
+                name: name.clone(),
+                prop_names: prop_names.clone(),
+                tuple: values,
+            }
+        }
         DynSolType::Tuple(items) => {
             let values = v.as_array().ok_or_else(invalid)?;
             if values.len() != items.len() {
@@ -210,9 +234,10 @@ fn json_value(v: DynSolValue) -> Value {
         DynSolValue::FixedBytes(b, n) => json!(alloy_primitives::hex::encode_prefixed(&b[..n])),
         DynSolValue::String(s) => json!(s),
         DynSolValue::Function(f) => json!(f.to_string()),
-        DynSolValue::Array(a) | DynSolValue::FixedArray(a) | DynSolValue::Tuple(a) => {
-            Value::Array(a.into_iter().map(json_value).collect())
-        }
+        DynSolValue::CustomStruct { tuple: a, .. }
+        | DynSolValue::Array(a)
+        | DynSolValue::FixedArray(a)
+        | DynSolValue::Tuple(a) => Value::Array(a.into_iter().map(json_value).collect()),
     }
 }
 pub fn decode_contract_output(contract: &str, name: &str, bytes: &[u8]) -> Result<Value, Error> {

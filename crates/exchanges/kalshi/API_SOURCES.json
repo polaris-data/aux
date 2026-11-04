@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-11-04",
+  "sources": {
+    "openapi.yaml": {
+      "url": "https://docs.kalshi.com/openapi.yaml",
+      "sha256": "b00862e39b9c543065c5cee75f7d16d26e682ba8c7c4cd4c329ae34d0ecded74"
+    },
+    "perps_openapi.yaml": {
+      "url": "https://docs.kalshi.com/perps_openapi.yaml",
+      "sha256": "40b2e929926942b5f78af23600bd6eb92f503d32159cfaf63e1a4f92e67efe04"
+    },
+    "perps_scm_openapi.yaml": {
+      "url": "https://docs.kalshi.com/perps_scm_openapi.yaml",
+      "sha256": "afaf0b90311b754e63fe1e34b18c35a19bec9d6178bae0d076fc643f77a6022e"
+    },
+    "asyncapi.yaml": {
+      "url": "https://docs.kalshi.com/asyncapi.yaml",
+      "sha256": "33fd603e0f7a95acd0da82a70cfc9126c31ddc27528a6e696efb2c3806b56b23"
+    },
+    "perps_asyncapi.yaml": {
+      "url": "https://docs.kalshi.com/perps_asyncapi.yaml",
+      "sha256": "ed5d8ae9ee16a5d3c60c32aa3a92e364adb5ff417fd0df9ff60e4e07fc3b2a4d"
+    },
+    "authentication.md": {
+      "url": "https://docs.kalshi.com/getting_started/quick_start_authenticated_requests.md",
+      "sha256": "4067f14089c0767537d7a18dad6ca3e4319562377b9d637c6c84dc5246ceeabd"
+    }
+  },
+  "normalized_sha256": {
+    "predictions.json": "5d304349f84179b7e8213efb07192b3cdc9b684cc485e1cad452161f71ff0750",
+    "perps.json": "02ec8ac294a836238b8629f86b80b098c31ed4f38879853bdc827e74cc3b23f1",
+    "clearing.json": "18f73fb77e37b1fe78f9a8a3c5cf7caf36da92886be4238280280a5f2c3d5a31",
+    "asyncapi.json": "1e1b168dcc938be99d05da4e0459c94d54a08e53cd200eb813da299ee2544c57",
+    "perps_asyncapi.json": "fa3ddef72459c68d16088bbe95230edc4ee37baa326efca3f2909790cd15cc24"
+  },
+  "notes": "Published contract union, exact native values and tracked supplemental surfaces. External schemas are pinned generation inputs. Upstream SDKs are never runtime dependencies. Publication limits are explicit in schema/blockers.json.",
+  "artifacts_sha256": {
+    "coverage.json": "b6343024f112fff2c825f9e73a20fd22ea25a5e1d9867570ab4c5d0939fbfe34",
+    "schema/blockers.json": "c7b856add9c00e98074f7bea8c97678e2f41d4e1ce5f0509ef6c804315c58414",
+    "schema/services.json": "d3b0cd77f64774f6b98fe9fe6620c42e49dbc89abc85f18b63d1ae69304747d2",
+    "schema/stream-notes-margin.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-notes-predictions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-sources.json": "eca3dda648cf54a19bc0473df8fba5848b7cb0c16691e222812dff67f01d6796",
+    "schema/websocket.json": "08da750eb1cb5b070d217e869e0a7716b97aecffddcaf56c85701aa3707dc6ee",
+    "tests/fixtures/contracts.json": "d3f3e8ed9497c9cc6a10752c546fe9aaec134b381717daecad2a5d620f79368b",
+    "tests/fixtures/signing.json": "1c775b077b8cf4f6235bfe382b5aff0263584333b0d77fd6f4efa1480ee8ae7a",
+    "tests/fixtures/ws.json": "ce9500ba7acf1d4e0149fbecb9ca71457b4aac0b29e8b56d6dff63e9ff1f98d1"
+  },
+  "rest_operations": 215,
+  "websocket_messages": 75,
+  "reference_vectors": {
+    "tools": [
+      "Python cryptography"
+    ],
+    "source": "independent RSA-PSS/SHA-256 salt32 and Ed25519 signing",
+    "seed": "public test PEM keys in fixtures"
+  }
+}

@@ -54,6 +54,9 @@ impl<P: ClientResources> ClientState<P> {
             .cloned()
             .ok_or_else(|| errors::ClosedError::new_err("client is closed"))
     }
+    pub fn closing_receiver(&self) -> watch::Receiver<bool> {
+        self.closing.subscribe()
+    }
     pub fn is_closed(&self) -> bool {
         *self.closing.borrow()
     }

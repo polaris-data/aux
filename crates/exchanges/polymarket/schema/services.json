@@ -1,0 +1,56 @@
+[
+  {
+    "name": "clob",
+    "input": "clob.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  },
+  {
+    "name": "gamma",
+    "input": "gamma.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  },
+  {
+    "name": "relayer",
+    "input": "relayer.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  },
+  {
+    "name": "combos_rfq",
+    "input": "combos_rfq.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  },
+  {
+    "name": "bridge",
+    "input": "bridge.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  },
+  {
+    "name": "data",
+    "input": "data.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  },
+  {
+    "name": "perps",
+    "input": "perps.json",
+    "client": "PolymarketPerpsClient",
+    "auth": "perps"
+  },
+  {
+    "name": "collateral_return",
+    "input": "collateral_return.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  },
+  {
+    "name": "builder_gateway",
+    "input": "builder_gateway.json",
+    "client": "PolymarketClient",
+    "auth": "native"
+  }
+]

@@ -1,0 +1,1683 @@
+{
+  "market.market.subscriptionRequest": {
+    "assets_ids": [
+      "65818619657568813474341868652308942079804919287380422192892211131408793125422",
+      "52114319501245915516055106046884209969926127482827954674443846427813813222426"
+    ],
+    "type": "market"
+  },
+  "market.market.subscriptionRequestUpdate": {
+    "operation": "subscribe",
+    "assets_ids": [
+      "71321045679252212594626385532706912750332728571942532289631379312455583992563"
+    ]
+  },
+  "market.market.ping": "PING",
+  "market.market.pong": "PONG",
+  "market.market.book": {
+    "event_type": "book",
+    "asset_id": "65818619657568813474341868652308942079804919287380422192892211131408793125422",
+    "market": "0xbd31dc8a20211944f6b70f31557f1001557b59905b7738480ca09bd4532f84af",
+    "bids": [
+      {
+        "price": "0.48",
+        "size": "30"
+      },
+      {
+        "price": "0.49",
+        "size": "20"
+      },
+      {
+        "price": "0.50",
+        "size": "15"
+      }
+    ],
+    "asks": [
+      {
+        "price": "0.52",
+        "size": "25"
+      },
+      {
+        "price": "0.53",
+        "size": "60"
+      },
+      {
+        "price": "0.54",
+        "size": "10"
+      }
+    ],
+    "timestamp": "1757908892351",
+    "hash": "0xabc123..."
+  },
+  "market.market.priceChange": {
+    "event_type": "price_change",
+    "market": "0x5f65177b394277fd294cd75650044e32ba009a95022d88a0c1d565897d72f8f1",
+    "price_changes": [
+      {
+        "asset_id": "71321045679252212594626385532706912750332728571942532289631379312455583992563",
+        "price": "0.5",
+        "size": "200",
+        "side": "BUY",
+        "hash": "56621a121a47ed9333273e21c83b660cff37ae50",
+        "best_bid": "0.5",
+        "best_ask": "1"
+      }
+    ],
+    "timestamp": "1757908892351"
+  },
+  "market.market.lastTradePrice": {
+    "event_type": "last_trade_price",
+    "asset_id": "114122071509644379678018727908709560226618148003371446110114509806601493071694",
+    "market": "0x6a67b9d828d53862160e470329ffea5246f338ecfffdf2cab45211ec578b0347",
+    "price": "0.456",
+    "size": "219.217767",
+    "fee_rate_bps": "0",
+    "side": "BUY",
+    "timestamp": "1750428146322",
+    "transaction_hash": "0xeeefffggghhh"
+  },
+  "market.market.tickSizeChange": {
+    "event_type": "tick_size_change",
+    "asset_id": "65818619657568813474341868652308942079804919287380422192892211131408793125422",
+    "market": "0xbd31dc8a20211944f6b70f31557f1001557b59905b7738480ca09bd4532f84af",
+    "old_tick_size": "0.01",
+    "new_tick_size": "0.001",
+    "timestamp": "1757908892351"
+  },
+  "market.market.bestBidAsk": {
+    "event_type": "best_bid_ask",
+    "market": "0x0005c0d312de0be897668695bae9f32b624b4a1ae8b140c49f08447fcc74f442",
+    "asset_id": "85354956062430465315924116860125388538595433819574542752031640332592237464430",
+    "best_bid": "0.73",
+    "best_ask": "0.77",
+    "spread": "0.04",
+    "timestamp": "1766789469958"
+  },
+  "market.market.newMarket": {
+    "event_type": "new_market",
+    "id": "1031769",
+    "question": "Will NVIDIA (NVDA) close above $240 end of January?",
+    "market": "0x311d0c4b6671ab54af4970c06fcf58662516f5168997bdda209ec3db5aa6b0c1",
+    "slug": "nvda-above-240-on-january-30-2026",
+    "description": "This market will resolve to \"Yes\" if the official closing price for NVIDIA (NVDA) on the final trading day of January 2026 is higher than the listed price. Otherwise, this market will resolve to \"No\".",
+    "assets_ids": [
+      "76043073756653678226373981964075571318267289248134717369284518995922789326425",
+      "31690934263385727664202099278545688007799199447969475608906331829650099442770"
+    ],
+    "outcomes": [
+      "Yes",
+      "No"
+    ],
+    "event_message": {
+      "id": "125819",
+      "ticker": "nvda-above-in-january-2026",
+      "slug": "nvda-above-in-january-2026",
+      "title": "Will NVIDIA (NVDA) close above ___ end of January?",
+      "description": "This market will resolve to \"Yes\" if the official closing price for NVIDIA (NVDA) on the final trading day of January 2026 is higher than the listed price. Otherwise, this market will resolve to \"No\"."
+    },
+    "timestamp": "1766790415550",
+    "tags": [
+      "stocks"
+    ],
+    "condition_id": "0x311d0c4b6671ab54af4970c06fcf58662516f5168997bdda209ec3db5aa6b0c1",
+    "active": true,
+    "clob_token_ids": [
+      "76043073756653678226373981964075571318267289248134717369284518995922789326425",
+      "31690934263385727664202099278545688007799199447969475608906331829650099442770"
+    ],
+    "sports_market_type": "",
+    "line": "",
+    "game_start_time": "",
+    "order_price_min_tick_size": "0.01",
+    "group_item_title": "NVDA above $240"
+  },
+  "market.market.marketResolved": {
+    "event_type": "market_resolved",
+    "id": "1031769",
+    "market": "0x311d0c4b6671ab54af4970c06fcf58662516f5168997bdda209ec3db5aa6b0c1",
+    "assets_ids": [
+      "76043073756653678226373981964075571318267289248134717369284518995922789326425",
+      "31690934263385727664202099278545688007799199447969475608906331829650099442770"
+    ],
+    "winning_asset_id": "76043073756653678226373981964075571318267289248134717369284518995922789326425",
+    "winning_outcome": "Yes",
+    "timestamp": "1766790415550",
+    "tags": [
+      "stocks"
+    ]
+  },
+  "user.user.userSubscriptionRequest": {
+    "auth": {
+      "apiKey": "your-api-key-uuid",
+      "secret": "your-api-secret",
+      "passphrase": "your-passphrase"
+    },
+    "type": "user"
+  },
+  "user.user.userSubscriptionRequestUpdate": {
+    "operation": "subscribe",
+    "markets": [
+      "0x5f65177b394277fd294cd75650044e32ba009a95022d88a0c1d565897d72f8f1"
+    ]
+  },
+  "user.user.ping": "PING",
+  "user.user.pong": "PONG",
+  "user.user.order": {
+    "event_type": "order",
+    "id": "0xff354cd7ca7539dfa9c28d90943ab5779a4eac34b9b37a757d7b32bdfb11790b",
+    "owner": "9180014b-33c8-9240-a14b-bdca11c0a465",
+    "market": "0xbd31dc8a20211944f6b70f31557f1001557b59905b7738480ca09bd4532f84af",
+    "asset_id": "52114319501245915516055106046884209969926127482827954674443846427813813222426",
+    "side": "SELL",
+    "order_owner": "9180014b-33c8-9240-a14b-bdca11c0a465",
+    "original_size": "10",
+    "size_matched": "0",
+    "price": "0.57",
+    "associate_trades": null,
+    "outcome": "YES",
+    "type": "PLACEMENT",
+    "created_at": "1672290687",
+    "expiration": "1234567",
+    "order_type": "GTD",
+    "status": "LIVE",
+    "maker_address": "0x1234...",
+    "timestamp": "1672290687"
+  },
+  "user.user.trade": {
+    "event_type": "trade",
+    "type": "TRADE",
+    "id": "28c4d2eb-bbea-40e7-a9f0-b2fdb56b2c2e",
+    "taker_order_id": "0x06bc63e346ed4ceddce9efd6b3af37c8f8f440c92fe7da6b2d0f9e4ccbc50c42",
+    "market": "0xbd31dc8a20211944f6b70f31557f1001557b59905b7738480ca09bd4532f84af",
+    "asset_id": "52114319501245915516055106046884209969926127482827954674443846427813813222426",
+    "side": "BUY",
+    "size": "10",
+    "price": "0.57",
+    "fee_rate_bps": "0",
+    "status": "MATCHED",
+    "match_time": "1672290701",
+    "last_update": "1672290701",
+    "outcome": "YES",
+    "owner": "9180014b-33c8-9240-a14b-bdca11c0a465",
+    "trade_owner": "9180014b-33c8-9240-a14b-bdca11c0a465",
+    "maker_address": "0x1234...",
+    "transaction_hash": "",
+    "bucket_index": 0,
+    "maker_orders": [
+      {
+        "order_id": "0xff354cd7ca7539dfa9c28d90943ab5779a4eac34b9b37a757d7b32bdfb11790b",
+        "owner": "9180014b-33c8-9240-a14b-bdca11c0a465",
+        "maker_address": "0x5678...",
+        "matched_amount": "10",
+        "price": "0.57",
+        "fee_rate_bps": "0",
+        "asset_id": "52114319501245915516055106046884209969926127482827954674443846427813813222426",
+        "outcome": "YES",
+        "side": "SELL"
+      }
+    ],
+    "trader_side": "TAKER",
+    "timestamp": "1672290701"
+  },
+  "sports.sports.ping": "ping",
+  "sports.sports.pong": "pong",
+  "sports.sports.sportsUpdate": {
+    "slug": "mci-liv-2025-02-03",
+    "live": true,
+    "ended": false,
+    "score": "1-0",
+    "period": "1H",
+    "elapsed": "32:15",
+    "last_update": "2025-02-03T19:50:16.939Z"
+  },
+  "rfq.quoter.auth": {
+    "type": "auth",
+    "auth": {
+      "apiKey": "YOUR_API_KEY",
+      "secret": "YOUR_API_SECRET",
+      "passphrase": "YOUR_API_PASSPHRASE"
+    },
+    "identity": {
+      "signer_address": "0xYourSigner",
+      "maker_address": "0xYourQuoterWallet",
+      "signature_type": 0
+    }
+  },
+  "rfq.quoter.authResponse": {
+    "type": "auth",
+    "success": true,
+    "address": "0xAuthenticatedAddress"
+  },
+  "rfq.quoter.rfqRequest": {
+    "type": "RFQ_REQUEST",
+    "rfq_id": "rfq_<id>",
+    "requestor_public_id": "req_<public_id>",
+    "leg_position_ids": [
+      "<leg_position_id_1>",
+      "<leg_position_id_2>"
+    ],
+    "condition_id": "0x<condition_id>",
+    "yes_position_id": "<yes_position_id>",
+    "no_position_id": "<no_position_id>",
+    "direction": "BUY",
+    "side": "YES",
+    "requested_size": {
+      "unit": "notional",
+      "value_e6": "1000000"
+    },
+    "submission_deadline": 1780575184000
+  },
+  "rfq.quoter.rfqQuote": {
+    "type": "RFQ_QUOTE",
+    "rfq_id": "rfq_<id>",
+    "price_e6": "450000",
+    "size_e6": "1000000",
+    "signed_order": {
+      "salt": "<order_salt>",
+      "maker": "0xYourQuoterWallet",
+      "signer": "0xYourSigner",
+      "tokenId": "<yes_or_no_position_id>",
+      "makerAmount": "<amount_to_pay>",
+      "takerAmount": "<taker_amount>",
+      "side": 0,
+      "signatureType": 0,
+      "timestamp": "<unix_seconds>",
+      "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "builder": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "0x..."
+    }
+  },
+  "rfq.quoter.ackRfqQuote": {
+    "type": "ACK_RFQ_QUOTE",
+    "rfq_id": "rfq_<id>",
+    "quote_id": "quote_<id>"
+  },
+  "rfq.quoter.rfqQuoteCancel": {
+    "type": "RFQ_QUOTE_CANCEL",
+    "rfq_id": "rfq_<id>",
+    "quote_id": "quote_<id>",
+    "signer_address": "0xYourSigner",
+    "maker_address": "0xYourQuoterWallet"
+  },
+  "rfq.quoter.ackRfqQuoteCancel": {
+    "type": "ACK_RFQ_QUOTE_CANCEL",
+    "rfq_id": "rfq_<id>",
+    "quote_id": "quote_<id>"
+  },
+  "rfq.quoter.rfqConfirmationRequest": {
+    "type": "RFQ_CONFIRMATION_REQUEST",
+    "rfq_id": "rfq_<id>",
+    "quote_id": "quote_<id>",
+    "signer_address": "0xYourSigner",
+    "maker_address": "0xYourQuoterWallet",
+    "signature_type": 0,
+    "leg_position_ids": [
+      "<leg_position_id_1>",
+      "<leg_position_id_2>"
+    ],
+    "condition_id": "0x<condition_id>",
+    "yes_position_id": "<yes_position_id>",
+    "no_position_id": "<no_position_id>",
+    "direction": "BUY",
+    "side": "YES",
+    "fill_size_e6": "1000000",
+    "price_e6": "450000",
+    "confirm_by": 1780575184000
+  },
+  "rfq.quoter.rfqConfirmationResponse": {
+    "type": "RFQ_CONFIRMATION_RESPONSE",
+    "rfq_id": "rfq_<id>",
+    "quote_id": "quote_<id>",
+    "decision": "CONFIRM"
+  },
+  "rfq.quoter.ackRfqConfirmationResponse": {
+    "type": "ACK_RFQ_CONFIRMATION_RESPONSE",
+    "rfq_id": "rfq_<id>",
+    "quote_id": "quote_<id>",
+    "decision": "CONFIRM"
+  },
+  "rfq.quoter.rfqExecutionUpdate": {
+    "type": "RFQ_EXECUTION_UPDATE",
+    "rfq_id": "rfq_<id>",
+    "status": "MINED",
+    "tx_hash": "0x<transaction_hash>"
+  },
+  "rfq.quoter.rfqTrade": {
+    "type": "RFQ_TRADE",
+    "rfq_id": "rfq_<id>",
+    "requester_id": "req_<public_id>",
+    "condition_id": "0x<condition_id>",
+    "leg_position_ids": [
+      "<leg_position_id_1>",
+      "<leg_position_id_2>"
+    ],
+    "direction": "BUY",
+    "side": "YES",
+    "price_e6": "125000",
+    "size_e6": "800000",
+    "executed_at": 1780854786039
+  },
+  "rfq.quoter.rfqError": {
+    "type": "RFQ_ERROR",
+    "request_type": "RFQ_QUOTE",
+    "rfq_id": "rfq_<id>",
+    "code": "SUBMISSION_WINDOW_CLOSED",
+    "error": "submission window closed"
+  },
+  "perps.ping.Request": {
+    "req": "post",
+    "op": {
+      "type": "ping"
+    }
+  },
+  "perps.ping.Response": {
+    "data": {
+      "status": "ok",
+      "ts": 1767225600000,
+      "sq": 1234567890
+    }
+  },
+  "perps.placeOrders.Request": {
+    "req": "post",
+    "op": {
+      "type": "createOrders",
+      "args": [
+        {
+          "iid": 1,
+          "buy": true,
+          "p": "100.00",
+          "qty": "10.00",
+          "tif": "gtc",
+          "po": false,
+          "ro": false,
+          "c": "550e8400e29b41d4a716446655440000",
+          "tr": {
+            "trp": "110.00",
+            "tpsl": "tp"
+          },
+          "builder": {
+            "address": "0x1234567890abcdef1234567890abcdef12345678",
+            "fee_rate": "0.001"
+          }
+        }
+      ],
+      "grp": "order"
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000,
+    "exp": 1767225600000
+  },
+  "perps.placeOrders.Response": {
+    "id": 1,
+    "data": [
+      {
+        "status": "ok",
+        "oid": 1234567890
+      }
+    ]
+  },
+  "perps.cancelOrders.Request": {
+    "req": "post",
+    "op": {
+      "type": "cancelOrders",
+      "args": [
+        1234567890
+      ]
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000,
+    "exp": 1767225600000
+  },
+  "perps.cancelOrders.Response": {
+    "id": 3,
+    "data": [
+      {
+        "status": "ok",
+        "oid": 1234567890,
+        "ts": 1767225600100
+      },
+      {
+        "status": "ok",
+        "oid": 1234567891,
+        "ts": 1767225600101
+      }
+    ]
+  },
+  "perps.cancelOrdersCOID.Request": {
+    "req": "post",
+    "op": {
+      "type": "cancelOrdersCOID",
+      "args": [
+        "550e8400e29b41d4a716446655440000"
+      ]
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000,
+    "exp": 1767225600000
+  },
+  "perps.cancelOrdersCOID.Response": {
+    "id": 3,
+    "data": [
+      {
+        "status": "ok",
+        "oid": 1234567890,
+        "coid": "550e8400e29b41d4a716446655440000",
+        "ts": 1767225600100
+      },
+      {
+        "status": "ok",
+        "oid": 1234567891,
+        "coid": "550e8400e29b41d4a716446655440001",
+        "ts": 1767225600101
+      }
+    ]
+  },
+  "perps.cancelAll.Request": {
+    "req": "post",
+    "op": {
+      "type": "cancelAll",
+      "args": {
+        "iid": 1
+      }
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000,
+    "exp": 1767225600000
+  },
+  "perps.cancelAll.Response": {
+    "id": 5,
+    "data": {
+      "status": "ok"
+    }
+  },
+  "perps.autoCancel.Request": {
+    "req": "post",
+    "op": {
+      "type": "autoCancel",
+      "args": {
+        "time": 1767225600000
+      }
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000
+  },
+  "perps.autoCancel.Response": {
+    "id": 5,
+    "data": {
+      "status": "ok"
+    }
+  },
+  "perps.updateLeverage.Request": {
+    "req": "post",
+    "op": {
+      "type": "updateLeverage",
+      "args": {
+        "iid": 1,
+        "lev": 10,
+        "cross": true
+      }
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000
+  },
+  "perps.updateLeverage.Response": {
+    "id": 6,
+    "data": {
+      "status": "ok"
+    }
+  },
+  "perps.updateLeverages.Request": {
+    "req": "post",
+    "op": {
+      "type": "updateLeverages",
+      "args": [
+        {
+          "iid": 1,
+          "lev": 10,
+          "cross": true
+        }
+      ]
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000
+  },
+  "perps.updateLeverages.Response": {
+    "id": 7,
+    "data": [
+      {
+        "status": "ok",
+        "instrument_id": 1,
+        "leverage": 5,
+        "cross": false
+      },
+      {
+        "status": "err",
+        "instrument_id": 2,
+        "error": "insufficient_margin"
+      }
+    ]
+  },
+  "perps.updateMargin.Request": {
+    "id": 7,
+    "req": "post",
+    "op": {
+      "type": "updateMargin",
+      "args": {
+        "iid": 1,
+        "amt": "100.00"
+      }
+    },
+    "sig": "0x7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d1c",
+    "salt": 444444444,
+    "ts": 1767000013000
+  },
+  "perps.updateMargin.Response": {
+    "id": 7,
+    "data": {
+      "status": "ok"
+    }
+  },
+  "perps.auth.Request": {
+    "req": "post",
+    "op": {
+      "type": "auth",
+      "args": {
+        "proxy": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
+        "secret": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+      }
+    }
+  },
+  "perps.auth.Response": {
+    "id": 1,
+    "data": {
+      "status": "ok",
+      "pod": "gateway-ws-7b68c9d4f5-m2n8p"
+    }
+  },
+  "perps.trades.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "trades::1"
+    ]
+  },
+  "perps.trades.SubscribeResponse": {
+    "data": []
+  },
+  "perps.trades.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "trades::1"
+    ]
+  },
+  "perps.trades.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.trades.Update": {
+    "ch": "trades::1",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      {
+        "tid": 1,
+        "iid": 1,
+        "side": "long",
+        "p": "100.00",
+        "qty": "10.00",
+        "ts": 1767225600000,
+        "hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "settlement": true
+      }
+    ]
+  },
+  "perps.bbo.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "bbo::1"
+    ]
+  },
+  "perps.bbo.SubscribeResponse": {
+    "data": []
+  },
+  "perps.bbo.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "bbo::1"
+    ]
+  },
+  "perps.bbo.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.bbo.Update": {
+    "ch": "bbo::1",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "iid": 1,
+      "bp": "99.50",
+      "bq": "10.00",
+      "ap": "100.50",
+      "aq": "10.00"
+    }
+  },
+  "perps.book.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "book::1",
+      "book::1::50"
+    ]
+  },
+  "perps.book.SubscribeResponse": {
+    "data": []
+  },
+  "perps.book.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "book::1",
+      "book::1::50"
+    ]
+  },
+  "perps.book.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.book.Update": {
+    "ch": "book::1",
+    "ts": 1767225600000,
+    "ets": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "b": [
+        [
+          "100.00",
+          "10.00"
+        ]
+      ],
+      "a": [
+        [
+          "100.00",
+          "10.00"
+        ]
+      ]
+    }
+  },
+  "perps.klines.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "klines::1::1m"
+    ]
+  },
+  "perps.klines.SubscribeResponse": {
+    "data": []
+  },
+  "perps.klines.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "klines::1::1m"
+    ]
+  },
+  "perps.klines.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.klines.Update": {
+    "ch": "klines::1::1m",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      [
+        1767225600000,
+        "100.00",
+        "105.00",
+        "99.00",
+        "102.00",
+        "500.00",
+        42
+      ]
+    ]
+  },
+  "perps.tickers.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "tickers::all"
+    ]
+  },
+  "perps.tickers.SubscribeResponse": {
+    "data": []
+  },
+  "perps.tickers.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "tickers::all"
+    ]
+  },
+  "perps.tickers.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.tickers.Update": {
+    "ch": "tickers::all",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      {
+        "iid": 1,
+        "idx": "100.00",
+        "mark": "100.00",
+        "last": "100.00",
+        "mid": "100.00",
+        "oi": "10.00",
+        "fr": "0.0001",
+        "nxf": 1767225600000
+      }
+    ]
+  },
+  "perps.statistics.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "statistics::all"
+    ]
+  },
+  "perps.statistics.SubscribeResponse": {
+    "data": []
+  },
+  "perps.statistics.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "statistics::all"
+    ]
+  },
+  "perps.statistics.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.statistics.Update": {
+    "ch": "statistics::all",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      {
+        "iid": 1,
+        "vol": "1000.00",
+        "open": "100.50",
+        "klines": [
+          [
+            1767225600000,
+            "100.00",
+            "105.00",
+            "99.00",
+            "102.00",
+            "500.00",
+            42
+          ]
+        ]
+      }
+    ]
+  },
+  "perps.fills.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "fills"
+    ]
+  },
+  "perps.fills.SubscribeResponse": {
+    "data": []
+  },
+  "perps.fills.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "fills"
+    ]
+  },
+  "perps.fills.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.fills.Update": {
+    "ch": "fills",
+    "ts": 1767225600000,
+    "ets": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      {
+        "tid": 1,
+        "oid": 1234567890,
+        "iid": 1,
+        "side": "long",
+        "p": "100.00",
+        "qty": "10.00",
+        "fee": "1.25",
+        "builder_fee": "1.00",
+        "total_fee": "2.25",
+        "builder": {
+          "address": "0x1234567890abcdef1234567890abcdef12345678",
+          "fee_rate": "0.001"
+        },
+        "fea": "USDC",
+        "psz": "26.86",
+        "pep": "100.00",
+        "pnl": "100.00",
+        "ts": 1767225600000,
+        "coid": "550e8400e29b41d4a716446655440000",
+        "liquidation_details": {
+          "method": "market",
+          "mark": "fixture"
+        },
+        "taker": true,
+        "liq": true,
+        "adl": true,
+        "settlement": true
+      }
+    ]
+  },
+  "perps.backstop.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "backstop"
+    ]
+  },
+  "perps.backstop.SubscribeResponse": {
+    "data": []
+  },
+  "perps.backstop.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "backstop"
+    ]
+  },
+  "perps.backstop.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.backstop.Update": {
+    "ch": "backstop",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "lid": 1234567890,
+      "mgn": "150.00",
+      "pos": [
+        {
+          "tid": 1,
+          "iid": 1,
+          "side": "long",
+          "qty": "10.00",
+          "p": "100.00"
+        }
+      ],
+      "cross": true
+    }
+  },
+  "perps.orders.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "orders"
+    ]
+  },
+  "perps.orders.SubscribeResponse": {
+    "data": []
+  },
+  "perps.orders.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "orders"
+    ]
+  },
+  "perps.orders.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.orders.Update": {
+    "ch": "orders",
+    "ts": 1767225600000,
+    "ets": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "oid": 1234567890,
+      "iid": 1,
+      "buy": true,
+      "p": "100.00",
+      "qty": "10.00",
+      "tif": "gtc",
+      "po": false,
+      "ro": false,
+      "rest": "9.00",
+      "fill": "1.00",
+      "cts": 1767225600000,
+      "uts": 1767225600000,
+      "status": "open",
+      "coid": "550e8400e29b41d4a716446655440000",
+      "builder": {
+        "address": "0x1234567890abcdef1234567890abcdef12345678",
+        "fee_rate": "0.001"
+      }
+    }
+  },
+  "perps.funding.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "funding"
+    ]
+  },
+  "perps.funding.SubscribeResponse": {
+    "data": []
+  },
+  "perps.funding.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "funding"
+    ]
+  },
+  "perps.funding.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.funding.Update": {
+    "ch": "funding",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "id": 3055723280187747,
+      "iid": 1,
+      "sz": "10.00",
+      "fr": "0.0001",
+      "fund": "1.00",
+      "fua": "USDC",
+      "ts": 1767225600000
+    }
+  },
+  "perps.balances.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "balances"
+    ]
+  },
+  "perps.balances.SubscribeResponse": {
+    "data": []
+  },
+  "perps.balances.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "balances"
+    ]
+  },
+  "perps.balances.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.balances.Update": {
+    "ch": "balances",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "asset": "USDC",
+      "balance": "10000.00",
+      "value": "10000.00"
+    }
+  },
+  "perps.portfolio.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "portfolio"
+    ]
+  },
+  "perps.portfolio.SubscribeResponse": {
+    "data": []
+  },
+  "perps.portfolio.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "portfolio"
+    ]
+  },
+  "perps.portfolio.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.portfolio.Update": {
+    "ch": "portfolio",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "positions": [
+        {
+          "symbol": "NVDA-USDC",
+          "size": "10.00",
+          "entry_price": "2986.30",
+          "leverage": 10,
+          "initial_margin": "10.00",
+          "maintenance_margin": "100.00",
+          "position_value": "100.03",
+          "liquidation_price": "2866.27",
+          "unrealized_pnl": "-0.01",
+          "return_on_equity": "-0.0027",
+          "cumulative_funding": "514.09",
+          "adl_index": 2,
+          "instrument_id": 1,
+          "cross": true
+        }
+      ],
+      "margin": {
+        "total_account_value": "13109.48",
+        "available_order_margin": "13104.51",
+        "total_initial_margin": "4.97",
+        "total_maintenance_margin": "2.49",
+        "total_position_value": "100.03"
+      },
+      "withdrawable": "13104.51",
+      "timestamp": 1767225600000,
+      "fee_tier": 0,
+      "in_liquidation": true
+    }
+  },
+  "perps.deposits.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "deposits"
+    ]
+  },
+  "perps.deposits.SubscribeResponse": {
+    "data": []
+  },
+  "perps.deposits.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "deposits"
+    ]
+  },
+  "perps.deposits.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.deposits.Update": {
+    "ch": "deposits",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      {
+        "hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "asset": "USDC",
+        "amount": "100000000",
+        "status": "pending"
+      }
+    ]
+  },
+  "perps.withdrawals.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "withdrawals"
+    ]
+  },
+  "perps.withdrawals.SubscribeResponse": {
+    "data": []
+  },
+  "perps.withdrawals.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "withdrawals"
+    ]
+  },
+  "perps.withdrawals.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.withdrawals.Update": {
+    "ch": "withdrawals",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      {
+        "asset": "USDC",
+        "amount": "100000000",
+        "fee": "5.00",
+        "to": "0x1234567890abcdef1234567890abcdef12345678",
+        "status": "pending",
+        "hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "withdraw_id": 1
+      }
+    ]
+  },
+  "perps.notifications.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "notifications"
+    ]
+  },
+  "perps.notifications.SubscribeResponse": {
+    "data": []
+  },
+  "perps.notifications.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "notifications"
+    ]
+  },
+  "perps.notifications.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.notifications.Update": {
+    "ch": "notifications",
+    "ts": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "id": "0a5d8f1e-3b2c-5e4a-9f8b-1c2d3e4f5a6b",
+      "type": "position_opened",
+      "instrument_id": 1,
+      "side": "long",
+      "size": "10.00",
+      "avg_price": "64210",
+      "leverage": 10,
+      "order_type": "market",
+      "fill_qty": "0.05",
+      "order_qty": "0.10"
+    }
+  },
+  "perps.modifyOrders.Request": {
+    "id": 2,
+    "req": "post",
+    "op": {
+      "type": "modifyOrders",
+      "args": [
+        {
+          "oid": 1234567890,
+          "p": "100.25",
+          "qty": "8"
+        }
+      ]
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000,
+    "exp": 1767225660000
+  },
+  "perps.modifyOrders.Response": {
+    "id": 2,
+    "data": [
+      {
+        "status": "ok",
+        "order": {
+          "oid": 1234567890,
+          "iid": 1,
+          "buy": true,
+          "p": "100.25",
+          "qty": "8",
+          "tif": "gtc",
+          "po": false,
+          "ro": false,
+          "rest": "8",
+          "fill": "0",
+          "status": "open",
+          "cts": 1767225600000,
+          "uts": 1767225601000
+        }
+      }
+    ]
+  },
+  "perps.modifyOrdersCOID.Request": {
+    "id": 2,
+    "req": "post",
+    "op": {
+      "type": "modifyOrdersCOID",
+      "args": [
+        {
+          "coid": "550e8400e29b41d4a716446655440000",
+          "p": "100.25",
+          "qty": "8"
+        }
+      ]
+    },
+    "sig": "0x1234567890...",
+    "salt": 1234567890,
+    "ts": 1767225600000,
+    "exp": 1767225660000
+  },
+  "perps.modifyOrdersCOID.Response": {
+    "id": 2,
+    "data": [
+      {
+        "status": "ok",
+        "order": {
+          "oid": 1234567890,
+          "coid": "550e8400e29b41d4a716446655440000",
+          "iid": 1,
+          "buy": true,
+          "p": "100.25",
+          "qty": "8",
+          "tif": "gtc",
+          "po": false,
+          "ro": false,
+          "rest": "8",
+          "fill": "0",
+          "status": "open",
+          "cts": 1767225600000,
+          "uts": 1767225601000
+        }
+      }
+    ]
+  },
+  "perps.builderFills.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "builderFills"
+    ]
+  },
+  "perps.builderFills.SubscribeResponse": {
+    "data": []
+  },
+  "perps.builderFills.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "builderFills"
+    ]
+  },
+  "perps.builderFills.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.builderFills.Update": {
+    "ch": "builderFills",
+    "ts": 1767225600000,
+    "ets": 1767225600000,
+    "sq": 1234567890,
+    "data": [
+      {
+        "earning_id": "1:1:0",
+        "trade_id": 1,
+        "order_id": 1234567890,
+        "instrument_id": 1,
+        "trader": "0x1234567890abcdef1234567890abcdef12345678",
+        "buy": true,
+        "price": "100.00",
+        "quantity": "10.00",
+        "client_order_id": "550e8400e29b41d4a716446655440000",
+        "side": "maker",
+        "sequence": 1234567890,
+        "notional": "1000.00",
+        "timestamp": 1767225600000,
+        "fee_asset": "pUSD",
+        "fee": "0.125",
+        "builder_fee": "1.00",
+        "total_fee": "1.125",
+        "fee_rate": "0.001"
+      }
+    ]
+  },
+  "perps.tpsl.SubscribeRequest": {
+    "req": "sub",
+    "chs": [
+      "tpsl"
+    ]
+  },
+  "perps.tpsl.SubscribeResponse": {
+    "data": []
+  },
+  "perps.tpsl.UnsubscribeRequest": {
+    "req": "unsub",
+    "chs": [
+      "tpsl"
+    ]
+  },
+  "perps.tpsl.UnsubscribeResponse": {
+    "data": []
+  },
+  "perps.tpsl.Update": {
+    "ch": "tpsl::12345",
+    "ts": 1767225600002,
+    "ets": 1767225600000,
+    "sq": 1234567890,
+    "data": {
+      "oid": 1234567890,
+      "st": "armed"
+    }
+  },
+  "polybolt.ws.subscribe": {
+    "op": "subscribe",
+    "rid": "s1",
+    "subscriptions": [
+      {
+        "channel": "price.polymarket",
+        "filter": {
+          "asset_id": "21742633143463906290569050155826241533067272736897614950488156847949938836455"
+        }
+      },
+      {
+        "channel": "price.crypto",
+        "filter": {
+          "symbol": "btcusd"
+        }
+      }
+    ]
+  },
+  "polybolt.ws.unsubscribe": {
+    "op": "unsubscribe",
+    "channel": "price.crypto",
+    "filter": {
+      "symbol": "btcusd"
+    }
+  },
+  "polybolt.ws.auth": {
+    "op": "auth",
+    "rid": "a1",
+    "auth": {
+      "apiKey": "00000000-0000-4000-8000-000000000000",
+      "secret": "<api secret>",
+      "passphrase": "<api passphrase>"
+    }
+  },
+  "polybolt.ws.ping": {
+    "op": "ping",
+    "rid": "p1"
+  },
+  "polybolt.ws.subscribed": {
+    "op": "subscribed",
+    "channel": "price.crypto",
+    "rid": "s1"
+  },
+  "polybolt.ws.unsubscribed": {
+    "op": "unsubscribed",
+    "channel": "price.crypto"
+  },
+  "polybolt.ws.authed": {
+    "op": "authed",
+    "rid": "a1"
+  },
+  "polybolt.ws.pong": {
+    "op": "pong",
+    "rid": "p1"
+  },
+  "polybolt.ws.error": {
+    "op": "error",
+    "code": "auth_required",
+    "channel": "price.crypto",
+    "rid": "s1"
+  },
+  "polybolt.ws.pricePolymarket": {
+    "v": 1,
+    "channel": "price.polymarket",
+    "seq": 1,
+    "ts": 1788973000123,
+    "snapshot": true,
+    "payload": {
+      "market": "0x9deb0baac40648821f96f01339229a422e2f5c877de55dc4dbf981f95a1e709c",
+      "asset_id": "21742633143463906290569050155826241533067272736897614950488156847949938836455",
+      "best_bid": "0.51",
+      "best_ask": "0.53",
+      "hash": "3f9c1e7a",
+      "timestamp": 1788972999871
+    }
+  },
+  "polybolt.ws.priceCrypto": {
+    "v": 1,
+    "channel": "price.crypto",
+    "seq": 1,
+    "ts": 1788973000000,
+    "snapshot": true,
+    "payload": {
+      "symbol": "btcusd",
+      "source": "pyth",
+      "data": [
+        {
+          "timestamp": 1788972880000,
+          "value": 64123.5,
+          "full_accuracy_value": "64123.50000000"
+        },
+        {
+          "timestamp": 1788972881000,
+          "value": 64125.1,
+          "full_accuracy_value": "64125.10000000"
+        }
+      ]
+    }
+  },
+  "polybolt.ws.priceEquity": {
+    "v": 1,
+    "channel": "price.equity",
+    "seq": 5,
+    "ts": 1788973001200,
+    "payload": {
+      "symbol": "aapl",
+      "value": 189.42,
+      "full_accuracy_value": "189.4217",
+      "timestamp": 1788973001200,
+      "received_at": 1788973001207,
+      "is_carried_forward": false,
+      "source": "pyth"
+    }
+  },
+  "polybolt.ws.priceCryptoTwap": {
+    "v": 1,
+    "channel": "price.crypto.twap",
+    "seq": 3,
+    "ts": 1788973002000,
+    "payload": {
+      "symbol": "btcusd",
+      "value": 64120.7,
+      "full_accuracy_value": "64120.70000000",
+      "timestamp": 1788973002000,
+      "window_seconds": 60,
+      "source": "chainlink"
+    }
+  },
+  "polybolt.ws.priceEquityTwap": {
+    "v": 1,
+    "channel": "price.equity.twap",
+    "seq": 3,
+    "ts": 1788973002000,
+    "payload": {
+      "symbol": "eurusd",
+      "value": 1.0842,
+      "full_accuracy_value": "1.08420000",
+      "timestamp": 1788973002000,
+      "window_seconds": 60,
+      "source": "chainlink"
+    }
+  },
+  "polybolt.ws.esportsSeries": {
+    "v": 1,
+    "channel": "esports.series",
+    "seq": 2,
+    "ts": 1790000000000,
+    "payload": {
+      "event_id": "184213",
+      "title": "lol",
+      "source": "grid",
+      "provider_series_id": "2843071",
+      "schema_version": 1,
+      "binding_revision": 3,
+      "revision": 42,
+      "source_updated_at_ms": 1789999998000,
+      "observed_at_ms": 1790000000000,
+      "published_at_ms": 1790000000005,
+      "phase": "live",
+      "valid": true,
+      "invalidation_reason": "",
+      "feed_status": "live",
+      "capabilities": [
+        "series",
+        "plays"
+      ],
+      "format": "best-of-3",
+      "best_of": 3,
+      "current_game": 1,
+      "legacy_score": "0-0,missing,missing|0-0|Bo3",
+      "period": "1/3",
+      "teams": [
+        {
+          "id": "47",
+          "name": "T1",
+          "polymarket_side": "home",
+          "games_won": 0
+        },
+        {
+          "id": "48",
+          "name": "G2",
+          "polymarket_side": "away",
+          "games_won": 0
+        }
+      ],
+      "games": [
+        {
+          "number": 1,
+          "map": "",
+          "started": true,
+          "finished": false,
+          "paused": false,
+          "winner_team_id": "",
+          "clock": {
+            "seconds": 754,
+            "ticking": true,
+            "counts_down": false
+          },
+          "teams": [
+            {
+              "team_id": "47",
+              "side": "blue",
+              "kills": 0,
+              "objectives": [],
+              "players": [],
+              "drakes": [
+                "infernal"
+              ],
+              "first_kill": false
+            },
+            {
+              "team_id": "48",
+              "side": "red",
+              "kills": 0,
+              "objectives": [],
+              "players": [],
+              "drakes": [],
+              "first_kill": false
+            }
+          ],
+          "draft": [],
+          "structures": [],
+          "timers": [],
+          "rounds": []
+        }
+      ],
+      "recent_plays": [
+        {
+          "id": "e1",
+          "game": 1,
+          "type": "player-completed-slayDragon",
+          "kind": "dragon",
+          "variant": "infernal",
+          "team_id": "47",
+          "player_name": "",
+          "target": "",
+          "occurred_at_ms": 1789999999000
+        }
+      ]
+    }
+  },
+  "polybolt.ws.challenge": {
+    "op": "challenge",
+    "nonce": "3f2b6c1e-9a4d-4c2b-8e1f-0a1b2c3d4e5f",
+    "rid": "c1"
+  },
+  "polybolt.ws.challengeRequest": {
+    "op": "challenge",
+    "rid": "c1"
+  },
+  "rtds.crypto_prices.update": {
+    "topic": "crypto_prices",
+    "type": "update",
+    "timestamp": 1,
+    "payload": {
+      "symbol": "fixture",
+      "timestamp": 1,
+      "value": null
+    }
+  },
+  "rtds.crypto_prices_chainlink.update": {
+    "topic": "crypto_prices_chainlink",
+    "type": "update",
+    "timestamp": 1,
+    "payload": {
+      "symbol": "fixture",
+      "timestamp": 1,
+      "value": null
+    }
+  },
+  "rtds.crypto_prices_twap_thirty.update": {
+    "topic": "crypto_prices_twap_thirty",
+    "type": "update",
+    "timestamp": 1,
+    "payload": {
+      "symbol": "fixture",
+      "timestamp": 1,
+      "value": null,
+      "full_accuracy_value": "fixture",
+      "window_s": 1
+    }
+  },
+  "rtds.crypto_prices_twap_sixty.update": {
+    "topic": "crypto_prices_twap_sixty",
+    "type": "update",
+    "timestamp": 1,
+    "payload": {
+      "symbol": "fixture",
+      "timestamp": 1,
+      "value": null,
+      "full_accuracy_value": "fixture",
+      "window_s": 1
+    }
+  },
+  "rtds.equity_prices.update": {
+    "topic": "equity_prices",
+    "type": "update",
+    "timestamp": 1,
+    "payload": {
+      "symbol": "fixture",
+      "timestamp": 1,
+      "value": null,
+      "full_accuracy_value": "fixture",
+      "received_at": 1,
+      "is_carried_forward": true
+    }
+  },
+  "rtds.equity_prices.subscribe": {
+    "topic": "equity_prices",
+    "type": "subscribe",
+    "timestamp": 1,
+    "payload": {
+      "symbol": "fixture",
+      "data": [
+        {
+          "timestamp": 1,
+          "value": null
+        }
+      ]
+    }
+  },
+  "rtds.comments.comment_created": {
+    "topic": "comments",
+    "type": "comment_created",
+    "timestamp": 1,
+    "payload": {
+      "id": "fixture",
+      "body": "fixture"
+    }
+  },
+  "rtds.comments.comment_removed": {
+    "topic": "comments",
+    "type": "comment_removed",
+    "timestamp": 1,
+    "payload": {
+      "id": "fixture",
+      "body": "fixture"
+    }
+  },
+  "rtds.comments.reaction_created": {
+    "topic": "comments",
+    "type": "reaction_created",
+    "timestamp": 1,
+    "payload": {
+      "id": "fixture",
+      "body": "fixture"
+    }
+  },
+  "rtds.comments.reaction_removed": {
+    "topic": "comments",
+    "type": "reaction_removed",
+    "timestamp": 1,
+    "payload": {
+      "id": "fixture",
+      "body": "fixture"
+    }
+  }
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "source": "asyncapi.yaml",
+    "channel": "root",
+    "address": "/"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "control_frames",
+    "address": "/"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "orderbook_delta",
+    "address": "orderbook_delta"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "ticker",
+    "address": "ticker"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "trade",
+    "address": "trade"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "fill",
+    "address": "fill"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "market_positions",
+    "address": "market_positions"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "market_lifecycle_v2",
+    "address": "market_lifecycle_v2"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "multivariate_market_lifecycle",
+    "address": "multivariate_market_lifecycle"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "communications",
+    "address": "communications"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "order_group_updates",
+    "address": "order_group_updates"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "user_orders",
+    "address": "user_orders"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "cfbenchmarks_value",
+    "address": "cfbenchmarks_value"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "cfbenchmarks_value_5hz",
+    "address": "cfbenchmarks_value_5hz"
+  },
+  {
+    "source": "asyncapi.yaml",
+    "channel": "pyth_value",
+    "address": "pyth_value"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "root",
+    "address": "/"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "control_frames",
+    "address": "/"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "orderbook_delta",
+    "address": "orderbook_delta"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "corporate_actions",
+    "address": "corporate_actions"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "market_lifecycle_v2",
+    "address": "market_lifecycle_v2"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "ticker",
+    "address": "ticker"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "trade",
+    "address": "trade"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "fill",
+    "address": "fill"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "user_orders",
+    "address": "user_orders"
+  },
+  {
+    "source": "perps_asyncapi.yaml",
+    "channel": "order_group_updates",
+    "address": "order_group_updates"
+  }
+]

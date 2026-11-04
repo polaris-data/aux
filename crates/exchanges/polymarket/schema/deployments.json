@@ -1,0 +1,28 @@
+{
+  "chain_id": 137,
+  "contracts": {
+    "depositWalletFactory": "0x00000000000Fb5C9ADea0298D729A0CB3823Cc07",
+    "depositWalletBeacon": "0x7A18EDfe055488A3128f01F563e5B479D92ffc3a",
+    "depositWalletImplementation": "0x58CA52ebe0DadfdF531Cde7062e76746de4Db1eB",
+    "proxyFactory": "0xaB45c5A4B0c941a2F231C04C3f49182e1A254052",
+    "proxyImplementation": "0x44e999d5c2F66Ef0861317f9A4805AC2e90aEB4f",
+    "safeFactory": "0xaacFeEa03eb1561C4e67d661e40682Bd20E3541b",
+    "collateralToken": "0xC011a7E12a19f7B1f670d46F03B03f3342E82DFB",
+    "conditionalTokens": "0x4D97DCd97eC945f40cF65F87097ACe5EA0476045",
+    "negRiskAdapter": "0xd91E80cF2E7be2e162c6513ceD06f1dD0dA35296",
+    "collateralAdapter": "0xAdA100Db00Ca00073811820692005400218FcE1f",
+    "negRiskCollateralAdapter": "0xadA2005600Dec949baf300f4C6120000bDB6eAab",
+    "standardExchange": "0xE111180000d2663C0091e4f400237545B87B996B",
+    "negRiskExchange": "0xe2222d279d744050d28e00520010520000310F59",
+    "exchangeV3": "0xe3333700cA9d93003F00f0F71f8515005F6c00Aa",
+    "protocolV2Router": "0x12121212006e4CD160D18e3f00711DA5c3372600",
+    "binaryModule": "0x1000008dD9001B968442c1000017eaE6E0dA00Ba",
+    "negRiskModule": "0x200000900045e3B6259600682756002200028933",
+    "combinatorialModule": "0x30000034706c7d8e12009dab006be20000c031a8",
+    "positionManager": "0x006F54F7f9A22e0000CC2AB60031000000ae9fEF",
+    "autoRedeemOperator": "0xa1200000d0002264C9a1698e001292D00E1b00af",
+    "safeMultisend": "0xA238CBeb142c10Ef7Ad8442C6D1f9E89e07e7761",
+    "relayHub": "0xD216153c06E857cD7f72665E0aF1d7D82172F494",
+    "perpsDepositContract": "0xDCa4af75705dbB50f62437045afF9921947917d2"
+  }
+}

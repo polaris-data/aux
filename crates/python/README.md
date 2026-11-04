@@ -290,3 +290,9 @@ async with MetricChainClient(chain_id=1, read_rpc=rpc_url) as chain:
 The [workflow guide](../exchanges/metric/WORKFLOWS.md) documents pool-creation preparation, native ETH liquidity, external-swap fallbacks and combined stop-loss evaluation, including `oracle_stop_loss_status` for reads anchored to one block.
 
 The second builder returns inspectable calldata; explicit `send_transaction()` performs the write. The `aux_py.metric` module exposes the same Rust packing, oracle, liquidity-planning and native-payment helpers. Rust retains the ABI and protocol logic. See the [Metric guide](../exchanges/metric/README.md) for native units, API-key versus wallet authentication, the contract inventory and verification results.
+
+## Prediction exchanges
+
+`PolymarketClient`, `PolymarketPerpsClient`, `KalshiClient`, `KalshiPerpsClient` and `PascalClient` expose the pinned native REST operations and stream/command sessions. Requests use native mappings: path/query parameters at the top level, JSON request payloads under `body`. Prediction/perps credentials and models are separate. Local and async callback signers, exact `Decimal` conversion, structured exceptions and context-managed cleanup use the same Rust implementations. `PolymarketChainClient` handles explicit EVM operations; `PascalChainClient` handles explicit Solana USDC deposits and separate chain/API credit reconciliation. Floats are rejected recursively.
+
+See [Polymarket](../exchanges/polymarket/README.md), [Kalshi](../exchanges/kalshi/README.md) and [Pascal](../exchanges/pascal/README.md) for native signing authority, endpoint overrides, deployment pins and publication limits. `examples/prediction_public.py` is an explicitly invoked public smoke check. `examples/prediction_write.py` requires a caller-reviewed JSON request and `--execute`; mainnet additionally requires `AUX_ALLOW_MAINNET=1`. No funded verification is run in CI.

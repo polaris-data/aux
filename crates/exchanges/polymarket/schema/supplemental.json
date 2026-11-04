@@ -1,0 +1,913 @@
+{
+  "clob": {
+    "/v1/user/session-signers": {
+      "get": {
+        "operationId": "clob_list_session_signers",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "relayer": {
+    "/v1/session-signers/authorizations": {
+      "post": {
+        "operationId": "relayer_authorizations",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "scopes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "validUntil": {
+                    "type": "string"
+                  },
+                  "deadline": {
+                    "type": "string"
+                  },
+                  "nonce": {
+                    "type": "string"
+                  },
+                  "sessionSignerAddress": {
+                    "type": "string"
+                  },
+                  "signature": {
+                    "type": "string"
+                  },
+                  "walletAddress": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "scopes",
+                  "validUntil",
+                  "deadline",
+                  "nonce",
+                  "sessionSignerAddress",
+                  "signature",
+                  "walletAddress"
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/session-signers/revocations": {
+      "post": {
+        "operationId": "relayer_revocations",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "deadline": {
+                    "type": "string"
+                  },
+                  "nonce": {
+                    "type": "string"
+                  },
+                  "sessionSignerAddress": {
+                    "type": "string"
+                  },
+                  "signature": {
+                    "type": "string"
+                  },
+                  "walletAddress": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "deadline",
+                  "nonce",
+                  "sessionSignerAddress",
+                  "signature",
+                  "walletAddress"
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/account/transactions/params": {
+      "get": {
+        "operationId": "relayer_get_execute_params",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "collateral_return": {
+    "/v1/collateral-return/plan": {
+      "post": {
+        "operationId": "collateral_return_plan",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "wallet": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "wallet"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/collateral-return/submit": {
+      "post": {
+        "operationId": "collateral_return_submit",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plan_hash": {
+                    "type": "string"
+                  },
+                  "envelope": {
+                    "type": "object",
+                    "properties": {},
+                    "required": []
+                  }
+                },
+                "required": [
+                  "plan_hash",
+                  "envelope"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "builder_gateway": {
+    "/v1/builder/rfq/requests": {
+      "post": {
+        "operationId": "builder_gateway_create_rfq",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "direction": {
+                    "type": "string"
+                  },
+                  "leg_position_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "maker_address": {
+                    "type": "string"
+                  },
+                  "requested_size": {
+                    "type": "object",
+                    "properties": {
+                      "unit": {
+                        "type": "string"
+                      },
+                      "value_e6": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "unit",
+                      "value_e6"
+                    ]
+                  },
+                  "side": {
+                    "type": "string"
+                  },
+                  "signature_type": {
+                    "type": "integer"
+                  },
+                  "signer_address": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "direction",
+                  "leg_position_ids",
+                  "maker_address",
+                  "requested_size",
+                  "side",
+                  "signature_type",
+                  "signer_address"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/builder/rfq/requests/{rfq_id}": {
+      "get": {
+        "operationId": "builder_gateway_get_rfq",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "rfq_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/v1/builder/rfq/requests/{rfq_id}/accept": {
+      "post": {
+        "operationId": "builder_gateway_accept_rfq",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quote_id": {
+                    "type": "string"
+                  },
+                  "signed_order": {
+                    "type": "object",
+                    "properties": {},
+                    "required": []
+                  }
+                },
+                "required": [
+                  "quote_id",
+                  "signed_order"
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "rfq_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "perps": {
+    "/v1/trade/chases": {
+      "post": {
+        "operationId": "create_chase",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "createChase"
+                        ]
+                      },
+                      "args": {
+                        "type": "object",
+                        "properties": {
+                          "iid": {
+                            "type": "integer"
+                          },
+                          "buy": {
+                            "type": "boolean"
+                          },
+                          "qty": {
+                            "type": "string"
+                          },
+                          "lim": {
+                            "type": "string"
+                          },
+                          "max_dist": {
+                            "type": "string"
+                          },
+                          "max_dist_bps": {
+                            "type": "integer"
+                          },
+                          "po": {
+                            "type": "boolean"
+                          },
+                          "ro": {
+                            "type": "boolean"
+                          },
+                          "c": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "iid",
+                          "buy",
+                          "qty"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "args"
+                    ]
+                  },
+                  "sig": {
+                    "type": "string"
+                  },
+                  "salt": {
+                    "type": "integer"
+                  },
+                  "ts": {
+                    "type": "integer"
+                  },
+                  "exp": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "op"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "cancel_chase",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "cancelChase"
+                        ]
+                      },
+                      "args": {
+                        "type": "object",
+                        "properties": {
+                          "chid": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "chid"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "args"
+                    ]
+                  },
+                  "sig": {
+                    "type": "string"
+                  },
+                  "salt": {
+                    "type": "integer"
+                  },
+                  "ts": {
+                    "type": "integer"
+                  },
+                  "exp": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "op"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/account/chases": {
+      "get": {
+        "operationId": "get_chases",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/trade/twaps": {
+      "post": {
+        "operationId": "create_twap",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "createTwap"
+                        ]
+                      },
+                      "args": {
+                        "type": "object",
+                        "properties": {
+                          "iid": {
+                            "type": "integer"
+                          },
+                          "buy": {
+                            "type": "boolean"
+                          },
+                          "qty": {
+                            "type": "string"
+                          },
+                          "dur": {
+                            "type": "integer"
+                          },
+                          "ivl": {
+                            "type": "integer"
+                          },
+                          "rnd": {
+                            "type": "boolean"
+                          },
+                          "slip_bps": {
+                            "type": "integer"
+                          },
+                          "min_px": {
+                            "type": "string"
+                          },
+                          "max_px": {
+                            "type": "string"
+                          },
+                          "ro": {
+                            "type": "boolean"
+                          },
+                          "c": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "iid",
+                          "buy",
+                          "qty"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "args"
+                    ]
+                  },
+                  "sig": {
+                    "type": "string"
+                  },
+                  "salt": {
+                    "type": "integer"
+                  },
+                  "ts": {
+                    "type": "integer"
+                  },
+                  "exp": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "op"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "cancel_twap",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "cancelTwap"
+                        ]
+                      },
+                      "args": {
+                        "type": "object",
+                        "properties": {
+                          "twid": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "twid"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "args"
+                    ]
+                  },
+                  "sig": {
+                    "type": "string"
+                  },
+                  "salt": {
+                    "type": "integer"
+                  },
+                  "ts": {
+                    "type": "integer"
+                  },
+                  "exp": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "op"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "control_twap",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "op": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "controlTwap"
+                        ]
+                      },
+                      "args": {
+                        "type": "object",
+                        "properties": {
+                          "twid": {
+                            "type": "integer"
+                          },
+                          "act": {
+                            "type": "string",
+                            "enum": [
+                              "pause",
+                              "resume"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "twid",
+                          "act"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "args"
+                    ]
+                  },
+                  "sig": {
+                    "type": "string"
+                  },
+                  "salt": {
+                    "type": "integer"
+                  },
+                  "ts": {
+                    "type": "integer"
+                  },
+                  "exp": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "op"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/account/twaps": {
+      "get": {
+        "operationId": "get_twaps",
+        "description": "Supplemental native operation from the pinned official unified SDK.",
+        "security": [
+          {
+            "native": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

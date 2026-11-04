@@ -8,6 +8,9 @@ use std::sync::{Arc, Mutex};
 use tokio::sync::watch;
 
 pub enum NativeHandle {
+    Pascal(aux_rs::pascal::SubscriptionHandle<StandardSubscription>),
+    Polymarket(aux_rs::polymarket::SubscriptionHandle<StandardSubscription>),
+    Kalshi(aux_rs::kalshi::SubscriptionHandle<StandardSubscription>),
     DataFeed(Box<aux_rs::tardis::FeedStream>),
     DataReplay(Box<aux_rs::tardis::Replay<aux_rs::StandardTransport>>),
     DataMachine(Box<aux_rs::tardis::MachineStream<aux_rs::standard::StandardConnection>>),
@@ -37,6 +40,9 @@ pub enum NativeHandle {
 impl NativeHandle {
     async fn close(&mut self) -> Result<(), ClientError> {
         match self {
+            Self::Kalshi(h) => h.close().await.map_err(ClientError::Kalshi),
+            Self::Polymarket(h) => h.close().await.map_err(ClientError::Polymarket),
+            Self::Pascal(h) => h.close().await.map_err(ClientError::Pascal),
             Self::DataFeed(h) => h.close().await.map_err(ClientError::Data),
             Self::DataReplay(h) => h.close().await.map_err(ClientError::Data),
             Self::DataMachine(h) => h.close().await.map_err(ClientError::Data),
@@ -59,6 +65,18 @@ impl NativeHandle {
     async fn next_json(&mut self) -> Option<Result<serde_json::Value, ClientError>> {
         use serde_json::json;
         match self {
+            Self::Kalshi(h) => h
+                .next()
+                .await
+                .map(|r| r.map(|e| e.0).map_err(ClientError::Kalshi)),
+            Self::Polymarket(h) => h
+                .next()
+                .await
+                .map(|r| r.map(|e| e.0).map_err(ClientError::Polymarket)),
+            Self::Pascal(h) => h
+                .next()
+                .await
+                .map(|r| r.map(|e| e.0).map_err(ClientError::Pascal)),
             Self::DataFeed(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),
             Self::DataReplay(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),
             Self::DataMachine(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),

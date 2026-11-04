@@ -1,0 +1,20 @@
+[
+  {
+    "name": "predictions",
+    "input": "predictions.json",
+    "client": "KalshiClient",
+    "auth": "native"
+  },
+  {
+    "name": "perps",
+    "input": "perps.json",
+    "client": "KalshiPerpsClient",
+    "auth": "native"
+  },
+  {
+    "name": "clearing",
+    "input": "clearing.json",
+    "client": "KalshiPerpsClient",
+    "auth": "bearer"
+  }
+]

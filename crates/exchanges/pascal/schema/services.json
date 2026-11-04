@@ -1,0 +1,14 @@
+[
+  {
+    "name": "read",
+    "input": "read.json",
+    "client": "PascalClient",
+    "auth": "native"
+  },
+  {
+    "name": "write",
+    "input": "write.json",
+    "client": "PascalClient",
+    "auth": "native"
+  }
+]

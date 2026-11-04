@@ -7,6 +7,7 @@ on:
       - Cargo.toml
       - Cargo.lock
       - crates/**
+      - scripts/**
   workflow_dispatch:
   release:
     types: [published]
@@ -106,7 +107,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install Rust
-        run: rustup toolchain install 1.92.0 --profile minimal && rustup default 1.92.0
+        run: rustup toolchain install 1.92.0 --profile minimal --component rustfmt && rustup default 1.92.0
       - name: Build source distribution
         uses: PyO3/maturin-action@e83996d129638aa358a18fbd1dfb82f0b0fb5d3b # v1
         with:
@@ -119,6 +120,12 @@ jobs:
           python -m pip install -r crates/python/dev-requirements.txt
           python -c 'import aux_py; from importlib.metadata import version; assert aux_py.__version__ == version("aux-py")'
           python -m unittest discover -s crates/python/tests -v
+      - name: Verify pinned API coverage and dependency isolation offline
+        run: |
+          python scripts/check-data-coverage.py
+          python scripts/check-native-coverage.py
+          python scripts/check-prediction-coverage.py
+          python scripts/dependencies.py --check --target x86_64-unknown-linux-gnu
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: python-dist-sdist

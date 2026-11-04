@@ -575,3 +575,33 @@ __all__ += ["TardisClient", "TardisMachineClient", "DatabentoHistoricalClient",
             "DataStream", "ByteStream", "DataVendorError"]
 from ._metric import MetricClient, MetricChainClient, MetricSigner
 __all__ += ["MetricClient", "MetricChainClient", "MetricSigner"]
+
+# Native prediction-market and perpetual-futures connectors.
+from ._kalshi_client import KalshiClient
+from ._kalshi_perps_client import KalshiPerpsClient
+from ._polymarket_client import PolymarketClient
+from ._polymarket_perps_client import PolymarketPerpsClient
+from ._pascal_client import PascalClient
+
+KalshiSigner = _native.KalshiSigner
+PolymarketSigner = _native.PolymarketSigner
+PascalSigner = _native.PascalSigner
+
+class PolymarketChainClient(_ExchangeClient):
+    def __init__(self, **configuration):
+        self._inner = _native.PolymarketChainClient(**configuration)
+    def __getattr__(self, name):
+        return getattr(self._inner, name)
+
+class PascalChainClient(_ExchangeClient):
+    def __init__(self, **configuration):
+        self._inner = _native.PascalChainClient(**configuration)
+    async def reconcile_deposit_credit(self, api, owner, signature):
+        return await self._inner.reconcile_deposit_credit(api._inner, owner, signature)
+    def __getattr__(self, name):
+        return getattr(self._inner, name)
+
+__all__ += ["PolymarketClient", "PolymarketPerpsClient", "PolymarketChainClient", "PolymarketSigner", "KalshiClient", "KalshiPerpsClient", "KalshiSigner", "PascalClient", "PascalChainClient", "PascalSigner"]
+
+from ._prediction_rpc import KalshiRpcSession, PascalRpcSession, PolymarketRfqSession, PolymarketPerpsRpcSession
+__all__ += ["KalshiRpcSession", "PascalRpcSession", "PolymarketRfqSession", "PolymarketPerpsRpcSession"]

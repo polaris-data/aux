@@ -33,3 +33,10 @@ pub use aux_rs_tardis as tardis;
 pub use aux_rs_databento as databento;
 #[cfg(feature = "metric")]
 pub use aux_rs_metric as metric;
+
+#[cfg(feature = "kalshi")]
+pub use aux_rs_kalshi as kalshi;
+#[cfg(feature = "pascal")]
+pub use aux_rs_pascal as pascal;
+#[cfg(feature = "polymarket")]
+pub use aux_rs_polymarket as polymarket;

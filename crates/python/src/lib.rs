@@ -7,10 +7,14 @@ mod convert;
 mod data;
 mod derive;
 mod errors;
+mod kalshi;
 mod lighter;
 mod metric;
 mod monaco;
 mod paradex;
+mod pascal;
+mod polymarket;
+mod prediction_signers;
 mod qfex;
 mod signers;
 mod state;
@@ -74,6 +78,24 @@ fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
         signers::lighter_transaction_signing_payload,
         module
     )?)?;
+    module.add_class::<kalshi::KalshiClient>()?;
+    module.add_class::<kalshi::KalshiPerpsClient>()?;
+    module.add_class::<polymarket::PolymarketClient>()?;
+    module.add_class::<polymarket::PolymarketPerpsClient>()?;
+    module.add_class::<pascal::PascalClient>()?;
+    module.add_class::<prediction_signers::KalshiSigner>()?;
+    module.add_class::<prediction_signers::PolymarketSigner>()?;
+    module.add_class::<prediction_signers::PascalSigner>()?;
+    module.add_class::<polymarket::PolymarketChainClient>()?;
+    module.add_class::<kalshi::KalshiRpcSession>()?;
+    module.add_class::<pascal::PascalRpcSession>()?;
+    module.add_class::<polymarket::PolymarketRpcSession>()?;
+    module.add_class::<pascal::PascalChainClient>()?;
+    module.add_function(wrap_pyfunction!(
+        polymarket::polymarket_encode_call,
+        module
+    )?)?;
+    module.add_function(wrap_pyfunction!(polymarket::polymarket_helper, module)?)?;
     errors::add_to_module(module)?;
     module.add("__version__", env!("CARGO_PKG_VERSION"))?;
     Ok(())

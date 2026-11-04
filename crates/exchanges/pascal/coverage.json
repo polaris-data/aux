@@ -1,0 +1,1454 @@
+{
+  "rest": [
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "account_state_snapshot",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbol",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "exclude_orders",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "account_state_snapshot",
+      "rust": "PascalClient::account_state_snapshot",
+      "rust_module": "read",
+      "request_type": "AccountStateSnapshotParams",
+      "response_type": "AccountStateSnapshotResponse",
+      "python": "aux_py.PascalClient.account_state_snapshot",
+      "rust_test": "tests/contracts.rs::read_account_state_snapshot",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "account_bio",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/bio",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "account_bio",
+      "rust": "PascalClient::account_bio",
+      "rust_module": "read",
+      "request_type": "AccountBioParams",
+      "response_type": "AccountBioResponse",
+      "python": "aux_py.PascalClient.account_bio",
+      "rust_test": "tests/contracts.rs::read_account_bio",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "builder_stats",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/builder-stats",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "builder_stats",
+      "rust": "PascalClient::builder_stats",
+      "rust_module": "read",
+      "request_type": "BuilderStatsParams",
+      "response_type": "BuilderStatsResponse",
+      "python": "aux_py.PascalClient.builder_stats",
+      "rust_test": "tests/contracts.rs::read_builder_stats",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "deposit_address",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/deposit-address",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "deposit_address",
+      "rust": "PascalClient::deposit_address",
+      "rust_module": "read",
+      "request_type": "DepositAddressParams",
+      "response_type": "DepositAddressResponse",
+      "python": "aux_py.PascalClient.deposit_address",
+      "rust_test": "tests/contracts.rs::read_deposit_address",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "fill_history",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/fills",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "before_cursor",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "at_or_before_seq",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "fill_history",
+      "rust": "PascalClient::fill_history",
+      "rust_module": "read",
+      "request_type": "FillHistoryParams",
+      "response_type": "FillHistoryResponse",
+      "python": "aux_py.PascalClient.fill_history",
+      "rust_test": "tests/contracts.rs::read_fill_history",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "pn_l_history",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/history",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "pn_l_history",
+      "rust": "PascalClient::pn_l_history",
+      "rust_module": "read",
+      "request_type": "PnLHistoryParams",
+      "response_type": "PnLHistoryResponse",
+      "python": "aux_py.PascalClient.pn_l_history",
+      "rust_test": "tests/contracts.rs::read_pn_l_history",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "market_pn_l_movers",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/pnl-movers",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "window",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "order_by",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "sort_order",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "market_pn_l_movers",
+      "rust": "PascalClient::market_pn_l_movers",
+      "rust_module": "read",
+      "request_type": "MarketPnLMoversParams",
+      "response_type": "MarketPnLMoversResponse",
+      "python": "aux_py.PascalClient.market_pn_l_movers",
+      "rust_test": "tests/contracts.rs::read_market_pn_l_movers",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "position_resolution_history",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/position-resolutions",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "before_cursor",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "at_or_before_seq",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "position_resolution_history",
+      "rust": "PascalClient::position_resolution_history",
+      "rust_module": "read",
+      "request_type": "PositionResolutionHistoryParams",
+      "response_type": "PositionResolutionHistoryResponse",
+      "python": "aux_py.PascalClient.position_resolution_history",
+      "rust_test": "tests/contracts.rs::read_position_resolution_history",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "referrals",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/referrals",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "referrals",
+      "rust": "PascalClient::referrals",
+      "rust_module": "read",
+      "request_type": "ReferralsParams",
+      "response_type": "ReferralsResponse",
+      "python": "aux_py.PascalClient.referrals",
+      "rust_test": "tests/contracts.rs::read_referrals",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "taker_discount_terms",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/taker-discount-terms",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "taker_discount_terms",
+      "rust": "PascalClient::taker_discount_terms",
+      "rust_module": "read",
+      "request_type": "TakerDiscountTermsParams",
+      "response_type": "TakerDiscountTermsResponse",
+      "python": "aux_py.PascalClient.taker_discount_terms",
+      "rust_test": "tests/contracts.rs::read_taker_discount_terms",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "trading_keys",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/trading-keys",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "trading_keys",
+      "rust": "PascalClient::trading_keys",
+      "rust_module": "read",
+      "request_type": "TradingKeysParams",
+      "response_type": "TradingKeysResponse",
+      "python": "aux_py.PascalClient.trading_keys",
+      "rust_test": "tests/contracts.rs::read_trading_keys",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "transfer_history",
+      "verb": "GET",
+      "path": "/api/v1/accounts/{owner}/transfers",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "before_cursor",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "at_or_before_seq",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "transfer_history",
+      "rust": "PascalClient::transfer_history",
+      "rust_module": "read",
+      "request_type": "TransferHistoryParams",
+      "response_type": "TransferHistoryResponse",
+      "python": "aux_py.PascalClient.transfer_history",
+      "rust_test": "tests/contracts.rs::read_transfer_history",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "order_books",
+      "verb": "GET",
+      "path": "/api/v1/books",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "order_books",
+      "rust": "PascalClient::order_books",
+      "rust_module": "read",
+      "request_type": "OrderBooksParams",
+      "response_type": "OrderBooksResponse",
+      "python": "aux_py.PascalClient.order_books",
+      "rust_test": "tests/contracts.rs::read_order_books",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "mark_price_candles",
+      "verb": "GET",
+      "path": "/api/v1/mark-price-candles",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbol",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "interval",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "end_time_ms",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "start_time_ms",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "count_back",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "mark_price_candles",
+      "rust": "PascalClient::mark_price_candles",
+      "rust_module": "read",
+      "request_type": "MarkPriceCandlesParams",
+      "response_type": "MarkPriceCandlesResponse",
+      "python": "aux_py.PascalClient.mark_price_candles",
+      "rust_test": "tests/contracts.rs::read_mark_price_candles",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "batch_mark_price_candles",
+      "verb": "GET",
+      "path": "/api/v1/mark-price-candles/batch",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "interval",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "end_time_ms",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "start_time_ms",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "count_back",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "batch_mark_price_candles",
+      "rust": "PascalClient::batch_mark_price_candles",
+      "rust_module": "read",
+      "request_type": "BatchMarkPriceCandlesParams",
+      "response_type": "BatchMarkPriceCandlesResponse",
+      "python": "aux_py.PascalClient.batch_mark_price_candles",
+      "rust_test": "tests/contracts.rs::read_batch_mark_price_candles",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "list_markets",
+      "verb": "GET",
+      "path": "/api/v1/markets",
+      "auth": "none",
+      "safe": true,
+      "parameters": [],
+      "has_body": false,
+      "fixture": "list_markets",
+      "rust": "PascalClient::list_markets",
+      "rust_module": "read",
+      "request_type": "ListMarketsParams",
+      "response_type": "ListMarketsResponse",
+      "python": "aux_py.PascalClient.list_markets",
+      "rust_test": "tests/contracts.rs::read_list_markets",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "resolved_markets",
+      "verb": "GET",
+      "path": "/api/v1/markets/resolved",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "lookback",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "order_by",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "resolved_markets",
+      "rust": "PascalClient::resolved_markets",
+      "rust_module": "read",
+      "request_type": "ResolvedMarketsParams",
+      "response_type": "ResolvedMarketsResponse",
+      "python": "aux_py.PascalClient.resolved_markets",
+      "rust_test": "tests/contracts.rs::read_resolved_markets",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "market_search",
+      "verb": "POST",
+      "path": "/api/v1/markets/search",
+      "auth": "none",
+      "safe": false,
+      "parameters": [],
+      "has_body": false,
+      "fixture": "market_search",
+      "rust": "PascalClient::market_search",
+      "rust_module": "read",
+      "request_type": "MarketSearchParams",
+      "response_type": "MarketSearchResponse",
+      "python": "aux_py.PascalClient.market_search",
+      "rust_test": "tests/contracts.rs::read_market_search",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "market_text_search",
+      "verb": "POST",
+      "path": "/api/v1/markets/text-search",
+      "auth": "none",
+      "safe": false,
+      "parameters": [],
+      "has_body": false,
+      "fixture": "market_text_search",
+      "rust": "PascalClient::market_text_search",
+      "rust_module": "read",
+      "request_type": "MarketTextSearchParams",
+      "response_type": "MarketTextSearchResponse",
+      "python": "aux_py.PascalClient.market_text_search",
+      "rust_test": "tests/contracts.rs::read_market_text_search",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "referral_code",
+      "verb": "GET",
+      "path": "/api/v1/referral-codes/{referral_code}",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "referral_code",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "referral_code",
+      "rust": "PascalClient::referral_code",
+      "rust_module": "read",
+      "request_type": "ReferralCodeParams",
+      "response_type": "ReferralCodeResponse",
+      "python": "aux_py.PascalClient.referral_code",
+      "rust_test": "tests/contracts.rs::read_referral_code",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "server_time",
+      "verb": "GET",
+      "path": "/api/v1/time",
+      "auth": "none",
+      "safe": true,
+      "parameters": [],
+      "has_body": false,
+      "fixture": "server_time",
+      "rust": "PascalClient::server_time",
+      "rust_module": "read",
+      "request_type": "ServerTimeParams",
+      "response_type": "ServerTimeResponse",
+      "python": "aux_py.PascalClient.server_time",
+      "rust_test": "tests/contracts.rs::read_server_time",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "top_holders",
+      "verb": "GET",
+      "path": "/api/v1/top-holders",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "top_holders",
+      "rust": "PascalClient::top_holders",
+      "rust_module": "read",
+      "request_type": "TopHoldersParams",
+      "response_type": "TopHoldersResponse",
+      "python": "aux_py.PascalClient.top_holders",
+      "rust_test": "tests/contracts.rs::read_top_holders",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "trade_candles",
+      "verb": "GET",
+      "path": "/api/v1/trade-candles",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbol",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "interval",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "end_time_ms",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "start_time_ms",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "count_back",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "trade_candles",
+      "rust": "PascalClient::trade_candles",
+      "rust_module": "read",
+      "request_type": "TradeCandlesParams",
+      "response_type": "TradeCandlesResponse",
+      "python": "aux_py.PascalClient.trade_candles",
+      "rust_test": "tests/contracts.rs::read_trade_candles",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "trades",
+      "verb": "GET",
+      "path": "/api/v1/trades",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "before_cursor",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "at_or_before_seq",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "trades",
+      "rust": "PascalClient::trades",
+      "rust_module": "read",
+      "request_type": "TradesParams",
+      "response_type": "TradesResponse",
+      "python": "aux_py.PascalClient.trades",
+      "rust_test": "tests/contracts.rs::read_trades",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "batch_trades",
+      "verb": "GET",
+      "path": "/api/v1/trades/batch",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "batch_trades",
+      "rust": "PascalClient::batch_trades",
+      "rust_module": "read",
+      "request_type": "BatchTradesParams",
+      "response_type": "BatchTradesResponse",
+      "python": "aux_py.PascalClient.batch_trades",
+      "rust_test": "tests/contracts.rs::read_batch_trades",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "trading_key_accounts",
+      "verb": "GET",
+      "path": "/api/v1/trading-keys/{trading_key_pubkey}/accounts",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "trading_key_pubkey",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "trading_key_accounts",
+      "rust": "PascalClient::trading_key_accounts",
+      "rust_module": "read",
+      "request_type": "TradingKeyAccountsParams",
+      "response_type": "TradingKeyAccountsResponse",
+      "python": "aux_py.PascalClient.trading_key_accounts",
+      "rust_test": "tests/contracts.rs::read_trading_key_accounts",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "usernames",
+      "verb": "GET",
+      "path": "/api/v1/usernames",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "owners",
+          "location": "query",
+          "required": true,
+          "explode": false,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "usernames",
+      "rust": "PascalClient::usernames",
+      "rust_module": "read",
+      "request_type": "UsernamesParams",
+      "response_type": "UsernamesResponse",
+      "python": "aux_py.PascalClient.usernames",
+      "rust_test": "tests/contracts.rs::read_usernames",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "read",
+      "client": "PascalClient",
+      "method": "closed_position_history",
+      "verb": "GET",
+      "path": "/api/v2/accounts/{owner}/position-instances",
+      "auth": "none",
+      "safe": true,
+      "parameters": [
+        {
+          "name": "symbols",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "order_by",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "sort_order",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "before_cursor",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "limit",
+          "location": "query",
+          "required": false,
+          "explode": true,
+          "style": "form"
+        },
+        {
+          "name": "owner",
+          "location": "path",
+          "required": true,
+          "explode": true,
+          "style": "form"
+        }
+      ],
+      "has_body": false,
+      "fixture": "closed_position_history",
+      "rust": "PascalClient::closed_position_history",
+      "rust_module": "read",
+      "request_type": "ClosedPositionHistoryParams",
+      "response_type": "ClosedPositionHistoryResponse",
+      "python": "aux_py.PascalClient.closed_position_history",
+      "rust_test": "tests/contracts.rs::read_closed_position_history",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "set_an_account_bio",
+      "verb": "POST",
+      "path": "/api/v1/account-bios",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "set_an_account_bio",
+      "rust": "PascalClient::set_an_account_bio",
+      "rust_module": "write",
+      "request_type": "SetAnAccountBioParams",
+      "response_type": "SetAnAccountBioResponse",
+      "python": "aux_py.PascalClient.set_an_account_bio",
+      "rust_test": "tests/contracts.rs::write_set_an_account_bio",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "cancel_orders",
+      "verb": "POST",
+      "path": "/api/v1/cancels",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "cancel_orders",
+      "rust": "PascalClient::cancel_orders",
+      "rust_module": "write",
+      "request_type": "CancelOrdersParams",
+      "response_type": "Vec<CancelOrdersResponseItem>",
+      "python": "aux_py.PascalClient.cancel_orders",
+      "rust_test": "tests/contracts.rs::write_cancel_orders",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "register_a_deposit_address",
+      "verb": "POST",
+      "path": "/api/v1/deposit-addresses",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "register_a_deposit_address",
+      "rust": "PascalClient::register_a_deposit_address",
+      "rust_module": "write",
+      "request_type": "RegisterADepositAddressParams",
+      "response_type": "RegisterADepositAddressResponse",
+      "python": "aux_py.PascalClient.register_a_deposit_address",
+      "rust_test": "tests/contracts.rs::write_register_a_deposit_address",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "mass_cancel_orders",
+      "verb": "POST",
+      "path": "/api/v1/mass-cancels",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "mass_cancel_orders",
+      "rust": "PascalClient::mass_cancel_orders",
+      "rust_module": "write",
+      "request_type": "MassCancelOrdersParams",
+      "response_type": "Vec<MassCancelOrdersResponseItem>",
+      "python": "aux_py.PascalClient.mass_cancel_orders",
+      "rust_test": "tests/contracts.rs::write_mass_cancel_orders",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "place_and_replace_orders",
+      "verb": "POST",
+      "path": "/api/v1/orders",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "place_and_replace_orders",
+      "rust": "PascalClient::place_and_replace_orders",
+      "rust_module": "write",
+      "request_type": "PlaceAndReplaceOrdersParams",
+      "response_type": "Vec<PlaceAndReplaceOrdersResponseItem>",
+      "python": "aux_py.PascalClient.place_and_replace_orders",
+      "rust_test": "tests/contracts.rs::write_place_and_replace_orders",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "generate_a_referral_code",
+      "verb": "POST",
+      "path": "/api/v1/referral-codes",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "generate_a_referral_code",
+      "rust": "PascalClient::generate_a_referral_code",
+      "rust_module": "write",
+      "request_type": "GenerateAReferralCodeParams",
+      "response_type": "GenerateAReferralCodeResponse",
+      "python": "aux_py.PascalClient.generate_a_referral_code",
+      "rust_test": "tests/contracts.rs::write_generate_a_referral_code",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "apply_a_referral_code",
+      "verb": "POST",
+      "path": "/api/v1/referral-codes/apply",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "apply_a_referral_code",
+      "rust": "PascalClient::apply_a_referral_code",
+      "rust_module": "write",
+      "request_type": "ApplyAReferralCodeParams",
+      "response_type": "ApplyAReferralCodeResponse",
+      "python": "aux_py.PascalClient.apply_a_referral_code",
+      "rust_test": "tests/contracts.rs::write_apply_a_referral_code",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "claim_a_custom_referral_code",
+      "verb": "POST",
+      "path": "/api/v1/referral-codes/custom",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "claim_a_custom_referral_code",
+      "rust": "PascalClient::claim_a_custom_referral_code",
+      "rust_module": "write",
+      "request_type": "ClaimACustomReferralCodeParams",
+      "response_type": "ClaimACustomReferralCodeResponse",
+      "python": "aux_py.PascalClient.claim_a_custom_referral_code",
+      "rust_test": "tests/contracts.rs::write_claim_a_custom_referral_code",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "revoke_a_trading_key",
+      "verb": "POST",
+      "path": "/api/v1/trading-key-revocations",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "revoke_a_trading_key",
+      "rust": "PascalClient::revoke_a_trading_key",
+      "rust_module": "write",
+      "request_type": "RevokeATradingKeyParams",
+      "response_type": "RevokeATradingKeyResponse",
+      "python": "aux_py.PascalClient.revoke_a_trading_key",
+      "rust_test": "tests/contracts.rs::write_revoke_a_trading_key",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "create_a_trading_key",
+      "verb": "POST",
+      "path": "/api/v1/trading-keys",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "create_a_trading_key",
+      "rust": "PascalClient::create_a_trading_key",
+      "rust_module": "write",
+      "request_type": "CreateATradingKeyParams",
+      "response_type": "CreateATradingKeyResponse",
+      "python": "aux_py.PascalClient.create_a_trading_key",
+      "rust_test": "tests/contracts.rs::write_create_a_trading_key",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "set_a_username",
+      "verb": "POST",
+      "path": "/api/v1/usernames",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "set_a_username",
+      "rust": "PascalClient::set_a_username",
+      "rust_module": "write",
+      "request_type": "SetAUsernameParams",
+      "response_type": "SetAUsernameResponse",
+      "python": "aux_py.PascalClient.set_a_username",
+      "rust_test": "tests/contracts.rs::write_set_a_username",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    },
+    {
+      "service": "write",
+      "client": "PascalClient",
+      "method": "withdraw_collateral",
+      "verb": "POST",
+      "path": "/api/v1/withdrawals",
+      "auth": "native",
+      "safe": false,
+      "parameters": [],
+      "has_body": true,
+      "fixture": "withdraw_collateral",
+      "rust": "PascalClient::withdraw_collateral",
+      "rust_module": "write",
+      "request_type": "WithdrawCollateralParams",
+      "response_type": "WithdrawCollateralResponse",
+      "python": "aux_py.PascalClient.withdraw_collateral",
+      "rust_test": "tests/contracts.rs::write_withdraw_collateral",
+      "python_test": "tests/test_prediction_connectors.py::test_every_published_method_and_public_fixture"
+    }
+  ],
+  "websocket": [
+    {
+      "source": "pascal-ws.json",
+      "channel": "client-requests",
+      "message": "example_1",
+      "rust": "data::DataClientRequestsExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.client-requests.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "client-requests",
+      "message": "example_2",
+      "rust": "data::DataClientRequestsExample2",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.client-requests.example_2"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "client-requests",
+      "message": "example_3",
+      "rust": "data::DataClientRequestsExample3",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.client-requests.example_3"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "client-requests",
+      "message": "example_4",
+      "rust": "data::DataClientRequestsExample4",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.client-requests.example_4"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "server-responses",
+      "message": "example_1",
+      "rust": "data::DataServerResponsesExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.server-responses.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "server-responses",
+      "message": "example_2",
+      "rust": "data::DataServerResponsesExample2",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.server-responses.example_2"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "server-responses",
+      "message": "example_3",
+      "rust": "data::DataServerResponsesExample3",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.server-responses.example_3"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "server-responses",
+      "message": "example_4",
+      "rust": "data::DataServerResponsesExample4",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.server-responses.example_4"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "client-messages",
+      "message": "example_1",
+      "rust": "data::DataClientMessagesExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.client-messages.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "client-messages",
+      "message": "example_2",
+      "rust": "data::DataClientMessagesExample2",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.client-messages.example_2"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "client-messages",
+      "message": "example_3",
+      "rust": "data::DataClientMessagesExample3",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.client-messages.example_3"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "server-messages",
+      "message": "example_1",
+      "rust": "data::DataServerMessagesExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.server-messages.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "book-channel",
+      "message": "example_1",
+      "rust": "data::DataBookChannelExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.book-channel.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "book-channel",
+      "message": "example_2",
+      "rust": "data::DataBookChannelExample2",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.book-channel.example_2"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "trades-channel",
+      "message": "example_1",
+      "rust": "data::DataTradesChannelExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.trades-channel.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "all-trades-channel",
+      "message": "example_1",
+      "rust": "data::DataAllTradesChannelExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.all-trades-channel.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "all-trades-channel",
+      "message": "example_2",
+      "rust": "data::DataAllTradesChannelExample2",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.all-trades-channel.example_2"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "candles-channel",
+      "message": "example_1",
+      "rust": "data::DataCandlesChannelExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.candles-channel.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "mark-price-candles-channel",
+      "message": "example_1",
+      "rust": "data::DataMarkPriceCandlesChannelExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.mark-price-candles-channel.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "account-channel",
+      "message": "example_1",
+      "rust": "data::DataAccountChannelExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.account-channel.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "account-channel",
+      "message": "example_2",
+      "rust": "data::DataAccountChannelExample2",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.account-channel.example_2"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "account-channel",
+      "message": "example_3",
+      "rust": "data::DataAccountChannelExample3",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.account-channel.example_3"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "market-update-channel",
+      "message": "example_1",
+      "rust": "data::DataMarketUpdateChannelExample1",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.market-update-channel.example_1"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "market-update-channel",
+      "message": "example_2",
+      "rust": "data::DataMarketUpdateChannelExample2",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.market-update-channel.example_2"
+    },
+    {
+      "source": "pascal-ws.json",
+      "channel": "market-update-channel",
+      "message": "example_3",
+      "rust": "data::DataMarketUpdateChannelExample3",
+      "python": "Subscription native mapping / RpcSession native command",
+      "fixture": "data.market-update-channel.example_3"
+    }
+  ],
+  "contracts": [],
+  "source_policy": "Published source union, pinned in API_SOURCES.json. Synthetic fixtures establish codecs, not funded execution."
+}

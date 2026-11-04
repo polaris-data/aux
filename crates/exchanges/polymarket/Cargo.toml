@@ -1,0 +1,42 @@
+[package]
+name = "aux-rs-polymarket"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license = "MIT"
+repository = "https://github.com/polaris-data/connectors"
+readme = "README.md"
+description = "International Polymarket prediction and perpetual APIs, signing and EVM contracts"
+
+[features]
+default = []
+http = ["aux-rs-core/http", "aux-rs-evm/http"]
+ws = ["aux-rs-core/ws"]
+
+[dependencies]
+aux-rs-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+zeroize.workspace = true
+url.workspace = true
+getrandom.workspace = true
+base64.workspace = true
+sha2.workspace = true
+aux-rs-evm.workspace = true
+k256.workspace = true
+sha3.workspace = true
+alloy-primitives.workspace = true
+alloy-sol-types.workspace = true
+alloy-dyn-abi = { workspace=true, features=["eip712"] }
+alloy-json-abi.workspace = true
+rmp = "0.8"
+hmac = { version="0.12", default-features=false }
+
+[dev-dependencies]
+tokio = { workspace=true, features=["macros","rt-multi-thread","net","io-util","time","sync"] }
+tokio-tungstenite.workspace = true
+futures-util.workspace = true
+
+[lints]
+workspace = true

@@ -145,7 +145,10 @@ VENUE={'client':'hyperliquid','signers':'hyperliquid','lighter':'lighter','qfex'
 RUST_RETURNS={}
 for venue in MODELS:
     methods=RUST_RETURNS.setdefault(venue,{})
-    for file in sorted((ROOT/'crates/exchanges'/venue/'src').glob('*.rs')):
+    files=sorted((ROOT/'crates/exchanges'/venue/'src').glob('*.rs'))
+    # Metric's compatibility client inherits these native RPC return types.
+    if venue=='metric':files.append(ROOT/'crates/chain/evm/src/chain.rs')
+    for file in files:
         if file.stem not in ('client','endpoints','trading','account','operations','rpc_operations','auth','ws','chain','liquidity','workflows'):continue
         for match in re.finditer(r'pub async fn (\w+)\s*\([^{}]*?\)\s*-> Result<(.*?)>\s*\{',file.read_text(),re.S):
             value=' '.join(match[2].split());depth=0

@@ -1,0 +1,789 @@
+{
+  "data.client-requests.example_1": {
+    "id": "42",
+    "type": "place|cancel|mass_cancel|ping",
+    "payload": "/* same place, cancel or mass cancel payload as REST */"
+  },
+  "data.client-requests.example_2": {
+    "id": "1",
+    "type": "place",
+    "payload": [
+      {
+        "client_order_id": "42",
+        "symbol": "SIM_EVENT_1.MARKET_1",
+        "side": "BID",
+        "price": "0.550000",
+        "size": "10",
+        "auth": {
+          "client_ts_ms": "1731536000000",
+          "recv_window_ms": "5000",
+          "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+          "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1",
+          "signature": "2rUctQ9bFbuQaUxbXDGRtGm4LMj3GdbYWAW6pjrznAsLvpdH8Eqyx3LgsFx3YzV9cvMfw1ND5T5nChUQZZJ7jEad"
+        }
+      }
+    ]
+  },
+  "data.client-requests.example_3": {
+    "id": "2",
+    "type": "cancel",
+    "payload": [
+      {
+        "client_order_id": "42",
+        "auth": {
+          "client_ts_ms": "1731536000000",
+          "recv_window_ms": "5000",
+          "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+          "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1",
+          "signature": "591YziUjZzro24mamxgRrSDdYD71NpsDBmU4UGSyrBYbFiWzYaLjR9he1P5DP8djMKMJzHTsZzwRAagvLqgtiXnc"
+        }
+      }
+    ]
+  },
+  "data.client-requests.example_4": {
+    "id": "3",
+    "type": "mass_cancel",
+    "payload": [
+      {
+        "symbol": "SIM_EVENT_1.MARKET_1",
+        "auth": {
+          "client_ts_ms": "1731536000000",
+          "recv_window_ms": "5000",
+          "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+          "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1",
+          "signature": "oLmkQxx9xLPK4QJnFhZUFEker5k5pbLregsYPgRrhrd9sEBYDuCtitUtFSVfhiJpTFHWAdmGk6zKDLpPtA3iegS"
+        }
+      }
+    ]
+  },
+  "data.server-responses.example_1": {
+    "id": "1",
+    "type": "place",
+    "payload": [
+      {
+        "status": "success",
+        "data": {
+          "order": {
+            "id": "987654321",
+            "client_order_id": "42",
+            "symbol": "SIM_EVENT_1.MARKET_1",
+            "side": "BID",
+            "price": "0.550000",
+            "size_original": "10",
+            "size_remaining": "7",
+            "size_filled": "3",
+            "notional_filled": "1.650000",
+            "tif": "GTC",
+            "type": "LIMIT",
+            "post_only": false,
+            "reduce_only": false,
+            "seq": "67880",
+            "update_seq": "67891",
+            "place_ts_ms": "1731536000050",
+            "update_ts_ms": "1731536000050"
+          },
+          "fills": [
+            {
+              "trade_id": "555001",
+              "symbol": "SIM_EVENT_1.MARKET_1",
+              "side": "BID",
+              "reduce_only": false,
+              "fill_price": "0.550000",
+              "fill_size": "3",
+              "liquidity": "TAKER",
+              "counterparty": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+              "order_id": "987654321",
+              "client_order_id": "42",
+              "order_progress": {
+                "size_original": "10",
+                "size_filled": "3",
+                "size_remaining": "7"
+              },
+              "fee_usd": "0.000742",
+              "collateral_change_usd": "-1.650742",
+              "position_size_prev": "0",
+              "realized_pnl_usd": "0.000000",
+              "seq": "67891",
+              "trade_ts_ms": "1731536000050"
+            }
+          ]
+        },
+        "seq": "67891",
+        "state_time_ms": "1731536000050",
+        "server_time_ms": "1731536000123"
+      }
+    ]
+  },
+  "data.server-responses.example_2": {
+    "id": "2",
+    "type": "cancel",
+    "payload": [
+      {
+        "status": "success",
+        "data": {
+          "id": "987654321",
+          "client_order_id": "42",
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "side": "BID",
+          "price": "0.550000",
+          "size_original": "10",
+          "size_remaining": "0",
+          "size_filled": "3",
+          "notional_filled": "1.650000",
+          "tif": "GTC",
+          "type": "LIMIT",
+          "post_only": false,
+          "reduce_only": false,
+          "seq": "67880",
+          "update_seq": "67891",
+          "place_ts_ms": "1731536000050",
+          "update_ts_ms": "1731536000050"
+        },
+        "seq": "67891",
+        "state_time_ms": "1731536000050",
+        "server_time_ms": "1731536000123"
+      }
+    ]
+  },
+  "data.server-responses.example_3": {
+    "id": "3",
+    "type": "mass_cancel",
+    "payload": [
+      {
+        "status": "success",
+        "data": {
+          "orders": [
+            {
+              "id": "987654321",
+              "client_order_id": "42",
+              "symbol": "SIM_EVENT_1.MARKET_1",
+              "side": "BID",
+              "price": "0.550000",
+              "size_original": "10",
+              "size_remaining": "0",
+              "size_filled": "3",
+              "notional_filled": "1.650000",
+              "tif": "GTC",
+              "type": "LIMIT",
+              "post_only": false,
+              "reduce_only": false,
+              "seq": "67880",
+              "update_seq": "67891",
+              "place_ts_ms": "1731536000050",
+              "update_ts_ms": "1731536000050"
+            },
+            {
+              "id": "987654322",
+              "client_order_id": "43",
+              "symbol": "SIM_EVENT_1.MARKET_1",
+              "side": "BID",
+              "price": "0.550000",
+              "size_original": "10",
+              "size_remaining": "0",
+              "size_filled": "3",
+              "notional_filled": "1.650000",
+              "tif": "GTC",
+              "type": "LIMIT",
+              "post_only": false,
+              "reduce_only": false,
+              "seq": "67880",
+              "update_seq": "67891",
+              "place_ts_ms": "1731536000050",
+              "update_ts_ms": "1731536000050"
+            }
+          ]
+        },
+        "seq": "67891",
+        "state_time_ms": "1731536000050",
+        "server_time_ms": "1731536000123"
+      }
+    ]
+  },
+  "data.server-responses.example_4": {
+    "id": "3",
+    "type": "error",
+    "payload": {
+      "data": {
+        "code": "RATE_LIMITED",
+        "message": "rate limited; slow down before retrying"
+      },
+      "client_order_ids": [
+        "42"
+      ]
+    }
+  },
+  "data.client-messages.example_1": {
+    "type": "subscribe",
+    "channels": [
+      {
+        "channel": "book",
+        "symbol": "SIM_EVENT_1.MARKET_1"
+      },
+      {
+        "channel": "trades",
+        "symbol": "SIM_EVENT_1.MARKET_1"
+      },
+      {
+        "channel": "all_trades"
+      }
+    ]
+  },
+  "data.client-messages.example_2": {
+    "type": "unsubscribe",
+    "channels": [
+      {
+        "channel": "book",
+        "symbol": "SIM_EVENT_1.MARKET_1"
+      }
+    ]
+  },
+  "data.client-messages.example_3": {
+    "type": "ping"
+  },
+  "data.server-messages.example_1": {
+    "channel": "book",
+    "symbol": "SIM_EVENT_1.MARKET_1",
+    "type": "error",
+    "data": {
+      "code": "SYMBOL_NOT_FOUND",
+      "message": "symbol not found: symbol=SIM_EVENT_1.MARKET_1"
+    },
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.book-channel.example_1": {
+    "channel": "book",
+    "symbol": "SIM_EVENT_1.MARKET_1",
+    "type": "snapshot",
+    "data": {
+      "asks": [
+        [
+          "0.560000",
+          "12"
+        ],
+        [
+          "0.570000",
+          "20"
+        ]
+      ],
+      "bids": [
+        [
+          "0.540000",
+          "15"
+        ],
+        [
+          "0.530000",
+          "7"
+        ]
+      ],
+      "spec": {
+        "symbol": "SIM_EVENT_1.MARKET_1",
+        "taker_fee_rate": "0.001000",
+        "maker_rebate_share": "0.500000",
+        "tick_size_min": "0.010000",
+        "tick_sig_figs": 2
+      }
+    },
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.book-channel.example_2": {
+    "channel": "book",
+    "symbol": "SIM_EVENT_1.MARKET_1",
+    "type": "update",
+    "data": {
+      "asks": [
+        [
+          "0.570000",
+          "0"
+        ]
+      ],
+      "bids": [
+        [
+          "0.540000",
+          "15"
+        ]
+      ]
+    },
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.trades-channel.example_1": {
+    "channel": "trades",
+    "symbol": "SIM_EVENT_1.MARKET_1",
+    "type": "update",
+    "data": [
+      {
+        "trade_id": "555001",
+        "symbol": "SIM_EVENT_1.MARKET_1",
+        "taker_side": "BID",
+        "price": "0.550000",
+        "size": "3",
+        "maker": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+        "taker": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+        "maker_reduce_only": false,
+        "taker_reduce_only": false,
+        "maker_position_size_prev": "10",
+        "taker_position_size_prev": "0",
+        "seq": "67891",
+        "trade_ts_ms": "1731536000050"
+      }
+    ],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.all-trades-channel.example_1": {
+    "channel": "all_trades",
+    "type": "snapshot",
+    "data": [
+      {
+        "trade_id": "555001",
+        "symbol": "SIM_EVENT_1.MARKET_1",
+        "taker_side": "BID",
+        "price": "0.550000",
+        "size": "3",
+        "maker": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+        "taker": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+        "maker_reduce_only": false,
+        "taker_reduce_only": false,
+        "maker_position_size_prev": "10",
+        "taker_position_size_prev": "0",
+        "seq": "67891",
+        "trade_ts_ms": "1731536000050"
+      }
+    ],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.all-trades-channel.example_2": {
+    "channel": "all_trades",
+    "type": "update",
+    "data": [
+      {
+        "trade_id": "555001",
+        "symbol": "SIM_EVENT_1.MARKET_1",
+        "taker_side": "BID",
+        "price": "0.550000",
+        "size": "3",
+        "maker": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+        "taker": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+        "maker_reduce_only": false,
+        "taker_reduce_only": false,
+        "maker_position_size_prev": "10",
+        "taker_position_size_prev": "0",
+        "seq": "67891",
+        "trade_ts_ms": "1731536000050"
+      }
+    ],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.candles-channel.example_1": {
+    "channel": "candles",
+    "symbol": "SIM_EVENT_1.MARKET_1",
+    "interval": "1m",
+    "type": "update",
+    "data": [
+      {
+        "time": "1731535960000",
+        "open": "0.520000",
+        "high": "0.570000",
+        "low": "0.510000",
+        "close": "0.550000",
+        "volume": "120",
+        "taker_buy_volume": "70",
+        "taker_sell_volume": "50",
+        "volume_notional": "66.000000",
+        "taker_buy_volume_notional": "38.500000",
+        "taker_sell_volume_notional": "27.500000",
+        "trade_count": "8",
+        "taker_buy_count": "5",
+        "taker_sell_count": "3"
+      }
+    ],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.mark-price-candles-channel.example_1": {
+    "channel": "mark_price_candles",
+    "symbol": "SIM_EVENT_1.MARKET_1",
+    "interval": "1m",
+    "type": "update",
+    "data": [
+      {
+        "time": "1731535960000",
+        "open": "0.540000",
+        "high": "0.580000",
+        "low": "0.530000",
+        "close": "0.560000"
+      }
+    ],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.account-channel.example_1": {
+    "channel": "account",
+    "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+    "type": "update",
+    "data": {
+      "has_deposited": true,
+      "collateral_usd": "100.000000",
+      "rewards": {
+        "referral_rewards_received_usd": "12.500000",
+        "builder_fees_received_usd": "34.375000",
+        "user_rewards_received_usd": "5.000000"
+      },
+      "lifetime_stats": {
+        "maker": {
+          "volume_contracts": "1250",
+          "weighted_volume": "250.000000",
+          "volume_notional_usd": "625.000000",
+          "fees_paid_usd": "-0.625000"
+        },
+        "taker": {
+          "volume_contracts": "750",
+          "weighted_volume": "150.000000",
+          "volume_notional_usd": "375.000000",
+          "fees_paid_usd": "1.125000"
+        }
+      },
+      "orders": [
+        {
+          "id": "987654321",
+          "client_order_id": "42",
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "side": "BID",
+          "price": "0.550000",
+          "size_original": "10",
+          "size_remaining": "7",
+          "size_filled": "3",
+          "notional_filled": "1.650000",
+          "tif": "GTC",
+          "type": "LIMIT",
+          "post_only": false,
+          "reduce_only": false,
+          "seq": "67880",
+          "update_seq": "67891",
+          "place_ts_ms": "1731536000050",
+          "update_ts_ms": "1731536000050"
+        }
+      ],
+      "positions": [
+        {
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "size": "3",
+          "cumulative_increasing_contracts": "3",
+          "cumulative_increasing_notional_usd": "1.650000",
+          "cumulative_reducing_contracts": "0",
+          "cumulative_reducing_notional_usd": "0.000000",
+          "cumulative_fees_usd": "0.000742",
+          "realized_pnl_usd": "0.000000",
+          "unrealized_pnl_usd": "0.000000",
+          "mark_price": "0.550000",
+          "average_entry_price": "0.550000",
+          "seq": "67880",
+          "update_seq": "67891",
+          "open_ts_ms": "1731535900000",
+          "update_ts_ms": "1731536000050"
+        }
+      ],
+      "pending_deposits": [
+        {
+          "deposit_id": "7",
+          "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+          "amount": "100.000000",
+          "transfer_status": "PROCESSING"
+        }
+      ],
+      "pending_withdrawals": [
+        {
+          "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+          "status": "VERIFYING",
+          "amount": "25.000000",
+          "destination_authority": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2"
+        }
+      ],
+      "order_updates": [
+        {
+          "order": {
+            "id": "987654321",
+            "client_order_id": "42",
+            "symbol": "SIM_EVENT_1.MARKET_1",
+            "side": "BID",
+            "price": "0.550000",
+            "size_original": "10",
+            "size_remaining": "7",
+            "size_filled": "3",
+            "notional_filled": "1.650000",
+            "tif": "GTC",
+            "type": "LIMIT",
+            "post_only": false,
+            "reduce_only": false,
+            "seq": "67880",
+            "update_seq": "67891",
+            "place_ts_ms": "1731536000050",
+            "update_ts_ms": "1731536000050"
+          }
+        }
+      ],
+      "fills": [
+        {
+          "trade_id": "555001",
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "side": "BID",
+          "reduce_only": false,
+          "fill_price": "0.550000",
+          "fill_size": "3",
+          "liquidity": "TAKER",
+          "counterparty": "5Z6Ay5NEcbg3xhopc522sBCRXQujkTiuDRnHGfQdcnSf",
+          "order_id": "987654321",
+          "client_order_id": "42",
+          "order_progress": {
+            "size_original": "10",
+            "size_filled": "3",
+            "size_remaining": "7"
+          },
+          "fee_usd": "0.000742",
+          "collateral_change_usd": "-1.650742",
+          "position_size_prev": "0",
+          "realized_pnl_usd": "0.000000",
+          "position_open_seq": "67891",
+          "position_open_ts_ms": "1731536000050",
+          "seq": "67891",
+          "trade_ts_ms": "1731536000050"
+        }
+      ],
+      "transfers": [
+        {
+          "type": "DEPOSIT",
+          "status": "COMPLETED",
+          "collateral_change_usd": "100.000000",
+          "fee_usd": "0.000000",
+          "net_usd": "100.000000",
+          "seq": "67880",
+          "transfer_ts_ms": "1731535900000"
+        }
+      ]
+    },
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.account-channel.example_2": {
+    "channel": "account",
+    "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+    "type": "update",
+    "data": {
+      "orders": [
+        {
+          "id": "987654322",
+          "client_order_id": "43",
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "side": "ASK",
+          "price": "0.550000",
+          "size_original": "10",
+          "size_remaining": "0",
+          "size_filled": "0",
+          "notional_filled": "0.000000",
+          "tif": "GTC",
+          "type": "LIMIT",
+          "post_only": false,
+          "reduce_only": true,
+          "seq": "67880",
+          "update_seq": "67891",
+          "place_ts_ms": "1731536000050",
+          "update_ts_ms": "1731536000050"
+        }
+      ],
+      "positions": [],
+      "pending_deposits": [],
+      "pending_withdrawals": [],
+      "order_updates": [
+        {
+          "order": {
+            "id": "987654322",
+            "client_order_id": "43",
+            "symbol": "SIM_EVENT_1.MARKET_1",
+            "side": "ASK",
+            "price": "0.550000",
+            "size_original": "10",
+            "size_remaining": "0",
+            "size_filled": "0",
+            "notional_filled": "0.000000",
+            "tif": "GTC",
+            "type": "LIMIT",
+            "post_only": false,
+            "reduce_only": true,
+            "seq": "67880",
+            "update_seq": "67891",
+            "place_ts_ms": "1731536000050",
+            "update_ts_ms": "1731536000050"
+          },
+          "update_reason": "NO_REDUCIBLE_POSITION"
+        }
+      ]
+    },
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.account-channel.example_3": {
+    "channel": "account",
+    "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB",
+    "type": "update",
+    "data": {
+      "collateral_usd": "101.349258",
+      "orders": [],
+      "positions": [
+        {
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "size": "0",
+          "cumulative_increasing_contracts": "0",
+          "cumulative_increasing_notional_usd": "0.000000",
+          "cumulative_reducing_contracts": "0",
+          "cumulative_reducing_notional_usd": "0.000000",
+          "cumulative_fees_usd": "0.000000",
+          "realized_pnl_usd": "0.000000",
+          "unrealized_pnl_usd": "0.000000",
+          "mark_price": "1.000000",
+          "seq": "67891",
+          "update_seq": "67892",
+          "open_ts_ms": "1731536000050",
+          "update_ts_ms": "1731536000100"
+        }
+      ],
+      "pending_deposits": [],
+      "pending_withdrawals": [],
+      "resolutions": [
+        {
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "resolution": "1.000000",
+          "size": "3",
+          "collateral_change_usd": "3.000000",
+          "realized_pnl_usd": "1.350000",
+          "position_open_seq": "67891",
+          "position_open_ts_ms": "1731536000050",
+          "seq": "67892",
+          "position_resolution_ts_ms": "1731536000100"
+        }
+      ],
+      "closed_positions": [
+        {
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "position_side": "LONG",
+          "position_instance_count": "1",
+          "held_until_resolution": true,
+          "realized_pnl_usd": "1.350000",
+          "cumulative_increasing_contracts": "3",
+          "cumulative_increasing_notional_usd": "1.650000",
+          "cumulative_reducing_notional_usd": "3.000000",
+          "average_increasing_price": "0.550000",
+          "average_reducing_price": "1.000000",
+          "open_seq": "67891",
+          "open_ts_ms": "1731536000050",
+          "close_seq": "67892",
+          "close_ts_ms": "1731536000100"
+        }
+      ]
+    },
+    "seq": "67892",
+    "state_time_ms": "1731536000100",
+    "server_time_ms": "1731536000123"
+  },
+  "data.market-update-channel.example_1": {
+    "channel": "market_update",
+    "type": "snapshot",
+    "data": [],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.market-update-channel.example_2": {
+    "channel": "market_update",
+    "type": "update",
+    "data": [
+      {
+        "update_type": "new",
+        "market": {
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "taker_fee_rate": "0.001000",
+          "maker_rebate_share": "0.500000",
+          "tick_size_min": "0.010000",
+          "tick_sig_figs": 2,
+          "is_mece": false,
+          "display_attributes": {
+            "event_description": "API documentation sample market",
+            "expected_resolution_time_ms": "1735000000000",
+            "market_description": "Yes",
+            "reverse_description": "No",
+            "sort_order": "SYMBOL_ASC",
+            "tags": [
+              "Docs"
+            ],
+            "topic": {
+              "id": "docs",
+              "description": "Documentation examples"
+            }
+          },
+          "listing_ts_ms": "1731536000000",
+          "rules_url": "https://sample-rules-url.com/events/SIM_EVENT_1/SIM_EVENT_1.MARKET_1.md",
+          "mark_price": "0.550000",
+          "open_interest": "250",
+          "long_interest": "250",
+          "short_interest": "250"
+        }
+      }
+    ],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  },
+  "data.market-update-channel.example_3": {
+    "channel": "market_update",
+    "type": "update",
+    "data": [
+      {
+        "update_type": "mece_designation",
+        "market": {
+          "symbol": "SIM_EVENT_1.MARKET_1",
+          "taker_fee_rate": "0.001000",
+          "maker_rebate_share": "0.500000",
+          "tick_size_min": "0.010000",
+          "tick_sig_figs": 2,
+          "is_mece": true,
+          "display_attributes": {
+            "event_description": "API documentation sample market",
+            "expected_resolution_time_ms": "1735000000000",
+            "market_description": "Yes",
+            "reverse_description": "No",
+            "sort_order": "SYMBOL_ASC",
+            "tags": [
+              "Docs"
+            ],
+            "topic": {
+              "id": "docs",
+              "description": "Documentation examples"
+            }
+          },
+          "listing_ts_ms": "1731536000000",
+          "rules_url": "https://sample-rules-url.com/events/SIM_EVENT_1/SIM_EVENT_1.MARKET_1.md",
+          "mark_price": "0.550000",
+          "open_interest": "250",
+          "long_interest": "250",
+          "short_interest": "250"
+        }
+      }
+    ],
+    "seq": "67891",
+    "state_time_ms": "1731536000050",
+    "server_time_ms": "1731536000123"
+  }
+}

@@ -1,0 +1,500 @@
+{
+  "channels": {
+    "crypto_prices": {
+      "address": "/",
+      "messages": {
+        "update": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "crypto_prices"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "value": {}
+                },
+                "required": [
+                  "symbol",
+                  "timestamp",
+                  "value"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        }
+      }
+    },
+    "crypto_prices_chainlink": {
+      "address": "/",
+      "messages": {
+        "update": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "crypto_prices_chainlink"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "value": {}
+                },
+                "required": [
+                  "symbol",
+                  "timestamp",
+                  "value"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        }
+      }
+    },
+    "crypto_prices_twap_thirty": {
+      "address": "/",
+      "messages": {
+        "update": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "crypto_prices_twap_thirty"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "value": {},
+                  "full_accuracy_value": {
+                    "type": "string"
+                  },
+                  "window_s": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "symbol",
+                  "timestamp",
+                  "value"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        }
+      }
+    },
+    "crypto_prices_twap_sixty": {
+      "address": "/",
+      "messages": {
+        "update": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "crypto_prices_twap_sixty"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "value": {},
+                  "full_accuracy_value": {
+                    "type": "string"
+                  },
+                  "window_s": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "symbol",
+                  "timestamp",
+                  "value"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        }
+      }
+    },
+    "equity_prices": {
+      "address": "/",
+      "messages": {
+        "update": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "equity_prices"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "integer"
+                  },
+                  "value": {},
+                  "full_accuracy_value": {
+                    "type": "string"
+                  },
+                  "received_at": {
+                    "type": "integer"
+                  },
+                  "is_carried_forward": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "symbol",
+                  "timestamp",
+                  "value"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        },
+        "subscribe": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "equity_prices"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "subscribe"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "symbol": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "timestamp": {
+                          "type": "integer"
+                        },
+                        "value": {}
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        }
+      }
+    },
+    "comments": {
+      "address": "/",
+      "messages": {
+        "comment_created": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "comments"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "comment_created"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        },
+        "comment_removed": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "comments"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "comment_removed"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        },
+        "reaction_created": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "comments"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "reaction_created"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        },
+        "reaction_removed": {
+          "payload": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "enum": [
+                  "comments"
+                ]
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "reaction_removed"
+                ]
+              },
+              "timestamp": {
+                "type": "integer"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "body": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "topic",
+              "type",
+              "timestamp",
+              "payload"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "provenance": "Independent native wire schema from pinned unified SDK packages/bindings/src/subscriptions/rtds.ts. Values are preserved without SDK normalization; additional payload fields remain native mappings."
+}

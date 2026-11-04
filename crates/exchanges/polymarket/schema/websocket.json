@@ -1,0 +1,202 @@
+[
+  {
+    "source": "asyncapi-rfq.json",
+    "channel": "quoter",
+    "address": "/ws/rfq"
+  },
+  {
+    "source": "asyncapi.json",
+    "channel": "market",
+    "address": "/ws/market"
+  },
+  {
+    "source": "asyncapi-user.json",
+    "channel": "user",
+    "address": "/ws/user"
+  },
+  {
+    "source": "asyncapi-sports.json",
+    "channel": "sports",
+    "address": "/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "ping",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "placeOrders",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "cancelOrders",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "cancelOrdersCOID",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "cancelAll",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "autoCancel",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "updateLeverage",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "updateLeverages",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "updateMargin",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "auth",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "trades",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "bbo",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "book",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "klines",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "tickers",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "statistics",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "fills",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "backstop",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "orders",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "funding",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "balances",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "portfolio",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "deposits",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "withdrawals",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "notifications",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "modifyOrders",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "modifyOrdersCOID",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "builderFills",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "asyncapi-perps.json",
+    "channel": "tpsl",
+    "address": "/v1/ws"
+  },
+  {
+    "source": "polybolt.json",
+    "channel": "ws",
+    "address": "/ws"
+  },
+  {
+    "source": "rtds.json",
+    "channel": "crypto_prices",
+    "address": "/"
+  },
+  {
+    "source": "rtds.json",
+    "channel": "crypto_prices_chainlink",
+    "address": "/"
+  },
+  {
+    "source": "rtds.json",
+    "channel": "crypto_prices_twap_thirty",
+    "address": "/"
+  },
+  {
+    "source": "rtds.json",
+    "channel": "crypto_prices_twap_sixty",
+    "address": "/"
+  },
+  {
+    "source": "rtds.json",
+    "channel": "equity_prices",
+    "address": "/"
+  },
+  {
+    "source": "rtds.json",
+    "channel": "comments",
+    "address": "/"
+  }
+]
