@@ -1,0 +1,80 @@
+name: Build Node SDK
+on:
+  pull_request:
+    paths:
+      - .github/workflows/release-node.yml
+      - Cargo.toml
+      - Cargo.lock
+      - crates/**
+      - scripts/**
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: node-sdk-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+jobs:
+  native:
+    name: Node (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: crates/node/package-lock.json
+      - name: Install Rust
+        run: rustup toolchain install 1.92.0 --profile minimal --component rustfmt --component clippy && rustup default 1.92.0
+      - name: Install build tools
+        run: npm ci --prefix crates/node
+      - name: Validate sources and declarations
+        run: |
+          cargo fmt --all --check
+          python3 scripts/generate-node-bindings.py --check --models
+          python3 scripts/generate-metric-bindings.py --check
+          python3 scripts/check-node-coverage.py
+          cargo clippy --locked -p aux-rs-node --all-targets --all-features -- -D warnings
+          cargo test --locked -p aux-rs-node --test values
+          npm --prefix crates/node run typecheck
+      - name: Build and test release addon
+        run: |
+          npm --prefix crates/node run build:release
+          npm --prefix crates/node test
+          node scripts/check-node-package.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: node-${{ matrix.os }}
+          path: crates/node/aux.*.node
+          if-no-files-found: error
+  package:
+    needs: native
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+      - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
+        with:
+          pattern: node-*
+          path: crates/node
+          merge-multiple: true
+      - name: Pack all supported platforms
+        run: |
+          npm ci --prefix crates/node
+          node scripts/check-node-package.mjs
+          cd crates/node
+          npm pack
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: aux-ts-package
+          path: crates/node/*.tgz
+          if-no-files-found: error

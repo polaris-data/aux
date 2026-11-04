@@ -193,17 +193,21 @@ impl<S: Signer> AuthHandler for HyperliquidAuth<S> {
 
 /// Prepared fields cannot be mutated after signing. A caller can inspect or
 /// serialize this envelope, but cannot replace the action or signing context.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SignedRequest {
     #[serde(skip)]
     network: Network,
     #[serde(skip)]
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     signer_address: Address,
     action: Action,
     nonce: u64,
     signature: Signature,
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null"))]
     vault_address: Option<Address>,
     #[serde(skip_serializing_if = "Option::is_none")]
     expires_after: Option<u64>,

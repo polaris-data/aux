@@ -11,6 +11,8 @@ use std::collections::BTreeMap;
 const MAX48: i64 = (1i64 << 48) - 1;
 
 /// Native integer units; obtain the market's supported decimals before scaling.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "PascalCase")]
 pub struct CreateOrder {
@@ -62,6 +64,8 @@ impl CreateOrder {
         Ok(())
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "PascalCase")]
 pub struct CancelOrder {
@@ -355,12 +359,15 @@ pub(crate) fn form_encode(value: &str) -> String {
     out
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct SendTxResponse {
     pub code: i64,
     pub tx_hash: String,
     pub predicted_execution_time_ms: i64,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
 

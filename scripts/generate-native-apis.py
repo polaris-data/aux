@@ -39,6 +39,23 @@ def reference_root(venue):
 
 
 def write_file(path, contents):
+    # Node and Python share the same typed native operation inventory.
+    if path.name == "operations.rs" and "crates/python/src" in str(path):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("node_codegen", ROOT / "scripts/node-codegen.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        target = ROOT / "crates/node/src" / path.relative_to(ROOT / "crates/python/src")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        write_file(target, module.operations(contents))
+    if path.name in ("models.rs", "sbe_models.rs"):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("typescript_models", ROOT / "scripts/typescript-models.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        # Annotate formatted fields, including generated inline Rust declarations.
+        contents = subprocess.run(['rustfmt', '--edition', '2024', '--emit', 'stdout'], input=contents, text=True, capture_output=True, check=True).stdout
+        contents = module.annotate(contents)
     if path.suffix == '.rs':
         contents = subprocess.run(['rustfmt','--edition','2024','--emit','stdout'],input=contents,text=True,capture_output=True,check=True).stdout
     if CHECK:

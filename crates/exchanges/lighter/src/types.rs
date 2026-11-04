@@ -32,6 +32,8 @@ pub fn scale_decimal(value: &str, decimals: u8) -> Result<u64, Error> {
         .ok_or(Error::InvalidRequest("scaled decimal overflow"))
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct OrderBook {
     pub symbol: String,
@@ -43,6 +45,7 @@ pub struct OrderBook {
     pub min_base_amount: String,
     pub min_quote_amount: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
 impl OrderBook {
@@ -55,21 +58,29 @@ impl OrderBook {
             .map_err(|_| Error::InvalidRequest("price overflow"))
     }
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct OrderBooks {
     pub code: i64,
     pub order_books: Vec<OrderBook>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct SimpleOrder {
     pub order_index: i64,
     pub price: String,
     pub remaining_base_amount: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct OrderBookOrders {
     pub code: i64,
@@ -78,8 +89,11 @@ pub struct OrderBookOrders {
     pub total_bids: i64,
     pub bids: Vec<SimpleOrder>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Trade {
     pub trade_id: i64,
@@ -89,15 +103,21 @@ pub struct Trade {
     pub is_maker_ask: bool,
     pub timestamp: i64,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Trades {
     pub code: i64,
     pub trades: Vec<Trade>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Position {
     pub market_id: i64,
@@ -109,8 +129,11 @@ pub struct Position {
     pub realized_pnl: String,
     pub liquidation_price: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Account {
     pub index: i64,
@@ -120,16 +143,22 @@ pub struct Account {
     pub collateral: String,
     pub positions: Vec<Position>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Accounts {
     pub code: i64,
     pub total: i64,
     pub accounts: Vec<Account>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Order {
     pub order_index: i64,
@@ -141,19 +170,26 @@ pub struct Order {
     pub is_ask: bool,
     pub status: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Orders {
     pub code: i64,
     pub orders: Vec<Order>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct NextNonce {
     pub code: i64,
     pub nonce: i64,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }

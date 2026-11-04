@@ -222,6 +222,8 @@ pub fn abi_encode(values: &[AbiValue]) -> Result<Vec<u8>, Error> {
     head.extend(tail);
     Ok(head)
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 pub struct ActionPayload {
     pub subaccount_id: String,

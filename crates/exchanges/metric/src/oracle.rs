@@ -49,6 +49,8 @@ pub fn encode_u64x32(value: u64, rounding: Rounding) -> Result<u32, Error> {
     }
     Ok((e << 27) | m as u32)
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct OracleLane {
     #[serde(deserialize_with = "exact_u64")]
@@ -57,6 +59,7 @@ pub struct OracleLane {
     pub spread1: u16,
 }
 fn exact_u64<'de, D: serde::Deserializer<'de>>(deserializer: D) -> Result<u64, D::Error> {
+    #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
     #[derive(Deserialize)]
     #[serde(untagged)]
     enum Exact {

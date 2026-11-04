@@ -1,5 +1,5 @@
 [workspace]
-members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric"]
+members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric", "crates/node"]
 default-members = ["crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
 resolver = "3"
 
@@ -10,6 +10,7 @@ rust-version = "1.92"
 publish = false
 
 [workspace.dependencies]
+ts-rs = { version = "12", default-features = false, features = ["serde-compat", "serde-json-impl"] }
 aux-rs-data = { path = "crates/data/common", default-features = false }
 aux-rs-tardis = { path = "crates/data/tardis", default-features = false }
 aux-rs-databento = { path = "crates/data/databento", default-features = false }

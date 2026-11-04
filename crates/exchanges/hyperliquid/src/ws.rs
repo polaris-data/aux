@@ -11,6 +11,8 @@ use crate::{
     endpoints::validate_coin,
 };
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(tag = "type")]
 pub enum Subscription {
@@ -22,18 +24,21 @@ pub enum Subscription {
     OrderUpdates { user: Address },
     #[serde(rename = "userFills")]
     UserFills {
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         user: Address,
         #[serde(rename = "aggregateByTime", skip_serializing_if = "Option::is_none")]
         aggregate_by_time: Option<bool>,
     },
     #[serde(rename = "clearinghouseState")]
     ClearinghouseState {
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         user: Address,
         #[serde(skip_serializing_if = "Option::is_none")]
         dex: Option<String>,
     },
     #[serde(rename = "openOrders")]
     OpenOrders {
+        #[cfg_attr(feature = "typescript", ts(type = "string"))]
         user: Address,
         #[serde(skip_serializing_if = "Option::is_none")]
         dex: Option<String>,
@@ -176,6 +181,8 @@ fn matches_dex(data: &Value, dex: &Option<String>) -> bool {
         .is_none_or(|actual| actual == dex.as_deref().unwrap_or_default())
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SubscriptionResponse {
     pub method: String,
@@ -198,6 +205,7 @@ pub enum Event {
 
 impl Event {
     pub fn decode(text: &str) -> Result<Self, Error> {
+        #[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
         #[derive(Deserialize)]
         struct Envelope {
             channel: String,

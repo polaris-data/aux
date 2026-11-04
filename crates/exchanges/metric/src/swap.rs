@@ -3,23 +3,35 @@ use aux_rs_core::{Error as ClientError, HttpTransport};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct PreparedCall {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub to: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub data: Bytes,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub value: U256,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct RoutePreparation {
     pub route: RouteResponse,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub router: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub recipient: Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub deadline: U256,
     pub slippage_bps: u16,
     #[serde(default)]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub extension_datas: Option<Vec<Bytes>>,
     #[serde(default = "latest")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub block: String,
 }
 fn latest() -> String {

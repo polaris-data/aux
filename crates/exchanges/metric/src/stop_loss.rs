@@ -7,41 +7,63 @@ use crate::{
     },
 };
 use serde::{Deserialize, Serialize};
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct StopLossBinInput {
     pub bin_idx: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token0_balance_scaled: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub token1_balance_scaled: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub total_shares: U256,
     /// Current, already decayed watermark from the same observation as the balances.
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub high_watermark0: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub high_watermark1: U256,
 }
 fn yes() -> bool {
     true
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct StopLossEvaluationRequest {
     pub bins: Vec<StopLossBinInput>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub bid_price_x64: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub ask_price_x64: U256,
     pub drawdown_e6: u32,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub decay_per_second_e18: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub minimal_operational_liquidity: U256,
     #[serde(default = "yes")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub skip_empty_bins: bool,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StopLossBinStatus {
     pub bin_idx: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub metric_token0: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub metric_token1: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub high_watermark0: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub high_watermark1: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub threshold0: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub threshold1: U256,
     pub breached_token0: bool,
     pub breached_token1: bool,
@@ -50,6 +72,8 @@ pub struct StopLossBinStatus {
     pub seconds_until_zero_for_one_resumes: Option<u64>,
     pub seconds_until_one_for_zero_resumes: Option<u64>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StopLossEvaluation {
@@ -149,10 +173,13 @@ pub fn evaluate_oracle_stop_loss(
     })
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StopLossConfig {
     pub drawdown_e6: u32,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub decay_per_second_e18: U256,
     pub timelock: u64,
     pub initialized: bool,
@@ -163,31 +190,45 @@ fn latest() -> String {
 fn batch_limit() -> u32 {
     512
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct StopLossStatusRequest {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub pool: crate::Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub extension: crate::Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub data_provider: crate::Address,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub bid_price_x64: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub ask_price_x64: U256,
     #[serde(default = "latest")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub block: String,
     /// Explicit upper bound on the pool range to read; no partial status is returned.
     #[serde(default = "batch_limit")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub max_bins: u32,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StopLossStatus {
     #[serde(flatten)]
     pub evaluation: StopLossEvaluation,
     pub config: StopLossConfig,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub bid_price_x64: U256,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub ask_price_x64: U256,
     pub cur_bin_idx: i16,
     pub lowest_bin: i16,
     pub highest_bin: i16,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub minimal_operational_liquidity: U256,
     pub block: String,
 }

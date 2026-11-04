@@ -6,8 +6,11 @@ use aux_rs_core::{
 };
 use serde::{Deserialize, Serialize};
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct UserStateRequest {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub user: Address,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub dex: Option<String>,
@@ -18,8 +21,11 @@ impl UserStateRequest {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct OpenOrdersRequest {
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub user: Address,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub dex: Option<String>,
@@ -30,6 +36,8 @@ impl OpenOrdersRequest {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Serialize)]
 #[serde(tag = "type")]
 enum AccountRequest<'a> {
@@ -69,6 +77,8 @@ impl Endpoint<Hyperliquid> for OpenOrdersRequest {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserState {
@@ -78,10 +88,14 @@ pub struct UserState {
     pub margin_summary: MarginSummary,
     pub withdrawable: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub time: Option<u64>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MarginSummary {
@@ -90,16 +104,22 @@ pub struct MarginSummary {
     pub total_ntl_pos: String,
     pub total_raw_usd: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AssetPosition {
     #[serde(rename = "type")]
     pub position_type: String,
     pub position: Position,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Position {
@@ -115,8 +135,11 @@ pub struct Position {
     pub szi: String,
     pub unrealized_pnl: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CumulativeFunding {
@@ -124,8 +147,11 @@ pub struct CumulativeFunding {
     pub since_change: String,
     pub since_open: String,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "lowercase")]
 pub enum Leverage {
@@ -138,6 +164,8 @@ pub enum Leverage {
         raw_usd: String,
     },
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OpenOrder {
@@ -148,10 +176,13 @@ pub struct OpenOrder {
     pub sz: String,
     pub timestamp: u64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(type = "(string) | null", optional = nullable))]
     pub cloid: Option<Cloid>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub orig_sz: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
 
@@ -171,19 +202,27 @@ impl<T: HttpTransport, A: Sync> HyperliquidClient<T, A> {
     }
 }
 
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AccountStateEvent {
     pub dex: String,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub user: Address,
     pub clearinghouse_state: UserState,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OpenOrdersEvent {
     pub dex: String,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub user: Address,
     pub orders: Vec<OpenOrder>,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct OrderUpdate {
@@ -191,18 +230,26 @@ pub struct OrderUpdate {
     pub status: String,
     pub status_timestamp: u64,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserFills {
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub is_snapshot: Option<bool>,
+    #[cfg_attr(feature = "typescript", ts(type = "string"))]
     pub user: Address,
     pub fills: Vec<Fill>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Fill {
@@ -221,7 +268,9 @@ pub struct Fill {
     pub tid: u64,
     pub fee_token: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[cfg_attr(feature = "typescript", ts(optional = nullable))]
     pub builder_fee: Option<String>,
     #[serde(flatten)]
+    #[cfg_attr(feature = "typescript", ts(skip))]
     pub extra: ExtraFields,
 }

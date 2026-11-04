@@ -3,3 +3,8 @@
 __pycache__/
 /crates/python/python/aux_py/_native*.so
 /crates/python/python/aux_py/_native*.pyd
+/crates/node/node_modules/
+/crates/node/*.node
+/crates/node/native.cjs
+/crates/node/*.tgz
+/crates/node/native.d.ts

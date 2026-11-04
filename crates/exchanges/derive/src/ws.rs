@@ -14,6 +14,8 @@ use std::{
     },
 };
 static IDS: AtomicU64 = AtomicU64::new(1);
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(tag = "type", rename_all = "snake_case")]
 pub enum Subscription {
@@ -125,9 +127,12 @@ impl Subscription {
     }
 }
 /// Native envelope, including acknowledgements, publication metadata and unknown fields.
+#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]
+#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]
 #[derive(Clone, Serialize, Deserialize)]
 #[serde(transparent)]
 pub struct Event {
+    #[cfg_attr(feature = "typescript", ts(type = "{ [key: string]: LosslessValue }"))]
     pub fields: serde_json::Map<String, Value>,
 }
 impl Event {
