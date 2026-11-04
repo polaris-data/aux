@@ -225,12 +225,42 @@ pub(super) async fn connect(
     url: &str,
     tls: Arc<rustls::ClientConfig>,
     config: &TransportConfig,
+    headers: Vec<(String, String)>,
 ) -> Result<Socket, TransportError> {
+    use tokio_tungstenite::tungstenite::{
+        client::IntoClientRequest,
+        http::{HeaderName, HeaderValue},
+    };
+    let invalid = || {
+        TransportError::new(
+            TransportErrorKind::Configuration,
+            RequestOutcome::NotSent,
+            "invalid WebSocket upgrade request",
+        )
+    };
+    let mut request = url.into_client_request().map_err(|_| invalid())?;
+    for (name, value) in headers {
+        let name = HeaderName::from_bytes(name.as_bytes()).map_err(|_| invalid())?;
+        if matches!(
+            name.as_str(),
+            "host"
+                | "connection"
+                | "upgrade"
+                | "sec-websocket-key"
+                | "sec-websocket-version"
+                | "sec-websocket-extensions"
+        ) {
+            return Err(invalid());
+        }
+        request
+            .headers_mut()
+            .append(name, HeaderValue::from_str(&value).map_err(|_| invalid())?);
+    }
     let socket_config = WebSocketConfig::default()
         .max_message_size(Some(config.max_message_bytes))
         .max_frame_size(Some(config.max_message_bytes));
     let connection = tokio_tungstenite::connect_async_tls_with_config(
-        url,
+        request,
         Some(socket_config),
         false,
         Some(tokio_tungstenite::Connector::Rustls(tls)),
@@ -254,9 +284,13 @@ pub(super) async fn connect(
     Ok(socket)
 }
 impl StandardTransport {
-    async fn session(&self, url: &str, scope: String) -> Result<Session, TransportError> {
+    async fn session(
+        &self,
+        url: &str,
+        scope: String,
+        spec: Arc<dyn WebSocketSubscription>,
+    ) -> Result<Session, TransportError> {
         let _connecting = OperationGuard::start(&self.lifecycle)?;
-        let mut shutdown = self.lifecycle.closed.subscribe();
         self.lifecycle.check()?;
         let key = (url.to_owned(), scope);
         let mut sessions = self.sessions.lock().await;
@@ -265,26 +299,53 @@ impl StandardTransport {
             return Ok(session.clone());
         }
         sessions.retain(|_, s| !s.commands.is_closed());
-        let socket = tokio::select! {biased;_=shutdown.changed()=>return Err(closed(RequestOutcome::NotSent)),result=connect(url,self.tls.clone(),&self.config)=>result?};
-        self.lifecycle.check()?;
-        let (sender, receiver) = mpsc::unbounded_channel();
+        let (sender, mut receiver) = mpsc::unbounded_channel();
         let session = Session { commands: sender };
         let guard = OperationGuard::start(&self.lifecycle)?;
-        tokio::spawn(run(
-            socket,
-            receiver,
-            url.to_owned(),
-            self.tls.clone(),
-            self.config.clone(),
-            shutdown,
-            guard,
-        ));
+        let mut shutdown = self.lifecycle.closed.subscribe();
+        let url = url.to_owned();
+        let tls = self.tls.clone();
+        let config = self.config.clone();
+        // Publish the pending actor before dialing. Signer callbacks and socket
+        // handshakes run without holding the registry mutex; concurrent consumers
+        // still share exactly one connection attempt for this URL and scope.
+        tokio::spawn(async move {
+            let dial = async {
+                let headers = timeout(config.timeout, spec.handshake_headers())
+                    .await
+                    .map_err(|_| timed_out())??;
+                connect(&url, tls.clone(), &config, headers).await
+            };
+            let result = tokio::select! {biased;_=shutdown.changed()=>Err(closed(RequestOutcome::NotSent)),result=dial=>result};
+            match result {
+                Ok(socket) => run(socket, receiver, url, tls, config, shutdown, guard).await,
+                Err(error) => {
+                    receiver.close();
+                    while let Some(command) = receiver.recv().await {
+                        match command {
+                            Command::Add { done, .. } => {
+                                let _ = done.send(Err(error.clone()));
+                            }
+                            Command::Remove {
+                                done: Some(done), ..
+                            } => {
+                                let _ = done.send(Ok(()));
+                            }
+                            _ => {}
+                        }
+                    }
+                }
+            }
+        });
         sessions.insert(key, session.clone());
         Ok(session)
     }
 }
 impl WebSocketTransport for StandardTransport {
     type Stream = StandardSubscription;
+    fn supports_handshake_headers(&self) -> bool {
+        true
+    }
     async fn subscribe<S: WebSocketSubscription>(
         &self,
         url: &str,
@@ -293,7 +354,7 @@ impl WebSocketTransport for StandardTransport {
         let spec: Arc<dyn WebSocketSubscription> = Arc::new(spec);
         let mut scope = spec.connection_scope();
         for _ in 0..3 {
-            let session = self.session(url, scope.clone()).await?;
+            let session = self.session(url, scope.clone(), spec.clone()).await?;
             let id = NEXT_ID.fetch_add(1, Ordering::Relaxed);
             let mailbox = Mailbox::new(self.config.subscription_capacity);
             let mut subscription = StandardSubscription {
@@ -337,6 +398,9 @@ async fn send(
     text: String,
     config: &TransportConfig,
 ) -> Result<(), TransportError> {
+    if text.is_empty() {
+        return Ok(());
+    }
     timeout(config.timeout, socket.send(Message::Text(text.into())))
         .await
         .map_err(|_| timed_out())?
@@ -553,7 +617,8 @@ async fn connected(
                     Some(Ok(Message::Frame(_)))=>return(Some(protocol("unexpected raw WebSocket frame")),healthy,None),
                     Some(Err(WsError::Capacity(_)))=>return(Some(TransportError::new(TransportErrorKind::ResponseTooLarge,RequestOutcome::Unknown,"WebSocket frame exceeded configured limit")),healthy,None),
                     Some(Err(WsError::Protocol(_)))|Some(Err(WsError::Utf8(_)))=>return(Some(protocol("invalid WebSocket protocol frame")),healthy,None),
-                    Some(Ok(Message::Close(_)))|Some(Err(_))|None=>return(Some(disconnected()),healthy,None),
+                    Some(Ok(Message::Close(frame)))=>return(Some(frame.and_then(|f|owner.as_ref().and_then(|s|s.close_error(u16::from(f.code)))).unwrap_or_else(disconnected)),healthy,None),
+                    Some(Err(_))|None=>return(Some(disconnected()),healthy,None),
                 };
                 let had_entries=!entries.is_empty();
                 let replies:HashSet<_>=entries.values().filter_map(|e|e.spec.response_message(&text)).collect();
@@ -561,6 +626,7 @@ async fn connected(
                 let mut removed=Vec::new();
                 for entry in entries.values_mut(){
                     if !entry.spec.matches(&text){continue;}
+                    if let Err(error)=entry.spec.validate_message(&text){return(Some(error),healthy,None);}
                     if entry.awaiting_snapshot&&!entry.spec.is_snapshot_control(&text)&&!entry.spec.is_initial_snapshot(&text){
                         for (id,peer) in &entry.peers{peer.finish(Some(protocol("native delta arrived before subscription snapshot")));removed.push(*id);}continue;
                     }
@@ -648,7 +714,18 @@ async fn run(
                     _=&mut pause=>break,
                 }
             }
-            let dial = connect(&url, tls.clone(), &config);
+            let handshake_spec = entries
+                .values()
+                .next()
+                .expect("nonempty entries")
+                .spec
+                .clone();
+            let dial = async {
+                let headers = timeout(config.timeout, handshake_spec.handshake_headers())
+                    .await
+                    .map_err(|_| timed_out())??;
+                connect(&url, tls.clone(), &config, headers).await
+            };
             tokio::pin!(dial);
             let candidate = loop {
                 tokio::select! {biased;
@@ -689,9 +766,10 @@ async fn run(
                 };
             let restore = timeout(config.timeout, async {
                 for entry in entries.values() {
-                    candidate
-                        .send(Message::Text(entry.spec.subscribe_message().into()))
-                        .await?;
+                    let message = entry.spec.subscribe_message();
+                    if !message.is_empty() {
+                        candidate.send(Message::Text(message.into())).await?;
+                    }
                 }
                 Ok::<(), WsError>(())
             });

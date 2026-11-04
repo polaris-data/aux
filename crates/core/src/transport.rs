@@ -12,6 +12,7 @@ pub enum HttpMethod {
     Get,
     Post,
     Put,
+    Patch,
     Delete,
 }
 
@@ -116,6 +117,24 @@ pub trait WebSocketConnector: Send + Sync {
         &self,
         url: &str,
     ) -> impl Future<Output = Result<Self::Connection, TransportError>> + Send;
+    /// Credentials belong to the upgrade request, not a post-connect frame.
+    /// Existing custom connectors remain usable for unsigned upgrades.
+    fn connect_with_headers(
+        &self,
+        url: &str,
+        headers: Vec<(String, String)>,
+    ) -> impl Future<Output = Result<Self::Connection, TransportError>> + Send {
+        async move {
+            if !headers.is_empty() {
+                return Err(TransportError::new(
+                    TransportErrorKind::Configuration,
+                    RequestOutcome::NotSent,
+                    "custom WebSocket connector does not support handshake headers",
+                ));
+            }
+            self.connect(url).await
+        }
+    }
     /// Read-only, potentially finite streams may drain received frames and end
     /// normally after a clean close. Command connections keep their stricter
     /// discontinuity behavior. Custom implementations may share their connector.
@@ -131,6 +150,8 @@ pub trait WebSocketConnector: Send + Sync {
 /// before subscribing and prepare a fresh message on every reconnect.
 pub type AuthenticationMessage<'a> =
     Pin<Box<dyn Future<Output = Result<Option<String>, TransportError>> + Send + 'a>>;
+pub type HandshakeHeaders<'a> =
+    Pin<Box<dyn Future<Output = Result<Vec<(String, String)>, TransportError>> + Send + 'a>>;
 /// Wakes a pooled session when shared credentials are refreshed or invalidated.
 pub type AuthenticationChanged<'a> = Pin<Box<dyn Future<Output = ()> + Send + 'a>>;
 
@@ -141,6 +162,11 @@ pub type AuthenticationChanged<'a> = Pin<Box<dyn Future<Output = ()> + Send + 'a
 /// must route malformed or error messages for explicit
 /// handling rather than silently discarding them.
 pub trait WebSocketSubscription: Send + Sync + 'static {
+    /// Called immediately before each dial, including recovery attempts.
+    /// Implementations using credentials must also isolate connection_scope.
+    fn handshake_headers(&self) -> HandshakeHeaders<'_> {
+        Box::pin(std::future::ready(Ok(Vec::new())))
+    }
     /// Adapter-owned binary codec. Returns native text for the existing routing
     /// and delivery pipeline. All subscriptions sharing a connection scope must
     /// use the same codec. The default preserves text-only protocol validation.
@@ -197,6 +223,15 @@ pub trait WebSocketSubscription: Send + Sync + 'static {
     fn subscribe_message(&self) -> String;
     fn unsubscribe_message(&self) -> String;
     fn matches(&self, text: &str) -> bool;
+    /// Validate native continuity before delivering a matching frame. A
+    /// Disconnected error triggers bounded recovery and a fresh snapshot.
+    fn validate_message(&self, _text: &str) -> Result<(), TransportError> {
+        Ok(())
+    }
+    /// Override native policy/authentication closes that must not reconnect.
+    fn close_error(&self, _code: u16) -> Option<TransportError> {
+        None
+    }
     fn heartbeat_message(&self) -> Option<String> {
         None
     }
@@ -218,6 +253,11 @@ pub trait WebSocketStream: Send {
 
 pub trait WebSocketTransport: Send + Sync {
     type Stream: WebSocketStream;
+
+    /// Opt in only when subscribe prepares upgrade headers on every dial.
+    fn supports_handshake_headers(&self) -> bool {
+        false
+    }
 
     /// Implementations that pool connections must honor `connection_scope` to
     /// complete session authentication before subscribing and on reconnect,

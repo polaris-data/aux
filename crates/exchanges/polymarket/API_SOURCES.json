@@ -1,0 +1,182 @@
+{
+  "recorded_at": "2026-11-04",
+  "sources": {
+    "clob-openapi.yaml": {
+      "url": "https://docs.polymarket.com/api-spec/clob-openapi.yaml",
+      "sha256": "19268516978fc513ac3b02be4dde220df1236c56860e950395abfa9d51b58255"
+    },
+    "gamma-openapi.yaml": {
+      "url": "https://docs.polymarket.com/api-spec/gamma-openapi.yaml",
+      "sha256": "8b68e4ddd8bc4e11e5332127e6d8768a62006915999259c951568b2dc59c29a8"
+    },
+    "relayer-openapi.yaml": {
+      "url": "https://docs.polymarket.com/api-spec/relayer-openapi.yaml",
+      "sha256": "bc166abe718228203d6d479af36eae5901d77f807a1e73444fc380ee5ae385a8"
+    },
+    "combos-rfq-openapi.yaml": {
+      "url": "https://docs.polymarket.com/api-spec/combos-rfq-openapi.yaml",
+      "sha256": "2fd460508ace0b906948c07d0c835a49de59acf95abaed27ac59a8bffa45f638"
+    },
+    "bridge-openapi.yaml": {
+      "url": "https://docs.polymarket.com/api-spec/bridge-openapi.yaml",
+      "sha256": "e6ea7f3209c4b33f2e1fe8360681c0248f8a0f304c336b60b4d265fb731b6f15"
+    },
+    "perps-openapi.json": {
+      "url": "https://docs.polymarket.com/api-spec/perps-openapi.json",
+      "sha256": "2f22b131a3f5c3252157fa2231dfa631da66d9ce8132583493830bcc708ee2cf"
+    },
+    "asyncapi-rfq.json": {
+      "url": "https://docs.polymarket.com/asyncapi-rfq.json",
+      "sha256": "6f4d9a814f457a4aa81b7eb7759e6b277491a9131edb35aab6e6b9d45236523b"
+    },
+    "asyncapi.json": {
+      "url": "https://docs.polymarket.com/asyncapi.json",
+      "sha256": "c5b556cf140725ef72803e1e5e2d8afc5cc1cd4326abf004cf3809394de8aee1"
+    },
+    "asyncapi-user.json": {
+      "url": "https://docs.polymarket.com/asyncapi-user.json",
+      "sha256": "d17d8e8f81c5d06446c6418fb4046a0e34b59ae1dfa97f3917313d0e2f90c021"
+    },
+    "asyncapi-sports.json": {
+      "url": "https://docs.polymarket.com/asyncapi-sports.json",
+      "sha256": "59925fa2545e7e0532a6c0c858983aaf602da8eae400055c03ef1fe599e80824"
+    },
+    "asyncapi-perps.json": {
+      "url": "https://docs.polymarket.com/asyncapi-perps.json",
+      "sha256": "5db88635f63f4369d6f11052f6dacc96e7dad3874556e3313bc1675002b2f3ed"
+    },
+    "polybolt.json": {
+      "url": "https://ws-live-v2.polymarket.com/asyncapi.json",
+      "sha256": "1be0eaa3edf6087e8233bd234afcc6d8dfc5c76e50335731de04d744d0ba9f21"
+    },
+    "data-openapi.json": {
+      "url": "https://data-api.polymarket.com/v2/openapi.json",
+      "sha256": "cf4ceff85c26e6586c4164377dc4a1e9c1196ea7fa3ed94ce11a0fc083ca8fea"
+    },
+    "reference.txt": {
+      "url": "https://docs.polymarket.com/_llms/en/api-reference/predictions.txt",
+      "sha256": "3b0488a62f6da110ad7c3a1a39ae951d8789a2ef96d32bbc7971e0bd78965cb6"
+    },
+    "perps-reference.txt": {
+      "url": "https://docs.polymarket.com/_llms/en/api-reference/perps.txt",
+      "sha256": "caa486bc05715d681c8a5a15e8dce19c3ad19bec70835cd1541819023fa8d0ee"
+    },
+    "full-sdk/packages/client/src/abis.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/abis.ts",
+      "sha256": "813aa7f14dfcbc4f43df4eecdfadd2340de606782c441fe392be2f98743b5789"
+    },
+    "full-sdk/packages/client/src/environments.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/environments.ts",
+      "sha256": "ba8812c4ac92fafe8edaa8aa59a46c0fc27a70fa72f792385cc160c0854fd078"
+    },
+    "full-sdk/packages/client/src/wallet.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/wallet.ts",
+      "sha256": "4db9f8f959909a082dce457c9f79480abe5011e2985e4f57f65e8669a54ce2af"
+    },
+    "full-sdk/packages/client/src/authentication.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/authentication.ts",
+      "sha256": "51ebbaf882426c33f5a9510c8967d1e0f111e7c668f767f40e35ca3c920c6f01"
+    },
+    "full-sdk/packages/client/src/authorization.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/authorization.ts",
+      "sha256": "131fbe0a44f660932537204aa9bb97f686bef058c768192882aa7e4276309ebb"
+    },
+    "full-sdk/packages/client/src/actions/orders/typed-data.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/actions/orders/typed-data.ts",
+      "sha256": "ea5acac9dcc148c4bb2873396ec0db7d8065ee41c720fbf13e59ed50c4422ed8"
+    },
+    "full-sdk/packages/client/src/actions/perps.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/actions/perps.ts",
+      "sha256": "6cf0e60ab2e1be55ce7ce9fb927b72bcdadfec5cfbb36328d1fde19aba6338fb"
+    },
+    "full-sdk/packages/client/src/actions/session-keys.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/actions/session-keys.ts",
+      "sha256": "9e390e4a5fba026eebf44c5f93258a482cd3049a474dd132f35103dad8d64ac6"
+    },
+    "full-sdk/packages/client/src/actions/rfq.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/actions/rfq.ts",
+      "sha256": "013ae80023f83e2932eab0fd262c1764363a79e1431e66590d871952c1ec003b"
+    },
+    "full-sdk/packages/client/src/websockets/perps/signing.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/websockets/perps/signing.ts",
+      "sha256": "b40c9f6fae45be7f9eaa4925502597d81411a7fac10139234caa458545624598"
+    },
+    "full-sdk/packages/bindings/src/subscriptions/rtds.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/bindings/src/subscriptions/rtds.ts",
+      "sha256": "2237447126705cb4a471eae25ce54e05942df47947b440c1e45eec351a822d10"
+    },
+    "notices/Polymarket-ts-sdk-LICENSE": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/LICENSE",
+      "sha256": "1579b08d05547bc573b4cf032a4c252850e1af16d84270dd08ee3924ae5ccf0e"
+    },
+    "packages/client/package.json": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/package.json",
+      "sha256": "40183530bd93d135ebdc29a6357b5544f31361f3e632b0411ae656b1cbb7c8cb"
+    },
+    "full-sdk/packages/client/src/exchange.ts": {
+      "url": "https://raw.githubusercontent.com/Polymarket/ts-sdk/e44d1846e645d0892fc49de66b78b58a82296f5f/packages/client/src/exchange.ts",
+      "sha256": "892923940c1caffc2226afe96170fb4e87d81d9bc2bcff6ac0e85031a29171c9"
+    }
+  },
+  "normalized_sha256": {
+    "clob.json": "88ef7fab6f32230bcdc6c7f4eed11a39504e1c7d553980d48a4001e6116cfa8d",
+    "gamma.json": "42f78175589690a6834d09c57f5e181ea860d9c9b48cd546ecb70c99d7c445e0",
+    "relayer.json": "68eff51794b6db1f2b6b856d889401fcbeef7345813b67883c785d6a915eb660",
+    "combos_rfq.json": "2f9a35942bcfd8dbdefcf5107f102dfaff09ed793e6884ae7b9bd6b42827743a",
+    "bridge.json": "050cd15c3cd9825ccd42bcb9f17f569b5020df35e6f34e200c59a0c1a8d31dde",
+    "data.json": "84aa0eac9c4b908747a80a19541dd4264e572dd7ff93b704be7d3e40c3dcc75a",
+    "perps.json": "e784fa9c8647af746fd5245405e4778d6104ec46d1565ad81eee4da4ad7c6269",
+    "collateral_return.json": "33ea2ba33cc68f745c0f0922abcfb5e08e944c1c808948006c9ad924c3c4979d",
+    "builder_gateway.json": "33ea2ba33cc68f745c0f0922abcfb5e08e944c1c808948006c9ad924c3c4979d",
+    "asyncapi.json": "c5b556cf140725ef72803e1e5e2d8afc5cc1cd4326abf004cf3809394de8aee1",
+    "asyncapi-user.json": "d17d8e8f81c5d06446c6418fb4046a0e34b59ae1dfa97f3917313d0e2f90c021",
+    "asyncapi-sports.json": "59925fa2545e7e0532a6c0c858983aaf602da8eae400055c03ef1fe599e80824",
+    "asyncapi-rfq.json": "6f4d9a814f457a4aa81b7eb7759e6b277491a9131edb35aab6e6b9d45236523b",
+    "asyncapi-perps.json": "5db88635f63f4369d6f11052f6dacc96e7dad3874556e3313bc1675002b2f3ed",
+    "polybolt.json": "1be0eaa3edf6087e8233bd234afcc6d8dfc5c76e50335731de04d744d0ba9f21"
+  },
+  "notes": "Published contract union, exact native values and tracked supplemental surfaces. External schemas are pinned generation inputs. Upstream SDKs are never runtime dependencies. Publication limits are explicit in schema/blockers.json.",
+  "artifacts_sha256": {
+    "coverage.json": "520a5a36eea75403d68e60ec2878375925d8b14f1cb91bf996abdf1c693bab34",
+    "schema/blockers.json": "57277f9b058105c12bcc6c847396c1792da0a3f912e747a9da5620bf8019f3e3",
+    "schema/contracts.json": "5d704417a59f0e94764972358102d558e781e424be7764d34c03f734c08794ac",
+    "schema/deployments.json": "6d86ddb8d4c006922e801325290b8864217b71c65b7c9a0f097bd199e05e931b",
+    "schema/rtds.json": "94f13dc8e7c5f171a8555b3c126316cc49d4c78d0cb5bc8429ae78bfefa3482c",
+    "schema/services.json": "f20e43db88827eefd15e565c7bbb792ff8478b9dd46b088efd28b56a2ee5b788",
+    "schema/stream-notes-market.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-notes-perps.json": "a452ae42fd1f7c1372da0a915029d988b989f7c3d88d9ce54a39431d6dd7e029",
+    "schema/stream-notes-polybolt.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-notes-rfq.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-notes-rtds.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-notes-sports.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-notes-user.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-sources.json": "f2b449302f94c5dcef5ec86d407c42a89c31bed98995a976fb11a3e9bd34b753",
+    "schema/supplemental.json": "f7d3d9c047c3cf0f4c6400872403b1521d094dee6c3bbfdfaad4fcff8aca038d",
+    "schema/websocket.json": "740dad3c1034ff8b3e1fe50e95bf26c8633ff2befef7f81fcfe1d3e0b6d75d50",
+    "tests/fixtures/contracts-abi.json": "f0f6e87d08f26a38919cc08fc6287ed128224e02d07368426b605b3f9243d9b3",
+    "tests/fixtures/contracts.json": "92dc369ef16183632a202e83d621efa355c01f347985663e1d2b46cc2ba14fca",
+    "tests/fixtures/session-signature.json": "c0ebed0ee55f45cbf3b2fe25587adb553edb620e2641dbff2f59051383d6c41e",
+    "tests/fixtures/signing.json": "8a50d09e24f680dace706e8b75f095d577f790d27adfe54c0ba2dc2f6917950c",
+    "tests/fixtures/ws.json": "98f6c27319ff3315d045036578734760ff2c32fabc5ee2dfd7f0bfe982166184"
+  },
+  "rest_operations": 236,
+  "websocket_messages": 169,
+  "reference_vectors": {
+    "tools": [
+      "eth-account 0.13.7",
+      "eth-abi 5.2.0",
+      "msgpack 1.1.2",
+      "Python stdlib HMAC/SHA-256"
+    ],
+    "seed": "public test key 0x07 repeated 32 bytes",
+    "source": "independent implementations of pinned SDK/API preimages"
+  },
+  "sdk": {
+    "repository": "https://github.com/Polymarket/ts-sdk",
+    "commit": "e44d1846e645d0892fc49de66b78b58a82296f5f",
+    "package": "@polymarket/client",
+    "version": "0.16.0",
+    "license": "MIT",
+    "use": "protocol formats, deployed addresses and client-facing ABI signatures; no runtime dependency"
+  }
+}

@@ -1,0 +1,29 @@
+[package]
+name = "aux-rs-evm"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license = "MIT"
+repository = "https://github.com/polaris-data/connectors"
+description = "Shared explicit EVM transactions, signing and nonce reconciliation"
+
+[features]
+default = []
+http = ["aux-rs-core/http"]
+
+[dependencies]
+aux-rs-core.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+zeroize.workspace = true
+k256.workspace = true
+url.workspace = true
+alloy-primitives.workspace = true
+alloy-sol-types.workspace = true
+alloy-consensus.workspace = true
+alloy-eips.workspace = true
+alloy-tx-macros.workspace = true
+
+[lints]
+workspace = true

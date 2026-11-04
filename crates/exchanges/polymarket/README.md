@@ -1,0 +1,23 @@
+# Polymarket
+
+Enable `aux-rs` with `polymarket` for native models, codecs and injected I/O. Add `http` and/or `ws` only when standard networking is needed; exchange selection alone does not enable a runtime or socket stack. Constructors accept explicit deployment environments and custom endpoint maps. `with_transport` accepts caller-owned I/O. Standard clients expose their transport for deterministic `shutdown`.
+
+`PolymarketClient` covers international predictions through `gamma`, `clob`, `data`, `relayer`, `bridge`, `combos_rfq`, `builder_gateway` and `collateral_return`. `PolymarketPerpsClient` uses the separate `perps` namespace and credential lifecycle. Polymarket US is excluded.
+
+Prediction authentication supports wallet EIP-712 authorization, CLOB API credentials/HMAC, explicit CTF/V2 order domains, signature modes 0–3, builder credentials, relayer API keys, and Deposit Wallet session signers. Configure `OrderDomain` explicitly before automatic order signing. `market_asset_id` selects decimal CTF token IDs or V2 position IDs from explicit versioned metadata. It does not guess from a market ID. `market_order_domain` requires native negative-risk metadata.
+
+Perps use owner authorization for proxy creation/withdrawals and separate `PerpsCredentials` plus a proxy signer for operations. Native MessagePack arrays and EIP-712 hashes are encoded without JSON-number coercion. Provide the documented withdrawal contract explicitly. Proxy expiry is checked before streams resume. API, builder, relayer and proxy secrets are distinct.
+
+Stream services are `market`, `user`, `sports`, `polybolt`, `rtds`, `rfq` and `perps`. `Subscription.params` contains the native subscription mapping; perps uses `{"channel": <native channel>}`. RTDS topics retain native names and exact `full_accuracy_value` fields, including TWAP windows 30/60, equity snapshots and comment/reaction events. RFQ and perps have separate command session helpers in Python. Select proxy/Safe/Deposit Wallet RFQ identity explicitly with `with_rfq_signature_type` (Rust) or `rfq_signature_type` (Python); modes 0–3 stay native. Writes retain pending correlation after timeout/disconnect and require explicit reconciliation; they are never resubmitted automatically.
+
+`PolymarketChainClient` reuses `aux-rs-evm`, independently of Metric. `contracts` contains the 22 client-facing callable signatures published by the pinned unified SDK; `schema/deployments.json` pins Polygon addresses. Use `ContractCall::new` with typed calls or exact `encode_contract_call`/decode helpers. Approvals, split/merge/redemption, router operations, Deposit Wallet authorization/batches and perps deposits are explicit actions. Callers choose recipients, limits, deployment, fees and funding order. No allowance, transfer or funding workflow runs implicitly. Runtime code identity pins are available through shared EVM `ChainConfig`.
+
+## Requests, values and Python
+
+Every REST operation has a named async method; the inventory maps `236` REST operations and `169` WebSocket message contracts. Rust request types are under the service namespace and end in `Params`. Path/query/header fields are at the top level and JSON request bodies are under `body`. Unknown response fields and explicit nulls are retained. Native numeric strings remain strings; JSON numbers use arbitrary precision rather than binary floating point.
+
+Python exports matching clients and local/async callback signers from `aux_py`. Use `async with Client(...) as client` or `await client.aclose()`. Constructors accept `network`, `endpoints`, `websocket`, timeout and bounded subscription capacity. Requests are native mappings with the same `body` envelope as Rust. Python floats are rejected recursively; use `Decimal`, integers or native strings. Responses preserve JSON integers, decode fractions to `Decimal`, and keep string-encoded decimals as strings. Native errors carry venue/status/code/body fields. `Subscription` supports async iteration and explicit close; parent shutdown cancels children. Command helpers live in `aux_py._prediction_rpc` and are returned by `open_rpc()`.
+
+Writes execute once. Transport errors with unknown outcomes require explicit caller reconciliation against order IDs, transaction hashes or native history. Public idempotent reads may use the bounded standard retry policy; signed reads are prepared afresh per call and are not automatically retried. Client close/cancellation never silently repeats a write.
+
+See [coverage](COVERAGE.md), [signing](SIGNING.md), [verification](VERIFICATION.md), [source pins](API_SOURCES.json) and [notice](NOTICE). Public smoke and explicitly gated write examples are in `crates/python/examples/prediction_*.py`.

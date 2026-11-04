@@ -1,0 +1,55 @@
+{
+  "recorded_at": "2026-11-04",
+  "sources": {
+    "docs.html": {
+      "url": "https://docs.pascal.trade/",
+      "sha256": "edc2fb8370e42473d5aaf6441985813110f9c02838500a4fdc95317c9aeb402a"
+    },
+    "config.py": {
+      "url": "https://raw.githubusercontent.com/Pascal-Research-Inc/pascal-python-quickstart/dd9d4824f0318c9fe26882876e5ed39165170485/pascal_quickstart/config.py",
+      "sha256": "31fcea07927ef035cc13dce8f8c59d31ecada5473ad87befb6eb1b70da205c2e"
+    },
+    "signing.py": {
+      "url": "https://raw.githubusercontent.com/Pascal-Research-Inc/pascal-python-quickstart/dd9d4824f0318c9fe26882876e5ed39165170485/pascal_quickstart/signing.py",
+      "sha256": "f188a2b2894e18266ea6adbd6c57c96c060174b52588800b92bcfb65b3a5aa00"
+    },
+    "vectors.py": {
+      "url": "https://raw.githubusercontent.com/Pascal-Research-Inc/pascal-python-quickstart/dd9d4824f0318c9fe26882876e5ed39165170485/tests/test_signing_vectors.py",
+      "sha256": "58eb23e9186dad7c9bec35cfd54578af1a38f3dfbb345371866aac78981c88ec"
+    }
+  },
+  "normalized_sha256": {
+    "read.json": "744e71d09a75238ef7dd149f5eadc2852b5930d3e74fd835a4b93ca9ec4b384b",
+    "write.json": "1f45047a7caa7e5481f21440899c84667878f84debd9a2392e8cc41a93a43110",
+    "pascal-ws.json": "b73b34bc3b49f1aaa06468195b22262a27b421808c4cd1077412e6a45c711299"
+  },
+  "notes": "Published contract union, exact native values and tracked supplemental surfaces. External schemas are pinned generation inputs. Upstream SDKs are never runtime dependencies. Publication limits are explicit in schema/blockers.json.",
+  "artifacts_sha256": {
+    "coverage.json": "fe6a8ba21700584ae4b431fc54523b3b6321b251f8582b16c8cf996a505183e5",
+    "schema/blockers.json": "4dcb2e2b2e961e0bc5bc5afcd6000eeb50f2d9c45bb839c7871605995278263d",
+    "schema/services.json": "9f69880b5db02480c053e17269a104b595f1ac92a467e2acfd842f7bbf13ec89",
+    "schema/stream-notes-data.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "schema/stream-sources.json": "64e8c8319eda600fb27669169fd9587d626042705b173662c756db7f2500c802",
+    "schema/websocket.json": "79879041c17ceb5d3a824e13027e7db224a1779b32e4713935ae1e04ca7bc6fe",
+    "tests/fixtures/contracts.json": "98c2a265e8de887796748ba07c99f027a581b17fa4ae99fbf7cd3d56aa38dbe9",
+    "tests/fixtures/signing.json": "d9ceb0251490d6b49e9953dd410f1ad4fc7458e6a6112751fa2e2558cabf3668",
+    "tests/fixtures/solana.json": "121372c9fc8a2b3370f5d13f9276ea211f38a06219ca183e92069a0fd77d9984",
+    "tests/fixtures/ws.json": "1940c0639635370008da62156720594af180da73ea6840969bc217ed43c639b4"
+  },
+  "rest_operations": 40,
+  "websocket_messages": 25,
+  "reference_vectors": {
+    "tools": [
+      "published python-quickstart vectors",
+      "solders 0.27.1"
+    ],
+    "source": "official permit vectors and independently generated SPL transferChecked transaction",
+    "seed": "public test Ed25519 seeds in fixtures"
+  },
+  "quickstart": {
+    "repository": "https://github.com/Pascal-Research-Inc/pascal-python-quickstart",
+    "commit": "dd9d4824f0318c9fe26882876e5ed39165170485",
+    "use": "configuration and official permit vectors; implementation independently written",
+    "license": "No upstream license grant assumed"
+  }
+}

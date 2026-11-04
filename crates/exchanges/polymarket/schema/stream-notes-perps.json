@@ -1,0 +1,86 @@
+[
+  {
+    "schema_path": "/channels/placeOrders/messages/Request/payload/properties/op/properties/args",
+    "correction": "Array documented in description and official examples; object schema wrapped as items."
+  },
+  {
+    "schema_path": "/channels/trades/messages/Update/payload/properties/data",
+    "correction": "Array documented in description and official examples; object schema wrapped as items."
+  },
+  {
+    "schema_path": "/channels/tickers/messages/Update/payload/properties/data",
+    "correction": "Array documented in description and official examples; object schema wrapped as items."
+  },
+  {
+    "schema_path": "/channels/statistics/messages/Update/payload/properties/data",
+    "correction": "Array documented in description and official examples; object schema wrapped as items."
+  },
+  {
+    "schema_path": "/channels/deposits/messages/Update/payload/properties/data",
+    "correction": "Array documented in description and official examples; object schema wrapped as items."
+  },
+  {
+    "schema_path": "/channels/withdrawals/messages/Update/payload/properties/data",
+    "correction": "Array documented in description and official examples; object schema wrapped as items."
+  },
+  {
+    "fixture": "perps.updateLeverage.Request",
+    "field": "/op/args/cross",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.trades.Update",
+    "field": "/data/0/settlement",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.fills.Update",
+    "field": "/data/0/taker",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.fills.Update",
+    "field": "/data/0/liq",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.fills.Update",
+    "field": "/data/0/adl",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.fills.Update",
+    "field": "/data/0/settlement",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.fills.Update",
+    "field": "/data/0/liquidation_details/mark",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.backstop.Update",
+    "field": "/data/cross",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.portfolio.Update",
+    "field": "/data/positions/0/instrument_id",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.portfolio.Update",
+    "field": "/data/positions/0/cross",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.portfolio.Update",
+    "field": "/data/in_liquidation",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  },
+  {
+    "fixture": "perps.withdrawals.Update",
+    "field": "/data/0/withdraw_id",
+    "correction": "Published example omits a required schema field; completed with a synthetic schema value."
+  }
+]

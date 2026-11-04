@@ -1,0 +1,9 @@
+{
+  "excluded": [
+    "Kalshi FIX"
+  ],
+  "publication_limits": [
+    "Restricted clearing/member roles and production credentials are not exercised offline."
+  ],
+  "missing_published_artifacts": []
+}

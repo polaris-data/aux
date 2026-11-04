@@ -388,6 +388,7 @@ impl<S: SessionSigner> MonacoAuth<S> {
             HttpMethod::Get => "GET",
             HttpMethod::Post => "POST",
             HttpMethod::Put => "PUT",
+            HttpMethod::Patch => "PATCH",
             HttpMethod::Delete => "DELETE",
         };
         let public = hex::encode(self.signer.public_key());

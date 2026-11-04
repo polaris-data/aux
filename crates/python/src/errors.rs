@@ -13,6 +13,9 @@ pub enum ClientError {
     Arcus(NativeError<aux_rs::arcus::Error>),
     Hyperliquid(NativeError<hl::Error>),
     Lighter(NativeError<lt::Error>),
+    Kalshi(NativeError<aux_rs::kalshi::Error>),
+    Polymarket(NativeError<aux_rs::polymarket::Error>),
+    Pascal(NativeError<aux_rs::pascal::Error>),
     Conversion,
 }
 create_exception!(aux_py, ConnectorError, PyException);
@@ -22,7 +25,10 @@ create_exception!(aux_py, GapError, TransportError);
 impl ClientError {
     pub fn is_gap(&self) -> bool {
         match self {
-            Self::Metric(NativeError::Transport(e))
+            Self::Kalshi(NativeError::Transport(e))
+            | Self::Polymarket(NativeError::Transport(e))
+            | Self::Pascal(NativeError::Transport(e))
+            | Self::Metric(NativeError::Transport(e))
             | Self::Hyperliquid(NativeError::Transport(e))
             | Self::Derive(NativeError::Transport(e))
             | Self::Paradex(NativeError::Transport(e))
@@ -118,7 +124,35 @@ pub fn lt_native(error: lt::Error) -> PyErr {
 pub fn map_error(error: &ClientError) -> PyErr {
     match error {
         ClientError::Data(error) => data_ref(error),
-        ClientError::Metric(NativeError::Transport(e))
+        ClientError::Pascal(NativeError::Exchange(e)) => match e {
+            aux_rs::pascal::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
+            aux_rs::pascal::Error::Decode(_)=>DecodeError::new_err("Pascal response decoding failed"),
+            aux_rs::pascal::Error::Authentication(s)=>AuthenticationError::new_err(*s),
+            aux_rs::pascal::Error::Signing(s)=>SigningError::new_err(*s),
+            aux_rs::pascal::Error::PendingOutcome=>OutcomeUncertainError::new_err("reconcile the pending native submission"),
+            aux_rs::pascal::Error::Api{status,body}=>prediction_api("Pascal",*status,body),
+        },
+        ClientError::Polymarket(NativeError::Exchange(e)) => match e {
+            aux_rs::polymarket::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
+            aux_rs::polymarket::Error::Abi(_)=>ValidationError::new_err("invalid Polymarket ABI value"),
+            aux_rs::polymarket::Error::Decode(_)=>DecodeError::new_err("Polymarket response decoding failed"),
+            aux_rs::polymarket::Error::Authentication(s)=>AuthenticationError::new_err(*s),
+            aux_rs::polymarket::Error::Signing(s)=>SigningError::new_err(*s),
+            aux_rs::polymarket::Error::PendingOutcome=>OutcomeUncertainError::new_err("reconcile the pending native submission"),
+            aux_rs::polymarket::Error::Api{status,body}=>prediction_api("Polymarket",*status,body),
+        },
+        ClientError::Kalshi(NativeError::Exchange(e)) => match e {
+            aux_rs::kalshi::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
+            aux_rs::kalshi::Error::Decode(_)=>DecodeError::new_err("Kalshi response decoding failed"),
+            aux_rs::kalshi::Error::Authentication(s)=>AuthenticationError::new_err(*s),
+            aux_rs::kalshi::Error::Signing(s)=>SigningError::new_err(*s),
+            aux_rs::kalshi::Error::PendingOutcome=>OutcomeUncertainError::new_err("reconcile the pending native submission"),
+            aux_rs::kalshi::Error::Api{status,body}=>prediction_api("Kalshi",*status,body),
+        },
+        ClientError::Kalshi(NativeError::Transport(e))
+        | ClientError::Polymarket(NativeError::Transport(e))
+        | ClientError::Pascal(NativeError::Transport(e))
+        | ClientError::Metric(NativeError::Transport(e))
         | ClientError::Hyperliquid(NativeError::Transport(e))
         | ClientError::Derive(NativeError::Transport(e))
         | ClientError::Paradex(NativeError::Transport(e))
@@ -302,6 +336,38 @@ pub fn derive(error: NativeError<aux_rs::derive::Error>) -> PyErr {
 pub fn paradex(error: NativeError<aux_rs::paradex::Error>) -> PyErr {
     map_error(&ClientError::Paradex(error))
 }
+fn prediction_api(venue: &str, status: u16, body: &serde_json::Value) -> PyErr {
+    let native = body.get("error").filter(|v| v.is_object()).unwrap_or(body);
+    let code = native.get("code").or_else(|| body.get("error_code"));
+    let message = native
+        .get("message")
+        .and_then(serde_json::Value::as_str)
+        .or_else(|| body.get("error").and_then(serde_json::Value::as_str))
+        .or_else(|| body.get("errorMsg").and_then(serde_json::Value::as_str));
+    let error = exchange(
+        venue,
+        (status != 0).then_some(status),
+        Some(&body.to_string()),
+        message,
+        None,
+        None,
+    );
+    Python::attach(|py| {
+        if let Ok(value) = crate::convert::output(body) {
+            let _ = error.value(py).setattr("native", value);
+        }
+        if let Ok(value) = crate::convert::output(code) {
+            let _ = error.value(py).setattr("code", value);
+        }
+        if let Some(object) = body.as_object()
+            && let Ok(value) = crate::convert::output(object)
+        {
+            let _ = error.value(py).setattr("extra", value);
+        }
+    });
+    error
+}
+
 fn native_body(venue: &str, status: Option<u16>, body: &serde_json::Value) -> PyErr {
     let native = body.get("error").unwrap_or(body);
     let code = native.get("code").and_then(serde_json::Value::as_i64);
@@ -356,40 +422,64 @@ pub fn metric(error: NativeError<aux_rs::metric::Error>) -> PyErr {
     map_error(&ClientError::Metric(error))
 }
 
-fn metric_native(e: &aux_rs::metric::Error) -> PyErr {
+fn evm_native(venue: &str, e: &aux_rs::metric::Error) -> PyErr {
     match e {
         aux_rs::metric::Error::InvalidRequest(s) => ValidationError::new_err(*s),
         aux_rs::metric::Error::Decode(_) | aux_rs::metric::Error::Abi(_) => {
-            DecodeError::new_err("Metric codec failed")
+            DecodeError::new_err(format!("{venue} codec failed"))
         }
-        aux_rs::metric::Error::Signing(_) => SigningError::new_err("Metric signing failed"),
+        aux_rs::metric::Error::Signing(_) => {
+            SigningError::new_err(format!("{venue} signing failed"))
+        }
         aux_rs::metric::Error::Authentication(s) => AuthenticationError::new_err(*s),
         aux_rs::metric::Error::PendingOutcome => {
-            OutcomeUncertainError::new_err("Metric submission outcome is unresolved")
+            OutcomeUncertainError::new_err(format!("{venue} submission outcome is unresolved"))
         }
-        aux_rs::metric::Error::Api { status, body } => native_body("Metric", Some(*status), body),
+        aux_rs::metric::Error::Api { status, body } => native_body(venue, Some(*status), body),
         aux_rs::metric::Error::Rpc {
             code,
             message,
             data,
         } => native_body(
-            "Metric",
+            venue,
             None,
             &serde_json::json!({"code":code,"message":message,"data":data}),
         ),
         aux_rs::metric::Error::UncertainSubmission { hash, cause } => {
             Python::attach(|py| -> PyResult<PyErr> {
-                let error = OutcomeUncertainError::new_err(
-                    "Metric submission response is uncertain; reconcile the transaction hash",
-                );
+                let error = OutcomeUncertainError::new_err(format!(
+                    "{venue} submission response is uncertain; reconcile the transaction hash"
+                ));
                 error.value(py).setattr("hash", format!("{hash:#x}"))?;
                 error.value(py).setattr("outcome", "unknown")?;
                 error
                     .value(py)
-                    .setattr("cause", metric_native(cause).value(py))?;
+                    .setattr("cause", evm_native(venue, cause).value(py))?;
                 Ok(error)
             })
             .unwrap_or_else(std::convert::identity)
         }
     }
+}
+
+fn metric_native(e: &aux_rs::metric::Error) -> PyErr {
+    evm_native("Metric", e)
+}
+pub fn polymarket_chain(error: NativeError<aux_rs::polymarket::EvmError>) -> PyErr {
+    match error {
+        NativeError::Transport(e) => transport(&e),
+        NativeError::Exchange(e) => evm_native("Polymarket", &e),
+    }
+}
+
+pub fn kalshi(error: NativeError<aux_rs::kalshi::Error>) -> PyErr {
+    map_error(&ClientError::Kalshi(error))
+}
+
+pub fn polymarket(error: NativeError<aux_rs::polymarket::Error>) -> PyErr {
+    map_error(&ClientError::Polymarket(error))
+}
+
+pub fn pascal(error: NativeError<aux_rs::pascal::Error>) -> PyErr {
+    map_error(&ClientError::Pascal(error))
 }

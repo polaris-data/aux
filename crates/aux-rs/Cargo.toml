@@ -11,8 +11,8 @@ include = ["Cargo.toml", "src/**"]
 
 [features]
 default = ["http", "ws"]
-http = ["aux-rs-metric?/http", "aux-rs-tardis?/http", "aux-rs-databento?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
-ws = ["aux-rs-tardis?/ws", "aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]
+http = ["aux-rs-pascal?/http", "aux-rs-kalshi?/http", "aux-rs-polymarket?/http", "aux-rs-metric?/http", "aux-rs-tardis?/http", "aux-rs-databento?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
+ws = ["aux-rs-pascal?/ws", "aux-rs-kalshi?/ws", "aux-rs-polymarket?/ws", "aux-rs-tardis?/ws", "aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]
 files = ["aux-rs-tardis?/files", "aux-rs-databento?/files"]
 tcp = ["aux-rs-databento?/tcp"]
 tardis = ["dep:aux-rs-tardis"]
@@ -26,7 +26,16 @@ paradex = ["dep:aux-rs-paradex"]
 hyperliquid = ["dep:aux-rs-hyperliquid"]
 lighter = ["dep:aux-rs-lighter"]
 
+polymarket = ["dep:aux-rs-polymarket"]
+
+kalshi = ["dep:aux-rs-kalshi"]
+
+pascal = ["dep:aux-rs-pascal"]
+
 [dependencies]
+aux-rs-pascal = { workspace=true, optional=true }
+aux-rs-kalshi = { workspace=true, optional=true }
+aux-rs-polymarket = { workspace=true, optional=true }
 aux-rs-tardis = { workspace = true, optional = true }
 aux-rs-databento = { workspace = true, optional = true }
 aux-rs-metric = { workspace = true, optional = true }

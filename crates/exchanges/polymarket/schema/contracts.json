@@ -1,0 +1,112 @@
+[
+  {
+    "interface": "IERC20",
+    "reference": "ERC20_APPROVE",
+    "signature": "function approve(address spender, uint256 amount)"
+  },
+  {
+    "interface": "IERC20",
+    "reference": "ERC20_ALLOWANCE",
+    "signature": "function allowance(address owner, address spender) view returns (uint256)"
+  },
+  {
+    "interface": "IERC20",
+    "reference": "ERC20_TRANSFER",
+    "signature": "function transfer(address recipient, uint256 amount)"
+  },
+  {
+    "interface": "IDepositWallet",
+    "reference": "DEPOSIT_WALLET_AUTHORIZE_SESSION_SIGNER",
+    "signature": "function authorizeSessionSigner(address sessionSigner, uint256 validUntil)"
+  },
+  {
+    "interface": "IDepositWallet",
+    "reference": "DEPOSIT_WALLET_REVOKE_SESSION_SIGNER",
+    "signature": "function revokeSessionSigner(address sessionSigner)"
+  },
+  {
+    "interface": "IPerpsDeposit",
+    "reference": "PERPS_DEPOSIT",
+    "signature": "function deposit(address token, uint256 amount, address to)"
+  },
+  {
+    "interface": "IPositions",
+    "reference": "ERC1155_SET_APPROVAL_FOR_ALL",
+    "signature": "function setApprovalForAll(address operator, bool approved)"
+  },
+  {
+    "interface": "IPositions",
+    "reference": "ERC1155_IS_APPROVED_FOR_ALL",
+    "signature": "function isApprovedForAll(address account, address operator) view returns (bool)"
+  },
+  {
+    "interface": "IPositions",
+    "reference": "ERC1155_BALANCE_OF",
+    "signature": "function balanceOf(address account, uint256 id) view returns (uint256)"
+  },
+  {
+    "interface": "IPositions",
+    "reference": "ERC1155_BALANCE_OF_BATCH",
+    "signature": "function balanceOfBatch(address[] accounts, uint256[] ids) view returns (uint256[])"
+  },
+  {
+    "interface": "ICtf",
+    "reference": "CTF_SPLIT_POSITION",
+    "signature": "function splitPosition(address collateralToken, bytes32 parentCollectionId, bytes32 conditionId, uint256[] partition, uint256 amount)"
+  },
+  {
+    "interface": "ICtf",
+    "reference": "CTF_MERGE_POSITIONS",
+    "signature": "function mergePositions(address collateralToken, bytes32 parentCollectionId, bytes32 conditionId, uint256[] partition, uint256 amount)"
+  },
+  {
+    "interface": "ICtf",
+    "reference": "CTF_REDEEM_POSITIONS",
+    "signature": "function redeemPositions(address collateralToken, bytes32 parentCollectionId, bytes32 conditionId, uint256[] indexSets)"
+  },
+  {
+    "interface": "IRouterV2",
+    "reference": "ROUTER_SPLIT",
+    "signature": "function split(bytes31 conditionId, uint256 amount)"
+  },
+  {
+    "interface": "IRouterV2",
+    "reference": "ROUTER_CONVERT",
+    "signature": "function convert(bytes29 eventId, uint16 conditionIndex, uint256 amount)"
+  },
+  {
+    "interface": "IRouterV2",
+    "reference": "ROUTER_HORIZONTAL_SPLIT",
+    "signature": "function horizontalSplit(bytes29 eventId, uint256 amount)"
+  },
+  {
+    "interface": "IRouterV2",
+    "reference": "ROUTER_HORIZONTAL_MERGE",
+    "signature": "function horizontalMerge(bytes29 eventId, uint256 amount)"
+  },
+  {
+    "interface": "IRouterV2",
+    "reference": "ROUTER_MERGE",
+    "signature": "function merge(bytes31 conditionId, uint256 amount)"
+  },
+  {
+    "interface": "IRouterV2",
+    "reference": "ROUTER_REDEEM",
+    "signature": "function redeem(bytes31 conditionId, uint256 outcomeIndex, uint256 amount)"
+  },
+  {
+    "interface": "ICombinatorialModule",
+    "reference": "COMBINATORIAL_MODULE_PREPARE_CONDITION",
+    "signature": "function prepareCondition(uint256[] legs) returns (bytes31)"
+  },
+  {
+    "interface": "IMultisend",
+    "reference": "SAFE_MULTISEND",
+    "signature": "function multiSend(bytes)"
+  },
+  {
+    "interface": "IProxyFactory",
+    "reference": "PROXY_FACTORY",
+    "signature": "function proxy((uint8 typeCode, address to, uint256 value, bytes data)[] calls) returns (bytes[])"
+  }
+]

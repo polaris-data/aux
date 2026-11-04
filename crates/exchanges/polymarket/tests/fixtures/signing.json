@@ -1,0 +1,1119 @@
+[
+  {
+    "name": "wallet_auth",
+    "typed_data": {
+      "domain": {
+        "name": "ClobAuthDomain",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "ClobAuth",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "ClobAuth": [
+          {
+            "name": "address",
+            "type": "address"
+          },
+          {
+            "name": "timestamp",
+            "type": "string"
+          },
+          {
+            "name": "nonce",
+            "type": "uint256"
+          },
+          {
+            "name": "message",
+            "type": "string"
+          }
+        ]
+      },
+      "message": {
+        "address": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "timestamp": "1731536000",
+        "nonce": 0,
+        "message": "This message attests that I control the given wallet"
+      }
+    },
+    "digest": "0xb0a7d750f9fcb15d6d862d97fa968abd3aa871cf60ac375c496a7e8f430471f4",
+    "signature": "0xbba33a080eb7ccca5f2b7c453046018d1cdeabc0f66af56d7cfdebc94727e6401bcc5ce27ea2f62ec9673a03ecf2890b3f25365c6fc4f50a919c26ebde42fecb1c",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569"
+  },
+  {
+    "name": "order_v2_signature_0",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "2",
+        "chainId": 137,
+        "verifyingContract": "0xE111180000d2663C0091e4f400237545B87B996B"
+      },
+      "primaryType": "Order",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "salt": 42,
+        "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "tokenId": "123456789012345678901234567890",
+        "makerAmount": "550000",
+        "takerAmount": "1000000",
+        "side": 0,
+        "signatureType": 0,
+        "timestamp": "1731536000",
+        "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x87cd6875377090a52dcc5903bb34855887743c3f5ba0456330130796c27f4267",
+    "signature": "0x376649ea7481182e232f15191019013a52fcd37ecc88177ee26fb6215c1f02a84d538d20eccca67e58d2c931705d68cbb1eee39f9ab05940ed6e13476791bad61b",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "order_signature": "0x376649ea7481182e232f15191019013a52fcd37ecc88177ee26fb6215c1f02a84d538d20eccca67e58d2c931705d68cbb1eee39f9ab05940ed6e13476791bad61b"
+  },
+  {
+    "name": "order_v2_signature_3",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "2",
+        "chainId": 137,
+        "verifyingContract": "0xE111180000d2663C0091e4f400237545B87B996B"
+      },
+      "primaryType": "TypedDataSign",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ],
+        "TypedDataSign": [
+          {
+            "name": "contents",
+            "type": "Order"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          },
+          {
+            "name": "salt",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "contents": {
+          "salt": 42,
+          "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "tokenId": "123456789012345678901234567890",
+          "makerAmount": "550000",
+          "takerAmount": "1000000",
+          "side": 0,
+          "signatureType": 3,
+          "timestamp": "1731536000",
+          "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "name": "DepositWallet",
+        "version": "1",
+        "chainId": 137,
+        "verifyingContract": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "salt": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x709c14a8fb0fea215fc5fd56af0787becac2a5fe68e32ac77225dc64d4d18dd9",
+    "signature": "0xbe06109c2601ef291fb9e0be4b6657896c9251b6412eafd2c6bab2f3f7cac35c3dd1d77436d651fb9f7a61eb85e06ef305410864198d62027657c4f4b99639611c",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "order_signature": "0xbe06109c2601ef291fb9e0be4b6657896c9251b6412eafd2c6bab2f3f7cac35c3dd1d77436d651fb9f7a61eb85e06ef305410864198d62027657c4f4b99639611c3264e159346253e26a64e00b69032db0e7d32f94628de3e6eecb50304d7af3d26b1cf0a17348fc39c31525485308b781979e37b13743fb8b211e3031bbc234704f726465722875696e743235362073616c742c61646472657373206d616b65722c61646472657373207369676e65722c75696e7432353620746f6b656e49642c75696e74323536206d616b6572416d6f756e742c75696e743235362074616b6572416d6f756e742c75696e743820736964652c75696e7438207369676e6174757265547970652c75696e743235362074696d657374616d702c62797465733332206d657461646174612c62797465733332206275696c6465722900ba"
+  },
+  {
+    "name": "order_v3_signature_0",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "3",
+        "chainId": 137,
+        "verifyingContract": "0xe3333700cA9d93003F00f0F71f8515005F6c00Aa"
+      },
+      "primaryType": "Order",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "salt": 42,
+        "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "tokenId": "123456789012345678901234567890",
+        "makerAmount": "550000",
+        "takerAmount": "1000000",
+        "side": 0,
+        "signatureType": 0,
+        "timestamp": "1731536000",
+        "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x5b3192ccbdd43f3528d4b2d51fde64f02266617f0de67d11fbb87587334b5736",
+    "signature": "0x3d1c544ab94fc3bc9e489fabe95dab1b5e31d5d12dce9ad0201f3d69d5db371917802cddacacb0028cfd21beb36b129e6b49fb3ee6185960483ec70a0fd60c7f1c",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "order_signature": "0x3d1c544ab94fc3bc9e489fabe95dab1b5e31d5d12dce9ad0201f3d69d5db371917802cddacacb0028cfd21beb36b129e6b49fb3ee6185960483ec70a0fd60c7f1c"
+  },
+  {
+    "name": "order_v3_signature_3",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "3",
+        "chainId": 137,
+        "verifyingContract": "0xe3333700cA9d93003F00f0F71f8515005F6c00Aa"
+      },
+      "primaryType": "TypedDataSign",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ],
+        "TypedDataSign": [
+          {
+            "name": "contents",
+            "type": "Order"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          },
+          {
+            "name": "salt",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "contents": {
+          "salt": 42,
+          "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "tokenId": "123456789012345678901234567890",
+          "makerAmount": "550000",
+          "takerAmount": "1000000",
+          "side": 0,
+          "signatureType": 3,
+          "timestamp": "1731536000",
+          "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "name": "DepositWallet",
+        "version": "1",
+        "chainId": 137,
+        "verifyingContract": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "salt": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x4faebfb9cecd26f85a73cfe63135eee31ecf18a2751dfab4d88f1906182ae886",
+    "signature": "0x67cf5f73a0c1946a8c016a28d47578f87d8e0195c6b06c462537f0932dde17a737fa12c165ed553741cd694da3c04ffb3bb5b6edebcf49acee3a5315f7ffdee41c",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "order_signature": "0x67cf5f73a0c1946a8c016a28d47578f87d8e0195c6b06c462537f0932dde17a737fa12c165ed553741cd694da3c04ffb3bb5b6edebcf49acee3a5315f7ffdee41c466c63910185bbd55e8679264200c4e0abdcbb0c6264eb3d41d13326022e095b6b1cf0a17348fc39c31525485308b781979e37b13743fb8b211e3031bbc234704f726465722875696e743235362073616c742c61646472657373206d616b65722c61646472657373207369676e65722c75696e7432353620746f6b656e49642c75696e74323536206d616b6572416d6f756e742c75696e743235362074616b6572416d6f756e742c75696e743820736964652c75696e7438207369676e6174757265547970652c75696e743235362074696d657374616d702c62797465733332206d657461646174612c62797465733332206275696c6465722900ba"
+  },
+  {
+    "name": "perps_op_0",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "Op",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "Op": [
+          {
+            "name": "data",
+            "type": "bytes32"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "data": "0xace85affedca7163bc390a9b7baf06bd154e3fe3c8bcfe859c420841b14495ff",
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0x788cf65fbcfce85f5776f748b1fa408373ab45f0e4d53bc70b8571074f66fbda",
+    "signature": "0xdaf0d64a21d2f9a6b6e24cc815168c519294d128bb039363013a228b8e3b3d384e0532e7785876f1226b1d4983e7489e70058b48543aa490a600640b8ec2e2d91c",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "operation": [
+      "createOrders",
+      [
+        [
+          1,
+          true,
+          "100.00",
+          "10.00",
+          "gtc",
+          false
+        ]
+      ]
+    ],
+    "msgpack_hex": "92ac6372656174654f7264657273919601c3a63130302e3030a531302e3030a3677463c2"
+  },
+  {
+    "name": "perps_op_1",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "Op",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "Op": [
+          {
+            "name": "data",
+            "type": "bytes32"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "data": "0xea7b7726e1e653ecc0157b4742c591bed6cc4cc88b5261e2fc72477be177b4cd",
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0x32f6a6073d0468ab2a5364c63dd85a5569e6f9894e14e6f5161b5155eefbef22",
+    "signature": "0x10b1ed36a17c2dae9b6c7268457eefa78dd3217e06e7f802c2e2f00747aba0d16df5f6213f1e28f6f4fcacf2f53d378d395671fbacc0cab9d2588339d3c729321b",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "operation": [
+      "cancelOrders",
+      [
+        "123"
+      ]
+    ],
+    "msgpack_hex": "92ac63616e63656c4f726465727391a3313233"
+  },
+  {
+    "name": "perps_op_2",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "Op",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "Op": [
+          {
+            "name": "data",
+            "type": "bytes32"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "data": "0xe6fefb3d6e823bae8dd698a2bd753dd4b393f89604b221c82d2d621e4b6109d1",
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0x6ebd962a9b36a9334a4de8e5bc98ef67eb92ab7d4604ca7e6d1f9f2a45b2b8d2",
+    "signature": "0x2e3b57a1cab4187d23fc5f18b9f006ee8abdceb932ef9c8d6c9b40539cf14e723e3bd3bf1ab43eca0c8a8d2c8d661fa26aff3272abd99291ca7ea23be2dc0b871b",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "operation": [
+      "updateLeverage",
+      [
+        1,
+        5,
+        true
+      ]
+    ],
+    "msgpack_hex": "92ae7570646174654c65766572616765930105c3"
+  },
+  {
+    "name": "perps_op_3",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "Op",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "Op": [
+          {
+            "name": "data",
+            "type": "bytes32"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "data": "0xee45b3f4e752730e56d9cd1360e08caa9a0a5e61347c0612abdde18e1623e00f",
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0x91240660181dcb5f8ea4238ae5a3506e80ec24c3892a926af27fabaa0d5a3609",
+    "signature": "0x3a647c5e7d35a2e7974906fcadecc91e430d45e8db07abc0eb1d9cf628383850793094f87395cb22250bba8296e32abea995afca827422bdf14291b3947b4e091c",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "operation": [
+      "internalTransfer",
+      [
+        "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "1000000",
+        "0x4a62316623ad457F02cDC5D997deD67a383EC569"
+      ]
+    ],
+    "msgpack_hex": "92b0696e7465726e616c5472616e7366657294d92a307834613632333136363233616434353746303263444335443939376465443637613338334543353639d92a307834613632333136363233616434353746303263444335443939376465443637613338334543353639a731303030303030d92a307834613632333136363233616434353746303263444335443939376465443637613338334543353639"
+  },
+  {
+    "name": "hmac",
+    "secret": "cHVibGljLXRlc3Qtc2VjcmV0",
+    "message": "1731536000POST/order{\"price\":\"0.550000\",\"size\":\"10\"}",
+    "signature": "YnJIqeRTYC12GTuysXh19APpp3yzt-7l_h4M5c5sTNs="
+  },
+  {
+    "name": "extra_updateBuilder",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "Op",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "Op": [
+          {
+            "name": "data",
+            "type": "bytes32"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "data": "0x8dae4af2d510c81cc638531545bbb48c888204d557044943b6f072e09ed8ead4",
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0xea0c62dbd8ed4b30212fa54e636fdc12302f938e6942ba0dbc6eb1f71533c66f",
+    "signature": "0x7ce7f0c6324e234e7b87d0995002d93b32790465148ff653abd8777acd77b27b219575082b5c34ef61bdc9c1c5c39c4c61e9c934c88d45e72370fbbeac19fa3e1c",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "operation": {
+      "type": "updateBuilder",
+      "args": {
+        "name": "Trader 🙂"
+      }
+    },
+    "msgpack_hex": "92ad7570646174654275696c64657291ab54726164657220f09f9982",
+    "body": {
+      "op": {
+        "type": "updateBuilder",
+        "args": {
+          "name": "Trader 🙂"
+        }
+      },
+      "salt": 42,
+      "ts": 1731536000000
+    },
+    "authority": "owner"
+  },
+  {
+    "name": "extra_createChase",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "Op",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "Op": [
+          {
+            "name": "data",
+            "type": "bytes32"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "data": "0x60c915455001eaddf0d9fe3bbdc70873c50e4a42beba314950e217bdd1e908f2",
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0xcbdbfde669a1190730f2506ce6a8614079c537efc18ea0b0fb61de670ae562e2",
+    "signature": "0x0382549bc94cb417dfd1a77244052e2281fba67ad9327085a0594d0f4558d4ec14d99526b1a5c99e2950a5c2070607f673adb3f4b0f56c80c0205455b8371aaf1b",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "operation": {
+      "type": "createChase",
+      "args": {
+        "iid": 1,
+        "buy": true,
+        "qty": "10",
+        "lim": "0.5",
+        "po": true,
+        "ro": false
+      }
+    },
+    "msgpack_hex": "92ab63726561746543686173659601c3a23130a3302e35c3c2",
+    "body": {
+      "op": {
+        "type": "createChase",
+        "args": {
+          "iid": 1,
+          "buy": true,
+          "qty": "10",
+          "lim": "0.5",
+          "po": true,
+          "ro": false
+        }
+      },
+      "salt": 42,
+      "ts": 1731536000000
+    },
+    "authority": "proxy"
+  },
+  {
+    "name": "extra_createTwap",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "Op",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "Op": [
+          {
+            "name": "data",
+            "type": "bytes32"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "data": "0xa5564c7f92643eadc525612d5c09538448776d8c53d733b5e8293cb926233a7e",
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0xc7b30cb269f0406a6c3435e16fa9a88bc95cf662f1c2bb58594e65d52363b75c",
+    "signature": "0x32a16cc0981f49849cc0334d277e9d76787b9d4efc94dcb93069904d56c9233f2a2c00ac18e730f318ccf62156329e80d48e30c0eba6c9fb1ba5f7cd51025e321b",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "operation": {
+      "type": "createTwap",
+      "args": {
+        "iid": 1,
+        "buy": true,
+        "qty": "10",
+        "dur": 60000,
+        "ivl": 1000,
+        "rnd": false
+      }
+    },
+    "msgpack_hex": "92aa637265617465547761709601c3a23130cdea60cd03e8c2",
+    "body": {
+      "op": {
+        "type": "createTwap",
+        "args": {
+          "iid": 1,
+          "buy": true,
+          "qty": "10",
+          "dur": 60000,
+          "ivl": 1000,
+          "rnd": false
+        }
+      },
+      "salt": 42,
+      "ts": 1731536000000
+    },
+    "authority": "proxy"
+  },
+  {
+    "name": "extra_createProxy",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137
+      },
+      "primaryType": "CreateProxy",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          }
+        ],
+        "CreateProxy": [
+          {
+            "name": "addr",
+            "type": "address"
+          },
+          {
+            "name": "exp",
+            "type": "uint64"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "addr": "0x1111111111111111111111111111111111111111",
+        "exp": 1800000000000,
+        "salt": 42,
+        "ts": 1731536000000
+      }
+    },
+    "digest": "0x7a32b1336c899774876f7eef72e5beb64d1aaf2ac4285e8811219269dd84abde",
+    "signature": "0x51424213bff5cf84de0051137b47db0a3a999ff4ff1cd455fda24b18e1ffcbda61d433f6d88a2a2b1bedf969d4656a6da380cbdfaa32698f05b7ebdb69ea57601b",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "body": {
+      "op": {
+        "type": "createProxy",
+        "args": {
+          "proxy": "0x1111111111111111111111111111111111111111",
+          "expiry": 1800000000000
+        }
+      },
+      "salt": 42,
+      "ts": 1731536000000
+    },
+    "authority": "owner"
+  },
+  {
+    "name": "extra_withdraw",
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket",
+        "version": "1",
+        "chainId": 137,
+        "verifyingContract": "0xDCa4af75705dbB50f62437045afF9921947917d2"
+      },
+      "primaryType": "Withdraw",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Withdraw": [
+          {
+            "name": "account",
+            "type": "address"
+          },
+          {
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "name": "amount",
+            "type": "uint256"
+          },
+          {
+            "name": "fee",
+            "type": "uint256"
+          },
+          {
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "name": "salt",
+            "type": "uint64"
+          },
+          {
+            "name": "ts",
+            "type": "uint64"
+          }
+        ]
+      },
+      "message": {
+        "account": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "token": "0x1111111111111111111111111111111111111111",
+        "amount": "25000000",
+        "fee": 0,
+        "to": "0x2222222222222222222222222222222222222222",
+        "salt": 42,
+        "ts": 1731536000
+      }
+    },
+    "digest": "0xcd22168c5890e6b2d25165fc8e5ba6c88d0773cca66b6075462a3394897c35fc",
+    "signature": "0x8e1faf5d385e25c9b32d4975d997531ba20f203987843142c54a6b9338aa2d8d657f21439b77f97200f954adc446cf31a44a50123a2c7e43dabddf133aee70f71b",
+    "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+    "body": {
+      "op": {
+        "type": "withdraw",
+        "args": {
+          "account": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "token": "0x1111111111111111111111111111111111111111",
+          "amount": "25000000",
+          "to": "0x2222222222222222222222222222222222222222"
+        }
+      },
+      "salt": 42,
+      "ts": 1731536000
+    },
+    "authority": "owner"
+  }
+]

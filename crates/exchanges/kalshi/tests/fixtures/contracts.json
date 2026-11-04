@@ -1,0 +1,5156 @@
+{
+  "predictions.upgrade_account_api_usage_level": {
+    "request": {},
+    "response": null
+  },
+  "predictions.get_account_api_usage_level_volume_progress": {
+    "request": {},
+    "response": {
+      "volume_progress": [
+        {
+          "computed_ts": 1,
+          "trailing_30d_volume_fp": "10.00",
+          "goals": [
+            {
+              "level": "expert",
+              "earn_volume_goal_fp": "10.00",
+              "keep_volume_goal_fp": "10.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "predictions.get_account_endpoint_costs": {
+    "request": {},
+    "response": {
+      "default_cost": 1,
+      "endpoint_costs": [
+        {
+          "method": "fixture",
+          "path": "fixture",
+          "cost": 1
+        }
+      ]
+    }
+  },
+  "predictions.get_account_api_limits": {
+    "request": {},
+    "response": {
+      "usage_tier": "expert",
+      "read": {
+        "refill_rate": 1,
+        "bucket_capacity": 1
+      },
+      "write": {
+        "refill_rate": 1,
+        "bucket_capacity": 1
+      },
+      "grants": [
+        {
+          "exchange_instance": "event_contract",
+          "level": "prestige",
+          "expires_ts": 1,
+          "source": "fixture"
+        }
+      ]
+    }
+  },
+  "predictions.get_api_keys": {
+    "request": {
+      "fcm_subtrader_id": "fixture"
+    },
+    "response": {
+      "api_keys": [
+        {
+          "api_key_id": "fixture",
+          "name": "fixture",
+          "scopes": [
+            "read"
+          ],
+          "subaccount": 1,
+          "fcm_subtrader_id": "fixture"
+        }
+      ],
+      "api_key_region_expiration_ts": 1
+    }
+  },
+  "predictions.create_api_key": {
+    "request": {
+      "body": {
+        "name": "fixture",
+        "public_key": "fixture",
+        "scopes": [
+          "read"
+        ],
+        "subaccount": 1,
+        "fcm_subtrader_id": "fixture"
+      }
+    },
+    "response": {
+      "api_key_id": "fixture",
+      "warning": "fixture"
+    }
+  },
+  "predictions.generate_api_key": {
+    "request": {
+      "body": {
+        "name": "fixture",
+        "key_type": "rsa",
+        "scopes": [
+          "read"
+        ],
+        "subaccount": 1,
+        "fcm_subtrader_id": "fixture"
+      }
+    },
+    "response": {
+      "api_key_id": "fixture",
+      "key_type": "rsa",
+      "private_key": "fixture",
+      "warning": "fixture"
+    }
+  },
+  "predictions.delete_api_key": {
+    "request": {
+      "api_key": "fixture"
+    },
+    "response": null
+  },
+  "predictions.get_block_trade_proposals": {
+    "request": {
+      "cursor": "fixture",
+      "market_ticker": "fixture",
+      "limit": 1,
+      "status": "fixture"
+    },
+    "response": {
+      "block_trade_proposals": [
+        {
+          "id": "fixture",
+          "proposer_user_id": "fixture",
+          "buyer_user_id": "fixture",
+          "buyer_subtrader_id": "fixture",
+          "seller_user_id": "fixture",
+          "seller_subtrader_id": "fixture",
+          "market_ticker": "fixture",
+          "price_centi_cents": 1,
+          "centicount": 1,
+          "maker_side": "yes",
+          "expiration_ts": "fixture",
+          "status": "fixture",
+          "created_ts": "fixture",
+          "updated_ts": "fixture",
+          "buyer_accepted": true,
+          "seller_accepted": true,
+          "buyer_accepted_ts": "fixture",
+          "seller_accepted_ts": "fixture",
+          "executed_ts": "fixture",
+          "buyer_order_id": "fixture",
+          "seller_order_id": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.propose_block_trade": {
+    "request": {
+      "body": {
+        "buyer_user_id": "fixture",
+        "buyer_subtrader_id": "fixture",
+        "buyer_subaccount": 1,
+        "seller_user_id": "fixture",
+        "seller_subtrader_id": "fixture",
+        "seller_subaccount": 1,
+        "market_ticker": "fixture",
+        "price_centi_cents": 1,
+        "centicount": 1,
+        "maker_side": "yes",
+        "expiration_ts": "fixture"
+      }
+    },
+    "response": {
+      "block_trade_proposal_id": "fixture"
+    }
+  },
+  "predictions.accept_block_trade_proposal": {
+    "request": {
+      "block_trade_proposal_id": "fixture",
+      "body": {
+        "subtrader_id": "fixture",
+        "subaccount": 1
+      }
+    },
+    "response": null
+  },
+  "predictions.get_communications_id": {
+    "request": {},
+    "response": {
+      "communications_id": "fixture"
+    }
+  },
+  "predictions.get_quotes": {
+    "request": {
+      "cursor": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "limit": 1,
+      "status": "fixture",
+      "quote_creator_user_id": "fixture",
+      "user_filter": "self",
+      "rfq_user_filter": "self",
+      "rfq_creator_user_id": "fixture",
+      "rfq_creator_subtrader_id": "fixture",
+      "rfq_id": "fixture"
+    },
+    "response": {
+      "quotes": [
+        {
+          "id": "fixture",
+          "rfq_id": "fixture",
+          "creator_id": "fixture",
+          "rfq_creator_id": "fixture",
+          "market_ticker": "fixture",
+          "contracts_fp": "10.00",
+          "yes_bid_dollars": "0.5600",
+          "no_bid_dollars": "0.5600",
+          "created_ts": "fixture",
+          "updated_ts": "fixture",
+          "status": "open",
+          "accepted_side": "yes",
+          "accepted_ts": "fixture",
+          "confirmed_ts": "fixture",
+          "executed_ts": "fixture",
+          "cancelled_ts": "fixture",
+          "rest_remainder": true,
+          "post_only": true,
+          "cancellation_reason": "fixture",
+          "creator_user_id": "fixture",
+          "rfq_creator_user_id": "fixture",
+          "rfq_target_cost_dollars": "0.5600",
+          "target_cost_excludes_fees": true,
+          "rfq_creator_order_id": "fixture",
+          "creator_order_id": "fixture",
+          "creator_subaccount": 1,
+          "rfq_creator_subaccount": 1,
+          "yes_contracts_fp": "10.00",
+          "no_contracts_fp": "10.00"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.create_quote": {
+    "request": {
+      "body": {
+        "rfq_id": "fixture",
+        "yes_bid": "0.5600",
+        "no_bid": "0.5600",
+        "rest_remainder": true,
+        "post_only": true,
+        "subaccount": 1
+      }
+    },
+    "response": {
+      "id": "fixture"
+    }
+  },
+  "predictions.delete_quote": {
+    "request": {
+      "quote_id": "fixture"
+    },
+    "response": null
+  },
+  "predictions.get_quote": {
+    "request": {
+      "quote_id": "fixture"
+    },
+    "response": {
+      "quote": {
+        "id": "fixture",
+        "rfq_id": "fixture",
+        "creator_id": "fixture",
+        "rfq_creator_id": "fixture",
+        "market_ticker": "fixture",
+        "contracts_fp": "10.00",
+        "yes_bid_dollars": "0.5600",
+        "no_bid_dollars": "0.5600",
+        "created_ts": "fixture",
+        "updated_ts": "fixture",
+        "status": "open",
+        "accepted_side": "yes",
+        "accepted_ts": "fixture",
+        "confirmed_ts": "fixture",
+        "executed_ts": "fixture",
+        "cancelled_ts": "fixture",
+        "rest_remainder": true,
+        "post_only": true,
+        "cancellation_reason": "fixture",
+        "creator_user_id": "fixture",
+        "rfq_creator_user_id": "fixture",
+        "rfq_target_cost_dollars": "0.5600",
+        "target_cost_excludes_fees": true,
+        "rfq_creator_order_id": "fixture",
+        "creator_order_id": "fixture",
+        "creator_subaccount": 1,
+        "rfq_creator_subaccount": 1,
+        "yes_contracts_fp": "10.00",
+        "no_contracts_fp": "10.00"
+      }
+    }
+  },
+  "predictions.accept_quote": {
+    "request": {
+      "quote_id": "fixture",
+      "body": {
+        "accepted_side": "yes"
+      }
+    },
+    "response": null
+  },
+  "predictions.confirm_quote": {
+    "request": {
+      "quote_id": "fixture",
+      "body": {}
+    },
+    "response": null
+  },
+  "predictions.get_rfq_batches": {
+    "request": {
+      "cursor": "fixture",
+      "subaccount": 1,
+      "limit": 1,
+      "status": "open",
+      "user_filter": "self"
+    },
+    "response": {
+      "rfq_batches": [
+        {
+          "id": "fixture",
+          "creator_id": "fixture",
+          "status": "open",
+          "created_ts": "fixture",
+          "accepted_ts": "fixture",
+          "closed_ts": "fixture",
+          "rfqs": [
+            {
+              "id": "fixture",
+              "creator_id": "fixture",
+              "market_ticker": "fixture",
+              "contracts_fp": "10.00",
+              "status": "open",
+              "created_ts": "fixture"
+            }
+          ],
+          "updated_ts": "fixture",
+          "close_reason": "fixture",
+          "client_batch_id": "fixture",
+          "creator_user_id": "fixture",
+          "creator_subaccount": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.create_rfq_batch": {
+    "request": {
+      "body": {
+        "children": [
+          {
+            "market_ticker": "fixture",
+            "selected_markets": [],
+            "contracts_fp": "10.00",
+            "target_cost_dollars": "0.5600"
+          },
+          {
+            "market_ticker": "fixture",
+            "selected_markets": [],
+            "contracts_fp": "10.00",
+            "target_cost_dollars": "0.5600"
+          }
+        ],
+        "mve_collection_ticker": "fixture",
+        "contracts_fp": "10.00",
+        "target_cost_dollars": "0.5600",
+        "target_cost_excludes_fees": true,
+        "rest_remainder": true,
+        "replace_existing": true,
+        "obscure_creator_id": true,
+        "client_batch_id": "fixture",
+        "subtrader_id": "fixture",
+        "subaccount": 1
+      }
+    },
+    "response": {
+      "rfq_batch": {
+        "id": "fixture",
+        "creator_id": "fixture",
+        "status": "open",
+        "created_ts": "fixture",
+        "accepted_ts": "fixture",
+        "closed_ts": "fixture",
+        "rfqs": [
+          {
+            "id": "fixture",
+            "creator_id": "fixture",
+            "market_ticker": "fixture",
+            "contracts_fp": "10.00",
+            "target_cost_dollars": "0.5600",
+            "target_cost_excludes_fees": true,
+            "status": "open",
+            "created_ts": "fixture",
+            "mve_collection_ticker": "fixture",
+            "mve_selected_legs": [],
+            "rest_remainder": true,
+            "cancellation_reason": "fixture",
+            "creator_user_id": "fixture",
+            "creator_subaccount": 1,
+            "cancelled_ts": "fixture",
+            "updated_ts": "fixture",
+            "rfq_batch_id": "fixture"
+          }
+        ],
+        "updated_ts": "fixture",
+        "close_reason": "fixture",
+        "client_batch_id": "fixture",
+        "creator_user_id": "fixture",
+        "creator_subaccount": 1
+      }
+    }
+  },
+  "predictions.delete_rfq_batch": {
+    "request": {
+      "rfq_batch_id": "fixture"
+    },
+    "response": null
+  },
+  "predictions.get_rfq_batch": {
+    "request": {
+      "rfq_batch_id": "fixture"
+    },
+    "response": {
+      "rfq_batch": {
+        "id": "fixture",
+        "creator_id": "fixture",
+        "status": "open",
+        "created_ts": "fixture",
+        "accepted_ts": "fixture",
+        "closed_ts": "fixture",
+        "rfqs": [
+          {
+            "id": "fixture",
+            "creator_id": "fixture",
+            "market_ticker": "fixture",
+            "contracts_fp": "10.00",
+            "target_cost_dollars": "0.5600",
+            "target_cost_excludes_fees": true,
+            "status": "open",
+            "created_ts": "fixture",
+            "mve_collection_ticker": "fixture",
+            "mve_selected_legs": [],
+            "rest_remainder": true,
+            "cancellation_reason": "fixture",
+            "creator_user_id": "fixture",
+            "creator_subaccount": 1,
+            "cancelled_ts": "fixture",
+            "updated_ts": "fixture",
+            "rfq_batch_id": "fixture"
+          }
+        ],
+        "updated_ts": "fixture",
+        "close_reason": "fixture",
+        "client_batch_id": "fixture",
+        "creator_user_id": "fixture",
+        "creator_subaccount": 1
+      }
+    }
+  },
+  "predictions.accept_rfq_batch": {
+    "request": {
+      "rfq_batch_id": "fixture",
+      "body": {
+        "accepted_side": "yes",
+        "min_bids": [
+          {
+            "rfq_id": "fixture",
+            "bid_dollars": "0.5600"
+          },
+          {
+            "rfq_id": "fixture",
+            "bid_dollars": "0.5600"
+          }
+        ],
+        "client_order_id": "fixture"
+      }
+    },
+    "response": {
+      "accepted_side": "yes",
+      "quotes": [
+        {
+          "id": "fixture",
+          "rfq_id": "fixture",
+          "creator_id": "fixture",
+          "rfq_creator_id": "fixture",
+          "market_ticker": "fixture",
+          "contracts_fp": "10.00",
+          "yes_bid_dollars": "0.5600",
+          "no_bid_dollars": "0.5600",
+          "created_ts": "fixture",
+          "updated_ts": "fixture",
+          "status": "open",
+          "accepted_side": "yes",
+          "accepted_ts": "fixture",
+          "confirmed_ts": "fixture",
+          "executed_ts": "fixture",
+          "cancelled_ts": "fixture",
+          "rest_remainder": true,
+          "post_only": true,
+          "cancellation_reason": "fixture",
+          "creator_user_id": "fixture",
+          "rfq_creator_user_id": "fixture",
+          "rfq_target_cost_dollars": "0.5600",
+          "target_cost_excludes_fees": true,
+          "rfq_creator_order_id": "fixture",
+          "creator_order_id": "fixture",
+          "creator_subaccount": 1,
+          "rfq_creator_subaccount": 1,
+          "yes_contracts_fp": "10.00",
+          "no_contracts_fp": "10.00"
+        }
+      ]
+    }
+  },
+  "predictions.get_rfq_batch_best_quotes": {
+    "request": {
+      "rfq_batch_id": "fixture"
+    },
+    "response": {
+      "best_quotes": {
+        "rfq_batch_id": "fixture",
+        "status": "open",
+        "version": 1,
+        "updated_ts": "fixture",
+        "yes_complete": true,
+        "no_complete": true,
+        "rfqs": [
+          {
+            "rfq_id": "fixture",
+            "market_ticker": "fixture",
+            "yes_bid_dollars": "0.5600",
+            "no_bid_dollars": "0.5600",
+            "yes_contracts_offered_fp": "10.00",
+            "no_contracts_offered_fp": "10.00"
+          }
+        ]
+      }
+    }
+  },
+  "predictions.get_rfq_batch_quotes": {
+    "request": {
+      "rfq_batch_id": "fixture"
+    },
+    "response": {
+      "batch_quotes": [
+        {
+          "id": "fixture",
+          "rfq_batch_id": "fixture",
+          "creator_id": "fixture",
+          "rfq_creator_id": "fixture",
+          "status": "open",
+          "created_ts": "fixture",
+          "updated_ts": "fixture",
+          "accepted_side": "yes",
+          "accepted_ts": "fixture",
+          "confirmed_ts": "fixture",
+          "quotes": [
+            {
+              "id": "fixture",
+              "rfq_id": "fixture",
+              "creator_id": "fixture",
+              "rfq_creator_id": "fixture",
+              "market_ticker": "fixture",
+              "contracts_fp": "10.00",
+              "yes_bid_dollars": "0.5600",
+              "no_bid_dollars": "0.5600",
+              "created_ts": "fixture",
+              "updated_ts": "fixture",
+              "status": "open"
+            }
+          ],
+          "rest_remainder": true,
+          "post_only": true,
+          "creator_user_id": "fixture",
+          "creator_subaccount": 1,
+          "rfq_creator_user_id": "fixture",
+          "rfq_creator_subaccount": 1
+        }
+      ]
+    }
+  },
+  "predictions.create_rfq_batch_quote": {
+    "request": {
+      "rfq_batch_id": "fixture",
+      "body": {
+        "quotes": [
+          {
+            "rfq_id": "fixture",
+            "yes_bid": "0.5600",
+            "no_bid": "0.5600"
+          },
+          {
+            "rfq_id": "fixture",
+            "yes_bid": "0.5600",
+            "no_bid": "0.5600"
+          }
+        ],
+        "rest_remainder": true,
+        "post_only": true,
+        "subaccount": 1
+      }
+    },
+    "response": {
+      "id": "fixture"
+    }
+  },
+  "predictions.delete_rfq_batch_quote": {
+    "request": {
+      "rfq_batch_id": "fixture",
+      "batch_quote_id": "fixture"
+    },
+    "response": null
+  },
+  "predictions.confirm_rfq_batch_quote": {
+    "request": {
+      "rfq_batch_id": "fixture",
+      "batch_quote_id": "fixture",
+      "body": {}
+    },
+    "response": null
+  },
+  "predictions.get_rf_qs": {
+    "request": {
+      "cursor": "fixture",
+      "event_ticker": "fixture",
+      "market_ticker": "fixture",
+      "subaccount": 1,
+      "limit": 1,
+      "status": "fixture",
+      "creator_user_id": "fixture",
+      "user_filter": "self"
+    },
+    "response": {
+      "rfqs": [
+        {
+          "id": "fixture",
+          "creator_id": "fixture",
+          "market_ticker": "fixture",
+          "contracts_fp": "10.00",
+          "target_cost_dollars": "0.5600",
+          "target_cost_excludes_fees": true,
+          "status": "open",
+          "created_ts": "fixture",
+          "mve_collection_ticker": "fixture",
+          "mve_selected_legs": [
+            {}
+          ],
+          "rest_remainder": true,
+          "cancellation_reason": "fixture",
+          "creator_user_id": "fixture",
+          "creator_subaccount": 1,
+          "cancelled_ts": "fixture",
+          "updated_ts": "fixture",
+          "rfq_batch_id": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.create_rfq": {
+    "request": {
+      "body": {
+        "market_ticker": "fixture",
+        "contracts": 1,
+        "contracts_fp": "10.00",
+        "target_cost_centi_cents": 1,
+        "target_cost_dollars": "0.5600",
+        "target_cost_excludes_fees": true,
+        "obscure_creator_id": true,
+        "rest_remainder": true,
+        "replace_existing": true,
+        "subtrader_id": "fixture",
+        "subaccount": 1
+      }
+    },
+    "response": {
+      "id": "fixture"
+    }
+  },
+  "predictions.delete_rfq": {
+    "request": {
+      "rfq_id": "fixture"
+    },
+    "response": null
+  },
+  "predictions.get_rfq": {
+    "request": {
+      "rfq_id": "fixture"
+    },
+    "response": {
+      "rfq": {
+        "id": "fixture",
+        "creator_id": "fixture",
+        "market_ticker": "fixture",
+        "contracts_fp": "10.00",
+        "target_cost_dollars": "0.5600",
+        "target_cost_excludes_fees": true,
+        "status": "open",
+        "created_ts": "fixture",
+        "mve_collection_ticker": "fixture",
+        "mve_selected_legs": [
+          {
+            "event_ticker": "fixture",
+            "market_ticker": "fixture",
+            "side": "fixture",
+            "yes_settlement_value_dollars": "0.5600"
+          }
+        ],
+        "rest_remainder": true,
+        "cancellation_reason": "fixture",
+        "creator_user_id": "fixture",
+        "creator_subaccount": 1,
+        "cancelled_ts": "fixture",
+        "updated_ts": "fixture",
+        "rfq_batch_id": "fixture"
+      }
+    }
+  },
+  "predictions.delete_rfq_quote": {
+    "request": {
+      "rfq_id": "fixture",
+      "quote_id": "fixture"
+    },
+    "response": null
+  },
+  "predictions.get_rfq_quote": {
+    "request": {
+      "rfq_id": "fixture",
+      "quote_id": "fixture"
+    },
+    "response": {
+      "quote": {
+        "id": "fixture",
+        "rfq_id": "fixture",
+        "creator_id": "fixture",
+        "rfq_creator_id": "fixture",
+        "market_ticker": "fixture",
+        "contracts_fp": "10.00",
+        "yes_bid_dollars": "0.5600",
+        "no_bid_dollars": "0.5600",
+        "created_ts": "fixture",
+        "updated_ts": "fixture",
+        "status": "open",
+        "accepted_side": "yes",
+        "accepted_ts": "fixture",
+        "confirmed_ts": "fixture",
+        "executed_ts": "fixture",
+        "cancelled_ts": "fixture",
+        "rest_remainder": true,
+        "post_only": true,
+        "cancellation_reason": "fixture",
+        "creator_user_id": "fixture",
+        "rfq_creator_user_id": "fixture",
+        "rfq_target_cost_dollars": "0.5600",
+        "target_cost_excludes_fees": true,
+        "rfq_creator_order_id": "fixture",
+        "creator_order_id": "fixture",
+        "creator_subaccount": 1,
+        "rfq_creator_subaccount": 1,
+        "yes_contracts_fp": "10.00",
+        "no_contracts_fp": "10.00"
+      }
+    }
+  },
+  "predictions.accept_rfq_quote": {
+    "request": {
+      "rfq_id": "fixture",
+      "quote_id": "fixture",
+      "body": {
+        "accepted_side": "yes"
+      }
+    },
+    "response": null
+  },
+  "predictions.confirm_rfq_quote": {
+    "request": {
+      "rfq_id": "fixture",
+      "quote_id": "fixture",
+      "body": {}
+    },
+    "response": null
+  },
+  "predictions.get_events": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "with_nested_markets": true,
+      "with_milestones": true,
+      "status": "unopened",
+      "series_ticker": "fixture",
+      "tickers": "fixture",
+      "min_close_ts": 1,
+      "min_updated_ts": 1
+    },
+    "response": {
+      "events": [
+        {
+          "event_ticker": "fixture",
+          "series_ticker": "fixture",
+          "sub_title": "fixture",
+          "title": "fixture",
+          "collateral_return_type": "fixture",
+          "mutually_exclusive": true,
+          "category": "fixture",
+          "strike_date": "fixture",
+          "strike_period": "fixture",
+          "markets": [
+            {
+              "ticker": "fixture",
+              "event_ticker": "fixture",
+              "market_type": "binary",
+              "yes_sub_title": "fixture",
+              "no_sub_title": "fixture",
+              "created_time": "fixture",
+              "updated_time": "fixture",
+              "open_time": "fixture",
+              "close_time": "fixture",
+              "latest_expiration_time": "fixture",
+              "settlement_timer_seconds": 1,
+              "status": "initialized",
+              "yes_bid_dollars": "0.5600",
+              "yes_bid_size_fp": "10.00",
+              "yes_ask_dollars": "0.5600",
+              "yes_ask_size_fp": "10.00",
+              "no_bid_dollars": "0.5600",
+              "no_ask_dollars": "0.5600",
+              "last_price_dollars": "0.5600",
+              "volume_fp": "10.00",
+              "volume_24h_fp": "10.00",
+              "result": "yes",
+              "can_close_early": true,
+              "open_interest_fp": "10.00",
+              "notional_value_dollars": "0.5600",
+              "previous_yes_bid_dollars": "0.5600",
+              "previous_yes_ask_dollars": "0.5600",
+              "previous_price_dollars": "0.5600",
+              "settlement_bounds_type": "default",
+              "expiration_value": "fixture",
+              "rules_primary": "fixture",
+              "rules_secondary": "fixture",
+              "price_level_structure": "fixture",
+              "price_ranges": []
+            }
+          ],
+          "product_metadata": {},
+          "settlement_sources": [
+            {}
+          ],
+          "last_updated_ts": "fixture",
+          "fee_type_override": "fixture",
+          "fee_multiplier_override": 1,
+          "exchange_index": 0
+        }
+      ],
+      "milestones": [
+        {
+          "id": "fixture",
+          "category": "Sports",
+          "type": "football_game",
+          "start_date": "fixture",
+          "end_date": "fixture",
+          "related_event_tickers": [
+            "fixture"
+          ],
+          "title": "fixture",
+          "notification_message": "fixture",
+          "source_id": "fixture",
+          "source_ids": {},
+          "details": {},
+          "primary_event_tickers": [
+            "fixture"
+          ],
+          "last_updated_ts": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_event_fee_changes": {
+    "request": {
+      "event_ticker": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "event_fee_changes": [
+        {
+          "id": "fixture",
+          "event_ticker": "fixture",
+          "series_ticker": "fixture",
+          "fee_type_override": "quadratic",
+          "fee_multiplier_override": 1,
+          "scheduled_ts": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_multivariate_events": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "series_ticker": "fixture",
+      "collection_ticker": "fixture",
+      "tickers": "fixture",
+      "with_nested_markets": true
+    },
+    "response": {
+      "events": [
+        {
+          "event_ticker": "fixture",
+          "series_ticker": "fixture",
+          "sub_title": "fixture",
+          "title": "fixture",
+          "collateral_return_type": "fixture",
+          "mutually_exclusive": true,
+          "category": "fixture",
+          "strike_date": "fixture",
+          "strike_period": "fixture",
+          "markets": [
+            {
+              "ticker": "fixture",
+              "event_ticker": "fixture",
+              "market_type": "binary",
+              "yes_sub_title": "fixture",
+              "no_sub_title": "fixture",
+              "created_time": "fixture",
+              "updated_time": "fixture",
+              "open_time": "fixture",
+              "close_time": "fixture",
+              "latest_expiration_time": "fixture",
+              "settlement_timer_seconds": 1,
+              "status": "initialized",
+              "yes_bid_dollars": "0.5600",
+              "yes_bid_size_fp": "10.00",
+              "yes_ask_dollars": "0.5600",
+              "yes_ask_size_fp": "10.00",
+              "no_bid_dollars": "0.5600",
+              "no_ask_dollars": "0.5600",
+              "last_price_dollars": "0.5600",
+              "volume_fp": "10.00",
+              "volume_24h_fp": "10.00",
+              "result": "yes",
+              "can_close_early": true,
+              "open_interest_fp": "10.00",
+              "notional_value_dollars": "0.5600",
+              "previous_yes_bid_dollars": "0.5600",
+              "previous_yes_ask_dollars": "0.5600",
+              "previous_price_dollars": "0.5600",
+              "settlement_bounds_type": "default",
+              "expiration_value": "fixture",
+              "rules_primary": "fixture",
+              "rules_secondary": "fixture",
+              "price_level_structure": "fixture",
+              "price_ranges": []
+            }
+          ],
+          "product_metadata": {},
+          "settlement_sources": [
+            {}
+          ],
+          "last_updated_ts": "fixture",
+          "fee_type_override": "fixture",
+          "fee_multiplier_override": 1,
+          "exchange_index": 0
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_event": {
+    "request": {
+      "event_ticker": "fixture",
+      "exclude_markets": true,
+      "with_nested_markets": true
+    },
+    "response": {
+      "event": {
+        "event_ticker": "fixture",
+        "series_ticker": "fixture",
+        "sub_title": "fixture",
+        "title": "fixture",
+        "collateral_return_type": "fixture",
+        "mutually_exclusive": true,
+        "category": "fixture",
+        "strike_date": "fixture",
+        "strike_period": "fixture",
+        "markets": [
+          {
+            "ticker": "fixture",
+            "event_ticker": "fixture",
+            "market_type": "binary",
+            "title": "fixture",
+            "subtitle": "fixture",
+            "yes_sub_title": "fixture",
+            "no_sub_title": "fixture",
+            "created_time": "fixture",
+            "updated_time": "fixture",
+            "open_time": "fixture",
+            "close_time": "fixture",
+            "expected_expiration_time": "fixture",
+            "expiration_time": "fixture",
+            "latest_expiration_time": "fixture",
+            "settlement_timer_seconds": 1,
+            "status": "initialized",
+            "yes_bid_dollars": "0.5600",
+            "yes_bid_size_fp": "10.00",
+            "yes_ask_dollars": "0.5600",
+            "yes_ask_size_fp": "10.00",
+            "no_bid_dollars": "0.5600",
+            "no_ask_dollars": "0.5600",
+            "last_price_dollars": "0.5600",
+            "volume_fp": "10.00",
+            "volume_24h_fp": "10.00",
+            "result": "yes",
+            "can_close_early": true,
+            "open_interest_fp": "10.00",
+            "notional_value_dollars": "0.5600",
+            "previous_yes_bid_dollars": "0.5600",
+            "previous_yes_ask_dollars": "0.5600",
+            "previous_price_dollars": "0.5600",
+            "settlement_value_dollars": "0.5600",
+            "settlement_ts": "fixture",
+            "settlement_bounds_type": "default",
+            "settlement_floor_dollars": "0.5600",
+            "expiration_value": "fixture",
+            "occurrence_datetime": "fixture",
+            "fee_waiver_expiration_time": "fixture",
+            "early_close_condition": "fixture",
+            "strike_type": "greater",
+            "floor_strike": 1,
+            "cap_strike": 1,
+            "functional_strike": "fixture",
+            "custom_strike": {},
+            "rules_primary": "fixture",
+            "rules_secondary": "fixture",
+            "mve_collection_ticker": "fixture",
+            "mve_selected_legs": [],
+            "primary_participant_key": "fixture",
+            "price_level_structure": "fixture",
+            "price_ranges": [],
+            "is_provisional": true,
+            "exchange_index": 0
+          }
+        ],
+        "product_metadata": {},
+        "settlement_sources": [
+          {
+            "name": "fixture",
+            "url": "fixture"
+          }
+        ],
+        "last_updated_ts": "fixture",
+        "fee_type_override": "fixture",
+        "fee_multiplier_override": 1,
+        "exchange_index": 0
+      },
+      "markets": [
+        {
+          "ticker": "fixture",
+          "event_ticker": "fixture",
+          "market_type": "binary",
+          "title": "fixture",
+          "subtitle": "fixture",
+          "yes_sub_title": "fixture",
+          "no_sub_title": "fixture",
+          "created_time": "fixture",
+          "updated_time": "fixture",
+          "open_time": "fixture",
+          "close_time": "fixture",
+          "expected_expiration_time": "fixture",
+          "expiration_time": "fixture",
+          "latest_expiration_time": "fixture",
+          "settlement_timer_seconds": 1,
+          "status": "initialized",
+          "yes_bid_dollars": "0.5600",
+          "yes_bid_size_fp": "10.00",
+          "yes_ask_dollars": "0.5600",
+          "yes_ask_size_fp": "10.00",
+          "no_bid_dollars": "0.5600",
+          "no_ask_dollars": "0.5600",
+          "last_price_dollars": "0.5600",
+          "volume_fp": "10.00",
+          "volume_24h_fp": "10.00",
+          "result": "yes",
+          "can_close_early": true,
+          "open_interest_fp": "10.00",
+          "notional_value_dollars": "0.5600",
+          "previous_yes_bid_dollars": "0.5600",
+          "previous_yes_ask_dollars": "0.5600",
+          "previous_price_dollars": "0.5600",
+          "settlement_value_dollars": "0.5600",
+          "settlement_ts": "fixture",
+          "settlement_bounds_type": "default",
+          "settlement_floor_dollars": "0.5600",
+          "expiration_value": "fixture",
+          "occurrence_datetime": "fixture",
+          "fee_waiver_expiration_time": "fixture",
+          "early_close_condition": "fixture",
+          "strike_type": "greater",
+          "floor_strike": 1,
+          "cap_strike": 1,
+          "functional_strike": "fixture",
+          "custom_strike": {},
+          "rules_primary": "fixture",
+          "rules_secondary": "fixture",
+          "mve_collection_ticker": "fixture",
+          "mve_selected_legs": [
+            {}
+          ],
+          "primary_participant_key": "fixture",
+          "price_level_structure": "fixture",
+          "price_ranges": [
+            {
+              "start": "fixture",
+              "end": "fixture",
+              "step": "fixture"
+            }
+          ],
+          "is_provisional": true,
+          "exchange_index": 0
+        }
+      ]
+    }
+  },
+  "predictions.get_event_metadata": {
+    "request": {
+      "event_ticker": "fixture"
+    },
+    "response": {
+      "image_url": "fixture",
+      "featured_image_url": "fixture",
+      "market_details": [
+        {
+          "market_ticker": "fixture",
+          "image_url": "fixture",
+          "color_code": "fixture"
+        }
+      ],
+      "settlement_sources": [
+        {
+          "name": "fixture",
+          "url": "fixture"
+        }
+      ],
+      "competition": "fixture",
+      "competition_scope": "fixture"
+    }
+  },
+  "predictions.get_exchange_schedule": {
+    "request": {},
+    "response": {
+      "schedule": {
+        "standard_hours": [
+          {
+            "start_time": "fixture",
+            "end_time": "fixture",
+            "monday": [],
+            "tuesday": [],
+            "wednesday": [],
+            "thursday": [],
+            "friday": [],
+            "saturday": [],
+            "sunday": []
+          }
+        ],
+        "maintenance_windows": [
+          {
+            "start_datetime": "fixture",
+            "end_datetime": "fixture"
+          }
+        ]
+      }
+    }
+  },
+  "predictions.get_exchange_status": {
+    "request": {},
+    "response": {
+      "exchange_active": true,
+      "trading_active": true,
+      "intra_exchange_transfers_active": true,
+      "exchange_estimated_resume_time": "fixture",
+      "exchange_index_statuses": [
+        {
+          "exchange_index": 0,
+          "description": "fixture",
+          "exchange_active": true,
+          "trading_active": true,
+          "intra_exchange_transfers_active": true
+        }
+      ]
+    }
+  },
+  "predictions.get_user_data_timestamp": {
+    "request": {},
+    "response": {
+      "as_of_time": "fixture"
+    }
+  },
+  "predictions.get_fcm_fills": {
+    "request": {
+      "min_ts": 1,
+      "max_ts": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "fills": [
+        {
+          "fill_id": "fixture",
+          "exchange_index": 0,
+          "ticker": "fixture",
+          "taker_outcome_side": "yes",
+          "count_fp": "10.00",
+          "yes_price_dollars": "0.5600",
+          "created_time": "fixture",
+          "maker_order_id": "fixture",
+          "maker_subtrader_id": "fixture",
+          "maker_fee_cost": "0.5600",
+          "taker_order_id": "fixture",
+          "taker_subtrader_id": "fixture",
+          "taker_fee_cost": "0.5600"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_fcm_orders": {
+    "request": {
+      "subtrader_id": "fixture",
+      "client_order_ids": "fixture",
+      "cursor": "fixture",
+      "event_ticker": "fixture",
+      "ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "status": "resting",
+      "limit": 1
+    },
+    "response": {
+      "orders": [
+        {
+          "order_id": "fixture",
+          "user_id": "fixture",
+          "client_order_id": "fixture",
+          "ticker": "fixture",
+          "side": "yes",
+          "action": "buy",
+          "outcome_side": "yes",
+          "book_side": "bid",
+          "type": "limit",
+          "status": "resting",
+          "yes_price_dollars": "0.5600",
+          "no_price_dollars": "0.5600",
+          "fill_count_fp": "10.00",
+          "remaining_count_fp": "10.00",
+          "initial_count_fp": "10.00",
+          "taker_fill_cost_dollars": "0.5600",
+          "maker_fill_cost_dollars": "0.5600",
+          "taker_fees_dollars": "0.5600",
+          "maker_fees_dollars": "0.5600",
+          "expiration_time": "fixture",
+          "created_time": "fixture",
+          "last_update_time": "fixture",
+          "self_trade_prevention_type": "taker_at_cross",
+          "order_group_id": "fixture",
+          "cancel_order_on_pause": true,
+          "subaccount_number": 1,
+          "exchange_index": 0
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_fcm_positions": {
+    "request": {
+      "subtrader_id": "fixture",
+      "ticker": "fixture",
+      "event_ticker": "fixture",
+      "count_filter": "fixture",
+      "settlement_status": "all",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "cursor": "fixture",
+      "market_positions": [
+        {
+          "ticker": "fixture",
+          "exchange_index": 0,
+          "total_traded_dollars": "0.5600",
+          "position_fp": "10.00",
+          "market_exposure_dollars": "0.5600",
+          "realized_pnl_dollars": "0.5600",
+          "fees_paid_dollars": "0.5600",
+          "last_updated_ts": "fixture",
+          "netting_enabled": true
+        }
+      ],
+      "event_positions": [
+        {
+          "event_ticker": "fixture",
+          "total_cost_dollars": "0.5600",
+          "total_cost_shares_fp": "10.00",
+          "event_exposure_dollars": "0.5600",
+          "realized_pnl_dollars": "0.5600",
+          "fees_paid_dollars": "0.5600"
+        }
+      ]
+    }
+  },
+  "predictions.create_fcm_position_transfer": {
+    "request": {
+      "body": {
+        "source_subtrader_id": "3f2a8c1e-5b7d-4e9a-8c6f-1d2b3a4e5f60_CUST123",
+        "target_subtrader_id": "9b8c7d6e-5f4a-4b3c-9d2e-1f0a9b8c7d6e_ERR1",
+        "market_ticker": "KXEXAMPLE-26DEC31",
+        "position_centicount": 1000,
+        "price_centicents": 4500
+      }
+    },
+    "response": {
+      "position_transfer_id": "fixture"
+    }
+  },
+  "predictions.list_fcm_subtraders": {
+    "request": {},
+    "response": {
+      "subtraders": [
+        {
+          "subtrader_id": "fixture",
+          "exchange_indices": [
+            1
+          ],
+          "trading_blocked": true,
+          "fcm_trading_blocked": true,
+          "propagation_pending": true
+        }
+      ]
+    }
+  },
+  "predictions.create_fcm_subtrader": {
+    "request": {
+      "body": {
+        "subtrader_suffix": "fixture"
+      }
+    },
+    "response": {
+      "subtrader_id": "fixture"
+    }
+  },
+  "predictions.get_fcm_subtrader_blocked_categories": {
+    "request": {
+      "subtrader_id": "fixture"
+    },
+    "response": {
+      "categories": [
+        "fixture"
+      ]
+    }
+  },
+  "predictions.update_fcm_subtrader_blocked_categories": {
+    "request": {
+      "body": {
+        "subtrader_id": "fixture",
+        "category": "fixture",
+        "blocked": true
+      }
+    },
+    "response": {
+      "categories": [
+        "fixture"
+      ]
+    }
+  },
+  "predictions.delete_fcm_event_contract_daily_cap": {
+    "request": {
+      "subtrader_id": "fixture"
+    },
+    "response": {}
+  },
+  "predictions.get_fcm_event_contract_daily_cap": {
+    "request": {
+      "subtrader_id": "fixture"
+    },
+    "response": {
+      "subtrader_id": "fixture",
+      "limit": "0.5600",
+      "executed_utilization": "0.5600",
+      "resting_order_utilization": "0.5600",
+      "pending_order_utilization": "0.5600",
+      "cap_date": "fixture"
+    }
+  },
+  "predictions.update_fcm_event_contract_daily_cap": {
+    "request": {
+      "body": {
+        "subtrader_id": "fixture",
+        "limit": "0.5600"
+      }
+    },
+    "response": {}
+  },
+  "predictions.get_historical_cutoff": {
+    "request": {},
+    "response": {
+      "market_settled_ts": "fixture",
+      "trades_created_ts": "fixture",
+      "orders_updated_ts": "fixture",
+      "market_positions_last_updated_ts": "fixture"
+    }
+  },
+  "predictions.get_fills_historical": {
+    "request": {
+      "ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "fills": [
+        {
+          "fill_id": "fixture",
+          "exchange_index": 0,
+          "trade_id": "fixture",
+          "order_id": "fixture",
+          "ticker": "fixture",
+          "market_ticker": "fixture",
+          "side": "yes",
+          "action": "buy",
+          "outcome_side": "yes",
+          "book_side": "bid",
+          "count_fp": "10.00",
+          "yes_price_dollars": "0.5600",
+          "no_price_dollars": "0.5600",
+          "is_taker": true,
+          "created_time": "fixture",
+          "fee_cost": "0.5600",
+          "subaccount_number": 1,
+          "ts": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_historical_markets": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "tickers": "fixture",
+      "event_ticker": "fixture",
+      "series_ticker": "fixture",
+      "mve_filter": "exclude"
+    },
+    "response": {
+      "markets": [
+        {
+          "ticker": "fixture",
+          "event_ticker": "fixture",
+          "market_type": "binary",
+          "title": "fixture",
+          "subtitle": "fixture",
+          "yes_sub_title": "fixture",
+          "no_sub_title": "fixture",
+          "created_time": "fixture",
+          "updated_time": "fixture",
+          "open_time": "fixture",
+          "close_time": "fixture",
+          "expected_expiration_time": "fixture",
+          "expiration_time": "fixture",
+          "latest_expiration_time": "fixture",
+          "settlement_timer_seconds": 1,
+          "status": "initialized",
+          "yes_bid_dollars": "0.5600",
+          "yes_bid_size_fp": "10.00",
+          "yes_ask_dollars": "0.5600",
+          "yes_ask_size_fp": "10.00",
+          "no_bid_dollars": "0.5600",
+          "no_ask_dollars": "0.5600",
+          "last_price_dollars": "0.5600",
+          "volume_fp": "10.00",
+          "volume_24h_fp": "10.00",
+          "result": "yes",
+          "can_close_early": true,
+          "open_interest_fp": "10.00",
+          "notional_value_dollars": "0.5600",
+          "previous_yes_bid_dollars": "0.5600",
+          "previous_yes_ask_dollars": "0.5600",
+          "previous_price_dollars": "0.5600",
+          "settlement_value_dollars": "0.5600",
+          "settlement_ts": "fixture",
+          "settlement_bounds_type": "default",
+          "settlement_floor_dollars": "0.5600",
+          "expiration_value": "fixture",
+          "occurrence_datetime": "fixture",
+          "fee_waiver_expiration_time": "fixture",
+          "early_close_condition": "fixture",
+          "strike_type": "greater",
+          "floor_strike": 1,
+          "cap_strike": 1,
+          "functional_strike": "fixture",
+          "custom_strike": {},
+          "rules_primary": "fixture",
+          "rules_secondary": "fixture",
+          "mve_collection_ticker": "fixture",
+          "mve_selected_legs": [
+            {}
+          ],
+          "primary_participant_key": "fixture",
+          "price_level_structure": "fixture",
+          "price_ranges": [
+            {
+              "start": "fixture",
+              "end": "fixture",
+              "step": "fixture"
+            }
+          ],
+          "is_provisional": true,
+          "exchange_index": 0
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_historical_market": {
+    "request": {
+      "ticker": "fixture"
+    },
+    "response": {
+      "market": {
+        "ticker": "fixture",
+        "event_ticker": "fixture",
+        "market_type": "binary",
+        "title": "fixture",
+        "subtitle": "fixture",
+        "yes_sub_title": "fixture",
+        "no_sub_title": "fixture",
+        "created_time": "fixture",
+        "updated_time": "fixture",
+        "open_time": "fixture",
+        "close_time": "fixture",
+        "expected_expiration_time": "fixture",
+        "expiration_time": "fixture",
+        "latest_expiration_time": "fixture",
+        "settlement_timer_seconds": 1,
+        "status": "initialized",
+        "yes_bid_dollars": "0.5600",
+        "yes_bid_size_fp": "10.00",
+        "yes_ask_dollars": "0.5600",
+        "yes_ask_size_fp": "10.00",
+        "no_bid_dollars": "0.5600",
+        "no_ask_dollars": "0.5600",
+        "last_price_dollars": "0.5600",
+        "volume_fp": "10.00",
+        "volume_24h_fp": "10.00",
+        "result": "yes",
+        "can_close_early": true,
+        "open_interest_fp": "10.00",
+        "notional_value_dollars": "0.5600",
+        "previous_yes_bid_dollars": "0.5600",
+        "previous_yes_ask_dollars": "0.5600",
+        "previous_price_dollars": "0.5600",
+        "settlement_value_dollars": "0.5600",
+        "settlement_ts": "fixture",
+        "settlement_bounds_type": "default",
+        "settlement_floor_dollars": "0.5600",
+        "expiration_value": "fixture",
+        "occurrence_datetime": "fixture",
+        "fee_waiver_expiration_time": "fixture",
+        "early_close_condition": "fixture",
+        "strike_type": "greater",
+        "floor_strike": 1,
+        "cap_strike": 1,
+        "functional_strike": "fixture",
+        "custom_strike": {},
+        "rules_primary": "fixture",
+        "rules_secondary": "fixture",
+        "mve_collection_ticker": "fixture",
+        "mve_selected_legs": [
+          {
+            "event_ticker": "fixture",
+            "market_ticker": "fixture",
+            "side": "fixture",
+            "yes_settlement_value_dollars": "0.5600"
+          }
+        ],
+        "primary_participant_key": "fixture",
+        "price_level_structure": "fixture",
+        "price_ranges": [
+          {
+            "start": "fixture",
+            "end": "fixture",
+            "step": "fixture"
+          }
+        ],
+        "is_provisional": true,
+        "exchange_index": 0
+      }
+    }
+  },
+  "predictions.get_market_candlesticks_historical": {
+    "request": {
+      "ticker": "fixture",
+      "start_ts": 1,
+      "end_ts": 1,
+      "period_interval": 1
+    },
+    "response": {
+      "ticker": "fixture",
+      "candlesticks": [
+        {
+          "end_period_ts": 1,
+          "yes_bid": {
+            "open": "0.5600",
+            "low": "0.5600",
+            "high": "0.5600",
+            "close": "0.5600"
+          },
+          "yes_ask": {
+            "open": "0.5600",
+            "low": "0.5600",
+            "high": "0.5600",
+            "close": "0.5600"
+          },
+          "price": {
+            "open": "0.5600",
+            "low": "0.5600",
+            "high": "0.5600",
+            "close": "0.5600",
+            "mean": "0.5600",
+            "previous": "0.5600"
+          },
+          "volume": "10.00",
+          "open_interest": "10.00"
+        }
+      ]
+    }
+  },
+  "predictions.get_historical_orders": {
+    "request": {
+      "ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "orders": [
+        {
+          "order_id": "fixture",
+          "user_id": "fixture",
+          "client_order_id": "fixture",
+          "ticker": "fixture",
+          "side": "yes",
+          "action": "buy",
+          "outcome_side": "yes",
+          "book_side": "bid",
+          "type": "limit",
+          "status": "resting",
+          "yes_price_dollars": "0.5600",
+          "no_price_dollars": "0.5600",
+          "fill_count_fp": "10.00",
+          "remaining_count_fp": "10.00",
+          "initial_count_fp": "10.00",
+          "taker_fill_cost_dollars": "0.5600",
+          "maker_fill_cost_dollars": "0.5600",
+          "taker_fees_dollars": "0.5600",
+          "maker_fees_dollars": "0.5600",
+          "expiration_time": "fixture",
+          "created_time": "fixture",
+          "last_update_time": "fixture",
+          "self_trade_prevention_type": "taker_at_cross",
+          "order_group_id": "fixture",
+          "cancel_order_on_pause": true,
+          "subaccount_number": 1,
+          "exchange_index": 0
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_historical_positions": {
+    "request": {
+      "ticker": "fixture",
+      "event_ticker": "fixture",
+      "subaccount": 1,
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "cursor": "fixture",
+      "market_positions": [
+        {
+          "ticker": "fixture",
+          "exchange_index": 0,
+          "total_traded_dollars": "0.5600",
+          "position_fp": "10.00",
+          "market_exposure_dollars": "0.5600",
+          "realized_pnl_dollars": "0.5600",
+          "fees_paid_dollars": "0.5600",
+          "last_updated_ts": "fixture",
+          "netting_enabled": true
+        }
+      ],
+      "event_positions": [
+        {
+          "event_ticker": "fixture",
+          "total_cost_dollars": "0.5600",
+          "total_cost_shares_fp": "10.00",
+          "event_exposure_dollars": "0.5600",
+          "realized_pnl_dollars": "0.5600",
+          "fees_paid_dollars": "0.5600"
+        }
+      ]
+    }
+  },
+  "predictions.get_trades_historical": {
+    "request": {
+      "ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "is_block_trade": true
+    },
+    "response": {
+      "trades": [
+        {
+          "trade_id": "fixture",
+          "ticker": "fixture",
+          "count_fp": "10.00",
+          "yes_price_dollars": "0.5600",
+          "no_price_dollars": "0.5600",
+          "taker_side": "yes",
+          "taker_outcome_side": "yes",
+          "taker_book_side": "bid",
+          "created_time": "fixture",
+          "is_block_trade": true
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_incentive_programs": {
+    "request": {
+      "status": "all",
+      "type": "all",
+      "incentive_description": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "incentive_programs": [
+        {
+          "id": "fixture",
+          "market_id": "fixture",
+          "market_ticker": "fixture",
+          "incentive_type": "liquidity",
+          "incentive_description": "fixture",
+          "start_date": "fixture",
+          "end_date": "fixture",
+          "period_reward": 1,
+          "paid_out": true,
+          "discount_factor_bps": 1,
+          "target_size_fp": "10.00",
+          "max_reward_per_account": 1
+        }
+      ],
+      "next_cursor": "fixture"
+    }
+  },
+  "predictions.get_live_datas": {
+    "request": {
+      "milestone_ids": [
+        "fixture"
+      ],
+      "include_player_stats": true
+    },
+    "response": {
+      "live_datas": [
+        {
+          "type": "fixture",
+          "details": {},
+          "milestone_id": "fixture"
+        }
+      ]
+    }
+  },
+  "predictions.get_event_live_data": {
+    "request": {
+      "event_ticker": "fixture",
+      "range": "fixture"
+    },
+    "response": {
+      "live_data": {
+        "type": "fixture",
+        "details": {},
+        "is_historical": true,
+        "default_range": "fixture",
+        "range_options": [
+          "fixture"
+        ]
+      }
+    }
+  },
+  "predictions.get_live_data_by_milestone": {
+    "request": {
+      "milestone_id": "fixture",
+      "include_player_stats": true
+    },
+    "response": {
+      "live_data": {
+        "type": "fixture",
+        "details": {},
+        "milestone_id": "fixture"
+      }
+    }
+  },
+  "predictions.get_game_stats": {
+    "request": {
+      "milestone_id": "fixture"
+    },
+    "response": {
+      "pbp": {
+        "periods": [
+          {
+            "events": []
+          }
+        ]
+      }
+    }
+  },
+  "predictions.get_weather_index": {
+    "request": {
+      "city": "fixture",
+      "from": 1,
+      "to": 1,
+      "last_sec": 1,
+      "detailed": true
+    },
+    "response": {
+      "city": "fixture",
+      "config_version": "fixture",
+      "units": "fixture",
+      "timeseries": [
+        {
+          "t": 1,
+          "v": 1,
+          "status": "fixture",
+          "contributors": 1,
+          "receipt_basis": "fixture",
+          "stations": [
+            {
+              "station_id": "fixture",
+              "code": "fixture"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "predictions.get_weather_index_calibrations": {
+    "request": {
+      "city": "fixture"
+    },
+    "response": {
+      "city": "fixture",
+      "units": "fixture",
+      "calibrations": [
+        {
+          "config_version": "fixture",
+          "published_at_ms": 1,
+          "effective_at_ms": 1,
+          "change_reason": "fixture",
+          "calibration_window_start_ms": 1,
+          "calibration_window_end_ms": 1,
+          "city_reference_c": 1,
+          "stations": [
+            {
+              "station_id": "fixture",
+              "weight": 1,
+              "offset_c": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "predictions.get_live_data": {
+    "request": {
+      "type": "fixture",
+      "milestone_id": "fixture",
+      "include_player_stats": true
+    },
+    "response": {
+      "live_data": {
+        "type": "fixture",
+        "details": {},
+        "milestone_id": "fixture"
+      }
+    }
+  },
+  "predictions.get_markets": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "event_ticker": "fixture",
+      "series_ticker": "fixture",
+      "min_created_ts": 1,
+      "max_created_ts": 1,
+      "min_updated_ts": 1,
+      "max_updated_ts": 1,
+      "max_close_ts": 1,
+      "min_close_ts": 1,
+      "min_settled_ts": 1,
+      "max_settled_ts": 1,
+      "status": "unopened",
+      "tickers": "fixture",
+      "mve_filter": "only"
+    },
+    "response": {
+      "markets": [
+        {
+          "ticker": "fixture",
+          "event_ticker": "fixture",
+          "market_type": "binary",
+          "title": "fixture",
+          "subtitle": "fixture",
+          "yes_sub_title": "fixture",
+          "no_sub_title": "fixture",
+          "created_time": "fixture",
+          "updated_time": "fixture",
+          "open_time": "fixture",
+          "close_time": "fixture",
+          "expected_expiration_time": "fixture",
+          "expiration_time": "fixture",
+          "latest_expiration_time": "fixture",
+          "settlement_timer_seconds": 1,
+          "status": "initialized",
+          "yes_bid_dollars": "0.5600",
+          "yes_bid_size_fp": "10.00",
+          "yes_ask_dollars": "0.5600",
+          "yes_ask_size_fp": "10.00",
+          "no_bid_dollars": "0.5600",
+          "no_ask_dollars": "0.5600",
+          "last_price_dollars": "0.5600",
+          "volume_fp": "10.00",
+          "volume_24h_fp": "10.00",
+          "result": "yes",
+          "can_close_early": true,
+          "open_interest_fp": "10.00",
+          "notional_value_dollars": "0.5600",
+          "previous_yes_bid_dollars": "0.5600",
+          "previous_yes_ask_dollars": "0.5600",
+          "previous_price_dollars": "0.5600",
+          "settlement_value_dollars": "0.5600",
+          "settlement_ts": "fixture",
+          "settlement_bounds_type": "default",
+          "settlement_floor_dollars": "0.5600",
+          "expiration_value": "fixture",
+          "occurrence_datetime": "fixture",
+          "fee_waiver_expiration_time": "fixture",
+          "early_close_condition": "fixture",
+          "strike_type": "greater",
+          "floor_strike": 1,
+          "cap_strike": 1,
+          "functional_strike": "fixture",
+          "custom_strike": {},
+          "rules_primary": "fixture",
+          "rules_secondary": "fixture",
+          "mve_collection_ticker": "fixture",
+          "mve_selected_legs": [
+            {}
+          ],
+          "primary_participant_key": "fixture",
+          "price_level_structure": "fixture",
+          "price_ranges": [
+            {
+              "start": "fixture",
+              "end": "fixture",
+              "step": "fixture"
+            }
+          ],
+          "is_provisional": true,
+          "exchange_index": 0
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.batch_get_market_candlesticks": {
+    "request": {
+      "market_tickers": "fixture",
+      "start_ts": 1,
+      "end_ts": 1,
+      "period_interval": 1,
+      "include_latest_before_start": true
+    },
+    "response": {
+      "markets": [
+        {
+          "market_ticker": "fixture",
+          "candlesticks": [
+            {
+              "end_period_ts": 1,
+              "yes_bid": {
+                "open_dollars": "0.5600",
+                "low_dollars": "0.5600",
+                "high_dollars": "0.5600",
+                "close_dollars": "0.5600"
+              },
+              "yes_ask": {
+                "open_dollars": "0.5600",
+                "low_dollars": "0.5600",
+                "high_dollars": "0.5600",
+                "close_dollars": "0.5600"
+              },
+              "price": {},
+              "volume_fp": "10.00",
+              "open_interest_fp": "10.00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "predictions.get_market_orderbooks": {
+    "request": {
+      "tickers": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "orderbooks": [
+        {
+          "ticker": "fixture",
+          "orderbook_fp": {
+            "yes_dollars": [],
+            "no_dollars": []
+          }
+        }
+      ]
+    }
+  },
+  "predictions.get_trades": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "is_block_trade": true
+    },
+    "response": {
+      "trades": [
+        {
+          "trade_id": "fixture",
+          "ticker": "fixture",
+          "count_fp": "10.00",
+          "yes_price_dollars": "0.5600",
+          "no_price_dollars": "0.5600",
+          "taker_side": "yes",
+          "taker_outcome_side": "yes",
+          "taker_book_side": "bid",
+          "created_time": "fixture",
+          "is_block_trade": true
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_market": {
+    "request": {
+      "ticker": "fixture"
+    },
+    "response": {
+      "market": {
+        "ticker": "fixture",
+        "event_ticker": "fixture",
+        "market_type": "binary",
+        "title": "fixture",
+        "subtitle": "fixture",
+        "yes_sub_title": "fixture",
+        "no_sub_title": "fixture",
+        "created_time": "fixture",
+        "updated_time": "fixture",
+        "open_time": "fixture",
+        "close_time": "fixture",
+        "expected_expiration_time": "fixture",
+        "expiration_time": "fixture",
+        "latest_expiration_time": "fixture",
+        "settlement_timer_seconds": 1,
+        "status": "initialized",
+        "yes_bid_dollars": "0.5600",
+        "yes_bid_size_fp": "10.00",
+        "yes_ask_dollars": "0.5600",
+        "yes_ask_size_fp": "10.00",
+        "no_bid_dollars": "0.5600",
+        "no_ask_dollars": "0.5600",
+        "last_price_dollars": "0.5600",
+        "volume_fp": "10.00",
+        "volume_24h_fp": "10.00",
+        "result": "yes",
+        "can_close_early": true,
+        "open_interest_fp": "10.00",
+        "notional_value_dollars": "0.5600",
+        "previous_yes_bid_dollars": "0.5600",
+        "previous_yes_ask_dollars": "0.5600",
+        "previous_price_dollars": "0.5600",
+        "settlement_value_dollars": "0.5600",
+        "settlement_ts": "fixture",
+        "settlement_bounds_type": "default",
+        "settlement_floor_dollars": "0.5600",
+        "expiration_value": "fixture",
+        "occurrence_datetime": "fixture",
+        "fee_waiver_expiration_time": "fixture",
+        "early_close_condition": "fixture",
+        "strike_type": "greater",
+        "floor_strike": 1,
+        "cap_strike": 1,
+        "functional_strike": "fixture",
+        "custom_strike": {},
+        "rules_primary": "fixture",
+        "rules_secondary": "fixture",
+        "mve_collection_ticker": "fixture",
+        "mve_selected_legs": [
+          {
+            "event_ticker": "fixture",
+            "market_ticker": "fixture",
+            "side": "fixture",
+            "yes_settlement_value_dollars": "0.5600"
+          }
+        ],
+        "primary_participant_key": "fixture",
+        "price_level_structure": "fixture",
+        "price_ranges": [
+          {
+            "start": "fixture",
+            "end": "fixture",
+            "step": "fixture"
+          }
+        ],
+        "is_provisional": true,
+        "exchange_index": 0
+      }
+    }
+  },
+  "predictions.get_market_orderbook": {
+    "request": {
+      "ticker": "fixture",
+      "depth": 1
+    },
+    "response": {
+      "orderbook_fp": {
+        "yes_dollars": [
+          [
+            "0.1500",
+            "100.00"
+          ]
+        ],
+        "no_dollars": [
+          [
+            "0.1500",
+            "100.00"
+          ]
+        ]
+      }
+    }
+  },
+  "predictions.get_milestones": {
+    "request": {
+      "limit": 1,
+      "minimum_start_date": "fixture",
+      "category": "Sports",
+      "competition": "Pro Football",
+      "source_id": "fixture",
+      "type": "football_game",
+      "related_event_ticker": "fixture",
+      "cursor": "fixture",
+      "min_updated_ts": 1
+    },
+    "response": {
+      "milestones": [
+        {
+          "id": "fixture",
+          "category": "Sports",
+          "type": "football_game",
+          "start_date": "fixture",
+          "end_date": "fixture",
+          "related_event_tickers": [
+            "fixture"
+          ],
+          "title": "fixture",
+          "notification_message": "fixture",
+          "source_id": "fixture",
+          "source_ids": {},
+          "details": {},
+          "primary_event_tickers": [
+            "fixture"
+          ],
+          "last_updated_ts": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_milestone": {
+    "request": {
+      "milestone_id": "fixture"
+    },
+    "response": {
+      "milestone": {
+        "id": "fixture",
+        "category": "Sports",
+        "type": "football_game",
+        "start_date": "fixture",
+        "end_date": "fixture",
+        "related_event_tickers": [
+          "fixture"
+        ],
+        "title": "fixture",
+        "notification_message": "fixture",
+        "source_id": "fixture",
+        "source_ids": {},
+        "details": {},
+        "primary_event_tickers": [
+          "fixture"
+        ],
+        "last_updated_ts": "fixture"
+      }
+    }
+  },
+  "predictions.get_multivariate_event_collections": {
+    "request": {
+      "status": "unopened",
+      "associated_event_ticker": "fixture",
+      "series_ticker": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "multivariate_contracts": [
+        {
+          "collection_ticker": "fixture",
+          "series_ticker": "fixture",
+          "exchange_index": 0,
+          "title": "fixture",
+          "description": "fixture",
+          "open_date": "fixture",
+          "close_date": "fixture",
+          "associated_events": [
+            {
+              "ticker": "fixture",
+              "is_yes_only": true,
+              "active_quoters": []
+            }
+          ],
+          "associated_event_tickers": [
+            "fixture"
+          ],
+          "is_ordered": true,
+          "is_single_market_per_event": true,
+          "is_all_yes": true,
+          "size_min": 1,
+          "size_max": 1,
+          "functional_description": "fixture",
+          "price_level_structure": "fixture",
+          "price_ranges": [
+            {
+              "start": "fixture",
+              "end": "fixture",
+              "step": "fixture"
+            }
+          ]
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_multivariate_event_collection": {
+    "request": {
+      "collection_ticker": "fixture"
+    },
+    "response": {
+      "multivariate_contract": {
+        "collection_ticker": "fixture",
+        "series_ticker": "fixture",
+        "exchange_index": 0,
+        "title": "fixture",
+        "description": "fixture",
+        "open_date": "fixture",
+        "close_date": "fixture",
+        "associated_events": [
+          {
+            "ticker": "fixture",
+            "is_yes_only": true,
+            "size_max": 1,
+            "size_min": 1,
+            "active_quoters": []
+          }
+        ],
+        "associated_event_tickers": [
+          "fixture"
+        ],
+        "is_ordered": true,
+        "is_single_market_per_event": true,
+        "is_all_yes": true,
+        "size_min": 1,
+        "size_max": 1,
+        "functional_description": "fixture",
+        "price_level_structure": "fixture",
+        "price_ranges": [
+          {
+            "start": "fixture",
+            "end": "fixture",
+            "step": "fixture"
+          }
+        ]
+      }
+    }
+  },
+  "predictions.create_market_in_multivariate_event_collection": {
+    "request": {
+      "collection_ticker": "fixture",
+      "body": {
+        "selected_markets": [
+          {
+            "market_ticker": "fixture",
+            "event_ticker": "fixture",
+            "side": "yes"
+          }
+        ],
+        "with_market_payload": true
+      }
+    },
+    "response": {
+      "event_ticker": "fixture",
+      "market_ticker": "fixture",
+      "market": {
+        "ticker": "fixture",
+        "event_ticker": "fixture",
+        "market_type": "binary",
+        "title": "fixture",
+        "subtitle": "fixture",
+        "yes_sub_title": "fixture",
+        "no_sub_title": "fixture",
+        "created_time": "fixture",
+        "updated_time": "fixture",
+        "open_time": "fixture",
+        "close_time": "fixture",
+        "expected_expiration_time": "fixture",
+        "expiration_time": "fixture",
+        "latest_expiration_time": "fixture",
+        "settlement_timer_seconds": 1,
+        "status": "initialized",
+        "yes_bid_dollars": "0.5600",
+        "yes_bid_size_fp": "10.00",
+        "yes_ask_dollars": "0.5600",
+        "yes_ask_size_fp": "10.00",
+        "no_bid_dollars": "0.5600",
+        "no_ask_dollars": "0.5600",
+        "last_price_dollars": "0.5600",
+        "volume_fp": "10.00",
+        "volume_24h_fp": "10.00",
+        "result": "yes",
+        "can_close_early": true,
+        "open_interest_fp": "10.00",
+        "notional_value_dollars": "0.5600",
+        "previous_yes_bid_dollars": "0.5600",
+        "previous_yes_ask_dollars": "0.5600",
+        "previous_price_dollars": "0.5600",
+        "settlement_value_dollars": "0.5600",
+        "settlement_ts": "fixture",
+        "settlement_bounds_type": "default",
+        "settlement_floor_dollars": "0.5600",
+        "expiration_value": "fixture",
+        "occurrence_datetime": "fixture",
+        "fee_waiver_expiration_time": "fixture",
+        "early_close_condition": "fixture",
+        "strike_type": "greater",
+        "floor_strike": 1,
+        "cap_strike": 1,
+        "functional_strike": "fixture",
+        "custom_strike": {},
+        "rules_primary": "fixture",
+        "rules_secondary": "fixture",
+        "mve_collection_ticker": "fixture",
+        "mve_selected_legs": [
+          {
+            "event_ticker": "fixture",
+            "market_ticker": "fixture",
+            "side": "fixture",
+            "yes_settlement_value_dollars": "0.5600"
+          }
+        ],
+        "primary_participant_key": "fixture",
+        "price_level_structure": "fixture",
+        "price_ranges": [
+          {
+            "start": "fixture",
+            "end": "fixture",
+            "step": "fixture"
+          }
+        ],
+        "is_provisional": true,
+        "exchange_index": 0
+      }
+    }
+  },
+  "predictions.get_balance": {
+    "request": {
+      "subaccount": 1,
+      "exchange_index": 0
+    },
+    "response": {
+      "balance": 1,
+      "balance_dollars": "0.5600",
+      "portfolio_value": 1,
+      "updated_ts": 1,
+      "balance_breakdown": [
+        {
+          "exchange_index": 0,
+          "balance": "0.5600"
+        }
+      ]
+    }
+  },
+  "predictions.get_credit_history": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "min_ts": 1,
+      "max_ts": 1
+    },
+    "response": {
+      "credits": [
+        {
+          "credit_id": "fixture",
+          "type": "fixture",
+          "status": "unknown",
+          "amount_dollars": "0.5600",
+          "reason": "fixture",
+          "created_time": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_deposits": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "deposits": [
+        {
+          "id": "fixture",
+          "status": "pending",
+          "type": "ach",
+          "amount_cents": 1,
+          "fee_cents": 1,
+          "created_ts": 1,
+          "finalized_ts": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.cancel_all_orders": {
+    "request": {
+      "subaccount": 1
+    },
+    "response": null
+  },
+  "predictions.create_order_v2": {
+    "request": {
+      "body": {
+        "ticker": "HIGHNY-24JAN01-T60",
+        "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+        "side": "bid",
+        "count": "10.00",
+        "price": "0.5600",
+        "time_in_force": "good_till_canceled",
+        "self_trade_prevention_type": "taker_at_cross",
+        "post_only": false,
+        "cancel_order_on_pause": false,
+        "reduce_only": false,
+        "subaccount": 0,
+        "exchange_index": 0
+      }
+    },
+    "response": {
+      "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+      "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+      "fill_count": "0.00",
+      "remaining_count": "10.00",
+      "ts_ms": 1715793600123
+    }
+  },
+  "predictions.batch_cancel_orders_v2": {
+    "request": {
+      "body": {
+        "orders": [
+          {
+            "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+            "subaccount": 0,
+            "exchange_index": 0
+          },
+          {
+            "order_id": "a6d6010d-6d5f-40a1-a7e7-5501386bb621",
+            "subaccount": 0,
+            "exchange_index": 0
+          }
+        ]
+      }
+    },
+    "response": {
+      "orders": [
+        {
+          "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+          "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+          "reduced_by": "10.00",
+          "ts_ms": 1715793660456
+        },
+        {
+          "order_id": "a6d6010d-6d5f-40a1-a7e7-5501386bb621",
+          "client_order_id": "2a0e3fc9-b593-4aa3-96e5-82f7f7566c2a",
+          "reduced_by": "5.00",
+          "ts_ms": 1715793660789
+        }
+      ]
+    }
+  },
+  "predictions.batch_create_orders_v2": {
+    "request": {
+      "body": {
+        "orders": [
+          {
+            "ticker": "HIGHNY-24JAN01-T60",
+            "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+            "side": "bid",
+            "count": "10.00",
+            "price": "0.5600",
+            "time_in_force": "good_till_canceled",
+            "self_trade_prevention_type": "taker_at_cross",
+            "exchange_index": 0
+          },
+          {
+            "ticker": "HIGHNY-24JAN01-T60",
+            "client_order_id": "2a0e3fc9-b593-4aa3-96e5-82f7f7566c2a",
+            "side": "ask",
+            "count": "5.00",
+            "price": "0.5800",
+            "time_in_force": "immediate_or_cancel",
+            "self_trade_prevention_type": "maker",
+            "exchange_index": 0
+          }
+        ]
+      }
+    },
+    "response": {
+      "orders": [
+        {
+          "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+          "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+          "fill_count": "0.00",
+          "remaining_count": "10.00",
+          "ts_ms": 1715793600123
+        },
+        {
+          "order_id": "a6d6010d-6d5f-40a1-a7e7-5501386bb621",
+          "client_order_id": "2a0e3fc9-b593-4aa3-96e5-82f7f7566c2a",
+          "fill_count": "5.00",
+          "remaining_count": "0.00",
+          "average_fill_price": "0.5800",
+          "average_fee_paid": "0.0012",
+          "ts_ms": 1715793600456
+        }
+      ]
+    }
+  },
+  "predictions.create_order_with_exit_trigger": {
+    "request": {
+      "body": {
+        "ticker": "fixture",
+        "client_order_id": "fixture",
+        "side": "bid",
+        "count": "10.00",
+        "price": "0.5600",
+        "expiration_time": 1,
+        "time_in_force": "fixture",
+        "post_only": true,
+        "self_trade_prevention_type": "taker_at_cross",
+        "cancel_order_on_pause": true,
+        "reduce_only": true,
+        "subaccount": 1,
+        "order_group_id": "fixture",
+        "exchange_index": 0,
+        "exit_trigger": {
+          "slippage": {
+            "unit": "bps",
+            "value": 1
+          },
+          "stop_loss_price": "0.5600",
+          "take_profit_price": "0.5600"
+        }
+      }
+    },
+    "response": {
+      "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+      "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+      "fill_count": "0.00",
+      "remaining_count": "10.00",
+      "ts_ms": 1715793600123
+    }
+  },
+  "predictions.cancel_order_v2": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount": 1,
+      "exchange_index": 0,
+      "market_ticker": "fixture"
+    },
+    "response": {
+      "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+      "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+      "reduced_by": "10.00",
+      "ts_ms": 1715793660456
+    }
+  },
+  "predictions.amend_order_v2": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount": 1,
+      "body": {
+        "ticker": "HIGHNY-24JAN01-T60",
+        "side": "bid",
+        "price": "0.5700",
+        "count": "8.00",
+        "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+        "updated_client_order_id": "2a0e3fc9-b593-4aa3-96e5-82f7f7566c2a",
+        "exchange_index": 0
+      }
+    },
+    "response": {
+      "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+      "client_order_id": "2a0e3fc9-b593-4aa3-96e5-82f7f7566c2a",
+      "remaining_count": "8.00",
+      "fill_count": "0.00",
+      "ts_ms": 1715793690123
+    }
+  },
+  "predictions.decrease_order_v2": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount": 1,
+      "body": {
+        "reduce_by": "2.00",
+        "exchange_index": 0
+      }
+    },
+    "response": {
+      "order_id": "3b23c1c7-f4ef-4f0d-8b9a-9e53c61f1a0d",
+      "client_order_id": "8c35ecb3-328f-4f52-8c7c-0f4b9862f8d1",
+      "remaining_count": "8.00",
+      "ts_ms": 1715793680789
+    }
+  },
+  "predictions.get_fills": {
+    "request": {
+      "ticker": "fixture",
+      "order_id": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "subaccount": 1,
+      "exchange_index": 1
+    },
+    "response": {
+      "fills": [
+        {
+          "fill_id": "fixture",
+          "exchange_index": 0,
+          "trade_id": "fixture",
+          "order_id": "fixture",
+          "ticker": "fixture",
+          "market_ticker": "fixture",
+          "side": "yes",
+          "action": "buy",
+          "outcome_side": "yes",
+          "book_side": "bid",
+          "count_fp": "10.00",
+          "yes_price_dollars": "0.5600",
+          "no_price_dollars": "0.5600",
+          "is_taker": true,
+          "created_time": "fixture",
+          "fee_cost": "0.5600",
+          "subaccount_number": 1,
+          "ts": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.intra_exchange_instance_transfer": {
+    "request": {
+      "body": {
+        "client_transfer_id": "fixture",
+        "source": "event_contract",
+        "destination": "event_contract",
+        "amount": 1,
+        "source_exchange_shard": 1,
+        "destination_exchange_shard": 1,
+        "source_subaccount": 1,
+        "destination_subaccount": 1
+      }
+    },
+    "response": {
+      "transfer_id": "fixture"
+    }
+  },
+  "predictions.get_intra_exchange_instance_transfers": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "transfers": [
+        {
+          "transfer_id": "fixture",
+          "client_transfer_id": "fixture",
+          "source": "event_contract",
+          "destination": "event_contract",
+          "source_exchange_shard": 1,
+          "destination_exchange_shard": 1,
+          "amount": "0.5600",
+          "status": "pending",
+          "created_ts": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_intra_exchange_instance_transfer": {
+    "request": {
+      "transfer_id": "fixture"
+    },
+    "response": {
+      "transfer": {
+        "transfer_id": "fixture",
+        "client_transfer_id": "fixture",
+        "source": "event_contract",
+        "destination": "event_contract",
+        "source_exchange_shard": 1,
+        "destination_exchange_shard": 1,
+        "amount": "0.5600",
+        "status": "pending",
+        "created_ts": 1
+      }
+    }
+  },
+  "predictions.get_order_groups": {
+    "request": {
+      "subaccount": 1
+    },
+    "response": {
+      "order_groups": [
+        {
+          "id": "fixture",
+          "contracts_limit_fp": "10.00",
+          "is_auto_cancel_enabled": true,
+          "exchange_index": 0
+        }
+      ]
+    }
+  },
+  "predictions.create_order_group": {
+    "request": {
+      "body": {
+        "subaccount": 1,
+        "contracts_limit": 1,
+        "contracts_limit_fp": "10.00",
+        "exchange_index": 0
+      }
+    },
+    "response": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "exchange_index": 0
+    }
+  },
+  "predictions.delete_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "exchange_index": 0
+    },
+    "response": {}
+  },
+  "predictions.get_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "is_auto_cancel_enabled": true,
+      "contracts_limit_fp": "10.00",
+      "orders": [
+        "fixture"
+      ],
+      "exchange_index": 0
+    }
+  },
+  "predictions.update_order_group_limit": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "exchange_index": 0,
+      "body": {
+        "contracts_limit": 1,
+        "contracts_limit_fp": "10.00"
+      }
+    },
+    "response": {}
+  },
+  "predictions.reset_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "exchange_index": 0,
+      "body": {}
+    },
+    "response": {}
+  },
+  "predictions.trigger_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "exchange_index": 0,
+      "body": {}
+    },
+    "response": {}
+  },
+  "predictions.get_orders": {
+    "request": {
+      "ticker": "fixture",
+      "event_ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "status": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "subaccount": 1,
+      "exchange_index": 1
+    },
+    "response": {
+      "orders": [
+        {
+          "order_id": "fixture",
+          "user_id": "fixture",
+          "client_order_id": "fixture",
+          "ticker": "fixture",
+          "side": "yes",
+          "action": "buy",
+          "outcome_side": "yes",
+          "book_side": "bid",
+          "type": "limit",
+          "status": "resting",
+          "yes_price_dollars": "0.5600",
+          "no_price_dollars": "0.5600",
+          "fill_count_fp": "10.00",
+          "remaining_count_fp": "10.00",
+          "initial_count_fp": "10.00",
+          "taker_fill_cost_dollars": "0.5600",
+          "maker_fill_cost_dollars": "0.5600",
+          "taker_fees_dollars": "0.5600",
+          "maker_fees_dollars": "0.5600",
+          "expiration_time": "fixture",
+          "created_time": "fixture",
+          "last_update_time": "fixture",
+          "self_trade_prevention_type": "taker_at_cross",
+          "order_group_id": "fixture",
+          "cancel_order_on_pause": true,
+          "subaccount_number": 1,
+          "exchange_index": 0
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_order_queue_positions": {
+    "request": {
+      "market_tickers": "fixture",
+      "event_ticker": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "queue_positions": [
+        {
+          "order_id": "fixture",
+          "market_ticker": "fixture",
+          "queue_position_fp": "10.00"
+        }
+      ]
+    }
+  },
+  "predictions.get_order": {
+    "request": {
+      "order_id": "fixture"
+    },
+    "response": {
+      "order": {
+        "order_id": "fixture",
+        "user_id": "fixture",
+        "client_order_id": "fixture",
+        "ticker": "fixture",
+        "side": "yes",
+        "action": "buy",
+        "outcome_side": "yes",
+        "book_side": "bid",
+        "type": "limit",
+        "status": "resting",
+        "yes_price_dollars": "0.5600",
+        "no_price_dollars": "0.5600",
+        "fill_count_fp": "10.00",
+        "remaining_count_fp": "10.00",
+        "initial_count_fp": "10.00",
+        "taker_fill_cost_dollars": "0.5600",
+        "maker_fill_cost_dollars": "0.5600",
+        "taker_fees_dollars": "0.5600",
+        "maker_fees_dollars": "0.5600",
+        "expiration_time": "fixture",
+        "created_time": "fixture",
+        "last_update_time": "fixture",
+        "self_trade_prevention_type": "taker_at_cross",
+        "order_group_id": "fixture",
+        "cancel_order_on_pause": true,
+        "subaccount_number": 1,
+        "exchange_index": 0
+      }
+    }
+  },
+  "predictions.get_order_queue_position": {
+    "request": {
+      "order_id": "fixture"
+    },
+    "response": {
+      "queue_position_fp": "10.00"
+    }
+  },
+  "predictions.get_positions": {
+    "request": {
+      "cursor": "fixture",
+      "limit": 1,
+      "count_filter": "fixture",
+      "settlement_status": "unsettled",
+      "ticker": "fixture",
+      "event_ticker": "fixture",
+      "subaccount": 1,
+      "exchange_index": 1
+    },
+    "response": {
+      "cursor": "fixture",
+      "market_positions": [
+        {
+          "ticker": "fixture",
+          "exchange_index": 0,
+          "total_traded_dollars": "0.5600",
+          "position_fp": "10.00",
+          "market_exposure_dollars": "0.5600",
+          "realized_pnl_dollars": "0.5600",
+          "fees_paid_dollars": "0.5600",
+          "last_updated_ts": "fixture",
+          "netting_enabled": true
+        }
+      ],
+      "event_positions": [
+        {
+          "event_ticker": "fixture",
+          "total_cost_dollars": "0.5600",
+          "total_cost_shares_fp": "10.00",
+          "event_exposure_dollars": "0.5600",
+          "realized_pnl_dollars": "0.5600",
+          "fees_paid_dollars": "0.5600"
+        }
+      ]
+    }
+  },
+  "predictions.delete_event_contract_exit_trigger": {
+    "request": {
+      "ticker": "fixture",
+      "subaccount": 1,
+      "kind": "bracket"
+    },
+    "response": null
+  },
+  "predictions.get_event_contract_exit_triggers": {
+    "request": {
+      "ticker": "fixture",
+      "subaccount": 1,
+      "kind": "bracket"
+    },
+    "response": {
+      "exit_trigger": {
+        "slippage": {
+          "unit": "bps",
+          "value": 1
+        },
+        "id": "fixture",
+        "ticker": "fixture",
+        "side": "yes",
+        "subaccount_number": 1,
+        "kind": "bracket",
+        "stop_loss_price": "0.5600",
+        "take_profit_price": "0.5600",
+        "status": "pending_on_entry",
+        "status_reason": "fixture",
+        "triggered_order_id": "fixture",
+        "triggered_leg": "stop_loss",
+        "created_time": "fixture",
+        "updated_time": "fixture"
+      },
+      "exit_triggers": [
+        {
+          "slippage": {
+            "unit": "bps",
+            "value": 1
+          },
+          "id": "fixture",
+          "ticker": "fixture",
+          "side": "yes",
+          "subaccount_number": 1,
+          "kind": "bracket",
+          "stop_loss_price": "0.5600",
+          "take_profit_price": "0.5600",
+          "status": "pending_on_entry",
+          "status_reason": "fixture",
+          "triggered_order_id": "fixture",
+          "triggered_leg": "stop_loss",
+          "created_time": "fixture",
+          "updated_time": "fixture"
+        }
+      ]
+    }
+  },
+  "predictions.set_event_contract_exit_trigger": {
+    "request": {
+      "ticker": "fixture",
+      "subaccount": 1,
+      "body": {
+        "slippage": {
+          "unit": "bps",
+          "value": 1
+        },
+        "kind": "bracket",
+        "stop_loss_price": "0.5600",
+        "take_profit_price": "0.5600"
+      }
+    },
+    "response": {
+      "slippage": {
+        "unit": "bps",
+        "value": 1
+      },
+      "id": "fixture",
+      "ticker": "fixture",
+      "side": "yes",
+      "subaccount_number": 1,
+      "kind": "bracket",
+      "stop_loss_price": "0.5600",
+      "take_profit_price": "0.5600",
+      "status": "pending_on_entry",
+      "status_reason": "fixture",
+      "triggered_order_id": "fixture",
+      "triggered_leg": "stop_loss",
+      "created_time": "fixture",
+      "updated_time": "fixture"
+    }
+  },
+  "predictions.get_settlements": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "ticker": "fixture",
+      "event_ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "subaccount": 1
+    },
+    "response": {
+      "settlements": [
+        {
+          "ticker": "fixture",
+          "exchange_index": 0,
+          "event_ticker": "fixture",
+          "market_result": "yes",
+          "yes_count_fp": "10.00",
+          "yes_total_cost_dollars": "0.5600",
+          "no_count_fp": "10.00",
+          "no_total_cost_dollars": "0.5600",
+          "revenue": 1,
+          "settled_time": "fixture",
+          "fee_cost": "0.5600",
+          "value": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.create_subaccount": {
+    "request": {
+      "body": {
+        "exchange_index": 0
+      }
+    },
+    "response": {
+      "subaccount_number": 1
+    }
+  },
+  "predictions.get_subaccount_balances": {
+    "request": {},
+    "response": {
+      "subaccount_balances": [
+        {
+          "subaccount_number": 1,
+          "exchange_index": 1,
+          "balance": "0.5600",
+          "updated_ts": 1
+        }
+      ]
+    }
+  },
+  "predictions.get_subaccount_netting": {
+    "request": {},
+    "response": {
+      "netting_configs": [
+        {
+          "subaccount_number": 1,
+          "enabled": true,
+          "exchange_index": 1
+        }
+      ]
+    }
+  },
+  "predictions.update_subaccount_netting": {
+    "request": {
+      "body": {
+        "subaccount_number": 1,
+        "enabled": true
+      }
+    },
+    "response": null
+  },
+  "predictions.apply_subaccount_transfer": {
+    "request": {
+      "body": {
+        "client_transfer_id": "fixture",
+        "from_subaccount": 1,
+        "to_subaccount": 1,
+        "amount_cents": 1,
+        "exchange_index": 0
+      }
+    },
+    "response": {}
+  },
+  "predictions.get_subaccount_transfers": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "transfers": [
+        {
+          "transfer_id": "fixture",
+          "from_subaccount": 1,
+          "to_subaccount": 1,
+          "amount_cents": 1,
+          "created_ts": 1,
+          "exchange_index": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_portfolio_resting_order_total_value": {
+    "request": {},
+    "response": {
+      "total_resting_order_value": 1,
+      "resting_order_value_breakdown": [
+        {
+          "exchange_index": 0,
+          "balance": "0.5600"
+        }
+      ]
+    }
+  },
+  "predictions.get_target_balance_allocation": {
+    "request": {},
+    "response": {
+      "allocations": [
+        {
+          "exchange_index": 1,
+          "percent": 1
+        }
+      ],
+      "resting_margin_reservation": "none"
+    }
+  },
+  "predictions.set_target_balance_allocation": {
+    "request": {
+      "body": {
+        "allocations": [
+          {
+            "exchange_index": 1,
+            "percent": 1
+          }
+        ],
+        "resting_margin_reservation": "none"
+      }
+    },
+    "response": {}
+  },
+  "predictions.get_withdrawals": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "withdrawals": [
+        {
+          "id": "fixture",
+          "status": "pending",
+          "type": "ach",
+          "amount_cents": 1,
+          "fee_cents": 1,
+          "created_ts": 1,
+          "finalized_ts": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_filters_for_sports": {
+    "request": {},
+    "response": {
+      "filters_by_sports": {},
+      "sport_ordering": [
+        "fixture"
+      ]
+    }
+  },
+  "predictions.get_tags_for_series_categories": {
+    "request": {},
+    "response": {
+      "tags_by_categories": {}
+    }
+  },
+  "predictions.get_series_list": {
+    "request": {
+      "category": "fixture",
+      "tags": "fixture",
+      "include_product_metadata": true,
+      "include_volume": true,
+      "min_updated_ts": 1
+    },
+    "response": {
+      "series": [
+        {
+          "ticker": "fixture",
+          "frequency": "fixture",
+          "title": "fixture",
+          "category": "fixture",
+          "categories": [
+            "fixture"
+          ],
+          "tags": [
+            "fixture"
+          ],
+          "settlement_sources": [
+            {}
+          ],
+          "contract_url": "fixture",
+          "contract_terms_url": "fixture",
+          "product_metadata": {},
+          "fee_type": "quadratic",
+          "fee_multiplier": 1,
+          "additional_prohibitions": [
+            "fixture"
+          ],
+          "volume_fp": "10.00",
+          "last_updated_ts": "fixture",
+          "exchange_index": 0
+        }
+      ]
+    }
+  },
+  "predictions.get_series_fee_changes": {
+    "request": {
+      "series_ticker": "fixture",
+      "show_historical": true
+    },
+    "response": {
+      "series_fee_change_arr": [
+        {
+          "id": "fixture",
+          "series_ticker": "fixture",
+          "fee_type": "quadratic",
+          "fee_multiplier": 1,
+          "scheduled_ts": "fixture"
+        }
+      ]
+    }
+  },
+  "predictions.get_series": {
+    "request": {
+      "series_ticker": "fixture",
+      "include_volume": true
+    },
+    "response": {
+      "series": {
+        "ticker": "fixture",
+        "frequency": "fixture",
+        "title": "fixture",
+        "category": "fixture",
+        "categories": [
+          "fixture"
+        ],
+        "tags": [
+          "fixture"
+        ],
+        "settlement_sources": [
+          {
+            "name": "fixture",
+            "url": "fixture"
+          }
+        ],
+        "contract_url": "fixture",
+        "contract_terms_url": "fixture",
+        "product_metadata": {},
+        "fee_type": "quadratic",
+        "fee_multiplier": 1,
+        "additional_prohibitions": [
+          "fixture"
+        ],
+        "volume_fp": "10.00",
+        "last_updated_ts": "fixture",
+        "exchange_index": 0
+      }
+    }
+  },
+  "predictions.get_market_candlesticks_by_event": {
+    "request": {
+      "ticker": "fixture",
+      "series_ticker": "fixture",
+      "start_ts": 1,
+      "end_ts": 1,
+      "period_interval": 1
+    },
+    "response": {
+      "market_tickers": [
+        "fixture"
+      ],
+      "market_candlesticks": [
+        [
+          {
+            "end_period_ts": 1,
+            "yes_bid": {
+              "open_dollars": "0.5600",
+              "low_dollars": "0.5600",
+              "high_dollars": "0.5600",
+              "close_dollars": "0.5600"
+            },
+            "yes_ask": {
+              "open_dollars": "0.5600",
+              "low_dollars": "0.5600",
+              "high_dollars": "0.5600",
+              "close_dollars": "0.5600"
+            },
+            "price": {},
+            "volume_fp": "10.00",
+            "open_interest_fp": "10.00"
+          }
+        ]
+      ],
+      "adjusted_end_ts": 1
+    }
+  },
+  "predictions.get_event_forecast_percentiles_history": {
+    "request": {
+      "ticker": "fixture",
+      "series_ticker": "fixture",
+      "percentiles": [
+        1
+      ],
+      "start_ts": 1,
+      "end_ts": 1,
+      "period_interval": 0
+    },
+    "response": {
+      "forecast_history": [
+        {
+          "event_ticker": "fixture",
+          "end_period_ts": 1,
+          "period_interval": 1,
+          "percentile_points": [
+            {
+              "percentile": 1,
+              "raw_numerical_forecast": 1,
+              "numerical_forecast": 1,
+              "formatted_forecast": "fixture"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "predictions.get_market_candlesticks": {
+    "request": {
+      "series_ticker": "fixture",
+      "ticker": "fixture",
+      "start_ts": 1,
+      "end_ts": 1,
+      "period_interval": 1,
+      "include_latest_before_start": true
+    },
+    "response": {
+      "ticker": "fixture",
+      "candlesticks": [
+        {
+          "end_period_ts": 1,
+          "yes_bid": {
+            "open_dollars": "0.5600",
+            "low_dollars": "0.5600",
+            "high_dollars": "0.5600",
+            "close_dollars": "0.5600"
+          },
+          "yes_ask": {
+            "open_dollars": "0.5600",
+            "low_dollars": "0.5600",
+            "high_dollars": "0.5600",
+            "close_dollars": "0.5600"
+          },
+          "price": {
+            "open_dollars": "0.5600",
+            "low_dollars": "0.5600",
+            "high_dollars": "0.5600",
+            "close_dollars": "0.5600",
+            "mean_dollars": "0.5600",
+            "previous_dollars": "0.5600",
+            "min_dollars": "0.5600",
+            "max_dollars": "0.5600"
+          },
+          "volume_fp": "10.00",
+          "open_interest_fp": "10.00"
+        }
+      ]
+    }
+  },
+  "predictions.get_structured_targets": {
+    "request": {
+      "ids": [
+        "fixture"
+      ],
+      "type": "basketball_player",
+      "competition": "NBA",
+      "page_size": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "structured_targets": [
+        {
+          "id": "fixture",
+          "name": "fixture",
+          "type": "fixture",
+          "details": {},
+          "source_id": "fixture",
+          "source_ids": {},
+          "last_updated_ts": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "predictions.get_structured_target": {
+    "request": {
+      "structured_target_id": "fixture"
+    },
+    "response": {
+      "structured_target": {
+        "id": "fixture",
+        "name": "fixture",
+        "type": "fixture",
+        "details": {},
+        "source_id": "fixture",
+        "source_ids": {},
+        "last_updated_ts": "fixture"
+      }
+    }
+  },
+  "perps.get_perps_account_api_limits": {
+    "request": {},
+    "response": {
+      "usage_tier": "fixture",
+      "read": {
+        "refill_rate": 1,
+        "bucket_capacity": 1
+      },
+      "write": {
+        "refill_rate": 1,
+        "bucket_capacity": 1
+      },
+      "grants": [
+        {
+          "exchange_instance": "event_contract",
+          "level": "fixture",
+          "expires_ts": 1,
+          "source": "fixture"
+        }
+      ]
+    }
+  },
+  "perps.get_margin_balance": {
+    "request": {
+      "compute_available_balance": true
+    },
+    "response": {
+      "subaccount_balances": [
+        {
+          "subaccount": 1,
+          "subaccount_type": "cross",
+          "position_value": "0.5600",
+          "account_equity": "0.5600",
+          "maintenance_margin": "0.5600",
+          "initial_margin": "0.5600",
+          "resting_orders_margin": "0.5600",
+          "available_balance": "0.5600"
+        }
+      ],
+      "settled_funds": "0.5600"
+    }
+  },
+  "perps.get_margin_corporate_actions": {
+    "request": {
+      "ticker": "fixture",
+      "market_id": "fixture"
+    },
+    "response": {
+      "corporate_actions": [
+        {
+          "id": "fixture",
+          "market_id": "fixture",
+          "market_ticker": "fixture",
+          "type": "cash_dividend",
+          "status": "scheduled",
+          "updated_ts": "fixture",
+          "execution_time": "fixture",
+          "cash": {
+            "cash_per_share": "0.5600",
+            "cash_per_contract": "0.5600",
+            "ex_date": "fixture"
+          },
+          "split": {
+            "ratio_old": "fixture",
+            "ratio_new": "fixture",
+            "ex_date": "fixture"
+          },
+          "final_settlement": {
+            "reason": "fixture",
+            "settlement_price_per_share": "0.5600",
+            "settlement_price_per_contract": "0.5600"
+          },
+          "ticker_change": {
+            "old_ticker": "fixture",
+            "new_ticker": "fixture"
+          }
+        }
+      ]
+    }
+  },
+  "perps.delete_cross_margin_exit_trigger": {
+    "request": {
+      "ticker": "fixture",
+      "subaccount": 1,
+      "kind": "bracket"
+    },
+    "response": null
+  },
+  "perps.get_cross_margin_exit_triggers": {
+    "request": {
+      "ticker": "fixture",
+      "subaccount": 1,
+      "kind": "bracket"
+    },
+    "response": {
+      "exit_triggers": [
+        {
+          "id": "fixture",
+          "ticker": "fixture",
+          "kind": "bracket",
+          "status": "pending_on_entry",
+          "status_reason": "user_canceled",
+          "triggered_leg": "stop_loss",
+          "triggered_order_id": "fixture",
+          "anchor_order_id": "fixture",
+          "client_trigger_id": "fixture",
+          "stop_loss_price": "0.5600",
+          "take_profit_price": "0.5600",
+          "trail_amount": "0.5600",
+          "trail_bps": 1,
+          "watermark_price": "0.5600",
+          "effective_stop_price": "0.5600",
+          "count": "10.00",
+          "filled_count": "10.00",
+          "created_time": "fixture",
+          "updated_time": "fixture"
+        }
+      ]
+    }
+  },
+  "perps.set_cross_margin_exit_trigger": {
+    "request": {
+      "ticker": "fixture",
+      "subaccount": 1,
+      "body": {
+        "count": "10.00",
+        "anchor_order_id": "fixture",
+        "client_trigger_id": "fixture",
+        "kind": "bracket",
+        "stop_loss_price": "0.5600",
+        "take_profit_price": "0.5600",
+        "trail_amount": "0.5600",
+        "trail_bps": 1
+      }
+    },
+    "response": {
+      "id": "fixture",
+      "ticker": "fixture",
+      "kind": "bracket",
+      "status": "pending_on_entry",
+      "status_reason": "user_canceled",
+      "triggered_leg": "stop_loss",
+      "triggered_order_id": "fixture",
+      "anchor_order_id": "fixture",
+      "client_trigger_id": "fixture",
+      "stop_loss_price": "0.5600",
+      "take_profit_price": "0.5600",
+      "trail_amount": "0.5600",
+      "trail_bps": 1,
+      "watermark_price": "0.5600",
+      "effective_stop_price": "0.5600",
+      "count": "10.00",
+      "filled_count": "10.00",
+      "created_time": "fixture",
+      "updated_time": "fixture"
+    }
+  },
+  "perps.delete_cross_margin_exit_trigger_by_id": {
+    "request": {
+      "ticker": "fixture",
+      "trigger_id": "fixture",
+      "subaccount": 1
+    },
+    "response": null
+  },
+  "perps.update_cross_margin_exit_trigger": {
+    "request": {
+      "ticker": "fixture",
+      "trigger_id": "fixture",
+      "subaccount": 1,
+      "body": {
+        "stop_loss_price": "0.5600",
+        "take_profit_price": "0.5600"
+      }
+    },
+    "response": {
+      "id": "fixture",
+      "ticker": "fixture",
+      "kind": "bracket",
+      "status": "pending_on_entry",
+      "status_reason": "user_canceled",
+      "triggered_leg": "stop_loss",
+      "triggered_order_id": "fixture",
+      "anchor_order_id": "fixture",
+      "client_trigger_id": "fixture",
+      "stop_loss_price": "0.5600",
+      "take_profit_price": "0.5600",
+      "trail_amount": "0.5600",
+      "trail_bps": 1,
+      "watermark_price": "0.5600",
+      "effective_stop_price": "0.5600",
+      "count": "10.00",
+      "filled_count": "10.00",
+      "created_time": "fixture",
+      "updated_time": "fixture"
+    }
+  },
+  "perps.get_margin_enabled": {
+    "request": {},
+    "response": {
+      "enabled": true
+    }
+  },
+  "perps.get_margin_exchange_status": {
+    "request": {},
+    "response": {
+      "exchange_active": true,
+      "trading_active": true,
+      "intra_exchange_transfers_active": true,
+      "exchange_estimated_resume_time": "fixture",
+      "exchange_index_statuses": [
+        {
+          "exchange_index": 0,
+          "description": "fixture",
+          "exchange_active": true,
+          "trading_active": true,
+          "intra_exchange_transfers_active": true
+        }
+      ]
+    }
+  },
+  "perps.delete_fcm_notional_risk_limit": {
+    "request": {},
+    "response": {}
+  },
+  "perps.update_fcm_notional_risk_limit": {
+    "request": {
+      "body": {
+        "notional_value_risk_limit": "5000.0000"
+      }
+    },
+    "response": {}
+  },
+  "perps.create_margin_fcm_subtrader": {
+    "request": {
+      "body": {
+        "subtrader_suffix": "fixture",
+        "require_category_cap": true
+      }
+    },
+    "response": {
+      "subtrader_id": "fixture"
+    }
+  },
+  "perps.delete_fcm_subtrader_risk_controls": {
+    "request": {
+      "subtrader_id": "fixture",
+      "market_ticker": "fixture",
+      "asset_class": "Crypto"
+    },
+    "response": {}
+  },
+  "perps.get_fcm_subtrader_risk_controls": {
+    "request": {
+      "subtrader_id": "fixture",
+      "market_ticker": "fixture",
+      "asset_class": "Crypto"
+    },
+    "response": {
+      "risk_controls": [
+        {
+          "subtrader_id": "fixture",
+          "market_ticker": "fixture",
+          "asset_class": "Crypto",
+          "im_cap": "100.0000",
+          "current_im": "42.0000"
+        }
+      ],
+      "notional_limits": [
+        {
+          "subtrader_id": "fixture",
+          "market_ticker": "fixture",
+          "notional_value_risk_limit": "5000.0000",
+          "current_notional": "1250.0000"
+        }
+      ]
+    }
+  },
+  "perps.update_fcm_subtrader_risk_controls": {
+    "request": {
+      "body": {
+        "subtrader_id": "fixture",
+        "market_ticker": "fixture",
+        "asset_class": "Crypto",
+        "im_cap": "100.0000"
+      }
+    },
+    "response": {}
+  },
+  "perps.get_margin_fee_tier_rates": {
+    "request": {},
+    "response": {
+      "fee_tier_rates": [
+        {
+          "fee_schedule": "self_clearing_members",
+          "tier": 1,
+          "maker_fee_rate": 1,
+          "taker_fee_rate": 1
+        }
+      ]
+    }
+  },
+  "perps.get_margin_fee_tiers": {
+    "request": {},
+    "response": {
+      "maker_fee_rates": {},
+      "taker_fee_rates": {}
+    }
+  },
+  "perps.get_margin_fills": {
+    "request": {
+      "subaccount": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "min_ts": 1,
+      "max_ts": 1
+    },
+    "response": {
+      "fills": [
+        {
+          "fill_id": "fixture",
+          "order_id": "fixture",
+          "is_taker": true,
+          "side": "bid",
+          "count": "10.00",
+          "created_time": "fixture",
+          "ticker": "fixture",
+          "price": "fixture",
+          "entry_price": "fixture",
+          "fees": "fixture",
+          "realized_pnl": "fixture",
+          "order_source": "user"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "perps.get_margin_funding_history": {
+    "request": {
+      "ticker": "fixture",
+      "start_date": "fixture",
+      "end_date": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "funding_history": [
+        {
+          "market_ticker": "fixture",
+          "funding_time": "fixture",
+          "funding_rate": 1,
+          "mark_price": "0.5600",
+          "funding_amount": "0.5600",
+          "quantity": "10.00",
+          "subaccount_number": 1,
+          "subaccount_type": "cross"
+        }
+      ]
+    }
+  },
+  "perps.get_margin_funding_rate_estimate": {
+    "request": {
+      "ticker": "fixture"
+    },
+    "response": {
+      "market_ticker": "fixture",
+      "computed_time": "fixture",
+      "funding_rate": 1,
+      "mark_price": "0.5600",
+      "next_funding_time": "fixture",
+      "premium_index": "fixture",
+      "premium_index_ts": "fixture"
+    }
+  },
+  "perps.get_margin_historical_funding_rates": {
+    "request": {
+      "ticker": "fixture",
+      "start_ts": 1,
+      "end_ts": 1
+    },
+    "response": {
+      "funding_rates": [
+        {
+          "market_ticker": "fixture",
+          "funding_time": "fixture",
+          "funding_rate": 1,
+          "mark_price": "0.5600"
+        }
+      ]
+    }
+  },
+  "perps.get_margin_premium_index": {
+    "request": {
+      "ticker": "fixture",
+      "start_ts": 1,
+      "end_ts": 1
+    },
+    "response": {
+      "points": [
+        {
+          "second_ts": "fixture",
+          "premium_index": "fixture"
+        }
+      ]
+    }
+  },
+  "perps.delete_isolated_margin_exit_trigger": {
+    "request": {
+      "ticker": "fixture",
+      "kind": "bracket"
+    },
+    "response": null
+  },
+  "perps.get_isolated_margin_exit_triggers": {
+    "request": {
+      "ticker": "fixture",
+      "kind": "bracket"
+    },
+    "response": {
+      "exit_triggers": [
+        {
+          "id": "fixture",
+          "ticker": "fixture",
+          "kind": "bracket",
+          "status": "pending_on_entry",
+          "status_reason": "user_canceled",
+          "triggered_leg": "stop_loss",
+          "triggered_order_id": "fixture",
+          "anchor_order_id": "fixture",
+          "client_trigger_id": "fixture",
+          "stop_loss_price": "0.5600",
+          "take_profit_price": "0.5600",
+          "trail_amount": "0.5600",
+          "trail_bps": 1,
+          "watermark_price": "0.5600",
+          "effective_stop_price": "0.5600",
+          "count": "10.00",
+          "filled_count": "10.00",
+          "created_time": "fixture",
+          "updated_time": "fixture"
+        }
+      ]
+    }
+  },
+  "perps.set_isolated_margin_exit_trigger": {
+    "request": {
+      "ticker": "fixture",
+      "body": {
+        "kind": "bracket",
+        "stop_loss_price": "0.5600",
+        "take_profit_price": "0.5600",
+        "trail_amount": "0.5600",
+        "trail_bps": 1
+      }
+    },
+    "response": {
+      "id": "fixture",
+      "ticker": "fixture",
+      "kind": "bracket",
+      "status": "pending_on_entry",
+      "status_reason": "user_canceled",
+      "triggered_leg": "stop_loss",
+      "triggered_order_id": "fixture",
+      "anchor_order_id": "fixture",
+      "client_trigger_id": "fixture",
+      "stop_loss_price": "0.5600",
+      "take_profit_price": "0.5600",
+      "trail_amount": "0.5600",
+      "trail_bps": 1,
+      "watermark_price": "0.5600",
+      "effective_stop_price": "0.5600",
+      "count": "10.00",
+      "filled_count": "10.00",
+      "created_time": "fixture",
+      "updated_time": "fixture"
+    }
+  },
+  "perps.get_margin_markets": {
+    "request": {
+      "status": "inactive"
+    },
+    "response": {
+      "markets": [
+        {
+          "market_id": "fixture",
+          "ticker": "fixture",
+          "title": "fixture",
+          "market_version": 1,
+          "exchange_index": 1,
+          "contract_size": "fixture",
+          "underlying_multiplier": "fixture",
+          "tick_size": "0.5600",
+          "status": "inactive",
+          "fractional_trading_enabled": true,
+          "leverage_estimate": 1,
+          "leverage_estimates": {},
+          "long_leverage_estimates": {},
+          "short_leverage_estimates": {},
+          "price": "0.5600",
+          "volume": "10.00",
+          "volume_notional_value_dollars": "0.5600",
+          "open_interest": "10.00",
+          "open_interest_notional_value_dollars": "0.5600",
+          "volume_24h": "10.00",
+          "volume_24h_notional_value_dollars": "0.5600",
+          "bid": "0.5600",
+          "bid_size_fp": "10.00",
+          "ask": "0.5600",
+          "ask_size_fp": "10.00",
+          "settlement_mark_price": {
+            "price": "0.5600",
+            "ts_ms": 1
+          },
+          "liquidation_mark_price": {
+            "price": "0.5600",
+            "ts_ms": 1
+          },
+          "reference_price": {
+            "price": "0.5600",
+            "ts_ms": 1
+          },
+          "asset_class": "fixture",
+          "product_metadata": {
+            "important_info": {
+              "markdown": "**Important information:** Review this market's trading schedule."
+            }
+          },
+          "schedule": {
+            "is_open": true,
+            "next_close_ts": 1,
+            "next_open_ts": 1
+          },
+          "funding_deadband": 1,
+          "funding_cap": 1,
+          "funding_limit_unit": "percentage",
+          "halt_sources": [
+            "fixture"
+          ],
+          "funding_invalid_premium_handling": "dampen"
+        }
+      ]
+    }
+  },
+  "perps.get_margin_market_orderbooks": {
+    "request": {
+      "tickers": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "orderbooks": [
+        {
+          "ticker": "fixture",
+          "orderbook": {
+            "bids": [],
+            "asks": []
+          }
+        }
+      ]
+    }
+  },
+  "perps.get_margin_market_schedules": {
+    "request": {
+      "tickers": [
+        "fixture"
+      ]
+    },
+    "response": {}
+  },
+  "perps.get_margin_market": {
+    "request": {
+      "ticker": "fixture"
+    },
+    "response": {
+      "market": {
+        "market_id": "fixture",
+        "ticker": "fixture",
+        "title": "fixture",
+        "market_version": 1,
+        "exchange_index": 1,
+        "contract_size": "fixture",
+        "underlying_multiplier": "fixture",
+        "tick_size": "0.5600",
+        "status": "inactive",
+        "fractional_trading_enabled": true,
+        "leverage_estimate": 1,
+        "leverage_estimates": {},
+        "long_leverage_estimates": {},
+        "short_leverage_estimates": {},
+        "price": "0.5600",
+        "volume": "10.00",
+        "volume_notional_value_dollars": "0.5600",
+        "open_interest": "10.00",
+        "open_interest_notional_value_dollars": "0.5600",
+        "volume_24h": "10.00",
+        "volume_24h_notional_value_dollars": "0.5600",
+        "bid": "0.5600",
+        "bid_size_fp": "10.00",
+        "ask": "0.5600",
+        "ask_size_fp": "10.00",
+        "settlement_mark_price": {
+          "price": "0.5600",
+          "ts_ms": 1
+        },
+        "liquidation_mark_price": {
+          "price": "0.5600",
+          "ts_ms": 1
+        },
+        "reference_price": {
+          "price": "0.5600",
+          "ts_ms": 1
+        },
+        "asset_class": "fixture",
+        "product_metadata": {
+          "important_info": {
+            "markdown": "**Important information:** Review this market's trading schedule."
+          }
+        },
+        "schedule": {
+          "is_open": true,
+          "next_close_ts": 1,
+          "next_open_ts": 1
+        },
+        "funding_deadband": 1,
+        "funding_cap": 1,
+        "funding_limit_unit": "percentage",
+        "halt_sources": [
+          "fixture"
+        ],
+        "funding_invalid_premium_handling": "dampen"
+      }
+    }
+  },
+  "perps.get_margin_market_candlesticks": {
+    "request": {
+      "ticker": "fixture",
+      "start_ts": 1,
+      "end_ts": 1,
+      "period_interval": 1,
+      "include_latest_before_start": true
+    },
+    "response": {
+      "ticker": "fixture",
+      "candlesticks": [
+        {
+          "end_period_ts": 1,
+          "bid": {
+            "open": "0.5600",
+            "low": "0.5600",
+            "high": "0.5600",
+            "close": "0.5600"
+          },
+          "ask": {
+            "open": "0.5600",
+            "low": "0.5600",
+            "high": "0.5600",
+            "close": "0.5600"
+          },
+          "price": {
+            "open": "0.5600",
+            "low": "0.5600",
+            "high": "0.5600",
+            "close": "0.5600",
+            "mean": "0.5600",
+            "previous": "0.5600"
+          },
+          "volume": "10.00",
+          "volume_notional_value_dollars": "0.5600",
+          "open_interest": "10.00",
+          "open_interest_notional_value_dollars": "0.5600"
+        }
+      ]
+    }
+  },
+  "perps.get_margin_market_orderbook": {
+    "request": {
+      "ticker": "fixture",
+      "depth": 1,
+      "aggregation_tick_size": "fixture"
+    },
+    "response": {
+      "orderbook": {
+        "bids": [
+          [
+            "0.1500",
+            "100.00"
+          ]
+        ],
+        "asks": [
+          [
+            "0.1500",
+            "100.00"
+          ]
+        ]
+      }
+    }
+  },
+  "perps.get_margin_notional_risk_limit": {
+    "request": {},
+    "response": {
+      "default_notional_value_risk_limit": "5000.0000",
+      "notional_value_risk_limits_by_market_ticker": {
+        "market-abc-123": "5000.0000"
+      },
+      "total_current_usage": "1250.0000",
+      "current_usage_by_market_ticker": {
+        "market-abc-123": "1250.0000"
+      },
+      "member_notional_value_risk_limit": "5000.0000",
+      "effective_account_notional_value_risk_limit": "5000.0000"
+    }
+  },
+  "perps.get_margin_order_groups": {
+    "request": {
+      "subaccount": 1
+    },
+    "response": {
+      "order_groups": [
+        {
+          "id": "fixture",
+          "contracts_limit_fp": "10.00",
+          "is_auto_cancel_enabled": true,
+          "exchange_index": 0
+        }
+      ]
+    }
+  },
+  "perps.create_margin_order_group": {
+    "request": {
+      "body": {
+        "subaccount": 1,
+        "contracts_limit": 1,
+        "contracts_limit_fp": "10.00",
+        "exchange_index": 0
+      }
+    },
+    "response": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "exchange_index": 0
+    }
+  },
+  "perps.delete_margin_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1
+    },
+    "response": {}
+  },
+  "perps.get_margin_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "is_auto_cancel_enabled": true,
+      "contracts_limit_fp": "10.00",
+      "orders": [
+        "fixture"
+      ],
+      "exchange_index": 0
+    }
+  },
+  "perps.update_margin_order_group_limit": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "body": {
+        "contracts_limit": 1,
+        "contracts_limit_fp": "10.00"
+      }
+    },
+    "response": {}
+  },
+  "perps.reset_margin_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "body": {}
+    },
+    "response": {}
+  },
+  "perps.trigger_margin_order_group": {
+    "request": {
+      "order_group_id": "fixture",
+      "subaccount": 1,
+      "body": {}
+    },
+    "response": {}
+  },
+  "perps.cancel_all_margin_orders": {
+    "request": {
+      "subaccount": 1
+    },
+    "response": null
+  },
+  "perps.get_margin_orders": {
+    "request": {
+      "ticker": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "status": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "orders": [
+        {
+          "order_id": "fixture",
+          "user_id": "fixture",
+          "client_order_id": "fixture",
+          "ticker": "fixture",
+          "side": "bid",
+          "last_update_reason": "",
+          "price": "0.5600",
+          "fill_count": "10.00",
+          "remaining_count": "10.00",
+          "expiration_time": "fixture",
+          "created_time": "fixture",
+          "last_update_time": "fixture",
+          "self_trade_prevention_type": "taker_at_cross",
+          "cancel_order_on_pause": true,
+          "order_group_id": "fixture",
+          "order_source": "user",
+          "order_reason": "liquidation"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "perps.create_margin_order": {
+    "request": {
+      "body": {
+        "ticker": "fixture",
+        "market_id": "fixture",
+        "client_order_id": "fixture",
+        "side": "bid",
+        "count": "10.00",
+        "price": "0.5600",
+        "expiration_time": 1,
+        "time_in_force": "fill_or_kill",
+        "post_only": true,
+        "self_trade_prevention_type": "taker_at_cross",
+        "cancel_order_on_pause": true,
+        "reduce_only": true,
+        "subaccount": 1,
+        "order_group_id": "fixture",
+        "market_version": 1
+      }
+    },
+    "response": {
+      "order_id": "fixture",
+      "client_order_id": "fixture",
+      "fill_count": "10.00",
+      "remaining_count": "10.00",
+      "average_fill_price": "0.5600",
+      "average_fee_paid": "0.5600"
+    }
+  },
+  "perps.cancel_margin_order": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount": 1
+    },
+    "response": {
+      "order_id": "fixture",
+      "client_order_id": "fixture",
+      "reduced_by": "10.00"
+    }
+  },
+  "perps.get_margin_order": {
+    "request": {
+      "order_id": "fixture"
+    },
+    "response": {
+      "order": {
+        "order_id": "fixture",
+        "user_id": "fixture",
+        "client_order_id": "fixture",
+        "ticker": "fixture",
+        "side": "bid",
+        "last_update_reason": "",
+        "price": "0.5600",
+        "fill_count": "10.00",
+        "remaining_count": "10.00",
+        "expiration_time": "fixture",
+        "created_time": "fixture",
+        "last_update_time": "fixture",
+        "self_trade_prevention_type": "taker_at_cross",
+        "cancel_order_on_pause": true,
+        "order_group_id": "fixture",
+        "order_source": "user",
+        "order_reason": "liquidation"
+      }
+    }
+  },
+  "perps.amend_margin_order": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount": 1,
+      "body": {
+        "ticker": "fixture",
+        "market_id": "fixture",
+        "side": "bid",
+        "price": "0.5600",
+        "count": "10.00",
+        "client_order_id": "fixture",
+        "updated_client_order_id": "fixture",
+        "expiration_time": 1
+      }
+    },
+    "response": {
+      "order_id": "fixture",
+      "client_order_id": "fixture",
+      "remaining_count": "10.00",
+      "fill_count": "10.00",
+      "average_fill_price": "0.5600",
+      "average_fee_paid": "0.5600"
+    }
+  },
+  "perps.decrease_margin_order": {
+    "request": {
+      "order_id": "fixture",
+      "subaccount": 1,
+      "body": {
+        "reduce_by": "10.00",
+        "reduce_to": "10.00"
+      }
+    },
+    "response": {
+      "order_id": "fixture",
+      "client_order_id": "fixture",
+      "remaining_count": "10.00"
+    }
+  },
+  "perps.get_margin_positions": {
+    "request": {
+      "subaccount": 1,
+      "ticker": "fixture"
+    },
+    "response": {
+      "positions": [
+        {
+          "subaccount": 1,
+          "subaccount_type": "cross",
+          "market_ticker": "fixture",
+          "position": "10.00",
+          "entry_price": "0.5600",
+          "unrealized_pnl": "0.5600",
+          "margin_used": "0.5600",
+          "fees": "0.5600",
+          "roe": 1,
+          "is_portfolio": true
+        }
+      ]
+    }
+  },
+  "perps.get_margin_risk": {
+    "request": {},
+    "response": {
+      "account_leverage": 1,
+      "total_position_notional": "0.5600",
+      "total_maintenance_margin": "0.5600",
+      "positions": [
+        {
+          "subaccount": 1,
+          "subaccount_type": "cross",
+          "market_ticker": "fixture",
+          "position": "10.00",
+          "mark_price": "0.5600",
+          "position_notional": "0.5600",
+          "maintenance_margin_required": "0.5600",
+          "position_leverage": 1,
+          "estimated_liquidation_price": "0.5600",
+          "is_portfolio": true
+        }
+      ]
+    }
+  },
+  "perps.get_margin_risk_parameters": {
+    "request": {},
+    "response": {
+      "liquidation_margin_ratio_threshold": 1,
+      "queue_entry_margin_ratio_threshold": 1,
+      "initial_margin_multiplier": {}
+    }
+  },
+  "perps.get_margin_trades": {
+    "request": {
+      "ticker": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "min_ts": 1,
+      "max_ts": 1,
+      "is_block_trade": true
+    },
+    "response": {
+      "trades": [
+        {
+          "trade_id": "fixture",
+          "ticker": "fixture",
+          "count": "10.00",
+          "price": "fixture",
+          "created_time": "fixture",
+          "taker_side": "bid",
+          "is_block_trade": true
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "perps.intra_exchange_instance_transfer": {
+    "request": {
+      "body": {
+        "client_transfer_id": "fixture",
+        "source": "event_contract",
+        "destination": "event_contract",
+        "amount": 1,
+        "source_exchange_shard": 1,
+        "destination_exchange_shard": 1,
+        "source_subaccount": 1,
+        "destination_subaccount": 1
+      }
+    },
+    "response": {
+      "transfer_id": "fixture"
+    }
+  },
+  "perps.create_margin_subaccount": {
+    "request": {},
+    "response": {
+      "subaccount_number": 1
+    }
+  },
+  "perps.apply_margin_subaccount_transfer": {
+    "request": {
+      "body": {
+        "client_transfer_id": "fixture",
+        "from_subaccount": 1,
+        "to_subaccount": 1,
+        "amount_cents": 1,
+        "exchange_index": 0
+      }
+    },
+    "response": {}
+  },
+  "clearing.clearing_list_margin_fcm_api_keys": {
+    "request": {
+      "fcm_subtrader_id": "fixture"
+    },
+    "response": {
+      "api_keys": [
+        {
+          "api_key_id": "fixture",
+          "name": "fixture",
+          "fcm_subtrader_id": "fixture"
+        }
+      ]
+    }
+  },
+  "clearing.clearing_create_margin_fcm_api_key": {
+    "request": {
+      "body": {
+        "name": "fixture",
+        "public_key": "fixture",
+        "fcm_subtrader_id": "fixture"
+      }
+    },
+    "response": {
+      "api_key_id": "fixture",
+      "warning": "fixture"
+    }
+  },
+  "clearing.clearing_generate_margin_fcm_api_key": {
+    "request": {
+      "body": {
+        "name": "fixture",
+        "fcm_subtrader_id": "fixture"
+      }
+    },
+    "response": {
+      "api_key_id": "fixture",
+      "private_key": "fixture",
+      "warning": "fixture"
+    }
+  },
+  "clearing.clearing_delete_margin_fcm_api_key": {
+    "request": {
+      "api_key_id": "fixture"
+    },
+    "response": null
+  },
+  "clearing.clearing_get_margin_subtrader_groups": {
+    "request": {},
+    "response": {
+      "groups": [
+        {
+          "group_id": "fixture",
+          "member_subtrader_ids": [
+            "fixture"
+          ]
+        }
+      ]
+    }
+  },
+  "clearing.clearing_create_margin_subtrader_group": {
+    "request": {
+      "body": {
+        "subtrader_ids": [
+          "fixture"
+        ]
+      }
+    },
+    "response": {
+      "group_id": "fixture"
+    }
+  },
+  "clearing.clearing_delete_margin_subtrader_group": {
+    "request": {
+      "group_id": "fixture"
+    },
+    "response": null
+  },
+  "clearing.clearing_update_margin_subtrader_group": {
+    "request": {
+      "group_id": "fixture",
+      "body": {
+        "subtrader_ids": [
+          "fixture"
+        ]
+      }
+    },
+    "response": null
+  },
+  "clearing.clearing_get_active_margin_obligations": {
+    "request": {},
+    "response": {
+      "obligations": [
+        {
+          "id": "fixture",
+          "user_id": "fixture",
+          "amount_centicents": 1,
+          "amount_fp": "fixture",
+          "fees_centicents": 1,
+          "maintenance_margin_centicents": 1,
+          "pnl_centicents": 1,
+          "pnl_fp": "fixture",
+          "execution_time": "fixture",
+          "last_updated_ts": "fixture",
+          "asset_class": "Crypto",
+          "receives": [
+            {
+              "id": "fixture",
+              "type": "fixture",
+              "amount_centicents": 1,
+              "amount_fp": "fixture",
+              "external_reference": "fixture",
+              "created_ts": "fixture"
+            }
+          ],
+          "settlement_details": [
+            {
+              "id": "fixture",
+              "market_ticker": "fixture",
+              "subtrader_id": "fixture",
+              "position_quantity_fp": "fixture",
+              "pnl_centicents": 1,
+              "pnl_fp": "fixture",
+              "total_fees_centicents": 1,
+              "total_amount_centicents": 1,
+              "total_amount_fp": "fixture"
+            }
+          ],
+          "maintenance_margin_details": [
+            {
+              "id": "fixture",
+              "subtrader_id": "fixture",
+              "maintenance_margin_centicents": 1,
+              "maintenance_margin_delta_centicents": 1
+            }
+          ],
+          "funding_payments": [
+            {
+              "id": "fixture",
+              "market_ticker": "fixture",
+              "subtrader_id": "fixture",
+              "funding_time": "fixture",
+              "position_quantity_fp": "fixture",
+              "notional_value_centicents": 1,
+              "notional_value_fp": "fixture",
+              "funding_amount_centicents": 1,
+              "funding_amount_fp": "fixture"
+            }
+          ],
+          "corporate_action_payments": [
+            {
+              "id": "fixture",
+              "type": "fixture",
+              "ca_id": "fixture",
+              "market_id": "fixture",
+              "market_ticker": "fixture",
+              "asset_class": "Crypto",
+              "subtrader_id": "fixture",
+              "position_quantity_fp": "fixture",
+              "post_position_quantity_fp": "fixture",
+              "payment_amount_centicents": 1,
+              "payment_amount_fp": "fixture",
+              "payment_time": "fixture",
+              "settlement_execution_time": "fixture",
+              "created_ts": "fixture"
+            }
+          ],
+          "corporate_action_payments_truncated": true,
+          "settlement_details_truncated": true,
+          "maintenance_margin_details_truncated": true,
+          "funding_payments_truncated": true
+        }
+      ]
+    }
+  },
+  "clearing.clearing_estimate_portfolio_maintenance_margin": {
+    "request": {
+      "body": {
+        "asset_class": "Crypto",
+        "date": "fixture",
+        "clearing_type": "FCM",
+        "positions": [
+          {
+            "market_ticker": "fixture",
+            "quantity": 1,
+            "price": "fixture"
+          }
+        ]
+      }
+    },
+    "response": {
+      "maintenance_margin_fp": "fixture",
+      "base_margin_fp": "fixture",
+      "hvar_fp": "fixture",
+      "apc_fp": "fixture",
+      "funding_addon_fp": "fixture",
+      "liquidation_addon_fp": "fixture"
+    }
+  },
+  "clearing.clearing_get_maintenance_margin_metadata": {
+    "request": {
+      "asset_class": "Crypto",
+      "date": "fixture"
+    },
+    "response": {
+      "asset_class": "Crypto",
+      "base_tail_percentile": 1,
+      "funding_tail_percentile": 1,
+      "matrices": {
+        "hvar": {
+          "market_tickers": [
+            "fixture"
+          ],
+          "returns": [
+            []
+          ]
+        },
+        "apc": {
+          "market_tickers": [
+            "fixture"
+          ],
+          "returns": [
+            []
+          ]
+        },
+        "aug": {
+          "market_tickers": [
+            "fixture"
+          ],
+          "returns": [
+            []
+          ]
+        },
+        "funding": {
+          "market_tickers": [
+            "fixture"
+          ],
+          "returns": [
+            []
+          ]
+        }
+      },
+      "liquidation_configs": [
+        {
+          "market_ticker": "fixture",
+          "market_impact_volatility": 1,
+          "market_impact_coefficient": 1,
+          "market_impact_exponent": 1,
+          "market_impact_forecasted_volume": 1,
+          "spread_rate": 1
+        }
+      ],
+      "subgroups": [
+        [
+          "fixture"
+        ]
+      ]
+    }
+  },
+  "clearing.clearing_get_funding_estimate_by_asset_class": {
+    "request": {},
+    "response": {
+      "estimates": {}
+    }
+  },
+  "clearing.clearing_get_member_funding_payments": {
+    "request": {
+      "funding_time": "fixture",
+      "market_ticker": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "payments": [
+        {
+          "id": "fixture",
+          "market_ticker": "fixture",
+          "subtrader_id": "fixture",
+          "funding_time": "fixture",
+          "position_quantity_fp": "fixture",
+          "notional_value_centicents": 1,
+          "notional_value_fp": "fixture",
+          "funding_amount_centicents": 1,
+          "funding_amount_fp": "fixture",
+          "settlement_execution_time": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "clearing.clearing_get_margin_funding_schedule": {
+    "request": {
+      "asset_class": "Crypto"
+    },
+    "response": {
+      "schedule": "fixture"
+    }
+  },
+  "clearing.clearing_get_guaranty_fund_balance": {
+    "request": {},
+    "response": {
+      "user_id": "fixture",
+      "amount_centicents": 1,
+      "updated_ts": "fixture"
+    }
+  },
+  "clearing.clearing_get_large_trader_positions": {
+    "request": {
+      "report_date": "fixture"
+    },
+    "response": {
+      "user_id": "fixture",
+      "report_date": "fixture",
+      "positions": [
+        {
+          "market_ticker": "fixture",
+          "position": 1,
+          "exit_day": true,
+          "reportable_threshold": 1
+        }
+      ]
+    }
+  },
+  "clearing.clearing_get_obligation_history": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "settlement_start_ts": "fixture",
+      "settlement_end_ts": "fixture"
+    },
+    "response": {
+      "obligations": [
+        {
+          "id": "fixture",
+          "user_id": "fixture",
+          "amount_centicents": 1,
+          "amount_fp": "fixture",
+          "fees_centicents": 1,
+          "maintenance_margin_centicents": 1,
+          "pnl_centicents": 1,
+          "pnl_fp": "fixture",
+          "execution_time": "fixture",
+          "last_updated_ts": "fixture",
+          "asset_class": "Crypto",
+          "receives": [
+            {
+              "id": "fixture",
+              "type": "fixture",
+              "amount_centicents": 1,
+              "amount_fp": "fixture",
+              "external_reference": "fixture",
+              "created_ts": "fixture"
+            }
+          ],
+          "settlement_details": [
+            {
+              "id": "fixture",
+              "market_ticker": "fixture",
+              "subtrader_id": "fixture",
+              "position_quantity_fp": "fixture",
+              "pnl_centicents": 1,
+              "pnl_fp": "fixture",
+              "total_fees_centicents": 1,
+              "total_amount_centicents": 1,
+              "total_amount_fp": "fixture"
+            }
+          ],
+          "maintenance_margin_details": [
+            {
+              "id": "fixture",
+              "subtrader_id": "fixture",
+              "maintenance_margin_centicents": 1,
+              "maintenance_margin_delta_centicents": 1
+            }
+          ],
+          "funding_payments": [
+            {
+              "id": "fixture",
+              "market_ticker": "fixture",
+              "subtrader_id": "fixture",
+              "funding_time": "fixture",
+              "position_quantity_fp": "fixture",
+              "notional_value_centicents": 1,
+              "notional_value_fp": "fixture",
+              "funding_amount_centicents": 1,
+              "funding_amount_fp": "fixture"
+            }
+          ],
+          "corporate_action_payments": [
+            {
+              "id": "fixture",
+              "type": "fixture",
+              "ca_id": "fixture",
+              "market_id": "fixture",
+              "market_ticker": "fixture",
+              "asset_class": "Crypto",
+              "subtrader_id": "fixture",
+              "position_quantity_fp": "fixture",
+              "post_position_quantity_fp": "fixture",
+              "payment_amount_centicents": 1,
+              "payment_amount_fp": "fixture",
+              "payment_time": "fixture",
+              "settlement_execution_time": "fixture",
+              "created_ts": "fixture"
+            }
+          ],
+          "corporate_action_payments_truncated": true,
+          "settlement_details_truncated": true,
+          "maintenance_margin_details_truncated": true,
+          "funding_payments_truncated": true
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "clearing.clearing_get_obligation_corporate_action_payments": {
+    "request": {
+      "obligation_id": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "corporate_action_payments": [
+        {
+          "id": "fixture",
+          "type": "fixture",
+          "ca_id": "fixture",
+          "market_id": "fixture",
+          "market_ticker": "fixture",
+          "asset_class": "Crypto",
+          "subtrader_id": "fixture",
+          "position_quantity_fp": "fixture",
+          "post_position_quantity_fp": "fixture",
+          "payment_amount_centicents": 1,
+          "payment_amount_fp": "fixture",
+          "payment_time": "fixture",
+          "settlement_execution_time": "fixture",
+          "pre_split_price_centicents": 1,
+          "post_split_price_centicents": 1,
+          "exchange_ts": "fixture",
+          "created_ts": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "clearing.clearing_get_obligation_funding_payments": {
+    "request": {
+      "obligation_id": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "funding_payments": [
+        {
+          "id": "fixture",
+          "market_ticker": "fixture",
+          "subtrader_id": "fixture",
+          "funding_time": "fixture",
+          "position_quantity_fp": "fixture",
+          "notional_value_centicents": 1,
+          "notional_value_fp": "fixture",
+          "funding_amount_centicents": 1,
+          "funding_amount_fp": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "clearing.clearing_get_obligation_maintenance_margin_details": {
+    "request": {
+      "obligation_id": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "maintenance_margin_details": [
+        {
+          "id": "fixture",
+          "subtrader_id": "fixture",
+          "margin_group_id": "fixture",
+          "maintenance_margin_centicents": 1,
+          "maintenance_margin_delta_centicents": 1
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "clearing.clearing_get_obligation_settlement_details": {
+    "request": {
+      "obligation_id": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "settlement_details": [
+        {
+          "id": "fixture",
+          "market_ticker": "fixture",
+          "subtrader_id": "fixture",
+          "position_quantity_fp": "fixture",
+          "pnl_centicents": 1,
+          "pnl_fp": "fixture",
+          "total_fees_centicents": 1,
+          "total_amount_centicents": 1,
+          "total_amount_fp": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "clearing.clearing_get_margin_reports": {
+    "request": {
+      "start_date": "fixture",
+      "end_date": "fixture"
+    },
+    "response": {
+      "reports": [
+        {
+          "report_type": "trade_audit",
+          "url": "fixture",
+          "date": "fixture",
+          "created_ts": "fixture",
+          "is_end_of_day": true,
+          "snapshot_ts": "fixture"
+        }
+      ]
+    }
+  },
+  "clearing.clearing_get_settlement_balance": {
+    "request": {},
+    "response": {
+      "user_id": "fixture",
+      "balance_available_centicents": 1,
+      "balance_available_fp": "fixture",
+      "locked_balance_centicents": 1,
+      "locked_balance_fp": "fixture"
+    }
+  },
+  "clearing.clearing_get_settlement_balance_history": {
+    "request": {
+      "limit": 1,
+      "cursor": "fixture",
+      "start_ts": "fixture",
+      "end_ts": "fixture"
+    },
+    "response": {
+      "entries": [
+        {
+          "balance_delta_centicents": 1,
+          "balance_delta_fp": "fixture",
+          "locked_balance_delta_centicents": 1,
+          "locked_balance_delta_fp": "fixture",
+          "reason": "fixture",
+          "business_transaction_id": "fixture",
+          "created_ts": "fixture"
+        }
+      ],
+      "cursor": "fixture"
+    }
+  },
+  "clearing.clearing_get_settlement_balance_withdrawal": {
+    "request": {
+      "id": "fixture"
+    },
+    "response": {
+      "id": "fixture",
+      "amount": "fixture",
+      "status": "pending",
+      "created_ts": "fixture"
+    }
+  },
+  "clearing.clearing_withdraw_settlement_balance": {
+    "request": {
+      "body": {
+        "amount": "fixture",
+        "mfa_code": "fixture"
+      }
+    },
+    "response": {
+      "id": "fixture"
+    }
+  },
+  "clearing.clearing_get_settlement_estimate_by_asset_class": {
+    "request": {},
+    "response": {
+      "estimates": {},
+      "settlement_balance_centicents": 1,
+      "settlement_balance_fp": "fixture"
+    }
+  },
+  "clearing.clearing_get_settlement_prices": {
+    "request": {
+      "asset_class": "Crypto",
+      "settlement_time": "fixture"
+    },
+    "response": {
+      "settlement_prices": {}
+    }
+  }
+}

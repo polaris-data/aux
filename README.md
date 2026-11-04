@@ -41,6 +41,9 @@ remain distinguishable from transport failures.
 | `files` | No | Data download helpers with custom I/O; also enabled by data adapters’ `http` feature |
 | `paradex` | No | [Native Paradex v1/v2 client, Starknet/EVM signing, and SBE streams](crates/exchanges/paradex/README.md) |
 | `metric` | No | [Metric liquidity/routing HTTP APIs, native EVM contracts and transaction signing](crates/exchanges/metric/README.md) |
+| `polymarket` | No | [International predictions, perps, streams, signing and EVM calls](crates/exchanges/polymarket/README.md) |
+| `kalshi` | No | [Predictions, perps and clearing APIs with RSA/Ed25519 authentication](crates/exchanges/kalshi/README.md) |
+| `pascal` | No | [Prediction APIs, binary permits and Solana collateral](crates/exchanges/pascal/README.md) |
 
 Exchange and data-vendor features do not activate networking. Disable default features to use
 custom I/O. Built-in transports support configurable timeouts, safe-read retries,

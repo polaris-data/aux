@@ -12,7 +12,7 @@ use zeroize::Zeroizing;
 fn local(e: m::Error) -> PyErr {
     errors::metric(aux_rs::Error::Exchange(e))
 }
-fn transaction_request(request: &Bound<'_, PyAny>) -> PyResult<m::PreparedTransaction> {
+pub(crate) fn transaction_request(request: &Bound<'_, PyAny>) -> PyResult<m::PreparedTransaction> {
     let mut value = convert::from_python(request)?;
     if let Some(amount @ serde_json::Value::Number(_)) = value.get_mut("value") {
         *amount = serde_json::Value::String(amount.to_string());
@@ -25,7 +25,7 @@ fn transaction_request(request: &Bound<'_, PyAny>) -> PyResult<m::PreparedTransa
 }
 // Alloy's U256 visitor accepts strings and u64 values. Preserve larger
 // Python integers as exact decimal strings before deserializing helpers.
-fn wide_integers(value: serde_json::Value) -> serde_json::Value {
+pub(crate) fn wide_integers(value: serde_json::Value) -> serde_json::Value {
     use serde_json::Value;
     match value {
         Value::Number(ref n) if n.as_u64().is_none() && n.as_i64().is_none() => {
@@ -50,12 +50,12 @@ enum Kind {
     },
 }
 #[derive(Clone)]
-struct Signer {
+pub(crate) struct Signer {
     inner: Arc<Kind>,
     locals: Option<pyo3_async_runtimes::TaskLocals>,
 }
 impl Signer {
-    fn scoped(&self, py: Python<'_>) -> PyResult<Self> {
+    pub(crate) fn scoped(&self, py: Python<'_>) -> PyResult<Self> {
         Ok(Self {
             inner: self.inner.clone(),
             locals: Some(pyo3_async_runtimes::tokio::get_current_locals(py)?),
@@ -91,12 +91,12 @@ impl m::EvmSigner for Signer {
 #[pyclass(module = "aux_py._native", frozen)]
 #[derive(Clone)]
 pub struct MetricSigner {
-    inner: Signer,
+    pub(crate) inner: Signer,
 }
 #[pymethods]
 impl MetricSigner {
     #[new]
-    fn new(private_key: String) -> PyResult<Self> {
+    pub(crate) fn new(private_key: String) -> PyResult<Self> {
         Ok(Self {
             inner: Signer {
                 inner: Arc::new(Kind::Local(
@@ -107,7 +107,7 @@ impl MetricSigner {
         })
     }
     #[staticmethod]
-    fn remote(address: &str, callback: Bound<'_, PyAny>) -> PyResult<Self> {
+    pub(crate) fn remote(address: &str, callback: Bound<'_, PyAny>) -> PyResult<Self> {
         if !callback.is_callable() {
             return Err(errors::ValidationError::new_err(
                 "callback must be callable",
@@ -126,7 +126,7 @@ impl MetricSigner {
         })
     }
     #[getter]
-    fn address(&self) -> String {
+    pub(crate) fn address(&self) -> String {
         self.inner.address().to_string()
     }
     fn __repr__(&self) -> &'static str {

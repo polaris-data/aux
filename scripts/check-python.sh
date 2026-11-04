@@ -16,4 +16,5 @@ VIRTUAL_ENV="$binding_venv" "$binding_python" -m maturin develop --locked --mani
 "$binding_python" -m unittest discover -s crates/python/tests -v
 "$binding_python" scripts/check-data-coverage.py
 "$binding_python" scripts/check-native-coverage.py
+"$binding_python" scripts/check-prediction-coverage.py
 "$binding_python" scripts/dependencies.py --check

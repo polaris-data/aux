@@ -8,9 +8,10 @@ description = "Native Metric exchange client"
 
 [features]
 default = []
-http = ["aux-rs-core/http"]
+http = ["aux-rs-core/http", "aux-rs-evm/http"]
 
 [dependencies]
+aux-rs-evm.workspace = true
 aux-rs-core.workspace = true
 serde.workspace = true
 serde_json.workspace = true
@@ -23,7 +24,7 @@ alloy-primitives.workspace = true
 alloy-sol-types.workspace = true
 alloy-sol-type-parser.workspace = true
 alloy-json-abi.workspace = true
-alloy-dyn-abi.workspace = true
+alloy-dyn-abi = { workspace=true, features=["eip712"] }
 alloy-consensus.workspace = true
 alloy-eips.workspace = true
 alloy-tx-macros.workspace = true

@@ -1,0 +1,12 @@
+{
+  "excluded": [
+    "Polymarket US"
+  ],
+  "publication_limits": [
+    "Only published client-facing callable ABI signatures are bound; unpublished contract storage layouts, admin interfaces and private settlement instructions are not inferred.",
+    "AsyncAPI perps schema/example discrepancies are explicitly normalized in stream-notes-perps.json.",
+    "RTDS retains documented legacy channels and native payload values; SDK display normalization is not applied.",
+    "GET /auth/api-keys is L1 in the pinned OpenAPI and L2 in the pinned SDK. The named interface selects L2 when API credentials are configured and otherwise L1; it does not retry with a different authority. DELETE /auth/api-key uses L2 as specified by both sources."
+  ],
+  "missing_published_artifacts": []
+}

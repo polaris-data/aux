@@ -1,0 +1,12 @@
+{
+  "excluded": [
+    "Direct matching-engine settlement instructions"
+  ],
+  "publication_limits": [
+    "No published settlement program ABI or account layout; engine-only settlement stays on API.",
+    "Deposit credit history does not guarantee a transaction-signature correlation field; native history/account reconciliation remains explicit."
+  ],
+  "missing_published_artifacts": [
+    "No complete machine-readable OpenAPI/AsyncAPI in the pinned public sources; normalized inventories derive from documented endpoint tables and examples."
+  ]
+}

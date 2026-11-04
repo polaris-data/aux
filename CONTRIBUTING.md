@@ -377,3 +377,5 @@ additional venues is undecided.
 - [x] Monaco
 - [x] Derive v3
 - [ ] Metric (native core and four workflow helper groups implemented; full SDK export audit pending)
+
+Polymarket, Kalshi and Pascal use separate product/service namespaces and exact native mappings. Run `scripts/check-prediction-coverage.py` for pinned REST/event/contract and Rust/Python parity checks; pass `--reference-root PATH` for read-only regeneration against externally pinned normalized schemas. `API_SOURCES.json` records raw hashes and normalized inputs; schemas are generation inputs, never runtime SDKs or CI downloads. Handwritten authentication, command correlation and chain state require independent signing/transaction vectors and local peers. Kalshi custom WebSocket transports must support asynchronous handshake headers on every connection attempt. Metric and Polymarket share the venue-independent `crates/chain/evm` transaction layer; keep venue ABIs and workflows in their adapters.
