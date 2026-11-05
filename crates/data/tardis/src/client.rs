@@ -161,7 +161,6 @@ impl<T: StreamingHttpTransport + Clone> TardisClient<T> {
         // Files are returned verbatim, including their gzip container.
         self.datasets.open(wire, false).await
     }
-    #[cfg(feature = "files")]
     pub async fn download_dataset(
         &self,
         request: DatasetRequest,

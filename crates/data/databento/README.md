@@ -7,9 +7,10 @@ and default compression features disabled.
 
 ## Rust
 
-Select facade feature `databento` and `http` for historical/reference clients, and
-`databento,tcp` for the built-in live connector. HTTP and WebSockets remain the
-facade defaults; TCP is explicit. This adapter does not use WebSockets.
+Select facade features `databento` and `http` for built-in historical/reference
+HTTP clients. `databento` includes the built-in live TCP connector and file download
+helpers, along with their Tokio dependency, even with default features disabled.
+HTTP and WebSockets remain the facade defaults. This adapter does not use WebSockets.
 
 ```rust,no_run
 use aux_rs::databento::{HistoricalClient, params};
@@ -123,8 +124,8 @@ Python SDK runs in the binding layer.
 HTTP clients accept `with_transport(api_url, api_key, transport)` using the core
 `StreamingHttpTransport` contract. `LiveClient::with_connector` accepts independent
 `ByteStream`/`ByteWriter` halves through the vendor's `ByteConnector` contract.
-No built-in network stack is required for custom I/O. The optional `files` feature
-adds download helpers independently; `http` enables it automatically.
+Custom I/O remains supported. The built-in TCP connector and download helpers are
+always included; built-in HTTP remains optional.
 
 Buffered metadata and individual JSON rows are limited to 16 MiB, byte chunks to
 64 KiB, and batches to 1–4096 records. DBN metadata allocation is checked before

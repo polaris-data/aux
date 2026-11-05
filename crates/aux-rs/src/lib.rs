@@ -1,7 +1,8 @@
-//! Native exchange and data-vendor adapters with optional transports.
+//! Native exchange and data-vendor adapters with optional HTTP and WebSocket transports.
 //!
 //! Enable `hyperliquid`, `lighter`, or both to select exchanges. The default `http` and `ws`
 //! features supply standard transports; disable defaults to bring your own I/O.
+//! Data vendors include Tokio-backed file helpers; Databento also includes its TCP connector.
 
 pub use aux_rs_core::*;
 

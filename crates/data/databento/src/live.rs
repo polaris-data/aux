@@ -41,11 +41,7 @@ pub trait ByteConnector: Send + Sync {
         gateway: &str,
     ) -> impl Future<Output = std::result::Result<(Self::Reader, Self::Writer), TransportError>> + Send;
 }
-#[cfg(feature = "tcp")]
 pub type DefaultConnector = crate::TcpConnector;
-#[cfg(not(feature = "tcp"))]
-#[derive(Clone, Debug)]
-pub struct DefaultConnector;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SessionOptions {
@@ -108,7 +104,6 @@ impl<C> LiveClient<C> {
         })
     }
 }
-#[cfg(feature = "tcp")]
 impl LiveClient<crate::TcpConnector> {
     pub fn new(api_key: impl Into<String>) -> Result<Self> {
         Self::with_connector(api_key, crate::TcpConnector::default())

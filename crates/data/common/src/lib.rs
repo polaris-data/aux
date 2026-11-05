@@ -1,11 +1,9 @@
-//! Runtime-independent, bounded streaming support. No vendor protocols live here.
+//! Bounded streaming support and Tokio-backed file downloads. No vendor protocols live here.
 mod body;
-#[cfg(feature = "files")]
 mod files;
 mod http;
 use aux_rs_core::TransportError;
 pub use body::*;
-#[cfg(feature = "files")]
 pub use files::*;
 pub use http::*;
 use serde_json::Value;

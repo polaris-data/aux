@@ -3,7 +3,6 @@
 mod client;
 mod stream;
 mod types;
-#[cfg(feature = "files")]
 pub use aux_rs_data::download_to;
 pub use aux_rs_data::{DecodedBody, Error, Params, Result, params};
 pub use client::*;

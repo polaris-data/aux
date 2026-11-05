@@ -10,6 +10,10 @@ ROOT = Path(__file__).resolve().parent.parent
 TARGET = "aarch64-apple-darwin"
 PROFILES = [
     ("Core contracts", "aux-rs-core", ""),
+    ("Facade without adapters or standard transports", "aux-rs", ""),
+    ("Shared data support", "aux-rs-data", ""),
+    ("Tardis adapter", "aux-rs-tardis", ""),
+    ("Databento adapter", "aux-rs-databento", ""),
     ("Hyperliquid with custom transports", "aux-rs", "hyperliquid"),
     ("Hyperliquid with standard HTTP", "aux-rs", "hyperliquid,http"),
     ("Hyperliquid with standard WebSockets", "aux-rs", "hyperliquid,ws"),
@@ -55,7 +59,7 @@ for stack in ("", ",http,ws"):
 for vendor in ("tardis", "databento"):
     for stack in ("", ",http", ",ws", ",http,ws"):
         PROFILES.append((f"{vendor.title()} with {stack or 'custom transports'}", "aux-rs", vendor + stack))
-for features in ("tardis,files", "databento,files", "databento,tcp", "databento,http,tcp", "tardis,databento", "tardis,databento,http,ws,tcp", "metric,tardis,databento", "metric,tardis,databento,http,ws,tcp", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws,tcp", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,tardis,databento,http,ws,tcp"):
+for features in ("tardis,databento", "tardis,databento,http,ws", "metric,tardis,databento", "metric,tardis,databento,http,ws", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,tardis,databento,http,ws"):
     PROFILES.append(("Data/exchange integration: " + features, "aux-rs", features))
 
 for stack in ("", ",http,ws"):
@@ -83,6 +87,16 @@ def check(target):
         if "httpdate" in names:
             raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
+        data_selected = package in {"aux-rs-data", "aux-rs-tardis", "aux-rs-databento"} or (
+            package == "aux-rs" and bool(selected & {"tardis", "databento"})
+        )
+        if data_selected and "tokio" not in names:
+            raise SystemExit(f"Data support is missing Tokio in profile: {name}")
+        if package in {"aux-rs-core", "aux-rs-data", "aux-rs-tardis", "aux-rs-databento"}:
+            if names & {"reqwest", "tokio-tungstenite", "rustls"}:
+                raise SystemExit(f"Standard network stack leaked into base profile: {name}")
+            if not data_selected and "tokio" in names:
+                raise SystemExit(f"Tokio leaked into core profile: {name}")
         exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal", "tardis", "databento"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
@@ -117,8 +131,10 @@ def check(target):
                 raise SystemExit(f"HTTP leaked into profile: {name}")
             if "ws" not in selected and "tokio-tungstenite" in names:
                 raise SystemExit(f"WebSockets leaked into profile: {name}")
-            if not selected & {"http", "ws", "tcp", "files"} and names & {"tokio", "reqwest", "tokio-tungstenite", "rustls"}:
+            if not selected & {"http", "ws"} and names & {"reqwest", "tokio-tungstenite", "rustls"}:
                 raise SystemExit(f"Standard stack leaked into custom transport profile: {name}")
+            if not selected & {"http", "ws"} and not data_selected and "tokio" in names:
+                raise SystemExit(f"Tokio leaked into custom transport profile: {name}")
         if package == "aux-rs" and not selected & {"metric", "polymarket"} and any(n.startswith("alloy-") for n in names):
             raise SystemExit(f"Metric ABI/EVM dependencies leaked into profile: {name}")
         if package != "aux-rs-python" and any(

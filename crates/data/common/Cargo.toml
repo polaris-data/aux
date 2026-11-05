@@ -6,10 +6,6 @@ rust-version.workspace = true
 publish.workspace = true
 description = "Shared streaming utilities for native data connectors"
 
-[features]
-default = []
-files = ["dep:tokio"]
-
 [dependencies]
 aux-rs-core.workspace = true
 serde.workspace = true
@@ -20,7 +16,6 @@ futures-util.workspace = true
 async-compression.workspace = true
 [dependencies.tokio]
 workspace = true
-optional = true
 features = ["fs", "io-util"]
 
 [lints]

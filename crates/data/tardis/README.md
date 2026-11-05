@@ -97,8 +97,8 @@ Closing a client closes its child streams.
 `with_transport(url, transport)` accept caller-supplied I/O. Hosted methods require
 `StreamingHttpTransport`; sockets require `WebSocketConnector`. The core `Exchange`
 trait is not involved. Custom bodies must release their resources on drop.
-The `files` feature enables file helpers independently of standard networking;
-`http` enables it automatically.
+File helpers and their Tokio dependency are always included, even with default
+features disabled. Built-in HTTP and WebSocket transports remain optional.
 
 Lines and buffered metadata responses are limited to 16 MiB; decoded byte chunks
 are at most 64 KiB and batches contain 1–4096 records. HTTP timeout configuration

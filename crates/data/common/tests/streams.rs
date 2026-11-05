@@ -62,7 +62,6 @@ async fn bounded_collect_and_line_limit() {
     assert!(matches!(lines.next().await, Some(Err(Error::Decode(_)))));
     assert!(lines.next().await.is_none());
 }
-#[cfg(feature = "files")]
 #[tokio::test]
 async fn failed_download_does_not_publish_or_leave_partial_files() {
     use aux_rs_core::{RequestOutcome, TransportErrorKind};
