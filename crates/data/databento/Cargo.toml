@@ -8,9 +8,7 @@ description = "Native Databento data connector"
 
 [features]
 default = []
-http = ["aux-rs-core/http", "files"]
-files = ["aux-rs-data/files"]
-tcp = ["dep:tokio"]
+http = ["aux-rs-core/http"]
 
 [dependencies]
 aux-rs-core.workspace = true
@@ -26,7 +24,6 @@ zeroize.workspace = true
 
 [dependencies.tokio]
 workspace = true
-optional = true
 features = ["net", "io-util", "time", "sync", "rt", "macros"]
 
 [dev-dependencies]

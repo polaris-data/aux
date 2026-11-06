@@ -129,7 +129,6 @@ impl<T: StreamingHttpTransport> HistoricalClient<T> {
         wire.url = url.to_owned();
         self.http.open(wire, false).await
     }
-    #[cfg(feature = "files")]
     pub async fn download_to(&self, url: &str, path: impl AsRef<std::path::Path>) -> Result<u64> {
         aux_rs_data::download_to(self.download(url).await?, path).await
     }

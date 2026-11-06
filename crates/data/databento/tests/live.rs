@@ -1,4 +1,3 @@
-#[cfg(feature = "tcp")]
 use aux_rs_core::TransportErrorKind;
 use aux_rs_core::{ByteStream, TransportError};
 use aux_rs_databento::{
@@ -129,7 +128,6 @@ async fn live_authentication_and_validation_failures() {
     options.compression = "gzip".into();
     assert!(client.connect(options).await.is_err());
 }
-#[cfg(feature = "tcp")]
 #[tokio::test]
 async fn actual_tcp_fragments_disconnect_and_shutdown() {
     use tokio::{

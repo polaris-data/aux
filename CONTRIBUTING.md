@@ -74,7 +74,8 @@ DBN codec; official SDKs are protocol references rather than client dependencies
 `aux-rs-data` shares bounded decompression, NDJSON parsing, native HTTP errors,
 credential redaction, redirect policy and explicit file downloads. Core contracts
 remain dependency-free without features. Native operations work with custom I/O;
-HTTP, WebSocket, TCP and filesystem implementations are separately selectable.
+HTTP and WebSocket implementations are separately selectable. Data adapters
+include Tokio-backed file helpers, and Databento includes its TCP implementation.
 File helpers publish complete temporary files without overwriting destinations.
 No data request, paid batch submission or interrupted stream is replayed implicitly.
 
@@ -225,7 +226,10 @@ source distribution before publishing to PyPI.
 
 ## Dependency changes
 
-Default facade features are `http` and `ws`; no exchange or data vendor is selected automatically. `tcp` opts into Databento live networking, and `files` enables data file helpers independently of networking.
+Default facade features are `http` and `ws`; no exchange or data vendor is selected
+automatically. Data-vendor features include Tokio-backed file helpers, and
+`databento` includes its live TCP connector. These capabilities are also included
+when default features are disabled; selecting an adapter does not open connections.
 Exchange features (`hyperliquid`, `lighter`, `qfex`, `arcus`, `monaco`, `derive`, `paradex`, and `metric`) are additive and
 must not force standard transport features. Keep internal adapter dependencies'
 default features disabled. With `default-features = false`, selected adapters

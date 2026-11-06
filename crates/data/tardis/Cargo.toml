@@ -8,8 +8,7 @@ description = "Native Tardis data connector"
 
 [features]
 default = []
-http = ["aux-rs-core/http", "files"]
-files = ["aux-rs-data/files"]
+http = ["aux-rs-core/http"]
 ws = ["aux-rs-core/ws"]
 
 [dependencies]

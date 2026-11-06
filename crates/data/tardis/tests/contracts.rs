@@ -378,7 +378,6 @@ fn request_validation() {
     assert!(request.validate().is_err());
 }
 
-#[cfg(feature = "files")]
 #[tokio::test]
 async fn native_file_helper() {
     let mock = Mock::default();

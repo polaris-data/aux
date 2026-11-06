@@ -237,7 +237,6 @@ async fn timeseries_downloads_and_no_batch_submission_retry() {
     }
 }
 
-#[cfg(feature = "files")]
 #[tokio::test]
 async fn native_file_helper() {
     let mock = Mock::default();
