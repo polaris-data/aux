@@ -66,4 +66,9 @@ for cls,methods in native_commands.items():
  for method in methods:stubs.append(f'    async def {method}(self, request: Any = None) -> Any: ...')
  stubs.append('')
 stubs+=['def polymarket_encode_call(contract: str, function: str, args: Any) -> str: ...','def polymarket_helper(operation: str, payload: Any) -> Any: ...']
-path=ROOT/'crates/python/python/aux_py/_native.pyi';old=path.read_text();marker='# BEGIN PREDICTION CONNECTORS';old=old.split(marker)[0].rstrip()+'\n\n';write(path,old+marker+'\n'+'\n'.join(stubs)+'\n')
+path=ROOT/'crates/python/python/aux_py/_native.pyi'
+old=path.read_text();marker='# BEGIN PREDICTION CONNECTORS'
+perpetual_marker='# Phoenix and Extended native declarations.'
+suffix=perpetual_marker+old.split(perpetual_marker,1)[1] if perpetual_marker in old else ''
+old=old.split(marker)[0].rstrip()+'\n\n'
+write(path,old+marker+'\n'+'\n'.join(stubs)+'\n'+('\n'+suffix if suffix else ''))

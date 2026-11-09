@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1",
+    "result": {
+      "method": "subscribe",
+      "status": "OK",
+      "subscription": "orderbooks.BTC-USD"
+    },
+    "jsonrpc": "2.0"
+  },
+  {
+    "type": "ORDERBOOKS.SNAPSHOT",
+    "data": {
+      "t": "SNAPSHOT",
+      "m": "BTC-USD",
+      "b": [
+        {
+          "q": "0.84907",
+          "p": "75202"
+        }
+      ],
+      "a": [
+        {
+          "q": "3.98697",
+          "p": "75203"
+        }
+      ],
+      "d": "f"
+    },
+    "ts": 1794186171078,
+    "seq": 0,
+    "subscription": "orderbooks.BTC-USD"
+  },
+  {
+    "type": "ORDERBOOKS.DELTA",
+    "data": {
+      "t": "DELTA",
+      "m": "BTC-USD",
+      "b": [
+        {
+          "q": "0.78676",
+          "p": "75194",
+          "c": "1.45531"
+        }
+      ],
+      "a": [],
+      "d": "f"
+    },
+    "ts": 1794186171090,
+    "seq": 1,
+    "subscription": "orderbooks.BTC-USD"
+  }
+]

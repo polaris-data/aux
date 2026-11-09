@@ -1,0 +1,7 @@
+Settlement hash layouts adapted from fast-stark-crypto 0.5.0, rust-crypto-lib-base/src/starknet_messages.rs.
+Source distribution sha256 and source hash recorded in API_SOURCES.json. See CRYPTO_LICENSE.
+The adapter uses starknet-core/starknet-crypto primitives; no SDK or Python runtime dependency.
+
+Native API models and contract inventories are derived from the MIT-licensed
+https://github.com/x10xchange/python_sdk at da9a79726d23fb605518348dd6f4fa7d3dbd83c9.
+See SDK_LICENSE.

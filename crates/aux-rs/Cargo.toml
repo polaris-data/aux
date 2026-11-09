@@ -10,10 +10,10 @@ readme = "../../README.md"
 include = ["Cargo.toml", "src/**"]
 
 [features]
-typescript = ["aux-rs-hyperliquid?/typescript", "aux-rs-arcus?/typescript", "aux-rs-derive?/typescript", "aux-rs-qfex?/typescript", "aux-rs-monaco?/typescript", "aux-rs-paradex?/typescript", "aux-rs-lighter?/typescript", "aux-rs-metric?/typescript"]
+typescript = ["aux-rs-extended?/typescript", "aux-rs-phoenix?/typescript", "aux-rs-hyperliquid?/typescript", "aux-rs-arcus?/typescript", "aux-rs-derive?/typescript", "aux-rs-qfex?/typescript", "aux-rs-monaco?/typescript", "aux-rs-paradex?/typescript", "aux-rs-lighter?/typescript", "aux-rs-metric?/typescript"]
 default = ["http", "ws"]
-http = ["aux-rs-pascal?/http", "aux-rs-kalshi?/http", "aux-rs-polymarket?/http", "aux-rs-metric?/http", "aux-rs-tardis?/http", "aux-rs-databento?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
-ws = ["aux-rs-pascal?/ws", "aux-rs-kalshi?/ws", "aux-rs-polymarket?/ws", "aux-rs-tardis?/ws", "aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]
+http = ["aux-rs-extended?/http", "aux-rs-phoenix?/http", "aux-rs-pascal?/http", "aux-rs-kalshi?/http", "aux-rs-polymarket?/http", "aux-rs-metric?/http", "aux-rs-tardis?/http", "aux-rs-databento?/http", "aux-rs-core/http", "aux-rs-hyperliquid?/http", "aux-rs-lighter?/http", "aux-rs-qfex?/http", "aux-rs-arcus?/http", "aux-rs-monaco?/http", "aux-rs-derive?/http", "aux-rs-paradex?/http"]
+ws = ["aux-rs-extended?/ws", "aux-rs-phoenix?/ws", "aux-rs-pascal?/ws", "aux-rs-kalshi?/ws", "aux-rs-polymarket?/ws", "aux-rs-tardis?/ws", "aux-rs-core/ws", "aux-rs-hyperliquid?/ws", "aux-rs-lighter?/ws", "aux-rs-qfex?/ws", "aux-rs-arcus?/ws", "aux-rs-monaco?/ws", "aux-rs-derive?/ws", "aux-rs-paradex?/ws"]
 tardis = ["dep:aux-rs-tardis"]
 databento = ["dep:aux-rs-databento"]
 metric = ["dep:aux-rs-metric"]
@@ -31,7 +31,13 @@ kalshi = ["dep:aux-rs-kalshi"]
 
 pascal = ["dep:aux-rs-pascal"]
 
+phoenix = ["dep:aux-rs-phoenix"]
+
+extended = ["dep:aux-rs-extended"]
+
 [dependencies]
+aux-rs-extended = { workspace = true, optional = true }
+aux-rs-phoenix = { workspace = true, optional = true }
 aux-rs-pascal = { workspace=true, optional=true }
 aux-rs-kalshi = { workspace=true, optional=true }
 aux-rs-polymarket = { workspace=true, optional=true }
@@ -116,3 +122,20 @@ required-features = ["metric", "http"]
 
 [lints]
 workspace = true
+
+
+[[example]]
+name = "phoenix_public"
+required-features = ["phoenix", "http", "ws"]
+
+[[example]]
+name = "extended_public"
+required-features = ["extended", "http", "ws"]
+
+[[example]]
+name = "extended_testnet_trade"
+required-features = ["extended", "http", "ws"]
+
+[[example]]
+name = "phoenix_transaction"
+required-features = ["phoenix", "http"]

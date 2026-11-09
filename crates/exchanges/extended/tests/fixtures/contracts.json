@@ -1,0 +1,3080 @@
+{
+  "get_assets": {
+    "request": {
+      "type": "fixture",
+      "asset": [
+        "fixture"
+      ],
+      "collateral": true
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "name": "fixture",
+          "symbol": "fixture",
+          "precision": 1,
+          "isActive": true,
+          "isCollateral": true,
+          "starkexId": "fixture",
+          "starkexResolution": 1,
+          "l1Id": "fixture",
+          "l1Resolution": 1,
+          "version": 1,
+          "type": "fixture",
+          "canBeUsedAsCollateral": true
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/assets?type=fixture&asset=fixture&collateral=true",
+    "body": null
+  },
+  "get_asset_price": {
+    "request": {
+      "asset": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/assets/fixture/price",
+    "body": null
+  },
+  "get_markets": {
+    "request": {
+      "market": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "name": "fixture",
+          "type": "fixture",
+          "assetName": "fixture",
+          "assetPrecision": 1,
+          "collateralAssetName": "fixture",
+          "collateralAssetPrecision": 1,
+          "active": true,
+          "isRfq": true,
+          "isOffHours": true,
+          "tradingHours": "fixture",
+          "marketStats": {
+            "dailyVolume": "fixture",
+            "dailyVolumeBase": "fixture",
+            "dailyPriceChange": "fixture",
+            "dailyLow": "fixture",
+            "dailyHigh": "fixture",
+            "lastPrice": "fixture",
+            "askPrice": "fixture",
+            "bidPrice": "fixture",
+            "markPrice": "fixture",
+            "indexPrice": "fixture",
+            "fundingRate": "fixture",
+            "nextFundingRate": 1,
+            "openInterest": "fixture",
+            "openInterestBase": "fixture"
+          },
+          "tradingConfig": {
+            "minOrderSize": "fixture",
+            "minOrderSizeChange": "fixture",
+            "minPriceChange": "fixture",
+            "maxMarketOrderValue": "fixture",
+            "maxLimitOrderValue": "fixture",
+            "maxPositionValue": "fixture",
+            "maxLeverage": "fixture",
+            "maxNumOrders": 1,
+            "limitPriceCap": "fixture",
+            "limitPriceFloor": "fixture",
+            "riskFactorConfig": [
+              {
+                "upperBound": "fixture",
+                "riskFactor": "fixture"
+              }
+            ]
+          },
+          "l2Config": {
+            "type": "fixture",
+            "collateralId": "fixture",
+            "collateralResolution": 1,
+            "syntheticId": "fixture",
+            "syntheticResolution": 1
+          }
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/markets?market=fixture",
+    "body": null
+  },
+  "get_markets_stats": {
+    "request": {
+      "market[]": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/markets/stats?market%5B%5D=fixture",
+    "body": null
+  },
+  "get_market_statistics": {
+    "request": {
+      "market": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "dailyVolume": "fixture",
+        "dailyVolumeBase": "fixture",
+        "dailyPriceChange": "fixture",
+        "dailyLow": "fixture",
+        "dailyHigh": "fixture",
+        "lastPrice": "fixture",
+        "askPrice": "fixture",
+        "bidPrice": "fixture",
+        "markPrice": "fixture",
+        "indexPrice": "fixture",
+        "fundingRate": "fixture",
+        "nextFundingRate": 1,
+        "openInterest": "fixture",
+        "openInterestBase": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/markets/fixture/stats",
+    "body": null
+  },
+  "get_market_trades": {
+    "request": {
+      "market": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/markets/fixture/trades",
+    "body": null
+  },
+  "get_orderbook_snapshot": {
+    "request": {
+      "market": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "market": "fixture",
+        "bid": [
+          {
+            "qty": "fixture",
+            "price": "fixture"
+          }
+        ],
+        "ask": [
+          {
+            "qty": "fixture",
+            "price": "fixture"
+          }
+        ]
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/markets/fixture/orderbook",
+    "body": null
+  },
+  "get_funding_rates_history": {
+    "request": {
+      "market": "fixture",
+      "startTime": "fixture",
+      "endTime": "fixture",
+      "cursor": 1,
+      "limit": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "market": "fixture",
+          "fundingRate": "fixture",
+          "timestamp": 1
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/fixture/funding?startTime=fixture&endTime=fixture&cursor=1&limit=1",
+    "body": null
+  },
+  "get_trading_candles": {
+    "request": {
+      "market": "fixture",
+      "interval": "fixture",
+      "limit": 1,
+      "endTime": 1
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/candles/fixture/trades?interval=fixture&limit=1&endTime=1",
+    "body": null
+  },
+  "get_mark_price_candles": {
+    "request": {
+      "market": "fixture",
+      "interval": "fixture",
+      "limit": 1,
+      "endTime": 1
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/candles/fixture/mark-prices?interval=fixture&limit=1&endTime=1",
+    "body": null
+  },
+  "get_index_price_candles": {
+    "request": {
+      "market": "fixture",
+      "interval": "fixture",
+      "limit": 1,
+      "endTime": 1
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/candles/fixture/index-prices?interval=fixture&limit=1&endTime=1",
+    "body": null
+  },
+  "get_open_interests": {
+    "request": {
+      "market": "fixture",
+      "interval": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/fixture/open-interests?interval=fixture&startTime=1&endTime=1&limit=1",
+    "body": null
+  },
+  "get_public_leaderboard": {
+    "request": {
+      "period": "DAILY"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/leaderboard?period=DAILY",
+    "body": null
+  },
+  "get_public_referral_link": {
+    "request": {
+      "id": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/referral/link?id=fixture",
+    "body": null
+  },
+  "get_builder_dashboard": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/builder/dashboard",
+    "body": null
+  },
+  "get_vault_positions": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/vault/positions",
+    "body": null
+  },
+  "get_vault_position_history": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/vault/positions/history",
+    "body": null
+  },
+  "get_vault_orders": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/vault/orders",
+    "body": null
+  },
+  "get_vault_trades": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/vault/trades",
+    "body": null
+  },
+  "get_vault_funding_history": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/vault/funding/history",
+    "body": null
+  },
+  "get_exchange_status": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/status",
+    "body": null
+  },
+  "get_settings": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": {
+        "starkExContractAddress": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/settings",
+    "body": null
+  },
+  "get_starknet_domain": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/starknet",
+    "body": null
+  },
+  "get_accounts": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "description": "fixture",
+          "accountIndex": 1,
+          "status": "fixture",
+          "l2Key": "fixture",
+          "l2Vault": 1,
+          "bridgeStarknetAddress": "fixture"
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/accounts",
+    "body": null
+  },
+  "get_account": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": 1,
+        "description": "fixture",
+        "accountIndex": 1,
+        "status": "fixture",
+        "l2Key": "fixture",
+        "l2Vault": 1,
+        "bridgeStarknetAddress": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/account/info",
+    "body": null
+  },
+  "update_account_info": {
+    "request": {
+      "body": {
+        "description": "fixture"
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/account/info",
+    "body": {
+      "description": "fixture"
+    }
+  },
+  "get_leverage": {
+    "request": {
+      "market": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "market": "fixture",
+          "leverage": "fixture"
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/leverage?market=fixture",
+    "body": null
+  },
+  "update_leverage": {
+    "request": {
+      "body": {
+        "market": "fixture",
+        "leverage": "fixture"
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": {},
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/leverage",
+    "body": {
+      "market": "fixture",
+      "leverage": "fixture"
+    }
+  },
+  "get_api_keys": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/account/api-keys",
+    "body": null
+  },
+  "create_api_key": {
+    "request": {
+      "L1_SIGNATURE": "fixture",
+      "L1_MESSAGE_TIME": "fixture",
+      "X-X10-ACTIVE-ACCOUNT": "fixture",
+      "body": {
+        "description": "fixture"
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "key": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/account/api-key",
+    "body": {
+      "description": "fixture"
+    }
+  },
+  "delete_api_key": {
+    "request": {
+      "id": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/account/api-key/fixture",
+    "body": null
+  },
+  "get_balance": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": {
+        "collateralName": "fixture",
+        "balance": "fixture",
+        "equity": "fixture",
+        "availableForTrade": "fixture",
+        "availableForWithdrawal": "fixture",
+        "unrealisedPnl": "fixture",
+        "initialMargin": "fixture",
+        "marginRatio": "fixture",
+        "updatedTime": 1,
+        "spotEquity": "fixture",
+        "spotEquityForAvailableForTrade": "fixture",
+        "collateralReservedForSpotOrders": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/balance",
+    "body": null
+  },
+  "get_spot_balances": {
+    "request": {
+      "accountId[]": [
+        1
+      ],
+      "accountId": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "accountId": 1,
+          "asset": "fixture",
+          "balance": "fixture",
+          "indexPrice": "fixture",
+          "notionalValue": "fixture",
+          "contributionFactor": "fixture",
+          "equityContribution": "fixture",
+          "availableToWithdraw": "fixture",
+          "absolutePnl": "fixture",
+          "pnlPercentage": "fixture",
+          "averageEntryPrice": "fixture",
+          "updatedAt": 1
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/spot/balances?accountId%5B%5D=1&accountId=1",
+    "body": null
+  },
+  "get_positions": {
+    "request": {
+      "market": [
+        "fixture"
+      ],
+      "side": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "accountId": 1,
+          "market": "fixture",
+          "status": "fixture",
+          "side": "fixture",
+          "leverage": "fixture",
+          "size": "fixture",
+          "value": "fixture",
+          "openPrice": "fixture",
+          "markPrice": "fixture",
+          "liquidationPrice": "fixture",
+          "unrealisedPnl": "fixture",
+          "realisedPnl": "fixture",
+          "tpPrice": "fixture",
+          "slPrice": "fixture",
+          "adl": 1,
+          "createdAt": 1,
+          "updatedAt": 1
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/positions?market=fixture&side=fixture",
+    "body": null
+  },
+  "get_positions_history": {
+    "request": {
+      "market": [
+        "fixture"
+      ],
+      "side": "fixture",
+      "cursor": 1,
+      "limit": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "accountId": 1,
+          "market": "fixture",
+          "side": "fixture",
+          "size": "fixture",
+          "maxPositionSize": "fixture",
+          "leverage": "fixture",
+          "openPrice": "fixture",
+          "exitPrice": "fixture",
+          "realisedPnl": "fixture",
+          "realisedPnlBreakdown": {
+            "tradePnl": "fixture",
+            "fundingFees": "fixture",
+            "openFees": "fixture",
+            "closeFees": "fixture"
+          },
+          "createdTime": 1,
+          "exitType": "fixture",
+          "closedTime": 1
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/positions/history?market=fixture&side=fixture&cursor=1&limit=1",
+    "body": null
+  },
+  "get_open_orders": {
+    "request": {
+      "market": [
+        "fixture"
+      ],
+      "type": "fixture",
+      "side": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "accountId": 1,
+          "externalId": "fixture",
+          "market": "fixture",
+          "type": "fixture",
+          "side": "fixture",
+          "status": "fixture",
+          "statusReason": "fixture",
+          "price": "fixture",
+          "averagePrice": "fixture",
+          "rfqStartPrice": "fixture",
+          "qty": "fixture",
+          "filledQty": "fixture",
+          "cancelledQty": "fixture",
+          "reduceOnly": true,
+          "postOnly": true,
+          "chaseOrder": true,
+          "payedFee": "fixture",
+          "createdTime": 1,
+          "updatedTime": 1,
+          "expiryTime": 1,
+          "timeInForce": "fixture",
+          "tpSlType": "fixture",
+          "takeProfit": {
+            "triggerPrice": "fixture",
+            "triggerPriceType": "fixture",
+            "price": "fixture",
+            "priceType": "fixture",
+            "status": "fixture"
+          },
+          "stopLoss": {
+            "triggerPrice": "fixture",
+            "triggerPriceType": "fixture",
+            "price": "fixture",
+            "priceType": "fixture",
+            "status": "fixture"
+          }
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/orders?market=fixture&type=fixture&side=fixture",
+    "body": null
+  },
+  "get_order": {
+    "request": {
+      "id": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/orders/fixture",
+    "body": null
+  },
+  "get_orders_history": {
+    "request": {
+      "market": [
+        "fixture"
+      ],
+      "type": "fixture",
+      "side": "fixture",
+      "cursor": 1,
+      "limit": 1,
+      "sort": "fixture",
+      "id": 1,
+      "externalId": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "accountId": 1,
+          "externalId": "fixture",
+          "market": "fixture",
+          "type": "fixture",
+          "side": "fixture",
+          "status": "fixture",
+          "statusReason": "fixture",
+          "price": "fixture",
+          "averagePrice": "fixture",
+          "rfqStartPrice": "fixture",
+          "qty": "fixture",
+          "filledQty": "fixture",
+          "cancelledQty": "fixture",
+          "reduceOnly": true,
+          "postOnly": true,
+          "chaseOrder": true,
+          "payedFee": "fixture",
+          "createdTime": 1,
+          "updatedTime": 1,
+          "expiryTime": 1,
+          "timeInForce": "fixture",
+          "tpSlType": "fixture",
+          "takeProfit": {
+            "triggerPrice": "fixture",
+            "triggerPriceType": "fixture",
+            "price": "fixture",
+            "priceType": "fixture",
+            "status": "fixture"
+          },
+          "stopLoss": {
+            "triggerPrice": "fixture",
+            "triggerPriceType": "fixture",
+            "price": "fixture",
+            "priceType": "fixture",
+            "status": "fixture"
+          }
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/orders/history?market=fixture&type=fixture&side=fixture&cursor=1&limit=1&sort=fixture&id=1&externalId=fixture",
+    "body": null
+  },
+  "get_order_by_external_id": {
+    "request": {
+      "externalId": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/orders/external/fixture",
+    "body": null
+  },
+  "place_order": {
+    "request": {
+      "body": {
+        "id": 1,
+        "market": "fixture",
+        "type": "fixture",
+        "side": "fixture",
+        "qty": "fixture",
+        "price": "fixture",
+        "timeInForce": "GTT",
+        "expiryEpochMillis": 1,
+        "fee": "fixture",
+        "nonce": 1,
+        "reduceOnly": true,
+        "postOnly": true,
+        "trigger": {
+          "triggerPrice": "fixture",
+          "triggerType": "MARK_PRICE"
+        },
+        "tpSlType": "fixture",
+        "twap": {
+          "numParts": 1,
+          "interval": 1
+        }
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": 1,
+        "externalId": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/order",
+    "body": {
+      "id": 1,
+      "market": "fixture",
+      "type": "fixture",
+      "side": "fixture",
+      "qty": "fixture",
+      "price": "fixture",
+      "timeInForce": "GTT",
+      "expiryEpochMillis": 1,
+      "fee": "fixture",
+      "nonce": 1,
+      "reduceOnly": true,
+      "postOnly": true,
+      "trigger": {
+        "triggerPrice": "fixture",
+        "triggerType": "MARK_PRICE"
+      },
+      "tpSlType": "fixture",
+      "twap": {
+        "numParts": 1,
+        "interval": 1
+      }
+    }
+  },
+  "cancel_order_by_external_id": {
+    "request": {
+      "externalId": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {},
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/order?externalId=fixture",
+    "body": null
+  },
+  "create_scaled_order": {
+    "request": {
+      "body": {
+        "market": "fixture",
+        "side": "fixture",
+        "totalQty": "fixture",
+        "numOrders": 1,
+        "priceMin": "fixture",
+        "priceMax": "fixture",
+        "timeInForce": "GTT",
+        "expiryEpochMillis": 1,
+        "reduceOnly": true
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/order/scaled",
+    "body": {
+      "market": "fixture",
+      "side": "fixture",
+      "totalQty": "fixture",
+      "numOrders": 1,
+      "priceMin": "fixture",
+      "priceMax": "fixture",
+      "timeInForce": "GTT",
+      "expiryEpochMillis": 1,
+      "reduceOnly": true
+    }
+  },
+  "cancel_order": {
+    "request": {
+      "id": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/order/fixture",
+    "body": null
+  },
+  "mass_cancel": {
+    "request": {
+      "body": {
+        "market": "fixture",
+        "side": "fixture",
+        "ids": [
+          1
+        ],
+        "externalIds": [
+          "fixture"
+        ]
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": {},
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/order/massCancel",
+    "body": {
+      "market": "fixture",
+      "side": "fixture",
+      "ids": [
+        1
+      ],
+      "externalIds": [
+        "fixture"
+      ]
+    }
+  },
+  "get_trades": {
+    "request": {
+      "market": [
+        "fixture"
+      ],
+      "side": "fixture",
+      "type": "fixture",
+      "cursor": 1,
+      "limit": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "accountId": 1,
+          "market": "fixture",
+          "orderId": 1,
+          "side": "fixture",
+          "price": "fixture",
+          "qty": "fixture",
+          "value": "fixture",
+          "fee": "fixture",
+          "isTaker": true,
+          "tradeType": "fixture",
+          "createdTime": 1
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/trades?market=fixture&side=fixture&type=fixture&cursor=1&limit=1",
+    "body": null
+  },
+  "get_user_funding_history": {
+    "request": {
+      "market[]": [
+        "fixture"
+      ],
+      "side": "fixture",
+      "startTime": 1,
+      "cursor": "fixture",
+      "limit": 1,
+      "market": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": [
+        null
+      ],
+      "cursor": "fixture",
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/funding/history?market%5B%5D=fixture&side=fixture&startTime=1&cursor=fixture&limit=1&market=fixture",
+    "body": null
+  },
+  "update_funding_rate_config": {
+    "request": {
+      "body": {
+        "market": "fixture",
+        "enabled": true
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/config/funding-rate",
+    "body": {
+      "market": "fixture",
+      "enabled": true
+    }
+  },
+  "transfer_patch": {
+    "request": {
+      "body": {
+        "fromAccount": 1,
+        "toAccount": 1,
+        "amount": "fixture",
+        "transferredAsset": "fixture",
+        "settlement": {}
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/transfer",
+    "body": {
+      "fromAccount": 1,
+      "toAccount": 1,
+      "amount": "fixture",
+      "transferredAsset": "fixture",
+      "settlement": {}
+    }
+  },
+  "transfer": {
+    "request": {
+      "body": {
+        "fromAccount": 1,
+        "toAccount": 1,
+        "amount": "fixture",
+        "transferredAsset": "fixture",
+        "settlement": {}
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/transfer",
+    "body": {
+      "fromAccount": 1,
+      "toAccount": 1,
+      "amount": "fixture",
+      "transferredAsset": "fixture",
+      "settlement": {}
+    }
+  },
+  "post_user_transfer_onchain": {
+    "request": {
+      "body": {
+        "fromVault": "fixture",
+        "toVault": "fixture",
+        "amount": "fixture",
+        "transferredAsset": "fixture"
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "validSignature": true,
+        "id": 1,
+        "hashCalculated": "fixture",
+        "starkExRepresentation": null
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/transfer/onchain",
+    "body": {
+      "fromVault": "fixture",
+      "toVault": "fixture",
+      "amount": "fixture",
+      "transferredAsset": "fixture"
+    }
+  },
+  "get_withdrawals": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/withdrawal",
+    "body": null
+  },
+  "withdraw": {
+    "request": {
+      "body": {
+        "amount": "fixture",
+        "asset": "fixture",
+        "destination": "fixture",
+        "nonce": 1
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": 1,
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/withdrawal",
+    "body": {
+      "amount": "fixture",
+      "asset": "fixture",
+      "destination": "fixture",
+      "nonce": 1
+    }
+  },
+  "onchain_withdrawal": {
+    "request": {
+      "body": {
+        "amount": "fixture",
+        "asset": "fixture",
+        "positionId": 1
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/withdrawal/onchain",
+    "body": {
+      "amount": "fixture",
+      "asset": "fixture",
+      "positionId": 1
+    }
+  },
+  "create_deposit": {
+    "request": {
+      "body": {
+        "accountId": 1,
+        "assetId": "fixture",
+        "amount": "fixture",
+        "sourceChain": "fixture",
+        "snTransactionHash": "fixture",
+        "fee": "fixture",
+        "bridgeId": "fixture"
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/deposit",
+    "body": {
+      "accountId": 1,
+      "assetId": "fixture",
+      "amount": "fixture",
+      "sourceChain": "fixture",
+      "snTransactionHash": "fixture",
+      "fee": "fixture",
+      "bridgeId": "fixture"
+    }
+  },
+  "get_bridge_config": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": {
+        "chains": [
+          {
+            "chain": "fixture",
+            "contractAddress": "fixture"
+          }
+        ]
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/bridge/config",
+    "body": null
+  },
+  "get_bridge_quote": {
+    "request": {
+      "chainIn": "fixture",
+      "chainOut": "fixture",
+      "amount": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": "fixture",
+        "fee": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/bridge/quote?chainIn=fixture&chainOut=fixture&amount=fixture",
+    "body": null
+  },
+  "commit_bridge_quote": {
+    "request": {
+      "id": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {},
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/bridge/quote?id=fixture",
+    "body": null
+  },
+  "validate_wallet": {
+    "request": {
+      "body": {
+        "address": "fixture"
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/wallet/validation",
+    "body": {
+      "address": "fixture"
+    }
+  },
+  "get_wallet_validation": {
+    "request": {
+      "id": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/wallet/validation/fixture",
+    "body": null
+  },
+  "get_fees": {
+    "request": {
+      "market": [
+        "fixture"
+      ],
+      "builderId": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "market": "fixture",
+          "makerFeeRate": "fixture",
+          "takerFeeRate": "fixture",
+          "builderFeeRate": "fixture"
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/fees?market=fixture&builderId=1",
+    "body": null
+  },
+  "get_trading_fee_stats": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/fees/stats",
+    "body": null
+  },
+  "get_user_leaderboard": {
+    "request": {
+      "period": "DAILY"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/leaderboard?period=DAILY",
+    "body": null
+  },
+  "set_deadman_switch": {
+    "request": {
+      "countdownTime": 1
+    },
+    "response": null,
+    "route": "/api/v1/user/deadmanswitch?countdownTime=1",
+    "body": null
+  },
+  "get_claims": {
+    "request": {
+      "startTime": 1,
+      "limit": 1
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/claim?startTime=1&limit=1",
+    "body": null
+  },
+  "claim_testing_funds": {
+    "request": {
+      "body": {}
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": 1
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/claim",
+    "body": {}
+  },
+  "get_claim": {
+    "request": {
+      "id": 1
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/claim/1",
+    "body": null
+  },
+  "get_next_claim_time": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/nextclaim",
+    "body": null
+  },
+  "get_partner_rewards": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/rewards/partner",
+    "body": null
+  },
+  "get_affiliate_rewards": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/rewards/affiliate",
+    "body": null
+  },
+  "get_earned_rewards": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/rewards/earned",
+    "body": null
+  },
+  "get_reward_leaderboard_stats": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/rewards/leaderboard/stats",
+    "body": null
+  },
+  "get_rebates_csv": {
+    "request": {},
+    "response": null,
+    "route": "/api/v1/user/rebates/csv",
+    "body": null
+  },
+  "get_rebate_stats": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/rebates/stats",
+    "body": null
+  },
+  "get_referral_status": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/referrals/status",
+    "body": null
+  },
+  "get_referral_links": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/referrals/links",
+    "body": null
+  },
+  "create_referral_link": {
+    "request": {
+      "body": {
+        "code": "fixture",
+        "description": "fixture"
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/referrals",
+    "body": {
+      "code": "fixture",
+      "description": "fixture"
+    }
+  },
+  "update_referral_link": {
+    "request": {
+      "body": {
+        "code": "fixture",
+        "description": "fixture"
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/referrals",
+    "body": {
+      "code": "fixture",
+      "description": "fixture"
+    }
+  },
+  "use_referral_code": {
+    "request": {
+      "body": {
+        "code": "fixture"
+      }
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/referrals/use",
+    "body": {
+      "code": "fixture"
+    }
+  },
+  "get_referral_rebates_by_period_csv": {
+    "request": {
+      "period": "LAST_7_DAYS",
+      "granularity": "DAILY",
+      "links[]": [
+        "fixture"
+      ],
+      "subaffiliates[]": [
+        "fixture"
+      ]
+    },
+    "response": null,
+    "route": "/api/v1/user/referrals/rebates/period/csv?period=LAST_7_DAYS&granularity=DAILY&links%5B%5D=fixture&subaffiliates%5B%5D=fixture",
+    "body": null
+  },
+  "get_referral_rebates_by_user_csv": {
+    "request": {
+      "period": "LAST_7_DAYS",
+      "links[]": [
+        "fixture"
+      ],
+      "subaffiliates[]": [
+        "fixture"
+      ]
+    },
+    "response": null,
+    "route": "/api/v1/user/referrals/rebates/user/csv?period=LAST_7_DAYS&links%5B%5D=fixture&subaffiliates%5B%5D=fixture",
+    "body": null
+  },
+  "get_referral_rebates_by_subaffiliate_csv": {
+    "request": {
+      "period": "LAST_7_DAYS",
+      "subaffiliates[]": [
+        "fixture"
+      ]
+    },
+    "response": null,
+    "route": "/api/v1/user/referrals/rebates/subaffiliate/csv?period=LAST_7_DAYS&subaffiliates%5B%5D=fixture",
+    "body": null
+  },
+  "get_referral_rebates_by_link_csv": {
+    "request": {
+      "period": "LAST_7_DAYS",
+      "links[]": [
+        "fixture"
+      ]
+    },
+    "response": null,
+    "route": "/api/v1/user/referrals/rebates/link/csv?period=LAST_7_DAYS&links%5B%5D=fixture",
+    "body": null
+  },
+  "get_referral_dashboard": {
+    "request": {
+      "period": "LAST_7_DAYS"
+    },
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/referrals/dashboard?period=LAST_7_DAYS",
+    "body": null
+  },
+  "get_affiliate": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/affiliate",
+    "body": null
+  },
+  "asset_operations": {
+    "request": {
+      "id": "fixture",
+      "type": "fixture",
+      "status": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "cursor": 1,
+      "limit": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": "fixture",
+          "type": "fixture",
+          "status": "fixture",
+          "amount": "fixture",
+          "fee": "fixture",
+          "asset": 1,
+          "time": 1,
+          "accountId": 1,
+          "counterpartyAccountId": 1,
+          "transactionHash": "fixture"
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/assetOperations?id=fixture&type=fixture&status=fixture&startTime=1&endTime=1&cursor=1&limit=1",
+    "body": null
+  },
+  "get_asset_operations": {
+    "request": {
+      "accountId[]": [
+        1
+      ],
+      "id": "fixture",
+      "type[]": [
+        "fixture"
+      ],
+      "status[]": [
+        "fixture"
+      ],
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "ok": true,
+      "data": [
+        null
+      ],
+      "cursor": "fixture",
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/asset-operations?accountId%5B%5D=1&id=fixture&type%5B%5D=fixture&status%5B%5D=fixture&startTime=1&endTime=1&limit=1&cursor=fixture",
+    "body": null
+  },
+  "get_client": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": 1,
+        "evmWalletAddress": "fixture",
+        "starknetWalletAddress": "fixture",
+        "referralLinkCode": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/client/info",
+    "body": null
+  },
+  "mark_wallet_checked": {
+    "request": {
+      "passed": true
+    },
+    "response": null,
+    "route": "/api/v1/user/client/info/walletChecked?passed=true",
+    "body": null
+  },
+  "export_csv_zip": {
+    "request": {
+      "type[]": [
+        "ORDERS"
+      ],
+      "accountId": 1
+    },
+    "response": null,
+    "route": "/api/v1/user/export/csv/zip?type%5B%5D=ORDERS&accountId=1",
+    "body": null
+  },
+  "get_wrapper": {
+    "request": {},
+    "response": {
+      "ok": true,
+      "data": null,
+      "status": "OK",
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/wrapper",
+    "body": null
+  },
+  "place_rfq_order": {
+    "request": {
+      "body": {
+        "id": 1,
+        "market": "fixture",
+        "type": "fixture",
+        "side": "fixture",
+        "qty": "fixture",
+        "price": "fixture",
+        "timeInForce": "GTT",
+        "expiryEpochMillis": 1,
+        "fee": "fixture",
+        "nonce": 1,
+        "reduceOnly": true,
+        "postOnly": true,
+        "trigger": {
+          "triggerPrice": "fixture",
+          "triggerType": "MARK_PRICE"
+        },
+        "tpSlType": "fixture",
+        "twap": {
+          "numParts": 1,
+          "interval": 1
+        },
+        "rfqStartPrice": "fixture"
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": 1,
+        "externalId": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/order/rfq",
+    "body": {
+      "id": 1,
+      "market": "fixture",
+      "type": "fixture",
+      "side": "fixture",
+      "qty": "fixture",
+      "price": "fixture",
+      "timeInForce": "GTT",
+      "expiryEpochMillis": 1,
+      "fee": "fixture",
+      "nonce": 1,
+      "reduceOnly": true,
+      "postOnly": true,
+      "trigger": {
+        "triggerPrice": "fixture",
+        "triggerType": "MARK_PRICE"
+      },
+      "tpSlType": "fixture",
+      "twap": {
+        "numParts": 1,
+        "interval": 1
+      },
+      "rfqStartPrice": "fixture"
+    }
+  },
+  "delete_user_order_order_id": {
+    "request": {
+      "order_id": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {},
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/order/fixture",
+    "body": null
+  },
+  "get_builder_trades": {
+    "request": {
+      "cursor": 1,
+      "limit": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "time": 1,
+          "volume": "fixture",
+          "makerId": 1,
+          "takerId": 1,
+          "makerBuilderId": 1,
+          "takerBuilderId": 1,
+          "makerFee": "fixture",
+          "takerFee": "fixture",
+          "makerBuilderFee": "fixture",
+          "takerBuilderFee": "fixture"
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/builder/trades?cursor=1&limit=1",
+    "body": null
+  },
+  "get_info_assets_asset_name_price": {
+    "request": {
+      "asset_name": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": "fixture",
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/assets/fixture/price",
+    "body": null
+  },
+  "get_candles_history": {
+    "request": {
+      "market": "fixture",
+      "candle_type": "fixture",
+      "interval": "PT1M",
+      "limit": 1,
+      "endTime": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "open": "fixture",
+          "low": "fixture",
+          "high": "fixture",
+          "close": "fixture",
+          "volume": "fixture",
+          "timestamp": 1
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/candles/fixture/fixture?interval=PT1M&limit=1&endTime=fixture",
+    "body": null
+  },
+  "deposit_to_vault": {
+    "request": {
+      "body": {
+        "fromAccountId": 1,
+        "toAccountId": 1,
+        "collateral": "fixture",
+        "shares": "fixture",
+        "settlement": {
+          "baseAmount": 1,
+          "quoteAmount": 1,
+          "feeAmount": 1,
+          "baseAssetId": "fixture",
+          "quoteAssetId": "fixture",
+          "feeAssetId": "fixture",
+          "expirationTimestamp": 1,
+          "nonce": 1,
+          "receiverPositionId": 1,
+          "senderPositionId": 1,
+          "signature": {
+            "r": "fixture",
+            "s": "fixture"
+          }
+        }
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": null,
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/vault/user/deposits",
+    "body": {
+      "fromAccountId": 1,
+      "toAccountId": 1,
+      "collateral": "fixture",
+      "shares": "fixture",
+      "settlement": {
+        "baseAmount": 1,
+        "quoteAmount": 1,
+        "feeAmount": 1,
+        "baseAssetId": "fixture",
+        "quoteAssetId": "fixture",
+        "feeAssetId": "fixture",
+        "expirationTimestamp": 1,
+        "nonce": 1,
+        "receiverPositionId": 1,
+        "senderPositionId": 1,
+        "signature": {
+          "r": "fixture",
+          "s": "fixture"
+        }
+      }
+    }
+  },
+  "withdraw_from_vault": {
+    "request": {
+      "body": {
+        "fromAccountId": 1,
+        "toAccountId": 1,
+        "collateral": "fixture",
+        "shares": "fixture",
+        "settlement": {
+          "baseAmount": 1,
+          "quoteAmount": 1,
+          "feeAmount": 1,
+          "baseAssetId": "fixture",
+          "quoteAssetId": "fixture",
+          "feeAssetId": "fixture",
+          "expirationTimestamp": 1,
+          "nonce": 1,
+          "receiverPositionId": 1,
+          "senderPositionId": 1,
+          "signature": {
+            "r": "fixture",
+            "s": "fixture"
+          }
+        }
+      }
+    },
+    "response": {
+      "status": "OK",
+      "data": null,
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/vault/user/withdrawals",
+    "body": {
+      "fromAccountId": 1,
+      "toAccountId": 1,
+      "collateral": "fixture",
+      "shares": "fixture",
+      "settlement": {
+        "baseAmount": 1,
+        "quoteAmount": 1,
+        "feeAmount": 1,
+        "baseAssetId": "fixture",
+        "quoteAssetId": "fixture",
+        "feeAssetId": "fixture",
+        "expirationTimestamp": 1,
+        "nonce": 1,
+        "receiverPositionId": 1,
+        "senderPositionId": 1,
+        "signature": {
+          "r": "fixture",
+          "s": "fixture"
+        }
+      }
+    }
+  },
+  "get_order_by_id": {
+    "request": {
+      "order_id": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": 1,
+        "accountId": 1,
+        "externalId": "fixture",
+        "market": "fixture",
+        "type": "fixture",
+        "side": "fixture",
+        "status": "fixture",
+        "statusReason": "fixture",
+        "price": "fixture",
+        "averagePrice": "fixture",
+        "rfqStartPrice": "fixture",
+        "qty": "fixture",
+        "filledQty": "fixture",
+        "cancelledQty": "fixture",
+        "reduceOnly": true,
+        "postOnly": true,
+        "chaseOrder": true,
+        "payedFee": "fixture",
+        "createdTime": 1,
+        "updatedTime": 1,
+        "expiryTime": 1,
+        "timeInForce": "fixture",
+        "tpSlType": "fixture",
+        "takeProfit": {
+          "triggerPrice": "fixture",
+          "triggerPriceType": "fixture",
+          "price": "fixture",
+          "priceType": "fixture",
+          "status": "fixture"
+        },
+        "stopLoss": {
+          "triggerPrice": "fixture",
+          "triggerPriceType": "fixture",
+          "price": "fixture",
+          "priceType": "fixture",
+          "status": "fixture"
+        }
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/orders/fixture",
+    "body": null
+  },
+  "get_user_orders_external_external_id": {
+    "request": {
+      "external_id": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "accountId": 1,
+          "externalId": "fixture",
+          "market": "fixture",
+          "type": "fixture",
+          "side": "fixture",
+          "status": "fixture",
+          "statusReason": "fixture",
+          "price": "fixture",
+          "averagePrice": "fixture",
+          "rfqStartPrice": "fixture",
+          "qty": "fixture",
+          "filledQty": "fixture",
+          "cancelledQty": "fixture",
+          "reduceOnly": true,
+          "postOnly": true,
+          "chaseOrder": true,
+          "payedFee": "fixture",
+          "createdTime": 1,
+          "updatedTime": 1,
+          "expiryTime": 1,
+          "timeInForce": "fixture",
+          "tpSlType": "fixture",
+          "takeProfit": {
+            "triggerPrice": "fixture",
+            "triggerPriceType": "fixture",
+            "price": "fixture",
+            "priceType": "fixture",
+            "status": "fixture"
+          },
+          "stopLoss": {
+            "triggerPrice": "fixture",
+            "triggerPriceType": "fixture",
+            "price": "fixture",
+            "priceType": "fixture",
+            "status": "fixture"
+          }
+        }
+      ],
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/user/orders/external/fixture",
+    "body": null
+  },
+  "onboard_client": {
+    "request": {
+      "body": {}
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "l1Address": "fixture",
+        "defaultAccount": {
+          "id": 1,
+          "description": "fixture",
+          "accountIndex": 1,
+          "status": "fixture",
+          "l2Key": "fixture",
+          "l2Vault": 1,
+          "bridgeStarknetAddress": "fixture"
+        }
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/auth/onboard",
+    "body": {}
+  },
+  "onboard_subaccount": {
+    "request": {
+      "L1_SIGNATURE": "fixture",
+      "L1_MESSAGE_TIME": "fixture",
+      "body": {}
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "id": 1,
+        "description": "fixture",
+        "accountIndex": 1,
+        "status": "fixture",
+        "l2Key": "fixture",
+        "l2Vault": 1,
+        "bridgeStarknetAddress": "fixture"
+      },
+      "error": null,
+      "pagination": {},
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/auth/onboard/subaccount",
+    "body": {}
+  },
+  "get_info_candles_market_candle_type": {
+    "request": {
+      "market": "fixture",
+      "candleType": "fixture",
+      "interval": "fixture",
+      "limit": 1,
+      "endTime": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "o": "fixture",
+          "l": "fixture",
+          "h": "fixture",
+          "c": "fixture",
+          "v": "fixture",
+          "T": 1
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/info/candles/fixture/fixture?interval=fixture&limit=1&endTime=1",
+    "body": null
+  },
+  "get_account_equity_history": {
+    "request": {
+      "accountId": 1,
+      "interval": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "date": "fixture",
+          "value": "fixture"
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/equities?accountId=1&interval=fixture",
+    "body": null
+  },
+  "get_account_pn_l_history": {
+    "request": {
+      "accountId": 1,
+      "interval": "fixture",
+      "pnlType": "fixture",
+      "instrumentType": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "date": "fixture",
+          "value": "fixture"
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/pnl?accountId=1&interval=fixture&pnlType=fixture&instrumentType=fixture",
+    "body": null
+  },
+  "get_account_pn_l_percentage_history": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "pnlType": "fixture",
+      "priceMarket": [
+        "fixture"
+      ],
+      "instrumentType": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "pnl": [
+          {
+            "date": "fixture",
+            "value": "fixture"
+          }
+        ],
+        "priceChanges": {
+          "BTC-USD": [
+            {
+              "date": "fixture",
+              "value": "fixture"
+            }
+          ]
+        }
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/pnl/percentage?accountId=1&interval=fixture&pnlType=fixture&priceMarket=fixture&instrumentType=fixture",
+    "body": null
+  },
+  "get_cumulative_account_pn_l_history": {
+    "request": {
+      "accountId": 1,
+      "interval": "fixture",
+      "pnlType": "fixture",
+      "instrumentType": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "date": "fixture",
+          "value": "fixture"
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/pnl/cumulative?accountId=1&interval=fixture&pnlType=fixture&instrumentType=fixture",
+    "body": null
+  },
+  "get_cumulative_account_pn_l_percentage_history": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "pnlType": "fixture",
+      "priceMarket": [
+        "fixture"
+      ],
+      "instrumentType": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "pnl": [
+          {
+            "date": "fixture",
+            "value": "fixture"
+          }
+        ],
+        "priceChanges": {
+          "BTC-USD": [
+            {
+              "date": "fixture",
+              "value": "fixture"
+            }
+          ]
+        }
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/pnl/cumulative/percentage?accountId=1&interval=fixture&pnlType=fixture&priceMarket=fixture&instrumentType=fixture",
+    "body": null
+  },
+  "get_account_vault_equity_history": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "date": "fixture",
+          "value": "fixture"
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/vault-equities?accountId=1&interval=fixture",
+    "body": null
+  },
+  "get_account_max_drawdown_history": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "accountId": 1,
+          "data": [
+            {
+              "date": "fixture",
+              "value": "fixture"
+            }
+          ]
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/max-drawdown?accountId=1&interval=fixture",
+    "body": null
+  },
+  "get_account_funding_chart": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "market": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "date": "fixture",
+          "value": "fixture"
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/charts/funding?accountId=1&interval=fixture&market=fixture",
+    "body": null
+  },
+  "get_account_portfolio_summary": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "instrumentType": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "equity": "fixture",
+        "accountValue": {
+          "accountNotionalValue": "fixture",
+          "tradingEquity": "fixture",
+          "vaultNotionalValue": "fixture",
+          "spotNotionalValue": "fixture"
+        },
+        "exposure": "fixture",
+        "totalPnl": "fixture",
+        "profitFactor": "fixture",
+        "winRate": "fixture",
+        "tradingVolume": "fixture",
+        "makerVolume": "fixture",
+        "sharpeRatio": "fixture"
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/accounts/summary?accountId=1&interval=fixture&instrumentType=fixture",
+    "body": null
+  },
+  "get_account_health": {
+    "request": {
+      "accountId": [
+        1
+      ]
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "accountId": 1,
+          "equity": "fixture",
+          "unrealisedPnl": "fixture",
+          "exposure": "fixture",
+          "netExposure": "fixture",
+          "leverage": "fixture",
+          "initialMargin": "fixture",
+          "marginRatio": "fixture",
+          "availableForTrading": "fixture",
+          "availableForSpotTrading": "fixture",
+          "availableForWithdrawal": "fixture",
+          "health": "fixture"
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/accounts/health?accountId=1",
+    "body": null
+  },
+  "get_account_performance": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "marketType": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "accountId": 1,
+          "realisedPnl": "fixture",
+          "unrealisedPnl": "fixture",
+          "totalPnl": "fixture",
+          "totalPnlPercentage": "fixture",
+          "profitFactor": "fixture",
+          "maxDrawdown": "fixture",
+          "winRate": "fixture",
+          "tradingVolume": "fixture",
+          "makerVolume": "fixture",
+          "sharpeRatio": "fixture"
+        }
+      ],
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/accounts/performance?accountId=1&interval=fixture&marketType=fixture",
+    "body": null
+  },
+  "get_account_funding_stats": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "market": [
+        "fixture"
+      ]
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "totalFunding": "fixture",
+        "fundingPerMarket": [
+          {
+            "market": "fixture",
+            "netFundingFees": "fixture",
+            "netExposure": "fixture",
+            "fundingRate": "fixture"
+          }
+        ]
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/funding/stats?accountId=1&interval=fixture&market=fixture",
+    "body": null
+  },
+  "get_account_funding_history": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "market": [
+        "fixture"
+      ],
+      "cursor": 1,
+      "limit": 1
+    },
+    "response": {
+      "status": "OK",
+      "data": [
+        {
+          "id": 1,
+          "accountId": 1,
+          "market": "fixture",
+          "side": "fixture",
+          "size": "fixture",
+          "value": "fixture",
+          "markPrice": "fixture",
+          "fundingFee": "fixture",
+          "fundingRate": "fixture",
+          "paidTime": 1
+        }
+      ],
+      "pagination": {
+        "cursor": 1,
+        "count": 1
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/portfolio/funding/history?accountId=1&interval=fixture&market=fixture&cursor=1&limit=1",
+    "body": null
+  },
+  "get_vault_performance": {
+    "request": {
+      "interval": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "totalPnl": "fixture",
+        "aprPercentage": "fixture",
+        "profitFactor": "fixture",
+        "winRate": "fixture",
+        "maxDrawdown": "fixture",
+        "tradingVolume": "fixture",
+        "sharpeRatio": "fixture",
+        "aprBreakdown": {
+          "baseApr": "fixture",
+          "maxExtraApr": "fixture"
+        }
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/vault/public/performance?interval=fixture",
+    "body": null
+  },
+  "get_vault_summary": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": {
+        "equity": "fixture",
+        "walletBalance": "fixture",
+        "lastMonthApr": "fixture",
+        "exposure": "fixture",
+        "numberOfDepositors": 1,
+        "ageDays": 1,
+        "profitShare": "fixture",
+        "aprBreakdown": {
+          "baseApr": "fixture",
+          "maxExtraApr": "fixture"
+        }
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/vault/public/summary",
+    "body": null
+  },
+  "get_interest_rate_curves_history": {
+    "request": {
+      "interval": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "items": [
+          {
+            "timestamp": 1,
+            "amountBorrowed": "fixture",
+            "globalCurve": {
+              "currentUtilization": "fixture",
+              "currentRate": "fixture",
+              "targetUtilization": "fixture",
+              "minRate": "fixture",
+              "targetRate": "fixture",
+              "maxRate": "fixture"
+            },
+            "assetCurves": [
+              {
+                "assetId": 1,
+                "curve": {
+                  "currentUtilization": "fixture",
+                  "currentRate": "fixture",
+                  "targetUtilization": "fixture",
+                  "minRate": "fixture",
+                  "targetRate": "fixture",
+                  "maxRate": "fixture"
+                },
+                "calculatedRate": "fixture",
+                "amountBorrowed": "fixture"
+              }
+            ]
+          }
+        ]
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/interest/info/rate-curves?interval=fixture",
+    "body": null
+  },
+  "get_latest_interest_rate_curve": {
+    "request": {},
+    "response": {
+      "status": "OK",
+      "data": {
+        "item": {
+          "timestamp": 1,
+          "amountBorrowed": "fixture",
+          "globalCurve": {
+            "currentUtilization": "fixture",
+            "currentRate": "fixture",
+            "targetUtilization": "fixture",
+            "minRate": "fixture",
+            "targetRate": "fixture",
+            "maxRate": "fixture"
+          },
+          "assetCurves": [
+            {
+              "assetId": 1,
+              "curve": {
+                "currentUtilization": "fixture",
+                "currentRate": "fixture",
+                "targetUtilization": "fixture",
+                "minRate": "fixture",
+                "targetRate": "fixture",
+                "maxRate": "fixture"
+              },
+              "calculatedRate": "fixture",
+              "amountBorrowed": "fixture"
+            }
+          ]
+        }
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/interest/info/latest-rate-curves",
+    "body": null
+  },
+  "get_interest_key_metrics": {
+    "request": {
+      "accountId": [
+        1
+      ]
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "borrowed": "fixture",
+        "currentInterestRate": "fixture",
+        "estimatedNextPayment": "fixture"
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/interest/key-metrics?accountId=1",
+    "body": null
+  },
+  "get_interest_daily_metrics": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "1000": [
+          {
+            "date": "fixture",
+            "assetId": 1,
+            "interestPaid": "fixture",
+            "averageBorrowed": "fixture",
+            "annualizedInterestRate": "fixture"
+          }
+        ]
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/interest/daily-metrics?accountId=1&interval=fixture",
+    "body": null
+  },
+  "get_interest_payment_chart": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture",
+      "bucket": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "resolution": "fixture",
+        "points": [
+          {
+            "bucketStartTimestamp": 1,
+            "totalInterestPaid": "fixture",
+            "averageBorrowed": "fixture",
+            "averageApr": "fixture",
+            "borrowingByCollateralAsset": [
+              {
+                "assetId": 1,
+                "averageBorrowed": "fixture",
+                "averageApr": "fixture"
+              }
+            ]
+          }
+        ]
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/interest/payment-chart?accountId=1&interval=fixture&bucket=fixture",
+    "body": null
+  },
+  "get_interest_payments_history": {
+    "request": {
+      "accountId": [
+        1
+      ],
+      "interval": "fixture"
+    },
+    "response": {
+      "status": "OK",
+      "data": {
+        "items": [
+          {
+            "timestamp": 1,
+            "paymentAmount": "fixture",
+            "borrowedAmount": "fixture",
+            "effectiveOneHourRate": "fixture",
+            "accountId": 1
+          }
+        ]
+      },
+      "error": null,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/api/v1/interest/payments?accountId=1&interval=fixture",
+    "body": null
+  }
+}

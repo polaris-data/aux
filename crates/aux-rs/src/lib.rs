@@ -41,3 +41,9 @@ pub use aux_rs_kalshi as kalshi;
 pub use aux_rs_pascal as pascal;
 #[cfg(feature = "polymarket")]
 pub use aux_rs_polymarket as polymarket;
+
+#[cfg(feature = "phoenix")]
+pub use aux_rs_phoenix as phoenix;
+
+#[cfg(feature = "extended")]
+pub use aux_rs_extended as extended;

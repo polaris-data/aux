@@ -3968,6 +3968,2369 @@ fn main() {
         declaration::<aux_rs::metric::planning::WeightedRequest>(&config, false)
     ));
     result.push_str("}\n");
+    result.push_str("export namespace phoenix {\n");
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::AckBeforeTimestampBody>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::AckNotificationsBody>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::AcknowledgeNotificationsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::AcknowledgeNotificationsUpToTimestampParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ActivateInviteResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ActivateInviteWithReferralRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ActivateReferralParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ActivateReferralTxRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ActivateReferralTxResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ActivateReferralWithUserFundedTransactionParams>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::AggregatedTrades>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ApiAccountMeta>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ApiCandle>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ApiInstructionResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::AuthResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::AuthoritySetView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildAttachedConditionalOrderTransactionParams>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildCancelConditionalOrderTransactionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildCancelStopLossOrderTransactionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildIsolatedLimitOrderTransactionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildIsolatedLimitOrderTransactionWithConditionalsParams>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<
+            aux_rs::phoenix::BuildIsolatedLimitOrderTransactionWithLiquidationEstimateParams,
+        >(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildIsolatedMarketOrderTransactionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<
+            aux_rs::phoenix::BuildIsolatedMarketOrderTransactionWithLiquidationEstimateParams,
+        >(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildPositionConditionalOrderTransactionParams>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildRegisterIxsRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildRegisterIxsResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildRegisterTraderInstructionsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::BuildStopLossOrderTransactionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CancelConditionalOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CancelStopLossOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CapabilityAccessView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CheckWalletInviteStatusParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CheckWalletResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CollateralEvent>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CollateralHistoryResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CommodityMarketCalendarResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CommodityMarketCalendarView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CommodityMarketDaySchedule>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CommodityMarketSessionRange>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CommodityMetadata>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ConditionalTriggerRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CooldownStatus>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CreateServiceLoginChallengeParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CreateWalletTransactionChallengeParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::CurrentOrderState>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ErrorResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeKeysView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeLeverageTier>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeMarketConfig>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeMarketSnapshot>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeRiskFactors>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeSnapshotView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeStateSnapshot>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeStatusView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeWsCommodityMetadata>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeWsFundingConfig>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeWsLeverageTier>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeWsMarkPriceParameters>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeWsMarketPriceBand>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ExchangeWsRiskFactors>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FillRecord>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FillsResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FundingHourlyEvent>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FundingHourlyHistoryResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FundingOverviewPoint>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FundingOverviewResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FundingOverviewSeries>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FundingRateHistoryResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::FundingRatePoint>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetCandlesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetCommodityMarketCalendarParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetExchangeKeysParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetExchangeParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetExchangeSnapshotParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetExchangeStatusParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetFundingOverviewParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetFundingRateHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetJwksParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetMarkPriceParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetMarketCalendarByIdParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetMarketCalendarParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetMarketFillsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetMarketParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetMarketStatsHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetNextCommodityMarketTransitionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetNextMarketCalendarTransitionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetNotificationsResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetOrderHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetOrderHistoryV2Params>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetOrderbookParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetReferralActivationPermissionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTradeHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderCapabilitiesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderCollateralHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderFundingHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderMarketPnLParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderPnLParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderPortfolioValuesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderStateParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetTraderTradeHistoryV2Params>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetUserCollateralHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetUserHourlyFundingParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetUserLiquidationHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetUserPnLParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetUserTradeHistoryV2Params>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetV1TradersByTraderPubkeyCollateralHistoryParams>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::GetWalletLoginNonceParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::HashMapValueValue>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::IntendedOrder>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::JwksResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::LimitOrder>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ListMarketsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ListTraderNotificationsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::LogInWithPrivyTokenParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::LogInWithServiceSignatureParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::LogInWithSignedWalletTransactionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::LogInWithWalletSignatureParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::LogOutParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::LookupTable>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarkPriceResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketCalendar>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketCalendarRecord>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketCalendarResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketPriceBand>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketPublicMetadata>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketStatsHistoryResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketStatsPoint>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::MarketStatsSnapshot>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::NativeNumber>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::NextCommodityMarketTransition>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::NextMarketCalendarTransition>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::OrderbookView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecOrderHistoryItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecOrderHistoryItemDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecOrderHistoryV2Item>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecOrderHistoryV2ItemDataItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecTradeHistoryV2Item>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecTradeHistoryV2ItemDataItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecUserLiquidationHistoryPoint>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PaginatedResponseVecUserLiquidationHistoryPointDataItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlaceAttachedConditionalOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlaceIsolatedLimitOrderEnhancedResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlaceIsolatedLimitOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlaceIsolatedLimitOrderWithConditionalsRequest>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlaceIsolatedMarketOrderEnhancedResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlaceIsolatedMarketOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlacePositionConditionalOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PlacedOrder>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PnLPoint>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PortfolioValuePoint>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PreparedTransaction>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::Price>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PrivyLoginRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::PrivyWalletProof>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ReferralActivationPermissionResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::RefreshRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::RefreshSessionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::SendRegisterIxsRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::SendRegisterIxsResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ServiceChallengeRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ServiceChallengeResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ServiceLoginRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::SignedTransaction>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::Spline>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::SubmitRegisterTraderTransactionParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TickRegion>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TpSlOrderConfig>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderCapabilitiesMetadata>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderCapabilitiesView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderCapabilityDescriptor>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderFundingHistoryEvent>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderFundingHistoryResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderMarketPnLPoint>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderMarketPnLSeries>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderPositionView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateCapabilities>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateConditionalStopLossTrigger>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateConditionalTakeProfitTrigger>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateLimitOrderEvent>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateMarketLimitOrderEvent>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStatePositionRow>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateSnapshot>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateSnapshotResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateSplineRow>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateStopLossTrigger>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateSubaccountSnapshot>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateTakeProfitTrigger>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateTickRegion>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateTrigger>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderStateTriggerRow>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::TraderView>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ValidateInviteParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ValidateInviteRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::ValidateInviteResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::WalletLoginRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::WalletNonceResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::WalletTransactionChallengeRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::WalletTransactionChallengeResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::phoenix::WalletTransactionLoginRequest>(&config, true)
+    ));
+    result.push_str("}\n");
+    result.push_str("export namespace extended {\n");
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AccountInfo>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AccountLeverage>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AccountLeverageModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AccountModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AccountStreamDataModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AccountTradeModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AccountUpdateRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ApiKey>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ApiKeyRequestModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ApiKeyResponseModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ApiResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::Asset>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AssetIndexPrice>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AssetModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AssetOperation>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AssetOperationModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AssetOperationsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::AssetOperationsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::Balance>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::BalanceModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::BridgeConfig>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::BridgeConfigChainsItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::BridgeQuote>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::BridgesConfigModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::BuilderDashboard>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::BuilderTradeModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CancelOrderByExternalIdParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CancelOrderByExternalIdResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CancelOrderParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CandleModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ChainConfigModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::Claim>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClaimResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClaimResponseModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClaimTestingFundsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClaimTestingFundsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClientInfo>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClientModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClientRankings>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClientRankingsRankingsItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ClientTradingFeeStats>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CollateralSlowWithdrawal>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CommitBridgeQuoteParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CommitBridgeQuoteResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateApiKeyParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateApiKeyRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateApiKeyResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateApiKeyResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateDepositParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateDepositRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateOrderConditionalTriggerModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateOrderRfqModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateOrderTpslTriggerModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateRFQOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateReferralLinkCodeRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateReferralLinkParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateScaledOrderParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::CreateScaledOrderRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DeleteApiKeyParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DeleteUserOrderOrderIdParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DeleteUserOrderOrderIdResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DeleverageLevels>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DepositRequestModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DepositStatusUpdateModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DepositToVaultParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::DepositToVaultResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::EmptyModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ErrorResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ExchangeStatus>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ExportCsvZipParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::FundingFee>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::FundingRate>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::FundingRateConfigRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::FundingRateModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GeckoContract>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GeckoOrderBook>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountEquityHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountEquityHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountEquityHistoryResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingChartParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingChartResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingChartResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingHistoryResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingHistoryResultPagination>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingStatsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingStatsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingStatsResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountFundingStatsResultDataFundingPerMarketItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountHealthParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountHealthResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountHealthResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountMaxDrawdownHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountMaxDrawdownHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountMaxDrawdownHistoryResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountMaxDrawdownHistoryResultDataItemDataItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPerformanceParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPerformanceResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPerformanceResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLHistoryResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLPercentageHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLPercentageHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLPercentageHistoryResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLPercentageHistoryResultDataPnlItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPnLPercentageHistoryResultDataPriceChanges>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<
+            aux_rs::extended::GetAccountPnLPercentageHistoryResultDataPriceChangesBTCUSDItem,
+        >(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPortfolioSummaryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPortfolioSummaryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPortfolioSummaryResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountPortfolioSummaryResultDataAccountValue>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountVaultEquityHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountVaultEquityHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountVaultEquityHistoryResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAccountsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAffiliateParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAffiliateRewardsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetApiKeysParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAssetOperationsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAssetPriceParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAssetsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetAssetsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBalanceParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBalanceResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBridgeConfigParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBridgeConfigResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBridgeQuoteParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBridgeQuoteResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBuilderDashboardParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBuilderTradesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetBuilderTradesResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCandlesHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCandlesHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetClaimParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetClaimsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetClientParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetClientResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCumulativeAccountPnLHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCumulativeAccountPnLHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCumulativeAccountPnLHistoryResultDataItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCumulativeAccountPnLPercentageHistoryParams>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCumulativeAccountPnLPercentageHistoryResult>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCumulativeAccountPnLPercentageHistoryResultData>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetCumulativeAccountPnLPercentageHistoryResultDataPnlItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<
+            aux_rs::extended::GetCumulativeAccountPnLPercentageHistoryResultDataPriceChanges,
+        >(&config, true)
+    ));
+    result.push_str(&format!("export {}\n",declaration::<aux_rs::extended::GetCumulativeAccountPnLPercentageHistoryResultDataPriceChangesBTCUSDItem>( &config, true)));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetEarnedRewardsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetExchangeStatusParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetFeesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetFeesResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetFundingRatesHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetFundingRatesHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetIndexPriceCandlesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInfoAssetsAssetNamePriceParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInfoAssetsAssetNamePriceResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInfoCandlesMarketCandleTypeParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInfoCandlesMarketCandleTypeResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInfoCandlesMarketCandleTypeResultDataItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestDailyMetricsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestDailyMetricsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestDailyMetricsResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestDailyMetricsResultData1000Item>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestKeyMetricsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestKeyMetricsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestKeyMetricsResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentChartParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentChartResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentChartResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentChartResultDataPointsItem>(&config, true)
+    ));
+    result.push_str(&format!("export {}\n",declaration::<aux_rs::extended::GetInterestPaymentChartResultDataPointsItemBorrowingByCollateralAssetItem>( &config, true)));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentsHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentsHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentsHistoryResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestPaymentsHistoryResultDataItemsItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestRateCurvesHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestRateCurvesHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestRateCurvesHistoryResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestRateCurvesHistoryResultDataItemsItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<
+            aux_rs::extended::GetInterestRateCurvesHistoryResultDataItemsItemAssetCurvesItem,
+        >(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<
+            aux_rs::extended::GetInterestRateCurvesHistoryResultDataItemsItemAssetCurvesItemCurve,
+        >(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetInterestRateCurvesHistoryResultDataItemsItemGlobalCurve>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLatestInterestRateCurveParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLatestInterestRateCurveResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLatestInterestRateCurveResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLatestInterestRateCurveResultDataItem>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLatestInterestRateCurveResultDataItemAssetCurvesItem>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!("export {}\n",declaration::<aux_rs::extended::GetLatestInterestRateCurveResultDataItemAssetCurvesItemCurve>( &config, true)));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLatestInterestRateCurveResultDataItemGlobalCurve>(
+            &config, true
+        )
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLeverageParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetLeverageResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetMarkPriceCandlesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetMarketStatisticsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetMarketStatisticsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetMarketTradesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetMarketsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetMarketsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetMarketsStatsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetNextClaimTimeParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOpenInterestsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOpenOrdersParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOpenOrdersResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrderByExternalIdParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrderByIdParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrderByIdResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrderParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrderbookSnapshotParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrderbookSnapshotResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrdersHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetOrdersHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetPartnerRewardsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetPositionsHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetPositionsHistoryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetPositionsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetPositionsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetPublicLeaderboardParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetPublicReferralLinkParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetRebateStatsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetRebatesCsvParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetReferralDashboardParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetReferralLinksParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetReferralRebatesByLinkCsvParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetReferralRebatesByPeriodCsvParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetReferralRebatesBySubaffiliateCsvParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetReferralRebatesByUserCsvParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetReferralStatusParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetRewardLeaderboardStatsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetSettingsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetSettingsResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetSpotBalancesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetSpotBalancesResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetStarknetDomainParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetTradesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetTradesResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetTradingCandlesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetTradingFeeStatsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetUserFundingHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetUserLeaderboardParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetUserOrdersExternalExternalIdParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetUserOrdersExternalExternalIdResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultFundingHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultOrdersParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultPerformanceParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultPerformanceResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultPerformanceResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultPerformanceResultDataAprBreakdown>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultPositionHistoryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultPositionsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultSummaryParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultSummaryResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultSummaryResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultSummaryResultDataAprBreakdown>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetVaultTradesParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetWalletValidationParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetWithdrawalsParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::GetWrapperParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::InternalAmount>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::L1Amount>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::L2ConfigModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::LimitOrderSettlementModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MarkWalletCheckedParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MarketInfo>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MarketL2Config>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MarketModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MarketStats>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MarketStatsModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MarketTradingConfig>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MassCancelParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MassCancelRequestModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::MassCancelResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::NativeNumber>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::NewOrderModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::NewOrderResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnChainPerpetualTransferModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnChainTransfer>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnboardClientParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnboardClientResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnboardSubaccountParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnboardSubaccountResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnboardedClientModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OnchainWithdrawalParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OpenOrderModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OpenOrderTpslTriggerModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::Order>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OrderBook>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OrderCancelRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OrderConditionalTrigger>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OrderContext>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OrderTpslTrigger>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OrderbookQuantityModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::OrderbookUpdateModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PaginatedResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PaginationModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PerpetualTransferModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PlaceOrderParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PlaceOrderResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PlaceRfqOrderParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PlaceRfqOrderResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PlacedOrderModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::Position>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PositionHistory>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PositionHistoryModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PositionModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PostUserTransferOnchainParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PostUserTransferOnchainResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PreparedOrder>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PriceCandle>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PublicTrade>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::PublicTradeModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::QuoteModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::RealisedPnlBreakdownModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ResponseErrorModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::RiskFactorConfigModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::RiskFactorSegmentModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::SetDeadmanSwitchParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::Settings>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::SettingsModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::SettlementAsset>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::SettlementSignatureModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::SpotBalance>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::SpotBalanceModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StarkAmount>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StarkDebuggingOrderAmountsModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StarkSettlementModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StarkTransferSettlementModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StarkWithdrawalSettlementModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StarknetDomain>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcAccountBalanceModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcAccountDepositUpdateModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcAccountOrdersModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcAccountPositionsModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcAccountSpotBalancesModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcAccountTradesModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcAccountWithdrawalUpdateModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcOrderbookUpdateModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcPriceModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::StreamRpcResponseModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TimestampModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TradeCandle>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TradingConfigModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TradingFee>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TradingFeeModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TransferParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TransferPatchParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TransferRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::TransferResponseModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::Twap>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UpdateAccountInfoParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UpdateFundingRateConfigParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UpdateLeverageParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UpdateLeverageResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UpdateReferralLinkCodeRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UpdateReferralLinkParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UseReferralCodeParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::UseReferralCodeRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::ValidateWalletParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WalletValidation>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WalletValidationRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawFromVaultParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawFromVaultResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawParams>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawRequestModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawResult>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawalRequest>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawalRequestModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WithdrawalStatusUpdateModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WrappedApiResponseModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::WrappedStreamResponseModel>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::extended::X10BaseModel>(&config, true)
+    ));
+    result.push_str("}\n");
     let output = result.replace("JsonValue", "LosslessValue");
     for line in output.lines() {
         println!("{}", line.trim_end());

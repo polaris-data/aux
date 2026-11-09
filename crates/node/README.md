@@ -70,3 +70,7 @@ node scripts/check-node-package.mjs
 The build workflow produces and tests an npm tarball containing all supported native binaries. It does not publish to npm. Package naming, registry ownership, and publication are release decisions; `aux-ts` is the local package name.
 
 The Node crate denies handwritten unsafe code. napi-rs' generated FFI requires its macro-scoped allowance, so this boundary uses `deny` rather than the workspace's `forbid`; the protocol crates retain their existing lint policy.
+
+Phoenix perpetuals and Extended are also available through `PhoenixClient`, `PhoenixSigner`, `PhoenixChainClient`, `ExtendedClient`, and `ExtendedSigner`. See the [Phoenix guide](../exchanges/phoenix/README.md) and [Extended guide](../exchanges/extended/README.md) for credential separation, exact values, signing, stream recovery and explicit transaction workflows.
+
+Run `node examples/perpetual-public.mjs` from this package directory for public market reads. It requires a built/installed binding and makes no writes.

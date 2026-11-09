@@ -54,6 +54,7 @@ def annotate(source):
     """Keep Rust and TS declarations generated from the same serde representation."""
     source=strip_annotations(source)
     source=re.sub(r'(?m)^([ \t]*)(#\[derive\([^\]]*\b(?:Serialize|Deserialize)\b[^\]]*\)\])', r'\1#[cfg_attr(feature = "typescript", derive(ts_rs::TS))]\n\1#[cfg_attr(feature = "typescript", ts(optional_fields = nullable))]\n\1\2', source)
+    aliases=dict(re.findall(r'pub type (\w+) = (serde_json::Number);',source))
     out=[]
     for line in source.splitlines():
         match=re.match(r'(\s*)pub \w+:\s*(.+),\s*$',line)
@@ -62,6 +63,7 @@ def annotate(source):
             default=any('default' in attr and '#[serde(' in attr for attr in attrs)
             flatten=any('serde(flatten)' in attr for attr in attrs)
             typ=match[2]
+            for alias,target in aliases.items():typ=re.sub(r"\b"+alias+r"\b",target,typ)
             if 'serde_json::Number' in typ or 'serde_json::Value' in typ or 'serde_json::Map' in typ:
                 if flatten:out.append(match[1]+'#[cfg_attr(feature = "typescript", ts(skip))]')
                 else:

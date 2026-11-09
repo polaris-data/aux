@@ -1,0 +1,85 @@
+{
+  "sdk": {
+    "repository": "https://github.com/x10xchange/python_sdk",
+    "commit": "da9a79726d23fb605518348dd6f4fa7d3dbd83c9"
+  },
+  "documentation": "https://api.docs.extended.exchange/",
+  "input_sha256": {
+    "openapi.json": "dbf6a455df8b7bb2e1ff9d2e02d772c87ed29b379e75b5fead76ddb4e5c42cd2",
+    "docs.html": "571de686b3c9092745158b81eb645b12681ea274167a58adef51eccf4aaeda25"
+  },
+  "notes": [
+    "OpenAPI is partial and illustrative; normalized input is the union of SDK models, SDK routes and published documentation.",
+    "Onboarding uses origin-relative /auth routes; API-key management uses /api/v1 and explicit L1 signature headers, as defined by the pinned SDK.",
+    "Live public market payloads encode some SDK int fields, including tradingConfig.maxNumOrders, as strings. SDK integer fields accept both native JSON numbers and strings without coercion.",
+    "The documentation adds optional rfqStartPrice to RFQ submission; the dedicated CreateRFQOrderRequest extends the SDK order body. This field is excluded from settlement hashing.",
+    "Observed v2 RPC book frames use ORDERBOOKS.SNAPSHOT / ORDERBOOKS.DELTA (plural), with data.t carrying SNAPSHOT / DELTA. Snapshot recovery recognizes the native envelope and payload marker."
+  ],
+  "crypto_reference": {
+    "version": "fast-stark-crypto 0.5.0",
+    "source": "https://files.pythonhosted.org/packages/51/b7/bef41befac7c0a3bd02c54f5d92450054dfbde19c2d2aeae15eb719e5b6b/fast_stark_crypto-0.5.0.tar.gz",
+    "layout_sha256": "2967e05b83c1ff0d3606d2bbcb5ddb514e3f2ec33c354ee8f6b987ee4c72d425"
+  },
+  "live_read_samples": {
+    "date": "2026-11-09",
+    "url": "https://api.starknet.sepolia.extended.exchange/api/v1/info/markets",
+    "selection": "first market only; native JSON numeric tokens preserved",
+    "sha256": "0d4d068f47a5d74e22bf449f9261d6f9828cd63bac512be85d77f41c4453b6fa"
+  },
+  "sdk_model_inputs": [
+    "x10/models/funding_rate.py",
+    "x10/models/testnet.py",
+    "x10/models/withdrawal.py",
+    "x10/models/deposit.py",
+    "x10/models/candle.py",
+    "x10/models/asset.py",
+    "x10/models/trade.py",
+    "x10/models/market.py",
+    "x10/models/client.py",
+    "x10/models/order.py",
+    "x10/models/bridge.py",
+    "x10/models/__init__.py",
+    "x10/models/fee.py",
+    "x10/models/orderbook.py",
+    "x10/models/stream_rpc.py",
+    "x10/models/transfer.py",
+    "x10/models/vault.py",
+    "x10/models/position.py",
+    "x10/models/http.py",
+    "x10/models/settings.py",
+    "x10/models/balance.py",
+    "x10/models/base.py",
+    "x10/models/account.py",
+    "x10/core/amount.py",
+    "x10/core/types.py"
+  ],
+  "sdk_module_inputs": [
+    "x10/clients/rest/modules/order_management_module.py",
+    "x10/clients/rest/modules/builder_module.py",
+    "x10/clients/rest/modules/__init__.py",
+    "x10/clients/rest/modules/info_module.py",
+    "x10/clients/rest/modules/vault_module.py",
+    "x10/clients/rest/modules/account_module.py",
+    "x10/clients/rest/modules/base_module.py",
+    "x10/clients/rest/modules/testnet_module.py",
+    "x10/clients/onboarding/modules/__init__.py",
+    "x10/clients/onboarding/modules/account_module.py",
+    "x10/clients/onboarding/modules/auth_module.py",
+    "x10/clients/onboarding/modules/base_module.py"
+  ],
+  "retrieved_at": "2026-11-09",
+  "schema_source": "https://github.com/x10xchange/python_sdk/blob/da9a79726d23fb605518348dd6f4fa7d3dbd83c9/specs/rest-api.openapi.yaml",
+  "developer_documentation": [
+    "https://api.docs.extended.exchange/"
+  ],
+  "fixture_sha256": {
+    "tests/fixtures/ws.json": "3ca12c8f95aa3e079c359a1b2d6d6d838c98eb627ffd900045855a500473267b",
+    "tests/fixtures/rpc_public.json": "9e4f739f4358df849c2e57cc0144f7a796b02ace52b64cc2dc59d2c9c5294044"
+  },
+  "live_stream_samples": {
+    "date": "2026-11-09",
+    "url": "wss://api.starknet.extended.exchange/stream.extended.exchange/v2/rpc",
+    "fixture": "tests/fixtures/rpc_public.json",
+    "selection": "subscribe acknowledgement, snapshot, delta; first bid/ask only"
+  }
+}

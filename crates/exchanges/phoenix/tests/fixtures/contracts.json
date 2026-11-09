@@ -1,0 +1,2947 @@
+{
+  "get_exchange": {
+    "request": {},
+    "response": {
+      "keys": {
+        "activeTraderBuffer": [
+          "fixture"
+        ],
+        "canonicalMint": "fixture",
+        "currentAuthorities": {
+          "adlAuthority": "fixture",
+          "backstopAuthority": "fixture",
+          "cancelAuthority": "fixture",
+          "marketAuthority": "fixture",
+          "oracleAuthority": "fixture",
+          "riskAuthority": "fixture",
+          "rootAuthority": "fixture"
+        },
+        "globalConfig": "fixture",
+        "globalTraderIndex": [
+          "fixture"
+        ],
+        "globalVault": "fixture",
+        "pendingAuthorities": {
+          "adlAuthority": "fixture",
+          "backstopAuthority": "fixture",
+          "cancelAuthority": "fixture",
+          "marketAuthority": "fixture",
+          "oracleAuthority": "fixture",
+          "riskAuthority": "fixture",
+          "rootAuthority": "fixture"
+        },
+        "perpAssetMap": "fixture",
+        "withdrawQueue": "fixture"
+      },
+      "markets": [
+        {
+          "assetId": 1,
+          "baseLotsDecimals": 1,
+          "commodityMetadata": {
+            "afterHoursRadius": "fixture",
+            "executionPriceBand": {
+              "max": "fixture",
+              "min": "fixture"
+            },
+            "isAfterHours": true,
+            "isCommodity": true,
+            "isReopen": true,
+            "lastIndexExpiryTimestamp": 1,
+            "lastKnownIndexPrice": "fixture",
+            "markPriceBand": {
+              "max": "fixture",
+              "min": "fixture"
+            },
+            "status": "active"
+          },
+          "fundingIntervalSeconds": 1,
+          "fundingPeriodSeconds": 1,
+          "isolatedOnly": true,
+          "leverageTiers": [
+            {
+              "limitOrderRiskFactor": 1,
+              "limitOrderRiskFactorBps": 1,
+              "maxLeverage": 1,
+              "maxSizeBaseLots": 1
+            }
+          ],
+          "makerFee": 1,
+          "marketPubkey": "fixture",
+          "marketStatus": "uninitialized",
+          "maxFundingRatePerInterval": 1,
+          "maxFundingRatePerIntervalPercentage": 1,
+          "maxLiquidationSizeBaseLots": 1,
+          "metadata": {
+            "calendar": {
+              "calendarUri": "fixture",
+              "contentSha256": "fixture",
+              "description": "fixture",
+              "id": "fixture",
+              "nextMarketTransitionUtc": "fixture"
+            },
+            "coinGeckoId": "fixture",
+            "coinMarketCapId": 1,
+            "description": "fixture",
+            "displayColor": "fixture",
+            "logoUri": "fixture",
+            "name": "fixture",
+            "tokensXyzAssetId": "fixture"
+          },
+          "openInterestCapBaseLots": 1,
+          "riskFactors": {
+            "backstop": 1,
+            "backstopBps": 1,
+            "cancelOrder": 1,
+            "cancelOrderBps": 1,
+            "highRisk": 1,
+            "highRiskBps": 1,
+            "maintenance": 1,
+            "maintenanceBps": 1,
+            "upnl": 1,
+            "upnlBps": 1,
+            "upnlForWithdrawals": 1,
+            "upnlForWithdrawalsBps": 1
+          },
+          "splinePubkey": "fixture",
+          "statsSnapshot": {
+            "cumulativeFundingRate": 1,
+            "fundingStartIntervalTimestamp": 1,
+            "openInterestBaseLots": 1,
+            "slot": 1,
+            "slotIndex": 1
+          },
+          "symbol": "fixture",
+          "takerFee": 1,
+          "tickSize": 1
+        }
+      ],
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/view/exchange",
+    "body": null
+  },
+  "get_exchange_keys": {
+    "request": {},
+    "response": {
+      "activeTraderBuffer": [
+        "fixture"
+      ],
+      "canonicalMint": "fixture",
+      "currentAuthorities": {
+        "adlAuthority": "fixture",
+        "backstopAuthority": "fixture",
+        "cancelAuthority": "fixture",
+        "marketAuthority": "fixture",
+        "oracleAuthority": "fixture",
+        "riskAuthority": "fixture",
+        "rootAuthority": "fixture"
+      },
+      "globalConfig": "fixture",
+      "globalTraderIndex": [
+        "fixture"
+      ],
+      "globalVault": "fixture",
+      "pendingAuthorities": {
+        "adlAuthority": "fixture",
+        "backstopAuthority": "fixture",
+        "cancelAuthority": "fixture",
+        "marketAuthority": "fixture",
+        "oracleAuthority": "fixture",
+        "riskAuthority": "fixture",
+        "rootAuthority": "fixture"
+      },
+      "perpAssetMap": "fixture",
+      "withdrawQueue": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/view/exchange/keys",
+    "body": null
+  },
+  "list_markets": {
+    "request": {},
+    "response": [
+      {
+        "assetId": 1,
+        "baseLotsDecimals": 1,
+        "commodityMetadata": {
+          "afterHoursRadius": "fixture",
+          "executionPriceBand": {
+            "max": "fixture",
+            "min": "fixture"
+          },
+          "isAfterHours": true,
+          "isCommodity": true,
+          "isReopen": true,
+          "lastIndexExpiryTimestamp": 1,
+          "lastKnownIndexPrice": "fixture",
+          "markPriceBand": {
+            "max": "fixture",
+            "min": "fixture"
+          },
+          "status": "active"
+        },
+        "fundingIntervalSeconds": 1,
+        "fundingPeriodSeconds": 1,
+        "isolatedOnly": true,
+        "leverageTiers": [
+          {
+            "limitOrderRiskFactor": 1,
+            "limitOrderRiskFactorBps": 1,
+            "maxLeverage": 1,
+            "maxSizeBaseLots": 1
+          }
+        ],
+        "makerFee": 1,
+        "marketPubkey": "fixture",
+        "marketStatus": "uninitialized",
+        "maxFundingRatePerInterval": 1,
+        "maxFundingRatePerIntervalPercentage": 1,
+        "maxLiquidationSizeBaseLots": 1,
+        "metadata": {
+          "calendar": {
+            "calendarUri": "fixture",
+            "contentSha256": "fixture",
+            "description": "fixture",
+            "id": "fixture",
+            "nextMarketTransitionUtc": "fixture"
+          },
+          "coinGeckoId": "fixture",
+          "coinMarketCapId": 1,
+          "description": "fixture",
+          "displayColor": "fixture",
+          "logoUri": "fixture",
+          "name": "fixture",
+          "tokensXyzAssetId": "fixture"
+        },
+        "openInterestCapBaseLots": 1,
+        "riskFactors": {
+          "backstop": 1,
+          "backstopBps": 1,
+          "cancelOrder": 1,
+          "cancelOrderBps": 1,
+          "highRisk": 1,
+          "highRiskBps": 1,
+          "maintenance": 1,
+          "maintenanceBps": 1,
+          "upnl": 1,
+          "upnlBps": 1,
+          "upnlForWithdrawals": 1,
+          "upnlForWithdrawalsBps": 1
+        },
+        "splinePubkey": "fixture",
+        "statsSnapshot": {
+          "cumulativeFundingRate": 1,
+          "fundingStartIntervalTimestamp": 1,
+          "openInterestBaseLots": 1,
+          "slot": 1,
+          "slotIndex": 1
+        },
+        "symbol": "fixture",
+        "takerFee": 1,
+        "tickSize": 1
+      }
+    ],
+    "route": "/v1/view/exchange/markets",
+    "body": null
+  },
+  "get_market": {
+    "request": {
+      "symbol": "fixture"
+    },
+    "response": {
+      "assetId": 1,
+      "baseLotsDecimals": 1,
+      "commodityMetadata": {
+        "afterHoursRadius": "fixture",
+        "executionPriceBand": {
+          "max": "fixture",
+          "min": "fixture"
+        },
+        "isAfterHours": true,
+        "isCommodity": true,
+        "isReopen": true,
+        "lastIndexExpiryTimestamp": 1,
+        "lastKnownIndexPrice": "fixture",
+        "markPriceBand": {
+          "max": "fixture",
+          "min": "fixture"
+        },
+        "status": "active"
+      },
+      "fundingIntervalSeconds": 1,
+      "fundingPeriodSeconds": 1,
+      "isolatedOnly": true,
+      "leverageTiers": [
+        {
+          "limitOrderRiskFactor": 1,
+          "limitOrderRiskFactorBps": 1,
+          "maxLeverage": 1,
+          "maxSizeBaseLots": 1
+        }
+      ],
+      "makerFee": 1,
+      "marketPubkey": "fixture",
+      "marketStatus": "uninitialized",
+      "maxFundingRatePerInterval": 1,
+      "maxFundingRatePerIntervalPercentage": 1,
+      "maxLiquidationSizeBaseLots": 1,
+      "metadata": {
+        "calendar": {
+          "calendarUri": "fixture",
+          "contentSha256": "fixture",
+          "description": "fixture",
+          "id": "fixture",
+          "nextMarketTransitionUtc": "fixture"
+        },
+        "coinGeckoId": "fixture",
+        "coinMarketCapId": 1,
+        "description": "fixture",
+        "displayColor": "fixture",
+        "logoUri": "fixture",
+        "name": "fixture",
+        "tokensXyzAssetId": "fixture"
+      },
+      "openInterestCapBaseLots": 1,
+      "riskFactors": {
+        "backstop": 1,
+        "backstopBps": 1,
+        "cancelOrder": 1,
+        "cancelOrderBps": 1,
+        "highRisk": 1,
+        "highRiskBps": 1,
+        "maintenance": 1,
+        "maintenanceBps": 1,
+        "upnl": 1,
+        "upnlBps": 1,
+        "upnlForWithdrawals": 1,
+        "upnlForWithdrawalsBps": 1
+      },
+      "splinePubkey": "fixture",
+      "statsSnapshot": {
+        "cumulativeFundingRate": 1,
+        "fundingStartIntervalTimestamp": 1,
+        "openInterestBaseLots": 1,
+        "slot": 1,
+        "slotIndex": 1
+      },
+      "symbol": "fixture",
+      "takerFee": 1,
+      "tickSize": 1,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/view/exchange/market/fixture",
+    "body": null
+  },
+  "get_exchange_status": {
+    "request": {},
+    "response": {
+      "active": true,
+      "gated": true,
+      "withdrawalsAvailable": true,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/view/exchange/status",
+    "body": null
+  },
+  "get_exchange_snapshot": {
+    "request": {},
+    "response": {
+      "exchange": {
+        "active": true,
+        "activeTraderBuffer": [
+          "fixture"
+        ],
+        "canonicalMint": "fixture",
+        "currentAuthorities": {
+          "adlAuthority": "fixture",
+          "backstopAuthority": "fixture",
+          "cancelAuthority": "fixture",
+          "marketAuthority": "fixture",
+          "oracleAuthority": "fixture",
+          "riskAuthority": "fixture",
+          "rootAuthority": "fixture"
+        },
+        "exchangeStatusBits": 1,
+        "exchangeStatusFeatures": [
+          "fixture"
+        ],
+        "gated": true,
+        "globalConfig": "fixture",
+        "globalTraderIndex": [
+          "fixture"
+        ],
+        "globalVault": "fixture",
+        "perpAssetMap": "fixture",
+        "programId": "fixture",
+        "usdcMint": "fixture",
+        "withdrawQueue": "fixture",
+        "withdrawalsAvailable": true
+      },
+      "markets": [
+        {
+          "assetId": 1,
+          "baseLotsDecimals": 1,
+          "commodityMetadata": {
+            "afterHoursRadius": "fixture",
+            "executionPriceBand": {
+              "lower": "fixture",
+              "upper": "fixture"
+            },
+            "isAfterHours": true,
+            "isCommodity": true,
+            "isReopen": true,
+            "lastIndexExpiryTimestamp": 1,
+            "lastKnownIndexPrice": "fixture",
+            "markPriceBand": {
+              "lower": "fixture",
+              "upper": "fixture"
+            },
+            "status": "active"
+          },
+          "fundingConfig": {
+            "fundingIntervalSeconds": 1,
+            "fundingPeriodSeconds": 1,
+            "maxFundingRatePerInterval": 1
+          },
+          "isolatedOnly": true,
+          "leverageTiers": [
+            {
+              "limitOrderRiskFactor": 1,
+              "maxLeverage": 1,
+              "maxSizeBaseLots": 1
+            }
+          ],
+          "makerFee": 1,
+          "markPriceParameters": {
+            "adjustedExchangeSpotPriceWeight": 1,
+            "bookHardStaleMultiplier": 1,
+            "bookPriceRadius": 1,
+            "bookPriceStaleThreshold": 1,
+            "bookPriceWeight": 1,
+            "commoditiesAfterHoursRadius": 1,
+            "commoditiesAfterHoursRadiusBps": 1,
+            "emaDiffRadius": 1,
+            "emaPeriodSlots": 1,
+            "exchangePerpPriceWeight": 1,
+            "minOracleResponses": 1,
+            "oracleDivergenceRadius": 1,
+            "oracleHardStaleMultiplier": 1,
+            "perpPriceStaleThreshold": 1,
+            "riskActionPriceValidityRules": [
+              [
+                [
+                  "ignore"
+                ]
+              ]
+            ],
+            "spotPriceStaleThreshold": 1
+          },
+          "marketPubkey": "fixture",
+          "marketStatus": "uninitialized",
+          "maxLiquidationSizeBaseLots": 1,
+          "metadata": {
+            "calendar": {
+              "calendarUri": "fixture",
+              "contentSha256": "fixture",
+              "description": "fixture",
+              "id": "fixture",
+              "nextMarketTransitionUtc": "fixture"
+            },
+            "coinGeckoId": "fixture",
+            "coinMarketCapId": 1,
+            "description": "fixture",
+            "displayColor": "fixture",
+            "logoUri": "fixture",
+            "name": "fixture",
+            "tokensXyzAssetId": "fixture"
+          },
+          "openInterestCapBaseLots": 1,
+          "riskFactors": {
+            "backstop": 1,
+            "backstopBps": 1,
+            "cancelOrder": 1,
+            "cancelOrderBps": 1,
+            "highRisk": 1,
+            "highRiskBps": 1,
+            "maintenance": 1,
+            "maintenanceBps": 1,
+            "upnl": 1,
+            "upnlBps": 1,
+            "upnlForWithdrawals": 1,
+            "upnlForWithdrawalsBps": 1
+          },
+          "splinePubkey": "fixture",
+          "symbol": "fixture",
+          "takerFee": 1,
+          "tickSize": 1
+        }
+      ],
+      "sequenceNumber": 1,
+      "slot": 1,
+      "slotIndex": 1,
+      "version": 1,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/exchange/snapshot",
+    "body": null
+  },
+  "build_register_trader_instructions": {
+    "request": {
+      "body": {
+        "maxPositions": 1,
+        "traderAuthority": "fixture",
+        "txFeePayer": "fixture"
+      }
+    },
+    "response": {
+      "includeRegisterTrader": true,
+      "instructions": [
+        {
+          "data": [
+            1
+          ],
+          "keys": [
+            {
+              "isSigner": true,
+              "isWritable": true,
+              "pubkey": "fixture"
+            }
+          ],
+          "programId": "fixture"
+        }
+      ],
+      "maxPositions": 1,
+      "traderOnboarder": "fixture",
+      "traderPda": "fixture",
+      "txFeePayer": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/exchange/build-register-ixs",
+    "body": {
+      "maxPositions": 1,
+      "traderAuthority": "fixture",
+      "txFeePayer": "fixture"
+    }
+  },
+  "submit_register_trader_transaction": {
+    "request": {
+      "body": {
+        "maxPositions": 1,
+        "traderAuthority": "fixture",
+        "traderPdaIndex": 1,
+        "traderSubaccountIndex": 1,
+        "transaction": "fixture",
+        "txFeePayer": "fixture"
+      }
+    },
+    "response": {
+      "includeRegisterTrader": true,
+      "maxPositions": 1,
+      "signature": "fixture",
+      "traderOnboarder": "fixture",
+      "traderPda": "fixture",
+      "txFeePayer": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/exchange/send-register-ixs",
+    "body": {
+      "maxPositions": 1,
+      "traderAuthority": "fixture",
+      "traderPdaIndex": 1,
+      "traderSubaccountIndex": 1,
+      "transaction": "fixture",
+      "txFeePayer": "fixture"
+    }
+  },
+  "get_orderbook": {
+    "request": {
+      "symbol": "fixture",
+      "include_splines": true,
+      "bypass_execution_band": true
+    },
+    "response": {
+      "asks": [
+        [
+          1,
+          1
+        ]
+      ],
+      "bids": [
+        [
+          1,
+          1
+        ]
+      ],
+      "mid": 1,
+      "slot": 1,
+      "splines": [
+        {
+          "askFilledAmount": "fixture",
+          "askRegions": [
+            {
+              "density": 1,
+              "end": 1,
+              "filledSize": "fixture",
+              "start": 1,
+              "totalSize": "fixture"
+            }
+          ],
+          "bidFilledAmount": "fixture",
+          "bidRegions": [
+            {
+              "density": 1,
+              "end": 1,
+              "filledSize": "fixture",
+              "start": 1,
+              "totalSize": "fixture"
+            }
+          ],
+          "midPrice": 1,
+          "traderKey": "fixture"
+        }
+      ],
+      "symbol": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/view/orderbook/fixture?include_splines=true&bypass_execution_band=true",
+    "body": null
+  },
+  "get_mark_price": {
+    "request": {
+      "symbol": "fixture"
+    },
+    "response": {
+      "markPrice": {
+        "price": 1,
+        "slot": 1
+      },
+      "slot": 1,
+      "slotIndex": 1,
+      "symbol": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/market/fixture/mark-price",
+    "body": null
+  },
+  "get_market_stats_history": {
+    "request": {
+      "symbol": "fixture",
+      "start_time": "fixture",
+      "end_time": "fixture",
+      "limit": 1,
+      "timeframe": "fixture"
+    },
+    "response": {
+      "market_id": 1,
+      "stats": [
+        {
+          "mark_price": 1,
+          "open_interest": 1,
+          "slot": 1,
+          "spot_price": 1,
+          "timestamp": "fixture",
+          "total_maker_fees": 1,
+          "total_taker_fees": 1
+        }
+      ],
+      "symbol": "fixture",
+      "timeframe": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/market/fixture/stats?start_time=fixture&end_time=fixture&limit=1&timeframe=fixture",
+    "body": null
+  },
+  "get_next_market_calendar_transition": {
+    "request": {
+      "symbol": "fixture"
+    },
+    "response": {
+      "calendarUri": "fixture",
+      "currentState": "open",
+      "loadedAt": "fixture",
+      "market": "fixture",
+      "marketCalendarId": "fixture",
+      "nextMarketState": "open",
+      "utcNextTransition": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/market/fixture/next-market-calendar-transition",
+    "body": null
+  },
+  "get_next_commodity_market_transition": {
+    "request": {},
+    "response": {
+      "currentState": "open",
+      "loadedAt": "fixture",
+      "market": "fixture",
+      "nextMarketState": "open",
+      "utcNextTransition": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/market/next-commodity-market-transition",
+    "body": null
+  },
+  "get_market_calendar": {
+    "request": {
+      "symbol": "fixture"
+    },
+    "response": {
+      "calendar": {
+        "dateOverrides": {},
+        "weeklySchedule": {}
+      },
+      "calendarUri": "fixture",
+      "contentSha256": "fixture",
+      "description": "fixture",
+      "kind": "fixture",
+      "loadedAt": "fixture",
+      "market": "fixture",
+      "marketCalendarId": "fixture",
+      "rawJson": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/market/fixture/market-calendar",
+    "body": null
+  },
+  "get_market_calendar_by_id": {
+    "request": {
+      "market_calendar_id": "fixture"
+    },
+    "response": {
+      "calendar": {
+        "dateOverrides": {},
+        "weeklySchedule": {}
+      },
+      "calendarUri": "fixture",
+      "contentSha256": "fixture",
+      "description": "fixture",
+      "kind": "fixture",
+      "loadedAt": "fixture",
+      "marketCalendarId": "fixture",
+      "rawJson": "fixture",
+      "s3Path": "fixture",
+      "updatedAt": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/market-calendar/fixture",
+    "body": null
+  },
+  "get_commodity_market_calendar": {
+    "request": {},
+    "response": {
+      "calendar": {
+        "dateOverrides": {},
+        "weeklySchedule": {}
+      },
+      "loadedAt": "fixture",
+      "market": "fixture",
+      "rawJson": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/market/commodity-calendar",
+    "body": null
+  },
+  "get_candles": {
+    "request": {
+      "symbol": "fixture",
+      "timeframe": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1,
+      "enableExternalSource": true
+    },
+    "response": [
+      {
+        "close": 1,
+        "externalSource": "fixture",
+        "high": 1,
+        "low": 1,
+        "markClose": 1,
+        "markHigh": 1,
+        "markLow": 1,
+        "markOpen": 1,
+        "open": 1,
+        "time": 1,
+        "tradeCount": 1,
+        "volume": 1,
+        "volumeQuote": 1
+      }
+    ],
+    "route": "/v1/candles/fixture?timeframe=fixture&startTime=1&endTime=1&limit=1&enableExternalSource=true",
+    "body": null
+  },
+  "get_trader": {
+    "request": {
+      "pubkey": "fixture"
+    },
+    "response": {
+      "accumulatedFunding": "fixture",
+      "authority": "fixture",
+      "cancelMargin": "fixture",
+      "capabilities": {
+        "depositCollateral": {
+          "immediate": true,
+          "viaColdActivation": true
+        },
+        "placeLimitOrder": {
+          "immediate": true,
+          "viaColdActivation": true
+        },
+        "placeMarketOrder": {
+          "immediate": true,
+          "viaColdActivation": true
+        },
+        "riskIncreasingTrade": {
+          "immediate": true,
+          "viaColdActivation": true
+        },
+        "riskReducingTrade": {
+          "immediate": true,
+          "viaColdActivation": true
+        },
+        "withdrawCollateral": {
+          "immediate": true,
+          "viaColdActivation": true
+        }
+      },
+      "collateralBalance": "fixture",
+      "discountedUnrealizedPnl": "fixture",
+      "effectiveCollateral": "fixture",
+      "effectiveCollateralForWithdrawals": "fixture",
+      "flags": 1,
+      "initialMargin": "fixture",
+      "initialMarginForWithdrawals": "fixture",
+      "isInActiveTraders": true,
+      "lastDepositSlot": 1,
+      "limitOrders": {},
+      "maintenanceMargin": "fixture",
+      "makerFeeOverrideMultiplier": 1,
+      "maxPositions": 1,
+      "numMarketsWithSplines": 1,
+      "portfolioValue": "fixture",
+      "positions": [
+        {
+          "accumulatedFunding": "fixture",
+          "backstopMargin": "fixture",
+          "discountedUnrealizedPnl": "fixture",
+          "entryPrice": "fixture",
+          "initialMargin": "fixture",
+          "limitOrderMargin": "fixture",
+          "liquidationPrice": "fixture",
+          "maintenanceMargin": "fixture",
+          "positionInitialMargin": "fixture",
+          "positionSize": "fixture",
+          "positionValue": "fixture",
+          "stopLossPrice": "fixture",
+          "symbol": "fixture",
+          "takeProfitPrice": "fixture",
+          "unrealizedPnl": "fixture",
+          "unsettledFunding": "fixture",
+          "virtualQuotePosition": "fixture"
+        }
+      ],
+      "riskState": "healthy",
+      "riskTier": "safe",
+      "slot": 1,
+      "slotIndex": 1,
+      "state": "uninitialized",
+      "takerFeeOverrideMultiplier": 1,
+      "traderKey": "fixture",
+      "traderPdaIndex": 1,
+      "traderSubaccountIndex": 1,
+      "unrealizedPnl": "fixture",
+      "unsettledFundingOwed": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/view/trader/fixture",
+    "body": null
+  },
+  "get_trader_capabilities": {
+    "request": {},
+    "response": {
+      "capabilities": [
+        {
+          "deprecated": true,
+          "description": "fixture",
+          "displayName": "fixture",
+          "key": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/view/trader-capabilities",
+    "body": null
+  },
+  "get_trader_state": {
+    "request": {
+      "traderPdaIndex": 1,
+      "authority_pubkey": "fixture"
+    },
+    "response": {
+      "authority": "fixture",
+      "slot": 1,
+      "slotIndex": 1,
+      "snapshot": {
+        "capabilities": {
+          "capabilities": {
+            "depositCollateral": {
+              "immediate": true,
+              "viaColdActivation": true
+            },
+            "placeLimitOrder": {
+              "immediate": true,
+              "viaColdActivation": true
+            },
+            "placeMarketOrder": {
+              "immediate": true,
+              "viaColdActivation": true
+            },
+            "riskIncreasingTrade": {
+              "immediate": true,
+              "viaColdActivation": true
+            },
+            "riskReducingTrade": {
+              "immediate": true,
+              "viaColdActivation": true
+            },
+            "withdrawCollateral": {
+              "immediate": true,
+              "viaColdActivation": true
+            }
+          },
+          "flags": 1,
+          "state": "uninitialized"
+        },
+        "makerFeeOverrideMultiplier": 1,
+        "subaccounts": [
+          {
+            "capabilities": {
+              "capabilities": {
+                "depositCollateral": {
+                  "immediate": true,
+                  "viaColdActivation": true
+                },
+                "placeLimitOrder": {
+                  "immediate": true,
+                  "viaColdActivation": true
+                },
+                "placeMarketOrder": {
+                  "immediate": true,
+                  "viaColdActivation": true
+                },
+                "riskIncreasingTrade": {
+                  "immediate": true,
+                  "viaColdActivation": true
+                },
+                "riskReducingTrade": {
+                  "immediate": true,
+                  "viaColdActivation": true
+                },
+                "withdrawCollateral": {
+                  "immediate": true,
+                  "viaColdActivation": true
+                }
+              },
+              "flags": 1,
+              "state": "uninitialized"
+            },
+            "collateral": "fixture",
+            "cooldownStatus": {
+              "cooldownPeriodInSlots": 1,
+              "lastDepositSlot": 1
+            },
+            "orders": [
+              {
+                "orders": [
+                  {
+                    "change": "updated",
+                    "conditionalKind": "fixture",
+                    "initialSizeLots": "fixture",
+                    "isConditionalOrder": true,
+                    "isStopLoss": true,
+                    "isStopLossDirection": true,
+                    "orderSequenceNumber": "fixture",
+                    "orderType": "fixture",
+                    "priceTicks": "fixture",
+                    "priceUsd": "fixture",
+                    "reduceOnly": true,
+                    "side": "bid",
+                    "sizeRemainingLots": "fixture",
+                    "status": "fixture"
+                  }
+                ],
+                "symbol": "fixture"
+              }
+            ],
+            "positions": [
+              {
+                "accumulatedFundingQuoteLots": "fixture",
+                "basePositionLots": "fixture",
+                "conditionalStopLossTriggers": [
+                  {
+                    "conditionalStopLossId": "fixture",
+                    "status": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ],
+                "conditionalTakeProfitTriggers": [
+                  {
+                    "conditionalTakeProfitId": "fixture",
+                    "status": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ],
+                "entryPriceTicks": "fixture",
+                "entryPriceUsd": "fixture",
+                "positionSequenceNumber": "fixture",
+                "stopLossTriggers": [
+                  {
+                    "status": "fixture",
+                    "stopLossId": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ],
+                "takeProfitTriggers": [
+                  {
+                    "status": "fixture",
+                    "takeProfitId": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ],
+                "unsettledFundingQuoteLots": "fixture",
+                "virtualQuotePositionLots": "fixture"
+              }
+            ],
+            "sequence": 1,
+            "splines": [
+              {
+                "askFilledAmountLots": "fixture",
+                "askRegions": [
+                  {
+                    "densityLotsPerTick": "fixture",
+                    "endPriceTicks": "fixture",
+                    "filledSizeLots": "fixture",
+                    "startPriceTicks": "fixture",
+                    "totalSizeLots": "fixture"
+                  }
+                ],
+                "bidFilledAmountLots": "fixture",
+                "bidRegions": [
+                  {
+                    "densityLotsPerTick": "fixture",
+                    "endPriceTicks": "fixture",
+                    "filledSizeLots": "fixture",
+                    "startPriceTicks": "fixture",
+                    "totalSizeLots": "fixture"
+                  }
+                ],
+                "midPriceTicks": "fixture"
+              }
+            ],
+            "subaccountIndex": 1,
+            "triggers": [
+              {
+                "conditionalStopLossTriggers": [
+                  {
+                    "conditionalStopLossId": "fixture",
+                    "status": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ],
+                "conditionalTakeProfitTriggers": [
+                  {
+                    "conditionalTakeProfitId": "fixture",
+                    "status": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ],
+                "stopLossTriggers": [
+                  {
+                    "status": "fixture",
+                    "stopLossId": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ],
+                "takeProfitTriggers": [
+                  {
+                    "status": "fixture",
+                    "takeProfitId": "fixture",
+                    "trigger": {
+                      "executionPriceTicks": "fixture",
+                      "kind": "ioc",
+                      "side": "bid",
+                      "triggerPriceTicks": "fixture"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "takerFeeOverrideMultiplier": 1,
+        "version": 1
+      },
+      "traderPdaIndex": 1,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/trader/state/fixture?traderPdaIndex=1",
+    "body": null
+  },
+  "get_user_pn_l": {
+    "request": {
+      "user_pubkey": "fixture",
+      "resolution": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1
+    },
+    "response": [
+      {
+        "cumulativeFundingPayment": 1,
+        "cumulativePnl": 1,
+        "cumulativeTakerFee": 1,
+        "endTime": 1,
+        "startTime": 1,
+        "timestamp": 1,
+        "unrealizedPnl": 1
+      }
+    ],
+    "route": "/v1/users/fixture/pnl?resolution=fixture&startTime=1&endTime=1&limit=1",
+    "body": null
+  },
+  "get_trader_portfolio_values": {
+    "request": {
+      "trader_pubkey": "fixture",
+      "resolution": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1
+    },
+    "response": [
+      {
+        "endTime": 1,
+        "positions": {},
+        "startTime": 1,
+        "timestamp": 1,
+        "value": 1
+      }
+    ],
+    "route": "/v1/traders/fixture/portfolio-values?resolution=fixture&startTime=1&endTime=1&limit=1",
+    "body": null
+  },
+  "get_trader_pn_l": {
+    "request": {
+      "trader_pubkey": "fixture",
+      "resolution": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1
+    },
+    "response": [
+      {
+        "cumulativeFundingPayment": 1,
+        "cumulativePnl": 1,
+        "cumulativeTakerFee": 1,
+        "endTime": 1,
+        "startTime": 1,
+        "timestamp": 1,
+        "unrealizedPnl": 1
+      }
+    ],
+    "route": "/v1/traders/fixture/pnl?resolution=fixture&startTime=1&endTime=1&limit=1",
+    "body": null
+  },
+  "get_trader_market_pn_l": {
+    "request": {
+      "trader_pubkey": "fixture",
+      "resolution": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1,
+      "symbols": "fixture"
+    },
+    "response": [
+      {
+        "baseDecimals": 1,
+        "marketId": 1,
+        "points": [
+          {
+            "baseLots": 1,
+            "cumulativeFundingPayment": 1,
+            "cumulativePnl": 1,
+            "cumulativeTakerFee": 1,
+            "endTime": 1,
+            "markPrice": 1,
+            "realizedPnl": 1,
+            "startTime": 1,
+            "timestamp": 1,
+            "totalTakerFee": 1,
+            "unrealizedPnl": 1,
+            "virtualQuoteLots": 1
+          }
+        ],
+        "symbol": "fixture",
+        "tickSize": 1
+      }
+    ],
+    "route": "/v1/traders/fixture/pnl/markets?resolution=fixture&startTime=1&endTime=1&limit=1&symbols=fixture",
+    "body": null
+  },
+  "get_user_collateral_history": {
+    "request": {
+      "limit": 1,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "cursor": "fixture",
+      "user_pubkey": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "amount": 1,
+          "collateralAfter": 1,
+          "eventIndex": 1,
+          "eventType": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "timestamp": "fixture",
+          "traderPdaIndex": 1,
+          "traderSubaccountIndex": 1
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/users/fixture/collateral-history?limit=1&nextCursor=fixture&prevCursor=fixture&cursor=fixture",
+    "body": null
+  },
+  "get_trader_collateral_history": {
+    "request": {
+      "authority": "fixture",
+      "pdaIndex": 1,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "cursor": "fixture",
+      "limit": 1
+    },
+    "response": {
+      "data": [
+        {
+          "amount": 1,
+          "collateralAfter": 1,
+          "eventIndex": 1,
+          "eventType": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "timestamp": "fixture",
+          "traderPdaIndex": 1,
+          "traderSubaccountIndex": 1
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/trader/fixture/collateral-history?pdaIndex=1&nextCursor=fixture&prevCursor=fixture&cursor=fixture&limit=1",
+    "body": null
+  },
+  "get_v1_traders_by_trader_pubkey_collateral_history": {
+    "request": {
+      "limit": 1,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "cursor": "fixture",
+      "trader_pubkey": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "amount": 1,
+          "collateralAfter": 1,
+          "eventIndex": 1,
+          "eventType": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "timestamp": "fixture",
+          "traderPdaIndex": 1,
+          "traderSubaccountIndex": 1
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/traders/fixture/collateral-history?limit=1&nextCursor=fixture&prevCursor=fixture&cursor=fixture",
+    "body": null
+  },
+  "get_user_liquidation_history": {
+    "request": {
+      "pdaIndex": 1,
+      "subaccountIndex": 1,
+      "symbol": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "user_pubkey": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "atLossCloseValue": "fixture",
+          "atLossCollateralChange": "fixture",
+          "baseLotsFilled": "fixture",
+          "caller": "fixture",
+          "closedLong": "fixture",
+          "closedShort": "fixture",
+          "eventIndex": 1,
+          "haircutRateBps": 1,
+          "inProfitAccount": "fixture",
+          "inProfitCloseValue": "fixture",
+          "inProfitCollateralChange": "fixture",
+          "ixName": "fixture",
+          "kind": "market_order",
+          "liquidatee": "fixture",
+          "liquidateeCollateralChange": "fixture",
+          "liquidator": "fixture",
+          "liquidatorCollateralChange": "fixture",
+          "market": "fixture",
+          "positionClosed": true,
+          "price": "fixture",
+          "quoteLotsFilled": "fixture",
+          "quoteSize": "fixture",
+          "role": "liquidatee",
+          "side": "fixture",
+          "signature": "fixture",
+          "size": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "subaccountIndex": 1,
+          "symbol": "fixture",
+          "timestamp": 1,
+          "type": "market"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/users/fixture/liquidation-history?pdaIndex=1&subaccountIndex=1&symbol=fixture&limit=1&cursor=fixture",
+    "body": null
+  },
+  "get_trader_funding_history": {
+    "request": {
+      "authority": "fixture",
+      "traderPdaIndex": 1,
+      "symbol": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "resolution": "fixture"
+    },
+    "response": {
+      "events": [
+        {
+          "fundingPayment": "fixture",
+          "fundingRatePercentage": "fixture",
+          "positionSide": "fixture",
+          "positionSize": "fixture",
+          "symbol": "fixture",
+          "timestamp": "fixture"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/trader/fixture/funding-history?traderPdaIndex=1&symbol=fixture&startTime=1&endTime=1&limit=1&cursor=fixture&resolution=fixture",
+    "body": null
+  },
+  "get_user_hourly_funding": {
+    "request": {
+      "user_pubkey": "fixture",
+      "traderPdaIndex": 1,
+      "symbol": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "events": [
+        {
+          "fundingPayment": "fixture",
+          "fundingRatePercentage": "fixture",
+          "positionSide": "fixture",
+          "positionSize": "fixture",
+          "symbol": "fixture",
+          "timestamp": "fixture"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/users/fixture/funding-hourly?traderPdaIndex=1&symbol=fixture&limit=1&cursor=fixture",
+    "body": null
+  },
+  "get_funding_rate_history": {
+    "request": {
+      "symbol": "fixture",
+      "startTime": 1,
+      "endTime": 1,
+      "limit": 1
+    },
+    "response": {
+      "marketId": 1,
+      "rates": [
+        {
+          "fundingRatePercentage": "fixture",
+          "timestamp": "fixture"
+        }
+      ],
+      "symbol": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/funding/fixture/rates?startTime=1&endTime=1&limit=1",
+    "body": null
+  },
+  "get_funding_overview": {
+    "request": {
+      "startTime": 1,
+      "endTime": 1,
+      "perMarketLimit": 1
+    },
+    "response": {
+      "series": [
+        {
+          "marketId": 1,
+          "points": [
+            {
+              "fundingAmountPerUnit": "fixture",
+              "fundingRate": "fixture",
+              "markPrice": "fixture",
+              "timestamp": "fixture"
+            }
+          ],
+          "symbol": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/funding/overview?startTime=1&endTime=1&perMarketLimit=1",
+    "body": null
+  },
+  "get_order_history": {
+    "request": {
+      "authority": "fixture",
+      "traderPdaIndex": 1,
+      "marketSymbol": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "privyId": "fixture",
+      "orderStatus": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "baseQty": "fixture",
+          "completedAt": "fixture",
+          "filledBaseQty": "fixture",
+          "isConditionalOrder": true,
+          "isReduceOnly": true,
+          "isStopLoss": true,
+          "isStopLossDirection": true,
+          "marketSymbol": "fixture",
+          "orderSequenceNumber": "fixture",
+          "placedAt": "fixture",
+          "price": "fixture",
+          "remainingBaseQty": "fixture",
+          "side": "bid",
+          "status": "active"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/trader/fixture/order-history?traderPdaIndex=1&marketSymbol=fixture&limit=1&cursor=fixture&privyId=fixture&orderStatus=fixture",
+    "body": null
+  },
+  "get_order_history_v2": {
+    "request": {
+      "market_symbol": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "trader_pubkey": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "createdAt": "fixture",
+          "currentOrderState": {
+            "baseQty": "fixture",
+            "cancelledAt": "fixture",
+            "filledBaseQty": "fixture",
+            "lastFillAt": "fixture",
+            "orderSequenceNumber": 1,
+            "orderStatus": "fixture",
+            "placedAt": "fixture",
+            "price": "fixture",
+            "releasedBaseQty": "fixture",
+            "remainingBaseQty": "fixture",
+            "side": "fixture"
+          },
+          "eventIndex": 1,
+          "fillBeforePlacement": {
+            "numTrades": 1,
+            "totalBaseQtyFilled": "fixture",
+            "totalNumFills": 1,
+            "totalQuoteQtyFilled": "fixture",
+            "totalTakerFee": "fixture"
+          },
+          "instructionIndex": 1,
+          "instructionType": "fixture",
+          "intended": {
+            "baseLots": 1,
+            "baseQty": "fixture",
+            "cancelExisting": true,
+            "clientOrderId": "fixture",
+            "hasPriceLimit": true,
+            "isConditionalOrder": true,
+            "isPostOnly": true,
+            "isReduceOnly": true,
+            "isStopLoss": true,
+            "isStopLossDirection": true,
+            "isTakeOnly": true,
+            "lastValidSlot": 1,
+            "matchLimit": 1,
+            "orderFlags": 1,
+            "orderKind": "fixture",
+            "priceInTicks": 1,
+            "priceUsd": "fixture",
+            "quoteLotBudget": 1,
+            "side": "fixture"
+          },
+          "isConditionalOrder": true,
+          "isReduceOnly": true,
+          "isStopLoss": true,
+          "isStopLossDirection": true,
+          "marketSymbol": "fixture",
+          "orderType": "fixture",
+          "placedOrder": {
+            "baseQty": "fixture",
+            "eventIndex": 1,
+            "initialSlot": 1,
+            "lastValidSlot": 1,
+            "orderFlags": 1,
+            "orderSequenceNumber": 1,
+            "price": "fixture",
+            "side": "fixture",
+            "transactionTimestamp": "fixture"
+          },
+          "price": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "status": "fixture",
+          "traderId": 1,
+          "traderPdaIndex": 1,
+          "traderSubaccountIndex": 1,
+          "userId": 1
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/traders/fixture/orders_v2?market_symbol=fixture&limit=1&cursor=fixture",
+    "body": null
+  },
+  "get_trade_history": {
+    "request": {
+      "authority": "fixture",
+      "pdaIndex": 1,
+      "marketSymbol": "fixture",
+      "limit": 1,
+      "cursor": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "baseLotsAfter": "fixture",
+          "baseLotsBefore": "fixture",
+          "baseLotsDelta": "fixture",
+          "eventIndex": 1,
+          "fees": "fixture",
+          "fillId": "fixture",
+          "instructionIndex": 1,
+          "instructionType": "fixture",
+          "liquidity": "maker",
+          "marketSymbol": "fixture",
+          "orderSequenceNumber": 1,
+          "price": "fixture",
+          "realizedPnl": "fixture",
+          "signature": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "splineSequenceNumber": 1,
+          "subaccountIndex": 1,
+          "timestamp": "fixture",
+          "tradeType": "limit",
+          "traderId": 1,
+          "traderPdaIndex": 1,
+          "userId": 1,
+          "virtualQuoteLotsAfter": "fixture",
+          "virtualQuoteLotsBefore": "fixture",
+          "virtualQuoteLotsDelta": "fixture"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/trader/fixture/trades-history?pdaIndex=1&marketSymbol=fixture&limit=1&cursor=fixture",
+    "body": null
+  },
+  "get_user_trade_history_v2": {
+    "request": {
+      "market_symbol": "fixture",
+      "trader_pda_index": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "privy_id": "fixture",
+      "user_pubkey": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "baseLotsAfter": "fixture",
+          "baseLotsBefore": "fixture",
+          "baseLotsDelta": "fixture",
+          "eventIndex": 1,
+          "fees": "fixture",
+          "fillId": "fixture",
+          "instructionIndex": 1,
+          "instructionType": "fixture",
+          "liquidity": "maker",
+          "marketSymbol": "fixture",
+          "orderSequenceNumber": 1,
+          "price": "fixture",
+          "realizedPnl": "fixture",
+          "signature": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "splineSequenceNumber": 1,
+          "subaccountIndex": 1,
+          "timestamp": "fixture",
+          "tradeType": "limit",
+          "traderId": 1,
+          "traderPdaIndex": 1,
+          "userId": 1,
+          "virtualQuoteLotsAfter": "fixture",
+          "virtualQuoteLotsBefore": "fixture",
+          "virtualQuoteLotsDelta": "fixture"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/users/fixture/trades_v2?market_symbol=fixture&trader_pda_index=1&limit=1&cursor=fixture&privy_id=fixture",
+    "body": null
+  },
+  "get_trader_trade_history_v2": {
+    "request": {
+      "market_symbol": "fixture",
+      "trader_pda_index": 1,
+      "limit": 1,
+      "cursor": "fixture",
+      "privy_id": "fixture",
+      "trader_pubkey": "fixture"
+    },
+    "response": {
+      "data": [
+        {
+          "baseLotsAfter": "fixture",
+          "baseLotsBefore": "fixture",
+          "baseLotsDelta": "fixture",
+          "eventIndex": 1,
+          "fees": "fixture",
+          "fillId": "fixture",
+          "instructionIndex": 1,
+          "instructionType": "fixture",
+          "liquidity": "maker",
+          "marketSymbol": "fixture",
+          "orderSequenceNumber": 1,
+          "price": "fixture",
+          "realizedPnl": "fixture",
+          "signature": "fixture",
+          "slot": 1,
+          "slotIndex": 1,
+          "splineSequenceNumber": 1,
+          "subaccountIndex": 1,
+          "timestamp": "fixture",
+          "tradeType": "limit",
+          "traderId": 1,
+          "traderPdaIndex": 1,
+          "userId": 1,
+          "virtualQuoteLotsAfter": "fixture",
+          "virtualQuoteLotsBefore": "fixture",
+          "virtualQuoteLotsDelta": "fixture"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/traders/fixture/trades_v2?market_symbol=fixture&trader_pda_index=1&limit=1&cursor=fixture&privy_id=fixture",
+    "body": null
+  },
+  "get_market_fills": {
+    "request": {
+      "symbol": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "startTime": 1,
+      "endTime": 1
+    },
+    "response": {
+      "data": [
+        {
+          "baseQty": "fixture",
+          "instructionType": "fixture",
+          "marketSymbol": "fixture",
+          "price": "fixture",
+          "quoteQty": "fixture",
+          "timestamp": "fixture",
+          "transactionSignature": "fixture"
+        }
+      ],
+      "hasMore": true,
+      "nextCursor": "fixture",
+      "prevCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/trades/fixture/fills?limit=1&cursor=fixture&startTime=1&endTime=1",
+    "body": null
+  },
+  "list_trader_notifications": {
+    "request": {
+      "trader_pubkey": "fixture",
+      "limit": 1,
+      "cursor": "fixture",
+      "unackedOnly": true
+    },
+    "response": {
+      "items": [
+        {
+          "acked": true,
+          "createdAt": "fixture",
+          "data": null,
+          "details": {
+            "base_lots_filled": 1,
+            "price": 1,
+            "side": "fixture",
+            "symbol": "fixture",
+            "type": "orderFilled"
+          },
+          "eventIndex": 1,
+          "id": 1,
+          "instructionIndex": 1,
+          "notificationType": "fixture",
+          "recipientIndex": 1,
+          "slot": 1,
+          "slotIndex": 1,
+          "source": "event"
+        }
+      ],
+      "nextCursor": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/traders/fixture/notifications?limit=1&cursor=fixture&unackedOnly=true",
+    "body": null
+  },
+  "acknowledge_notifications_up_to_timestamp": {
+    "request": {
+      "trader_pubkey": "fixture",
+      "body": {
+        "beforeTimestamp": "fixture"
+      }
+    },
+    "response": null,
+    "route": "/v1/traders/fixture/notifications/ack/up-to",
+    "body": {
+      "beforeTimestamp": "fixture"
+    }
+  },
+  "acknowledge_notifications": {
+    "request": {
+      "trader_pubkey": "fixture",
+      "body": {
+        "items": [
+          {
+            "eventIndex": 1,
+            "id": 1,
+            "instructionIndex": 1,
+            "recipientIndex": 1,
+            "slot": 1,
+            "slotIndex": 1,
+            "type": "event"
+          }
+        ]
+      }
+    },
+    "response": null,
+    "route": "/v1/traders/fixture/notifications/ack/notifications",
+    "body": {
+      "items": [
+        {
+          "eventIndex": 1,
+          "id": 1,
+          "instructionIndex": 1,
+          "recipientIndex": 1,
+          "slot": 1,
+          "slotIndex": 1,
+          "type": "event"
+        }
+      ]
+    }
+  },
+  "build_isolated_limit_order_transaction": {
+    "request": {
+      "body": {
+        "allowCrossAndIsolatedForAsset": true,
+        "authority": "fixture",
+        "feePayer": "fixture",
+        "flightBuilderAuthority": "fixture",
+        "flightFeeCollectorTrader": "fixture",
+        "isPostOnly": true,
+        "isReduceOnly": true,
+        "numBaseLots": 1,
+        "pdaIndex": 1,
+        "positionAuthority": "fixture",
+        "price": 1,
+        "priceInTicks": 1,
+        "quantity": 1,
+        "side": "fixture",
+        "skipTransferToParent": true,
+        "slide": true,
+        "symbol": "fixture",
+        "tpSl": {
+          "numBaseLots": 1,
+          "orderKind": "fixture",
+          "quantity": 1,
+          "stopLossExecutionPrice": 1,
+          "stopLossExecutionPriceInTicks": 1,
+          "stopLossTriggerPrice": 1,
+          "stopLossTriggerPriceInTicks": 1,
+          "takeProfitExecutionPrice": 1,
+          "takeProfitExecutionPriceInTicks": 1,
+          "takeProfitTriggerPrice": 1,
+          "takeProfitTriggerPriceInTicks": 1
+        },
+        "transferAmount": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/place-isolated-limit-order",
+    "body": {
+      "allowCrossAndIsolatedForAsset": true,
+      "authority": "fixture",
+      "feePayer": "fixture",
+      "flightBuilderAuthority": "fixture",
+      "flightFeeCollectorTrader": "fixture",
+      "isPostOnly": true,
+      "isReduceOnly": true,
+      "numBaseLots": 1,
+      "pdaIndex": 1,
+      "positionAuthority": "fixture",
+      "price": 1,
+      "priceInTicks": 1,
+      "quantity": 1,
+      "side": "fixture",
+      "skipTransferToParent": true,
+      "slide": true,
+      "symbol": "fixture",
+      "tpSl": {
+        "numBaseLots": 1,
+        "orderKind": "fixture",
+        "quantity": 1,
+        "stopLossExecutionPrice": 1,
+        "stopLossExecutionPriceInTicks": 1,
+        "stopLossTriggerPrice": 1,
+        "stopLossTriggerPriceInTicks": 1,
+        "takeProfitExecutionPrice": 1,
+        "takeProfitExecutionPriceInTicks": 1,
+        "takeProfitTriggerPrice": 1,
+        "takeProfitTriggerPriceInTicks": 1
+      },
+      "transferAmount": 1
+    }
+  },
+  "build_isolated_market_order_transaction": {
+    "request": {
+      "body": {
+        "allowCrossAndIsolatedForAsset": true,
+        "authority": "fixture",
+        "feePayer": "fixture",
+        "flightBuilderAuthority": "fixture",
+        "flightFeeCollectorTrader": "fixture",
+        "isReduceOnly": true,
+        "maxPriceInTicks": 1,
+        "numBaseLots": 1,
+        "pdaIndex": 1,
+        "positionAuthority": "fixture",
+        "quantity": 1,
+        "side": "fixture",
+        "skipTransferToParent": true,
+        "symbol": "fixture",
+        "tpSl": {
+          "numBaseLots": 1,
+          "orderKind": "fixture",
+          "quantity": 1,
+          "stopLossExecutionPrice": 1,
+          "stopLossExecutionPriceInTicks": 1,
+          "stopLossTriggerPrice": 1,
+          "stopLossTriggerPriceInTicks": 1,
+          "takeProfitExecutionPrice": 1,
+          "takeProfitExecutionPriceInTicks": 1,
+          "takeProfitTriggerPrice": 1,
+          "takeProfitTriggerPriceInTicks": 1
+        },
+        "transferAmount": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/place-isolated-market-order",
+    "body": {
+      "allowCrossAndIsolatedForAsset": true,
+      "authority": "fixture",
+      "feePayer": "fixture",
+      "flightBuilderAuthority": "fixture",
+      "flightFeeCollectorTrader": "fixture",
+      "isReduceOnly": true,
+      "maxPriceInTicks": 1,
+      "numBaseLots": 1,
+      "pdaIndex": 1,
+      "positionAuthority": "fixture",
+      "quantity": 1,
+      "side": "fixture",
+      "skipTransferToParent": true,
+      "symbol": "fixture",
+      "tpSl": {
+        "numBaseLots": 1,
+        "orderKind": "fixture",
+        "quantity": 1,
+        "stopLossExecutionPrice": 1,
+        "stopLossExecutionPriceInTicks": 1,
+        "stopLossTriggerPrice": 1,
+        "stopLossTriggerPriceInTicks": 1,
+        "takeProfitExecutionPrice": 1,
+        "takeProfitExecutionPriceInTicks": 1,
+        "takeProfitTriggerPrice": 1,
+        "takeProfitTriggerPriceInTicks": 1
+      },
+      "transferAmount": 1
+    }
+  },
+  "build_cancel_conditional_order_transaction": {
+    "request": {
+      "body": {
+        "authority": "fixture",
+        "conditionalOrderIndex": 1,
+        "executionDirection": "fixture",
+        "isIsolated": true,
+        "positionAuthority": "fixture",
+        "symbol": "fixture",
+        "traderPdaIndex": 1,
+        "traderSubaccountIndex": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/cancel-conditional-order",
+    "body": {
+      "authority": "fixture",
+      "conditionalOrderIndex": 1,
+      "executionDirection": "fixture",
+      "isIsolated": true,
+      "positionAuthority": "fixture",
+      "symbol": "fixture",
+      "traderPdaIndex": 1,
+      "traderSubaccountIndex": 1
+    }
+  },
+  "build_stop_loss_order_transaction": {
+    "request": {
+      "body": {
+        "numBaseLots": 1,
+        "orderKind": "fixture",
+        "quantity": 1,
+        "stopLossExecutionPrice": 1,
+        "stopLossExecutionPriceInTicks": 1,
+        "stopLossTriggerPrice": 1,
+        "stopLossTriggerPriceInTicks": 1,
+        "takeProfitExecutionPrice": 1,
+        "takeProfitExecutionPriceInTicks": 1,
+        "takeProfitTriggerPrice": 1,
+        "takeProfitTriggerPriceInTicks": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/place-stop-loss-order",
+    "body": {
+      "numBaseLots": 1,
+      "orderKind": "fixture",
+      "quantity": 1,
+      "stopLossExecutionPrice": 1,
+      "stopLossExecutionPriceInTicks": 1,
+      "stopLossTriggerPrice": 1,
+      "stopLossTriggerPriceInTicks": 1,
+      "takeProfitExecutionPrice": 1,
+      "takeProfitExecutionPriceInTicks": 1,
+      "takeProfitTriggerPrice": 1,
+      "takeProfitTriggerPriceInTicks": 1
+    }
+  },
+  "build_cancel_stop_loss_order_transaction": {
+    "request": {
+      "body": {
+        "authority": "fixture",
+        "executionDirection": "fixture",
+        "isIsolated": true,
+        "positionAuthority": "fixture",
+        "symbol": "fixture",
+        "traderPdaIndex": 1,
+        "traderSubaccountIndex": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/cancel-stop-loss-order",
+    "body": {
+      "authority": "fixture",
+      "executionDirection": "fixture",
+      "isIsolated": true,
+      "positionAuthority": "fixture",
+      "symbol": "fixture",
+      "traderPdaIndex": 1,
+      "traderSubaccountIndex": 1
+    }
+  },
+  "build_attached_conditional_order_transaction": {
+    "request": {
+      "body": {
+        "authority": "fixture",
+        "feePayer": "fixture",
+        "flightBuilderAuthority": "fixture",
+        "flightFeeCollectorTrader": "fixture",
+        "greaterTrigger": {
+          "executionPrice": 1,
+          "executionPriceInTicks": 1,
+          "orderKind": "fixture",
+          "side": "fixture",
+          "triggerPrice": 1,
+          "triggerPriceInTicks": 1
+        },
+        "isIsolated": true,
+        "lessTrigger": {
+          "executionPrice": 1,
+          "executionPriceInTicks": 1,
+          "orderKind": "fixture",
+          "side": "fixture",
+          "triggerPrice": 1,
+          "triggerPriceInTicks": 1
+        },
+        "orderPriceInTicks": 1,
+        "orderSequenceNumber": "fixture",
+        "positionAuthority": "fixture",
+        "symbol": "fixture",
+        "traderPdaIndex": 1,
+        "traderSubaccountIndex": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/place-attached-conditional-order",
+    "body": {
+      "authority": "fixture",
+      "feePayer": "fixture",
+      "flightBuilderAuthority": "fixture",
+      "flightFeeCollectorTrader": "fixture",
+      "greaterTrigger": {
+        "executionPrice": 1,
+        "executionPriceInTicks": 1,
+        "orderKind": "fixture",
+        "side": "fixture",
+        "triggerPrice": 1,
+        "triggerPriceInTicks": 1
+      },
+      "isIsolated": true,
+      "lessTrigger": {
+        "executionPrice": 1,
+        "executionPriceInTicks": 1,
+        "orderKind": "fixture",
+        "side": "fixture",
+        "triggerPrice": 1,
+        "triggerPriceInTicks": 1
+      },
+      "orderPriceInTicks": 1,
+      "orderSequenceNumber": "fixture",
+      "positionAuthority": "fixture",
+      "symbol": "fixture",
+      "traderPdaIndex": 1,
+      "traderSubaccountIndex": 1
+    }
+  },
+  "build_position_conditional_order_transaction": {
+    "request": {
+      "body": {
+        "authority": "fixture",
+        "feePayer": "fixture",
+        "flightBuilderAuthority": "fixture",
+        "flightFeeCollectorTrader": "fixture",
+        "greaterTrigger": {
+          "executionPrice": 1,
+          "executionPriceInTicks": 1,
+          "orderKind": "fixture",
+          "side": "fixture",
+          "triggerPrice": 1,
+          "triggerPriceInTicks": 1
+        },
+        "isIsolated": true,
+        "lessTrigger": {
+          "executionPrice": 1,
+          "executionPriceInTicks": 1,
+          "orderKind": "fixture",
+          "side": "fixture",
+          "triggerPrice": 1,
+          "triggerPriceInTicks": 1
+        },
+        "numBaseLots": 1,
+        "positionAuthority": "fixture",
+        "quantity": 1,
+        "sizePercent": 1,
+        "symbol": "fixture",
+        "traderPdaIndex": 1,
+        "traderSubaccountIndex": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/place-position-conditional-order",
+    "body": {
+      "authority": "fixture",
+      "feePayer": "fixture",
+      "flightBuilderAuthority": "fixture",
+      "flightFeeCollectorTrader": "fixture",
+      "greaterTrigger": {
+        "executionPrice": 1,
+        "executionPriceInTicks": 1,
+        "orderKind": "fixture",
+        "side": "fixture",
+        "triggerPrice": 1,
+        "triggerPriceInTicks": 1
+      },
+      "isIsolated": true,
+      "lessTrigger": {
+        "executionPrice": 1,
+        "executionPriceInTicks": 1,
+        "orderKind": "fixture",
+        "side": "fixture",
+        "triggerPrice": 1,
+        "triggerPriceInTicks": 1
+      },
+      "numBaseLots": 1,
+      "positionAuthority": "fixture",
+      "quantity": 1,
+      "sizePercent": 1,
+      "symbol": "fixture",
+      "traderPdaIndex": 1,
+      "traderSubaccountIndex": 1
+    }
+  },
+  "build_isolated_limit_order_transaction_with_conditionals": {
+    "request": {
+      "body": {
+        "allowCrossAndIsolatedForAsset": true,
+        "authority": "fixture",
+        "feePayer": "fixture",
+        "flightBuilderAuthority": "fixture",
+        "flightFeeCollectorTrader": "fixture",
+        "greaterTrigger": {
+          "executionPrice": 1,
+          "executionPriceInTicks": 1,
+          "orderKind": "fixture",
+          "side": "fixture",
+          "triggerPrice": 1,
+          "triggerPriceInTicks": 1
+        },
+        "isPostOnly": true,
+        "lessTrigger": {
+          "executionPrice": 1,
+          "executionPriceInTicks": 1,
+          "orderKind": "fixture",
+          "side": "fixture",
+          "triggerPrice": 1,
+          "triggerPriceInTicks": 1
+        },
+        "numBaseLots": 1,
+        "pdaIndex": 1,
+        "positionAuthority": "fixture",
+        "price": 1,
+        "priceInTicks": 1,
+        "quantity": 1,
+        "side": "fixture",
+        "skipTransferToParent": true,
+        "slide": true,
+        "symbol": "fixture",
+        "transferAmount": 1
+      }
+    },
+    "response": [
+      {
+        "data": [
+          1
+        ],
+        "keys": [
+          {
+            "isSigner": true,
+            "isWritable": true,
+            "pubkey": "fixture"
+          }
+        ],
+        "programId": "fixture"
+      }
+    ],
+    "route": "/v1/ix/place-isolated-limit-order-with-conditionals",
+    "body": {
+      "allowCrossAndIsolatedForAsset": true,
+      "authority": "fixture",
+      "feePayer": "fixture",
+      "flightBuilderAuthority": "fixture",
+      "flightFeeCollectorTrader": "fixture",
+      "greaterTrigger": {
+        "executionPrice": 1,
+        "executionPriceInTicks": 1,
+        "orderKind": "fixture",
+        "side": "fixture",
+        "triggerPrice": 1,
+        "triggerPriceInTicks": 1
+      },
+      "isPostOnly": true,
+      "lessTrigger": {
+        "executionPrice": 1,
+        "executionPriceInTicks": 1,
+        "orderKind": "fixture",
+        "side": "fixture",
+        "triggerPrice": 1,
+        "triggerPriceInTicks": 1
+      },
+      "numBaseLots": 1,
+      "pdaIndex": 1,
+      "positionAuthority": "fixture",
+      "price": 1,
+      "priceInTicks": 1,
+      "quantity": 1,
+      "side": "fixture",
+      "skipTransferToParent": true,
+      "slide": true,
+      "symbol": "fixture",
+      "transferAmount": 1
+    }
+  },
+  "build_isolated_limit_order_transaction_with_liquidation_estimate": {
+    "request": {
+      "body": {
+        "allowCrossAndIsolatedForAsset": true,
+        "authority": "fixture",
+        "feePayer": "fixture",
+        "flightBuilderAuthority": "fixture",
+        "flightFeeCollectorTrader": "fixture",
+        "isPostOnly": true,
+        "isReduceOnly": true,
+        "numBaseLots": 1,
+        "pdaIndex": 1,
+        "positionAuthority": "fixture",
+        "price": 1,
+        "priceInTicks": 1,
+        "quantity": 1,
+        "side": "fixture",
+        "skipTransferToParent": true,
+        "slide": true,
+        "symbol": "fixture",
+        "tpSl": {
+          "numBaseLots": 1,
+          "orderKind": "fixture",
+          "quantity": 1,
+          "stopLossExecutionPrice": 1,
+          "stopLossExecutionPriceInTicks": 1,
+          "stopLossTriggerPrice": 1,
+          "stopLossTriggerPriceInTicks": 1,
+          "takeProfitExecutionPrice": 1,
+          "takeProfitExecutionPriceInTicks": 1,
+          "takeProfitTriggerPrice": 1,
+          "takeProfitTriggerPriceInTicks": 1
+        },
+        "transferAmount": 1
+      }
+    },
+    "response": {
+      "estimatedLiquidationPriceUsd": 1,
+      "instructions": [
+        {
+          "data": [
+            1
+          ],
+          "keys": [
+            {
+              "isSigner": true,
+              "isWritable": true,
+              "pubkey": "fixture"
+            }
+          ],
+          "programId": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/ix/place-isolated-limit-order-enhanced",
+    "body": {
+      "allowCrossAndIsolatedForAsset": true,
+      "authority": "fixture",
+      "feePayer": "fixture",
+      "flightBuilderAuthority": "fixture",
+      "flightFeeCollectorTrader": "fixture",
+      "isPostOnly": true,
+      "isReduceOnly": true,
+      "numBaseLots": 1,
+      "pdaIndex": 1,
+      "positionAuthority": "fixture",
+      "price": 1,
+      "priceInTicks": 1,
+      "quantity": 1,
+      "side": "fixture",
+      "skipTransferToParent": true,
+      "slide": true,
+      "symbol": "fixture",
+      "tpSl": {
+        "numBaseLots": 1,
+        "orderKind": "fixture",
+        "quantity": 1,
+        "stopLossExecutionPrice": 1,
+        "stopLossExecutionPriceInTicks": 1,
+        "stopLossTriggerPrice": 1,
+        "stopLossTriggerPriceInTicks": 1,
+        "takeProfitExecutionPrice": 1,
+        "takeProfitExecutionPriceInTicks": 1,
+        "takeProfitTriggerPrice": 1,
+        "takeProfitTriggerPriceInTicks": 1
+      },
+      "transferAmount": 1
+    }
+  },
+  "build_isolated_market_order_transaction_with_liquidation_estimate": {
+    "request": {
+      "body": {
+        "allowCrossAndIsolatedForAsset": true,
+        "authority": "fixture",
+        "feePayer": "fixture",
+        "flightBuilderAuthority": "fixture",
+        "flightFeeCollectorTrader": "fixture",
+        "isReduceOnly": true,
+        "maxPriceInTicks": 1,
+        "numBaseLots": 1,
+        "pdaIndex": 1,
+        "positionAuthority": "fixture",
+        "quantity": 1,
+        "side": "fixture",
+        "skipTransferToParent": true,
+        "symbol": "fixture",
+        "tpSl": {
+          "numBaseLots": 1,
+          "orderKind": "fixture",
+          "quantity": 1,
+          "stopLossExecutionPrice": 1,
+          "stopLossExecutionPriceInTicks": 1,
+          "stopLossTriggerPrice": 1,
+          "stopLossTriggerPriceInTicks": 1,
+          "takeProfitExecutionPrice": 1,
+          "takeProfitExecutionPriceInTicks": 1,
+          "takeProfitTriggerPrice": 1,
+          "takeProfitTriggerPriceInTicks": 1
+        },
+        "transferAmount": 1
+      }
+    },
+    "response": {
+      "estimatedLiquidationPriceUsd": 1,
+      "instructions": [
+        {
+          "data": [
+            1
+          ],
+          "keys": [
+            {
+              "isSigner": true,
+              "isWritable": true,
+              "pubkey": "fixture"
+            }
+          ],
+          "programId": "fixture"
+        }
+      ],
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/ix/place-isolated-market-order-enhanced",
+    "body": {
+      "allowCrossAndIsolatedForAsset": true,
+      "authority": "fixture",
+      "feePayer": "fixture",
+      "flightBuilderAuthority": "fixture",
+      "flightFeeCollectorTrader": "fixture",
+      "isReduceOnly": true,
+      "maxPriceInTicks": 1,
+      "numBaseLots": 1,
+      "pdaIndex": 1,
+      "positionAuthority": "fixture",
+      "quantity": 1,
+      "side": "fixture",
+      "skipTransferToParent": true,
+      "symbol": "fixture",
+      "tpSl": {
+        "numBaseLots": 1,
+        "orderKind": "fixture",
+        "quantity": 1,
+        "stopLossExecutionPrice": 1,
+        "stopLossExecutionPriceInTicks": 1,
+        "stopLossTriggerPrice": 1,
+        "stopLossTriggerPriceInTicks": 1,
+        "takeProfitExecutionPrice": 1,
+        "takeProfitExecutionPriceInTicks": 1,
+        "takeProfitTriggerPrice": 1,
+        "takeProfitTriggerPriceInTicks": 1
+      },
+      "transferAmount": 1
+    }
+  },
+  "validate_invite": {
+    "request": {
+      "body": {
+        "code": "fixture",
+        "transaction_signature": "fixture",
+        "wallet_address": "fixture"
+      }
+    },
+    "response": {
+      "message": "fixture",
+      "success": true,
+      "whitelisted": true,
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/invite/validate",
+    "body": {
+      "code": "fixture",
+      "transaction_signature": "fixture",
+      "wallet_address": "fixture"
+    }
+  },
+  "check_wallet_invite_status": {
+    "request": {
+      "wallet": "fixture"
+    },
+    "response": {
+      "invite_code_used": "fixture",
+      "whitelisted": true,
+      "whitelisted_at": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/invite/check/fixture",
+    "body": null
+  },
+  "activate_referral": {
+    "request": {
+      "body": {
+        "authority": "fixture",
+        "referral_code": "fixture"
+      }
+    },
+    "response": {
+      "trader_pda": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/referral/activate",
+    "body": {
+      "authority": "fixture",
+      "referral_code": "fixture"
+    }
+  },
+  "get_referral_activation_permission": {
+    "request": {},
+    "response": {
+      "permission_account": "fixture",
+      "risk_authority": "fixture",
+      "trader_onboarder": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/referral/activation-permission",
+    "body": null
+  },
+  "activate_referral_with_user_funded_transaction": {
+    "request": {
+      "body": {
+        "recent_blockhash": "fixture",
+        "referral_code": "fixture",
+        "trader_authority": "fixture",
+        "trader_pda_index": 1,
+        "trader_subaccount_index": 1,
+        "transaction": "fixture"
+      }
+    },
+    "response": {
+      "referral_code": "fixture",
+      "signature": "fixture",
+      "status": "activated",
+      "trader_pda": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/referral/activate-tx",
+    "body": {
+      "recent_blockhash": "fixture",
+      "referral_code": "fixture",
+      "trader_authority": "fixture",
+      "trader_pda_index": 1,
+      "trader_subaccount_index": 1,
+      "transaction": "fixture"
+    }
+  },
+  "log_in_with_privy_token": {
+    "request": {
+      "body": {
+        "privy_token": "fixture",
+        "wallet_proof": {
+          "nonce_id": "fixture",
+          "signed_transaction": "fixture"
+        },
+        "wallet_pubkey": "fixture"
+      }
+    },
+    "response": {
+      "access_token": "fixture",
+      "expires_in": 1,
+      "pop_key": "fixture",
+      "refresh_expires_in": 1,
+      "refresh_token": "fixture",
+      "token_type": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/login/privy",
+    "body": {
+      "privy_token": "fixture",
+      "wallet_proof": {
+        "nonce_id": "fixture",
+        "signed_transaction": "fixture"
+      },
+      "wallet_pubkey": "fixture"
+    }
+  },
+  "create_wallet_transaction_challenge": {
+    "request": {
+      "body": {
+        "wallet_pubkey": "fixture"
+      }
+    },
+    "response": {
+      "expires_at": "fixture",
+      "nonce_id": "fixture",
+      "unsigned_transaction": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/wallet/transaction-challenge",
+    "body": {
+      "wallet_pubkey": "fixture"
+    }
+  },
+  "log_in_with_signed_wallet_transaction": {
+    "request": {
+      "body": {
+        "nonce_id": "fixture",
+        "signed_transaction": "fixture",
+        "wallet_pubkey": "fixture"
+      }
+    },
+    "response": {
+      "access_token": "fixture",
+      "expires_in": 1,
+      "pop_key": "fixture",
+      "refresh_expires_in": 1,
+      "refresh_token": "fixture",
+      "token_type": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/login/wallet/transaction",
+    "body": {
+      "nonce_id": "fixture",
+      "signed_transaction": "fixture",
+      "wallet_pubkey": "fixture"
+    }
+  },
+  "create_service_login_challenge": {
+    "request": {
+      "body": {
+        "client_id": "fixture",
+        "key_id": "fixture"
+      }
+    },
+    "response": {
+      "expires_at": "fixture",
+      "key_id": "fixture",
+      "message": "fixture",
+      "nonce": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/login/service/challenge",
+    "body": {
+      "client_id": "fixture",
+      "key_id": "fixture"
+    }
+  },
+  "log_in_with_service_signature": {
+    "request": {
+      "body": {
+        "client_id": "fixture",
+        "key_id": "fixture",
+        "nonce": "fixture",
+        "signature": "fixture",
+        "timestamp": "fixture"
+      }
+    },
+    "response": {
+      "access_token": "fixture",
+      "expires_in": 1,
+      "pop_key": "fixture",
+      "refresh_expires_in": 1,
+      "refresh_token": "fixture",
+      "token_type": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/login/service",
+    "body": {
+      "client_id": "fixture",
+      "key_id": "fixture",
+      "nonce": "fixture",
+      "signature": "fixture",
+      "timestamp": "fixture"
+    }
+  },
+  "get_wallet_login_nonce": {
+    "request": {
+      "wallet_pubkey": "fixture"
+    },
+    "response": {
+      "expires_at": "fixture",
+      "message": "fixture",
+      "nonce_id": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/nonce?wallet_pubkey=fixture",
+    "body": null
+  },
+  "log_in_with_wallet_signature": {
+    "request": {
+      "body": {
+        "nonce_id": "fixture",
+        "signature": "fixture",
+        "wallet_pubkey": "fixture"
+      }
+    },
+    "response": {
+      "access_token": "fixture",
+      "expires_in": 1,
+      "pop_key": "fixture",
+      "refresh_expires_in": 1,
+      "refresh_token": "fixture",
+      "token_type": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/login/wallet",
+    "body": {
+      "nonce_id": "fixture",
+      "signature": "fixture",
+      "wallet_pubkey": "fixture"
+    }
+  },
+  "refresh_session": {
+    "request": {
+      "body": {
+        "refresh_token": "fixture"
+      }
+    },
+    "response": {
+      "access_token": "fixture",
+      "expires_in": 1,
+      "pop_key": "fixture",
+      "refresh_expires_in": 1,
+      "refresh_token": "fixture",
+      "token_type": "fixture",
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/refresh",
+    "body": {
+      "refresh_token": "fixture"
+    }
+  },
+  "log_out": {
+    "request": {},
+    "response": null,
+    "route": "/v1/auth/logout",
+    "body": null
+  },
+  "get_jwks": {
+    "request": {},
+    "response": {
+      "keys": [
+        null
+      ],
+      "future_field": {
+        "exact": "0.12345678901234567890123456789"
+      }
+    },
+    "route": "/v1/auth/jwks",
+    "body": null
+  }
+}

@@ -8,6 +8,8 @@ pub enum ClientError {
     Metric(NativeError<aux_rs::metric::Error>),
     Derive(NativeError<aux_rs::derive::Error>),
     Paradex(NativeError<aux_rs::paradex::Error>),
+    Extended(NativeError<aux_rs::extended::Error>),
+    Phoenix(NativeError<aux_rs::phoenix::Error>),
     Monaco(NativeError<aux_rs::monaco::Error>),
     Qfex(NativeError<aux_rs::qfex::Error>),
     Arcus(NativeError<aux_rs::arcus::Error>),
@@ -31,6 +33,8 @@ impl ClientError {
             | Self::Metric(NativeError::Transport(e))
             | Self::Hyperliquid(NativeError::Transport(e))
             | Self::Derive(NativeError::Transport(e))
+            | Self::Phoenix(NativeError::Transport(e))
+            | Self::Extended(NativeError::Transport(e))
             | Self::Paradex(NativeError::Transport(e))
             | Self::Lighter(NativeError::Transport(e))
             | Self::Qfex(NativeError::Transport(e))
@@ -155,6 +159,8 @@ pub fn map_error(error: &ClientError) -> PyErr {
         | ClientError::Metric(NativeError::Transport(e))
         | ClientError::Hyperliquid(NativeError::Transport(e))
         | ClientError::Derive(NativeError::Transport(e))
+        | ClientError::Phoenix(NativeError::Transport(e))
+        | ClientError::Extended(NativeError::Transport(e))
         | ClientError::Paradex(NativeError::Transport(e))
         | ClientError::Lighter(NativeError::Transport(e))
         | ClientError::Qfex(NativeError::Transport(e))
@@ -168,6 +174,22 @@ pub fn map_error(error: &ClientError) -> PyErr {
             aux_rs::derive::Error::Authentication(s)=>AuthenticationError::new_err(*s),
             aux_rs::derive::Error::PendingOutcome=>OutcomeUncertainError::new_err("Derive command outcome is unresolved; reconcile before another command"),
             aux_rs::derive::Error::Api{status,body}=>native_body("Derive",*status,body),
+        },
+        ClientError::Phoenix(NativeError::Exchange(e)) => match e {
+            aux_rs::phoenix::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
+            aux_rs::phoenix::Error::Decode(_)=>DecodeError::new_err("Phoenix decoding failed"),
+            aux_rs::phoenix::Error::Signing(_)=>SigningError::new_err("Phoenix signing failed"),
+            aux_rs::phoenix::Error::Authentication(s)=>AuthenticationError::new_err(*s),
+            aux_rs::phoenix::Error::PendingOutcome=>OutcomeUncertainError::new_err("Phoenix command outcome is unresolved; reconcile before another command"),
+            aux_rs::phoenix::Error::Api{status,body}=>native_body("Phoenix",*status,body),
+        },
+        ClientError::Extended(NativeError::Exchange(e)) => match e {
+            aux_rs::extended::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
+            aux_rs::extended::Error::Decode(_)=>DecodeError::new_err("Extended decoding failed"),
+            aux_rs::extended::Error::Signing(_)=>SigningError::new_err("Extended signing failed"),
+            aux_rs::extended::Error::Authentication(s)=>AuthenticationError::new_err(*s),
+            aux_rs::extended::Error::PendingOutcome=>OutcomeUncertainError::new_err("Extended command outcome is unresolved; reconcile before another command"),
+            aux_rs::extended::Error::Api{status,body}=>native_body("Extended",*status,body),
         },
         ClientError::Paradex(NativeError::Exchange(e)) => match e {
             aux_rs::paradex::Error::InvalidRequest(s)=>ValidationError::new_err(*s),
@@ -482,4 +504,12 @@ pub fn polymarket(error: NativeError<aux_rs::polymarket::Error>) -> PyErr {
 
 pub fn pascal(error: NativeError<aux_rs::pascal::Error>) -> PyErr {
     map_error(&ClientError::Pascal(error))
+}
+
+pub fn phoenix(error: NativeError<aux_rs::phoenix::Error>) -> PyErr {
+    map_error(&ClientError::Phoenix(error))
+}
+
+pub fn extended(error: NativeError<aux_rs::extended::Error>) -> PyErr {
+    map_error(&ClientError::Extended(error))
 }

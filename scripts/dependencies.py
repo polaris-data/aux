@@ -45,7 +45,7 @@ PROFILES = [
 ]
 
 
-for venue in ("derive", "paradex", "metric", "polymarket", "kalshi", "pascal"):
+for venue in ("phoenix", "extended", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal"):
     for stack in ("", ",http", ",ws", ",http,ws"):
         PROFILES.append((f"{venue.title()} with {stack or 'custom transports'}", "aux-rs", venue + stack))
 for stack in ("", ",http,ws"):
@@ -65,6 +65,10 @@ for features in ("tardis,databento", "tardis,databento,http,ws", "metric,tardis,
 for stack in ("", ",http,ws"):
     PROFILES.append(("All eleven exchanges"+stack,"aux-rs","hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,polymarket,kalshi,pascal"+stack))
 
+
+for stack in ("", ",http,ws"):
+    PROFILES.append(("Phoenix and Extended"+stack,"aux-rs","phoenix,extended"+stack))
+    PROFILES.append(("All thirteen exchanges"+stack,"aux-rs","hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,polymarket,kalshi,pascal,phoenix,extended"+stack))
 
 def inventory(package, features, target):
     command = [
@@ -97,36 +101,38 @@ def check(target):
                 raise SystemExit(f"Standard network stack leaked into base profile: {name}")
             if not data_selected and "tokio" in names:
                 raise SystemExit(f"Tokio leaked into core profile: {name}")
-        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal", "tardis", "databento"}
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal", "tardis", "databento", "phoenix", "extended"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
                 if f"aux-rs-{exchange}" in names:
                     raise SystemExit(f"Unselected {exchange} adapter leaked into profile: {name}")
             # Primitives may be owned by several selected adapters.
             owners = {
-                "k256": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket"},
-                "sha3": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket"},
+                "k256": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
+                "sha3": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
                 "rmp-serde": {"hyperliquid"},
                 "rmp": {"hyperliquid", "polymarket"},
-                "starknet-core": {"paradex"},
-                "starknet-crypto": {"paradex"},
-                "starknet-types-core": {"paradex"},
-                "hmac": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket"},
+                "starknet-core": {"paradex", "extended"},
+                "starknet-crypto": {"paradex", "extended"},
+                "starknet-types-core": {"paradex", "extended"},
+                "hmac": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
                 "rsa": {"kalshi"},
-                "solana-pubkey": {"pascal"},
+                "solana-pubkey": {"pascal", "phoenix"},
                 "aux-rs-evm": {"metric", "polymarket"},
                 "goldilocks-crypto": {"lighter"},
                 "poseidon-hash": {"lighter"},
-                "ed25519-dalek": {"arcus", "monaco", "kalshi", "pascal"},
-                "curve25519-dalek": {"arcus", "monaco", "kalshi", "pascal"},
+                "ed25519-dalek": {"arcus", "monaco", "kalshi", "pascal", "phoenix"},
+                "curve25519-dalek": {"arcus", "monaco", "kalshi", "pascal", "phoenix"},
             }
             for primitive, venues in owners.items():
                 if not selected & venues and primitive in names:
                     raise SystemExit(f"Unselected signing primitive {primitive} leaked into profile: {name}")
             if "databento" not in selected and names & {"dbn", "dbn-macros"}:
                 raise SystemExit(f"Unselected DBN codec leaked into profile: {name}")
-            if not selected & {"tardis", "databento"} and names & {"aux-rs-data", "async-compression", "compression-codecs", "zstd"}:
+            if not selected & {"tardis", "databento"} and names & {"aux-rs-data", "async-compression", "compression-codecs"}:
                 raise SystemExit(f"Unselected data support leaked into profile: {name}")
+            if not selected & {"phoenix", "tardis", "databento"} and "zstd" in names:
+                raise SystemExit(f"Unselected snapshot decompressor leaked into profile: {name}")
             if "http" not in selected and "reqwest" in names:
                 raise SystemExit(f"HTTP leaked into profile: {name}")
             if "ws" not in selected and "tokio-tungstenite" in names:

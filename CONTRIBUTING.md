@@ -374,12 +374,47 @@ additional venues is undecided.
 - [ ] EdgeX
 - [x] Arcus
 - [ ] Ondo Perps
-- [ ] Extended
+- [x] Extended
 - [ ] Pacifica
 - [ ] Bulk
 - [x] Paradex
 - [x] Monaco
 - [x] Derive v3
+- [x] Phoenix perpetuals
 - [ ] Metric (native core and four workflow helper groups implemented; full SDK export audit pending)
 
 Polymarket, Kalshi and Pascal use separate product/service namespaces and exact native mappings. Run `scripts/check-prediction-coverage.py` for pinned REST/event/contract and Rust/Python parity checks; pass `--reference-root PATH` for read-only regeneration against externally pinned normalized schemas. `API_SOURCES.json` records raw hashes and normalized inputs; schemas are generation inputs, never runtime SDKs or CI downloads. Handwritten authentication, command correlation and chain state require independent signing/transaction vectors and local peers. Kalshi custom WebSocket transports must support asynchronous handshake headers on every connection attempt. Metric and Polymarket share the venue-independent `crates/chain/evm` transaction layer; keep venue ABIs and workflows in their adapters.
+
+### Phoenix and Extended references
+
+Phoenix and Extended expose named native operations through Rust, Python, and
+Node. Their `coverage.json` files also inventory streams, signing helpers and
+Phoenix instruction builders. `scripts/check-perpetual-coverage.py` checks the
+committed operation/fixture/binding parity without downloading schemas.
+
+To regenerate their REST models, prepare external inputs under a reference root:
+`phoenix/openapi.json` is the pinned Phoenix schema; `extended/upstream/` is the
+pinned official SDK checkout and `extended/docs.html` is the pinned API reference.
+The SDK commits and source hashes are recorded in each `API_SOURCES.json`.
+
+```sh
+python scripts/prepare-perpetual-references.py --reference-root /path/to/references
+python scripts/generate-perpetual-apis.py --reference-root /path/to/references
+python scripts/generate-phoenix-instructions.py
+python scripts/update-perpetual-bindings.py
+python scripts/generate-node-bindings.py --models
+```
+
+The reference preparation tool uses development-only PyYAML and Beautiful Soup.
+The generated SDK does not depend on them. Updating upstream inputs requires an
+explicit source-pin review; ordinary builds and tests use checked-in output.
+Use `--check` on the API generator to verify regeneration against pinned inputs.
+Native instruction encoding, signing and transport lifecycle remain Rust code.
+The Phoenix instruction adaptation and Extended crypto layouts include their
+upstream license notices beside the adapters.
+
+Phoenix's local transaction compiler uses focused Solana message primitives,
+Borsh for native instruction bytes, Ed25519 for signing and bounded zstd for
+compressed exchange snapshots. Extended reuses Starknet and EVM cryptographic
+primitives, and uses arbitrary-precision integer arithmetic for exact native
+settlement amounts. Neither adapter imports an upstream exchange SDK at runtime.

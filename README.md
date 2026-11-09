@@ -29,6 +29,8 @@ remain distinguishable from transport failures.
 | --- | --- | --- |
 | `http` | Yes | Built-in HTTP transport using Reqwest |
 | `ws` | Yes | Built-in WebSocket transport using Tokio Tungstenite |
+| `phoenix` | No | [Native Phoenix perpetuals APIs, Solana instructions and signing](crates/exchanges/phoenix/README.md) |
+| `extended` | No | [Native Extended APIs, streams and Stark signing](crates/exchanges/extended/README.md) |
 | `hyperliquid` | No | [Native Hyperliquid client and signing](crates/exchanges/hyperliquid/README.md) |
 | `lighter` | No | [Native Lighter client and signing](crates/exchanges/lighter/README.md) |
 | `qfex` | No | [Native QFEX client and HMAC authentication](crates/exchanges/qfex/README.md) |
