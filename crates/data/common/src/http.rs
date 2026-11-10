@@ -10,6 +10,7 @@ pub struct HttpClient<T> {
     pub transport: T,
     base: Url,
     auth: Option<Arc<Zeroizing<String>>>,
+    auth_header: &'static str,
     secrets: Vec<Arc<Zeroizing<String>>>,
 }
 impl<T> std::fmt::Debug for HttpClient<T> {
@@ -26,10 +27,12 @@ impl<T> HttpClient<T> {
             base,
             transport,
             auth: None,
+            auth_header: "authorization",
             secrets: Vec::new(),
         })
     }
     pub fn with_auth(mut self, authorization: String, secret: String) -> Self {
+        self.auth_header = "authorization";
         self.secrets
             .push(Arc::new(Zeroizing::new(authorization.clone())));
         if let Some((_, credential)) = authorization.split_once(' ') {
@@ -38,6 +41,14 @@ impl<T> HttpClient<T> {
         }
         self.auth = Some(Arc::new(Zeroizing::new(authorization)));
         self.secrets.push(Arc::new(Zeroizing::new(secret)));
+        self
+    }
+    /// Authenticate with a vendor-specific header, retaining redirect/redaction policy.
+    pub fn with_header_auth(mut self, name: &'static str, credential: String) -> Self {
+        self.auth_header = name;
+        self.secrets
+            .push(Arc::new(Zeroizing::new(credential.clone())));
+        self.auth = Some(Arc::new(Zeroizing::new(credential)));
         self
     }
     pub fn url(&self, path: &str) -> Result<Url> {
@@ -78,7 +89,7 @@ impl<T> HttpClient<T> {
             ));
         }
         if let Some(auth) = &self.auth {
-            headers.push(("authorization".into(), auth.as_str().to_owned()));
+            headers.push((self.auth_header.into(), auth.as_str().to_owned()));
         }
         Ok(HttpRequest {
             method,
@@ -154,27 +165,36 @@ impl<T: StreamingHttpTransport> HttpClient<T> {
                 return Err(Error::Decode("insecure redirect"));
             }
             if previous.origin() != next.origin() {
-                request
-                    .headers
-                    .retain(|(name, _)| !name.eq_ignore_ascii_case("authorization"));
+                request.headers.retain(|(name, _)| {
+                    !name.eq_ignore_ascii_case("authorization")
+                        && !name.eq_ignore_ascii_case(self.auth_header)
+                });
             }
             request.url = next.into();
         }
         unreachable!()
     }
     pub async fn open(&self, request: HttpRequest, decode_content: bool) -> Result<DecodedBody> {
+        Ok(self.open_mode(request, decode_content, "").await?.1)
+    }
+    /// Open a bounded body while retaining native response headers such as pagination.
+    pub async fn open_with_headers(
+        &self,
+        request: HttpRequest,
+        decode_content: bool,
+    ) -> Result<(Vec<(String, String)>, DecodedBody)> {
         self.open_mode(request, decode_content, "").await
     }
     /// Decode file-level compression when it is not specified in HTTP headers.
     pub async fn open_encoded(&self, request: HttpRequest, encoding: &str) -> Result<DecodedBody> {
-        self.open_mode(request, true, encoding).await
+        Ok(self.open_mode(request, true, encoding).await?.1)
     }
     async fn open_mode(
         &self,
         request: HttpRequest,
         decode_content: bool,
         fallback: &str,
-    ) -> Result<DecodedBody> {
+    ) -> Result<(Vec<(String, String)>, DecodedBody)> {
         let response = self.send(request).await?;
         let success = (200..300).contains(&response.status);
         let encoding = if !success {
@@ -194,7 +214,7 @@ impl<T: StreamingHttpTransport> HttpClient<T> {
                 body: self.redact(native),
             });
         }
-        Ok(body)
+        Ok((response.headers, body))
     }
     pub async fn json(&self, request: HttpRequest) -> Result<Value> {
         let bytes = self

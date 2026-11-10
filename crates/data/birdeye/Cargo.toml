@@ -1,0 +1,26 @@
+[package]
+name = "aux-rs-birdeye"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+description = "Native Birdeye market data connector"
+
+[features]
+default = []
+http = ["aux-rs-core/http"]
+typescript = ["dep:ts-rs"]
+
+[dependencies]
+aux-rs-core.workspace = true
+aux-rs-data.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+ts-rs = { workspace = true, optional = true }
+
+[dev-dependencies]
+url.workspace = true
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "net", "io-util", "time", "sync"] }
+
+[lints]
+workspace = true

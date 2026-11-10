@@ -622,3 +622,9 @@ class PhoenixChainClient(_ExchangeClient):
     def __getattr__(self, name):
         return getattr(self._inner, name)
 __all__ += ["PhoenixChainClient"]
+
+from ._dune import DuneClient
+__all__ += ["DuneClient"]
+
+from ._birdeye import BirdeyeClient
+__all__ += ["BirdeyeClient"]

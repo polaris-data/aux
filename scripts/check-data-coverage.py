@@ -16,14 +16,14 @@ def require(condition, message):
 
 def main():
     ast.parse((ROOT / 'crates/python/python/aux_py/_native.pyi').read_text())
-    wrappers = ast.parse((ROOT / 'crates/python/python/aux_py/_data.py').read_text())
+    wrappers = ast.parse('\n'.join((ROOT / 'crates/python/python/aux_py' / name).read_text() for name in ('_data.py', '_dune.py', '_birdeye.py')))
     python_methods = {
         node.name: {method.name for method in node.body if isinstance(method, ast.AsyncFunctionDef)}
         for node in wrappers.body if isinstance(node, ast.ClassDef)
     }
-    python_tests = (ROOT / 'crates/python/tests/test_data.py').read_text()
-    native_binding = (ROOT / 'crates/python/src/data.rs').read_text()
-    for vendor in ('tardis', 'databento'):
+    python_tests = '\n'.join((ROOT / 'crates/python/tests' / name).read_text() for name in ('test_data.py', 'test_dune.py', 'test_birdeye.py'))
+    native_binding = '\n'.join((ROOT / path).read_text() for path in ('crates/python/src/data.rs', 'crates/python/src/dune/operations.rs', 'crates/python/src/birdeye/operations.rs'))
+    for vendor in ('tardis', 'databento', 'dune', 'birdeye'):
         base = ROOT / 'crates/data' / vendor
         inventory = json.loads((base / 'coverage.json').read_text())
         pins = json.loads((base / 'API_SOURCES.json').read_text())
@@ -47,6 +47,15 @@ def main():
             path, name = row['test'].split('#')
             require(re.search(r'fn\s+' + name + r'\(', (base / path).read_text()), f'{vendor}: missing Rust test {name}')
             require('async def ' + row['python_test'] + '(' in python_tests, f'{vendor}: missing Python test {row["python_test"]}')
+        if vendor in ('dune', 'birdeye'):
+            node_api = json.loads((ROOT / 'crates/node/src/api.json').read_text())
+            node_methods = {m['name'] for m in node_api['classes'][vendor.title()+'Client']['methods']}
+            node_tests = (ROOT / 'crates/node/tests' / (vendor+'.test.cjs')).read_text()
+            for row in inventory['operations']:
+                require(row['id'] in node_methods, f'Dune: missing Node method {row["id"]}')
+                require(row['node_test'] in node_tests, f'Dune: missing Node test {row["node_test"]}')
+            for relative, digest in pins['input_sha256'].items():
+                require(hashlib.sha256((base / relative).read_bytes()).hexdigest() == digest, f'Dune: input changed: {relative}')
         print(f'{vendor}: {len(inventory["operations"])} operations and {len(inventory["schemas"])} schema/control entries covered')
 
 

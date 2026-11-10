@@ -1,0 +1,121 @@
+[
+  {
+    "operation": "execute_sql",
+    "verb": "POST",
+    "path": "/api/v1/sql/execute",
+    "request_json": "{\"sql\": \"select 1\", \"performance\": \"large\"}",
+    "query": {},
+    "response_body": "{\"execution_id\": \"exec-1\", \"state\": \"QUERY_STATE_PENDING\"}",
+    "response_headers": {}
+  },
+  {
+    "operation": "execute_query",
+    "verb": "POST",
+    "path": "/api/v1/query/123/execute",
+    "request_json": "{\"query_parameters\": {\"address\": \"0x123\", \"amount\": 0.1000000000000000001, \"id\": 9007199254740993}}",
+    "query": {},
+    "response_body": "{\"execution_id\": \"exec-1\", \"state\": \"QUERY_STATE_PENDING\"}",
+    "response_headers": {}
+  },
+  {
+    "operation": "execute_query_pipeline",
+    "verb": "POST",
+    "path": "/api/v1/query/123/pipeline/execute",
+    "request_json": "{\"performance\": \"medium\", \"query_parameters\": {\"address\": \"0x123\"}}",
+    "query": {},
+    "response_body": "{\"pipeline_execution_id\":\"pipeline-1\"}",
+    "response_headers": {}
+  },
+  {
+    "operation": "get_execution_status",
+    "verb": "GET",
+    "path": "/api/v1/execution/exec-1/status",
+    "request_json": null,
+    "query": {},
+    "response_body": "{\"execution_id\":\"exec-1\",\"state\":\"QUERY_STATE_EXECUTING\",\"is_execution_finished\":false,\"queue_position\":1}",
+    "response_headers": {}
+  },
+  {
+    "operation": "get_execution_results",
+    "verb": "GET",
+    "path": "/api/v1/execution/exec-1/results",
+    "request_json": "{\"allow_partial_results\": true, \"columns\": \"id,amount\", \"filters\": \"amount > 0\", \"ignore_max_credits_per_request\": true, \"limit\": 1, \"offset\": 0, \"sort_by\": \"id desc\"}",
+    "query": {
+      "allow_partial_results": true,
+      "columns": "id,amount",
+      "filters": "amount > 0",
+      "ignore_max_credits_per_request": true,
+      "limit": 1,
+      "offset": 0,
+      "sort_by": "id desc"
+    },
+    "response_body": "{\"execution_id\":\"exec-1\",\"state\":\"QUERY_STATE_COMPLETED\",\"query_id\":9007199254740993,\"is_execution_finished\":true,\"submitted_at\":\"2026-11-10T12:00:00.123456789Z\",\"result\":{\"rows\":[{\"id\":9007199254740993,\"amount\":0.1000000000000000001,\"nested\":{\"x\":123456789012345678901234567890}}],\"metadata\":{\"column_names\":[\"id\",\"amount\"],\"column_types\":[\"bigint\",\"decimal\"],\"row_count\":1,\"total_row_count\":2,\"execution_time_millis\":1.25}},\"next_offset\":1,\"next_uri\":\"https://api.dune.com/api/v1/execution/exec-1/results?offset=1\",\"future\":{\"cost\":0.1000000000000000001}}",
+    "response_headers": {}
+  },
+  {
+    "operation": "get_execution_results_csv",
+    "verb": "GET",
+    "path": "/api/v1/execution/exec-1/results/csv",
+    "request_json": "{\"allow_partial_results\": true, \"columns\": \"id,amount\", \"filters\": \"amount > 0\", \"ignore_max_credits_per_request\": true, \"limit\": 1, \"offset\": 0, \"sort_by\": \"id desc\"}",
+    "query": {
+      "allow_partial_results": true,
+      "columns": "id,amount",
+      "filters": "amount > 0",
+      "ignore_max_credits_per_request": true,
+      "limit": 1,
+      "offset": 0,
+      "sort_by": "id desc"
+    },
+    "response_body": "id,amount\r\n9007199254740993,0.1000000000000000001\r\n",
+    "response_headers": {
+      "x-DuNe-NeXt-OfFsEt": "1",
+      "X-Dune-Next-Uri": "https://api.dune.com/api/v1/execution/exec-1/results/csv?offset=1"
+    }
+  },
+  {
+    "operation": "get_latest_query_results",
+    "verb": "GET",
+    "path": "/api/v1/query/123/results",
+    "request_json": "{\"allow_partial_results\": true, \"columns\": \"id,amount\", \"filters\": \"amount > 0\", \"ignore_max_credits_per_request\": true, \"limit\": 1, \"offset\": 0, \"sort_by\": \"id desc\"}",
+    "query": {
+      "allow_partial_results": true,
+      "columns": "id,amount",
+      "filters": "amount > 0",
+      "ignore_max_credits_per_request": true,
+      "limit": 1,
+      "offset": 0,
+      "sort_by": "id desc"
+    },
+    "response_body": "{\"execution_id\":\"exec-1\",\"state\":\"QUERY_STATE_COMPLETED\",\"query_id\":9007199254740993,\"is_execution_finished\":true,\"submitted_at\":\"2026-11-10T12:00:00.123456789Z\",\"result\":{\"rows\":[{\"id\":9007199254740993,\"amount\":0.1000000000000000001,\"nested\":{\"x\":123456789012345678901234567890}}],\"metadata\":{\"column_names\":[\"id\",\"amount\"],\"column_types\":[\"bigint\",\"decimal\"],\"row_count\":1,\"total_row_count\":2,\"execution_time_millis\":1.25}},\"next_offset\":1,\"next_uri\":\"https://api.dune.com/api/v1/execution/exec-1/results?offset=1\",\"future\":{\"cost\":0.1000000000000000001}}",
+    "response_headers": {}
+  },
+  {
+    "operation": "get_latest_query_results_csv",
+    "verb": "GET",
+    "path": "/api/v1/query/123/results/csv",
+    "request_json": "{\"allow_partial_results\": true, \"columns\": \"id,amount\", \"filters\": \"amount > 0\", \"ignore_max_credits_per_request\": true, \"limit\": 1, \"offset\": 0, \"sort_by\": \"id desc\"}",
+    "query": {
+      "allow_partial_results": true,
+      "columns": "id,amount",
+      "filters": "amount > 0",
+      "ignore_max_credits_per_request": true,
+      "limit": 1,
+      "offset": 0,
+      "sort_by": "id desc"
+    },
+    "response_body": "id,amount\r\n9007199254740993,0.1000000000000000001\r\n",
+    "response_headers": {
+      "x-DuNe-NeXt-OfFsEt": "1",
+      "X-Dune-Next-Uri": "https://api.dune.com/api/v1/execution/exec-1/results/csv?offset=1"
+    }
+  },
+  {
+    "operation": "cancel_execution",
+    "verb": "POST",
+    "path": "/api/v1/execution/exec-1/cancel",
+    "request_json": null,
+    "query": {},
+    "response_body": "{\"success\":true}",
+    "response_headers": {}
+  }
+]

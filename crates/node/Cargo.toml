@@ -16,7 +16,7 @@ typescript = ["aux-rs/typescript", "dep:ts-rs"]
 
 [dependencies]
 ts-rs = { workspace = true, optional = true }
-aux-rs = { workspace = true, features = ["extended", "phoenix", "hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "http", "ws"] }
+aux-rs = { workspace = true, features = ["extended", "phoenix", "hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "birdeye", "dune", "http", "ws"] }
 napi = { version = "3", default-features = false, features = ["napi8", "tokio_rt"] }
 napi-derive = "3"
 tokio = { workspace = true, features = ["rt-multi-thread", "sync", "macros"] }
