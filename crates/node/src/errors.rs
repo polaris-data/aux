@@ -98,6 +98,7 @@ impl ClientError {
     }
 }
 error_type!(ExchangeError, ConnectorError);
+error_type!(DataVendorError, ConnectorError);
 error_type!(DecodeError, ConnectorError);
 error_type!(ValidationError, ConnectorError);
 error_type!(ClosedError, ConnectorError);
@@ -427,4 +428,29 @@ pub fn phoenix(error: NativeError<aux_rs::phoenix::Error>) -> NativeBindingError
 
 pub fn extended(error: NativeError<aux_rs::extended::Error>) -> NativeBindingError {
     map_error(&ClientError::Extended(error))
+}
+
+/// Shared data-vendor errors retain native details without exposing credentials.
+pub fn data(error: aux_rs::dune::Error) -> NativeBindingError {
+    use aux_rs::dune::Error;
+    match &error {
+        Error::Transport(e) => transport(e),
+        Error::InvalidRequest(s) => ValidationError::new_err(*s),
+        Error::Decode(s) => DecodeError::new_err(*s),
+        Error::Io(_) => ConnectorError::new_err("data stream I/O failed"),
+        Error::Api { status, body } => context::evaluate(|| -> Result<NativeBindingError> {
+            let mapped = DataVendorError::new_err(error.to_string());
+            mapped.setattr("httpStatus", status)?;
+            mapped.setattr("kind", error.kind())?;
+            mapped.setattr("native", crate::convert::output(body)?)?;
+            Ok(mapped)
+        })
+        .unwrap_or_else(std::convert::identity),
+        Error::Authentication { body } => context::evaluate(|| -> Result<NativeBindingError> {
+            let mapped = AuthenticationError::new_err("data vendor authentication failed");
+            mapped.setattr("native", crate::convert::output(body)?)?;
+            Ok(mapped)
+        })
+        .unwrap_or_else(std::convert::identity),
+    }
 }

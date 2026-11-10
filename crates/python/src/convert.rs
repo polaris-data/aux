@@ -47,9 +47,13 @@ pub fn to_python(py: Python<'_>, value: Value) -> PyResult<Py<PyAny>> {
 /// Strict native JSON input. Floating point and implicit numeric coercion are
 /// rejected before parsing the exchange's typed Rust request.
 pub fn from_python(value: &Bound<'_, PyAny>) -> PyResult<Value> {
-    from_python_at(value, 0)
+    from_python_at(value, 0, false)
 }
-fn from_python_at(value: &Bound<'_, PyAny>, depth: usize) -> PyResult<Value> {
+/// Data request parameters can opt into exact JSON numeric tokens supplied as Decimal.
+pub fn from_python_with_decimal(value: &Bound<'_, PyAny>) -> PyResult<Value> {
+    from_python_at(value, 0, true)
+}
+fn from_python_at(value: &Bound<'_, PyAny>, depth: usize, allow_decimal: bool) -> PyResult<Value> {
     if depth >= 128 {
         return Err(crate::errors::ValidationError::new_err(
             "native request nesting exceeds 128 levels (possibly cyclic input)",
@@ -82,23 +86,37 @@ fn from_python_at(value: &Bound<'_, PyAny>, depth: usize) -> PyResult<Value> {
                 })?
                 .to_str()?
                 .to_owned();
-            result.insert(key, from_python_at(&value, depth + 1)?);
+            result.insert(key, from_python_at(&value, depth + 1, allow_decimal)?);
         }
         return Ok(Value::Object(result));
     }
     if let Ok(list) = value.cast::<PyList>() {
         return list
             .iter()
-            .map(|v| from_python_at(&v, depth + 1))
+            .map(|v| from_python_at(&v, depth + 1, allow_decimal))
             .collect::<PyResult<Vec<_>>>()
             .map(Value::Array);
     }
     if let Ok(tuple) = value.cast::<PyTuple>() {
         return tuple
             .iter()
-            .map(|v| from_python_at(&v, depth + 1))
+            .map(|v| from_python_at(&v, depth + 1, allow_decimal))
             .collect::<PyResult<Vec<_>>>()
             .map(Value::Array);
+    }
+    if allow_decimal {
+        let decimal = value.py().import("decimal")?.getattr("Decimal")?;
+        // Exact built-in type only: never invoke arbitrary user coercion hooks.
+        if value.get_type().is(&decimal) {
+            return value
+                .str()?
+                .to_str()?
+                .parse::<serde_json::Number>()
+                .map(Value::Number)
+                .map_err(|_| {
+                    crate::errors::ValidationError::new_err("Decimal must be a finite JSON number")
+                });
+        }
     }
     Err(crate::errors::ValidationError::new_err(
         "use native dictionaries, sequences, strings, integers, booleans or None; prices and quantities must use exact native strings or scaled integers",

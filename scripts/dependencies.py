@@ -14,6 +14,8 @@ PROFILES = [
     ("Shared data support", "aux-rs-data", ""),
     ("Tardis adapter", "aux-rs-tardis", ""),
     ("Databento adapter", "aux-rs-databento", ""),
+    ("Dune adapter", "aux-rs-dune", ""),
+    ("Birdeye adapter", "aux-rs-birdeye", ""),
     ("Hyperliquid with custom transports", "aux-rs", "hyperliquid"),
     ("Hyperliquid with standard HTTP", "aux-rs", "hyperliquid,http"),
     ("Hyperliquid with standard WebSockets", "aux-rs", "hyperliquid,ws"),
@@ -56,10 +58,10 @@ for stack in ("", ",http,ws"):
     PROFILES.append(("All eight exchanges" + stack, "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric" + stack))
 
 
-for vendor in ("tardis", "databento"):
+for vendor in ("tardis", "databento", "dune", "birdeye"):
     for stack in ("", ",http", ",ws", ",http,ws"):
         PROFILES.append((f"{vendor.title()} with {stack or 'custom transports'}", "aux-rs", vendor + stack))
-for features in ("tardis,databento", "tardis,databento,http,ws", "metric,tardis,databento", "metric,tardis,databento,http,ws", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,tardis,databento,http,ws"):
+for features in ("birdeye,dune", "birdeye,dune,http", "birdeye,dune,tardis,databento,http,ws", "dune,tardis,databento", "dune,tardis,databento,http,ws", "hyperliquid,dune,http,ws", "tardis,databento", "tardis,databento,http,ws", "metric,tardis,databento", "metric,tardis,databento,http,ws", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,tardis,databento,http,ws"):
     PROFILES.append(("Data/exchange integration: " + features, "aux-rs", features))
 
 for stack in ("", ",http,ws"):
@@ -91,17 +93,17 @@ def check(target):
         if "httpdate" in names:
             raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
-        data_selected = package in {"aux-rs-data", "aux-rs-tardis", "aux-rs-databento"} or (
-            package == "aux-rs" and bool(selected & {"tardis", "databento"})
+        data_selected = package in {"aux-rs-data", "aux-rs-tardis", "aux-rs-databento", "aux-rs-dune", "aux-rs-birdeye"} or (
+            package == "aux-rs" and bool(selected & {"tardis", "databento", "dune", "birdeye"})
         )
         if data_selected and "tokio" not in names:
             raise SystemExit(f"Data support is missing Tokio in profile: {name}")
-        if package in {"aux-rs-core", "aux-rs-data", "aux-rs-tardis", "aux-rs-databento"}:
+        if package in {"aux-rs-core", "aux-rs-data", "aux-rs-tardis", "aux-rs-databento", "aux-rs-dune", "aux-rs-birdeye"}:
             if names & {"reqwest", "tokio-tungstenite", "rustls"}:
                 raise SystemExit(f"Standard network stack leaked into base profile: {name}")
             if not data_selected and "tokio" in names:
                 raise SystemExit(f"Tokio leaked into core profile: {name}")
-        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal", "tardis", "databento", "phoenix", "extended"}
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal", "tardis", "databento", "dune", "birdeye", "phoenix", "extended"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
                 if f"aux-rs-{exchange}" in names:
@@ -129,9 +131,9 @@ def check(target):
                     raise SystemExit(f"Unselected signing primitive {primitive} leaked into profile: {name}")
             if "databento" not in selected and names & {"dbn", "dbn-macros"}:
                 raise SystemExit(f"Unselected DBN codec leaked into profile: {name}")
-            if not selected & {"tardis", "databento"} and names & {"aux-rs-data", "async-compression", "compression-codecs"}:
+            if not selected & {"tardis", "databento", "dune", "birdeye"} and names & {"aux-rs-data", "async-compression", "compression-codecs"}:
                 raise SystemExit(f"Unselected data support leaked into profile: {name}")
-            if not selected & {"phoenix", "tardis", "databento"} and "zstd" in names:
+            if not selected & {"phoenix", "tardis", "databento", "dune", "birdeye"} and "zstd" in names:
                 raise SystemExit(f"Unselected snapshot decompressor leaked into profile: {name}")
             if "http" not in selected and "reqwest" in names:
                 raise SystemExit(f"HTTP leaked into profile: {name}")

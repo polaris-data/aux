@@ -611,9 +611,11 @@ name = "aux-rs"
 version = "0.0.0"
 dependencies = [
  "aux-rs-arcus",
+ "aux-rs-birdeye",
  "aux-rs-core",
  "aux-rs-databento",
  "aux-rs-derive",
+ "aux-rs-dune",
  "aux-rs-extended",
  "aux-rs-hyperliquid",
  "aux-rs-kalshi",
@@ -646,6 +648,19 @@ dependencies = [
  "tokio-tungstenite",
  "ts-rs",
  "zeroize",
+]
+
+[[package]]
+name = "aux-rs-birdeye"
+version = "0.0.0"
+dependencies = [
+ "aux-rs-core",
+ "aux-rs-data",
+ "serde",
+ "serde_json",
+ "tokio",
+ "ts-rs",
+ "url",
 ]
 
 [[package]]
@@ -707,6 +722,18 @@ dependencies = [
  "ts-rs",
  "url",
  "zeroize",
+]
+
+[[package]]
+name = "aux-rs-dune"
+version = "0.0.0"
+dependencies = [
+ "aux-rs-core",
+ "aux-rs-data",
+ "serde",
+ "serde_json",
+ "tokio",
+ "ts-rs",
 ]
 
 [[package]]

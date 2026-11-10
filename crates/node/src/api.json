@@ -15882,6 +15882,1045 @@
           "resource": null
         }
       ]
+    },
+    "DuneClient": {
+      "module": "dune",
+      "methods": [
+        {
+          "name": "new",
+          "args": [
+            [
+              "api_key",
+              "String"
+            ],
+            [
+              "api_url",
+              "&str"
+            ],
+            [
+              "timeout_ms",
+              "u64"
+            ]
+          ],
+          "return": "PyResult<Self>",
+          "async": false,
+          "getter": false,
+          "static": false,
+          "constructor": true,
+          "defaults": {
+            "api_url": "\"https://api.dune.com/api/v1\"",
+            "timeout_ms": "10000"
+          },
+          "resource": null
+        },
+        {
+          "name": "closed",
+          "args": [],
+          "return": "bool",
+          "async": false,
+          "getter": true,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "aclose",
+          "args": [],
+          "return": "PyResult<()>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "()"
+        },
+        {
+          "name": "execute_sql",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "execute_query",
+          "args": [
+            [
+              "query_id",
+              "u64"
+            ],
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "execute_query_pipeline",
+          "args": [
+            [
+              "query_id",
+              "u64"
+            ],
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "get_execution_status",
+          "args": [
+            [
+              "execution_id",
+              "String"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "get_execution_results",
+          "args": [
+            [
+              "execution_id",
+              "String"
+            ],
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "get_execution_results_csv",
+          "args": [
+            [
+              "execution_id",
+              "String"
+            ],
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "get_latest_query_results",
+          "args": [
+            [
+              "query_id",
+              "u64"
+            ],
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "get_latest_query_results_csv",
+          "args": [
+            [
+              "query_id",
+              "u64"
+            ],
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "cancel_execution",
+          "args": [
+            [
+              "execution_id",
+              "String"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        }
+      ]
+    },
+    "BirdeyeClient": {
+      "module": "birdeye",
+      "methods": [
+        {
+          "name": "new",
+          "args": [
+            [
+              "api_key",
+              "String"
+            ],
+            [
+              "api_url",
+              "&str"
+            ],
+            [
+              "timeout_ms",
+              "u64"
+            ],
+            [
+              "chain",
+              "String"
+            ]
+          ],
+          "return": "PyResult<Self>",
+          "async": false,
+          "getter": false,
+          "static": false,
+          "constructor": true,
+          "defaults": {
+            "api_url": "\"https://public-api.birdeye.so\"",
+            "timeout_ms": "10000",
+            "chain": "\"solana\""
+          },
+          "resource": null
+        },
+        {
+          "name": "closed",
+          "args": [],
+          "return": "bool",
+          "async": false,
+          "getter": true,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "aclose",
+          "args": [],
+          "return": "PyResult<()>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "()"
+        },
+        {
+          "name": "price",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "multi_price",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "multi_price_post",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_trades",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "pair_trades",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_trades_by_time",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "pair_trades_by_time",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "trades_v3",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "token_trades_v3",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "recent_trades",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "ohlcv",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "ohlcv_pair",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "ohlcv_base_quote",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "ohlcv_v3",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "ohlcv_pair_v3",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "liquidity_ohlc_pair",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "liquidity_ohlc_token",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "liquidity_history_token",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "liquidity_history_pair",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "liquidity_latest_token",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "history_price",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "historical_price_unix",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "price_volume_single",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "price_volume_multi",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "pair_overview",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "pair_overview_multiple",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "price_stats",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "price_stats_multiple",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_trades_by_volume",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_list",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "token_list_v3",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "token_list_scroll",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "token_overview",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_metadata",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_metadata_multiple",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_market_data",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_market_data_multiple",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_trade_data",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_trade_data_multiple",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_new_listing",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null
+        },
+        {
+          "name": "token_markets",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_security",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_mint_burn",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_exit_liquidity",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "token_exit_liquidity_multiple",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "trader_trades_by_time",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        }
+      ]
     }
   },
   "functions": [

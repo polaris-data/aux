@@ -2,6 +2,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+python3 scripts/generate-dune-bindings.py --check
+python3 scripts/generate-birdeye-bindings.py --check
 cargo fmt --all --check
 cargo clippy --locked --workspace --exclude aux-rs-python --exclude aux-rs-node --all-features --all-targets -- -D warnings
 cargo check --locked -p aux-rs-core --no-default-features
@@ -24,13 +26,13 @@ done
 cargo check --locked -p aux-rs --no-default-features --features hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,polymarket,kalshi,pascal,phoenix,extended
 cargo test --locked --workspace --exclude aux-rs-python --exclude aux-rs-node --all-features
 cargo test --locked -p aux-rs-data --no-default-features
-for vendor in tardis databento; do
+for vendor in tardis databento dune birdeye; do
     cargo test --locked -p "aux-rs-$vendor" --no-default-features
     cargo test --locked -p aux-rs --no-default-features --features "$vendor"
     cargo check --locked -p aux-rs --no-default-features --features "$vendor,http"
     cargo check --locked -p aux-rs --no-default-features --features "$vendor,ws"
 done
-cargo check --locked -p aux-rs --no-default-features --features tardis,databento,http,ws
+cargo check --locked -p aux-rs --no-default-features --features tardis,databento,dune,http,ws
 python3 scripts/check-data-coverage.py
 python3 scripts/check-native-coverage.py
 python3 scripts/check-prediction-coverage.py

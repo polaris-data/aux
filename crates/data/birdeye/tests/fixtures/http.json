@@ -1,0 +1,554 @@
+[
+  {
+    "operation": "price",
+    "verb": "GET",
+    "path": "/defi/price",
+    "request_json": "{\"check_liquidity\":0.1000000000000000001,\"include_liquidity\":true,\"address\":\"TokenA\"}",
+    "query": {
+      "check_liquidity": "0.1000000000000000001",
+      "include_liquidity": "true",
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "multi_price",
+    "verb": "GET",
+    "path": "/defi/multi_price",
+    "request_json": "{\"check_liquidity\":0.1000000000000000001,\"include_liquidity\":true,\"list_address\":\"TokenA,TokenB\"}",
+    "query": {
+      "check_liquidity": "0.1000000000000000001",
+      "include_liquidity": "true",
+      "list_address": "TokenA,TokenB"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "multi_price_post",
+    "verb": "POST",
+    "path": "/defi/multi_price",
+    "request_json": "{\"check_liquidity\":0.1000000000000000001,\"include_liquidity\":true,\"body\":{\"list_address\":\"TokenA,TokenB\"}}",
+    "query": {
+      "check_liquidity": "0.1000000000000000001",
+      "include_liquidity": "true"
+    },
+    "body_json": "{\"list_address\":\"TokenA,TokenB\"}",
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_trades",
+    "verb": "GET",
+    "path": "/defi/txs/token",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "pair_trades",
+    "verb": "GET",
+    "path": "/defi/txs/pair",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_trades_by_time",
+    "verb": "GET",
+    "path": "/defi/txs/token/seek_by_time",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "pair_trades_by_time",
+    "verb": "GET",
+    "path": "/defi/txs/pair/seek_by_time",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "trades_v3",
+    "verb": "GET",
+    "path": "/defi/v3/txs",
+    "request_json": "{\"offset\":0,\"limit\":1}",
+    "query": {
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_trades_v3",
+    "verb": "GET",
+    "path": "/defi/v3/token/txs",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "recent_trades",
+    "verb": "GET",
+    "path": "/defi/v3/txs/recent",
+    "request_json": "{\"offset\":0,\"limit\":1}",
+    "query": {
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "ohlcv",
+    "verb": "GET",
+    "path": "/defi/ohlcv",
+    "request_json": "{\"address\":\"TokenA\",\"type\":\"1m\",\"time_from\":1700000000,\"time_to\":1700000000}",
+    "query": {
+      "address": "TokenA",
+      "type": "1m",
+      "time_from": "1700000000",
+      "time_to": "1700000000"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "ohlcv_pair",
+    "verb": "GET",
+    "path": "/defi/ohlcv/pair",
+    "request_json": "{\"address\":\"TokenA\",\"type\":\"1m\",\"time_from\":1700000000,\"time_to\":1700000000}",
+    "query": {
+      "address": "TokenA",
+      "type": "1m",
+      "time_from": "1700000000",
+      "time_to": "1700000000"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "ohlcv_base_quote",
+    "verb": "GET",
+    "path": "/defi/ohlcv/base_quote",
+    "request_json": "{\"base_address\":\"TokenA\",\"quote_address\":\"TokenA\",\"type\":\"1m\",\"time_from\":1700000000,\"time_to\":1700000000}",
+    "query": {
+      "base_address": "TokenA",
+      "quote_address": "TokenA",
+      "type": "1m",
+      "time_from": "1700000000",
+      "time_to": "1700000000"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "ohlcv_v3",
+    "verb": "GET",
+    "path": "/defi/v3/ohlcv",
+    "request_json": "{\"address\":\"TokenA\",\"type\":\"1s\",\"time_from\":1700000000,\"time_to\":1700000000}",
+    "query": {
+      "address": "TokenA",
+      "type": "1s",
+      "time_from": "1700000000",
+      "time_to": "1700000000"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "ohlcv_pair_v3",
+    "verb": "GET",
+    "path": "/defi/v3/ohlcv/pair",
+    "request_json": "{\"address\":\"TokenA\",\"type\":\"1s\",\"time_from\":1700000000,\"time_to\":1700000000}",
+    "query": {
+      "address": "TokenA",
+      "type": "1s",
+      "time_from": "1700000000",
+      "time_to": "1700000000"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "liquidity_ohlc_pair",
+    "verb": "GET",
+    "path": "/defi/v3/liquidity/ohlc/pair",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "liquidity_ohlc_token",
+    "verb": "GET",
+    "path": "/defi/v3/liquidity/ohlc/token",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "liquidity_history_token",
+    "verb": "GET",
+    "path": "/defi/v3/liquidity/history/token",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "liquidity_history_pair",
+    "verb": "GET",
+    "path": "/defi/v3/liquidity/history/pair",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "liquidity_latest_token",
+    "verb": "POST",
+    "path": "/defi/v3/liquidity/latest/token",
+    "request_json": "{\"body\":{\"addresses\":[\"TokenA\",\"TokenB\"]}}",
+    "query": {},
+    "body_json": "{\"addresses\":[\"TokenA\",\"TokenB\"]}",
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "history_price",
+    "verb": "GET",
+    "path": "/defi/history_price",
+    "request_json": "{\"address\":\"TokenA\",\"address_type\":\"token\",\"type\":\"1m\",\"time_from\":1700000000,\"time_to\":1700000000}",
+    "query": {
+      "address": "TokenA",
+      "address_type": "token",
+      "type": "1m",
+      "time_from": "1700000000",
+      "time_to": "1700000000"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "historical_price_unix",
+    "verb": "GET",
+    "path": "/defi/historical_price_unix",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "price_volume_single",
+    "verb": "GET",
+    "path": "/defi/price_volume/single",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "price_volume_multi",
+    "verb": "POST",
+    "path": "/defi/price_volume/multi",
+    "request_json": "{\"body\":{\"list_address\":\"TokenA,TokenB\",\"type\":\"1h\"}}",
+    "query": {},
+    "body_json": "{\"list_address\":\"TokenA,TokenB\",\"type\":\"1h\"}",
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "pair_overview",
+    "verb": "GET",
+    "path": "/defi/v3/pair/overview/single",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "pair_overview_multiple",
+    "verb": "GET",
+    "path": "/defi/v3/pair/overview/multiple",
+    "request_json": "{\"list_address\":\"TokenA,TokenB\"}",
+    "query": {
+      "list_address": "TokenA,TokenB"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "price_stats",
+    "verb": "GET",
+    "path": "/defi/v3/price/stats/single",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "price_stats_multiple",
+    "verb": "POST",
+    "path": "/defi/v3/price/stats/multiple",
+    "request_json": "{\"body\":{\"list_address\":\"TokenA,TokenB\"}}",
+    "query": {},
+    "body_json": "{\"list_address\":\"TokenA,TokenB\"}",
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_trades_by_volume",
+    "verb": "GET",
+    "path": "/defi/v3/token/txs-by-volume",
+    "request_json": "{\"token_address\":\"TokenA\",\"volume_type\":\"usd\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "token_address": "TokenA",
+      "volume_type": "usd",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_list",
+    "verb": "GET",
+    "path": "/defi/tokenlist",
+    "request_json": "{\"offset\":0,\"limit\":1}",
+    "query": {
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_list_v3",
+    "verb": "GET",
+    "path": "/defi/v3/token/list",
+    "request_json": "{\"offset\":0,\"limit\":1}",
+    "query": {
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_list_scroll",
+    "verb": "GET",
+    "path": "/defi/v3/token/list/scroll",
+    "request_json": "{\"limit\":1}",
+    "query": {
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_overview",
+    "verb": "GET",
+    "path": "/defi/token_overview",
+    "request_json": "{\"address\":\"TokenA\",\"frames\":\"1m,1h\"}",
+    "query": {
+      "address": "TokenA",
+      "frames": "1m,1h"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_metadata",
+    "verb": "GET",
+    "path": "/defi/v3/token/meta-data/single",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_metadata_multiple",
+    "verb": "GET",
+    "path": "/defi/v3/token/meta-data/multiple",
+    "request_json": "{\"list_address\":\"TokenA,TokenB\"}",
+    "query": {
+      "list_address": "TokenA,TokenB"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_market_data",
+    "verb": "GET",
+    "path": "/defi/v3/token/market-data",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_market_data_multiple",
+    "verb": "GET",
+    "path": "/defi/v3/token/market-data/multiple",
+    "request_json": "{\"list_address\":\"TokenA,TokenB\"}",
+    "query": {
+      "list_address": "TokenA,TokenB"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_trade_data",
+    "verb": "GET",
+    "path": "/defi/v3/token/trade-data/single",
+    "request_json": "{\"address\":\"TokenA\",\"frames\":\"1m,1h\"}",
+    "query": {
+      "address": "TokenA",
+      "frames": "1m,1h"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_trade_data_multiple",
+    "verb": "GET",
+    "path": "/defi/v3/token/trade-data/multiple",
+    "request_json": "{\"list_address\":\"TokenA,TokenB\",\"frames\":\"1m,1h\"}",
+    "query": {
+      "list_address": "TokenA,TokenB",
+      "frames": "1m,1h"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_new_listing",
+    "verb": "GET",
+    "path": "/defi/v2/tokens/new_listing",
+    "request_json": "{\"limit\":1}",
+    "query": {
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_markets",
+    "verb": "GET",
+    "path": "/defi/v2/markets",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_security",
+    "verb": "GET",
+    "path": "/defi/token_security",
+    "request_json": "{\"include\":[\"holder\",\"market\"],\"address\":\"TokenA\"}",
+    "query": {
+      "include": "holder,market",
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_mint_burn",
+    "verb": "GET",
+    "path": "/defi/v3/token/mint-burn-txs",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_exit_liquidity",
+    "verb": "GET",
+    "path": "/defi/v3/token/exit-liquidity",
+    "request_json": "{\"address\":\"TokenA\"}",
+    "query": {
+      "address": "TokenA"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "token_exit_liquidity_multiple",
+    "verb": "GET",
+    "path": "/defi/v3/token/exit-liquidity/multiple",
+    "request_json": "{\"list_address\":\"TokenA,TokenB\"}",
+    "query": {
+      "list_address": "TokenA,TokenB"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  },
+  {
+    "operation": "trader_trades_by_time",
+    "verb": "GET",
+    "path": "/trader/txs/seek_by_time",
+    "request_json": "{\"address\":\"TokenA\",\"offset\":0,\"limit\":1}",
+    "query": {
+      "address": "TokenA",
+      "offset": "0",
+      "limit": "1"
+    },
+    "body_json": null,
+    "response_body": "{\"success\":true,\"data\":{\"value\":0.1000000000000000001,\"rawAmount\":123456789012345678901234567890,\"items\":[{\"address\":\"TokenA\",\"unixTime\":1700000000,\"c\":0.1000000000000000001}],\"hasNext\":true},\"future\":{\"exact\":0.1000000000000000001}}"
+  }
+]

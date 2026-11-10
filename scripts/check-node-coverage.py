@@ -4,7 +4,7 @@ import json,re
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 api=json.loads((ROOT/'crates/node/src/api.json').read_text())
-for venue,cls in [('hyperliquid','HyperliquidClient'),('lighter','LighterClient'),('qfex','QfexClient'),('arcus','ArcusClient'),('monaco','MonacoClient'),('derive','DeriveClient'),('paradex','ParadexClient'),('metric','MetricClient'),('phoenix','PhoenixClient'),('extended','ExtendedClient')]:
+for venue,cls in [('hyperliquid','HyperliquidClient'),('lighter','LighterClient'),('qfex','QfexClient'),('arcus','ArcusClient'),('monaco','MonacoClient'),('derive','DeriveClient'),('paradex','ParadexClient'),('metric','MetricClient'),('phoenix','PhoenixClient'),('extended','ExtendedClient'),('dune','DuneClient'),('birdeye','BirdeyeClient')]:
     assert cls in api['classes'],cls
 for venue in ('derive','paradex','phoenix','extended'):
     coverage=json.loads((ROOT/'crates/exchanges'/venue/'coverage.json').read_text())
@@ -23,7 +23,7 @@ for file in (ROOT/'crates/python/src').rglob('*.rs'):
             if level==0:break
         names=set(re.findall(r'\bfn (\w+)(?:<[^\n]*?>)?\(',tail[:end]))
         python_methods.setdefault(match[1],set()).update(n for n in names if not n.startswith('__'))
-# Market-data clients are outside the exchange Node SDK; compare its bound classes.
+# Compare every exposed class with its independent Python declaration; Dune is included.
 for cls,binding in api['classes'].items():
     assert cls in python_methods,cls
     names=python_methods[cls]

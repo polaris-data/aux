@@ -2,10 +2,12 @@
 #![cfg_attr(test, allow(dead_code))]
 mod arcus;
 mod bindings;
+mod birdeye;
 mod client;
 mod context;
 mod convert;
 mod derive;
+mod dune;
 mod errors;
 mod extended;
 mod lighter;

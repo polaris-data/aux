@@ -79,6 +79,10 @@ include Tokio-backed file helpers, and Databento includes its TCP implementation
 File helpers publish complete temporary files without overwriting destinations.
 No data request, paid batch submission or interrupted stream is replayed implicitly.
 
+Dune adds HTTP execution and result pages (JSON and CSV), with no implicit polling or pagination. Its Rust/Python/Node operations share `crates/data/dune/operations.json`; regenerate with `python3 scripts/generate-dune-bindings.py` before the Node generator.
+
+Birdeye market-data requests and Rust/Python/Node operations share `crates/data/birdeye/operations.json`; regenerate with `python3 scripts/generate-birdeye-bindings.py` before the Node generator. Birdeye primitive request declarations also regenerate without the compiled model exporter. Source-only wrapper checks are `python3 scripts/check-birdeye-source.py` and `node scripts/check-birdeye-source.mjs`.
+
 Each data adapter records pinned sources and an API/schema coverage inventory.
 Run `python3 scripts/check-data-coverage.py` for offline method, fixture, binding
 and test parity. Add fixture/local-server tests and dependency profiles whenever

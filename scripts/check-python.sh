@@ -10,6 +10,9 @@ fi
 binding_venv="$("$binding_python" -c 'import sys; assert sys.prefix != sys.base_prefix, "use a virtual environment"; print(sys.prefix)')"
 export PYO3_PYTHON="$binding_python"
 
+python3 scripts/generate-dune-bindings.py --check
+python3 scripts/generate-birdeye-bindings.py --check
+python3 scripts/check-birdeye-source.py
 cargo fmt --all --check
 cargo clippy --locked -p aux-rs-python --all-targets -- -D warnings
 VIRTUAL_ENV="$binding_venv" "$binding_python" -m maturin develop --locked --manifest-path crates/python/Cargo.toml

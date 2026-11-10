@@ -300,3 +300,18 @@ See [Polymarket](../exchanges/polymarket/README.md), [Kalshi](../exchanges/kalsh
 Phoenix perpetuals and Extended are also available through `PhoenixClient`, `PhoenixSigner`, `PhoenixChainClient`, `ExtendedClient`, and `ExtendedSigner`. See the [Phoenix guide](../exchanges/phoenix/README.md) and [Extended guide](../exchanges/extended/README.md) for credential separation, exact values, signing, stream recovery and explicit transaction workflows.
 
 Run `python examples/perpetual_public.py` from this package directory for public market reads. It requires a built/installed binding and makes no writes.
+
+## Dune
+
+`aux_py.DuneClient` exposes the nine Dune execution and results endpoints through
+the Rust data connector, including raw SQL, saved queries, query-pipeline execution,
+status, cancellation, and JSON/CSV result pages. See the [Dune guide](../data/dune/README.md)
+for all methods, exact values, CSV pagination, authentication and examples.
+
+## Birdeye market data
+
+`BirdeyeClient` exposes 46 price/OHLCV, token/pair stats, discovery-list,
+trade/transaction, and security REST endpoints through the Rust data connector.
+See the [Birdeye guide](../data/birdeye/README.md) and
+[endpoint table](../data/birdeye/COVERAGE.md) for chain selection, authentication,
+exact values, typed requests, POST bodies, and examples.

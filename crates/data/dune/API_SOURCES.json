@@ -1,0 +1,44 @@
+{
+  "recorded_at": "2026-11-10",
+  "scope": "Nine Executions and Results REST endpoints only. Other API families, including pipeline monitoring, excluded.",
+  "documentation": [
+    "https://docs.dune.com/api-reference/executions/endpoint/execute-sql.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/execute-query.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/execute-query-pipeline.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-execution-status.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-execution-result.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-execution-result-csv.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-query-result.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-query-result-csv.md",
+    "https://docs.dune.com/api-reference/executions/endpoint/cancel-execution.md",
+    "https://docs.dune.com/api-reference/executions/pagination.md",
+    "https://docs.dune.com/api-reference/overview/authentication.md"
+  ],
+  "documentation_sha256": {
+    "https://docs.dune.com/api-reference/executions/endpoint/execute-sql.md": "0761488bf10e68426acba826b0c62f49259e155d56ecd1df3842fd9cf7553b50",
+    "https://docs.dune.com/api-reference/executions/endpoint/execute-query.md": "7deca9152e89bc0debceb7cad8b43c0187bcbff70bfd54ccbb17af81a43615fe",
+    "https://docs.dune.com/api-reference/executions/endpoint/execute-query-pipeline.md": "4029c5f7ed609fbe4a4a2a0016a5fe64a6156411cdeab0277a09e79a1ab397bf",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-execution-status.md": "7af943f2b06bf8dd21048d987ced154adde91e7b02f3f0876cf12ef79cd90d92",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-execution-result.md": "33537dc0fdb5b875589f73904a0590746a9b86b5eedab5c362bcb4669ff8a978",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-execution-result-csv.md": "1c67142d8dd4f1c789f12878df3dba0eb32901b8165d2fd9d350510a62343cb4",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-query-result.md": "0d1d761f82bed199af51db72eb7a702a7a560e41a86903b2223118d40da53230",
+    "https://docs.dune.com/api-reference/executions/endpoint/get-query-result-csv.md": "9fd0975c98b4ea0d68d6867f087f5f6084a2f586bb1563089c1fd3d211dcec33",
+    "https://docs.dune.com/api-reference/executions/endpoint/cancel-execution.md": "e9f484a5392c89461e965c5021f2077863c4b9386704e1d72796b3aa1d4a8044",
+    "https://docs.dune.com/api-reference/executions/pagination.md": "3b3d16749cba96b5584fdfa3546d4bd3aa9b35c45731ce4d9affb23eed5e96d2",
+    "https://docs.dune.com/api-reference/overview/authentication.md": "be2f50fd02e8cf026624a015c5486a922225f03c7e8ad0320bd156be47c692b4"
+  },
+  "inventory_sha256": "06778ea2834b0e1bc0027a1281bf36bb244a8b8a86031b2331de9e280426e25b",
+  "input_sha256": {
+    "operations.json": "cac90baf90f0c4ed7f04a9f9f9e0b887b1a32d7ece4af28f068aeace21be4258",
+    "src/models.rs": "8e6cfd5df4904378c74f9f36eb268e5baeb812aaea829cc532cbe02df61ba08a"
+  },
+  "fixture_sha256": {
+    "tests/fixtures/http.json": "fa5ec2703765821a39ea8a9378564a1023ecbe5947a285ac5458ffe085b941a1"
+  },
+  "notes": [
+    "Protocol implementation is original; official Dune SDKs are not runtime dependencies.",
+    "Fixtures are synthetic offline contracts, not responses from paid live queries.",
+    "Saved-query execute accepts JSON bodies as in the official documentation examples; generated OpenAPI query-parameter placement is inconsistent with those examples.",
+    "Latest-query result requests use query_id in the path, as in official examples; the redundant required queryID parameter in generated OpenAPI is omitted."
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "method": "execute_sql",
+    "verb": "POST",
+    "path": "sql/execute",
+    "response": "ExecutionResponse",
+    "handler": "post",
+    "request": "ExecuteSqlRequest",
+    "request_optional": false,
+    "argument": null
+  },
+  {
+    "method": "execute_query",
+    "verb": "POST",
+    "path": "query/{query_id}/execute",
+    "response": "ExecutionResponse",
+    "handler": "post",
+    "request": "ExecuteQueryRequest",
+    "request_optional": true,
+    "argument": "query_id"
+  },
+  {
+    "method": "execute_query_pipeline",
+    "verb": "POST",
+    "path": "query/{query_id}/pipeline/execute",
+    "response": "PipelineExecutionResponse",
+    "handler": "post",
+    "request": "ExecuteQueryPipelineRequest",
+    "request_optional": false,
+    "argument": "query_id"
+  },
+  {
+    "method": "get_execution_status",
+    "verb": "GET",
+    "path": "execution/{execution_id}/status",
+    "response": "ExecutionStatus",
+    "handler": "get",
+    "request": null,
+    "request_optional": false,
+    "argument": "execution_id"
+  },
+  {
+    "method": "get_execution_results",
+    "verb": "GET",
+    "path": "execution/{execution_id}/results",
+    "response": "QueryResults",
+    "handler": "get",
+    "request": "ResultOptions",
+    "request_optional": true,
+    "argument": "execution_id"
+  },
+  {
+    "method": "get_execution_results_csv",
+    "verb": "GET",
+    "path": "execution/{execution_id}/results/csv",
+    "response": "CsvResults",
+    "handler": "csv",
+    "request": "ResultOptions",
+    "request_optional": true,
+    "argument": "execution_id"
+  },
+  {
+    "method": "get_latest_query_results",
+    "verb": "GET",
+    "path": "query/{query_id}/results",
+    "response": "QueryResults",
+    "handler": "get",
+    "request": "ResultOptions",
+    "request_optional": true,
+    "argument": "query_id"
+  },
+  {
+    "method": "get_latest_query_results_csv",
+    "verb": "GET",
+    "path": "query/{query_id}/results/csv",
+    "response": "CsvResults",
+    "handler": "csv",
+    "request": "ResultOptions",
+    "request_optional": true,
+    "argument": "query_id"
+  },
+  {
+    "method": "cancel_execution",
+    "verb": "POST",
+    "path": "execution/{execution_id}/cancel",
+    "response": "CancelExecutionResponse",
+    "handler": "post",
+    "request": null,
+    "request_optional": false,
+    "argument": "execution_id"
+  }
+]

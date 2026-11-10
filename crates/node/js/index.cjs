@@ -964,6 +964,75 @@ signHash(options = {}) { options = Object.assign({}, options); return invoke(() 
 }
 classes.ExtendedSigner = ExtendedSigner;
 exports.ExtendedSigner = ExtendedSigner;
+class DuneClient {
+constructor(options = {}) { options = Object.assign({"apiUrl":"https://api.dune.com/api/v1","timeoutMs":10000}, options); this.__native = invoke(() => new native.DuneClient(encodeInput({"api_key": options.apiKey, "api_url": options.apiUrl, "timeout_ms": options.timeoutMs}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+executeSql(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.executeSql(encodeInput({"request": options.request})), decodeOutput); }
+executeQuery(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.executeQuery(encodeInput({"query_id": options.queryId, "request": options.request})), decodeOutput); }
+executeQueryPipeline(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.executeQueryPipeline(encodeInput({"query_id": options.queryId, "request": options.request})), decodeOutput); }
+getExecutionStatus(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExecutionStatus(encodeInput({"execution_id": options.executionId})), decodeOutput); }
+getExecutionResults(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExecutionResults(encodeInput({"execution_id": options.executionId, "request": options.request})), decodeOutput); }
+getExecutionResultsCsv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExecutionResultsCsv(encodeInput({"execution_id": options.executionId, "request": options.request})), decodeOutput); }
+getLatestQueryResults(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getLatestQueryResults(encodeInput({"query_id": options.queryId, "request": options.request})), decodeOutput); }
+getLatestQueryResultsCsv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getLatestQueryResultsCsv(encodeInput({"query_id": options.queryId, "request": options.request})), decodeOutput); }
+cancelExecution(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.cancelExecution(encodeInput({"execution_id": options.executionId})), decodeOutput); }
+}
+classes.DuneClient = DuneClient;
+exports.DuneClient = DuneClient;
+class BirdeyeClient {
+constructor(options = {}) { options = Object.assign({"apiUrl":"https://public-api.birdeye.so","timeoutMs":10000,"chain":"solana"}, options); this.__native = invoke(() => new native.BirdeyeClient(encodeInput({"api_key": options.apiKey, "api_url": options.apiUrl, "timeout_ms": options.timeoutMs, "chain": options.chain}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+price(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.price(encodeInput({"request": options.request})), decodeOutput); }
+multiPrice(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.multiPrice(encodeInput({"request": options.request})), decodeOutput); }
+multiPricePost(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.multiPricePost(encodeInput({"request": options.request})), decodeOutput); }
+tokenTrades(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenTrades(encodeInput({"request": options.request})), decodeOutput); }
+pairTrades(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.pairTrades(encodeInput({"request": options.request})), decodeOutput); }
+tokenTradesByTime(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenTradesByTime(encodeInput({"request": options.request})), decodeOutput); }
+pairTradesByTime(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.pairTradesByTime(encodeInput({"request": options.request})), decodeOutput); }
+tradesV3(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tradesV3(encodeInput({"request": options.request})), decodeOutput); }
+tokenTradesV3(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenTradesV3(encodeInput({"request": options.request})), decodeOutput); }
+recentTrades(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.recentTrades(encodeInput({"request": options.request})), decodeOutput); }
+ohlcv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.ohlcv(encodeInput({"request": options.request})), decodeOutput); }
+ohlcvPair(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.ohlcvPair(encodeInput({"request": options.request})), decodeOutput); }
+ohlcvBaseQuote(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.ohlcvBaseQuote(encodeInput({"request": options.request})), decodeOutput); }
+ohlcvV3(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.ohlcvV3(encodeInput({"request": options.request})), decodeOutput); }
+ohlcvPairV3(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.ohlcvPairV3(encodeInput({"request": options.request})), decodeOutput); }
+liquidityOhlcPair(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.liquidityOhlcPair(encodeInput({"request": options.request})), decodeOutput); }
+liquidityOhlcToken(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.liquidityOhlcToken(encodeInput({"request": options.request})), decodeOutput); }
+liquidityHistoryToken(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.liquidityHistoryToken(encodeInput({"request": options.request})), decodeOutput); }
+liquidityHistoryPair(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.liquidityHistoryPair(encodeInput({"request": options.request})), decodeOutput); }
+liquidityLatestToken(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.liquidityLatestToken(encodeInput({"request": options.request})), decodeOutput); }
+historyPrice(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.historyPrice(encodeInput({"request": options.request})), decodeOutput); }
+historicalPriceUnix(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.historicalPriceUnix(encodeInput({"request": options.request})), decodeOutput); }
+priceVolumeSingle(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceVolumeSingle(encodeInput({"request": options.request})), decodeOutput); }
+priceVolumeMulti(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceVolumeMulti(encodeInput({"request": options.request})), decodeOutput); }
+pairOverview(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.pairOverview(encodeInput({"request": options.request})), decodeOutput); }
+pairOverviewMultiple(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.pairOverviewMultiple(encodeInput({"request": options.request})), decodeOutput); }
+priceStats(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceStats(encodeInput({"request": options.request})), decodeOutput); }
+priceStatsMultiple(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceStatsMultiple(encodeInput({"request": options.request})), decodeOutput); }
+tokenTradesByVolume(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenTradesByVolume(encodeInput({"request": options.request})), decodeOutput); }
+tokenList(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenList(encodeInput({"request": options.request})), decodeOutput); }
+tokenListV3(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenListV3(encodeInput({"request": options.request})), decodeOutput); }
+tokenListScroll(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenListScroll(encodeInput({"request": options.request})), decodeOutput); }
+tokenOverview(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenOverview(encodeInput({"request": options.request})), decodeOutput); }
+tokenMetadata(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenMetadata(encodeInput({"request": options.request})), decodeOutput); }
+tokenMetadataMultiple(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenMetadataMultiple(encodeInput({"request": options.request})), decodeOutput); }
+tokenMarketData(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenMarketData(encodeInput({"request": options.request})), decodeOutput); }
+tokenMarketDataMultiple(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenMarketDataMultiple(encodeInput({"request": options.request})), decodeOutput); }
+tokenTradeData(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenTradeData(encodeInput({"request": options.request})), decodeOutput); }
+tokenTradeDataMultiple(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenTradeDataMultiple(encodeInput({"request": options.request})), decodeOutput); }
+tokenNewListing(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenNewListing(encodeInput({"request": options.request})), decodeOutput); }
+tokenMarkets(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenMarkets(encodeInput({"request": options.request})), decodeOutput); }
+tokenSecurity(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenSecurity(encodeInput({"request": options.request})), decodeOutput); }
+tokenMintBurn(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenMintBurn(encodeInput({"request": options.request})), decodeOutput); }
+tokenExitLiquidity(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenExitLiquidity(encodeInput({"request": options.request})), decodeOutput); }
+tokenExitLiquidityMultiple(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.tokenExitLiquidityMultiple(encodeInput({"request": options.request})), decodeOutput); }
+traderTradesByTime(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.traderTradesByTime(encodeInput({"request": options.request})), decodeOutput); }
+}
+classes.BirdeyeClient = BirdeyeClient;
+exports.BirdeyeClient = BirdeyeClient;
 classes.Subscription = require("./runtime.cjs").Subscription;
 exports.Subscription = classes.Subscription;
 exports.hyperliquidActionHash = (options = {}) => { options = Object.assign({}, options); return invoke(() => native.hyperliquidActionHash(encodeInput({"action": options.action, "nonce": options.nonce, "vault_address": options.vaultAddress, "expires_after": options.expiresAfter})), decodeOutput); };

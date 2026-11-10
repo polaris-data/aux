@@ -6331,6 +6331,270 @@ fn main() {
         declaration::<aux_rs::extended::X10BaseModel>(&config, true)
     ));
     result.push_str("}\n");
+    result.push_str("export namespace dune {\n");
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::CancelExecutionResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::CsvResults>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::ExecuteQueryPipelineRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::ExecuteQueryRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::ExecuteSqlRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::ExecutionResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::ExecutionStatus>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::Performance>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::PipelineExecutionResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::QueryResultData>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::QueryResultError>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::QueryResults>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::ResultMetadata>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::dune::ResultOptions>(&config, false)
+    ));
+    result.push_str("}\n");
+    result.push_str("export namespace birdeye {\n");
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::ApiResponse>(&config, true)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::HistoricalPriceUnixRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::HistoryPriceRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::LiquidityHistoryPairRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::LiquidityHistoryTokenRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::LiquidityLatestTokenBody>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::LiquidityLatestTokenRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::LiquidityOhlcPairRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::LiquidityOhlcTokenRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::MultiPricePostBody>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::MultiPricePostRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::MultiPriceRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::OhlcvBaseQuoteRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::OhlcvPairRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::OhlcvPairV3Request>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::OhlcvRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::OhlcvV3Request>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PairOverviewMultipleRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PairOverviewRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PairTradesByTimeRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PairTradesRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PriceRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PriceStatsMultipleBody>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PriceStatsMultipleRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PriceStatsRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PriceVolumeMultiBody>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PriceVolumeMultiRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::PriceVolumeSingleRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::RecentTradesRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenExitLiquidityMultipleRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenExitLiquidityRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenListRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenListScrollRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenListV3Request>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenMarketDataMultipleRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenMarketDataRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenMarketsRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenMetadataMultipleRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenMetadataRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenMintBurnRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenNewListingRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenOverviewRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenSecurityRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenTradeDataMultipleRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenTradeDataRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenTradesByTimeRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenTradesByVolumeRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenTradesRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TokenTradesV3Request>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TraderTradesByTimeRequest>(&config, false)
+    ));
+    result.push_str(&format!(
+        "export {}\n",
+        declaration::<aux_rs::birdeye::TradesV3Request>(&config, false)
+    ));
+    result.push_str("}\n");
     let output = result.replace("JsonValue", "LosslessValue");
     for line in output.lines() {
         println!("{}", line.trim_end());

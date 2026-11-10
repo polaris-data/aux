@@ -1,6 +1,6 @@
 [workspace]
-members = ["crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric", "crates/node"]
-default-members = ["crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
+members = ["crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric", "crates/node"]
+default-members = ["crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
 resolver = "3"
 
 [workspace.package]
@@ -19,6 +19,8 @@ aux-rs-kalshi = { path="crates/exchanges/kalshi", default-features=false }
 aux-rs-evm = { path = "crates/chain/evm", default-features = false }
 aux-rs-data = { path = "crates/data/common", default-features = false }
 aux-rs-tardis = { path = "crates/data/tardis", default-features = false }
+aux-rs-birdeye = { path = "crates/data/birdeye", default-features = false }
+aux-rs-dune = { path = "crates/data/dune", default-features = false }
 aux-rs-databento = { path = "crates/data/databento", default-features = false }
 async-compression = { version = "0.4", default-features = false, features = ["futures-io", "gzip", "zstd"] }
 dbn = { version = "=0.73.0", default-features = false, features = ["serde"] }

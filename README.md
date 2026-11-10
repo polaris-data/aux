@@ -38,6 +38,8 @@ remain distinguishable from transport failures.
 | `monaco` | No | [Native Monaco spot/perps client and wallet/session signing](crates/exchanges/monaco/README.md) |
 | `derive` | No | [Native Derive v3 client, wallet/session signing, and RPC sessions](crates/exchanges/derive/README.md) |
 | `tardis` | No | [Tardis hosted data and external Machine replay/live APIs, including file downloads](crates/data/tardis/README.md) |
+| `birdeye` | No | [Birdeye prices/OHLCV, token/pair stats, discovery, trades and security](crates/data/birdeye/README.md) |
+| `dune` | No | [Dune SQL/saved-query execution, status, cancellation, and JSON/CSV results](crates/data/dune/README.md) |
 | `databento` | No | [Databento historical, reference and live clients, including TCP connections and file downloads](crates/data/databento/README.md) |
 | `paradex` | No | [Native Paradex v1/v2 client, Starknet/EVM signing, and SBE streams](crates/exchanges/paradex/README.md) |
 | `metric` | No | [Metric liquidity/routing HTTP APIs, native EVM contracts and transaction signing](crates/exchanges/metric/README.md) |
@@ -120,7 +122,7 @@ The workspace contains:
 - [`aux-rs`](crates/aux-rs): public Rust SDK facade, examples, and integration tests.
 - [`aux-rs-core`](crates/core): shared client and transport contracts.
 - [Exchange adapters](crates/exchanges): native clients, types, and signing.
-- [Data adapters](crates/data): native Tardis and Databento clients, streaming data and downloads.
+- [Data adapters](crates/data): native Tardis, Databento, Dune, and Birdeye clients, streaming data and downloads.
 - [Python bindings](crates/python/README.md): asyncio clients backed by the Rust SDK.
 
 See the [architecture](CONTRIBUTING.md#architecture) and
