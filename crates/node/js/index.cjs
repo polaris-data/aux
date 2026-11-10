@@ -710,6 +710,260 @@ unsubscribeChannel(options = {}) { options = Object.assign({}, options); return 
 }
 classes.ParadexRpcSession = ParadexRpcSession;
 exports.ParadexRpcSession = ParadexRpcSession;
+class PhoenixClient {
+constructor(options = {}) { options = Object.assign({"network":"mainnet","timeoutMs":10000,"subscriptionCapacity":128}, options); this.__native = invoke(() => new native.PhoenixClient(encodeInput({"network": options.network, "http_url": options.httpUrl, "ws_url": options.wsUrl, "chain_id": options.chainId, "api_key": options.apiKey, "access_token": options.accessToken, "expires_at": options.expiresAt, "timeout_ms": options.timeoutMs, "subscription_capacity": options.subscriptionCapacity}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+setCredentials(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.setCredentials(encodeInput({"credentials": options.credentials})), decodeOutput); }
+subscribe(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.subscribe(encodeInput({"specification": options.specification})), value => wrap(classes.Subscription, value)); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+buildInstruction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildInstruction(encodeInput({"name": options.name, "request": options.request})), decodeOutput); }
+prepareTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.prepareTransaction(encodeInput({"request": options.request})), decodeOutput); }
+assembleTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.assembleTransaction(encodeInput({"prepared": options.prepared, "signatures": options.signatures})), decodeOutput); }
+validateServerTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.validateServerTransaction(encodeInput({"prepared": options.prepared, "transaction_base64": options.transactionBase64})), decodeOutput); }
+getExchange(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExchange(encodeInput({"request": options.request})), decodeOutput); }
+getExchangeKeys(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExchangeKeys(encodeInput({"request": options.request})), decodeOutput); }
+listMarkets(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.listMarkets(encodeInput({"request": options.request})), decodeOutput); }
+getMarket(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarket(encodeInput({"request": options.request})), decodeOutput); }
+getExchangeStatus(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExchangeStatus(encodeInput({"request": options.request})), decodeOutput); }
+getExchangeSnapshot(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExchangeSnapshot(encodeInput({"request": options.request})), decodeOutput); }
+buildRegisterTraderInstructions(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildRegisterTraderInstructions(encodeInput({"request": options.request})), decodeOutput); }
+submitRegisterTraderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.submitRegisterTraderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+getOrderbook(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrderbook(encodeInput({"request": options.request})), decodeOutput); }
+getMarkPrice(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarkPrice(encodeInput({"request": options.request})), decodeOutput); }
+getMarketStatsHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarketStatsHistory(encodeInput({"request": options.request})), decodeOutput); }
+getNextMarketCalendarTransition(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getNextMarketCalendarTransition(encodeInput({"request": options.request})), decodeOutput); }
+getNextCommodityMarketTransition(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getNextCommodityMarketTransition(encodeInput({"request": options.request})), decodeOutput); }
+getMarketCalendar(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarketCalendar(encodeInput({"request": options.request})), decodeOutput); }
+getMarketCalendarById(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarketCalendarById(encodeInput({"request": options.request})), decodeOutput); }
+getCommodityMarketCalendar(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getCommodityMarketCalendar(encodeInput({"request": options.request})), decodeOutput); }
+getCandles(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getCandles(encodeInput({"request": options.request})), decodeOutput); }
+getTrader(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTrader(encodeInput({"request": options.request})), decodeOutput); }
+getTraderCapabilities(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderCapabilities(encodeInput({"request": options.request})), decodeOutput); }
+getTraderState(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderState(encodeInput({"request": options.request})), decodeOutput); }
+getUserPnL(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserPnL(encodeInput({"request": options.request})), decodeOutput); }
+getTraderPortfolioValues(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderPortfolioValues(encodeInput({"request": options.request})), decodeOutput); }
+getTraderPnL(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderPnL(encodeInput({"request": options.request})), decodeOutput); }
+getTraderMarketPnL(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderMarketPnL(encodeInput({"request": options.request})), decodeOutput); }
+getUserCollateralHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserCollateralHistory(encodeInput({"request": options.request})), decodeOutput); }
+getTraderCollateralHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderCollateralHistory(encodeInput({"request": options.request})), decodeOutput); }
+getV1TradersByTraderPubkeyCollateralHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getV1TradersByTraderPubkeyCollateralHistory(encodeInput({"request": options.request})), decodeOutput); }
+getUserLiquidationHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserLiquidationHistory(encodeInput({"request": options.request})), decodeOutput); }
+getTraderFundingHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderFundingHistory(encodeInput({"request": options.request})), decodeOutput); }
+getUserHourlyFunding(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserHourlyFunding(encodeInput({"request": options.request})), decodeOutput); }
+getFundingRateHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getFundingRateHistory(encodeInput({"request": options.request})), decodeOutput); }
+getFundingOverview(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getFundingOverview(encodeInput({"request": options.request})), decodeOutput); }
+getOrderHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrderHistory(encodeInput({"request": options.request})), decodeOutput); }
+getOrderHistoryV2(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrderHistoryV2(encodeInput({"request": options.request})), decodeOutput); }
+getTradeHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTradeHistory(encodeInput({"request": options.request})), decodeOutput); }
+getUserTradeHistoryV2(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserTradeHistoryV2(encodeInput({"request": options.request})), decodeOutput); }
+getTraderTradeHistoryV2(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTraderTradeHistoryV2(encodeInput({"request": options.request})), decodeOutput); }
+getMarketFills(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarketFills(encodeInput({"request": options.request})), decodeOutput); }
+listTraderNotifications(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.listTraderNotifications(encodeInput({"request": options.request})), decodeOutput); }
+acknowledgeNotificationsUpToTimestamp(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.acknowledgeNotificationsUpToTimestamp(encodeInput({"request": options.request})), decodeOutput); }
+acknowledgeNotifications(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.acknowledgeNotifications(encodeInput({"request": options.request})), decodeOutput); }
+buildIsolatedLimitOrderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildIsolatedLimitOrderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+buildIsolatedMarketOrderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildIsolatedMarketOrderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+buildCancelConditionalOrderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildCancelConditionalOrderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+buildStopLossOrderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildStopLossOrderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+buildCancelStopLossOrderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildCancelStopLossOrderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+buildAttachedConditionalOrderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildAttachedConditionalOrderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+buildPositionConditionalOrderTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildPositionConditionalOrderTransaction(encodeInput({"request": options.request})), decodeOutput); }
+buildIsolatedLimitOrderTransactionWithConditionals(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildIsolatedLimitOrderTransactionWithConditionals(encodeInput({"request": options.request})), decodeOutput); }
+buildIsolatedLimitOrderTransactionWithLiquidationEstimate(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildIsolatedLimitOrderTransactionWithLiquidationEstimate(encodeInput({"request": options.request})), decodeOutput); }
+buildIsolatedMarketOrderTransactionWithLiquidationEstimate(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.buildIsolatedMarketOrderTransactionWithLiquidationEstimate(encodeInput({"request": options.request})), decodeOutput); }
+validateInvite(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.validateInvite(encodeInput({"request": options.request})), decodeOutput); }
+checkWalletInviteStatus(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.checkWalletInviteStatus(encodeInput({"request": options.request})), decodeOutput); }
+activateReferral(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.activateReferral(encodeInput({"request": options.request})), decodeOutput); }
+getReferralActivationPermission(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralActivationPermission(encodeInput({"request": options.request})), decodeOutput); }
+activateReferralWithUserFundedTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.activateReferralWithUserFundedTransaction(encodeInput({"request": options.request})), decodeOutput); }
+logInWithPrivyToken(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.logInWithPrivyToken(encodeInput({"request": options.request})), decodeOutput); }
+createWalletTransactionChallenge(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.createWalletTransactionChallenge(encodeInput({"request": options.request})), decodeOutput); }
+logInWithSignedWalletTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.logInWithSignedWalletTransaction(encodeInput({"request": options.request})), decodeOutput); }
+createServiceLoginChallenge(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.createServiceLoginChallenge(encodeInput({"request": options.request})), decodeOutput); }
+logInWithServiceSignature(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.logInWithServiceSignature(encodeInput({"request": options.request})), decodeOutput); }
+getWalletLoginNonce(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getWalletLoginNonce(encodeInput({"request": options.request})), decodeOutput); }
+logInWithWalletSignature(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.logInWithWalletSignature(encodeInput({"request": options.request})), decodeOutput); }
+refreshSession(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.refreshSession(encodeInput({"request": options.request})), decodeOutput); }
+logOut(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.logOut(encodeInput({"request": options.request})), decodeOutput); }
+getJwks(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getJwks(encodeInput({"request": options.request})), decodeOutput); }
+}
+classes.PhoenixClient = PhoenixClient;
+exports.PhoenixClient = PhoenixClient;
+class PhoenixSigner {
+constructor(options = {}) { options = Object.assign({}, options); this.__native = invoke(() => new native.PhoenixSigner(encodeInput({"private_key": options.privateKey}))); }
+static remote(options) { options = Object.assign({}, options); return wrap(PhoenixSigner, invoke(() => native.PhoenixSigner.remote(encodeInput({"public_key": options.publicKey}), callbackAdapter(options.callback)))); }
+get publicKey() { return invoke(() => this.__native.publicKey, decodeOutput); }
+signMessage(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.signMessage(encodeInput({"message_base64": options.messageBase64})), decodeOutput); }
+signTransaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.signTransaction(encodeInput({"prepared": options.prepared, "signatures": options.signatures})), decodeOutput); }
+}
+classes.PhoenixSigner = PhoenixSigner;
+exports.PhoenixSigner = PhoenixSigner;
+class PhoenixChainClient {
+constructor(options = {}) { options = Object.assign({"timeoutMs":10000}, options); this.__native = invoke(() => new native.PhoenixChainClient(encodeInput({"rpc_url": options.rpcUrl, "timeout_ms": options.timeoutMs}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+get pending() { return invoke(() => this.__native.pending, decodeOutput); }
+clearReconciledSubmission(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.clearReconciledSubmission(encodeInput({})), decodeOutput); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+latestBlockhash(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.latestBlockhash(encodeInput({})), decodeOutput); }
+blockHeight(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.blockHeight(encodeInput({})), decodeOutput); }
+signatureStatus(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.signatureStatus(encodeInput({"signature": options.signature})), decodeOutput); }
+transaction(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.transaction(encodeInput({"signature": options.signature})), decodeOutput); }
+simulate(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.simulate(encodeInput({"signed": options.signed})), decodeOutput); }
+submit(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.submit(encodeInput({"signed": options.signed})), decodeOutput); }
+prepare(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.prepare(encodeInput({"instructions": options.instructions, "fee_payer": options.feePayer})), decodeOutput); }
+}
+classes.PhoenixChainClient = PhoenixChainClient;
+exports.PhoenixChainClient = PhoenixChainClient;
+class ExtendedClient {
+constructor(options = {}) { options = Object.assign({"network":"testnet","timeoutMs":10000,"subscriptionCapacity":128}, options); this.__native = invoke(() => new native.ExtendedClient(encodeInput({"network": options.network, "http_url": options.httpUrl, "ws_url": options.wsUrl, "chain_id": options.chainId, "api_key": options.apiKey, "access_token": options.accessToken, "expires_at": options.expiresAt, "timeout_ms": options.timeoutMs, "subscription_capacity": options.subscriptionCapacity}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+setCredentials(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.setCredentials(encodeInput({"credentials": options.credentials})), decodeOutput); }
+subscribe(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.subscribe(encodeInput({"specification": options.specification})), value => wrap(classes.Subscription, value)); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+settlementHash(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.settlementHash(encodeInput({"kind": options.kind, "public_key": options.publicKey, "request": options.request})), decodeOutput); }
+prepareOrder(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.prepareOrder(encodeInput({"public_key": options.publicKey, "order": options.order, "context": options.context})), decodeOutput); }
+signOrder(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.signOrder(encodeInput({"order": options.order, "context": options.context}), options.signer?.__native), decodeOutput); }
+onboardingPayload(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.onboardingPayload(encodeInput({"registration": options.registration})), decodeOutput); }
+scaleDecimal(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.scaleDecimal(encodeInput({"value": options.value, "decimals": options.decimals})), decodeOutput); }
+keyDerivationPayload(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.keyDerivationPayload(encodeInput({"registration": options.registration})), decodeOutput); }
+apiRequestPayload(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.apiRequestPayload(encodeInput({"path": options.path, "timestamp": options.timestamp})), decodeOutput); }
+onboardingL2Hash(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.onboardingL2Hash(encodeInput({"wallet": options.wallet, "public_key": options.publicKey})), decodeOutput); }
+getAssets(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAssets(encodeInput({"request": options.request})), decodeOutput); }
+getAssetPrice(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAssetPrice(encodeInput({"request": options.request})), decodeOutput); }
+getMarkets(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarkets(encodeInput({"request": options.request})), decodeOutput); }
+getMarketsStats(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarketsStats(encodeInput({"request": options.request})), decodeOutput); }
+getMarketStatistics(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarketStatistics(encodeInput({"request": options.request})), decodeOutput); }
+getMarketTrades(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarketTrades(encodeInput({"request": options.request})), decodeOutput); }
+getOrderbookSnapshot(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrderbookSnapshot(encodeInput({"request": options.request})), decodeOutput); }
+getFundingRatesHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getFundingRatesHistory(encodeInput({"request": options.request})), decodeOutput); }
+getTradingCandles(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTradingCandles(encodeInput({"request": options.request})), decodeOutput); }
+getMarkPriceCandles(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getMarkPriceCandles(encodeInput({"request": options.request})), decodeOutput); }
+getIndexPriceCandles(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getIndexPriceCandles(encodeInput({"request": options.request})), decodeOutput); }
+getOpenInterests(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOpenInterests(encodeInput({"request": options.request})), decodeOutput); }
+getPublicLeaderboard(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getPublicLeaderboard(encodeInput({"request": options.request})), decodeOutput); }
+getPublicReferralLink(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getPublicReferralLink(encodeInput({"request": options.request})), decodeOutput); }
+getBuilderDashboard(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getBuilderDashboard(encodeInput({"request": options.request})), decodeOutput); }
+getVaultPositions(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getVaultPositions(encodeInput({"request": options.request})), decodeOutput); }
+getVaultPositionHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getVaultPositionHistory(encodeInput({"request": options.request})), decodeOutput); }
+getVaultOrders(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getVaultOrders(encodeInput({"request": options.request})), decodeOutput); }
+getVaultTrades(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getVaultTrades(encodeInput({"request": options.request})), decodeOutput); }
+getVaultFundingHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getVaultFundingHistory(encodeInput({"request": options.request})), decodeOutput); }
+getExchangeStatus(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getExchangeStatus(encodeInput({"request": options.request})), decodeOutput); }
+getSettings(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getSettings(encodeInput({"request": options.request})), decodeOutput); }
+getStarknetDomain(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getStarknetDomain(encodeInput({"request": options.request})), decodeOutput); }
+getAccounts(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccounts(encodeInput({"request": options.request})), decodeOutput); }
+getAccount(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccount(encodeInput({"request": options.request})), decodeOutput); }
+updateAccountInfo(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.updateAccountInfo(encodeInput({"request": options.request})), decodeOutput); }
+getLeverage(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getLeverage(encodeInput({"request": options.request})), decodeOutput); }
+updateLeverage(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.updateLeverage(encodeInput({"request": options.request})), decodeOutput); }
+getApiKeys(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getApiKeys(encodeInput({"request": options.request})), decodeOutput); }
+createApiKey(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.createApiKey(encodeInput({"request": options.request})), decodeOutput); }
+deleteApiKey(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.deleteApiKey(encodeInput({"request": options.request})), decodeOutput); }
+getBalance(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getBalance(encodeInput({"request": options.request})), decodeOutput); }
+getSpotBalances(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getSpotBalances(encodeInput({"request": options.request})), decodeOutput); }
+getPositions(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getPositions(encodeInput({"request": options.request})), decodeOutput); }
+getPositionsHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getPositionsHistory(encodeInput({"request": options.request})), decodeOutput); }
+getOpenOrders(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOpenOrders(encodeInput({"request": options.request})), decodeOutput); }
+getOrder(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrder(encodeInput({"request": options.request})), decodeOutput); }
+getOrdersHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrdersHistory(encodeInput({"request": options.request})), decodeOutput); }
+getOrderByExternalId(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrderByExternalId(encodeInput({"request": options.request})), decodeOutput); }
+placeOrder(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.placeOrder(encodeInput({"request": options.request})), decodeOutput); }
+cancelOrderByExternalId(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.cancelOrderByExternalId(encodeInput({"request": options.request})), decodeOutput); }
+createScaledOrder(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.createScaledOrder(encodeInput({"request": options.request})), decodeOutput); }
+cancelOrder(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.cancelOrder(encodeInput({"request": options.request})), decodeOutput); }
+massCancel(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.massCancel(encodeInput({"request": options.request})), decodeOutput); }
+getTrades(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTrades(encodeInput({"request": options.request})), decodeOutput); }
+getUserFundingHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserFundingHistory(encodeInput({"request": options.request})), decodeOutput); }
+updateFundingRateConfig(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.updateFundingRateConfig(encodeInput({"request": options.request})), decodeOutput); }
+transferPatch(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.transferPatch(encodeInput({"request": options.request})), decodeOutput); }
+transfer(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.transfer(encodeInput({"request": options.request})), decodeOutput); }
+postUserTransferOnchain(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.postUserTransferOnchain(encodeInput({"request": options.request})), decodeOutput); }
+getWithdrawals(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getWithdrawals(encodeInput({"request": options.request})), decodeOutput); }
+withdraw(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.withdraw(encodeInput({"request": options.request})), decodeOutput); }
+onchainWithdrawal(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.onchainWithdrawal(encodeInput({"request": options.request})), decodeOutput); }
+createDeposit(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.createDeposit(encodeInput({"request": options.request})), decodeOutput); }
+getBridgeConfig(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getBridgeConfig(encodeInput({"request": options.request})), decodeOutput); }
+getBridgeQuote(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getBridgeQuote(encodeInput({"request": options.request})), decodeOutput); }
+commitBridgeQuote(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.commitBridgeQuote(encodeInput({"request": options.request})), decodeOutput); }
+validateWallet(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.validateWallet(encodeInput({"request": options.request})), decodeOutput); }
+getWalletValidation(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getWalletValidation(encodeInput({"request": options.request})), decodeOutput); }
+getFees(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getFees(encodeInput({"request": options.request})), decodeOutput); }
+getTradingFeeStats(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getTradingFeeStats(encodeInput({"request": options.request})), decodeOutput); }
+getUserLeaderboard(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserLeaderboard(encodeInput({"request": options.request})), decodeOutput); }
+setDeadmanSwitch(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.setDeadmanSwitch(encodeInput({"request": options.request})), decodeOutput); }
+getClaims(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getClaims(encodeInput({"request": options.request})), decodeOutput); }
+claimTestingFunds(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.claimTestingFunds(encodeInput({"request": options.request})), decodeOutput); }
+getClaim(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getClaim(encodeInput({"request": options.request})), decodeOutput); }
+getNextClaimTime(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getNextClaimTime(encodeInput({"request": options.request})), decodeOutput); }
+getPartnerRewards(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getPartnerRewards(encodeInput({"request": options.request})), decodeOutput); }
+getAffiliateRewards(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAffiliateRewards(encodeInput({"request": options.request})), decodeOutput); }
+getEarnedRewards(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getEarnedRewards(encodeInput({"request": options.request})), decodeOutput); }
+getRewardLeaderboardStats(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getRewardLeaderboardStats(encodeInput({"request": options.request})), decodeOutput); }
+getRebatesCsv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getRebatesCsv(encodeInput({"request": options.request})), decodeOutput); }
+getRebateStats(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getRebateStats(encodeInput({"request": options.request})), decodeOutput); }
+getReferralStatus(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralStatus(encodeInput({"request": options.request})), decodeOutput); }
+getReferralLinks(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralLinks(encodeInput({"request": options.request})), decodeOutput); }
+createReferralLink(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.createReferralLink(encodeInput({"request": options.request})), decodeOutput); }
+updateReferralLink(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.updateReferralLink(encodeInput({"request": options.request})), decodeOutput); }
+useReferralCode(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.useReferralCode(encodeInput({"request": options.request})), decodeOutput); }
+getReferralRebatesByPeriodCsv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralRebatesByPeriodCsv(encodeInput({"request": options.request})), decodeOutput); }
+getReferralRebatesByUserCsv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralRebatesByUserCsv(encodeInput({"request": options.request})), decodeOutput); }
+getReferralRebatesBySubaffiliateCsv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralRebatesBySubaffiliateCsv(encodeInput({"request": options.request})), decodeOutput); }
+getReferralRebatesByLinkCsv(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralRebatesByLinkCsv(encodeInput({"request": options.request})), decodeOutput); }
+getReferralDashboard(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getReferralDashboard(encodeInput({"request": options.request})), decodeOutput); }
+getAffiliate(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAffiliate(encodeInput({"request": options.request})), decodeOutput); }
+assetOperations(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.assetOperations(encodeInput({"request": options.request})), decodeOutput); }
+getAssetOperations(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAssetOperations(encodeInput({"request": options.request})), decodeOutput); }
+getClient(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getClient(encodeInput({"request": options.request})), decodeOutput); }
+markWalletChecked(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.markWalletChecked(encodeInput({"request": options.request})), decodeOutput); }
+exportCsvZip(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.exportCsvZip(encodeInput({"request": options.request})), decodeOutput); }
+getWrapper(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getWrapper(encodeInput({"request": options.request})), decodeOutput); }
+placeRfqOrder(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.placeRfqOrder(encodeInput({"request": options.request})), decodeOutput); }
+deleteUserOrderOrderId(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.deleteUserOrderOrderId(encodeInput({"request": options.request})), decodeOutput); }
+getBuilderTrades(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getBuilderTrades(encodeInput({"request": options.request})), decodeOutput); }
+getInfoAssetsAssetNamePrice(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getInfoAssetsAssetNamePrice(encodeInput({"request": options.request})), decodeOutput); }
+getCandlesHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getCandlesHistory(encodeInput({"request": options.request})), decodeOutput); }
+depositToVault(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.depositToVault(encodeInput({"request": options.request})), decodeOutput); }
+withdrawFromVault(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.withdrawFromVault(encodeInput({"request": options.request})), decodeOutput); }
+getOrderById(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getOrderById(encodeInput({"request": options.request})), decodeOutput); }
+getUserOrdersExternalExternalId(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getUserOrdersExternalExternalId(encodeInput({"request": options.request})), decodeOutput); }
+onboardClient(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.onboardClient(encodeInput({"request": options.request})), decodeOutput); }
+onboardSubaccount(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.onboardSubaccount(encodeInput({"request": options.request})), decodeOutput); }
+getInfoCandlesMarketCandleType(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getInfoCandlesMarketCandleType(encodeInput({"request": options.request})), decodeOutput); }
+getAccountEquityHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountEquityHistory(encodeInput({"request": options.request})), decodeOutput); }
+getAccountPnLHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountPnLHistory(encodeInput({"request": options.request})), decodeOutput); }
+getAccountPnLPercentageHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountPnLPercentageHistory(encodeInput({"request": options.request})), decodeOutput); }
+getCumulativeAccountPnLHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getCumulativeAccountPnLHistory(encodeInput({"request": options.request})), decodeOutput); }
+getCumulativeAccountPnLPercentageHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getCumulativeAccountPnLPercentageHistory(encodeInput({"request": options.request})), decodeOutput); }
+getAccountVaultEquityHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountVaultEquityHistory(encodeInput({"request": options.request})), decodeOutput); }
+getAccountMaxDrawdownHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountMaxDrawdownHistory(encodeInput({"request": options.request})), decodeOutput); }
+getAccountFundingChart(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountFundingChart(encodeInput({"request": options.request})), decodeOutput); }
+getAccountPortfolioSummary(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountPortfolioSummary(encodeInput({"request": options.request})), decodeOutput); }
+getAccountHealth(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountHealth(encodeInput({"request": options.request})), decodeOutput); }
+getAccountPerformance(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountPerformance(encodeInput({"request": options.request})), decodeOutput); }
+getAccountFundingStats(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountFundingStats(encodeInput({"request": options.request})), decodeOutput); }
+getAccountFundingHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getAccountFundingHistory(encodeInput({"request": options.request})), decodeOutput); }
+getVaultPerformance(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getVaultPerformance(encodeInput({"request": options.request})), decodeOutput); }
+getVaultSummary(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getVaultSummary(encodeInput({"request": options.request})), decodeOutput); }
+getInterestRateCurvesHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getInterestRateCurvesHistory(encodeInput({"request": options.request})), decodeOutput); }
+getLatestInterestRateCurve(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getLatestInterestRateCurve(encodeInput({"request": options.request})), decodeOutput); }
+getInterestKeyMetrics(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getInterestKeyMetrics(encodeInput({"request": options.request})), decodeOutput); }
+getInterestDailyMetrics(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getInterestDailyMetrics(encodeInput({"request": options.request})), decodeOutput); }
+getInterestPaymentChart(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getInterestPaymentChart(encodeInput({"request": options.request})), decodeOutput); }
+getInterestPaymentsHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.getInterestPaymentsHistory(encodeInput({"request": options.request})), decodeOutput); }
+}
+classes.ExtendedClient = ExtendedClient;
+exports.ExtendedClient = ExtendedClient;
+class ExtendedSigner {
+constructor(options = {}) { options = Object.assign({"kind":"starknet"}, options); this.__native = invoke(() => new native.ExtendedSigner(encodeInput({"private_key": options.privateKey, "kind": options.kind}))); }
+static remote(options) { options = Object.assign({"kind":"starknet"}, options); return wrap(ExtendedSigner, invoke(() => native.ExtendedSigner.remote(encodeInput({"public_key": options.publicKey, "kind": options.kind}), callbackAdapter(options.callback)))); }
+get publicKey() { return invoke(() => this.__native.publicKey, decodeOutput); }
+sign(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.sign(encodeInput({"payload": options.payload})), decodeOutput); }
+static fromWalletSignature(options) { options = Object.assign({}, options); return wrap(ExtendedSigner, invoke(() => native.ExtendedSigner.fromWalletSignature(encodeInput({"signature": options.signature})))); }
+signHash(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.signHash(encodeInput({"hash": options.hash})), decodeOutput); }
+}
+classes.ExtendedSigner = ExtendedSigner;
+exports.ExtendedSigner = ExtendedSigner;
 classes.Subscription = require("./runtime.cjs").Subscription;
 exports.Subscription = classes.Subscription;
 exports.hyperliquidActionHash = (options = {}) => { options = Object.assign({}, options); return invoke(() => native.hyperliquidActionHash(encodeInput({"action": options.action, "nonce": options.nonce, "vault_address": options.vaultAddress, "expires_after": options.expiresAfter})), decodeOutput); };

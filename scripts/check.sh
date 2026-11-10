@@ -15,13 +15,13 @@ cargo test --locked -p aux-rs-lighter --no-default-features
 cargo test --locked -p aux-rs --no-default-features --features lighter
 cargo test --locked -p aux-rs --no-default-features --features lighter,http
 cargo test --locked -p aux-rs --no-default-features --features lighter,ws
-for exchange in qfex arcus monaco derive paradex metric polymarket kalshi pascal; do
+for exchange in phoenix extended qfex arcus monaco derive paradex metric polymarket kalshi pascal; do
     cargo test --locked -p "aux-rs-$exchange" --no-default-features
     cargo test --locked -p aux-rs --no-default-features --features "$exchange"
     cargo test --locked -p aux-rs --no-default-features --features "$exchange,http"
     cargo test --locked -p aux-rs --no-default-features --features "$exchange,ws"
 done
-cargo check --locked -p aux-rs --no-default-features --features hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,polymarket,kalshi,pascal
+cargo check --locked -p aux-rs --no-default-features --features hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,polymarket,kalshi,pascal,phoenix,extended
 cargo test --locked --workspace --exclude aux-rs-python --exclude aux-rs-node --all-features
 cargo test --locked -p aux-rs-data --no-default-features
 for vendor in tardis databento; do

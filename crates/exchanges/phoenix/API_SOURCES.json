@@ -1,0 +1,80 @@
+{
+  "sdk": {
+    "repository": "https://github.com/Ellipsis-Labs/rise-public",
+    "commit": "2ce47221ef04a8d5879d39d31e82f9e92021753e"
+  },
+  "documentation": "https://docs.phoenix.trade",
+  "input_sha256": {
+    "openapi.json": "542796fe0648ebbbe8ff69b473aedfcdf60f06e3df6b6a7b31b99903dae883e7"
+  },
+  "notes": [
+    "Phoenix optional bearer authentication follows the auth guide; the OpenAPI blanket bearer annotations are not treated as mandatory for public reads.",
+    "Live market metadata string-encodes numeric fields despite numeric schema declarations. Phoenix numeric schema fields use NativeNumber to preserve either JSON numbers or strings without coercion.",
+    "The instruction dispatcher covers all 67 non-privileged public builders, including multi-argument spline, Hawkeye, account and collateral helpers. Its synthetic fixtures also pin account metadata; independently published instruction bytes remain in instructions.json."
+  ],
+  "instruction_sources": {
+    "rust/ix/src/update_trader_preference_bits.rs": "3df77e9bce33ea4b9a7cee79437c275c648f62b8afa504a726e169ab4be78367",
+    "rust/ix/src/types.rs": "bd1ff2dba1ac0560d8a5aeed173f4d173bedeba3ac4afd9ceba09edb1152944e",
+    "rust/ix/src/spl_approve.rs": "3e8215a2443fb5972bcd30214a56064781fb1592a702a5ffc3531b8c08bc8e3d",
+    "rust/ix/src/cpi.rs": "beddae4f51f4f8bbb06f27c6db647054a48ed150ea0f09464fdd11cd553e1c4c",
+    "rust/ix/src/native_sol.rs": "17d904b778c254cc1efdb544f0023fdeb802e13718ae3dc6d81a6dc68ea9dbd9",
+    "rust/ix/src/ember_deposit.rs": "f6846cbe89a31869179d27f5f484fc0e8ab701507f7f447bc964278c066c6f20",
+    "rust/ix/src/conditional_order.rs": "181838ec687212b06fcd01a48034a1c46179058b4bbf2a3438164ebb57cda2dd",
+    "rust/ix/src/constants.rs": "e4057e510eb354fbecdec74721a5dd7044de9566d5f8781e868527e5c7c61164",
+    "rust/ix/src/error.rs": "c6496ab8ec85e3c44e6b379475fd50095640738b6c8d1ead56fff4a010f83412",
+    "rust/ix/src/limit_order.rs": "457883f39e38e42d7fc826fed6d19e579372303836b7730533856d4ca6340ac5",
+    "rust/ix/src/deposit_funds.rs": "66bf78c2290ac6c3da152d99016710c90c1030a04850e21cf0292570731b405c",
+    "rust/ix/src/accounts.rs": "c90afe451ce2761aace02f24297a388a3063983244e1176c61bd443307565e8b",
+    "rust/ix/src/delegate_trader.rs": "66785cfb8703b27b5ffdaf3790307bceadd9b8bba638a002dac3fade586d891b",
+    "rust/ix/src/lib.rs": "a61aa9ee0ae036f8521350fb478ba27829b966d450243bfe295aec1dbe4f8685",
+    "rust/ix/src/twap.rs": "dd58414c2a47b40fe86c84ff531958594445205d2fb78879748f4da8563caf73",
+    "rust/ix/src/hawkeye.rs": "4714507d1ad1691891d84fdad38c0c198eccef734ca1585ec7394844d0f6b97c",
+    "rust/ix/src/spline.rs": "8a8c57e9a14f114936c159406f422ecf76fb95f2bf5625f0e59738b7c63f2d8d",
+    "rust/ix/src/serde_helpers.rs": "96d1c7a1c0d01802203138db192608d168517926b328a4846044281196c47e8a",
+    "rust/ix/src/cancel_orders.rs": "afa5e6d76b5e3ef3c4e5d8005a1df3ac0929e2d12b039129a7bbbab7d4d0942a",
+    "rust/ix/src/return_data.rs": "022a243adb6eda96afd5bf34bb463e4db0f06d1d7f46f8987bd3dfd179619f6a",
+    "rust/ix/src/data.rs": "6ab18fb48a98dae9e3f3770ff20fcdf0660f3ad4c30bf0b2d229c0c840e4e200",
+    "rust/ix/src/discriminants.rs": "e7eeb7edb96d55d8d8cc670f87c311cb33c89ab3c80d099dc2ab7ec1960e0f86",
+    "rust/ix/src/withdraw_funds.rs": "3a0310315645a2bedf04b4f15ca39fd5858990973095b96d90d1c64f2e3e82e0",
+    "rust/ix/src/claim_fees.rs": "0aae224f10e939ca7fe3f65b8d818954f0d39c86c384f1d21346017d545a4294",
+    "rust/ix/src/spot.rs": "e681014147134a31550774f42fb165dcde73f993d700dc34aec1fad07b5d3b5a",
+    "rust/ix/src/uncross_crank.rs": "86a8a082e1fb80fdc4829ccfaa5b11754532f2976fc0ba31603e3194ba421411",
+    "rust/ix/src/multi_limit_order.rs": "e66f3464a97ab14a36cd9a22f99a13bd003c4eedf3d5788a414b7f50e4e6dde8",
+    "rust/ix/src/onboard_trader_delegated.rs": "f07ad086385523cf3cf08ed04d34499190934c5052df13f73a226f4037ceb887",
+    "rust/ix/src/order_packet.rs": "3992ae6fea0755b2bf47d551e2846b37714bd191a489c634bb68dfdd26a093da",
+    "rust/ix/src/register_trader.rs": "05727797db109d46e09297688cd468c6b32e012f75499dc88b6f58720635fe7b",
+    "rust/ix/src/ember_withdraw.rs": "933d1fff60e855244337a63b949a086999d7145ddee9eb9ff48ba21084d3d2c7",
+    "rust/ix/src/sync_parent_to_child.rs": "6d2e8c6e227e0daca7604db526fc3cc904ea8eeb7da8de0f68e2f1fefa2d8a69",
+    "rust/ix/src/create_ata.rs": "bae4954097f34d5cf31ebd67a04399f17af7365ff30dfbdd8c633e7219c1a432",
+    "rust/ix/src/transfer_collateral.rs": "b93ffe09485705221a45371c48a53d9759746b3d589c1e9fcfb136fe0b60aef0",
+    "rust/ix/src/market_order.rs": "5e21911e024ad6b61dbd84c8835b6e4f685884cce0b4ccc1040d25060d972018",
+    "rust/ix/src/cancel_stop_loss.rs": "ff7475e7e59eed8f5e166c073648b08f627bb9b02df9f57f3036e68bb7b5527b",
+    "rust/ix/src/place_stop_loss.rs": "b4473a99a4d2ac8c3619a5fcaed90860e71f51f1b007a9cc023b160f6a5ab478",
+    "rust/ix/src/flight/register_builder.rs": "ff338aa892a77fcca5e0b21f2caa8bf82a7f2407d39a62a6e8d98615e2e0a136",
+    "rust/ix/src/flight/onboard_trader.rs": "a53ebf81d9ab7dbde14e4500b9fbd35e2d020b3b0b1c5dbe702280de361377d4",
+    "rust/ix/src/flight/proxy_instruction.rs": "d033ef23818e6e0ad2fe6ae2abfc79b9528bad998aaed08c0e331dcaea2f0c35",
+    "rust/ix/src/flight/constants.rs": "f161351caaead5d6462b5668b56511d1e017a36b4eff1aa0f8850cd044b32479",
+    "rust/ix/src/flight/set_onboarder_signer.rs": "5adbfb45b52c87b7ca1a9f689cc86edde4a0a3435f60d8c240d836316bdffce5",
+    "rust/ix/src/flight/mod.rs": "5a763e782f79dcb46f88a50c3af422013b4532161f07c2877f18122f70027f7e",
+    "rust/ix/src/flight/update_fee.rs": "74ee0d50e5e124f0c81e9e3cb3413d57a6e46b8269234b632bd10c77168d53fb"
+  },
+  "reference_vectors": {
+    "tests/fixtures/instructions.json": "f29f16b7d6ef9478f08ce11fd9566003b45cb9645e6ba7cc90a31c0eedd667b8",
+    "tests/fixtures/instruction_dispatch.json": "bc35024e0aaccb683c8bc0fb6653f803e1b233724d8e2bc3dbee3f3e8f64261d"
+  },
+  "live_read_samples": {
+    "date": "2026-11-09",
+    "url": "https://perp-api.phoenix.trade/v1/view/exchange/markets",
+    "selection": "first market only; native JSON numeric tokens preserved",
+    "sha256": "64760ddb0f5ce2de2ed70194d5c6b31770e5b07b8b4ebdec391a4e83bf9220ff"
+  },
+  "retrieved_at": "2026-11-09",
+  "schema_source": "https://docs.phoenix.trade/openapi/phoenix-public-api.json",
+  "developer_documentation": [
+    "https://docs.phoenix.trade/sdk/rise",
+    "https://docs.phoenix.trade/sdk/ws-api-best-practices"
+  ],
+  "fixture_sha256": {
+    "tests/fixtures/ws.json": "5dffaadf925f1e6454f0137feebd9a444128b6ee2da419fd3e0ee3e9210f19a8"
+  }
+}

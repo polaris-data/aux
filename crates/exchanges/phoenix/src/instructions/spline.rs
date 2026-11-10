@@ -1,0 +1,1150 @@
+//! Spline instruction construction.
+
+use borsh::{BorshDeserialize, BorshSerialize, to_vec};
+use solana_pubkey::Pubkey;
+
+use crate::instructions::constants::{
+    PHOENIX_GLOBAL_CONFIGURATION, PHOENIX_LOG_AUTHORITY, PHOENIX_PROGRAM_ID, SYSTEM_PROGRAM_ID,
+};
+use crate::instructions::discriminants::PhoenixInstruction;
+use crate::instructions::error::PhoenixIxError;
+use crate::instructions::types::{AccountMeta, Instruction};
+
+pub const MAX_SPLINE_REGIONS: usize = 10;
+
+#[derive(Debug, Clone)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct RegisterSplineParams {
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    payer: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    authority: Pubkey,
+    #[cfg_attr(
+        all(),
+        serde(with = "crate::instructions::serde_helpers::pubkey_option")
+    )]
+    permission_account: Option<Pubkey>,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    market_account: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    spline_collection: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    trader_account: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    perp_asset_map: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    global_trader_index: Vec<Pubkey>,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    active_trader_buffer: Vec<Pubkey>,
+}
+
+impl RegisterSplineParams {
+    pub fn builder() -> RegisterSplineParamsBuilder {
+        RegisterSplineParamsBuilder::new()
+    }
+
+    pub fn payer(&self) -> Pubkey {
+        self.payer
+    }
+
+    pub fn authority(&self) -> Pubkey {
+        self.authority
+    }
+
+    pub fn permission_account(&self) -> Option<Pubkey> {
+        self.permission_account
+    }
+
+    pub fn market_account(&self) -> Pubkey {
+        self.market_account
+    }
+
+    pub fn spline_collection(&self) -> Pubkey {
+        self.spline_collection
+    }
+
+    pub fn trader_account(&self) -> Pubkey {
+        self.trader_account
+    }
+
+    pub fn perp_asset_map(&self) -> Pubkey {
+        self.perp_asset_map
+    }
+
+    pub fn global_trader_index(&self) -> &[Pubkey] {
+        &self.global_trader_index
+    }
+
+    pub fn active_trader_buffer(&self) -> &[Pubkey] {
+        &self.active_trader_buffer
+    }
+}
+
+#[derive(Default)]
+pub struct RegisterSplineParamsBuilder {
+    payer: Option<Pubkey>,
+    authority: Option<Pubkey>,
+    permission_account: Option<Pubkey>,
+    market_account: Option<Pubkey>,
+    spline_collection: Option<Pubkey>,
+    trader_account: Option<Pubkey>,
+    perp_asset_map: Option<Pubkey>,
+    global_trader_index: Option<Vec<Pubkey>>,
+    active_trader_buffer: Option<Vec<Pubkey>>,
+}
+
+impl RegisterSplineParamsBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn payer(mut self, payer: Pubkey) -> Self {
+        self.payer = Some(payer);
+        self
+    }
+
+    pub fn authority(mut self, authority: Pubkey) -> Self {
+        self.authority = Some(authority);
+        self
+    }
+
+    pub fn permission_account(mut self, permission_account: Pubkey) -> Self {
+        self.permission_account = Some(permission_account);
+        self
+    }
+
+    pub fn market_account(mut self, market_account: Pubkey) -> Self {
+        self.market_account = Some(market_account);
+        self
+    }
+
+    pub fn spline_collection(mut self, spline_collection: Pubkey) -> Self {
+        self.spline_collection = Some(spline_collection);
+        self
+    }
+
+    pub fn trader_account(mut self, trader_account: Pubkey) -> Self {
+        self.trader_account = Some(trader_account);
+        self
+    }
+
+    pub fn perp_asset_map(mut self, perp_asset_map: Pubkey) -> Self {
+        self.perp_asset_map = Some(perp_asset_map);
+        self
+    }
+
+    pub fn global_trader_index(mut self, global_trader_index: Vec<Pubkey>) -> Self {
+        self.global_trader_index = Some(global_trader_index);
+        self
+    }
+
+    pub fn active_trader_buffer(mut self, active_trader_buffer: Vec<Pubkey>) -> Self {
+        self.active_trader_buffer = Some(active_trader_buffer);
+        self
+    }
+
+    pub fn build(self) -> Result<RegisterSplineParams, PhoenixIxError> {
+        let global_trader_index = self
+            .global_trader_index
+            .ok_or(PhoenixIxError::MissingField("global_trader_index"))?;
+        if global_trader_index.is_empty() {
+            return Err(PhoenixIxError::EmptyGlobalTraderIndex);
+        }
+        let active_trader_buffer = self
+            .active_trader_buffer
+            .ok_or(PhoenixIxError::MissingField("active_trader_buffer"))?;
+        if active_trader_buffer.is_empty() {
+            return Err(PhoenixIxError::EmptyActiveTraderBuffer);
+        }
+
+        Ok(RegisterSplineParams {
+            payer: self.payer.ok_or(PhoenixIxError::MissingField("payer"))?,
+            authority: self
+                .authority
+                .ok_or(PhoenixIxError::MissingField("authority"))?,
+            permission_account: self.permission_account,
+            market_account: self
+                .market_account
+                .ok_or(PhoenixIxError::MissingField("market_account"))?,
+            spline_collection: self
+                .spline_collection
+                .ok_or(PhoenixIxError::MissingField("spline_collection"))?,
+            trader_account: self
+                .trader_account
+                .ok_or(PhoenixIxError::MissingField("trader_account"))?,
+            perp_asset_map: self
+                .perp_asset_map
+                .ok_or(PhoenixIxError::MissingField("perp_asset_map"))?,
+            global_trader_index,
+            active_trader_buffer,
+        })
+    }
+}
+
+#[derive(Debug, Clone)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct DeactivateSplineParams {
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    authority: Pubkey,
+    #[cfg_attr(
+        all(),
+        serde(with = "crate::instructions::serde_helpers::pubkey_option")
+    )]
+    permission_account: Option<Pubkey>,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    market_account: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    spline_collection: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    trader_account: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    perp_asset_map: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    global_trader_index: Vec<Pubkey>,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    active_trader_buffer: Vec<Pubkey>,
+}
+
+impl DeactivateSplineParams {
+    pub fn builder() -> DeactivateSplineParamsBuilder {
+        DeactivateSplineParamsBuilder::new()
+    }
+
+    pub fn authority(&self) -> Pubkey {
+        self.authority
+    }
+
+    pub fn permission_account(&self) -> Option<Pubkey> {
+        self.permission_account
+    }
+
+    pub fn market_account(&self) -> Pubkey {
+        self.market_account
+    }
+
+    pub fn spline_collection(&self) -> Pubkey {
+        self.spline_collection
+    }
+
+    pub fn trader_account(&self) -> Pubkey {
+        self.trader_account
+    }
+
+    pub fn perp_asset_map(&self) -> Pubkey {
+        self.perp_asset_map
+    }
+
+    pub fn global_trader_index(&self) -> &[Pubkey] {
+        &self.global_trader_index
+    }
+
+    pub fn active_trader_buffer(&self) -> &[Pubkey] {
+        &self.active_trader_buffer
+    }
+}
+
+#[derive(Default)]
+pub struct DeactivateSplineParamsBuilder {
+    authority: Option<Pubkey>,
+    permission_account: Option<Pubkey>,
+    market_account: Option<Pubkey>,
+    spline_collection: Option<Pubkey>,
+    trader_account: Option<Pubkey>,
+    perp_asset_map: Option<Pubkey>,
+    global_trader_index: Option<Vec<Pubkey>>,
+    active_trader_buffer: Option<Vec<Pubkey>>,
+}
+
+impl DeactivateSplineParamsBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn authority(mut self, authority: Pubkey) -> Self {
+        self.authority = Some(authority);
+        self
+    }
+
+    pub fn permission_account(mut self, permission_account: Pubkey) -> Self {
+        self.permission_account = Some(permission_account);
+        self
+    }
+
+    pub fn market_account(mut self, market_account: Pubkey) -> Self {
+        self.market_account = Some(market_account);
+        self
+    }
+
+    pub fn spline_collection(mut self, spline_collection: Pubkey) -> Self {
+        self.spline_collection = Some(spline_collection);
+        self
+    }
+
+    pub fn trader_account(mut self, trader_account: Pubkey) -> Self {
+        self.trader_account = Some(trader_account);
+        self
+    }
+
+    pub fn perp_asset_map(mut self, perp_asset_map: Pubkey) -> Self {
+        self.perp_asset_map = Some(perp_asset_map);
+        self
+    }
+
+    pub fn global_trader_index(mut self, global_trader_index: Vec<Pubkey>) -> Self {
+        self.global_trader_index = Some(global_trader_index);
+        self
+    }
+
+    pub fn active_trader_buffer(mut self, active_trader_buffer: Vec<Pubkey>) -> Self {
+        self.active_trader_buffer = Some(active_trader_buffer);
+        self
+    }
+
+    pub fn build(self) -> Result<DeactivateSplineParams, PhoenixIxError> {
+        let global_trader_index = self
+            .global_trader_index
+            .ok_or(PhoenixIxError::MissingField("global_trader_index"))?;
+        if global_trader_index.is_empty() {
+            return Err(PhoenixIxError::EmptyGlobalTraderIndex);
+        }
+        let active_trader_buffer = self
+            .active_trader_buffer
+            .ok_or(PhoenixIxError::MissingField("active_trader_buffer"))?;
+        if active_trader_buffer.is_empty() {
+            return Err(PhoenixIxError::EmptyActiveTraderBuffer);
+        }
+
+        Ok(DeactivateSplineParams {
+            authority: self
+                .authority
+                .ok_or(PhoenixIxError::MissingField("authority"))?,
+            permission_account: self.permission_account,
+            market_account: self
+                .market_account
+                .ok_or(PhoenixIxError::MissingField("market_account"))?,
+            spline_collection: self
+                .spline_collection
+                .ok_or(PhoenixIxError::MissingField("spline_collection"))?,
+            trader_account: self
+                .trader_account
+                .ok_or(PhoenixIxError::MissingField("trader_account"))?,
+            perp_asset_map: self
+                .perp_asset_map
+                .ok_or(PhoenixIxError::MissingField("perp_asset_map"))?,
+            global_trader_index,
+            active_trader_buffer,
+        })
+    }
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug, Copy, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct TickRegionParams {
+    pub start_offset: u64,
+    pub end_offset: u64,
+    pub density: u32,
+    pub top_level_hidden_take_size: u32,
+    pub lifespan: u64,
+}
+
+impl TickRegionParams {
+    pub const fn new(start_offset: u64, end_offset: u64, density: u32, lifespan: u64) -> Self {
+        Self {
+            start_offset,
+            end_offset,
+            density,
+            top_level_hidden_take_size: 0,
+            lifespan,
+        }
+    }
+
+    pub const fn new_with_hidden_take_size(
+        start_offset: u64,
+        end_offset: u64,
+        density: u32,
+        top_level_hidden_take_size: u32,
+        lifespan: u64,
+    ) -> Self {
+        Self {
+            start_offset,
+            end_offset,
+            density,
+            top_level_hidden_take_size,
+            lifespan,
+        }
+    }
+
+    pub fn try_from_raw(
+        start_offset: u64,
+        end_offset: u64,
+        density: u64,
+        lifespan: u64,
+    ) -> Result<Self, PhoenixIxError> {
+        Self::try_from_raw_with_hidden_take_size(start_offset, end_offset, density, 0, lifespan)
+    }
+
+    pub fn try_from_raw_with_hidden_take_size(
+        start_offset: u64,
+        end_offset: u64,
+        density: u64,
+        top_level_hidden_take_size: u64,
+        lifespan: u64,
+    ) -> Result<Self, PhoenixIxError> {
+        if start_offset >= end_offset {
+            return Err(PhoenixIxError::InvalidSplineTickRegion);
+        }
+        let density =
+            u32::try_from(density).map_err(|_| PhoenixIxError::InvalidSplineTickRegion)?;
+        let top_level_hidden_take_size = u32::try_from(top_level_hidden_take_size)
+            .map_err(|_| PhoenixIxError::InvalidSplineTickRegion)?;
+        Ok(Self::new_with_hidden_take_size(
+            start_offset,
+            end_offset,
+            density,
+            top_level_hidden_take_size,
+            lifespan,
+        ))
+    }
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct UpdateSplinePriceParams {
+    pub new_mid_price: u64,
+    pub user_update_slot: Option<u64>,
+    pub refresh_regions: bool,
+}
+
+impl UpdateSplinePriceParams {
+    pub fn builder() -> UpdateSplinePriceParamsBuilder {
+        UpdateSplinePriceParamsBuilder::new()
+    }
+}
+
+#[derive(Default)]
+pub struct UpdateSplinePriceParamsBuilder {
+    new_mid_price: Option<u64>,
+    user_update_slot: Option<u64>,
+    refresh_regions: Option<bool>,
+}
+
+impl UpdateSplinePriceParamsBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn new_mid_price(mut self, new_mid_price: u64) -> Self {
+        self.new_mid_price = Some(new_mid_price);
+        self
+    }
+
+    pub fn user_update_slot(mut self, user_update_slot: u64) -> Self {
+        self.user_update_slot = Some(user_update_slot);
+        self
+    }
+
+    pub fn refresh_regions(mut self, refresh_regions: bool) -> Self {
+        self.refresh_regions = Some(refresh_regions);
+        self
+    }
+
+    pub fn build(self) -> Result<UpdateSplinePriceParams, PhoenixIxError> {
+        Ok(UpdateSplinePriceParams {
+            new_mid_price: self
+                .new_mid_price
+                .ok_or(PhoenixIxError::MissingField("new_mid_price"))?,
+            user_update_slot: self.user_update_slot,
+            refresh_regions: self.refresh_regions.unwrap_or(true),
+        })
+    }
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct UpdateSplinePriceParamsWithOrdering {
+    pub new_mid_price: u64,
+    pub user_update_slot: Option<u64>,
+    pub refresh_regions: bool,
+    pub user_sequence_number: u64,
+    pub client_order_id: [u8; 16],
+    pub override_sequence_number: bool,
+}
+
+impl UpdateSplinePriceParamsWithOrdering {
+    pub fn builder() -> UpdateSplinePriceParamsWithOrderingBuilder {
+        UpdateSplinePriceParamsWithOrderingBuilder::new()
+    }
+}
+
+#[derive(Default)]
+pub struct UpdateSplinePriceParamsWithOrderingBuilder {
+    new_mid_price: Option<u64>,
+    user_update_slot: Option<u64>,
+    refresh_regions: Option<bool>,
+    user_sequence_number: Option<u64>,
+    client_order_id: Option<[u8; 16]>,
+    override_sequence_number: Option<bool>,
+}
+
+impl UpdateSplinePriceParamsWithOrderingBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn new_mid_price(mut self, new_mid_price: u64) -> Self {
+        self.new_mid_price = Some(new_mid_price);
+        self
+    }
+
+    pub fn user_update_slot(mut self, user_update_slot: u64) -> Self {
+        self.user_update_slot = Some(user_update_slot);
+        self
+    }
+
+    pub fn refresh_regions(mut self, refresh_regions: bool) -> Self {
+        self.refresh_regions = Some(refresh_regions);
+        self
+    }
+
+    pub fn user_sequence_number(mut self, user_sequence_number: u64) -> Self {
+        self.user_sequence_number = Some(user_sequence_number);
+        self
+    }
+
+    pub fn client_order_id(mut self, client_order_id: [u8; 16]) -> Self {
+        self.client_order_id = Some(client_order_id);
+        self
+    }
+
+    pub fn override_sequence_number(mut self, override_sequence_number: bool) -> Self {
+        self.override_sequence_number = Some(override_sequence_number);
+        self
+    }
+
+    pub fn build(self) -> Result<UpdateSplinePriceParamsWithOrdering, PhoenixIxError> {
+        Ok(UpdateSplinePriceParamsWithOrdering {
+            new_mid_price: self
+                .new_mid_price
+                .ok_or(PhoenixIxError::MissingField("new_mid_price"))?,
+            user_update_slot: self.user_update_slot,
+            refresh_regions: self.refresh_regions.unwrap_or(true),
+            user_sequence_number: self
+                .user_sequence_number
+                .ok_or(PhoenixIxError::MissingField("user_sequence_number"))?,
+            client_order_id: self.client_order_id.unwrap_or([0u8; 16]),
+            override_sequence_number: self.override_sequence_number.unwrap_or(false),
+        })
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct UpdateSplinePriceWithMetadataParams {
+    pub new_mid_price: u32,
+    pub user_update_slot: Option<u64>,
+    pub refresh_regions: bool,
+    pub user_sequence_number: u64,
+    pub client_order_id: [u8; 16],
+    pub override_sequence_number: bool,
+    pub bid_width: Option<u32>,
+    pub ask_width: Option<u32>,
+}
+
+impl UpdateSplinePriceWithMetadataParams {
+    pub fn builder() -> UpdateSplinePriceWithMetadataParamsBuilder {
+        UpdateSplinePriceWithMetadataParamsBuilder::new()
+    }
+
+    /// Encode the fixed 32-byte params followed by the 16-byte client order ID.
+    /// The instruction discriminator is not included.
+    pub fn encode(&self) -> Vec<u8> {
+        let flags = u32::from(self.refresh_regions)
+            | (u32::from(self.override_sequence_number) << 1)
+            | (u32::from(self.user_update_slot.is_some()) << 2)
+            | (u32::from(self.bid_width.is_some()) << 3)
+            | (u32::from(self.ask_width.is_some()) << 4);
+        let mut data = Vec::with_capacity(48);
+        data.extend_from_slice(&self.new_mid_price.to_le_bytes());
+        data.extend_from_slice(&flags.to_le_bytes());
+        data.extend_from_slice(&self.user_sequence_number.to_le_bytes());
+        data.extend_from_slice(&self.user_update_slot.unwrap_or(0).to_le_bytes());
+        data.extend_from_slice(&self.bid_width.unwrap_or(0).to_le_bytes());
+        data.extend_from_slice(&self.ask_width.unwrap_or(0).to_le_bytes());
+        data.extend_from_slice(&self.client_order_id);
+        data
+    }
+
+    /// Decode the fixed params and optional client order ID tail.
+    /// A missing or incomplete client order ID is reported as zero.
+    pub fn decode(data: &[u8]) -> Result<Self, PhoenixIxError> {
+        let (data, tail) = data
+            .split_first_chunk::<32>()
+            .ok_or(PhoenixIxError::InvalidSplinePriceMetadata)?;
+        let flags = u32::from_le_bytes(data[4..8].try_into().unwrap());
+        // Bits above the five defined flags are reserved and must be zero.
+        if flags >> 5 != 0 {
+            return Err(PhoenixIxError::InvalidSplinePriceMetadata);
+        }
+        Ok(Self {
+            new_mid_price: u32::from_le_bytes(data[..4].try_into().unwrap()),
+            user_sequence_number: u64::from_le_bytes(data[8..16].try_into().unwrap()),
+            refresh_regions: flags & 1 != 0,
+            override_sequence_number: flags & 2 != 0,
+            user_update_slot: (flags & 4 != 0)
+                .then(|| u64::from_le_bytes(data[16..24].try_into().unwrap())),
+            bid_width: (flags & 8 != 0)
+                .then(|| u32::from_le_bytes(data[24..28].try_into().unwrap())),
+            ask_width: (flags & 16 != 0)
+                .then(|| u32::from_le_bytes(data[28..32].try_into().unwrap())),
+            client_order_id: tail.first_chunk::<16>().copied().unwrap_or_default(),
+        })
+    }
+
+    /// Decode complete instruction data, including its discriminator.
+    /// The returned input params retain `client_order_id` for off-chain
+    /// tracking.
+    pub fn decode_instruction_data(data: &[u8]) -> Result<Self, PhoenixIxError> {
+        let (discriminator, payload) = data
+            .split_first_chunk::<8>()
+            .ok_or(PhoenixIxError::InvalidSplinePriceMetadata)?;
+        if *discriminator != PhoenixInstruction::UpdateSplinePriceWithMetadata.discriminant() {
+            return Err(PhoenixIxError::InvalidSplinePriceMetadata);
+        }
+        Self::decode(payload)
+    }
+}
+
+#[derive(Default)]
+pub struct UpdateSplinePriceWithMetadataParamsBuilder {
+    new_mid_price: Option<u32>,
+    user_update_slot: Option<u64>,
+    refresh_regions: Option<bool>,
+    user_sequence_number: Option<u64>,
+    client_order_id: Option<[u8; 16]>,
+    override_sequence_number: Option<bool>,
+    bid_width: Option<u32>,
+    ask_width: Option<u32>,
+}
+
+impl UpdateSplinePriceWithMetadataParamsBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn new_mid_price(mut self, new_mid_price: u32) -> Self {
+        self.new_mid_price = Some(new_mid_price);
+        self
+    }
+
+    pub fn user_update_slot(mut self, user_update_slot: u64) -> Self {
+        self.user_update_slot = Some(user_update_slot);
+        self
+    }
+
+    pub fn refresh_regions(mut self, refresh_regions: bool) -> Self {
+        self.refresh_regions = Some(refresh_regions);
+        self
+    }
+
+    pub fn user_sequence_number(mut self, user_sequence_number: u64) -> Self {
+        self.user_sequence_number = Some(user_sequence_number);
+        self
+    }
+
+    pub fn client_order_id(mut self, client_order_id: [u8; 16]) -> Self {
+        self.client_order_id = Some(client_order_id);
+        self
+    }
+
+    pub fn override_sequence_number(mut self, override_sequence_number: bool) -> Self {
+        self.override_sequence_number = Some(override_sequence_number);
+        self
+    }
+
+    /// Omission preserves the bid width; zero resets it.
+    pub fn bid_width(mut self, bid: u32) -> Self {
+        self.bid_width = Some(bid);
+        self
+    }
+
+    pub fn ask_width(mut self, ask: u32) -> Self {
+        self.ask_width = Some(ask);
+        self
+    }
+
+    /// Set both widths; (0, 0) resets them.
+    pub fn base_widths(mut self, bid: u32, ask: u32) -> Self {
+        self.bid_width = Some(bid);
+        self.ask_width = Some(ask);
+        self
+    }
+
+    pub fn build(self) -> Result<UpdateSplinePriceWithMetadataParams, PhoenixIxError> {
+        Ok(UpdateSplinePriceWithMetadataParams {
+            new_mid_price: self
+                .new_mid_price
+                .ok_or(PhoenixIxError::MissingField("new_mid_price"))?,
+            user_update_slot: self.user_update_slot,
+            refresh_regions: self.refresh_regions.unwrap_or(true),
+            user_sequence_number: self
+                .user_sequence_number
+                .ok_or(PhoenixIxError::MissingField("user_sequence_number"))?,
+            client_order_id: self.client_order_id.unwrap_or([0u8; 16]),
+            override_sequence_number: self.override_sequence_number.unwrap_or(false),
+            bid_width: self.bid_width,
+            ask_width: self.ask_width,
+        })
+    }
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct UpdateSplineParametersParamsWithOrdering {
+    pub bid_regions: Vec<TickRegionParams>,
+    pub ask_regions: Vec<TickRegionParams>,
+    pub refresh_regions: bool,
+    pub user_sequence_number: u64,
+    pub client_order_id: [u8; 16],
+    pub override_sequence_number: bool,
+}
+
+impl UpdateSplineParametersParamsWithOrdering {
+    pub fn builder() -> UpdateSplineParametersParamsWithOrderingBuilder {
+        UpdateSplineParametersParamsWithOrderingBuilder::new()
+    }
+}
+
+#[derive(Default)]
+pub struct UpdateSplineParametersParamsWithOrderingBuilder {
+    bid_regions: Vec<TickRegionParams>,
+    ask_regions: Vec<TickRegionParams>,
+    refresh_regions: Option<bool>,
+    user_sequence_number: Option<u64>,
+    client_order_id: Option<[u8; 16]>,
+    override_sequence_number: Option<bool>,
+}
+
+impl UpdateSplineParametersParamsWithOrderingBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn bid_regions(mut self, bid_regions: Vec<TickRegionParams>) -> Self {
+        self.bid_regions = bid_regions;
+        self
+    }
+
+    pub fn ask_regions(mut self, ask_regions: Vec<TickRegionParams>) -> Self {
+        self.ask_regions = ask_regions;
+        self
+    }
+
+    pub fn bid_regions_raw(
+        mut self,
+        regions: impl IntoIterator<Item = (u64, u64, u64, u64)>,
+    ) -> Result<Self, PhoenixIxError> {
+        self.bid_regions = regions
+            .into_iter()
+            .map(|(start, end, density, lifespan)| {
+                TickRegionParams::try_from_raw(start, end, density, lifespan)
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        Ok(self)
+    }
+
+    pub fn ask_regions_raw(
+        mut self,
+        regions: impl IntoIterator<Item = (u64, u64, u64, u64)>,
+    ) -> Result<Self, PhoenixIxError> {
+        self.ask_regions = regions
+            .into_iter()
+            .map(|(start, end, density, lifespan)| {
+                TickRegionParams::try_from_raw(start, end, density, lifespan)
+            })
+            .collect::<Result<Vec<_>, _>>()?;
+        Ok(self)
+    }
+
+    pub fn refresh_regions(mut self, refresh_regions: bool) -> Self {
+        self.refresh_regions = Some(refresh_regions);
+        self
+    }
+
+    pub fn user_sequence_number(mut self, user_sequence_number: u64) -> Self {
+        self.user_sequence_number = Some(user_sequence_number);
+        self
+    }
+
+    pub fn client_order_id(mut self, client_order_id: [u8; 16]) -> Self {
+        self.client_order_id = Some(client_order_id);
+        self
+    }
+
+    pub fn override_sequence_number(mut self, override_sequence_number: bool) -> Self {
+        self.override_sequence_number = Some(override_sequence_number);
+        self
+    }
+
+    pub fn build(self) -> Result<UpdateSplineParametersParamsWithOrdering, PhoenixIxError> {
+        if self.bid_regions.is_empty() && self.ask_regions.is_empty() {
+            return Err(PhoenixIxError::InvalidSplineTickRegion);
+        }
+        if self.bid_regions.len() > MAX_SPLINE_REGIONS
+            || self.ask_regions.len() > MAX_SPLINE_REGIONS
+        {
+            return Err(PhoenixIxError::InvalidSplineTickRegion);
+        }
+
+        Ok(UpdateSplineParametersParamsWithOrdering {
+            bid_regions: self.bid_regions,
+            ask_regions: self.ask_regions,
+            refresh_regions: self.refresh_regions.unwrap_or(true),
+            user_sequence_number: self
+                .user_sequence_number
+                .ok_or(PhoenixIxError::MissingField("user_sequence_number"))?,
+            client_order_id: self.client_order_id.unwrap_or([0u8; 16]),
+            override_sequence_number: self.override_sequence_number.unwrap_or(false),
+        })
+    }
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug, Copy, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct PositionSizeLimits {
+    pub long: u32,
+    pub short: u32,
+}
+
+impl PositionSizeLimits {
+    pub const fn symmetric(size: u32) -> Self {
+        Self {
+            long: size,
+            short: size,
+        }
+    }
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug, Copy, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub enum PositionSizeLimit {
+    Disabled,
+    Limit(PositionSizeLimits),
+}
+
+#[derive(BorshSerialize, BorshDeserialize, Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct UpdateSplinePositionLimitsConfigParams {
+    pub max_position_size: Option<PositionSizeLimit>,
+    pub leverage_decrease_in_bps: Option<u32>,
+}
+
+impl UpdateSplinePositionLimitsConfigParams {
+    pub fn builder() -> UpdateSplinePositionLimitsConfigParamsBuilder {
+        UpdateSplinePositionLimitsConfigParamsBuilder::new()
+    }
+}
+
+#[derive(Default)]
+pub struct UpdateSplinePositionLimitsConfigParamsBuilder {
+    max_position_size: Option<PositionSizeLimit>,
+    leverage_decrease_in_bps: Option<u32>,
+}
+
+impl UpdateSplinePositionLimitsConfigParamsBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn max_position_size(mut self, max_position_size: PositionSizeLimit) -> Self {
+        self.max_position_size = Some(max_position_size);
+        self
+    }
+
+    pub fn symmetric_max_position_size(mut self, size: u32) -> Self {
+        self.max_position_size = Some(PositionSizeLimit::Limit(PositionSizeLimits::symmetric(
+            size,
+        )));
+        self
+    }
+
+    pub fn disable_max_position_size(mut self) -> Self {
+        self.max_position_size = Some(PositionSizeLimit::Disabled);
+        self
+    }
+
+    pub fn leverage_decrease_in_bps(mut self, leverage_decrease_in_bps: u32) -> Self {
+        self.leverage_decrease_in_bps = Some(leverage_decrease_in_bps);
+        self
+    }
+
+    pub fn build(self) -> Result<UpdateSplinePositionLimitsConfigParams, PhoenixIxError> {
+        if self.max_position_size.is_none() && self.leverage_decrease_in_bps.is_none() {
+            return Err(PhoenixIxError::MissingSplineUpdate);
+        }
+        if self
+            .leverage_decrease_in_bps
+            .is_some_and(|bps| bps > 10_000)
+        {
+            return Err(PhoenixIxError::InvalidLeverageDecreaseBps);
+        }
+
+        Ok(UpdateSplinePositionLimitsConfigParams {
+            max_position_size: self.max_position_size,
+            leverage_decrease_in_bps: self.leverage_decrease_in_bps,
+        })
+    }
+}
+
+#[derive(Debug, Clone)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct SplineUpdateAccounts {
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    signer: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    trader_account: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    spline_collection: Pubkey,
+}
+
+impl SplineUpdateAccounts {
+    pub fn builder() -> SplineUpdateAccountsBuilder {
+        SplineUpdateAccountsBuilder::new()
+    }
+
+    pub fn signer(&self) -> Pubkey {
+        self.signer
+    }
+
+    pub fn trader_account(&self) -> Pubkey {
+        self.trader_account
+    }
+
+    pub fn spline_collection(&self) -> Pubkey {
+        self.spline_collection
+    }
+}
+
+#[derive(Default)]
+pub struct SplineUpdateAccountsBuilder {
+    signer: Option<Pubkey>,
+    trader_account: Option<Pubkey>,
+    spline_collection: Option<Pubkey>,
+}
+
+impl SplineUpdateAccountsBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn signer(mut self, signer: Pubkey) -> Self {
+        self.signer = Some(signer);
+        self
+    }
+
+    pub fn trader_account(mut self, trader_account: Pubkey) -> Self {
+        self.trader_account = Some(trader_account);
+        self
+    }
+
+    pub fn spline_collection(mut self, spline_collection: Pubkey) -> Self {
+        self.spline_collection = Some(spline_collection);
+        self
+    }
+
+    pub fn build(self) -> Result<SplineUpdateAccounts, PhoenixIxError> {
+        Ok(SplineUpdateAccounts {
+            signer: self.signer.ok_or(PhoenixIxError::MissingField("signer"))?,
+            trader_account: self
+                .trader_account
+                .ok_or(PhoenixIxError::MissingField("trader_account"))?,
+            spline_collection: self
+                .spline_collection
+                .ok_or(PhoenixIxError::MissingField("spline_collection"))?,
+        })
+    }
+}
+
+pub fn create_register_spline_ix(
+    params: RegisterSplineParams,
+) -> Result<Instruction, PhoenixIxError> {
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts: build_register_spline_accounts(&params),
+        data: PhoenixInstruction::RegisterSpline.discriminant().to_vec(),
+    })
+}
+
+pub fn create_deactivate_spline_ix(
+    params: DeactivateSplineParams,
+) -> Result<Instruction, PhoenixIxError> {
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts: build_deactivate_spline_accounts(&params),
+        data: PhoenixInstruction::DeactivateSpline.discriminant().to_vec(),
+    })
+}
+
+pub fn create_update_spline_price_ix(
+    accounts: SplineUpdateAccounts,
+    params: UpdateSplinePriceParams,
+) -> Result<Instruction, PhoenixIxError> {
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts: build_spline_update_accounts(&accounts),
+        data: encode_with_instruction(PhoenixInstruction::UpdateSplinePrice, &params),
+    })
+}
+
+pub fn create_update_spline_price_with_ordering_ix(
+    accounts: SplineUpdateAccounts,
+    params: UpdateSplinePriceParamsWithOrdering,
+) -> Result<Instruction, PhoenixIxError> {
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts: build_spline_update_accounts(&accounts),
+        data: encode_with_instruction(PhoenixInstruction::UpdateSplinePrice, &params),
+    })
+}
+
+pub fn create_update_spline_price_with_metadata_ix(
+    accounts: SplineUpdateAccounts,
+    params: UpdateSplinePriceWithMetadataParams,
+) -> Result<Instruction, PhoenixIxError> {
+    let mut data = Vec::with_capacity(8 + 48);
+    data.extend_from_slice(&PhoenixInstruction::UpdateSplinePriceWithMetadata.discriminant());
+    data.extend_from_slice(&params.encode());
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts: build_spline_update_accounts(&accounts),
+        data,
+    })
+}
+
+pub fn create_update_spline_parameters_with_ordering_ix(
+    accounts: SplineUpdateAccounts,
+    params: UpdateSplineParametersParamsWithOrdering,
+) -> Result<Instruction, PhoenixIxError> {
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts: build_spline_update_accounts(&accounts),
+        data: encode_with_instruction(PhoenixInstruction::UpdateSplineParameters, &params),
+    })
+}
+
+pub fn create_update_spline_position_limits_config_ix(
+    accounts: SplineUpdateAccounts,
+    params: UpdateSplinePositionLimitsConfigParams,
+) -> Result<Instruction, PhoenixIxError> {
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts: build_spline_update_accounts(&accounts),
+        data: encode_with_instruction(
+            PhoenixInstruction::UpdateSplinePositionLimitsConfig,
+            &params,
+        ),
+    })
+}
+
+fn encode_with_instruction<T: BorshSerialize>(
+    instruction: PhoenixInstruction,
+    params: &T,
+) -> Vec<u8> {
+    let mut data = Vec::with_capacity(8 + 64);
+    data.extend_from_slice(&instruction.discriminant());
+    data.extend_from_slice(&to_vec(params).expect("serializing spline params should not fail"));
+    data
+}
+
+fn build_register_spline_accounts(params: &RegisterSplineParams) -> Vec<AccountMeta> {
+    let mut accounts = log_accounts();
+    accounts.extend(authority_instruction_accounts(
+        params.authority(),
+        params.permission_account(),
+    ));
+    accounts.extend([
+        AccountMeta::writable_signer(params.payer()),
+        AccountMeta::writable(params.spline_collection()),
+        AccountMeta::readonly(params.market_account()),
+    ]);
+    extend_index_accounts(
+        &mut accounts,
+        params.global_trader_index(),
+        params.active_trader_buffer(),
+    );
+    accounts.extend([
+        AccountMeta::writable(params.trader_account()),
+        AccountMeta::readonly(params.perp_asset_map()),
+        AccountMeta::readonly(SYSTEM_PROGRAM_ID),
+    ]);
+    accounts
+}
+
+fn build_deactivate_spline_accounts(params: &DeactivateSplineParams) -> Vec<AccountMeta> {
+    let mut accounts = log_accounts();
+    accounts.extend(authority_instruction_accounts(
+        params.authority(),
+        params.permission_account(),
+    ));
+    accounts.extend([
+        AccountMeta::writable(params.spline_collection()),
+        AccountMeta::readonly(params.market_account()),
+    ]);
+    extend_index_accounts(
+        &mut accounts,
+        params.global_trader_index(),
+        params.active_trader_buffer(),
+    );
+    accounts.extend([
+        AccountMeta::writable(params.trader_account()),
+        AccountMeta::readonly(params.perp_asset_map()),
+        AccountMeta::readonly(SYSTEM_PROGRAM_ID),
+    ]);
+    accounts
+}
+
+fn build_spline_update_accounts(accounts: &SplineUpdateAccounts) -> Vec<AccountMeta> {
+    let mut account_metas = log_accounts();
+    account_metas.extend([
+        AccountMeta::readonly_signer(accounts.signer()),
+        AccountMeta::readonly(accounts.trader_account()),
+        AccountMeta::writable(accounts.spline_collection()),
+    ]);
+    account_metas
+}
+
+fn log_accounts() -> Vec<AccountMeta> {
+    vec![
+        AccountMeta::readonly(*PHOENIX_PROGRAM_ID),
+        AccountMeta::readonly(*PHOENIX_LOG_AUTHORITY),
+    ]
+}
+
+fn authority_instruction_accounts(
+    authority: Pubkey,
+    permission_account: Option<Pubkey>,
+) -> [AccountMeta; 3] {
+    [
+        AccountMeta::readonly(*PHOENIX_GLOBAL_CONFIGURATION),
+        AccountMeta::readonly_signer(authority),
+        AccountMeta::writable(permission_account.unwrap_or(authority)),
+    ]
+}
+
+fn extend_index_accounts(
+    accounts: &mut Vec<AccountMeta>,
+    global_trader_index: &[Pubkey],
+    active_trader_buffer: &[Pubkey],
+) {
+    accounts.extend(
+        global_trader_index
+            .iter()
+            .copied()
+            .map(AccountMeta::writable),
+    );
+    accounts.extend(
+        active_trader_buffer
+            .iter()
+            .copied()
+            .map(AccountMeta::writable),
+    );
+}

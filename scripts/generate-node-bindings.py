@@ -20,7 +20,7 @@ def resource(method):
     return ret if ret in CLASSES else None
 
 def ref_type(t):
-    m=re.search(r"PyRef<'_, (\w+)>",t)
+    m=re.search(r"PyRef<'_,\s*(\w+)>",t)
     return m[1] if m else None
 
 def adapter(cls,d,m):
@@ -140,7 +140,7 @@ rust=subprocess.run(['rustfmt','--edition','2024','--emit','stdout'],input='\n'.
 outputs={BASE/'src/bindings.rs':rust,BASE/'js/index.cjs':'\n'.join(js)+'\n'}
 # Public declarations use the Rust payload models and generated operation inventory.
 MODELS=json.loads((BASE/'src/models.json').read_text())
-VENUE={'client':'hyperliquid','signers':'hyperliquid','lighter':'lighter','qfex':'qfex','arcus':'arcus','monaco':'monaco','metric':'metric','derive':'derive','paradex':'paradex'}
+VENUE={'client':'hyperliquid','signers':'hyperliquid','lighter':'lighter','qfex':'qfex','arcus':'arcus','monaco':'monaco','metric':'metric','derive':'derive','paradex':'paradex','phoenix':'phoenix','extended':'extended'}
 
 RUST_RETURNS={}
 for venue in MODELS:
@@ -188,6 +188,8 @@ def model_arg(cls,d,m,key,typ):
             'HyperliquidSigner':('{digest: number[]; network: string; scheme: string}', 'hyperliquid.Signature'),
             'LighterSigner':('{digest: number[]; chainId: number | bigint; accountIndex: number | bigint; apiKeyIndex: number; purpose: {type: string; tx_type?: number; nonce?: number | bigint; deadline?: number | bigint}}', 'string'),
             'DeriveSigner':('{digest: string; chain_id: number | bigint; scheme: string}', 'string'),
+            'ExtendedSigner':('{digest: string; scheme: string; typed_data: LosslessValue; personal_message: string | null}', 'string | string[]'),
+            'PhoenixSigner':('{message_base64: string; public_key: string; scheme: string}', 'string'),
             'ParadexSigner':('{digest: string; scheme: string; typed_data: LosslessValue; personal_message: string | null}', 'string | string[]'),
             'MonacoSessionSigner':('number[]','string'), 'MonacoWalletSigner':('string','string'),
             'MetricSigner':('{digest: string; address: string; scheme: string}','string'),
@@ -227,11 +229,11 @@ def method_output(cls,d,m):
         ('LighterSigner','sign'):'string',('LighterSigner','auth_token'):'string',('LighterClient','auth_token'):'string',('LighterClient','next_nonce'):'lighter.NextNonce',
         ('MonacoSessionSigner','sign'):'string',('MonacoWalletSigner','sign_message'):'string',('MonacoClient','login'):'monaco.SessionInfo',
         ('MetricSigner','sign_digest'):'string',('MetricSigner','sign_personal_digest'):'string',('MetricSigner','sign_transaction'):'metric.SignedTransaction',
-        ('DeriveSigner','sign'):'string',('ParadexSigner','sign'):'string[]',
+        ('DeriveSigner','sign'):'string',('ParadexSigner','sign'):'string[]',('ExtendedSigner','sign'):'string[]',('PhoenixSigner','sign_message'):'string',('PhoenixSigner','sign_transaction'):'Record<string, string>',
     }
     if (cls,m['name']) in hints:return hints[cls,m['name']]
     # Full API inventories record exact native response types.
-    if venue in ('derive','paradex','metric'):
+    if venue in ('derive','paradex','metric','phoenix','extended'):
         coverage=json.loads((ROOT/'crates/exchanges'/venue/'coverage.json').read_text())
         for row in coverage['rest']:
             if row['method']==m['name']:return ts_type(row['response'],venue)

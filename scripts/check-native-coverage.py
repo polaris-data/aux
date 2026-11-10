@@ -139,6 +139,7 @@ if __name__ == '__main__':
     for venue in ['derive', 'paradex']:
         check(venue)
     check_metric()
+    subprocess.run([sys.executable, str(ROOT / "scripts/check-perpetual-coverage.py")], cwd=ROOT, check=True)
     if args.metric_sdk_root is not None:
         package = json.loads((args.metric_sdk_root / 'package.json').read_text())
         sdk = json.loads((ROOT / 'crates/exchanges/metric/API_SOURCES.json').read_text())['sdk']

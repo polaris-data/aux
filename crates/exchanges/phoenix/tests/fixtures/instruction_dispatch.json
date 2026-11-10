@@ -1,0 +1,6752 @@
+{
+  "create_associated_token_account_idempotent_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "DuB7uNjFjyYNYGKk4DhBdveyVmRT4eRfiTm3k99cjrim"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "25hjHpTATmkdET17ynDhf1MCuYNDn1z7wXfVw5iaxLAK"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "data": [
+        1
+      ],
+      "program_id": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+    },
+    "request": {
+      "mint": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2",
+      "owner": "25hjHpTATmkdET17ynDhf1MCuYNDn1z7wXfVw5iaxLAK",
+      "payer": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC"
+    }
+  },
+  "create_cancel_all_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        }
+      ],
+      "data": [
+        98,
+        191,
+        75,
+        220,
+        115,
+        40,
+        71,
+        237
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "global_trader_index": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "orderbook": "11111111111111111111111111111114",
+      "perp_asset_map": "11111111111111111111111111111113",
+      "spline_collection": "11111111111111111111111111111115",
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112"
+    }
+  },
+  "create_cancel_conditional_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111B"
+        }
+      ],
+      "data": [
+        82,
+        104,
+        25,
+        51,
+        248,
+        54,
+        66,
+        184,
+        1,
+        1,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "conditional_order_index": 1,
+      "disable_first": true,
+      "disable_second": false,
+      "orderbook": "11111111111111111111111111111115",
+      "trader_account": "11111111111111111111111111111112",
+      "trader_conditional_orders": "1111111111111111111111111111111B",
+      "trader_wallet": "11111111111111111111111111111113"
+    }
+  },
+  "create_cancel_orders_by_id_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        }
+      ],
+      "data": [
+        234,
+        204,
+        126,
+        94,
+        222,
+        22,
+        141,
+        24,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        232,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "global_trader_index": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "order_ids": [
+        {
+          "node_pointer": 0,
+          "order_id": {
+            "order_sequence_number": 0,
+            "price_in_ticks": 1000
+          }
+        }
+      ],
+      "orderbook": "11111111111111111111111111111114",
+      "perp_asset_map": "11111111111111111111111111111113",
+      "spline_collection": "11111111111111111111111111111115",
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112"
+    }
+  },
+  "create_cancel_stop_loss_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8GTkwa78r2DLB6P4Z6tD5bgApKq96gw6KTLDe87R2ZsU"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        120,
+        201,
+        10,
+        102,
+        12,
+        9,
+        111,
+        126,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "asset_id": 0,
+      "execution_direction": "GreaterThan",
+      "funder": "11111111111111111111111111111111",
+      "position_authority": "11111111111111111111111111111113",
+      "trader_account": "11111111111111111111111111111112"
+    }
+  },
+  "create_cancel_twap_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "gBxS1f6uyyGPuW5MzGBukidSb71jdsCb5fZaoSzULE5"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+        }
+      ],
+      "data": [
+        23,
+        154,
+        156,
+        168,
+        217,
+        164,
+        158,
+        170
+      ],
+      "program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+    },
+    "request": {
+      "authority": "gBxS1f6uyyGPuW5MzGBukidSb71jdsCb5fZaoSzULE5",
+      "flicker_program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b",
+      "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+      "twap_account": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB",
+      "twap_global_state": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U",
+      "twap_log_authority": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+    }
+  },
+  "create_cancel_up_to_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        }
+      ],
+      "data": [
+        26,
+        209,
+        244,
+        253,
+        59,
+        175,
+        227,
+        54,
+        1,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        232,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "global_trader_index": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "num_orders_to_cancel": 2,
+      "orderbook": "11111111111111111111111111111114",
+      "perp_asset_map": "11111111111111111111111111111113",
+      "side": "ask",
+      "spline_collection": "11111111111111111111111111111115",
+      "tick_limit": 1000,
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112"
+    }
+  },
+  "create_claim_fees_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "gBxS1f6uyyGPuW5MzGBukidSb71jdsCb5fZaoSzULE5"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "k7FaK87WHGVXzkaoHb7CdVPgkKDQhZ29VLDeBVbDfYn"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "p2Yicb86aZig616Eav2VWG9vuXR5mEqhtzshZYBxzsV"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "data": [
+        82,
+        251,
+        233,
+        156,
+        12,
+        52,
+        184,
+        202,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "amount": 1,
+      "authority": "gBxS1f6uyyGPuW5MzGBukidSb71jdsCb5fZaoSzULE5",
+      "destination": "p2Yicb86aZig616Eav2VWG9vuXR5mEqhtzshZYBxzsV",
+      "global_vault": "k7FaK87WHGVXzkaoHb7CdVPgkKDQhZ29VLDeBVbDfYn"
+    }
+  },
+  "create_close_inactive_twap_account_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi1"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+        }
+      ],
+      "data": [
+        124,
+        70,
+        207,
+        115,
+        138,
+        171,
+        52,
+        144
+      ],
+      "program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+    },
+    "request": {
+      "flicker_program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b",
+      "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+      "recipient": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi1",
+      "twap_account": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB",
+      "twap_global_state": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U",
+      "twap_log_authority": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+    }
+  },
+  "create_create_conditional_orders_account_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        201,
+        6,
+        112,
+        61,
+        231,
+        15,
+        57,
+        248,
+        32
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "capacity": 32,
+      "payer": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111113",
+      "trader_conditional_orders": "11111111111111111111111111111114",
+      "trader_wallet": "11111111111111111111111111111112"
+    }
+  },
+  "create_deactivate_spline_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        0,
+        254,
+        22,
+        100,
+        238,
+        197,
+        118,
+        181
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111119",
+        "1111111111111111111111111111111A"
+      ],
+      "authority": "11111111111111111111111111111111",
+      "global_trader_index": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "market_account": "11111111111111111111111111111113",
+      "permission_account": "11111111111111111111111111111112",
+      "perp_asset_map": "11111111111111111111111111111116",
+      "spline_collection": "11111111111111111111111111111114",
+      "trader_account": "11111111111111111111111111111115"
+    }
+  },
+  "create_delegate_trader_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8f1SJ8oVHyhTvxSYTCsGszbwLW5QYYGLCmvtTcn2qPEZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        }
+      ],
+      "data": [
+        3,
+        164,
+        192,
+        106,
+        119,
+        91,
+        122,
+        224
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "new_position_authority": "11111111111111111111111111111112",
+      "trader_account": "8f1SJ8oVHyhTvxSYTCsGszbwLW5QYYGLCmvtTcn2qPEZ",
+      "trader_wallet": "11111111111111111111111111111111"
+    }
+  },
+  "create_deposit_funds_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        }
+      ],
+      "data": [
+        202,
+        39,
+        52,
+        211,
+        53,
+        20,
+        250,
+        88,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "amount": 1,
+      "canonical_mint": "11111111111111111111111111111113",
+      "global_trader_index": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "global_vault": "11111111111111111111111111111114",
+      "permission_account": null,
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112",
+      "trader_token_account": "11111111111111111111111111111115"
+    }
+  },
+  "create_deposit_native_sol_ixs": {
+    "instruction": [
+      {
+        "accounts": [
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+          },
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+          },
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+          },
+          {
+            "is_signer": true,
+            "is_writable": true,
+            "pubkey": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC"
+          },
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+          },
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "11111111111111111111111111111111"
+          }
+        ],
+        "data": [
+          174,
+          248,
+          63,
+          35,
+          225,
+          236,
+          19,
+          204
+        ],
+        "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+      },
+      {
+        "accounts": [
+          {
+            "is_signer": true,
+            "is_writable": true,
+            "pubkey": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+          }
+        ],
+        "data": [
+          2,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "program_id": "11111111111111111111111111111111"
+      },
+      {
+        "accounts": [
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+          },
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+          }
+        ],
+        "data": [
+          155,
+          219,
+          36,
+          36,
+          239,
+          128,
+          21,
+          65
+        ],
+        "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+      }
+    ],
+    "request": {
+      "lamports": 1,
+      "payer": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC",
+      "sync": {
+        "active_trader_buffer": [
+          "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        ],
+        "global_trader_index": [
+          "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        ],
+        "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+      },
+      "trader_wallet": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+    }
+  },
+  "create_ember_deposit_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "6ur7v6AXNpnHeEb6xuk7PyezvZ1i5GrgYyWZkNCpzbRz"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "FKcEb4TdPDTRuMnQDpSEPQBcrm15S73xiUD6Qf8ZLUkq"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "data": [
+        242,
+        35,
+        198,
+        137,
+        82,
+        225,
+        242,
+        182,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EMBERpYNE6ehWmXymZZS2skiFmCa9V5dp14e1iduM5qy"
+    },
+    "request": {
+      "amount": 1,
+      "canonical_mint": "11111111111111111111111111111113",
+      "trader": "11111111111111111111111111111111",
+      "trader_phoenix_account": "11111111111111111111111111111115",
+      "trader_usdc_account": "11111111111111111111111111111114",
+      "usdc_mint": "11111111111111111111111111111112"
+    }
+  },
+  "create_ember_withdraw_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "6ur7v6AXNpnHeEb6xuk7PyezvZ1i5GrgYyWZkNCpzbRz"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "FKcEb4TdPDTRuMnQDpSEPQBcrm15S73xiUD6Qf8ZLUkq"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "data": [
+        183,
+        18,
+        70,
+        156,
+        148,
+        109,
+        161,
+        34,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EMBERpYNE6ehWmXymZZS2skiFmCa9V5dp14e1iduM5qy"
+    },
+    "request": {
+      "amount": 1,
+      "canonical_mint": "11111111111111111111111111111113",
+      "trader": "11111111111111111111111111111111",
+      "trader_phoenix_account": "11111111111111111111111111111115",
+      "trader_usdc_account": "11111111111111111111111111111114",
+      "usdc_mint": "11111111111111111111111111111112"
+    }
+  },
+  "create_execute_twap_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4rNrAAYahzvuxAFvs2bNatzUv3zUPd8jrFzQKfZ9azPJ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+        }
+      ],
+      "data": [
+        145,
+        69,
+        214,
+        36,
+        128,
+        146,
+        55,
+        207,
+        0
+      ],
+      "program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+    },
+    "request": {
+      "flicker_program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b",
+      "hawkeye_program_id": "4rNrAAYahzvuxAFvs2bNatzUv3zUPd8jrFzQKfZ9azPJ",
+      "order_accounts": [],
+      "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+      "transfer_accounts": [],
+      "twap_account": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB",
+      "twap_global_state": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U",
+      "twap_log_authority": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+    }
+  },
+  "create_hawkeye_view_bbo_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        55,
+        95,
+        35,
+        45,
+        83,
+        175,
+        18,
+        82
+      ],
+      "program_id": "RiSeVw3ZjNfsaXPRb4mgaqYaEEt41pNNJoDvVh7pgQj"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "global_config": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "orderbook": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+      "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+    }
+  },
+  "create_hawkeye_view_funding_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        }
+      ],
+      "data": [
+        194,
+        19,
+        142,
+        73,
+        250,
+        88,
+        167,
+        191,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "RiSeVw3ZjNfsaXPRb4mgaqYaEEt41pNNJoDvVh7pgQj"
+    },
+    "request": {
+      "accounts": {
+        "active_trader_buffer": [
+          "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        ],
+        "global_config": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd",
+        "global_trader_index": [
+          "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        ],
+        "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+        "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+        "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+      },
+      "asset_id": 1
+    }
+  },
+  "create_hawkeye_view_liquidation_price_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        }
+      ],
+      "data": [
+        249,
+        201,
+        188,
+        96,
+        44,
+        104,
+        68,
+        20,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "RiSeVw3ZjNfsaXPRb4mgaqYaEEt41pNNJoDvVh7pgQj"
+    },
+    "request": {
+      "accounts": {
+        "active_trader_buffer": [
+          "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        ],
+        "global_config": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd",
+        "global_trader_index": [
+          "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        ],
+        "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+        "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+        "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+      },
+      "asset_id": 1
+    }
+  },
+  "create_hawkeye_view_margin_for_asset_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        }
+      ],
+      "data": [
+        32,
+        18,
+        175,
+        254,
+        161,
+        237,
+        77,
+        155,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "RiSeVw3ZjNfsaXPRb4mgaqYaEEt41pNNJoDvVh7pgQj"
+    },
+    "request": {
+      "accounts": {
+        "active_trader_buffer": [
+          "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        ],
+        "global_config": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd",
+        "global_trader_index": [
+          "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        ],
+        "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+        "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+        "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+      },
+      "asset_id": 1
+    }
+  },
+  "create_hawkeye_view_margin_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        }
+      ],
+      "data": [
+        178,
+        10,
+        124,
+        173,
+        236,
+        210,
+        117,
+        6
+      ],
+      "program_id": "RiSeVw3ZjNfsaXPRb4mgaqYaEEt41pNNJoDvVh7pgQj"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "global_config": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+    }
+  },
+  "create_hawkeye_view_order_quote_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3EKkiwNLWqoUbzFkPrmKbtUB4EweE6f4STzevYUmezeL"
+        }
+      ],
+      "data": [
+        200,
+        175,
+        151,
+        81,
+        254,
+        171,
+        248,
+        44,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "RiSeVw3ZjNfsaXPRb4mgaqYaEEt41pNNJoDvVh7pgQj"
+    },
+    "request": {
+      "accounts": {
+        "market": {
+          "active_trader_buffer": [
+            "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+          ],
+          "global_config": "3AQTaduKvYWFTu1ExZSQK1hQp5jSZ2yEt4KzsASAufKd",
+          "global_trader_index": [
+            "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+          ],
+          "orderbook": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq",
+          "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+          "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+          "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        },
+        "scratch": "3EKkiwNLWqoUbzFkPrmKbtUB4EweE6f4STzevYUmezeL",
+        "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+      },
+      "order_packet": {
+        "kind": {
+          "Limit": {
+            "cancel_existing": false,
+            "client_order_id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "last_valid_slot": null,
+            "match_limit": null,
+            "num_base_lots": 1,
+            "order_flags": "None",
+            "price_in_ticks": 1,
+            "self_trade_behavior": "Abort",
+            "side": "Bid"
+          }
+        }
+      },
+      "reference_price_ticks": 1
+    }
+  },
+  "create_onboard_trader_delegated_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        }
+      ],
+      "data": [
+        207,
+        170,
+        17,
+        21,
+        53,
+        35,
+        88,
+        151,
+        6,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        3,
+        1,
+        2,
+        1,
+        4,
+        1,
+        5,
+        1
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "authority": "11111111111111111111111111111111",
+      "global_trader_index": [
+        "11111111111111111111111111111114",
+        "11111111111111111111111111111115"
+      ],
+      "permission_account": "11111111111111111111111111111112",
+      "trader_account": "11111111111111111111111111111113"
+    }
+  },
+  "create_onboard_trader_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8nccjm9jfLCCLvwEsuWy9N6Afanv32FkCBSvryuZeQc5"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "GwVadJ3Ezq92HoXZdMqYNwB3893yTfcyUpTGvcZEGuNp"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "7hfhMuRvj3nURyVYQU7s4vhYgYpcUuLzpNbcpZMAfyKM"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "981Hji48NWg9RS48WiDGokkWFedKnd5KuUR9RDRV6WFv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2fnGbL5gRT8HT1bxesGwwQj3pgD6PKXVEddAkvPbE1Y8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "5PFMJDRFNDMX2ctynK3Xe7RRaqRzVhXXHCsBCsy2QAhn"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        }
+      ],
+      "data": [
+        179,
+        241,
+        173,
+        225,
+        143,
+        230,
+        2,
+        142,
+        128,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "F1ightu9cujFYo34k9CabifLrJT8qzfDVM2Q7BqhJn2W"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111119",
+        "1111111111111111111111111111111A"
+      ],
+      "builder_authority": "11111111111111111111111111111111",
+      "global_trader_index": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "market_authority": "11111111111111111111111111111116",
+      "max_positions": 128,
+      "onboarder_signer": "11111111111111111111111111111112",
+      "payer": "11111111111111111111111111111113",
+      "risk_authority": "11111111111111111111111111111115",
+      "trader_preference_bits": 0,
+      "trader_wallet": "11111111111111111111111111111114"
+    }
+  },
+  "create_place_attached_conditional_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111B"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        43,
+        117,
+        136,
+        128,
+        72,
+        150,
+        101,
+        122,
+        232,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        132,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        131,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111119",
+        "1111111111111111111111111111111A"
+      ],
+      "asset_id": 0,
+      "global_trader_index": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "greater_trigger_order": null,
+      "less_trigger_order": {
+        "execution_price": 899,
+        "order_kind": "IOC",
+        "trade_side": "ask",
+        "trigger_direction": "LessThan",
+        "trigger_price": 900
+      },
+      "order_id": {
+        "order_sequence_number": 0,
+        "price_in_ticks": 1000
+      },
+      "orderbook": "11111111111111111111111111111115",
+      "payer": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112",
+      "trader_conditional_orders": "1111111111111111111111111111111B",
+      "trader_wallet": "11111111111111111111111111111113"
+    }
+  },
+  "create_place_limit_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        }
+      ],
+      "data": [
+        108,
+        176,
+        33,
+        186,
+        146,
+        229,
+        1,
+        197,
+        1,
+        0,
+        232,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "cancel_existing": false,
+      "client_order_id": 0,
+      "global_trader_index": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "last_valid_slot": null,
+      "match_limit": null,
+      "num_base_lots": 100,
+      "order_flags": "None",
+      "orderbook": "11111111111111111111111111111114",
+      "perp_asset_map": "11111111111111111111111111111113",
+      "price_in_ticks": 1000,
+      "self_trade_behavior": "Abort",
+      "side": "bid",
+      "spline_collection": "11111111111111111111111111111115",
+      "subaccount_index": 0,
+      "symbol": "",
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112"
+    }
+  },
+  "create_place_limit_order_with_conditionals_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111B"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        95,
+        45,
+        68,
+        168,
+        232,
+        218,
+        210,
+        92,
+        1,
+        0,
+        232,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        76,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        75,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        132,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        131,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111119",
+        "1111111111111111111111111111111A"
+      ],
+      "global_trader_index": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "greater_trigger_order": {
+        "execution_price": 1099,
+        "order_kind": "IOC",
+        "trade_side": "ask",
+        "trigger_direction": "GreaterThan",
+        "trigger_price": 1100
+      },
+      "less_trigger_order": {
+        "execution_price": 899,
+        "order_kind": "IOC",
+        "trade_side": "ask",
+        "trigger_direction": "LessThan",
+        "trigger_price": 900
+      },
+      "order_packet": {
+        "kind": {
+          "Limit": {
+            "cancel_existing": false,
+            "client_order_id": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "last_valid_slot": null,
+            "match_limit": null,
+            "num_base_lots": 100,
+            "order_flags": "None",
+            "price_in_ticks": 1000,
+            "self_trade_behavior": "Abort",
+            "side": "bid"
+          }
+        }
+      },
+      "orderbook": "11111111111111111111111111111115",
+      "payer": "11111111111111111111111111111111",
+      "perp_asset_map": "11111111111111111111111111111114",
+      "slot": 0,
+      "spline_collection": "11111111111111111111111111111116",
+      "trader_account": "11111111111111111111111111111112",
+      "trader_conditional_orders": "1111111111111111111111111111111B",
+      "trader_wallet": "11111111111111111111111111111113"
+    }
+  },
+  "create_place_market_order_delegated_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        160,
+        35,
+        21,
+        235,
+        110,
+        182,
+        245,
+        65,
+        2,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "market_order": {
+        "active_trader_buffer": [
+          "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        ],
+        "cancel_existing": false,
+        "client_order_id": 1,
+        "global_trader_index": [
+          "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        ],
+        "last_valid_slot": null,
+        "match_limit": null,
+        "min_base_lots_to_fill": 1,
+        "min_quote_lots_to_fill": 1,
+        "num_base_lots": 1,
+        "num_quote_lots": null,
+        "order_flags": "None",
+        "orderbook": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq",
+        "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+        "price_in_ticks": null,
+        "self_trade_behavior": "Abort",
+        "side": "Bid",
+        "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY",
+        "subaccount_index": 1,
+        "symbol": "fixture",
+        "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi",
+        "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+      },
+      "permission_account": "3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3",
+      "trader_wallet": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+    }
+  },
+  "create_place_market_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        }
+      ],
+      "data": [
+        90,
+        118,
+        192,
+        252,
+        192,
+        99,
+        39,
+        145,
+        2,
+        1,
+        0,
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "cancel_existing": false,
+      "client_order_id": 0,
+      "global_trader_index": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "last_valid_slot": null,
+      "match_limit": null,
+      "min_base_lots_to_fill": 0,
+      "min_quote_lots_to_fill": 0,
+      "num_base_lots": 100,
+      "num_quote_lots": null,
+      "order_flags": "None",
+      "orderbook": "11111111111111111111111111111114",
+      "perp_asset_map": "11111111111111111111111111111113",
+      "price_in_ticks": null,
+      "self_trade_behavior": "Abort",
+      "side": "ask",
+      "spline_collection": "11111111111111111111111111111115",
+      "subaccount_index": 0,
+      "symbol": "",
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112"
+    }
+  },
+  "create_place_multi_limit_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        }
+      ],
+      "data": [
+        236,
+        208,
+        221,
+        172,
+        141,
+        226,
+        129,
+        84,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "asks": [],
+      "bids": [],
+      "client_order_id": null,
+      "global_trader_index": [
+        "11111111111111111111111111111116",
+        "11111111111111111111111111111117"
+      ],
+      "orderbook": "11111111111111111111111111111114",
+      "perp_asset_map": "11111111111111111111111111111113",
+      "slide": false,
+      "spline_collection": "11111111111111111111111111111115",
+      "symbol": "",
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112"
+    }
+  },
+  "create_place_multi_limit_order_v2_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        64,
+        111,
+        40,
+        210,
+        2,
+        177,
+        38,
+        178,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "asks": [],
+      "bids": [],
+      "client_order_id": null,
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "orderbook": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "scale_set_continuation": false,
+      "scale_set_id": 1,
+      "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY",
+      "symbol": "fixture",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+    }
+  },
+  "create_place_position_conditional_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111B"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        65,
+        108,
+        83,
+        129,
+        76,
+        193,
+        92,
+        143,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        232,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        231,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111119",
+        "1111111111111111111111111111111A"
+      ],
+      "asset_id": 0,
+      "global_trader_index": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "greater_trigger_order": {
+        "execution_price": 999,
+        "order_kind": "IOC",
+        "trade_side": "ask",
+        "trigger_direction": "GreaterThan",
+        "trigger_price": 1000
+      },
+      "less_trigger_order": null,
+      "orderbook": "11111111111111111111111111111115",
+      "payer": "11111111111111111111111111111111",
+      "perp_asset_map": "11111111111111111111111111111114",
+      "size_base_lots": 100,
+      "size_percent": null,
+      "spline_collection": "11111111111111111111111111111116",
+      "trader_account": "11111111111111111111111111111112",
+      "trader_conditional_orders": "1111111111111111111111111111111B",
+      "trader_wallet": "11111111111111111111111111111113"
+    }
+  },
+  "create_place_stop_loss_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111B"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        236,
+        46,
+        164,
+        66,
+        235,
+        92,
+        162,
+        137,
+        232,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        231,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111119",
+        "1111111111111111111111111111111A"
+      ],
+      "asset_id": 0,
+      "execution_direction": "LessThan",
+      "execution_price": 999,
+      "funder": "11111111111111111111111111111111",
+      "global_trader_index": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "order_kind": "IOC",
+      "orderbook": "11111111111111111111111111111115",
+      "perp_asset_map": "11111111111111111111111111111114",
+      "position_authority": "11111111111111111111111111111113",
+      "spline_collection": "11111111111111111111111111111116",
+      "stop_loss_account": "1111111111111111111111111111111B",
+      "trade_side": "ask",
+      "trader_account": "11111111111111111111111111111112",
+      "trigger_price": 1000
+    }
+  },
+  "create_place_twap_order_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4rNrAAYahzvuxAFvs2bNatzUv3zUPd8jrFzQKfZ9azPJ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "gBxS1f6uyyGPuW5MzGBukidSb71jdsCb5fZaoSzULE5"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+        }
+      ],
+      "data": [
+        0,
+        140,
+        86,
+        197,
+        70,
+        38,
+        229,
+        173,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+    },
+    "request": {
+      "authority": "gBxS1f6uyyGPuW5MzGBukidSb71jdsCb5fZaoSzULE5",
+      "child_order_collateral_quote_lots_to_transfer": null,
+      "child_order_max_price_in_ticks": null,
+      "child_order_max_slippage_bps": 1,
+      "child_order_min_price_in_ticks": null,
+      "child_order_packet": {
+        "cancel_existing": false,
+        "client_order_id": 1,
+        "dust_order_size": 1,
+        "last_valid_slot": null,
+        "match_limit": null,
+        "min_base_lots_to_fill": 1,
+        "min_quote_lots_to_fill": 1,
+        "n_dust_orders": 1,
+        "num_base_lots": 1,
+        "num_quote_lots": null,
+        "order_flags": "None",
+        "price_in_ticks": null,
+        "self_trade_behavior": "Abort",
+        "side": "Bid"
+      },
+      "cooldown_slots": 1,
+      "flicker_program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b",
+      "hawkeye_program_id": "4rNrAAYahzvuxAFvs2bNatzUv3zUPd8jrFzQKfZ9azPJ",
+      "last_valid_slot": null,
+      "n_child_orders": 1,
+      "order_accounts": [],
+      "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+      "transfer_accounts": [],
+      "twap_account": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB",
+      "twap_global_state": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U",
+      "twap_log_authority": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+    }
+  },
+  "create_proxy_instruction_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8nccjm9jfLCCLvwEsuWy9N6Afanv32FkCBSvryuZeQc5"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "1111111111111111111111111111111C"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111D"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4q61erGmZcUuKx7u63eRcSFLh9BvG4iowhQVdJn6v275"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8f1SJ8oVHyhTvxSYTCsGszbwLW5QYYGLCmvtTcn2qPEZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "Hy4AQXWUqWEqZiZK5w1Es1gr2LNNdMyA4fLvWrKm2xu1"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "Fpr4HrP1zNtdNaPveSi1AN2xNbAnYae441gbufkTbVFQ"
+        }
+      ],
+      "data": [
+        24,
+        154,
+        56,
+        104,
+        106,
+        8,
+        35,
+        7,
+        90,
+        118,
+        192,
+        252,
+        192,
+        99,
+        39,
+        145,
+        2,
+        1,
+        0,
+        100,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "F1ightu9cujFYo34k9CabifLrJT8qzfDVM2Q7BqhJn2W"
+    },
+    "request": {
+      "builder_authority": "1111111111111111111111111111111C",
+      "builder_trader_account": "1111111111111111111111111111111D",
+      "fee_bps_override": null,
+      "inner_instruction": {
+        "accounts": [
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+          },
+          {
+            "is_signer": false,
+            "is_writable": false,
+            "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+          },
+          {
+            "is_signer": true,
+            "is_writable": false,
+            "pubkey": "1111111111111111111111111111111A"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "8f1SJ8oVHyhTvxSYTCsGszbwLW5QYYGLCmvtTcn2qPEZ"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "11111111111111111111111111111113"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "11111111111111111111111111111116"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "11111111111111111111111111111117"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "11111111111111111111111111111118"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "11111111111111111111111111111119"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "11111111111111111111111111111114"
+          },
+          {
+            "is_signer": false,
+            "is_writable": true,
+            "pubkey": "11111111111111111111111111111115"
+          }
+        ],
+        "data": [
+          90,
+          118,
+          192,
+          252,
+          192,
+          99,
+          39,
+          145,
+          2,
+          1,
+          0,
+          100,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+      },
+      "root_authority": "11111111111111111111111111111111",
+      "trader_wallet": "1111111111111111111111111111111A"
+    }
+  },
+  "create_realloc_trader_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        174,
+        248,
+        63,
+        35,
+        225,
+        236,
+        19,
+        204
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "payer": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "trader_wallet": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+    }
+  },
+  "create_register_builder_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8nccjm9jfLCCLvwEsuWy9N6Afanv32FkCBSvryuZeQc5"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8f1SJ8oVHyhTvxSYTCsGszbwLW5QYYGLCmvtTcn2qPEZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "GwVadJ3Ezq92HoXZdMqYNwB3893yTfcyUpTGvcZEGuNp"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        109,
+        199,
+        109,
+        36,
+        79,
+        239,
+        104,
+        173,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "F1ightu9cujFYo34k9CabifLrJT8qzfDVM2Q7BqhJn2W"
+    },
+    "request": {
+      "fee_bps": 1,
+      "subaccount_index": 0,
+      "trader_account": "8f1SJ8oVHyhTvxSYTCsGszbwLW5QYYGLCmvtTcn2qPEZ",
+      "trader_authority": "11111111111111111111111111111111",
+      "trader_pda_index": 0
+    }
+  },
+  "create_register_spline_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111B"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        30,
+        176,
+        160,
+        79,
+        252,
+        117,
+        241,
+        58
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "1111111111111111111111111111111A",
+        "1111111111111111111111111111111B"
+      ],
+      "authority": "11111111111111111111111111111112",
+      "global_trader_index": [
+        "11111111111111111111111111111118",
+        "11111111111111111111111111111119"
+      ],
+      "market_account": "11111111111111111111111111111114",
+      "payer": "11111111111111111111111111111111",
+      "permission_account": "11111111111111111111111111111113",
+      "perp_asset_map": "11111111111111111111111111111117",
+      "spline_collection": "11111111111111111111111111111115",
+      "trader_account": "11111111111111111111111111111116"
+    }
+  },
+  "create_register_trader_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        }
+      ],
+      "data": [
+        75,
+        243,
+        224,
+        167,
+        1,
+        5,
+        51,
+        32,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "max_positions": 1,
+      "payer": "11111111111111111111111111111111",
+      "subaccount_index": 0,
+      "trader": "11111111111111111111111111111112",
+      "trader_account": "11111111111111111111111111111113",
+      "trader_pda_index": 0,
+      "trader_preference_bits": 0
+    }
+  },
+  "create_spl_approve_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3uWi9x2SRpmjztkpkr2WWeBoVq3exjXG2YfDWLvm8KsQ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3yS1JFVT284y8z1LC9MRoWxZjzFrdoD5axKsZiyMsfC7"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "25hjHpTATmkdET17ynDhf1MCuYNDn1z7wXfVw5iaxLAK"
+        }
+      ],
+      "data": [
+        4,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    "request": {
+      "amount": 1,
+      "delegate": "3yS1JFVT284y8z1LC9MRoWxZjzFrdoD5axKsZiyMsfC7",
+      "owner": "25hjHpTATmkdET17ynDhf1MCuYNDn1z7wXfVw5iaxLAK",
+      "source": "3uWi9x2SRpmjztkpkr2WWeBoVq3exjXG2YfDWLvm8KsQ"
+    }
+  },
+  "create_swap_native_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "EyMEGLsytWAzAQsygQJVhyoBZFNcPyRifFojed8puqnV"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "HDCYsq3HdhhRUuxiVBTQD1Bvp3EwdFHAeiyXgjSMtbJ6"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3mg7sM6RFEBHiiFotFNfvteH1WdFcc9cujKuPaqZdfDz"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        88,
+        147,
+        177,
+        186,
+        129,
+        234,
+        239,
+        231,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "amount_in": 1,
+      "direction": "Sell",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "mint": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+      "signer_quote_token_account": "3mg7sM6RFEBHiiFotFNfvteH1WdFcc9cujKuPaqZdfDz",
+      "slippage": {
+        "MinAmountOut": 1
+      },
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "venue": {
+        "accounts": [],
+        "instructions": []
+      },
+      "withdraw_queue": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+    }
+  },
+  "create_swap_spot_with_sol_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4BBtj9tUo1xeZFkrW3LBg9GrUTtTezGYGBKqjs7A7fAE"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "HDCYsq3HdhhRUuxiVBTQD1Bvp3EwdFHAeiyXgjSMtbJ6"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3VBYHyzuehbwuUnhQXDDmbjVaroT4qEVQzG59SaihaGC"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4F7BsTMVPKFshM1MwLf6y23cid6fL3xMpazVoF9krzUw"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "BcdAFoNretSUXyoWhcUHuHszsbNyamFYkegigPWtJm4G"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        236,
+        150,
+        197,
+        249,
+        54,
+        231,
+        86,
+        101,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "amount_in": 1,
+      "direction": "Sell",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+      "signer_spot_token_account": "4F7BsTMVPKFshM1MwLf6y23cid6fL3xMpazVoF9krzUw",
+      "slippage": {
+        "MinAmountOut": 1
+      },
+      "spot_mint": "4BBtj9tUo1xeZFkrW3LBg9GrUTtTezGYGBKqjs7A7fAE",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "venue": {
+        "accounts": [],
+        "instructions": []
+      },
+      "withdraw_queue": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+    }
+  },
+  "create_swap_spot_with_spot_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4K2V1kpVycZ6qSFsNdz2FtpNxnJs17eBNzf9rdCMcKoe"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4NwnA4HWZurKyXWNowJwYmb9CwX4gBKzwQKov1ExMf8M"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3VBYHyzuehbwuUnhQXDDmbjVaroT4qEVQzG59SaihaGC"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "977rA2a3DWYXU2V9Xm1jFCpqhfnWShfwRPHT9oFo5YPS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4Ss5JMkXAD9Z7cktFEdrqeMuT6jGMF1pVozTyPHZ6zT4"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4WnNSfDXkWSnFi1PgXxn8X8fhFwU2Jhe4Df82mL9rKmm"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8tXi44oYVYJV8ohPeJHPhhnqD3AXJzrcNci7JThDRYoS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        70,
+        110,
+        253,
+        51,
+        88,
+        242,
+        231,
+        26,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "amount_in": 1,
+      "dst_mint": "4NwnA4HWZurKyXWNowJwYmb9CwX4gBKzwQKov1ExMf8M",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+      "signer_dst_token_account": "4WnNSfDXkWSnFi1PgXxn8X8fhFwU2Jhe4Df82mL9rKmm",
+      "signer_src_token_account": "4Ss5JMkXAD9Z7cktFEdrqeMuT6jGMF1pVozTyPHZ6zT4",
+      "slippage": {
+        "MinAmountOut": 1
+      },
+      "src_mint": "4K2V1kpVycZ6qSFsNdz2FtpNxnJs17eBNzf9rdCMcKoe",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "venue": {
+        "accounts": [],
+        "instructions": []
+      },
+      "withdraw_queue": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+    }
+  },
+  "create_swap_spot_with_usdc_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4BBtj9tUo1xeZFkrW3LBg9GrUTtTezGYGBKqjs7A7fAE"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3dcSWukWe8dXgtiAWaLMAKSVaqL7oXCZAzvjYY3C7x9n"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3VBYHyzuehbwuUnhQXDDmbjVaroT4qEVQzG59SaihaGC"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3mg7sM6RFEBHiiFotFNfvteH1WdFcc9cujKuPaqZdfDz"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4F7BsTMVPKFshM1MwLf6y23cid6fL3xMpazVoF9krzUw"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "BcdAFoNretSUXyoWhcUHuHszsbNyamFYkegigPWtJm4G"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        119,
+        121,
+        96,
+        136,
+        111,
+        0,
+        215,
+        223,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "amount_in": 1,
+      "direction": "Sell",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "quote_mint": "47GbarRUCifRRAWM4k1GPGW6EJgFyvaihmfBgV4ZNKqX",
+      "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+      "signer_quote_token_account": "3mg7sM6RFEBHiiFotFNfvteH1WdFcc9cujKuPaqZdfDz",
+      "signer_spot_token_account": "4F7BsTMVPKFshM1MwLf6y23cid6fL3xMpazVoF9krzUw",
+      "slippage": {
+        "MinAmountOut": 1
+      },
+      "spot_mint": "4BBtj9tUo1xeZFkrW3LBg9GrUTtTezGYGBKqjs7A7fAE",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "venue": {
+        "accounts": [],
+        "instructions": []
+      },
+      "withdraw_queue": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+    }
+  },
+  "create_sync_native_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        155,
+        219,
+        36,
+        36,
+        239,
+        128,
+        21,
+        65
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+    }
+  },
+  "create_sync_parent_to_child_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        }
+      ],
+      "data": [
+        175,
+        137,
+        217,
+        11,
+        235,
+        39,
+        150,
+        19
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "child_trader_account": "11111111111111111111111111111113",
+      "global_trader_index": [
+        "11111111111111111111111111111114",
+        "11111111111111111111111111111115"
+      ],
+      "parent_trader_account": "11111111111111111111111111111112",
+      "trader_wallet": "11111111111111111111111111111111"
+    }
+  },
+  "create_sync_spot_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2kZCsNhkiWqBoN8UseuPYtR8WAPrt2DMDd84AG7V8pEr"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        248,
+        53,
+        128,
+        214,
+        54,
+        165,
+        13,
+        2
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "mint": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+    }
+  },
+  "create_transfer_collateral_child_to_parent_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        }
+      ],
+      "data": [
+        51,
+        100,
+        177,
+        115,
+        139,
+        135,
+        247,
+        139
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "child_trader_account": "11111111111111111111111111111112",
+      "global_trader_index": [
+        "11111111111111111111111111111115",
+        "11111111111111111111111111111116"
+      ],
+      "parent_trader_account": "11111111111111111111111111111113",
+      "perp_asset_map": "11111111111111111111111111111114",
+      "trader": "11111111111111111111111111111111"
+    }
+  },
+  "create_transfer_collateral_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        }
+      ],
+      "data": [
+        157,
+        163,
+        63,
+        27,
+        242,
+        72,
+        251,
+        97,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "amount": 1,
+      "dst_trader_account": "11111111111111111111111111111113",
+      "global_trader_index": [
+        "11111111111111111111111111111115",
+        "11111111111111111111111111111116"
+      ],
+      "permission_account": null,
+      "perp_asset_map": "11111111111111111111111111111114",
+      "src_trader_account": "11111111111111111111111111111112",
+      "trader": "11111111111111111111111111111111"
+    }
+  },
+  "create_transfer_native_sol_from_child_to_parent_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3ZvESShPULHcJSWHaMPv4GKzH2zebR6AEWKwDShmPfFs"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3dqXakAQ4daqSXko1eiqM96kXCCrGUmynuzbGpkN8zaa"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        90,
+        175,
+        49,
+        106,
+        54,
+        115,
+        8,
+        185
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "child_trader_account": "3ZvESShPULHcJSWHaMPv4GKzH2zebR6AEWKwDShmPfFs",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "parent_trader_account": "3dqXakAQ4daqSXko1eiqM96kXCCrGUmynuzbGpkN8zaa",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi",
+      "trader_signs": false
+    }
+  },
+  "create_transfer_native_sol_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3S5e9qmNHjhA2G1Ghkk5UWnTniaFFHiX7gzd6gcZtzcT"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3VzwJ9ENt2zPAMFn944zmPZE2snSvMQLg6fHA4fAeKwA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        204,
+        65,
+        217,
+        206,
+        56,
+        180,
+        74,
+        252,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "dst_trader_account": "3VzwJ9ENt2zPAMFn944zmPZE2snSvMQLg6fHA4fAeKwA",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "lamports": 1,
+      "permission_account": null,
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "src_trader_account": "3S5e9qmNHjhA2G1Ghkk5UWnTniaFFHiX7gzd6gcZtzcT",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+    }
+  },
+  "create_transfer_spot_from_child_to_parent_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4XXJDzQiWMRj8YsRVZgkGTLtEY1XVuAGm9vpXDgVMoAk"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8KkNQRfsY3u4NTkKTA4zaqDntL6Y3eU6Gzpn9fFm4hMK"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CdjyoVB7timYP21sXBuLg1VfJMWVY7F7eBE7jdpoxcv6"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3ZvESShPULHcJSWHaMPv4GKzH2zebR6AEWKwDShmPfFs"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3dqXakAQ4daqSXko1eiqM96kXCCrGUmynuzbGpkN8zaa"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        49,
+        4,
+        0,
+        150,
+        126,
+        152,
+        163,
+        226
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "child_trader_account": "3ZvESShPULHcJSWHaMPv4GKzH2zebR6AEWKwDShmPfFs",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "mint": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2",
+      "parent_trader_account": "3dqXakAQ4daqSXko1eiqM96kXCCrGUmynuzbGpkN8zaa",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi",
+      "trader_signs": false
+    }
+  },
+  "create_transfer_spot_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "Eumqn52JiiUjfK6o1EZ9DU1cQcFqzC6BtAoKQEwD3zDQ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "EEUivWjR1ELMSVehkDS41Nc147hrMd5k4gXVQq9R8bdr"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3nPJdii1rVQLPNoNQqtzyPwJhTbQ1sheSj4UYEa3MAZ8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3S5e9qmNHjhA2G1Ghkk5UWnTniaFFHiX7gzd6gcZtzcT"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3VzwJ9ENt2zPAMFn944zmPZE2snSvMQLg6fHA4fAeKwA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        255,
+        127,
+        0,
+        119,
+        77,
+        53,
+        77,
+        58,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "amount": 1,
+      "dst_trader_account": "3VzwJ9ENt2zPAMFn944zmPZE2snSvMQLg6fHA4fAeKwA",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "mint": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2",
+      "permission_account": null,
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "src_trader_account": "3S5e9qmNHjhA2G1Ghkk5UWnTniaFFHiX7gzd6gcZtzcT",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+    }
+  },
+  "create_twap_account_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": true,
+          "is_writable": true,
+          "pubkey": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+        }
+      ],
+      "data": [
+        176,
+        112,
+        229,
+        136,
+        163,
+        211,
+        146,
+        156,
+        1,
+        0,
+        0,
+        0
+      ],
+      "program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b"
+    },
+    "request": {
+      "flicker_program_id": "4nTZ1s5a7hdgp51RRjGTJ2DiftnGiZSvHrKkGHWYqf4b",
+      "market_id": 1,
+      "payer": "swqrv48gsrwpBFbftEwnP2vB4jckpvfGJfXkwaniLCC",
+      "phoenix_program_id": "36VASLSKLFD2KokjXG7V28veZvXEsyHRKefLonPaAKzv",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "twap_account": "4ecxjG9Yw73EXtWQZ8cciGgCBaMsNS5HB2zS9XRMLzRB",
+      "twap_global_state": "4ahfaxgYLok1PoFu7qHhRPuRwR9fhNPTcdKn69Nkbf6U",
+      "twap_log_authority": "4iYFsZcZXQLTfykuzRwY19SxRja53Vm6jSf6CuTx6Kjt"
+    }
+  },
+  "create_uncross_crank_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        196,
+        121,
+        94,
+        253,
+        139,
+        42,
+        252,
+        147,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "match_limit": 1,
+      "orderbook": "GgBaCs3NCBuZN12kCJgAW63ydqohFkHEdfdEXBPzLHq",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+    }
+  },
+  "create_update_fee_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8nccjm9jfLCCLvwEsuWy9N6Afanv32FkCBSvryuZeQc5"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "GwVadJ3Ezq92HoXZdMqYNwB3893yTfcyUpTGvcZEGuNp"
+        }
+      ],
+      "data": [
+        232,
+        253,
+        195,
+        247,
+        148,
+        212,
+        73,
+        222,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "F1ightu9cujFYo34k9CabifLrJT8qzfDVM2Q7BqhJn2W"
+    },
+    "request": {
+      "fee_bps": 1,
+      "trader_authority": "11111111111111111111111111111111"
+    }
+  },
+  "create_update_spline_parameters_with_ordering_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        241,
+        91,
+        139,
+        170,
+        18,
+        41,
+        203,
+        22,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "accounts": {
+        "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+        "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY",
+        "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+      },
+      "params": {
+        "ask_regions": [],
+        "bid_regions": [],
+        "client_order_id": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "override_sequence_number": false,
+        "refresh_regions": false,
+        "user_sequence_number": 1
+      }
+    }
+  },
+  "create_update_spline_position_limits_config_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        96,
+        60,
+        5,
+        112,
+        19,
+        144,
+        13,
+        107,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "accounts": {
+        "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+        "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY",
+        "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+      },
+      "params": {
+        "leverage_decrease_in_bps": null,
+        "max_position_size": null
+      }
+    }
+  },
+  "create_update_spline_price_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        45,
+        155,
+        200,
+        52,
+        37,
+        214,
+        187,
+        140,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "accounts": {
+        "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+        "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY",
+        "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+      },
+      "params": {
+        "new_mid_price": 1,
+        "refresh_regions": false,
+        "user_update_slot": null
+      }
+    }
+  },
+  "create_update_spline_price_with_metadata_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        153,
+        162,
+        192,
+        201,
+        188,
+        88,
+        30,
+        224,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "accounts": {
+        "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+        "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY",
+        "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+      },
+      "params": {
+        "ask_width": null,
+        "bid_width": null,
+        "client_order_id": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "new_mid_price": 1,
+        "override_sequence_number": false,
+        "refresh_regions": false,
+        "user_sequence_number": 1,
+        "user_update_slot": null
+      }
+    }
+  },
+  "create_update_spline_price_with_ordering_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY"
+        }
+      ],
+      "data": [
+        45,
+        155,
+        200,
+        52,
+        37,
+        214,
+        187,
+        140,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "accounts": {
+        "signer": "3hkpj3dQevt4ad1JSx3ke1sWmMR3wYToMKfFLCnxtKuH",
+        "spline_collection": "LbUiWL3xVV8hTFYBVdbTNrpDo41NKS6o3LHHuDzjfcY",
+        "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+      },
+      "params": {
+        "client_order_id": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "new_mid_price": 1,
+        "override_sequence_number": false,
+        "refresh_regions": false,
+        "user_sequence_number": 1,
+        "user_update_slot": null
+      }
+    }
+  },
+  "create_update_trader_preference_bits_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        }
+      ],
+      "data": [
+        3,
+        249,
+        117,
+        158,
+        237,
+        31,
+        90,
+        153,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "toggles": [
+        {
+          "set": false,
+          "target": "CollateralSweep"
+        }
+      ],
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "trader_wallet": "ws91DX9HBAAxGW77BZs5FogRDwpRtcUpiLBpKdPTfWu"
+    }
+  },
+  "create_withdraw_funds_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111119"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "1111111111111111111111111111111A"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        }
+      ],
+      "data": [
+        241,
+        36,
+        29,
+        111,
+        208,
+        31,
+        104,
+        217,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111119",
+        "1111111111111111111111111111111A"
+      ],
+      "amount": 1,
+      "global_trader_index": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "global_vault": "11111111111111111111111111111114",
+      "perp_asset_map": "11111111111111111111111111111113",
+      "trader": "11111111111111111111111111111111",
+      "trader_account": "11111111111111111111111111111112",
+      "trader_token_account": "11111111111111111111111111111115",
+      "withdraw_queue": "11111111111111111111111111111116"
+    }
+  },
+  "create_withdraw_native_sol_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "p2Yicb86aZig616Eav2VWG9vuXR5mEqhtzshZYBxzsV"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        201,
+        104,
+        187,
+        105,
+        80,
+        204,
+        84,
+        138,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "action": "AllExcess",
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "destination": "p2Yicb86aZig616Eav2VWG9vuXR5mEqhtzshZYBxzsV",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "withdraw_queue": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+    }
+  },
+  "create_withdraw_spot_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "3VBYHyzuehbwuUnhQXDDmbjVaroT4qEVQzG59SaihaGC"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "2kZCsNhkiWqBoN8UseuPYtR8WAPrt2DMDd84AG7V8pEr"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "p2Yicb86aZig616Eav2VWG9vuXR5mEqhtzshZYBxzsV"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+        }
+      ],
+      "data": [
+        228,
+        41,
+        126,
+        4,
+        112,
+        18,
+        221,
+        112,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "action": "AllExcess",
+      "active_trader_buffer": [
+        "US517G5965aydkZ46HS38QLi7UQiSojurfbQfKCELFx"
+      ],
+      "destination": "p2Yicb86aZig616Eav2VWG9vuXR5mEqhtzshZYBxzsV",
+      "global_trader_index": [
+        "QWmroo4YnnMqYW3cnxWkFdaTxGD3P7vMSzwMHGbUzwF"
+      ],
+      "mint": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2",
+      "perp_asset_map": "CktRuQ2mttgRGkXJtyksdKHjUdc2C4TgDzyB98oEzy8",
+      "trader": "4vJ9JU1bJJE96FWSJKvHsmmFADCg4gpZQff4P3bkLKi",
+      "trader_account": "8qbHbw2BbbTHBW1sbeqakYXVKRQM8Ne7pLK7m6CVfeR",
+      "withdraw_queue": "3NAM1YJMhSPvtAkmGTRABe1hYZN3aE2hZHKy3JZy9fHk"
+    }
+  },
+  "create_withdraw_to_target_leverage_ix": {
+    "instruction": {
+      "accounts": [
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "GdxfTLSsdSY37G6fZoYtdGDSfgFnbT2EmRpuePZxWShS"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "2zskx2iyCvb6Stg7RBZkt1f6MrF4dpYtMG3yMvKwqtUZ"
+        },
+        {
+          "is_signer": true,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111111"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111112"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111113"
+        },
+        {
+          "is_signer": false,
+          "is_writable": false,
+          "pubkey": "11111111111111111111111111111114"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111115"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111116"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111117"
+        },
+        {
+          "is_signer": false,
+          "is_writable": true,
+          "pubkey": "11111111111111111111111111111118"
+        }
+      ],
+      "data": [
+        159,
+        170,
+        28,
+        190,
+        26,
+        189,
+        30,
+        154,
+        72,
+        232,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "program_id": "EtrnLzgbS7nMMy5fbD42kXiUzGg8XQzJ972Xtk1cjWih"
+    },
+    "request": {
+      "active_trader_buffer": [
+        "11111111111111111111111111111117",
+        "11111111111111111111111111111118"
+      ],
+      "dst_trader_account": "11111111111111111111111111111113",
+      "global_trader_index": [
+        "11111111111111111111111111111115",
+        "11111111111111111111111111111116"
+      ],
+      "permission_account": null,
+      "perp_asset_map": "11111111111111111111111111111114",
+      "src_trader_account": "11111111111111111111111111111112",
+      "target_leverage_bps": 125000,
+      "trader": "11111111111111111111111111111111"
+    }
+  }
+}

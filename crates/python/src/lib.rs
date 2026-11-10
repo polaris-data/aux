@@ -7,12 +7,14 @@ mod convert;
 mod data;
 mod derive;
 mod errors;
+mod extended;
 mod kalshi;
 mod lighter;
 mod metric;
 mod monaco;
 mod paradex;
 mod pascal;
+mod phoenix;
 mod polymarket;
 mod prediction_signers;
 mod qfex;
@@ -24,6 +26,11 @@ use pyo3::prelude::*;
 
 #[pymodule]
 fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_class::<extended::ExtendedClient>()?;
+    module.add_class::<extended::ExtendedSigner>()?;
+    module.add_class::<phoenix::PhoenixClient>()?;
+    module.add_class::<phoenix::PhoenixChainClient>()?;
+    module.add_class::<phoenix::PhoenixSigner>()?;
     module.add_class::<data::TardisClient>()?;
     module.add_class::<data::TardisMachineClient>()?;
     module.add_class::<data::DatabentoHistoricalClient>()?;

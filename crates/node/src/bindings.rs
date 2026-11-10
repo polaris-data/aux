@@ -9076,6 +9076,3422 @@ impl NodeParadexRpcSession {
         result.map_err(Error::into_napi)
     }
 }
+#[napi(js_name = "PhoenixClient")]
+pub struct NodePhoenixClient {
+    inner: phoenix::PhoenixClient,
+}
+#[napi]
+impl NodePhoenixClient {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let network: String = convert::arg(&args, "network")?;
+            let value = phoenix::PhoenixClient::new(
+                &network,
+                convert::arg(&args, "http_url")?,
+                convert::arg(&args, "ws_url")?,
+                convert::arg(&args, "chain_id")?,
+                convert::arg(&args, "api_key")?,
+                convert::arg(&args, "access_token")?,
+                convert::arg(&args, "expires_at")?,
+                convert::arg(&args, "timeout_ms")?,
+                convert::arg(&args, "subscription_capacity")?,
+            )?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn closed(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.closed();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn set_credentials(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            self.inner
+                .set_credentials(convert::arg(&args, "credentials")?)?;
+            convert::encode(())
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn subscribe(&self, args: String) -> napi::Result<NodeSubscription> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .subscribe(convert::arg(&args, "specification")?)
+                .await?;
+            Ok(NodeSubscription { inner: value })
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn close(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            self.inner.aclose().await?;
+            convert::encode(())
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn build_instruction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let name: String = convert::arg(&args, "name")?;
+            let value = self
+                .inner
+                .build_instruction(&name, convert::arg(&args, "request")?)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn prepare_transaction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = self
+                .inner
+                .prepare_transaction(convert::arg(&args, "request")?)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn assemble_transaction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.assemble_transaction(
+                convert::arg(&args, "prepared")?,
+                convert::arg(&args, "signatures")?,
+            )?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn validate_server_transaction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            self.inner.validate_server_transaction(
+                convert::arg(&args, "prepared")?,
+                convert::arg(&args, "transaction_base64")?,
+            )?;
+            convert::encode(())
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_exchange(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_exchange(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_exchange_keys(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_exchange_keys(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn list_markets(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .list_markets(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_market(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_market(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_exchange_status(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_exchange_status(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_exchange_snapshot(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_exchange_snapshot(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_register_trader_instructions(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_register_trader_instructions(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn submit_register_trader_transaction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .submit_register_trader_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_orderbook(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_orderbook(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_mark_price(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_mark_price(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_market_stats_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_market_stats_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_next_market_calendar_transition(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_next_market_calendar_transition(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_next_commodity_market_transition(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_next_commodity_market_transition(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_market_calendar(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_market_calendar(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_market_calendar_by_id(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_market_calendar_by_id(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_commodity_market_calendar(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_commodity_market_calendar(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_candles(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_candles(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_capabilities(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_capabilities(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_state(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_state(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_pn_l(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_pn_l(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_portfolio_values(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_portfolio_values(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_pn_l(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_pn_l(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_market_pn_l(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_market_pn_l(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_collateral_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_collateral_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_collateral_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_collateral_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_v1_traders_by_trader_pubkey_collateral_history(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_v1_traders_by_trader_pubkey_collateral_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_liquidation_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_liquidation_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_funding_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_funding_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_hourly_funding(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_hourly_funding(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_funding_rate_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_funding_rate_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_funding_overview(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_funding_overview(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_order_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_order_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_order_history_v2(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_order_history_v2(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trade_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trade_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_trade_history_v2(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_trade_history_v2(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trader_trade_history_v2(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trader_trade_history_v2(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_market_fills(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_market_fills(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn list_trader_notifications(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .list_trader_notifications(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn acknowledge_notifications_up_to_timestamp(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .acknowledge_notifications_up_to_timestamp(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn acknowledge_notifications(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .acknowledge_notifications(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_isolated_limit_order_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_isolated_limit_order_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_isolated_market_order_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_isolated_market_order_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_cancel_conditional_order_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_cancel_conditional_order_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_stop_loss_order_transaction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_stop_loss_order_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_cancel_stop_loss_order_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_cancel_stop_loss_order_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_attached_conditional_order_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_attached_conditional_order_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_position_conditional_order_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_position_conditional_order_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_isolated_limit_order_transaction_with_conditionals(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_isolated_limit_order_transaction_with_conditionals(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_isolated_limit_order_transaction_with_liquidation_estimate(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_isolated_limit_order_transaction_with_liquidation_estimate(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn build_isolated_market_order_transaction_with_liquidation_estimate(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .build_isolated_market_order_transaction_with_liquidation_estimate(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn validate_invite(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .validate_invite(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn check_wallet_invite_status(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .check_wallet_invite_status(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn activate_referral(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .activate_referral(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_activation_permission(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_activation_permission(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn activate_referral_with_user_funded_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .activate_referral_with_user_funded_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn log_in_with_privy_token(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .log_in_with_privy_token(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn create_wallet_transaction_challenge(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .create_wallet_transaction_challenge(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn log_in_with_signed_wallet_transaction(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .log_in_with_signed_wallet_transaction(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn create_service_login_challenge(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .create_service_login_challenge(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn log_in_with_service_signature(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .log_in_with_service_signature(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_wallet_login_nonce(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_wallet_login_nonce(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn log_in_with_wallet_signature(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .log_in_with_wallet_signature(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn refresh_session(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .refresh_session(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn log_out(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .log_out(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_jwks(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_jwks(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
+#[napi(js_name = "PhoenixSigner")]
+pub struct NodePhoenixSigner {
+    inner: phoenix::PhoenixSigner,
+}
+#[napi]
+impl NodePhoenixSigner {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = phoenix::PhoenixSigner::new(convert::arg(&args, "private_key")?)?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(factory)]
+    pub fn remote(
+        args: String,
+        callback: Function<'_, String, Promise<String>>,
+    ) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let callback = std::sync::Arc::new(
+                callback
+                    .build_threadsafe_function()
+                    .callee_handled::<false>()
+                    .weak::<true>()
+                    .build()
+                    .map_err(|_| {
+                        crate::errors::SigningError::new_err("unable to register signer callback")
+                    })?,
+            );
+            let value =
+                phoenix::PhoenixSigner::remote(convert::arg(&args, "public_key")?, callback)?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn public_key(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.public_key();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn sign_message(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .sign_message(convert::arg(&args, "message_base64")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn sign_transaction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .sign_transaction(
+                    convert::arg(&args, "prepared")?,
+                    args.get("signatures").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
+#[napi(js_name = "PhoenixChainClient")]
+pub struct NodePhoenixChainClient {
+    inner: phoenix::PhoenixChainClient,
+}
+#[napi]
+impl NodePhoenixChainClient {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = phoenix::PhoenixChainClient::new(
+                convert::arg(&args, "rpc_url")?,
+                convert::arg(&args, "timeout_ms")?,
+            )?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn closed(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.closed();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn pending(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.pending()?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn clear_reconciled_submission(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            self.inner.clear_reconciled_submission()?;
+            convert::encode(())
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn close(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            self.inner.aclose().await?;
+            convert::encode(())
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn latest_blockhash(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.latest_blockhash().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn block_height(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.block_height().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn signature_status(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .signature_status(convert::arg(&args, "signature")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn transaction(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .transaction(convert::arg(&args, "signature")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn simulate(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.simulate(convert::arg(&args, "signed")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn submit(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.submit(convert::arg(&args, "signed")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn prepare(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .prepare(
+                    convert::arg(&args, "instructions")?,
+                    convert::arg(&args, "fee_payer")?,
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
+#[napi(js_name = "ExtendedClient")]
+pub struct NodeExtendedClient {
+    inner: extended::ExtendedClient,
+}
+#[napi]
+impl NodeExtendedClient {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let network: String = convert::arg(&args, "network")?;
+            let value = extended::ExtendedClient::new(
+                &network,
+                convert::arg(&args, "http_url")?,
+                convert::arg(&args, "ws_url")?,
+                convert::arg(&args, "chain_id")?,
+                convert::arg(&args, "api_key")?,
+                convert::arg(&args, "access_token")?,
+                convert::arg(&args, "expires_at")?,
+                convert::arg(&args, "timeout_ms")?,
+                convert::arg(&args, "subscription_capacity")?,
+            )?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn closed(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.closed();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn set_credentials(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            self.inner
+                .set_credentials(convert::arg(&args, "credentials")?)?;
+            convert::encode(())
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn subscribe(&self, args: String) -> napi::Result<NodeSubscription> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .subscribe(convert::arg(&args, "specification")?)
+                .await?;
+            Ok(NodeSubscription { inner: value })
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn close(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            self.inner.aclose().await?;
+            convert::encode(())
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn settlement_hash(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let kind: String = convert::arg(&args, "kind")?;
+            let public_key: String = convert::arg(&args, "public_key")?;
+            let value =
+                self.inner
+                    .settlement_hash(&kind, &public_key, convert::arg(&args, "request")?)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn prepare_order(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let public_key: String = convert::arg(&args, "public_key")?;
+            let value = self.inner.prepare_order(
+                &public_key,
+                convert::arg(&args, "order")?,
+                convert::arg(&args, "context")?,
+            )?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn sign_order(
+        &self,
+        args: String,
+        signer: &NodeExtendedSigner,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .sign_order(
+                    &signer.inner,
+                    convert::arg(&args, "order")?,
+                    convert::arg(&args, "context")?,
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn onboarding_payload(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = self
+                .inner
+                .onboarding_payload(convert::arg(&args, "registration")?)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn scale_decimal(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value: String = convert::arg(&args, "value")?;
+            let value = self
+                .inner
+                .scale_decimal(&value, convert::arg(&args, "decimals")?)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn key_derivation_payload(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = self
+                .inner
+                .key_derivation_payload(convert::arg(&args, "registration")?)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn api_request_payload(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let path: String = convert::arg(&args, "path")?;
+            let timestamp: String = convert::arg(&args, "timestamp")?;
+            let value = self.inner.api_request_payload(&path, &timestamp)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn onboarding_l2_hash(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let wallet: String = convert::arg(&args, "wallet")?;
+            let public_key: String = convert::arg(&args, "public_key")?;
+            let value = self.inner.onboarding_l2_hash(&wallet, &public_key)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_assets(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_assets(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_asset_price(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_asset_price(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_markets(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_markets(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_markets_stats(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_markets_stats(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_market_statistics(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_market_statistics(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_market_trades(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_market_trades(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_orderbook_snapshot(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_orderbook_snapshot(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_funding_rates_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_funding_rates_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trading_candles(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trading_candles(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_mark_price_candles(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_mark_price_candles(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_index_price_candles(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_index_price_candles(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_open_interests(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_open_interests(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_public_leaderboard(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_public_leaderboard(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_public_referral_link(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_public_referral_link(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_builder_dashboard(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_builder_dashboard(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_vault_positions(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_vault_positions(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_vault_position_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_vault_position_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_vault_orders(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_vault_orders(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_vault_trades(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_vault_trades(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_vault_funding_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_vault_funding_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_exchange_status(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_exchange_status(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_settings(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_settings(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_starknet_domain(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_starknet_domain(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_accounts(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_accounts(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn update_account_info(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .update_account_info(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_leverage(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_leverage(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn update_leverage(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .update_leverage(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_api_keys(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_api_keys(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn create_api_key(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .create_api_key(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn delete_api_key(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .delete_api_key(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_balance(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_balance(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_spot_balances(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_spot_balances(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_positions(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_positions(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_positions_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_positions_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_open_orders(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_open_orders(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_order(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_order(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_orders_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_orders_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_order_by_external_id(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_order_by_external_id(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn place_order(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .place_order(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn cancel_order_by_external_id(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .cancel_order_by_external_id(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn create_scaled_order(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .create_scaled_order(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn cancel_order(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .cancel_order(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn mass_cancel(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .mass_cancel(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trades(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trades(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_funding_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_funding_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn update_funding_rate_config(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .update_funding_rate_config(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn transfer_patch(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .transfer_patch(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn transfer(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .transfer(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn post_user_transfer_onchain(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .post_user_transfer_onchain(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_withdrawals(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_withdrawals(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn withdraw(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .withdraw(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn onchain_withdrawal(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .onchain_withdrawal(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn create_deposit(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .create_deposit(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_bridge_config(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_bridge_config(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_bridge_quote(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_bridge_quote(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn commit_bridge_quote(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .commit_bridge_quote(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn validate_wallet(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .validate_wallet(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_wallet_validation(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_wallet_validation(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_fees(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_fees(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_trading_fee_stats(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_trading_fee_stats(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_leaderboard(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_leaderboard(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn set_deadman_switch(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .set_deadman_switch(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_claims(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_claims(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn claim_testing_funds(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .claim_testing_funds(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_claim(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_claim(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_next_claim_time(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_next_claim_time(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_partner_rewards(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_partner_rewards(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_affiliate_rewards(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_affiliate_rewards(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_earned_rewards(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_earned_rewards(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_reward_leaderboard_stats(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_reward_leaderboard_stats(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_rebates_csv(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_rebates_csv(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_rebate_stats(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_rebate_stats(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_status(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_status(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_links(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_links(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn create_referral_link(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .create_referral_link(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn update_referral_link(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .update_referral_link(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn use_referral_code(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .use_referral_code(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_rebates_by_period_csv(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_rebates_by_period_csv(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_rebates_by_user_csv(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_rebates_by_user_csv(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_rebates_by_subaffiliate_csv(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_rebates_by_subaffiliate_csv(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_rebates_by_link_csv(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_rebates_by_link_csv(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_referral_dashboard(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_referral_dashboard(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_affiliate(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_affiliate(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn asset_operations(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .asset_operations(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_asset_operations(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_asset_operations(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_client(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_client(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn mark_wallet_checked(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .mark_wallet_checked(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn export_csv_zip(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .export_csv_zip(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_wrapper(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_wrapper(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn place_rfq_order(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .place_rfq_order(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn delete_user_order_order_id(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .delete_user_order_order_id(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_builder_trades(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_builder_trades(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_info_assets_asset_name_price(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_info_assets_asset_name_price(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_candles_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_candles_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn deposit_to_vault(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .deposit_to_vault(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn withdraw_from_vault(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .withdraw_from_vault(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_order_by_id(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_order_by_id(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_user_orders_external_external_id(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_user_orders_external_external_id(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn onboard_client(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .onboard_client(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn onboard_subaccount(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .onboard_subaccount(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_info_candles_market_candle_type(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_info_candles_market_candle_type(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_equity_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_equity_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_pn_l_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_pn_l_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_pn_l_percentage_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_pn_l_percentage_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_cumulative_account_pn_l_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_cumulative_account_pn_l_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_cumulative_account_pn_l_percentage_history(
+        &self,
+        args: String,
+    ) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_cumulative_account_pn_l_percentage_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_vault_equity_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_vault_equity_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_max_drawdown_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_max_drawdown_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_funding_chart(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_funding_chart(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_portfolio_summary(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_portfolio_summary(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_health(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_health(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_performance(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_performance(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_funding_stats(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_funding_stats(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_account_funding_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_account_funding_history(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_vault_performance(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_vault_performance(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_vault_summary(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_vault_summary(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_interest_rate_curves_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_interest_rate_curves_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_latest_interest_rate_curve(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_latest_interest_rate_curve(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_interest_key_metrics(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_interest_key_metrics(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_interest_daily_metrics(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_interest_daily_metrics(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_interest_payment_chart(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_interest_payment_chart(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn get_interest_payments_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .get_interest_payments_history(
+                    args.get("request").filter(|v| !v.is_null()).cloned(),
+                )
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
+#[napi(js_name = "ExtendedSigner")]
+pub struct NodeExtendedSigner {
+    inner: extended::ExtendedSigner,
+}
+#[napi]
+impl NodeExtendedSigner {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let kind: String = convert::arg(&args, "kind")?;
+            let value = extended::ExtendedSigner::new(convert::arg(&args, "private_key")?, &kind)?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(factory)]
+    pub fn remote(
+        args: String,
+        callback: Function<'_, String, Promise<String>>,
+    ) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let public_key: String = convert::arg(&args, "public_key")?;
+            let callback = std::sync::Arc::new(
+                callback
+                    .build_threadsafe_function()
+                    .callee_handled::<false>()
+                    .weak::<true>()
+                    .build()
+                    .map_err(|_| {
+                        crate::errors::SigningError::new_err("unable to register signer callback")
+                    })?,
+            );
+            let kind: String = convert::arg(&args, "kind")?;
+            let value = extended::ExtendedSigner::remote(&public_key, callback, &kind)?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn public_key(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.public_key();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn sign(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.sign(convert::arg(&args, "payload")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi(factory)]
+    pub fn from_wallet_signature(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value =
+                extended::ExtendedSigner::from_wallet_signature(convert::arg(&args, "signature")?)?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn sign_hash(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.sign_hash(convert::arg(&args, "hash")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
 #[napi]
 pub struct NodeSubscription {
     inner: crate::subscription::Subscription,

@@ -1,0 +1,612 @@
+//! Place multi-limit-order instruction construction.
+
+use std::num::NonZeroU8;
+
+use borsh::BorshSerialize;
+use solana_pubkey::Pubkey;
+
+use crate::instructions::constants::{
+    PHOENIX_GLOBAL_CONFIGURATION, PHOENIX_LOG_AUTHORITY, PHOENIX_PROGRAM_ID,
+};
+use crate::instructions::error::PhoenixIxError;
+use crate::instructions::order_packet::{
+    CondensedOrder, CondensedOrderV2, MAX_SCALE_SET_ID, MultipleOrderPacket, MultipleOrderPacketV2,
+    client_order_id_to_bytes, encode_scale_set_tag,
+};
+use crate::instructions::types::{AccountMeta, Instruction, push_trader_index_accounts};
+
+/// Parameters for placing multiple limit orders in a single instruction.
+#[derive(Debug, Clone)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct MultiLimitOrderParams {
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    trader: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    trader_account: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    perp_asset_map: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    orderbook: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    spline_collection: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    global_trader_index: Vec<Pubkey>,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    active_trader_buffer: Vec<Pubkey>,
+    bids: Vec<CondensedOrder>,
+    asks: Vec<CondensedOrder>,
+    client_order_id: Option<u128>,
+    slide: bool,
+    /// Market symbol (e.g. "SOL"). Not serialized into the instruction.
+    symbol: String,
+}
+
+impl MultiLimitOrderParams {
+    pub fn builder() -> MultiLimitOrderParamsBuilder {
+        MultiLimitOrderParamsBuilder::new()
+    }
+
+    fn accounts(&self) -> MultiLimitOrderAccounts<'_> {
+        MultiLimitOrderAccounts {
+            trader: self.trader,
+            trader_account: self.trader_account,
+            perp_asset_map: self.perp_asset_map,
+            orderbook: self.orderbook,
+            spline_collection: self.spline_collection,
+            global_trader_index: &self.global_trader_index,
+            active_trader_buffer: &self.active_trader_buffer,
+        }
+    }
+
+    pub fn trader(&self) -> Pubkey {
+        self.trader
+    }
+
+    pub fn trader_account(&self) -> Pubkey {
+        self.trader_account
+    }
+
+    pub fn perp_asset_map(&self) -> Pubkey {
+        self.perp_asset_map
+    }
+
+    pub fn orderbook(&self) -> Pubkey {
+        self.orderbook
+    }
+
+    pub fn spline_collection(&self) -> Pubkey {
+        self.spline_collection
+    }
+
+    pub fn global_trader_index(&self) -> &[Pubkey] {
+        &self.global_trader_index
+    }
+
+    pub fn active_trader_buffer(&self) -> &[Pubkey] {
+        &self.active_trader_buffer
+    }
+
+    pub fn bids(&self) -> &[CondensedOrder] {
+        &self.bids
+    }
+
+    pub fn asks(&self) -> &[CondensedOrder] {
+        &self.asks
+    }
+
+    pub fn client_order_id(&self) -> Option<u128> {
+        self.client_order_id
+    }
+
+    pub fn slide(&self) -> bool {
+        self.slide
+    }
+
+    pub fn symbol(&self) -> &str {
+        &self.symbol
+    }
+}
+
+/// Builder for `MultiLimitOrderParams`.
+#[derive(Default)]
+pub struct MultiLimitOrderParamsBuilder {
+    trader: Option<Pubkey>,
+    trader_account: Option<Pubkey>,
+    perp_asset_map: Option<Pubkey>,
+    orderbook: Option<Pubkey>,
+    spline_collection: Option<Pubkey>,
+    global_trader_index: Option<Vec<Pubkey>>,
+    active_trader_buffer: Option<Vec<Pubkey>>,
+    bids: Vec<CondensedOrder>,
+    asks: Vec<CondensedOrder>,
+    client_order_id: Option<u128>,
+    slide: bool,
+    symbol: Option<String>,
+}
+
+impl MultiLimitOrderParamsBuilder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn trader(mut self, trader: Pubkey) -> Self {
+        self.trader = Some(trader);
+        self
+    }
+
+    pub fn trader_account(mut self, trader_account: Pubkey) -> Self {
+        self.trader_account = Some(trader_account);
+        self
+    }
+
+    pub fn perp_asset_map(mut self, perp_asset_map: Pubkey) -> Self {
+        self.perp_asset_map = Some(perp_asset_map);
+        self
+    }
+
+    pub fn orderbook(mut self, orderbook: Pubkey) -> Self {
+        self.orderbook = Some(orderbook);
+        self
+    }
+
+    pub fn spline_collection(mut self, spline_collection: Pubkey) -> Self {
+        self.spline_collection = Some(spline_collection);
+        self
+    }
+
+    pub fn global_trader_index(mut self, global_trader_index: Vec<Pubkey>) -> Self {
+        self.global_trader_index = Some(global_trader_index);
+        self
+    }
+
+    pub fn active_trader_buffer(mut self, active_trader_buffer: Vec<Pubkey>) -> Self {
+        self.active_trader_buffer = Some(active_trader_buffer);
+        self
+    }
+
+    pub fn bids(mut self, bids: Vec<CondensedOrder>) -> Self {
+        self.bids = bids;
+        self
+    }
+
+    pub fn asks(mut self, asks: Vec<CondensedOrder>) -> Self {
+        self.asks = asks;
+        self
+    }
+
+    pub fn add_bid(mut self, order: CondensedOrder) -> Self {
+        self.bids.push(order);
+        self
+    }
+
+    pub fn add_ask(mut self, order: CondensedOrder) -> Self {
+        self.asks.push(order);
+        self
+    }
+
+    pub fn client_order_id(mut self, client_order_id: u128) -> Self {
+        self.client_order_id = Some(client_order_id);
+        self
+    }
+
+    pub fn slide(mut self, slide: bool) -> Self {
+        self.slide = slide;
+        self
+    }
+
+    pub fn symbol(mut self, symbol: impl Into<String>) -> Self {
+        self.symbol = Some(symbol.into());
+        self
+    }
+
+    pub fn build(self) -> Result<MultiLimitOrderParams, PhoenixIxError> {
+        Ok(MultiLimitOrderParams {
+            trader: self.trader.ok_or(PhoenixIxError::MissingField("trader"))?,
+            trader_account: self
+                .trader_account
+                .ok_or(PhoenixIxError::MissingField("trader_account"))?,
+            perp_asset_map: self
+                .perp_asset_map
+                .ok_or(PhoenixIxError::MissingField("perp_asset_map"))?,
+            orderbook: self
+                .orderbook
+                .ok_or(PhoenixIxError::MissingField("orderbook"))?,
+            spline_collection: self
+                .spline_collection
+                .ok_or(PhoenixIxError::MissingField("spline_collection"))?,
+            global_trader_index: self
+                .global_trader_index
+                .ok_or(PhoenixIxError::MissingField("global_trader_index"))?,
+            active_trader_buffer: self
+                .active_trader_buffer
+                .ok_or(PhoenixIxError::MissingField("active_trader_buffer"))?,
+            bids: self.bids,
+            asks: self.asks,
+            client_order_id: self.client_order_id,
+            slide: self.slide,
+            symbol: self.symbol.unwrap_or_default(),
+        })
+    }
+}
+
+/// V2 of [`MultiLimitOrderParams`]: per-order [`CondensedOrderV2`] legs and a
+/// `scale_set_id`.
+#[derive(Debug, Clone)]
+#[cfg_attr(all(), derive(serde::Serialize, serde::Deserialize))]
+pub struct MultiLimitOrderParamsV2 {
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    trader: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    trader_account: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    perp_asset_map: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    orderbook: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey"))]
+    spline_collection: Pubkey,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    global_trader_index: Vec<Pubkey>,
+    #[cfg_attr(all(), serde(with = "crate::instructions::serde_helpers::pubkey_vec"))]
+    active_trader_buffer: Vec<Pubkey>,
+    bids: Vec<CondensedOrderV2>,
+    asks: Vec<CondensedOrderV2>,
+    client_order_id: Option<u128>,
+    scale_set_id: u8,
+    #[cfg_attr(all(), serde(default))]
+    scale_set_continuation: bool,
+    /// Market symbol (e.g. "SOL"). Not serialized into the instruction.
+    symbol: String,
+}
+
+impl MultiLimitOrderParamsV2 {
+    pub fn builder() -> MultiLimitOrderParamsV2Builder {
+        MultiLimitOrderParamsV2Builder::new()
+    }
+
+    fn accounts(&self) -> MultiLimitOrderAccounts<'_> {
+        MultiLimitOrderAccounts {
+            trader: self.trader,
+            trader_account: self.trader_account,
+            perp_asset_map: self.perp_asset_map,
+            orderbook: self.orderbook,
+            spline_collection: self.spline_collection,
+            global_trader_index: &self.global_trader_index,
+            active_trader_buffer: &self.active_trader_buffer,
+        }
+    }
+
+    pub fn trader(&self) -> Pubkey {
+        self.trader
+    }
+
+    pub fn trader_account(&self) -> Pubkey {
+        self.trader_account
+    }
+
+    pub fn perp_asset_map(&self) -> Pubkey {
+        self.perp_asset_map
+    }
+
+    pub fn orderbook(&self) -> Pubkey {
+        self.orderbook
+    }
+
+    pub fn spline_collection(&self) -> Pubkey {
+        self.spline_collection
+    }
+
+    pub fn global_trader_index(&self) -> &[Pubkey] {
+        &self.global_trader_index
+    }
+
+    pub fn active_trader_buffer(&self) -> &[Pubkey] {
+        &self.active_trader_buffer
+    }
+
+    pub fn bids(&self) -> &[CondensedOrderV2] {
+        &self.bids
+    }
+
+    pub fn asks(&self) -> &[CondensedOrderV2] {
+        &self.asks
+    }
+
+    pub fn client_order_id(&self) -> Option<u128> {
+        self.client_order_id
+    }
+
+    pub fn scale_set_id(&self) -> u8 {
+        self.scale_set_id
+    }
+
+    pub fn scale_set_continuation(&self) -> bool {
+        self.scale_set_continuation
+    }
+
+    pub fn symbol(&self) -> &str {
+        &self.symbol
+    }
+}
+
+/// Builder for `MultiLimitOrderParamsV2`.
+#[derive(Default)]
+pub struct MultiLimitOrderParamsV2Builder {
+    trader: Option<Pubkey>,
+    trader_account: Option<Pubkey>,
+    perp_asset_map: Option<Pubkey>,
+    orderbook: Option<Pubkey>,
+    spline_collection: Option<Pubkey>,
+    global_trader_index: Option<Vec<Pubkey>>,
+    active_trader_buffer: Option<Vec<Pubkey>>,
+    bids: Vec<CondensedOrderV2>,
+    asks: Vec<CondensedOrderV2>,
+    client_order_id: Option<u128>,
+    scale_set_id: u8,
+    scale_set_continuation: bool,
+    symbol: Option<String>,
+}
+
+impl MultiLimitOrderParamsV2Builder {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn trader(mut self, trader: Pubkey) -> Self {
+        self.trader = Some(trader);
+        self
+    }
+
+    pub fn trader_account(mut self, trader_account: Pubkey) -> Self {
+        self.trader_account = Some(trader_account);
+        self
+    }
+
+    pub fn perp_asset_map(mut self, perp_asset_map: Pubkey) -> Self {
+        self.perp_asset_map = Some(perp_asset_map);
+        self
+    }
+
+    pub fn orderbook(mut self, orderbook: Pubkey) -> Self {
+        self.orderbook = Some(orderbook);
+        self
+    }
+
+    pub fn spline_collection(mut self, spline_collection: Pubkey) -> Self {
+        self.spline_collection = Some(spline_collection);
+        self
+    }
+
+    pub fn global_trader_index(mut self, global_trader_index: Vec<Pubkey>) -> Self {
+        self.global_trader_index = Some(global_trader_index);
+        self
+    }
+
+    pub fn active_trader_buffer(mut self, active_trader_buffer: Vec<Pubkey>) -> Self {
+        self.active_trader_buffer = Some(active_trader_buffer);
+        self
+    }
+
+    pub fn bids(mut self, bids: Vec<CondensedOrderV2>) -> Self {
+        self.bids = bids;
+        self
+    }
+
+    pub fn asks(mut self, asks: Vec<CondensedOrderV2>) -> Self {
+        self.asks = asks;
+        self
+    }
+
+    pub fn add_bid(mut self, order: CondensedOrderV2) -> Self {
+        self.bids.push(order);
+        self
+    }
+
+    pub fn add_ask(mut self, order: CondensedOrderV2) -> Self {
+        self.asks.push(order);
+        self
+    }
+
+    pub fn client_order_id(mut self, client_order_id: u128) -> Self {
+        self.client_order_id = Some(client_order_id);
+        self
+    }
+
+    /// 0 = not part of a scale-order set; 1-127 = caller-assigned ladder id.
+    pub fn scale_set_id(mut self, scale_set_id: u8) -> Self {
+        self.scale_set_id = scale_set_id;
+        self
+    }
+
+    /// Marks the packet a continuation of a ladder split across
+    /// transactions; see [`encode_scale_set_tag`]. Requires a nonzero
+    /// `scale_set_id`.
+    pub fn scale_set_continuation(mut self, scale_set_continuation: bool) -> Self {
+        self.scale_set_continuation = scale_set_continuation;
+        self
+    }
+
+    pub fn symbol(mut self, symbol: impl Into<String>) -> Self {
+        self.symbol = Some(symbol.into());
+        self
+    }
+
+    pub fn build(self) -> Result<MultiLimitOrderParamsV2, PhoenixIxError> {
+        if self.scale_set_id > MAX_SCALE_SET_ID {
+            return Err(PhoenixIxError::InvalidScaleSetId {
+                scale_set_id: self.scale_set_id,
+            });
+        }
+        if self.scale_set_continuation && self.scale_set_id == 0 {
+            return Err(PhoenixIxError::ScaleSetContinuationRequiresId);
+        }
+
+        Ok(MultiLimitOrderParamsV2 {
+            trader: self.trader.ok_or(PhoenixIxError::MissingField("trader"))?,
+            trader_account: self
+                .trader_account
+                .ok_or(PhoenixIxError::MissingField("trader_account"))?,
+            perp_asset_map: self
+                .perp_asset_map
+                .ok_or(PhoenixIxError::MissingField("perp_asset_map"))?,
+            orderbook: self
+                .orderbook
+                .ok_or(PhoenixIxError::MissingField("orderbook"))?,
+            spline_collection: self
+                .spline_collection
+                .ok_or(PhoenixIxError::MissingField("spline_collection"))?,
+            global_trader_index: self
+                .global_trader_index
+                .ok_or(PhoenixIxError::MissingField("global_trader_index"))?,
+            active_trader_buffer: self
+                .active_trader_buffer
+                .ok_or(PhoenixIxError::MissingField("active_trader_buffer"))?,
+            bids: self.bids,
+            asks: self.asks,
+            client_order_id: self.client_order_id,
+            scale_set_id: self.scale_set_id,
+            scale_set_continuation: self.scale_set_continuation,
+            symbol: self.symbol.unwrap_or_default(),
+        })
+    }
+}
+
+/// Create a place multi-limit-order instruction.
+///
+/// This instruction places multiple post-only limit orders (bids and asks) in a
+/// single transaction. Individual orders that fail (e.g. too many orders,
+/// post-only cross) are skipped without failing the entire transaction.
+pub fn create_place_multi_limit_order_ix(
+    params: MultiLimitOrderParams,
+) -> Result<Instruction, PhoenixIxError> {
+    let accounts = params.accounts();
+    accounts.validate()?;
+
+    let accounts = accounts.to_account_metas();
+    let data = encode_multi_limit_order(params);
+
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts,
+        data,
+    })
+}
+
+/// V2 of [`create_place_multi_limit_order_ix`]. The account list is identical
+/// to V1; only the discriminant and packet encoding differ.
+pub fn create_place_multi_limit_order_v2_ix(
+    params: MultiLimitOrderParamsV2,
+) -> Result<Instruction, PhoenixIxError> {
+    let accounts = params.accounts();
+    accounts.validate()?;
+
+    let accounts = accounts.to_account_metas();
+    let data = encode_multi_limit_order_v2(params)?;
+
+    Ok(Instruction {
+        program_id: *PHOENIX_PROGRAM_ID,
+        accounts,
+        data,
+    })
+}
+
+/// The market-action account set shared verbatim by V1 and V2; only the
+/// discriminant and packet encoding differ between the two instructions.
+struct MultiLimitOrderAccounts<'a> {
+    trader: Pubkey,
+    trader_account: Pubkey,
+    perp_asset_map: Pubkey,
+    orderbook: Pubkey,
+    spline_collection: Pubkey,
+    global_trader_index: &'a [Pubkey],
+    active_trader_buffer: &'a [Pubkey],
+}
+
+impl MultiLimitOrderAccounts<'_> {
+    fn validate(&self) -> Result<(), PhoenixIxError> {
+        if self.global_trader_index.is_empty() {
+            return Err(PhoenixIxError::EmptyGlobalTraderIndex);
+        }
+        if self.active_trader_buffer.is_empty() {
+            return Err(PhoenixIxError::EmptyActiveTraderBuffer);
+        }
+        Ok(())
+    }
+
+    fn to_account_metas(&self) -> Vec<AccountMeta> {
+        // 6 fixed accounts plus the two trader-index groups.
+        let mut accounts = Vec::with_capacity(
+            6 + self.global_trader_index.len() + self.active_trader_buffer.len(),
+        );
+
+        // LogAccountGroupAccounts (2 accounts)
+        accounts.push(AccountMeta::readonly(*PHOENIX_PROGRAM_ID));
+        accounts.push(AccountMeta::readonly(*PHOENIX_LOG_AUTHORITY));
+
+        // MarketActionInstructionGroupAccounts
+        accounts.push(AccountMeta::writable(*PHOENIX_GLOBAL_CONFIGURATION));
+        accounts.push(AccountMeta::readonly_signer(self.trader));
+        accounts.push(AccountMeta::writable(self.trader_account));
+        accounts.push(AccountMeta::writable(self.perp_asset_map));
+
+        push_trader_index_accounts(
+            &mut accounts,
+            self.global_trader_index,
+            self.active_trader_buffer,
+        );
+
+        accounts.push(AccountMeta::writable(self.orderbook));
+        accounts.push(AccountMeta::writable(self.spline_collection));
+
+        accounts
+    }
+}
+
+fn encode_multi_limit_order(params: MultiLimitOrderParams) -> Vec<u8> {
+    let packet = MultipleOrderPacket {
+        client_order_id: params.client_order_id.map(client_order_id_to_bytes),
+        slide: params.slide,
+        bids: params.bids,
+        asks: params.asks,
+    };
+
+    encode_packet(
+        crate::instructions::PhoenixInstruction::PlaceMultiLimitOrder.discriminant(),
+        &packet,
+    )
+}
+
+fn encode_multi_limit_order_v2(params: MultiLimitOrderParamsV2) -> Result<Vec<u8>, PhoenixIxError> {
+    // Deserialized params bypass `MultiLimitOrderParamsV2Builder::build`, so
+    // this is the authoritative check for scale_set_id and the
+    // continuation-requires-id invariant.
+    let scale_set_id = match NonZeroU8::new(params.scale_set_id) {
+        Some(id) => encode_scale_set_tag(id, params.scale_set_continuation)?,
+        None if params.scale_set_continuation => {
+            return Err(PhoenixIxError::ScaleSetContinuationRequiresId);
+        }
+        None => 0,
+    };
+
+    let packet = MultipleOrderPacketV2 {
+        client_order_id: params.client_order_id.map(client_order_id_to_bytes),
+        scale_set_id,
+        bids: params.bids,
+        asks: params.asks,
+    };
+
+    Ok(encode_packet(
+        crate::instructions::PhoenixInstruction::PlaceMultiLimitOrderV2.discriminant(),
+        &packet,
+    ))
+}
+
+/// Serialize `packet` straight after the 8-byte discriminant, so the encoded
+/// instruction data is built in a single buffer rather than via a throwaway
+/// `borsh::to_vec` allocation.
+fn encode_packet<P: BorshSerialize>(discriminant: [u8; 8], packet: &P) -> Vec<u8> {
+    let mut data = Vec::from(discriminant);
+    packet
+        .serialize(&mut data)
+        .expect("serialization should not fail");
+    data
+}

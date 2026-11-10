@@ -25,7 +25,7 @@ def operations(source):
     source=re.sub(r"Bound<'(?:py|_), PyAny>", "Input", source)
     source=re.sub(r'\bpy,\s*','',source).replace('(py)','()')
     source=source.replace('PyResult','Result').replace('-> Result<Input>','-> Result<Output>')
-    source=re.sub(r'(?m)^(    )fn ',r'\1pub(crate) async fn ',source)
+    source=re.sub(r'(?m)^([ \t]*)fn ',r'\1pub(crate) async fn ',source)
     for match in reversed(list(re.finditer(r'\.run\(',source))):
         end=closing(source,match.end()-1);source=source[:end+1]+'.await'+source[end+1:]
     return source

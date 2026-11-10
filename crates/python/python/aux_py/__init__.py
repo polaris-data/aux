@@ -605,3 +605,20 @@ __all__ += ["PolymarketClient", "PolymarketPerpsClient", "PolymarketChainClient"
 
 from ._prediction_rpc import KalshiRpcSession, PascalRpcSession, PolymarketRfqSession, PolymarketPerpsRpcSession
 __all__ += ["KalshiRpcSession", "PascalRpcSession", "PolymarketRfqSession", "PolymarketPerpsRpcSession"]
+
+from ._phoenix import PhoenixClient
+__all__ += ["PhoenixClient"]
+
+from ._extended import ExtendedClient
+__all__ += ["ExtendedClient"]
+
+PhoenixSigner = _native.PhoenixSigner
+ExtendedSigner = _native.ExtendedSigner
+__all__ += ["PhoenixSigner", "ExtendedSigner"]
+
+class PhoenixChainClient(_ExchangeClient):
+    def __init__(self, rpc_url: str, **configuration):
+        self._inner = _native.PhoenixChainClient(rpc_url, **configuration)
+    def __getattr__(self, name):
+        return getattr(self._inner, name)
+__all__ += ["PhoenixChainClient"]
