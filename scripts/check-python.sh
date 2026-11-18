@@ -12,6 +12,8 @@ export PYO3_PYTHON="$binding_python"
 
 python3 scripts/generate-dune-bindings.py --check
 python3 scripts/generate-birdeye-bindings.py --check
+python3 scripts/generate-oracle-bindings.py --check
+python3 scripts/check-oracle-coverage.py
 python3 scripts/check-birdeye-source.py
 cargo fmt --all --check
 cargo clippy --locked -p aux-rs-python --all-targets -- -D warnings

@@ -8,6 +8,7 @@ description = "Shared streaming utilities for native data connectors"
 
 [dependencies]
 aux-rs-core.workspace = true
+sha2.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 url.workspace = true

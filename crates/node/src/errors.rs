@@ -64,6 +64,7 @@ use aux_rs::{
 };
 
 pub enum ClientError {
+    Data(aux_rs::pyth::Error),
     Metric(NativeError<aux_rs::metric::Error>),
     Derive(NativeError<aux_rs::derive::Error>),
     Paradex(NativeError<aux_rs::paradex::Error>),
@@ -83,6 +84,7 @@ error_type!(GapError, TransportError);
 impl ClientError {
     pub fn is_gap(&self) -> bool {
         match self {
+            Self::Data(aux_rs::pyth::Error::Transport(e)) => e.is_gap(),
             Self::Metric(NativeError::Transport(e))
             | Self::Hyperliquid(NativeError::Transport(e))
             | Self::Derive(NativeError::Transport(e))
@@ -339,6 +341,7 @@ pub fn map_error(error: &ClientError) -> NativeBindingError {
                 Ok(error)
             }).unwrap_or_else(std::convert::identity),
         },
+        ClientError::Data(e) => data_ref(e),
         ClientError::Conversion => {
             DecodeError::new_err("unexpected or unrepresentable native stream event")
         }
@@ -432,8 +435,11 @@ pub fn extended(error: NativeError<aux_rs::extended::Error>) -> NativeBindingErr
 
 /// Shared data-vendor errors retain native details without exposing credentials.
 pub fn data(error: aux_rs::dune::Error) -> NativeBindingError {
+    data_ref(&error)
+}
+fn data_ref(error: &aux_rs::dune::Error) -> NativeBindingError {
     use aux_rs::dune::Error;
-    match &error {
+    match error {
         Error::Transport(e) => transport(e),
         Error::InvalidRequest(s) => ValidationError::new_err(*s),
         Error::Decode(s) => DecodeError::new_err(*s),

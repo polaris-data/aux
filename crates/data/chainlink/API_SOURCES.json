@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-11-18",
+  "sources": [
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v2.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v3.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v7.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v8.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v9.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v10.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v11.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v14.rs",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/data-streams-api/interface-api.mdx",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/data-streams-api/interface-ws.mdx",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/data-streams-api/discovery-endpoint.mdx",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/candlestick-api/index.mdx"
+  ],
+  "source_sha256": {
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v2.rs": "3a6412362a658256f1dc67a3b895087dcf56a670c8908fafee64f163f96930c1",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v3.rs": "d7b31158bbf62d904f1012f455e20ff33edf14f0d33c689bbd58d7fe402a6d48",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v7.rs": "58aa71abc7a55b44a1476213acb018fd30d3eebfa0aead6f2b02a1f756bb7650",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v8.rs": "c7e0b80c572a63e51adb45afff123c900e53f17572282dd8ac2344f31daea983",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v9.rs": "68667aa6f615b20c0ddd8a8479c9c958f72ced0269496b6f06fc25e0dd152c53",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v10.rs": "4c4c9d2a316d29acf86e257d8fff27fc8b1588c7946c2bf20c00ceb86d8be8f8",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v11.rs": "d80977edd91ae86902a4c25bc9491485ebcb0755001e1209f3579a95ba42f618",
+    "https://raw.githubusercontent.com/smartcontractkit/data-streams-sdk/b64ce837caa67e112326c077370ee3e10839e00b/rust/crates/report/src/report/v14.rs": "729bc8343e26f8785464baa2c3f0735088bf7ff3cf076db45ce06f8929352b8e",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/data-streams-api/interface-api.mdx": "49949aa0a34298f12aa4dfe592e9a9446574db17c910e56167083c57463292de",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/data-streams-api/interface-ws.mdx": "62c95e6b241f9b475249646c3b36173d96a6b25024beb4c615c960d25f6bdeb7",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/data-streams-api/discovery-endpoint.mdx": "8ca8e85a0b8bfe314801a2e64b85ff51a88b84812ed8e35eb54ef9f8b7b4eca3",
+    "https://raw.githubusercontent.com/smartcontractkit/documentation/d243413f32bc7e85fae2fd40d3f701dda859db89/src/content/data-streams/reference/candlestick-api/index.mdx": "d0bb016ef0c8fb60c2ad52ba1bc93da5da27ea9c69598739797288b1b873a00c"
+  },
+  "inventory_sha256": "d9ac1d7e9307b0619b8241e3458c8f069b5a6db6d2b57fd1366ca8986d0b6bcd",
+  "fixture_sha256": {
+    "tests/fixtures/operations.json": "86118d6cd753e41f5966155d38941b0d417d93af3753eaba5863c463b2650a05",
+    "tests/fixtures/reports.json": "fe296c27985bc6c535766ebb9862324deb809dd65c973877eb3f343733b1016f"
+  }
+}

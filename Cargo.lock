@@ -612,6 +612,7 @@ version = "0.0.0"
 dependencies = [
  "aux-rs-arcus",
  "aux-rs-birdeye",
+ "aux-rs-chainlink",
  "aux-rs-core",
  "aux-rs-databento",
  "aux-rs-derive",
@@ -626,6 +627,7 @@ dependencies = [
  "aux-rs-pascal",
  "aux-rs-phoenix",
  "aux-rs-polymarket",
+ "aux-rs-pyth",
  "aux-rs-qfex",
  "aux-rs-tardis",
  "futures-util",
@@ -664,6 +666,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "aux-rs-chainlink"
+version = "0.0.0"
+dependencies = [
+ "alloy-primitives",
+ "alloy-sol-types",
+ "aux-rs-core",
+ "aux-rs-data",
+ "hmac",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tokio",
+ "tokio-tungstenite",
+ "url",
+ "zeroize",
+]
+
+[[package]]
 name = "aux-rs-core"
 version = "0.0.0"
 dependencies = [
@@ -684,6 +704,7 @@ dependencies = [
  "futures-util",
  "serde",
  "serde_json",
+ "sha2",
  "tokio",
  "url",
  "zeroize",
@@ -980,6 +1001,22 @@ dependencies = [
  "serde_json",
  "sha2",
  "sha3",
+ "tokio",
+ "tokio-tungstenite",
+ "url",
+ "zeroize",
+]
+
+[[package]]
+name = "aux-rs-pyth"
+version = "0.0.0"
+dependencies = [
+ "aux-rs-core",
+ "aux-rs-data",
+ "base64 0.22.1",
+ "futures-util",
+ "serde",
+ "serde_json",
  "tokio",
  "tokio-tungstenite",
  "url",

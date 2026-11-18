@@ -1,6 +1,6 @@
 # aux
 
-`aux` connects you to DeFi-native exchange APIs, external trading infrastructure and market data vendors, through SDKs in Rust and Python.
+`aux` connects you to DeFi-native exchange APIs, external trading infrastructure and market data vendors, through SDKs in Rust, Python, and Node/TypeScript.
 
 ## Installation
 
@@ -40,6 +40,8 @@ remain distinguishable from transport failures.
 | `tardis` | No | [Tardis hosted data and external Machine replay/live APIs, including file downloads](crates/data/tardis/README.md) |
 | `birdeye` | No | [Birdeye prices/OHLCV, token/pair stats, discovery, trades and security](crates/data/birdeye/README.md) |
 | `dune` | No | [Dune SQL/saved-query execution, status, cancellation, and JSON/CSV results](crates/data/dune/README.md) |
+| `pyth` | No | [Pyth Pro REST and WebSocket data, signed updates, and Hermes v2](crates/data/pyth/README.md) |
+| `chainlink` | No | [Chainlink Data Streams reports and Candlestick APIs](crates/data/chainlink/README.md) |
 | `databento` | No | [Databento historical, reference and live clients, including TCP connections and file downloads](crates/data/databento/README.md) |
 | `paradex` | No | [Native Paradex v1/v2 client, Starknet/EVM signing, and SBE streams](crates/exchanges/paradex/README.md) |
 | `metric` | No | [Metric liquidity/routing HTTP APIs, native EVM contracts and transaction signing](crates/exchanges/metric/README.md) |
@@ -122,8 +124,9 @@ The workspace contains:
 - [`aux-rs`](crates/aux-rs): public Rust SDK facade, examples, and integration tests.
 - [`aux-rs-core`](crates/core): shared client and transport contracts.
 - [Exchange adapters](crates/exchanges): native clients, types, and signing.
-- [Data adapters](crates/data): native Tardis, Databento, Dune, and Birdeye clients, streaming data and downloads.
+- [Data adapters](crates/data): native Tardis, Databento, Dune, Birdeye, Pyth, and Chainlink clients.
 - [Python bindings](crates/python/README.md): asyncio clients backed by the Rust SDK.
+- [Node/TypeScript bindings](crates/node/README.md): native Node clients backed by the Rust SDK.
 
 See the [architecture](CONTRIBUTING.md#architecture) and
 [roadmap](CONTRIBUTING.md#roadmap-and-release-gates) for design and remaining work.

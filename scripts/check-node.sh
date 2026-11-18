@@ -4,6 +4,8 @@ cd "$(dirname "$0")/.."
 npm ci --prefix crates/node
 python3 scripts/generate-dune-bindings.py --check
 python3 scripts/generate-birdeye-bindings.py --check
+python3 scripts/generate-oracle-bindings.py --check
+python3 scripts/check-oracle-coverage.py
 node scripts/check-birdeye-source.mjs
 cargo fmt --all --check
 python3 scripts/generate-node-bindings.py --check --models

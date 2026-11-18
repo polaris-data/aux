@@ -13358,6 +13358,661 @@ impl NodeBirdeyeClient {
         result.map_err(Error::into_napi)
     }
 }
+#[napi(js_name = "PythProClient")]
+pub struct NodePythProClient {
+    inner: oracles::PythProClient,
+}
+#[napi]
+impl NodePythProClient {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = oracles::PythProClient::new(
+                args.get("config").filter(|v| !v.is_null()).cloned(),
+                convert::arg(&args, "timeout_ms")?,
+            )?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn closed(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.closed();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn close(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            self.inner.aclose().await?;
+            convert::encode(())
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn live(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.live().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn ready(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.ready().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn symbols(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .symbols(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn config(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.config(convert::arg(&args, "request")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn search(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.search(convert::arg(&args, "request")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn resolve_symbol(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .resolve_symbol(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.history(convert::arg(&args, "request")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn price(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.price(convert::arg(&args, "request")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn price_range(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .price_range(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn publisher_updates(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .publisher_updates(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn latest_price(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .latest_price(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn price_at_timestamp(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .price_at_timestamp(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn subscribe(&self, args: String) -> napi::Result<NodeSubscription> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .subscribe(convert::arg(&args, "request")?)
+                .await?;
+            Ok(NodeSubscription { inner: value })
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn stream_merkle_roots(&self, args: String) -> napi::Result<NodeSubscription> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.stream_merkle_roots().await?;
+            Ok(NodeSubscription { inner: value })
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn reduce_price(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .reduce_price(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn publisher_stake_caps(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.publisher_stake_caps().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn guardian_set_upgrade(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.guardian_set_upgrade().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
+#[napi(js_name = "PythHermesClient")]
+pub struct NodePythHermesClient {
+    inner: oracles::PythHermesClient,
+}
+#[napi]
+impl NodePythHermesClient {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = oracles::PythHermesClient::new(
+                args.get("config").filter(|v| !v.is_null()).cloned(),
+                convert::arg(&args, "timeout_ms")?,
+            )?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn closed(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.closed();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn close(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            self.inner.aclose().await?;
+            convert::encode(())
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn live(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.live().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn ready(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.ready().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn price_feeds(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .price_feeds(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn latest_price_updates(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .latest_price_updates(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn price_updates_at_timestamp(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .price_updates_at_timestamp(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn latest_twaps(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .latest_twaps(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn latest_publisher_stake_caps(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .latest_publisher_stake_caps(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn stream_price_updates(&self, args: String) -> napi::Result<NodeSubscription> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .stream_price_updates(convert::arg(&args, "request")?)
+                .await?;
+            Ok(NodeSubscription { inner: value })
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
+#[napi(js_name = "ChainlinkDataStreamsClient")]
+pub struct NodeChainlinkDataStreamsClient {
+    inner: oracles::ChainlinkDataStreamsClient,
+}
+#[napi]
+impl NodeChainlinkDataStreamsClient {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = oracles::ChainlinkDataStreamsClient::new(
+                convert::arg(&args, "config")?,
+                convert::arg(&args, "timeout_ms")?,
+            )?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn closed(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.closed();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn close(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            self.inner.aclose().await?;
+            convert::encode(())
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn discovery(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .discovery(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn report(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.report(convert::arg(&args, "request")?).await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn latest_report(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .latest_report(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn bulk_reports(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .bulk_reports(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn report_page(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .report_page(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn subscribe_reports(&self, args: String) -> napi::Result<NodeSubscription> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .subscribe_reports(convert::arg(&args, "request")?)
+                .await?;
+            Ok(NodeSubscription { inner: value })
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub fn decode_report(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let full_report: String = convert::arg(&args, "full_report")?;
+            let value = self.inner.decode_report(&full_report)?;
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+}
+#[napi(js_name = "ChainlinkCandlestickClient")]
+pub struct NodeChainlinkCandlestickClient {
+    inner: oracles::ChainlinkCandlestickClient,
+}
+#[napi]
+impl NodeChainlinkCandlestickClient {
+    #[napi(constructor)]
+    pub fn new(args: String) -> napi::Result<Self> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let call = || -> crate::prelude::Result<_> {
+            let value = oracles::ChainlinkCandlestickClient::new(
+                convert::arg(&args, "config")?,
+                convert::arg(&args, "timeout_ms")?,
+            )?;
+            Ok(Self { inner: value })
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi(getter)]
+    pub fn closed(&self) -> napi::Result<String> {
+        let call = || -> crate::prelude::Result<_> {
+            let value = self.inner.closed();
+            convert::encode(value)
+        };
+        let result = call();
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn close(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            self.inner.aclose().await?;
+            convert::encode(())
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn authorize(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .authorize(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn symbol_info(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .symbol_info(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn groups(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self.inner.groups().await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn candle_history(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .candle_history(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn candle_history_rows(&self, args: String) -> napi::Result<String> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .candle_history_rows(convert::arg(&args, "request")?)
+                .await?;
+            convert::encode(value)
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+    #[napi]
+    pub async fn stream_prices(&self, args: String) -> napi::Result<NodeSubscription> {
+        let args = convert::input(&args).map_err(Error::into_napi)?;
+        let _ = &args;
+        let result = async {
+            let value = self
+                .inner
+                .stream_prices(args.get("request").filter(|v| !v.is_null()).cloned())
+                .await?;
+            Ok(NodeSubscription { inner: value })
+        }
+        .await;
+        result.map_err(Error::into_napi)
+    }
+}
 #[napi]
 pub struct NodeSubscription {
     inner: crate::subscription::Subscription,

@@ -1,6 +1,6 @@
 [workspace]
-members = ["crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric", "crates/node"]
-default-members = ["crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
+members = ["crates/data/pyth", "crates/data/chainlink", "crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric", "crates/node"]
+default-members = ["crates/data/pyth", "crates/data/chainlink", "crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
 resolver = "3"
 
 [workspace.package]
@@ -10,6 +10,8 @@ rust-version = "1.92"
 publish = false
 
 [workspace.dependencies]
+aux-rs-pyth = { path = "crates/data/pyth", default-features = false }
+aux-rs-chainlink = { path = "crates/data/chainlink", default-features = false }
 aux-rs-extended = { path = "crates/exchanges/extended", default-features = false }
 aux-rs-phoenix = { path = "crates/exchanges/phoenix", default-features = false }
 ts-rs = { version = "12", default-features = false, features = ["serde-compat", "serde-json-impl"] }

@@ -86,3 +86,6 @@ pub fn params(value: Value) -> Result<Params> {
         .cloned()
         .ok_or(Error::InvalidRequest("expected a native parameter object"))
 }
+
+mod records;
+pub use records::*;

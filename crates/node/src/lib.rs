@@ -13,6 +13,7 @@ mod extended;
 mod lighter;
 mod metric;
 mod monaco;
+mod oracles;
 mod paradex;
 mod phoenix;
 mod prelude;

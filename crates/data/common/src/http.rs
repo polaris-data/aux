@@ -11,6 +11,7 @@ pub struct HttpClient<T> {
     base: Url,
     auth: Option<Arc<Zeroizing<String>>>,
     auth_header: &'static str,
+    follow_redirects: bool,
     secrets: Vec<Arc<Zeroizing<String>>>,
 }
 impl<T> std::fmt::Debug for HttpClient<T> {
@@ -29,6 +30,7 @@ impl<T> HttpClient<T> {
             auth: None,
             auth_header: "authorization",
             secrets: Vec::new(),
+            follow_redirects: true,
         })
     }
     pub fn with_auth(mut self, authorization: String, secret: String) -> Self {
@@ -49,6 +51,15 @@ impl<T> HttpClient<T> {
         self.secrets
             .push(Arc::new(Zeroizing::new(credential.clone())));
         self.auth = Some(Arc::new(Zeroizing::new(credential)));
+        self
+    }
+    /// Signed request URLs must never be changed by redirect handling.
+    pub fn without_redirects(mut self) -> Self {
+        self.follow_redirects = false;
+        self
+    }
+    pub fn with_secret(mut self, secret: String) -> Self {
+        self.secrets.push(Arc::new(Zeroizing::new(secret)));
         self
     }
     pub fn url(&self, path: &str) -> Result<Url> {
@@ -149,7 +160,7 @@ impl<T: StreamingHttpTransport> HttpClient<T> {
             let previous = Url::parse(&request.url)
                 .map_err(|_| Error::InvalidRequest("invalid request URL"))?;
             let response = self.transport.execute_stream(request.clone()).await?;
-            if !matches!(response.status, 301 | 302 | 303 | 307 | 308) {
+            if !self.follow_redirects || !matches!(response.status, 301 | 302 | 303 | 307 | 308) {
                 return Ok(response);
             }
             if !matches!(request.method, HttpMethod::Get) || redirect == 5 {
@@ -216,6 +227,36 @@ impl<T: StreamingHttpTransport> HttpClient<T> {
         }
         Ok((response.headers, body))
     }
+    pub async fn json_response(&self, request: HttpRequest) -> Result<NativeResponse> {
+        let response = self.send(request).await?;
+        let encoding = header(&response.headers, "content-encoding").unwrap_or("");
+        let bytes = DecodedBody::new(response.body, encoding)?
+            .collect(MAX_RECORD_BYTES)
+            .await?;
+        if !(200..300).contains(&response.status) {
+            let value = serde_json::from_slice(&bytes)
+                .unwrap_or_else(|_| Value::String(String::from_utf8_lossy(&bytes).into()));
+            return Err(Error::Api {
+                status: response.status,
+                body: self.redact(value),
+            });
+        }
+        let data = serde_json::from_slice(&bytes)
+            .map_err(|_| Error::Decode("invalid vendor JSON response"))?;
+        Ok(NativeResponse {
+            status: response.status,
+            headers: response
+                .headers
+                .into_iter()
+                .filter(|(key, _)| {
+                    ["pyth-split-version", "retry-after"]
+                        .iter()
+                        .any(|name| key.eq_ignore_ascii_case(name))
+                })
+                .collect(),
+            data,
+        })
+    }
     pub async fn json(&self, request: HttpRequest) -> Result<Value> {
         let bytes = self
             .open(request, true)
@@ -268,4 +309,32 @@ pub fn segment(s: &str) -> String {
     url::form_urlencoded::byte_serialize(s.as_bytes())
         .collect::<String>()
         .replace('+', "%20")
+}
+
+/// Native body plus response metadata (partial results and adjustment versions).
+#[derive(Clone, serde::Serialize, serde::Deserialize)]
+pub struct NativeResponse<T = Value> {
+    pub status: u16,
+    pub headers: Vec<(String, String)>,
+    pub data: T,
+}
+
+impl<T> std::fmt::Debug for NativeResponse<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("NativeResponse")
+            .field("status", &self.status)
+            .finish_non_exhaustive()
+    }
+}
+
+impl NativeResponse {
+    /// Convert a stable vendor schema while retaining response metadata.
+    pub fn decode<T: serde::de::DeserializeOwned>(self) -> Result<NativeResponse<T>> {
+        Ok(NativeResponse {
+            status: self.status,
+            headers: self.headers,
+            data: serde_json::from_value(self.data)
+                .map_err(|_| Error::Decode("response does not match native schema"))?,
+        })
+    }
 }

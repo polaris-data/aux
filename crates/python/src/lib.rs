@@ -14,6 +14,7 @@ mod kalshi;
 mod lighter;
 mod metric;
 mod monaco;
+mod oracles;
 mod paradex;
 mod pascal;
 mod phoenix;
@@ -28,6 +29,10 @@ use pyo3::prelude::*;
 
 #[pymodule]
 fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    module.add_class::<oracles::PythProClient>()?;
+    module.add_class::<oracles::PythHermesClient>()?;
+    module.add_class::<oracles::ChainlinkDataStreamsClient>()?;
+    module.add_class::<oracles::ChainlinkCandlestickClient>()?;
     module.add_class::<extended::ExtendedClient>()?;
     module.add_class::<extended::ExtendedSigner>()?;
     module.add_class::<phoenix::PhoenixClient>()?;

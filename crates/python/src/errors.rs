@@ -27,6 +27,7 @@ create_exception!(aux_py, GapError, TransportError);
 impl ClientError {
     pub fn is_gap(&self) -> bool {
         match self {
+            Self::Data(aux_rs::pyth::Error::Transport(e)) => e.is_gap(),
             Self::Kalshi(NativeError::Transport(e))
             | Self::Polymarket(NativeError::Transport(e))
             | Self::Pascal(NativeError::Transport(e))

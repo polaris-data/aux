@@ -44,7 +44,7 @@ impl BirdeyeClient {
         api_key: String,
         api_url: &str,
         timeout_ms: u64,
-        chain: String,
+        chain: &str,
     ) -> PyResult<Self> {
         if timeout_ms == 0 {
             return Err(errors::ValidationError::new_err(

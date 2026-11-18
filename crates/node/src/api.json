@@ -16921,6 +16921,949 @@
           "resource": null
         }
       ]
+    },
+    "PythProClient": {
+      "module": "oracles",
+      "methods": [
+        {
+          "name": "new",
+          "args": [
+            [
+              "config",
+              "Option<Bound<'py, PyAny>>"
+            ],
+            [
+              "timeout_ms",
+              "u64"
+            ]
+          ],
+          "return": "PyResult<Self>",
+          "async": false,
+          "getter": false,
+          "static": false,
+          "constructor": true,
+          "defaults": {
+            "timeout_ms": "10000",
+            "config": "None"
+          },
+          "resource": null,
+          "types": {
+            "config": "{ api_url?: string; router_url?: string; hermes_url?: string; ws_urls?: string[]; api_key?: string; publisher_token?: string }",
+            "timeout_ms": "number | bigint"
+          }
+        },
+        {
+          "name": "closed",
+          "args": [],
+          "return": "bool",
+          "async": false,
+          "getter": true,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "aclose",
+          "args": [],
+          "return": "PyResult<()>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "()"
+        },
+        {
+          "name": "live",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "never"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "ready",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "never"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "symbols",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null,
+          "types": {
+            "request": "{ query?: string; asset_type?: string[]; instrument_type?: string[]; symbol_chain_id?: string[]; entitled_only?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "config",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "search",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string; query: string; type?: string; exchange?: string; limit?: number }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "resolve_symbol",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string; symbol: string }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "history",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string; symbol: string; from: (number | bigint); to: (number | bigint); resolution: string; split_adjusted?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "price",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string; ids: number[]; timestamp: (number | bigint); split_adjusted?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "price_range",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string; ids: number[]; start_timestamp: (number | bigint); end_timestamp: (number | bigint); limit?: number; after?: string; split_adjusted?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "publisher_updates",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ price_feed_id?: number[]; min_timestamp?: string; max_timestamp?: string; status?: string; status_reason?: string; status_reason_unset?: boolean; sort: string; limit?: number }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "latest_price",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string; priceFeedIds?: number[]; properties?: string[]; formats: string[]; parsed?: boolean; jsonBinaryEncoding?: string; symbols?: string[] }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "price_at_timestamp",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ channel: string; priceFeedIds?: number[]; properties?: string[]; formats: string[]; parsed?: boolean; jsonBinaryEncoding?: string; timestamp: (number | bigint); symbols?: string[] }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "subscribe",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "Subscription",
+          "types": {
+            "request": "{ channel: string; priceFeedIds?: number[]; properties?: string[]; formats: string[]; parsed?: boolean; jsonBinaryEncoding?: string; subscriptionId: (number | bigint); ignoreInvalidFeeds?: boolean; symbols?: string[]; deliveryFormat?: string }"
+          },
+          "output": null
+        },
+        {
+          "name": "stream_merkle_roots",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "Subscription",
+          "types": {
+            "request": "never"
+          },
+          "output": null
+        },
+        {
+          "name": "reduce_price",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ payload: NativeValue; priceFeedIds: number[] }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "publisher_stake_caps",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "never"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "guardian_set_upgrade",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "never"
+          },
+          "output": "OracleResponse"
+        }
+      ]
+    },
+    "PythHermesClient": {
+      "module": "oracles",
+      "methods": [
+        {
+          "name": "new",
+          "args": [
+            [
+              "config",
+              "Option<Bound<'py, PyAny>>"
+            ],
+            [
+              "timeout_ms",
+              "u64"
+            ]
+          ],
+          "return": "PyResult<Self>",
+          "async": false,
+          "getter": false,
+          "static": false,
+          "constructor": true,
+          "defaults": {
+            "timeout_ms": "10000",
+            "config": "None"
+          },
+          "resource": null,
+          "types": {
+            "config": "{ api_url?: string; router_url?: string; hermes_url?: string; ws_urls?: string[]; api_key?: string; publisher_token?: string }",
+            "timeout_ms": "number | bigint"
+          }
+        },
+        {
+          "name": "closed",
+          "args": [],
+          "return": "bool",
+          "async": false,
+          "getter": true,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "aclose",
+          "args": [],
+          "return": "PyResult<()>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "()"
+        },
+        {
+          "name": "live",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "never"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "ready",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "never"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "price_feeds",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null,
+          "types": {
+            "request": "{ query?: string; asset_type?: string }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "latest_price_updates",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ ids: string[]; encoding?: string; parsed?: boolean; ignore_invalid_price_ids?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "price_updates_at_timestamp",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ publish_time: (number | bigint); ids: string[]; encoding?: string; parsed?: boolean; ignore_invalid_price_ids?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "latest_twaps",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ window_seconds: (number | bigint) }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "latest_publisher_stake_caps",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null,
+          "types": {
+            "request": "{ encoding?: string; parsed?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "stream_price_updates",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "Subscription",
+          "types": {
+            "request": "{ ids: string[]; encoding?: string; parsed?: boolean; ignore_invalid_price_ids?: boolean; allow_unordered?: boolean; benchmarks_only?: boolean }"
+          },
+          "output": null
+        }
+      ]
+    },
+    "ChainlinkDataStreamsClient": {
+      "module": "oracles",
+      "methods": [
+        {
+          "name": "new",
+          "args": [
+            [
+              "config",
+              "Bound<'py, PyAny>"
+            ],
+            [
+              "timeout_ms",
+              "u64"
+            ]
+          ],
+          "return": "PyResult<Self>",
+          "async": false,
+          "getter": false,
+          "static": false,
+          "constructor": true,
+          "defaults": {
+            "timeout_ms": "10000"
+          },
+          "resource": null,
+          "types": {
+            "config": "{ network: \"mainnet\" | \"testnet\"; api_url?: string; ws_url?: string; candles_url?: string; api_key?: string; api_secret?: string; token?: string }",
+            "timeout_ms": "number | bigint"
+          }
+        },
+        {
+          "name": "closed",
+          "args": [],
+          "return": "bool",
+          "async": false,
+          "getter": true,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "aclose",
+          "args": [],
+          "return": "PyResult<()>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "()"
+        },
+        {
+          "name": "discovery",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null,
+          "types": {
+            "request": "{ base_asset?: string; quote_asset?: string; asset_class?: string; feed_type?: string; attribute_type?: string; status?: string; network_type?: string; created_after?: string; created_before?: string; expected_decommission_after?: string; expected_decommission_before?: string; decommissioned_after?: string; decommissioned_before?: string; hidden?: boolean }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "report",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ feedID: string; timestamp: (number | bigint) }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "latest_report",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ feedID: string }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "bulk_reports",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ feedIDs: string[]; timestamp: (number | bigint) }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "report_page",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ feedID: string; startTimestamp: (number | bigint); limit?: number }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "subscribe_reports",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "Subscription",
+          "types": {
+            "request": "{ feedIDs: string[] }"
+          },
+          "output": null
+        },
+        {
+          "name": "decode_report",
+          "args": [
+            [
+              "full_report",
+              "&str"
+            ]
+          ],
+          "return": "PyResult<Py<PyAny>>",
+          "async": false,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "output": "ChainlinkDecodedReport"
+        }
+      ]
+    },
+    "ChainlinkCandlestickClient": {
+      "module": "oracles",
+      "methods": [
+        {
+          "name": "new",
+          "args": [
+            [
+              "config",
+              "Bound<'py, PyAny>"
+            ],
+            [
+              "timeout_ms",
+              "u64"
+            ]
+          ],
+          "return": "PyResult<Self>",
+          "async": false,
+          "getter": false,
+          "static": false,
+          "constructor": true,
+          "defaults": {
+            "timeout_ms": "10000"
+          },
+          "resource": null,
+          "types": {
+            "config": "{ network: \"mainnet\" | \"testnet\"; api_url?: string; ws_url?: string; candles_url?: string; api_key?: string; api_secret?: string; token?: string }",
+            "timeout_ms": "number | bigint"
+          }
+        },
+        {
+          "name": "closed",
+          "args": [],
+          "return": "bool",
+          "async": false,
+          "getter": true,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null
+        },
+        {
+          "name": "aclose",
+          "args": [],
+          "return": "PyResult<()>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": "()"
+        },
+        {
+          "name": "authorize",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ login: string; password: string }"
+          },
+          "output": "OracleResponse<{ s: string; d: { access_token: string; expiration: bigint } }>"
+        },
+        {
+          "name": "symbol_info",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": null,
+          "types": {
+            "request": "{ group?: string }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "groups",
+          "args": [],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "never"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "candle_history",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ symbol: string; resolution: string; from: (number | bigint); to: (number | bigint) }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "candle_history_rows",
+          "args": [
+            [
+              "request",
+              "Bound<'py, PyAny>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {},
+          "resource": null,
+          "types": {
+            "request": "{ symbol: string; resolution: string; from: (number | bigint); to: (number | bigint) }"
+          },
+          "output": "OracleResponse"
+        },
+        {
+          "name": "stream_prices",
+          "args": [
+            [
+              "request",
+              "Option<Bound<'py, PyAny>>"
+            ]
+          ],
+          "return": "PyResult<Bound<'py, PyAny>>",
+          "async": true,
+          "getter": false,
+          "static": false,
+          "constructor": false,
+          "defaults": {
+            "request": "None"
+          },
+          "resource": "Subscription",
+          "types": {
+            "request": "{ symbol?: string[]; feedId?: string[] }"
+          },
+          "output": null
+        }
+      ]
     }
   },
   "functions": [
