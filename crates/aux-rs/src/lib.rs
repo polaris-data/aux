@@ -53,3 +53,8 @@ pub use aux_rs_dune as dune;
 
 #[cfg(feature = "birdeye")]
 pub use aux_rs_birdeye as birdeye;
+
+#[cfg(feature = "chainlink")]
+pub use aux_rs_chainlink as chainlink;
+#[cfg(feature = "pyth")]
+pub use aux_rs_pyth as pyth;

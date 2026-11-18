@@ -15,6 +15,8 @@ PROFILES = [
     ("Tardis adapter", "aux-rs-tardis", ""),
     ("Databento adapter", "aux-rs-databento", ""),
     ("Dune adapter", "aux-rs-dune", ""),
+    ("Pyth adapter", "aux-rs-pyth", ""),
+    ("Chainlink adapter", "aux-rs-chainlink", ""),
     ("Birdeye adapter", "aux-rs-birdeye", ""),
     ("Hyperliquid with custom transports", "aux-rs", "hyperliquid"),
     ("Hyperliquid with standard HTTP", "aux-rs", "hyperliquid,http"),
@@ -58,7 +60,7 @@ for stack in ("", ",http,ws"):
     PROFILES.append(("All eight exchanges" + stack, "aux-rs", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric" + stack))
 
 
-for vendor in ("tardis", "databento", "dune", "birdeye"):
+for vendor in ("tardis", "databento", "dune", "birdeye", "pyth", "chainlink"):
     for stack in ("", ",http", ",ws", ",http,ws"):
         PROFILES.append((f"{vendor.title()} with {stack or 'custom transports'}", "aux-rs", vendor + stack))
 for features in ("birdeye,dune", "birdeye,dune,http", "birdeye,dune,tardis,databento,http,ws", "dune,tardis,databento", "dune,tardis,databento,http,ws", "hyperliquid,dune,http,ws", "tardis,databento", "tardis,databento,http,ws", "metric,tardis,databento", "metric,tardis,databento,http,ws", "hyperliquid,tardis,databento", "hyperliquid,tardis,databento,http,ws", "hyperliquid,lighter,qfex,arcus,monaco,derive,paradex,metric,tardis,databento,http,ws"):
@@ -93,31 +95,31 @@ def check(target):
         if "httpdate" in names:
             raise SystemExit(f"Replaced HTTP-date dependency leaked into profile: {name}")
         selected = set(features.split(","))
-        data_selected = package in {"aux-rs-data", "aux-rs-tardis", "aux-rs-databento", "aux-rs-dune", "aux-rs-birdeye"} or (
-            package == "aux-rs" and bool(selected & {"tardis", "databento", "dune", "birdeye"})
+        data_selected = package in {"aux-rs-data", "aux-rs-tardis", "aux-rs-databento", "aux-rs-dune", "aux-rs-birdeye", "aux-rs-pyth", "aux-rs-chainlink"} or (
+            package == "aux-rs" and bool(selected & {"tardis", "databento", "dune", "birdeye", "pyth", "chainlink"})
         )
         if data_selected and "tokio" not in names:
             raise SystemExit(f"Data support is missing Tokio in profile: {name}")
-        if package in {"aux-rs-core", "aux-rs-data", "aux-rs-tardis", "aux-rs-databento", "aux-rs-dune", "aux-rs-birdeye"}:
+        if package in {"aux-rs-core", "aux-rs-data", "aux-rs-tardis", "aux-rs-databento", "aux-rs-dune", "aux-rs-birdeye", "aux-rs-pyth", "aux-rs-chainlink"}:
             if names & {"reqwest", "tokio-tungstenite", "rustls"}:
                 raise SystemExit(f"Standard network stack leaked into base profile: {name}")
             if not data_selected and "tokio" in names:
                 raise SystemExit(f"Tokio leaked into core profile: {name}")
-        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal", "tardis", "databento", "dune", "birdeye", "phoenix", "extended"}
+        exchanges = {"hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "polymarket", "kalshi", "pascal", "tardis", "databento", "dune", "birdeye", "pyth", "chainlink", "phoenix", "extended"}
         if package == "aux-rs":
             for exchange in exchanges - selected:
                 if f"aux-rs-{exchange}" in names:
                     raise SystemExit(f"Unselected {exchange} adapter leaked into profile: {name}")
             # Primitives may be owned by several selected adapters.
             owners = {
-                "k256": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
-                "sha3": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
+                "k256": {"chainlink", "hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
+                "sha3": {"chainlink", "hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
                 "rmp-serde": {"hyperliquid"},
                 "rmp": {"hyperliquid", "polymarket"},
                 "starknet-core": {"paradex", "extended"},
                 "starknet-crypto": {"paradex", "extended"},
                 "starknet-types-core": {"paradex", "extended"},
-                "hmac": {"hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
+                "hmac": {"chainlink", "hyperliquid", "monaco", "derive", "paradex", "metric", "polymarket", "extended"},
                 "rsa": {"kalshi"},
                 "solana-pubkey": {"pascal", "phoenix"},
                 "aux-rs-evm": {"metric", "polymarket"},
@@ -131,9 +133,9 @@ def check(target):
                     raise SystemExit(f"Unselected signing primitive {primitive} leaked into profile: {name}")
             if "databento" not in selected and names & {"dbn", "dbn-macros"}:
                 raise SystemExit(f"Unselected DBN codec leaked into profile: {name}")
-            if not selected & {"tardis", "databento", "dune", "birdeye"} and names & {"aux-rs-data", "async-compression", "compression-codecs"}:
+            if not selected & {"tardis", "databento", "dune", "birdeye", "pyth", "chainlink"} and names & {"aux-rs-data", "async-compression", "compression-codecs"}:
                 raise SystemExit(f"Unselected data support leaked into profile: {name}")
-            if not selected & {"phoenix", "tardis", "databento", "dune", "birdeye"} and "zstd" in names:
+            if not selected & {"phoenix", "tardis", "databento", "dune", "birdeye", "pyth", "chainlink"} and "zstd" in names:
                 raise SystemExit(f"Unselected snapshot decompressor leaked into profile: {name}")
             if "http" not in selected and "reqwest" in names:
                 raise SystemExit(f"HTTP leaked into profile: {name}")
@@ -143,7 +145,7 @@ def check(target):
                 raise SystemExit(f"Standard stack leaked into custom transport profile: {name}")
             if not selected & {"http", "ws"} and not data_selected and "tokio" in names:
                 raise SystemExit(f"Tokio leaked into custom transport profile: {name}")
-        if package == "aux-rs" and not selected & {"metric", "polymarket"} and any(n.startswith("alloy-") for n in names):
+        if package == "aux-rs" and not selected & {"metric", "polymarket", "chainlink"} and any(n.startswith("alloy-") for n in names):
             raise SystemExit(f"Metric ABI/EVM dependencies leaked into profile: {name}")
         if package != "aux-rs-python" and any(
             dependency.split()[0].startswith("pyo3")

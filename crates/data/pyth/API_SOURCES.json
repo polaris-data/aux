@@ -1,0 +1,27 @@
+{
+  "recorded_at": "2026-11-18",
+  "sources": [
+    "https://pyth-lazer-0.dourolabs.app/docs/openapi.json",
+    "https://raw.githubusercontent.com/pyth-network/pyth-crosschain/79b0d29915b7562e1d6e3d0cd973564cf7345fa8/apps/hermes/server/src/api.rs",
+    "https://raw.githubusercontent.com/pyth-network/pyth-lazer-public/75e5dbc850328109fc04fca7086559147d201b20/sdk/rust/protocol/src/binary_update.rs",
+    "https://raw.githubusercontent.com/pyth-network/pyth-lazer-public/75e5dbc850328109fc04fca7086559147d201b20/sdk/rust/protocol/src/message.rs",
+    "https://docs.pyth.network/pro/api/rest.md",
+    "https://docs.pyth.network/pro/subscribe-to-prices.md",
+    "https://docs.pyth.network/pro/pyth-core-upgrade.md",
+    "https://raw.githubusercontent.com/pyth-network/pyth-crosschain/79b0d29915b7562e1d6e3d0cd973564cf7345fa8/apps/hermes/server/src/api/rest/v2/latest_twaps.rs"
+  ],
+  "source_sha256": {
+    "https://pyth-lazer-0.dourolabs.app/docs/openapi.json": "17a901c98f7aa7c824c61d073082d06e1a13f6193dd1278ed2181767b2cd9c23",
+    "https://raw.githubusercontent.com/pyth-network/pyth-crosschain/79b0d29915b7562e1d6e3d0cd973564cf7345fa8/apps/hermes/server/src/api.rs": "073bfd9d28ed371c26d13fc250dffc00fd27bc73eb7a977d4272a7004ab7ec52",
+    "https://raw.githubusercontent.com/pyth-network/pyth-lazer-public/75e5dbc850328109fc04fca7086559147d201b20/sdk/rust/protocol/src/binary_update.rs": "de382cc62c023a7a9221ca98d1d4ada84b9b10a184531a81c775393898be96d9",
+    "https://raw.githubusercontent.com/pyth-network/pyth-lazer-public/75e5dbc850328109fc04fca7086559147d201b20/sdk/rust/protocol/src/message.rs": "00f04abd7f97d662834648e44422f7893aace457024fa131fca42826ec002bfb",
+    "https://docs.pyth.network/pro/api/rest.md": "b49226d42c95d606ae920261925455841e85f92ce63c8a7b858d7659bb393d05",
+    "https://docs.pyth.network/pro/subscribe-to-prices.md": "cb5ded1b5fc3c59430b35b00e9c306dce8d6f9149a36c479bbdc8cf9674ea9bc",
+    "https://docs.pyth.network/pro/pyth-core-upgrade.md": "e0c334a45d411ec86c2d2f276ecf4e95f5e1167c4e206e5f673e079f9f34c486",
+    "https://raw.githubusercontent.com/pyth-network/pyth-crosschain/79b0d29915b7562e1d6e3d0cd973564cf7345fa8/apps/hermes/server/src/api/rest/v2/latest_twaps.rs": "90115d3b63b8447c5ce86a3d8ecf39c294508928a594fa755042123b954c062a"
+  },
+  "inventory_sha256": "530068a98a790d0ad5903020c5b118eed810fe697a82891fc46c5e82da99a8d3",
+  "fixture_sha256": {
+    "tests/fixtures/operations.json": "47d77e9002cf5abb8f46e797dd4a62af4eeccfc7cc42a4043f9a458b331f7df0"
+  }
+}

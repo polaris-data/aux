@@ -628,3 +628,6 @@ __all__ += ["DuneClient"]
 
 from ._birdeye import BirdeyeClient
 __all__ += ["BirdeyeClient"]
+
+from ._oracles import PythProClient, PythHermesClient, ChainlinkDataStreamsClient, ChainlinkCandlestickClient
+__all__ += ['PythProClient', 'PythHermesClient', 'ChainlinkDataStreamsClient', 'ChainlinkCandlestickClient']

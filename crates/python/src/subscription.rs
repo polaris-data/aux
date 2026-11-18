@@ -8,6 +8,7 @@ use std::sync::{Arc, Mutex};
 use tokio::sync::watch;
 
 pub enum NativeHandle {
+    Oracle(aux_rs::pyth::JsonStream),
     Extended(aux_rs::extended::SubscriptionHandle<StandardSubscription>),
     Phoenix(aux_rs::phoenix::SubscriptionHandle<StandardSubscription>),
     Pascal(aux_rs::pascal::SubscriptionHandle<StandardSubscription>),
@@ -42,6 +43,7 @@ pub enum NativeHandle {
 impl NativeHandle {
     async fn close(&mut self) -> Result<(), ClientError> {
         match self {
+            Self::Oracle(h) => h.close().await.map_err(ClientError::Data),
             Self::Extended(h) => h.close().await.map_err(ClientError::Extended),
             Self::Phoenix(h) => h.close().await.map_err(ClientError::Phoenix),
             Self::Kalshi(h) => h.close().await.map_err(ClientError::Kalshi),
@@ -69,6 +71,7 @@ impl NativeHandle {
     async fn next_json(&mut self) -> Option<Result<serde_json::Value, ClientError>> {
         use serde_json::json;
         match self {
+            Self::Oracle(h) => h.next().await.map(|r| r.map_err(ClientError::Data)),
             Self::Extended(h) => h
                 .next()
                 .await

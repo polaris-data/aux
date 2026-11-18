@@ -315,3 +315,11 @@ trade/transaction, and security REST endpoints through the Rust data connector.
 See the [Birdeye guide](../data/birdeye/README.md) and
 [endpoint table](../data/birdeye/COVERAGE.md) for chain selection, authentication,
 exact values, typed requests, POST bodies, and examples.
+
+## Pyth and Chainlink data
+
+`PythProClient` and `PythHermesClient` expose Pyth discovery, historical and
+signed updates, and live prices. `ChainlinkDataStreamsClient` provides report
+reads, subscriptions and decoding. `ChainlinkCandlestickClient` provides
+candle history and a live price stream. See the [Pyth guide](../data/pyth/README.md)
+and [Chainlink guide](../data/chainlink/README.md) for configuration and examples.

@@ -1033,6 +1033,72 @@ traderTradesByTime(options = {}) { options = Object.assign({}, options); return 
 }
 classes.BirdeyeClient = BirdeyeClient;
 exports.BirdeyeClient = BirdeyeClient;
+class PythProClient {
+constructor(options = {}) { options = Object.assign({"timeoutMs":10000}, options); this.__native = invoke(() => new native.PythProClient(encodeInput({"config": options.config, "timeout_ms": options.timeoutMs}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+live(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.live(encodeInput({})), decodeOutput); }
+ready(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.ready(encodeInput({})), decodeOutput); }
+symbols(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.symbols(encodeInput({"request": options.request})), decodeOutput); }
+config(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.config(encodeInput({"request": options.request})), decodeOutput); }
+search(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.search(encodeInput({"request": options.request})), decodeOutput); }
+resolveSymbol(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.resolveSymbol(encodeInput({"request": options.request})), decodeOutput); }
+history(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.history(encodeInput({"request": options.request})), decodeOutput); }
+price(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.price(encodeInput({"request": options.request})), decodeOutput); }
+priceRange(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceRange(encodeInput({"request": options.request})), decodeOutput); }
+publisherUpdates(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.publisherUpdates(encodeInput({"request": options.request})), decodeOutput); }
+latestPrice(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.latestPrice(encodeInput({"request": options.request})), decodeOutput); }
+priceAtTimestamp(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceAtTimestamp(encodeInput({"request": options.request})), decodeOutput); }
+subscribe(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.subscribe(encodeInput({"request": options.request})), value => wrap(classes.Subscription, value)); }
+streamMerkleRoots(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.streamMerkleRoots(encodeInput({})), value => wrap(classes.Subscription, value)); }
+reducePrice(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.reducePrice(encodeInput({"request": options.request})), decodeOutput); }
+publisherStakeCaps(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.publisherStakeCaps(encodeInput({})), decodeOutput); }
+guardianSetUpgrade(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.guardianSetUpgrade(encodeInput({})), decodeOutput); }
+}
+classes.PythProClient = PythProClient;
+exports.PythProClient = PythProClient;
+class PythHermesClient {
+constructor(options = {}) { options = Object.assign({"timeoutMs":10000}, options); this.__native = invoke(() => new native.PythHermesClient(encodeInput({"config": options.config, "timeout_ms": options.timeoutMs}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+live(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.live(encodeInput({})), decodeOutput); }
+ready(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.ready(encodeInput({})), decodeOutput); }
+priceFeeds(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceFeeds(encodeInput({"request": options.request})), decodeOutput); }
+latestPriceUpdates(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.latestPriceUpdates(encodeInput({"request": options.request})), decodeOutput); }
+priceUpdatesAtTimestamp(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.priceUpdatesAtTimestamp(encodeInput({"request": options.request})), decodeOutput); }
+latestTwaps(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.latestTwaps(encodeInput({"request": options.request})), decodeOutput); }
+latestPublisherStakeCaps(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.latestPublisherStakeCaps(encodeInput({"request": options.request})), decodeOutput); }
+streamPriceUpdates(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.streamPriceUpdates(encodeInput({"request": options.request})), value => wrap(classes.Subscription, value)); }
+}
+classes.PythHermesClient = PythHermesClient;
+exports.PythHermesClient = PythHermesClient;
+class ChainlinkDataStreamsClient {
+constructor(options = {}) { options = Object.assign({"timeoutMs":10000}, options); this.__native = invoke(() => new native.ChainlinkDataStreamsClient(encodeInput({"config": options.config, "timeout_ms": options.timeoutMs}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+discovery(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.discovery(encodeInput({"request": options.request})), decodeOutput); }
+report(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.report(encodeInput({"request": options.request})), decodeOutput); }
+latestReport(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.latestReport(encodeInput({"request": options.request})), decodeOutput); }
+bulkReports(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.bulkReports(encodeInput({"request": options.request})), decodeOutput); }
+reportPage(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.reportPage(encodeInput({"request": options.request})), decodeOutput); }
+subscribeReports(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.subscribeReports(encodeInput({"request": options.request})), value => wrap(classes.Subscription, value)); }
+decodeReport(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.decodeReport(encodeInput({"full_report": options.fullReport})), decodeOutput); }
+}
+classes.ChainlinkDataStreamsClient = ChainlinkDataStreamsClient;
+exports.ChainlinkDataStreamsClient = ChainlinkDataStreamsClient;
+class ChainlinkCandlestickClient {
+constructor(options = {}) { options = Object.assign({"timeoutMs":10000}, options); this.__native = invoke(() => new native.ChainlinkCandlestickClient(encodeInput({"config": options.config, "timeout_ms": options.timeoutMs}))); }
+get closed() { return invoke(() => this.__native.closed, decodeOutput); }
+close(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.close(encodeInput({})), () => undefined); }
+authorize(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.authorize(encodeInput({"request": options.request})), decodeOutput); }
+symbolInfo(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.symbolInfo(encodeInput({"request": options.request})), decodeOutput); }
+groups(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.groups(encodeInput({})), decodeOutput); }
+candleHistory(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.candleHistory(encodeInput({"request": options.request})), decodeOutput); }
+candleHistoryRows(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.candleHistoryRows(encodeInput({"request": options.request})), decodeOutput); }
+streamPrices(options = {}) { options = Object.assign({}, options); return invoke(() => this.__native.streamPrices(encodeInput({"request": options.request})), value => wrap(classes.Subscription, value)); }
+}
+classes.ChainlinkCandlestickClient = ChainlinkCandlestickClient;
+exports.ChainlinkCandlestickClient = ChainlinkCandlestickClient;
 classes.Subscription = require("./runtime.cjs").Subscription;
 exports.Subscription = classes.Subscription;
 exports.hyperliquidActionHash = (options = {}) => { options = Object.assign({}, options); return invoke(() => native.hyperliquidActionHash(encodeInput({"action": options.action, "nonce": options.nonce, "vault_address": options.vaultAddress, "expires_after": options.expiresAfter})), decodeOutput); };

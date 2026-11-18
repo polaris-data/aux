@@ -111,3 +111,59 @@ async fn failed_download_does_not_publish_or_leave_partial_files() {
     assert_eq!(std::fs::read(&path).unwrap(), vec![2, 3]);
     std::fs::remove_dir_all(dir).unwrap();
 }
+
+#[tokio::test]
+async fn oracle_records_accept_fragmented_json_and_reject_a_truncated_tail() {
+    use aux_rs_data::{JsonFraming, JsonStream};
+    let (send, receive) = tokio::sync::mpsc::channel(4);
+    for fragment in [
+        &b"{\"test\":[\"escaped \\\""[..],
+        &b"brace }\",{\"nested\":true}]}"[..],
+        &b"{\"truncated\":"[..],
+    ] {
+        send.send(fragment.to_vec()).await.unwrap();
+    }
+    drop(send);
+    let body = DecodedBody::new(Fragments(receive), "").unwrap();
+    let mut records = JsonStream::http(body, JsonFraming::Objects);
+    assert_eq!(
+        records.next().await.unwrap().unwrap()["test"][1]["nested"],
+        true
+    );
+    assert!(matches!(records.next().await, Some(Err(Error::Decode(_)))));
+    assert!(records.next().await.is_none());
+}
+
+#[tokio::test]
+async fn oracle_sse_retains_fragmented_events_across_cancellation() {
+    use aux_rs_data::{JsonFraming, JsonStream};
+    let (send, receive) = tokio::sync::mpsc::channel(4);
+    let mut records = JsonStream::http(
+        DecodedBody::new(Fragments(receive), "").unwrap(),
+        JsonFraming::Sse,
+    );
+    send.send(b"\xEF\xBB\xBF:comment\rdata: {\"value\":\r".to_vec())
+        .await
+        .unwrap();
+    assert!(futures_util::poll!(Box::pin(records.next())).is_pending());
+    send.send(b"data: 12345678901234567890}\r\r".to_vec())
+        .await
+        .unwrap();
+    assert_eq!(
+        records.next().await.unwrap().unwrap()["value"].to_string(),
+        "12345678901234567890"
+    );
+    records.close().await.unwrap();
+    assert!(records.next().await.is_none());
+}
+
+#[tokio::test]
+async fn oracle_record_limit_terminates_an_oversized_event() {
+    use aux_rs_data::{JsonFraming, JsonStream, MAX_RECORD_BYTES};
+    let mut bytes = Vec::from(&b"{\"value\":\""[..]);
+    bytes.resize(MAX_RECORD_BYTES + 1, b'x');
+    let body = DecodedBody::new(BytesBody(Some(bytes)), "").unwrap();
+    let mut stream = JsonStream::http(body, JsonFraming::Objects);
+    assert!(matches!(stream.next().await, Some(Err(Error::Decode(_)))));
+    assert!(stream.next().await.is_none());
+}
