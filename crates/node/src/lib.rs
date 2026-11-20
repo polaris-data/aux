@@ -10,6 +10,7 @@ mod derive;
 mod dune;
 mod errors;
 mod extended;
+mod hyperdash;
 mod lighter;
 mod metric;
 mod monaco;

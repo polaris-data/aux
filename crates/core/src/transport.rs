@@ -107,6 +107,17 @@ pub trait WebSocketConnection: Send {
     fn send(&mut self, text: String) -> impl Future<Output = Result<(), TransportError>> + Send;
     fn next(&mut self) -> impl Future<Output = Option<Result<String, TransportError>>> + Send;
     fn close(&mut self) -> impl Future<Output = Result<(), TransportError>> + Send;
+    /// Take the peer's close frame after an opted-in connection has drained.
+    fn take_close_frame(&mut self) -> Option<WebSocketCloseFrame> {
+        None
+    }
+}
+
+/// Close metadata is available explicitly so peer-supplied reasons stay out of
+/// transport diagnostics.
+pub struct WebSocketCloseFrame {
+    pub code: u16,
+    pub reason: String,
 }
 
 /// Opens isolated WebSocket connections for protocols with session authentication
@@ -134,6 +145,15 @@ pub trait WebSocketConnector: Send + Sync {
             }
             self.connect(url).await
         }
+    }
+    /// Opt into draining ordered messages and retaining the peer's close frame.
+    /// Custom connectors may use their usual authenticated upgrade behavior.
+    fn connect_with_close_frames(
+        &self,
+        url: &str,
+        headers: Vec<(String, String)>,
+    ) -> impl Future<Output = Result<Self::Connection, TransportError>> + Send {
+        self.connect_with_headers(url, headers)
     }
     /// Read-only, potentially finite streams may drain received frames and end
     /// normally after a clean close. Command connections keep their stricter

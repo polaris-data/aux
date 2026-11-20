@@ -1,6 +1,7 @@
 use super::{OperationGuard, StandardTransport, closed, ws};
 use crate::{
-    RequestOutcome, TransportError, TransportErrorKind, WebSocketConnection, WebSocketConnector,
+    RequestOutcome, TransportError, TransportErrorKind, WebSocketCloseFrame, WebSocketConnection,
+    WebSocketConnector,
 };
 use futures_util::{SinkExt, StreamExt};
 use std::{
@@ -21,6 +22,7 @@ enum Command {
 struct Queue {
     frames: VecDeque<String>,
     terminal: Option<TransportError>,
+    close_frame: Option<WebSocketCloseFrame>,
     closed: bool,
 }
 struct Inbox {
@@ -29,6 +31,7 @@ struct Inbox {
     space: Notify,
     capacity: usize,
     read_only: bool,
+    preserve_close: bool,
 }
 impl Inbox {
     fn can_read(&self) -> bool {
@@ -49,6 +52,13 @@ impl Inbox {
             q.frames.clear();
             q.terminal = error;
         }
+        drop(q);
+        self.ready.notify_one();
+    }
+    fn finish_with_close(&self, frame: Option<WebSocketCloseFrame>) {
+        let mut q = self.queue.lock().unwrap_or_else(|e| e.into_inner());
+        q.close_frame = frame;
+        q.closed = true;
         drop(q);
         self.ready.notify_one();
     }
@@ -156,6 +166,14 @@ impl WebSocketConnection for StandardConnection {
             .map_err(|_| error(TransportErrorKind::Timeout, "WebSocket close timed out"))?
             .unwrap_or(Ok(()))
     }
+    fn take_close_frame(&mut self) -> Option<WebSocketCloseFrame> {
+        self.inbox
+            .queue
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .close_frame
+            .take()
+    }
 }
 impl Drop for StandardConnection {
     fn drop(&mut self) {
@@ -167,17 +185,24 @@ impl Drop for StandardConnection {
 impl WebSocketConnector for StandardTransport {
     type Connection = StandardConnection;
     async fn connect(&self, url: &str) -> Result<Self::Connection, TransportError> {
-        self.connect_dedicated(url, false, Vec::new()).await
+        self.connect_dedicated(url, false, false, Vec::new()).await
     }
     async fn connect_with_headers(
         &self,
         url: &str,
         headers: Vec<(String, String)>,
     ) -> Result<Self::Connection, TransportError> {
-        self.connect_dedicated(url, false, headers).await
+        self.connect_dedicated(url, false, false, headers).await
+    }
+    async fn connect_with_close_frames(
+        &self,
+        url: &str,
+        headers: Vec<(String, String)>,
+    ) -> Result<Self::Connection, TransportError> {
+        self.connect_dedicated(url, false, true, headers).await
     }
     async fn connect_read(&self, url: &str) -> Result<Self::Connection, TransportError> {
-        self.connect_dedicated(url, true, Vec::new()).await
+        self.connect_dedicated(url, true, false, Vec::new()).await
     }
 }
 impl StandardTransport {
@@ -185,6 +210,7 @@ impl StandardTransport {
         &self,
         url: &str,
         read_only: bool,
+        preserve_close: bool,
         headers: Vec<(String, String)>,
     ) -> Result<StandardConnection, TransportError> {
         let guard = OperationGuard::start(&self.lifecycle)?;
@@ -198,6 +224,7 @@ impl StandardTransport {
             space: Notify::new(),
             capacity: self.config.subscription_capacity,
             read_only,
+            preserve_close,
         });
         let (commands, receiver) = mpsc::unbounded_channel();
         tokio::spawn(run(
@@ -252,6 +279,13 @@ async fn run(
                     Some(Ok(Message::Text(text)))=> if !inbox.push(text.to_string()) { break; },
                     Some(Ok(Message::Ping(data)))=> if !matches!(timeout(config.timeout,socket.send(Message::Pong(data))).await, Ok(Ok(()))) { inbox.finish(Some(error(TransportErrorKind::Timeout,"WebSocket pong timed out"))); break; },
                     Some(Ok(Message::Pong(_)))=> {},
+                    Some(Ok(Message::Close(frame))) if inbox.preserve_close => {
+                        inbox.finish_with_close(frame.map(|frame| WebSocketCloseFrame {
+                            code: frame.code.into(),
+                            reason: frame.reason.to_string(),
+                        }));
+                        break;
+                    }
                     Some(Ok(Message::Close(Some(frame)))) if inbox.read_only && frame.code==tokio_tungstenite::tungstenite::protocol::frame::coding::CloseCode::Normal=> {inbox.finish(None);break;},
                     Some(Ok(Message::Close(_)))|None=> { inbox.finish(Some(error(TransportErrorKind::Disconnected,"WebSocket disconnected"))); break; },
                     Some(Err(tokio_tungstenite::tungstenite::Error::Capacity(_)))=> { inbox.finish(Some(error(TransportErrorKind::ResponseTooLarge,"WebSocket message exceeds configured size limit"))); break; },

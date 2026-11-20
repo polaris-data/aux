@@ -2,6 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 npm ci --prefix crates/node
+python3 scripts/generate-hyperdash-bindings.py --check
 python3 scripts/generate-dune-bindings.py --check
 python3 scripts/generate-birdeye-bindings.py --check
 python3 scripts/generate-oracle-bindings.py --check

@@ -75,6 +75,13 @@ Phoenix perpetuals and Extended are also available through `PhoenixClient`, `Pho
 
 Run `node examples/perpetual-public.mjs` from this package directory for public market reads. It requires a built/installed binding and makes no writes.
 
+## Hyperdash
+
+`HyperdashClient` provides typed Hyperdash Data API reads for Hyperliquid market,
+account, and analytics data, plus live WebSocket streams with explicit batch
+acknowledgements. See the [Hyperdash guide](../data/hyperdash/README.md)
+for setup, credit controls, and stream recovery.
+
 ## Dune
 
 `DuneClient` exposes the nine Dune execution and results endpoints through the

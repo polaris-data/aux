@@ -618,6 +618,7 @@ dependencies = [
  "aux-rs-derive",
  "aux-rs-dune",
  "aux-rs-extended",
+ "aux-rs-hyperdash",
  "aux-rs-hyperliquid",
  "aux-rs-kalshi",
  "aux-rs-lighter",
@@ -793,6 +794,21 @@ dependencies = [
  "tokio",
  "tokio-tungstenite",
  "ts-rs",
+ "url",
+ "zeroize",
+]
+
+[[package]]
+name = "aux-rs-hyperdash"
+version = "0.0.0"
+dependencies = [
+ "aux-rs-core",
+ "aux-rs-data",
+ "futures-util",
+ "serde",
+ "serde_json",
+ "tokio",
+ "tokio-tungstenite",
  "url",
  "zeroize",
 ]

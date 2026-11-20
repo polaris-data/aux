@@ -48,6 +48,9 @@ pub use aux_rs_phoenix as phoenix;
 #[cfg(feature = "extended")]
 pub use aux_rs_extended as extended;
 
+#[cfg(feature = "hyperdash")]
+pub use aux_rs_hyperdash as hyperdash;
+
 #[cfg(feature = "dune")]
 pub use aux_rs_dune as dune;
 

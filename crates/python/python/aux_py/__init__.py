@@ -631,3 +631,6 @@ __all__ += ["BirdeyeClient"]
 
 from ._oracles import PythProClient, PythHermesClient, ChainlinkDataStreamsClient, ChainlinkCandlestickClient
 __all__ += ['PythProClient', 'PythHermesClient', 'ChainlinkDataStreamsClient', 'ChainlinkCandlestickClient']
+
+from .hyperdash import HyperdashClient, HyperdashStream
+__all__ += ["HyperdashClient", "HyperdashStream"]

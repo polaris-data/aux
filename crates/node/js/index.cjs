@@ -1114,4 +1114,5 @@ exports.contracts = require("./contracts.cjs");
 exports.ExactNumber = require("./runtime.cjs").ExactNumber;
 exports.exactNumber = require("./runtime.cjs").exactNumber;
 exports.version = native.version();
+Object.assign(exports, require("./hyperdash.cjs"));
 Object.assign(exports, require("./errors.cjs"));
