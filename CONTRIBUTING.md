@@ -83,6 +83,11 @@ Dune adds HTTP execution and result pages (JSON and CSV), with no implicit polli
 
 Birdeye market-data requests and Rust/Python/Node operations share `crates/data/birdeye/operations.json`; regenerate with `python3 scripts/generate-birdeye-bindings.py` before the Node generator. Birdeye primitive request declarations also regenerate without the compiled model exporter. Source-only wrapper checks are `python3 scripts/check-birdeye-source.py` and `node scripts/check-birdeye-source.mjs`.
 
+Hyperdash generates Rust, Python, and Node methods and models from its pinned
+OpenAPI spec and documented supplemental routes. Run
+`python3 scripts/generate-hyperdash-bindings.py` after updating the pins.
+The live protocol uses explicit billable acknowledgements and caller-owned recovery.
+
 Pyth and Chainlink operation inventories generate Rust requests and dispatch,
 Python wrappers, and Node declarations. Run `python3 scripts/generate-oracle-bindings.py`
 before the Node generator after changing either inventory. Validate parity with

@@ -39,6 +39,7 @@ remain distinguishable from transport failures.
 | `derive` | No | [Native Derive v3 client, wallet/session signing, and RPC sessions](crates/exchanges/derive/README.md) |
 | `tardis` | No | [Tardis hosted data and external Machine replay/live APIs, including file downloads](crates/data/tardis/README.md) |
 | `birdeye` | No | [Birdeye prices/OHLCV, token/pair stats, discovery, trades and security](crates/data/birdeye/README.md) |
+| `hyperdash` | No | [Hyperdash Hyperliquid market and account data, analytics, and live streams](crates/data/hyperdash/README.md) |
 | `dune` | No | [Dune SQL/saved-query execution, status, cancellation, and JSON/CSV results](crates/data/dune/README.md) |
 | `pyth` | No | [Pyth Pro REST and WebSocket data, signed updates, and Hermes v2](crates/data/pyth/README.md) |
 | `chainlink` | No | [Chainlink Data Streams reports and Candlestick APIs](crates/data/chainlink/README.md) |
@@ -124,7 +125,7 @@ The workspace contains:
 - [`aux-rs`](crates/aux-rs): public Rust SDK facade, examples, and integration tests.
 - [`aux-rs-core`](crates/core): shared client and transport contracts.
 - [Exchange adapters](crates/exchanges): native clients, types, and signing.
-- [Data adapters](crates/data): native Tardis, Databento, Dune, Birdeye, Pyth, and Chainlink clients.
+- [Data adapters](crates/data): native Tardis, Databento, Dune, Birdeye, Pyth, Chainlink, and Hyperdash clients.
 - [Python bindings](crates/python/README.md): asyncio clients backed by the Rust SDK.
 - [Node/TypeScript bindings](crates/node/README.md): native Node clients backed by the Rust SDK.
 

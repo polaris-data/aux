@@ -10,6 +10,7 @@ fi
 binding_venv="$("$binding_python" -c 'import sys; assert sys.prefix != sys.base_prefix, "use a virtual environment"; print(sys.prefix)')"
 export PYO3_PYTHON="$binding_python"
 
+python3 scripts/generate-hyperdash-bindings.py --check
 python3 scripts/generate-dune-bindings.py --check
 python3 scripts/generate-birdeye-bindings.py --check
 python3 scripts/generate-oracle-bindings.py --check

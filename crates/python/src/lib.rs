@@ -10,6 +10,7 @@ mod derive;
 mod dune;
 mod errors;
 mod extended;
+mod hyperdash;
 mod kalshi;
 mod lighter;
 mod metric;
@@ -40,6 +41,8 @@ fn _native(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<phoenix::PhoenixSigner>()?;
     module.add_class::<birdeye::BirdeyeClient>()?;
     module.add_class::<dune::DuneClient>()?;
+    module.add_class::<hyperdash::HyperdashClient>()?;
+    module.add_class::<hyperdash::HyperdashStream>()?;
     module.add_class::<data::TardisClient>()?;
     module.add_class::<data::TardisMachineClient>()?;
     module.add_class::<data::DatabentoHistoricalClient>()?;
