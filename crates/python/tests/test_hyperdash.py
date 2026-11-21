@@ -115,7 +115,7 @@ class HyperdashTests(unittest.IsolatedAsyncioTestCase):
                         self.assertEqual((await stream.next())["credits_charged"], 1)
                         with self.assertRaises(aux_py.ValidationError):
                             await stream.ack(batch["sub"], batch["batch"])
-                        with self.assertRaises(TimeoutError):
+                        with self.assertRaises(asyncio.TimeoutError):
                             await asyncio.wait_for(stream.next(), 0.02)
                         finish.set()
                         with self.assertRaises(aux_py.ConnectorError) as raised:

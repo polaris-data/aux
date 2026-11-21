@@ -55,7 +55,7 @@ jobs:
     name: Wheel (${{ matrix.os }}, Python ${{ matrix.python.version }})
     needs: validate
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    timeout-minutes: ${{ matrix.os == 'ubuntu-24.04' && 45 || 90 }}
     strategy:
       fail-fast: false
       matrix:

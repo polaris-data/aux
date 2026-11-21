@@ -21,7 +21,7 @@ jobs:
       matrix:
         os: [ubuntu-24.04, macos-15, macos-15-intel]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    timeout-minutes: ${{ matrix.os == 'ubuntu-24.04' && 45 || 90 }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -47,7 +47,7 @@ jobs:
       - name: Build and test release addon
         run: |
           npm --prefix crates/node run build:release
-          npm --prefix crates/node test
+          NODE_OPTIONS=--unhandled-rejections=strict npm --prefix crates/node test
           node scripts/check-node-package.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
