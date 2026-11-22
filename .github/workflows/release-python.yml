@@ -55,7 +55,8 @@ jobs:
     name: Wheel (${{ matrix.os }}, Python ${{ matrix.python.version }})
     needs: validate
     runs-on: ${{ matrix.os }}
-    timeout-minutes: ${{ matrix.os == 'ubuntu-24.04' && 45 || 90 }}
+    # Cold arm64 builds can exceed 90 minutes compiling the Python extension.
+    timeout-minutes: ${{ matrix.os == 'macos-15' && 150 || matrix.os == 'macos-15-intel' && 90 || 45 }}
     strategy:
       fail-fast: false
       matrix:
