@@ -21,8 +21,18 @@ test("subscriptions yield typed data and early iteration exit closes the handle"
  for await(const value of s){assert.equal(value.coin,"ETH");assert.equal(typeof value.time,"bigint");break;}
  assert.equal(s.closed,true);assert.deepEqual(await s.next(),{value:undefined,done:true});
 });
-test("a second pending read fails and client close wakes the first",{timeout:5000},async t=>{
- const peer=await setup(t);const {s}=await peer.subscribe();const first=s.next();await assert.rejects(s.next(),sdk.BusyError);await peer.c.close();assert.deepEqual(await first,{value:undefined,done:true});assert.equal(s.closed,true);
+test("one concurrent read fails and client close wakes the other",{timeout:5000},async t=>{
+ const peer = await setup(t);
+ const {s} = await peer.subscribe();
+ const reads = [s.next(), s.next()];
+ await assert.rejects(Promise.race(reads), sdk.BusyError);
+
+ await peer.c.close();
+ const results = await Promise.allSettled(reads);
+ assert.deepEqual(results.filter(result => result.status === "fulfilled"), [
+  {status: "fulfilled", value: {value: undefined, done: true}},
+ ]);
+ assert.equal(s.closed, true);
 });
 test("overflow is terminal and remains visible to a slow consumer",{timeout:5000},async t=>{
  const peer=await setup(t,{subscriptionCapacity:1});const {s,socket}=await peer.subscribe();send(socket,20);await new Promise(resolve=>setTimeout(resolve,50));await assert.rejects(s.next(),error=>error instanceof sdk.TransportError&&error.kind==="overflow");assert.equal(s.closed,true);
