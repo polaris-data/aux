@@ -1,6 +1,6 @@
 {
   "name": "aux-ts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Exchange-native TypeScript SDK backed by Rust",
   "license": "MIT",
   "engines": {

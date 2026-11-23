@@ -104,9 +104,11 @@ Before the first release:
    The workflow creates the PyPI project on its first successful upload.
 
 For subsequent releases, update both `[project].version` in `pyproject.toml` and
-`[workspace.package].version` in the root `Cargo.toml` before tagging. The workflow
-rejects mismatches between those versions and the release tag. No PyPI API token
-is required. See [PyPI's Trusted Publishing guide](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/)
+`[workspace.package].version` in the root `Cargo.toml`. Run **Release Python SDK**
+on the release commit and wait for the full wheel matrix and source distribution
+to pass before publishing the GitHub release. For 0.0.1, use `aux-py-v0.0.1`.
+The workflow requires both versions and the release tag to agree. See
+[PyPI's Trusted Publishing guide](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/)
 for the account setup.
 
 ## Public reads and streams

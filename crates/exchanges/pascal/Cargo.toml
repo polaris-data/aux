@@ -4,8 +4,8 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
-license = "MIT"
-repository = "https://github.com/polaris-data/connectors"
+repository.workspace = true
+license-file.workspace = true
 readme = "README.md"
 description = "Pascal prediction exchange APIs, permits and Solana collateral"
 

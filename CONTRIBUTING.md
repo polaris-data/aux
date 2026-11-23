@@ -238,6 +238,33 @@ platform limits. CPython 3.12.7 on macOS arm64 has been validated locally; the
 [release workflow](crates/python/README.md#releases) checks the wheel matrix and
 source distribution before publishing to PyPI.
 
+## Rust releases
+
+Keep the workspace version, internal `aux-rs` dependency requirements, and
+`Cargo.lock` in sync. Use `cargo update --workspace` to refresh the lockfile
+after a version bump. Match the workspace version in the Python manifest and
+in the Node package manifest and lockfile. Run the package check from the
+release commit with Rust 1.92.
+
+```sh
+cargo +1.92.0 package --workspace --exclude aux-rs-python --exclude aux-rs-node \
+    --all-features --locked
+```
+
+Cargo builds the archives in dependency order and verifies the unpacked crates.
+After verification, publish from the same commit with a crates.io credential
+for the selected packages.
+
+```sh
+cargo +1.92.0 publish --workspace --exclude aux-rs-python --exclude aux-rs-node \
+    --registry crates-io --all-features --locked
+```
+
+Cargo publishes workspace dependencies before their dependents, including the
+`aux-rs` facade last. If a publish stops partway through, check which versions
+are visible on crates.io and rerun from the same commit with an additional
+`--exclude` for each crate already published at that version.
+
 ## Dependency changes
 
 Default facade features are `http` and `ws`; no exchange or data vendor is selected
@@ -370,8 +397,8 @@ Remaining release gates and work:
   registration are outside the current surface; other extended operations are
   tracked in the exchange guides.
 - Follow the [Python release checklist](crates/python/README.md#releases) for
-  publisher setup, wheel/platform verification, and distribution. Rust package
-  publication remains a separate release task.
+  publisher setup, wheel/platform verification, and distribution. Follow the
+  [Rust release instructions](#rust-releases) for crates.io publication.
 
 ### Exchange backlog
 

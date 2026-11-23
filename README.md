@@ -6,14 +6,17 @@
 
 ### Rust
 
-Requires **Rust 1.92 or later**. The crates are local workspace packages; add a
-path dependency and adjust the path to your checkout:
+Requires **Rust 1.92 or later**. To use `aux-rs` 0.0.1 from crates.io, add it
+with the features for your connectors.
 
 ```toml
 [dependencies]
-aux-rs = { path = "../connectors/crates/aux-rs", features = ["hyperliquid"] }
+aux-rs = { version = "0.0.1", features = ["hyperliquid"] }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 ```
+
+For a local checkout, replace `version` with `path = "../aux/crates/aux-rs"`
+and adjust the path to your checkout.
 
 Import the Rust package as `aux_rs`. HTTP and WebSocket transports are enabled
 by default; select each exchange explicitly with its feature flag. Unselected

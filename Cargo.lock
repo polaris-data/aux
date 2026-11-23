@@ -608,7 +608,7 @@ checksum = "f2032f911046de80f0a198e0901378627c33f59ea0ac00e363d481118bd70a53"
 
 [[package]]
 name = "aux-rs"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-arcus",
  "aux-rs-birdeye",
@@ -640,7 +640,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-arcus"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "ed25519-dalek",
@@ -655,7 +655,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-birdeye"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "aux-rs-data",
@@ -668,7 +668,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-chainlink"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "alloy-primitives",
  "alloy-sol-types",
@@ -686,7 +686,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-core"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "futures-util",
  "reqwest",
@@ -698,7 +698,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-data"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "async-compression",
  "aux-rs-core",
@@ -713,7 +713,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-databento"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "async-compression",
  "aux-rs-core",
@@ -731,7 +731,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-derive"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "futures-util",
@@ -748,7 +748,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-dune"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "aux-rs-data",
@@ -760,7 +760,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-evm"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -778,7 +778,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-extended"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "base64 0.22.1",
@@ -800,7 +800,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-hyperdash"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "aux-rs-data",
@@ -815,7 +815,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-hyperliquid"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "k256",
@@ -830,7 +830,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-kalshi"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "base64 0.22.1",
@@ -850,7 +850,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-lighter"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "futures-util",
@@ -866,7 +866,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-metric"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "alloy-consensus",
  "alloy-dyn-abi",
@@ -891,7 +891,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-monaco"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "base64 0.22.1",
@@ -912,7 +912,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-node"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs",
  "base64 0.22.1",
@@ -930,7 +930,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-paradex"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "base64 0.22.1",
@@ -952,7 +952,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-pascal"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "base64 0.22.1",
@@ -972,7 +972,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-phoenix"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "base64 0.22.1",
@@ -999,7 +999,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-polymarket"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "alloy-dyn-abi",
  "alloy-json-abi",
@@ -1025,7 +1025,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-pyth"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "aux-rs-data",
@@ -1041,7 +1041,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-python"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs",
  "base64 0.22.1",
@@ -1056,7 +1056,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-qfex"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "futures-util",
@@ -1072,7 +1072,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-tardis"
-version = "0.0.0"
+version = "0.0.1"
 dependencies = [
  "aux-rs-core",
  "aux-rs-data",

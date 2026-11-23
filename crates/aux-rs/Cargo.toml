@@ -3,11 +3,12 @@ name = "aux-rs"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
+publish.workspace = true
+repository.workspace = true
+license-file.workspace = true
 description = "Native exchange and data-vendor connectors for Rust"
-repository = "https://github.com/polaris-data/connectors"
-license = "MIT"
 readme = "../../README.md"
-include = ["Cargo.toml", "src/**"]
+include = ["src/**", "examples/**"]
 
 [features]
 pyth = ["dep:aux-rs-pyth"]

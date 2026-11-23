@@ -4,30 +4,32 @@ default-members = ["crates/data/pyth", "crates/data/chainlink", "crates/exchange
 resolver = "3"
 
 [workspace.package]
-version = "0.0.0"
+version = "0.0.1"
 edition = "2024"
 rust-version = "1.92"
-publish = false
+publish = ["crates-io"]
+repository = "https://github.com/polaris-data/aux"
+license-file = "LICENSE"
 
 [workspace.dependencies]
-aux-rs-pyth = { path = "crates/data/pyth", default-features = false }
-aux-rs-chainlink = { path = "crates/data/chainlink", default-features = false }
-aux-rs-extended = { path = "crates/exchanges/extended", default-features = false }
-aux-rs-phoenix = { path = "crates/exchanges/phoenix", default-features = false }
+aux-rs-pyth = { version = "0.0.1", path = "crates/data/pyth", default-features = false }
+aux-rs-chainlink = { version = "0.0.1", path = "crates/data/chainlink", default-features = false }
+aux-rs-extended = { version = "0.0.1", path = "crates/exchanges/extended", default-features = false }
+aux-rs-phoenix = { version = "0.0.1", path = "crates/exchanges/phoenix", default-features = false }
 ts-rs = { version = "12", default-features = false, features = ["serde-compat", "serde-json-impl"] }
-aux-rs-pascal = { path="crates/exchanges/pascal", default-features=false }
-aux-rs-polymarket = { path="crates/exchanges/polymarket", default-features=false }
-aux-rs-kalshi = { path="crates/exchanges/kalshi", default-features=false }
-aux-rs-evm = { path = "crates/chain/evm", default-features = false }
-aux-rs-data = { path = "crates/data/common", default-features = false }
-aux-rs-tardis = { path = "crates/data/tardis", default-features = false }
-aux-rs-birdeye = { path = "crates/data/birdeye", default-features = false }
-aux-rs-hyperdash = { path = "crates/data/hyperdash", default-features = false }
-aux-rs-dune = { path = "crates/data/dune", default-features = false }
-aux-rs-databento = { path = "crates/data/databento", default-features = false }
+aux-rs-pascal = { version = "0.0.1", path = "crates/exchanges/pascal", default-features = false }
+aux-rs-polymarket = { version = "0.0.1", path = "crates/exchanges/polymarket", default-features = false }
+aux-rs-kalshi = { version = "0.0.1", path = "crates/exchanges/kalshi", default-features = false }
+aux-rs-evm = { version = "0.0.1", path = "crates/chain/evm", default-features = false }
+aux-rs-data = { version = "0.0.1", path = "crates/data/common", default-features = false }
+aux-rs-tardis = { version = "0.0.1", path = "crates/data/tardis", default-features = false }
+aux-rs-birdeye = { version = "0.0.1", path = "crates/data/birdeye", default-features = false }
+aux-rs-hyperdash = { version = "0.0.1", path = "crates/data/hyperdash", default-features = false }
+aux-rs-dune = { version = "0.0.1", path = "crates/data/dune", default-features = false }
+aux-rs-databento = { version = "0.0.1", path = "crates/data/databento", default-features = false }
 async-compression = { version = "0.4", default-features = false, features = ["futures-io", "gzip", "zstd"] }
 dbn = { version = "=0.73.0", default-features = false, features = ["serde"] }
-aux-rs-metric = { path = "crates/exchanges/metric", default-features = false }
+aux-rs-metric = { version = "0.0.1", path = "crates/exchanges/metric", default-features = false }
 alloy-primitives = { version = "=1.4.1", default-features = false, features = ["std", "serde", "k256"] }
 alloy-sol-type-parser = { version = "=1.4.1", default-features = false }
 alloy-sol-types = { version = "=1.4.1", default-features = false, features = ["std", "json"] }
@@ -38,21 +40,21 @@ alloy-eips = { version = "=1.0.42", default-features = false }
 alloy-tx-macros = { version = "=1.0.42", default-features = false }
 
 time = { version = "0.3", default-features = false, features = ["std", "formatting"] }
-aux-rs-derive = { path = "crates/exchanges/derive", default-features = false }
-aux-rs-paradex = { path = "crates/exchanges/paradex", default-features = false }
+aux-rs-derive = { version = "0.0.1", path = "crates/exchanges/derive", default-features = false }
+aux-rs-paradex = { version = "0.0.1", path = "crates/exchanges/paradex", default-features = false }
 starknet-core = { version = "=0.16.0", default-features = false }
 starknet-crypto = { version = "=0.8.1", default-features = false }
-aux-rs-monaco = { path = "crates/exchanges/monaco", default-features = false }
+aux-rs-monaco = { version = "0.0.1", path = "crates/exchanges/monaco", default-features = false }
 base64 = "0.22"
 url = "2.5"
 sha2 = { version = "0.10", default-features = false }
 ed25519-dalek = { version = "2.2", default-features = false, features = ["std", "zeroize", "fast"] }
-aux-rs-arcus = { path = "crates/exchanges/arcus", default-features = false }
-aux-rs-qfex = { path = "crates/exchanges/qfex", default-features = false }
-aux-rs-core = { path = "crates/core", default-features = false }
-aux-rs = { path = "crates/aux-rs", default-features = false }
-aux-rs-hyperliquid = { path = "crates/exchanges/hyperliquid", default-features = false }
-aux-rs-lighter = { path = "crates/exchanges/lighter", default-features = false }
+aux-rs-arcus = { version = "0.0.1", path = "crates/exchanges/arcus", default-features = false }
+aux-rs-qfex = { version = "0.0.1", path = "crates/exchanges/qfex", default-features = false }
+aux-rs-core = { version = "0.0.1", path = "crates/core", default-features = false }
+aux-rs = { version = "0.0.1", path = "crates/aux-rs", default-features = false }
+aux-rs-hyperliquid = { version = "0.0.1", path = "crates/exchanges/hyperliquid", default-features = false }
+aux-rs-lighter = { version = "0.0.1", path = "crates/exchanges/lighter", default-features = false }
 goldilocks-crypto = { version = "=0.1.2", default-features = false }
 poseidon-hash = { version = "=0.1.4", default-features = false }
 getrandom = { version = "0.2", default-features = false }
