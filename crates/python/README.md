@@ -80,15 +80,15 @@ Funded testnet submit/cancel and real authenticated Lighter order-stream verific
 ## Releases
 
 The [Python release workflow](../../.github/workflows/release-python.yml) builds
-CPython 3.10–3.14 wheels for Linux x86_64 (glibc 2.28+) and macOS arm64 and x86_64,
-plus a source distribution containing the local Rust workspace dependencies.
-Each wheel and the source distribution are installed and run through the Python
-test suite before publication. Windows, Linux arm64, and free-threaded Python
-wheels are not included in this initial matrix.
+one stable ABI wheel for each of Linux x86_64 (glibc 2.28+), macOS arm64, and macOS
+x86_64, plus a source distribution containing the local Rust workspace dependencies.
+The workflow runs the Python test suite against each wheel on standard CPython
+3.10–3.14 and against an installation from the source distribution.
 
-Pull requests affecting the build inputs and manual workflow runs build and test
-artifacts without publishing. Publishing a GitHub release with a tag matching
-`aux-py-v<VERSION>` publishes those artifacts to PyPI using Trusted Publishing.
+The [SDK checks workflow](../../.github/workflows/check-sdks.yml) type-checks
+pull requests into `main`. Run **Release Python SDK** manually to build and test
+packages before release. Publishing a GitHub release with a tag matching
+`aux-py-v<VERSION>` builds, tests, and publishes packages to PyPI using Trusted Publishing.
 Other release tags are ignored. The first version is **0.0.0**, with tag
 `aux-py-v0.0.0`.
 
