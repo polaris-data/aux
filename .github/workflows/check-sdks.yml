@@ -1,0 +1,59 @@
+name: Check SDKs
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/check-sdks.yml
+      - .github/workflows/release-node.yml
+      - .github/workflows/release-python.yml
+      - Cargo.toml
+      - Cargo.lock
+      - crates/**
+      - scripts/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-sdks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Check Python and Node sources
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: crates/node/package-lock.json
+      - name: Install Rust
+        run: rustup toolchain install 1.92.0 --profile minimal --component rustfmt && rustup default 1.92.0
+      - name: Verify formatting, generated sources, and API coverage
+        run: |
+          cargo fmt --all --check
+          python scripts/check-python-release-version.py
+          python scripts/generate-node-bindings.py --check
+          python scripts/generate-metric-bindings.py --check
+          python scripts/check-node-coverage.py
+          python scripts/check-data-coverage.py
+          python scripts/check-native-coverage.py
+          python scripts/check-prediction-coverage.py
+          python scripts/dependencies.py --check --target x86_64-unknown-linux-gnu
+      - name: Check Rust bindings
+        run: |
+          cargo check --locked -p aux-rs-python
+          cargo check --locked -p aux-rs-node --all-targets
+      - name: Check TypeScript declarations
+        run: |
+          npm ci --ignore-scripts --prefix crates/node
+          npm --prefix crates/node run typecheck
