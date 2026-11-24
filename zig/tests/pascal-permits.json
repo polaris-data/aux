@@ -1,0 +1,158 @@
+[
+  {
+    "operation": "write.place_and_replace_orders",
+    "body": {
+      "size": "10",
+      "price": "0.550000",
+      "client_order_id": "42",
+      "replace_client_order_id": "43",
+      "expires_ts_ms": "1731539600000",
+      "symbol": "SIM_EVENT_1.MARKET_1",
+      "side": "BID",
+      "tif": "GTT",
+      "post_only": true,
+      "reduce_only": true,
+      "allow_missing_replace": true
+    },
+    "signature": "46gXGMwTxEckctHD3tjVyedhGG95VK2F97F3idkSYFR3WNEX4rG9g6g8KDTQPoxzLieudk8WHDXw7xNV3R2WwKCd",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  },
+  {
+    "operation": "write.cancel_orders",
+    "body": {
+      "client_order_id": "42"
+    },
+    "signature": "591YziUjZzro24mamxgRrSDdYD71NpsDBmU4UGSyrBYbFiWzYaLjR9he1P5DP8djMKMJzHTsZzwRAagvLqgtiXnc",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  },
+  {
+    "operation": "write.mass_cancel_orders",
+    "body": {
+      "symbol": "SIM_EVENT_1.MARKET_1"
+    },
+    "signature": "oLmkQxx9xLPK4QJnFhZUFEker5k5pbLregsYPgRrhrd9sEBYDuCtitUtFSVfhiJpTFHWAdmGk6zKDLpPtA3iegS",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  },
+  {
+    "operation": "write.create_a_trading_key",
+    "body": {
+      "name": "api-doc-key",
+      "trading_key": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1",
+      "expiration_ts_ms": "1732140800000"
+    },
+    "signature": "kyc2KdqPTeEWqoK3pXR2rgPUiK4zXg9QdQffPUWk8eALpFy7uaHBEsASt7RQyVzDeubHVsPqQAHXrt8m8KZ78Ep",
+    "auth": {
+      "seed": "0707070707070707070707070707070707070707070707070707070707070707",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+  },
+  {
+    "operation": "write.revoke_a_trading_key",
+    "body": {
+      "trading_key": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+    },
+    "signature": "3muKct6upyRNAr1CPdYcxQGCojpuB4gaEnWvbNwEBJ6rrKaThRZrKY56rpYbFEsGUZqJ4iCTJqYrPuxfGYVzXQX3",
+    "auth": {
+      "seed": "0707070707070707070707070707070707070707070707070707070707070707",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+  },
+  {
+    "operation": "write.withdraw_collateral",
+    "body": {
+      "amount": "25.000000",
+      "destination_authority": "29d2S7vB453rNYFdR5Ycwt7y9haRT5fwVwL9zTmBhfV2",
+      "destination_token_account": "3JF3sEqM796hk5WFqA6EtmEwJQ9quALszsfJyvXNQKy3"
+    },
+    "signature": "61YYUBk6BTXkfrksMbqDLUNxwo6jhMPqdP7fNnWjNF2FYvMDujTsaUxfCiRxXX72jxy4oLtt6AtLodCvjDi4XpDn",
+    "auth": {
+      "seed": "0707070707070707070707070707070707070707070707070707070707070707",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+  },
+  {
+    "operation": "write.register_a_deposit_address",
+    "body": {
+      "referral_code": "k7wq2m4x"
+    },
+    "signature": "2GVZuf1birCpfr6DKbu1ALSxRTpVnzFAa6oYqnEsnDUB2TFqeYTsKEZrCxNzATyCZbEaLW7koZJPRh9euhYiLtm4",
+    "auth": {
+      "seed": "0707070707070707070707070707070707070707070707070707070707070707",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+  },
+  {
+    "operation": "write.generate_a_referral_code",
+    "body": {},
+    "signature": "4UpZqQfCNDbj3NEnkkRUQsW5USTTcv7JekvPWyHsEC2ifcc3R8PwEVd5xVWZuSNacyNHrZg29ZqPeUME3GWGpnCN",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  },
+  {
+    "operation": "write.claim_a_custom_referral_code",
+    "body": {
+      "referral_code": "trader1"
+    },
+    "signature": "26FzDQPEDR6u7rKhkaEEJL1YSyKpbUCCibQtQxkDfEfEjyAsJu17X5p8TtuW5iXQfCNbs9gjEsFecqPv4yffwsgS",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  },
+  {
+    "operation": "write.apply_a_referral_code",
+    "body": {
+      "referral_code": "k7wq2m4x"
+    },
+    "signature": "32Vj9xAGjh6xzfuDNqsWeAghnacBDFKQzwUWb5HgNeZBjw6tthL3iEpL91cW9iB8Vwv5PDNUSrUwH2gddH2je4MF",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  },
+  {
+    "operation": "write.set_a_username",
+    "body": {
+      "username": "Trader"
+    },
+    "signature": "2aEt4QQeG3iFTD6tAZvDnfKzna7cnVh18eq6cveGho9mdwfDGLoFjs1fsyYieXuZKKGdpFFCH8VgvVQJ2K1BBmjV",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  },
+  {
+    "operation": "write.set_an_account_bio",
+    "body": {
+      "account_bio": "verify \"🙂\""
+    },
+    "signature": "33NKyaFk1DPtmndQvJZCph639oYtVuPUjWieDHfVKD6SKmWd5sW87Qczai9tqSQUkinm1ankSwMPWrqY4kRbLr93",
+    "auth": {
+      "seed": "0808080808080808080808080808080808080808080808080808080808080808",
+      "owner": "GmaDrppBC7P5ARKV8g3djiwP89vz1jLK23V2GBjuAEGB"
+    },
+    "signer": "2KW2XRd9kwqet15Aha2oK3tYvd3nWbTFH1MBiRAv1BE1"
+  }
+]

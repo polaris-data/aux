@@ -1,0 +1,566 @@
+[
+  {
+    "order": {
+      "salt": 42,
+      "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "tokenId": "123456789012345678901234567890",
+      "makerAmount": "550000",
+      "takerAmount": "1000000",
+      "side": 0,
+      "signatureType": 0,
+      "timestamp": "1731536000",
+      "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "domain": {
+      "chain_id": 137,
+      "exchange": "0xE111180000d2663C0091e4f400237545B87B996B",
+      "version": 2
+    },
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "2",
+        "chainId": 137,
+        "verifyingContract": "0xe111180000d2663c0091e4f400237545b87b996b"
+      },
+      "primaryType": "Order",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "salt": 42,
+        "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "tokenId": "123456789012345678901234567890",
+        "makerAmount": "550000",
+        "takerAmount": "1000000",
+        "side": 0,
+        "signatureType": 0,
+        "timestamp": "1731536000",
+        "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x87cd6875377090a52dcc5903bb34855887743c3f5ba0456330130796c27f4267"
+  },
+  {
+    "order": {
+      "salt": 42,
+      "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "tokenId": "123456789012345678901234567890",
+      "makerAmount": "550000",
+      "takerAmount": "1000000",
+      "side": 0,
+      "signatureType": 3,
+      "timestamp": "1731536000",
+      "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "domain": {
+      "chain_id": 137,
+      "exchange": "0xE111180000d2663C0091e4f400237545B87B996B",
+      "version": 2
+    },
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "2",
+        "chainId": 137,
+        "verifyingContract": "0xe111180000d2663c0091e4f400237545b87b996b"
+      },
+      "primaryType": "TypedDataSign",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ],
+        "TypedDataSign": [
+          {
+            "name": "contents",
+            "type": "Order"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          },
+          {
+            "name": "salt",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "contents": {
+          "salt": 42,
+          "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "tokenId": "123456789012345678901234567890",
+          "makerAmount": "550000",
+          "takerAmount": "1000000",
+          "side": 0,
+          "signatureType": 3,
+          "timestamp": "1731536000",
+          "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "name": "DepositWallet",
+        "version": "1",
+        "chainId": 137,
+        "verifyingContract": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "salt": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x709c14a8fb0fea215fc5fd56af0787becac2a5fe68e32ac77225dc64d4d18dd9"
+  },
+  {
+    "order": {
+      "salt": 42,
+      "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "tokenId": "123456789012345678901234567890",
+      "makerAmount": "550000",
+      "takerAmount": "1000000",
+      "side": 0,
+      "signatureType": 0,
+      "timestamp": "1731536000",
+      "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "domain": {
+      "chain_id": 137,
+      "exchange": "0xe3333700cA9d93003F00f0F71f8515005F6c00Aa",
+      "version": 3
+    },
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "3",
+        "chainId": 137,
+        "verifyingContract": "0xe3333700ca9d93003f00f0f71f8515005f6c00aa"
+      },
+      "primaryType": "Order",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "salt": 42,
+        "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "tokenId": "123456789012345678901234567890",
+        "makerAmount": "550000",
+        "takerAmount": "1000000",
+        "side": 0,
+        "signatureType": 0,
+        "timestamp": "1731536000",
+        "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x5b3192ccbdd43f3528d4b2d51fde64f02266617f0de67d11fbb87587334b5736"
+  },
+  {
+    "order": {
+      "salt": 42,
+      "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+      "tokenId": "123456789012345678901234567890",
+      "makerAmount": "550000",
+      "takerAmount": "1000000",
+      "side": 0,
+      "signatureType": 3,
+      "timestamp": "1731536000",
+      "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "domain": {
+      "chain_id": 137,
+      "exchange": "0xe3333700cA9d93003F00f0F71f8515005F6c00Aa",
+      "version": 3
+    },
+    "typed_data": {
+      "domain": {
+        "name": "Polymarket CTF Exchange",
+        "version": "3",
+        "chainId": 137,
+        "verifyingContract": "0xe3333700ca9d93003f00f0f71f8515005f6c00aa"
+      },
+      "primaryType": "TypedDataSign",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          }
+        ],
+        "Order": [
+          {
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "name": "maker",
+            "type": "address"
+          },
+          {
+            "name": "signer",
+            "type": "address"
+          },
+          {
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "name": "makerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "takerAmount",
+            "type": "uint256"
+          },
+          {
+            "name": "side",
+            "type": "uint8"
+          },
+          {
+            "name": "signatureType",
+            "type": "uint8"
+          },
+          {
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "name": "metadata",
+            "type": "bytes32"
+          },
+          {
+            "name": "builder",
+            "type": "bytes32"
+          }
+        ],
+        "TypedDataSign": [
+          {
+            "name": "contents",
+            "type": "Order"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "string"
+          },
+          {
+            "name": "chainId",
+            "type": "uint256"
+          },
+          {
+            "name": "verifyingContract",
+            "type": "address"
+          },
+          {
+            "name": "salt",
+            "type": "bytes32"
+          }
+        ]
+      },
+      "message": {
+        "contents": {
+          "salt": 42,
+          "maker": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "signer": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+          "tokenId": "123456789012345678901234567890",
+          "makerAmount": "550000",
+          "takerAmount": "1000000",
+          "side": 0,
+          "signatureType": 3,
+          "timestamp": "1731536000",
+          "metadata": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "builder": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "name": "DepositWallet",
+        "version": "1",
+        "chainId": 137,
+        "verifyingContract": "0x4a62316623ad457F02cDC5D997deD67a383EC569",
+        "salt": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "digest": "0x4faebfb9cecd26f85a73cfe63135eee31ecf18a2751dfab4d88f1906182ae886"
+  },
+  {
+    "typed_data": {
+      "domain": {
+        "name": "Example"
+      },
+      "primaryType": "Packet",
+      "types": {
+        "EIP712Domain": [
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "Packet": [
+          {
+            "name": "points",
+            "type": "Point[2][]"
+          },
+          {
+            "name": "text",
+            "type": "string"
+          },
+          {
+            "name": "raw",
+            "type": "bytes"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          }
+        ],
+        "Point": [
+          {
+            "name": "x",
+            "type": "int64"
+          },
+          {
+            "name": "flags",
+            "type": "bytes4"
+          }
+        ]
+      },
+      "message": {
+        "points": [
+          [
+            {
+              "x": -9223372036854775808,
+              "flags": "0x11223344"
+            },
+            {
+              "x": 9223372036854775807,
+              "flags": "0xff345678"
+            }
+          ]
+        ],
+        "text": "\u03bb",
+        "raw": "0xff00",
+        "enabled": true
+      }
+    },
+    "digest": "0x30fc23f329d0e18d0b2cff38aa56b815a796f9f960d7495d791d749fef0fa85b"
+  }
+]

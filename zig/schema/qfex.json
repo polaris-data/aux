@@ -1,0 +1,213 @@
+{
+  "client": "QfexClient",
+  "venue": "qfex",
+  "fixture": "data-http",
+  "strict": [
+    "ContractsRequest",
+    "EmptyRequest",
+    "OrderBookRequest",
+    "RefdataRequest"
+  ],
+  "aliases": {},
+  "models": {
+    "Symbol": [
+      [
+        "clobPairId",
+        "clob_pair_id",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "tick_size",
+        "tick_size",
+        "String",
+        "required"
+      ],
+      [
+        "lot_size",
+        "lot_size",
+        "String",
+        "required"
+      ],
+      [
+        "min_quantity",
+        "min_quantity",
+        "String",
+        "default"
+      ],
+      [
+        "max_quantity",
+        "max_quantity",
+        "String",
+        "default"
+      ],
+      [
+        "status",
+        "status",
+        "String",
+        "default"
+      ]
+    ],
+    "Refdata": [
+      [
+        "type",
+        "kind",
+        "String",
+        "required"
+      ],
+      [
+        "data",
+        "data",
+        "Vec<Symbol>",
+        "nullable_vec"
+      ]
+    ],
+    "Contracts": [
+      [
+        "data",
+        "data",
+        "Vec<serde_json::Value>",
+        "nullable_vec"
+      ]
+    ],
+    "OrderBook": [
+      [
+        "ticker_id",
+        "ticker_id",
+        "String",
+        "required"
+      ],
+      [
+        "timestamp",
+        "timestamp",
+        "i64",
+        "required"
+      ],
+      [
+        "bids",
+        "bids",
+        "Vec<[String; 2]>",
+        "nullable_vec"
+      ],
+      [
+        "asks",
+        "asks",
+        "Vec<[String; 2]>",
+        "nullable_vec"
+      ]
+    ],
+    "Position": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "position",
+        "position",
+        "serde_json::Number",
+        "required"
+      ],
+      [
+        "realised_pnl",
+        "realised_pnl",
+        "serde_json::Number",
+        "required"
+      ],
+      [
+        "unrealised_pnl",
+        "unrealised_pnl",
+        "serde_json::Number",
+        "required"
+      ],
+      [
+        "average_price",
+        "average_price",
+        "serde_json::Number",
+        "required"
+      ]
+    ],
+    "Balance": [
+      [
+        "available_balance",
+        "available_balance",
+        "serde_json::Number",
+        "required"
+      ],
+      [
+        "deposit",
+        "deposit",
+        "serde_json::Number",
+        "required"
+      ]
+    ],
+    "PositionsBalance": [
+      [
+        "positions",
+        "positions",
+        "Vec<Position>",
+        "nullable_vec"
+      ],
+      [
+        "balance",
+        "balance",
+        "Balance",
+        "required"
+      ]
+    ],
+    "RefdataRequest": [
+      [
+        "ticker",
+        "ticker",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "ContractsRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderBookRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "EmptyRequest": []
+  },
+  "methods": {
+    "refdata": [
+      "RefdataRequest",
+      "Refdata"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "OrderBook"
+    ],
+    "positions": [
+      "EmptyRequest",
+      "PositionsBalance"
+    ],
+    "contracts": [
+      "ContractsRequest",
+      "Contracts"
+    ],
+    "account_balances": [
+      "EmptyRequest",
+      "serde_json::Value"
+    ]
+  }
+}

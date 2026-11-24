@@ -1,0 +1,20 @@
+{
+  "client": "ReferenceClient",
+  "venue": "databento",
+  "fixture": "data-http",
+  "strict": [],
+  "aliases": {
+    "Params": "serde_json::Map<String,serde_json::Value>"
+  },
+  "models": {},
+  "methods": {
+    "list_events": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "list_enums": [
+      "Params",
+      "serde_json::Value"
+    ]
+  }
+}

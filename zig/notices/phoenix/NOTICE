@@ -1,0 +1,8 @@
+Instruction encoders in src/instructions are adapted from Ellipsis Labs Rise
+https://github.com/Ellipsis-Labs/rise-public
+commit 2ce47221ef04a8d5879d39d31e82f9e92021753e, rust/ix/src and math/src/direction.rs.
+MIT license: see RISE_LICENSE.
+Adaptations: module paths, unconditional serde, deterministic mainnet constants,
+excluded CPI/account/zero-copy view modules and upstream test modules.
+No upstream HTTP client, runtime SDK or network transport is used.
+Compatibility tests adapt rust/sdk/examples/build_all_ix.rs from the same pinned Rise revision.

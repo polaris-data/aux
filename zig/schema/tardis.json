@@ -1,0 +1,76 @@
+{
+  "client": "TardisClient",
+  "venue": "tardis",
+  "fixture": "data-http",
+  "strict": [
+    "EmptyRequest",
+    "ExchangeRequest",
+    "InstrumentRequest"
+  ],
+  "aliases": {
+    "Params": "serde_json::Map<String,serde_json::Value>"
+  },
+  "models": {
+    "EmptyRequest": [],
+    "ExchangeRequest": [
+      [
+        "exchange",
+        "exchange",
+        "String",
+        "required"
+      ]
+    ],
+    "InstrumentRequest": [
+      [
+        "exchange",
+        "exchange",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "InstrumentsRequest": [
+      [
+        "exchange",
+        "exchange",
+        "String",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "exchanges": [
+      "EmptyRequest",
+      "serde_json::Value"
+    ],
+    "exchange_details": [
+      "ExchangeRequest",
+      "serde_json::Value"
+    ],
+    "exchange_summary": [
+      "ExchangeRequest",
+      "serde_json::Value"
+    ],
+    "symbols": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "api_key_info": [
+      "EmptyRequest",
+      "serde_json::Value"
+    ],
+    "instruments": [
+      "InstrumentsRequest",
+      "serde_json::Value"
+    ],
+    "instrument": [
+      "InstrumentRequest",
+      "serde_json::Value"
+    ]
+  }
+}

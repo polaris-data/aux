@@ -1,0 +1,27 @@
+{
+  "client": "PythHermesClient",
+  "fixture": "data-http",
+  "oracle": true,
+  "aliases": {},
+  "strict": ["HermesLiveRequest","HealthResponse","HermesReadyRequest","PriceFeedsRequest","NativeResponse","LatestPriceUpdatesRequest","PriceUpdatesAtTimestampRequest","LatestTwapsRequest","LatestPublisherStakeCapsRequest"],
+  "models": {
+    "HermesLiveRequest": [],
+    "HealthResponse": [["status","status","u16","required"],["headers","headers","Vec<[String;2]>","required"],["data","data","String","required"]],
+    "HermesReadyRequest": [],
+    "PriceFeedsRequest": [["query","query","Option<String>","default"],["asset_type","asset_type","Option<String>","default"]],
+    "NativeResponse": [["status","status","u16","required"],["headers","headers","Vec<[String;2]>","required"],["data","data","serde_json::Value","required"]],
+    "LatestPriceUpdatesRequest": [["ids","ids","Vec<String>","required"],["encoding","encoding","Option<String>","default"],["parsed","parsed","Option<bool>","default"],["ignore_invalid_price_ids","ignore_invalid_price_ids","Option<bool>","default"]],
+    "PriceUpdatesAtTimestampRequest": [["publish_time","publish_time","u64","required"],["ids","ids","Vec<String>","required"],["encoding","encoding","Option<String>","default"],["parsed","parsed","Option<bool>","default"],["ignore_invalid_price_ids","ignore_invalid_price_ids","Option<bool>","default"]],
+    "LatestTwapsRequest": [["window_seconds","window_seconds","u64","required"]],
+    "LatestPublisherStakeCapsRequest": [["encoding","encoding","Option<String>","default"],["parsed","parsed","Option<bool>","default"]]
+  },
+  "methods": {
+    "live": ["HermesLiveRequest","HealthResponse"],
+    "ready": ["HermesReadyRequest","HealthResponse"],
+    "price_feeds": ["PriceFeedsRequest","NativeResponse"],
+    "latest_price_updates": ["LatestPriceUpdatesRequest","NativeResponse"],
+    "price_updates_at_timestamp": ["PriceUpdatesAtTimestampRequest","NativeResponse"],
+    "latest_twaps": ["LatestTwapsRequest","NativeResponse"],
+    "latest_publisher_stake_caps": ["LatestPublisherStakeCapsRequest","NativeResponse"]
+  }
+}

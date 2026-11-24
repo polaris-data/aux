@@ -1,0 +1,326 @@
+{
+  "account": {
+    "channel": "account",
+    "specification": {
+      "type": "account"
+    },
+    "template": 23
+  },
+  "balance_events": {
+    "channel": "balance_events",
+    "payload": {
+      "created_at": 1,
+      "fees": "fixture",
+      "fill_id": "fixture",
+      "funding_index": "fixture",
+      "market": "fixture",
+      "realized_funding": "fixture",
+      "realized_pnl": "fixture",
+      "settlement_asset_address": "fixture",
+      "settlement_asset_balance_after": "fixture",
+      "settlement_asset_balance_before": "fixture",
+      "settlement_asset_name": "fixture",
+      "settlement_asset_price": "fixture",
+      "status": "fixture",
+      "type": "fixture"
+    },
+    "specification": {
+      "type": "balance_events"
+    },
+    "template": null
+  },
+  "bbo": {
+    "channel": "bbo.ETH-USD-PERP",
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "bbo"
+    },
+    "template": 2
+  },
+  "block_trades": {
+    "channel": "block_trades",
+    "payload": {
+      "block_id": "123",
+      "status": "OPEN"
+    },
+    "specification": {
+      "type": "block_trades"
+    },
+    "template": null
+  },
+  "fills": {
+    "channel": "fills.ETH-USD-PERP",
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "fills"
+    },
+    "template": 21
+  },
+  "funding_data": {
+    "channel": "funding_data.ETH-USD-PERP",
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "funding_data"
+    },
+    "template": 5
+  },
+  "funding_payments": {
+    "channel": "funding_payments.ETH-USD-PERP",
+    "payload": {
+      "account": "fixture",
+      "created_at": 1,
+      "fill_id": "fixture",
+      "id": "fixture",
+      "index": "fixture",
+      "market": "fixture",
+      "payment": "fixture"
+    },
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "funding_payments"
+    },
+    "template": null
+  },
+  "funding_rate_comparison": {
+    "channel": "funding_rate_comparison.ALL@1000ms",
+    "specification": {
+      "refresh_rate": "1000ms",
+      "type": "funding_rate_comparison"
+    },
+    "template": 6
+  },
+  "markets": {
+    "channel": "markets.ETH-USD-PERP",
+    "payload": {
+      "changed_fields": {
+        "asset_kind": "fixture",
+        "base_currency": "fixture",
+        "clamp_rate": 1,
+        "delta1_cross_margin_params": {},
+        "expiry_at": 1,
+        "fee_config": {},
+        "funding_multiplier": 1,
+        "funding_period_hours": 1,
+        "interest_rate": 1,
+        "market_kind": "fixture",
+        "max_funding_rate": 1,
+        "max_funding_rate_change": 1,
+        "max_open_orders": 1,
+        "max_order_size": "fixture",
+        "max_slippage": 1,
+        "max_tob_spread": 1,
+        "min_notional": "fixture",
+        "open_at": 1,
+        "option_cross_margin_params": {},
+        "option_type": "fixture",
+        "oracle_ewma_factor": 1,
+        "order_size_increment": "fixture",
+        "position_limit": "fixture",
+        "price_bands_width": 1,
+        "price_tick_size": "fixture",
+        "quote_currency": "fixture",
+        "settlement_currency": "fixture",
+        "settlement_price": 1,
+        "strike_price": "fixture",
+        "underlying_twap_price": 1
+      },
+      "event_type": "CREATED",
+      "symbol": "fixture",
+      "updated_at": 1
+    },
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "markets"
+    },
+    "template": null
+  },
+  "markets_summary": {
+    "channel": "markets_summary.ETH-USD-PERP",
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "markets_summary"
+    },
+    "template": 4
+  },
+  "mmp": {
+    "channel": "mmp",
+    "payload": {
+      "account": "fixture",
+      "base_asset": "fixture",
+      "config": {
+        "base_asset": "fixture",
+        "delta_limit": "fixture",
+        "frozen_time_ms": 1,
+        "interval_ms": 1,
+        "protect_block_trades": true,
+        "removed": true,
+        "size_limit": "fixture",
+        "updated_at": 1,
+        "vega_limit": "fixture"
+      },
+      "created_at": 1,
+      "frozen_until": 1,
+      "kind": "TRIGGERED",
+      "trigger_market": "fixture",
+      "trip_reason": "SIZE",
+      "window_delta": "fixture",
+      "window_size": "fixture",
+      "window_vega": "fixture"
+    },
+    "specification": {
+      "type": "mmp"
+    },
+    "template": null
+  },
+  "order_book": {
+    "channel": "order_book.ETH-USD-PERP.snapshot@15@100ms@1",
+    "specification": {
+      "feed_type": "snapshot",
+      "market": "ETH-USD-PERP",
+      "price_tick": "1",
+      "refresh_rate": "100ms",
+      "type": "order_book"
+    },
+    "template": 3
+  },
+  "orders": {
+    "channel": "orders.ETH-USD-PERP",
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "orders"
+    },
+    "template": 20
+  },
+  "positions": {
+    "channel": "positions",
+    "specification": {
+      "type": "positions"
+    },
+    "template": 22
+  },
+  "rfq": {
+    "channel": "rfq.1",
+    "payload": {
+      "account": "fixture",
+      "created_at": 1,
+      "deribit_cost": {
+        "buy_available": "fixture",
+        "buy_cost": "fixture",
+        "buy_status": "PRICED",
+        "last_updated_at": 1,
+        "sell_available": "fixture",
+        "sell_cost": "fixture",
+        "sell_status": "PRICED"
+      },
+      "quote": {
+        "close_reason": "fixture",
+        "counterparty": "fixture",
+        "label": "fixture",
+        "order_id": "fixture",
+        "price": "fixture",
+        "quantity": "fixture",
+        "role": "TAKER",
+        "side": "BUY",
+        "state": "PENDING"
+      },
+      "result": {
+        "allowed_side": "BUY",
+        "http_status": 1,
+        "label": "fixture",
+        "message": "fixture",
+        "never_sent": true,
+        "operation": "RFQ_CREATE",
+        "order_id": "fixture",
+        "request_id": "fixture",
+        "status": "SUCCESS"
+      },
+      "rfq": {
+        "close_reason": "FILLED",
+        "expires_at": 1,
+        "quantity": "fixture",
+        "state": "OPENED"
+      },
+      "rfq_id": "fixture",
+      "seq": 1,
+      "trade": {
+        "counterparty": "fixture",
+        "price": "fixture",
+        "quantity": "fixture",
+        "reason": "fixture",
+        "side": "BUY",
+        "state": "STARTED",
+        "trade_id": "fixture"
+      },
+      "type": "RFQ"
+    },
+    "specification": {
+      "rfq_id": "1",
+      "type": "rfq"
+    },
+    "template": null
+  },
+  "tradebusts": {
+    "channel": "tradebusts",
+    "payload": {
+      "account": "fixture",
+      "busted_fill_id": "fixture",
+      "created_at": 1
+    },
+    "specification": {
+      "type": "tradebusts"
+    },
+    "template": null
+  },
+  "trades": {
+    "channel": "trades.ETH-USD-PERP",
+    "specification": {
+      "market": "ETH-USD-PERP",
+      "type": "trades"
+    },
+    "template": 1
+  },
+  "transaction": {
+    "channel": "transaction",
+    "payload": {
+      "completed_at": 1,
+      "created_at": 1,
+      "hash": "fixture",
+      "id": "fixture",
+      "state": "ACCEPTED_ON_L1",
+      "type": "TRANSACTION_FILL"
+    },
+    "specification": {
+      "type": "transaction"
+    },
+    "template": null
+  },
+  "transfers": {
+    "channel": "transfers",
+    "payload": {
+      "account": "fixture",
+      "amount": "fixture",
+      "auto_withdrawal_fee": "fixture",
+      "bridge": "",
+      "counterparty": "fixture",
+      "created_at": 1,
+      "direction": "IN",
+      "external_account": "fixture",
+      "external_chain": "fixture",
+      "external_txn_hash": "fixture",
+      "failure_reason": "fixture",
+      "id": "fixture",
+      "kind": "DEPOSIT",
+      "last_updated_at": 1,
+      "socialized_loss_factor": "fixture",
+      "status": "PENDING",
+      "token": "fixture",
+      "txn_hash": "fixture",
+      "vault_address": "fixture",
+      "vault_unwind_completion_percentage": "fixture"
+    },
+    "specification": {
+      "type": "transfers"
+    },
+    "template": null
+  }
+}

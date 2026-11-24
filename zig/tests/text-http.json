@@ -1,0 +1,112 @@
+[
+  {
+    "venue": "dune",
+    "operation": "get_execution_results_csv",
+    "private": true,
+    "request": {
+      "execution_id": "exec-1",
+      "limit": 1
+    },
+    "path": "/api/v1/execution/exec-1/results/csv?limit=1",
+    "accept": "text/csv",
+    "body": "id,value\r\n1,\"a,b\"\r\n",
+    "headers": {
+      "X-Dune-Next-Offset": "18446744073709551615",
+      "X-Dune-Next-Uri": "/next"
+    },
+    "expected": {
+      "next_offset": 18446744073709551615,
+      "next_uri": "/next",
+      "data": "id,value\r\n1,\"a,b\"\r\n"
+    }
+  },
+  {
+    "venue": "dune",
+    "operation": "get_latest_query_results_csv",
+    "private": true,
+    "request": {
+      "query_id": 123,
+      "limit": 1
+    },
+    "path": "/api/v1/query/123/results/csv?limit=1",
+    "accept": "text/csv",
+    "body": "id,value\r\n1,\"a,b\"\r\n",
+    "headers": {
+      "X-Dune-Next-Offset": "18446744073709551615",
+      "X-Dune-Next-Uri": "/next"
+    },
+    "expected": {
+      "next_offset": 18446744073709551615,
+      "next_uri": "/next",
+      "data": "id,value\r\n1,\"a,b\"\r\n"
+    }
+  },
+  {
+    "venue": "pyth_pro",
+    "operation": "live",
+    "private": false,
+    "request": {},
+    "path": "/v1/live",
+    "accept": "application/json",
+    "body": "OK",
+    "headers": {
+      "Retry-After": "2"
+    },
+    "expected": {
+      "data": "OK",
+      "status": 200,
+      "headers": []
+    }
+  },
+  {
+    "venue": "pyth_pro",
+    "operation": "ready",
+    "private": false,
+    "request": {},
+    "path": "/v1/ready",
+    "accept": "application/json",
+    "body": "OK",
+    "headers": {
+      "Retry-After": "2"
+    },
+    "expected": {
+      "data": "OK",
+      "status": 200,
+      "headers": []
+    }
+  },
+  {
+    "venue": "pyth_hermes",
+    "operation": "live",
+    "private": false,
+    "request": {},
+    "path": "/live",
+    "accept": "application/json",
+    "body": "OK",
+    "headers": {
+      "Retry-After": "2"
+    },
+    "expected": {
+      "data": "OK",
+      "status": 200,
+      "headers": []
+    }
+  },
+  {
+    "venue": "pyth_hermes",
+    "operation": "ready",
+    "private": false,
+    "request": {},
+    "path": "/ready",
+    "accept": "application/json",
+    "body": "OK",
+    "headers": {
+      "Retry-After": "2"
+    },
+    "expected": {
+      "data": "OK",
+      "status": 200,
+      "headers": []
+    }
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "client": "ChainlinkDataStreamsClient",
+  "fixture": "data-http",
+  "oracle": true,
+  "aliases": {},
+  "strict": ["DiscoveryRequest","NativeResponse","ReportRequest","LatestReportRequest","BulkReportsRequest","ReportPageRequest"],
+  "models": {
+    "DiscoveryRequest": [["base_asset","base_asset","Option<String>","default"],["quote_asset","quote_asset","Option<String>","default"],["asset_class","asset_class","Option<String>","default"],["feed_type","feed_type","Option<String>","default"],["attribute_type","attribute_type","Option<String>","default"],["status","status","Option<String>","default"],["network_type","network_type","Option<String>","default"],["created_after","created_after","Option<String>","default"],["created_before","created_before","Option<String>","default"],["expected_decommission_after","expected_decommission_after","Option<String>","default"],["expected_decommission_before","expected_decommission_before","Option<String>","default"],["decommissioned_after","decommissioned_after","Option<String>","default"],["decommissioned_before","decommissioned_before","Option<String>","default"],["hidden","hidden","Option<bool>","default"]],
+    "NativeResponse": [["status","status","u16","required"],["headers","headers","Vec<[String;2]>","required"],["data","data","serde_json::Value","required"]],
+    "ReportRequest": [["feedID","feed_id","String","required"],["timestamp","timestamp","u64","required"]],
+    "LatestReportRequest": [["feedID","feed_id","String","required"]],
+    "BulkReportsRequest": [["feedIDs","feed_ids","Vec<String>","required"],["timestamp","timestamp","u64","required"]],
+    "ReportPageRequest": [["feedID","feed_id","String","required"],["startTimestamp","start_timestamp","u64","required"],["limit","limit","Option<u32>","default"]]
+  },
+  "methods": {
+    "discovery": ["DiscoveryRequest","NativeResponse"],
+    "report": ["ReportRequest","NativeResponse"],
+    "latest_report": ["LatestReportRequest","NativeResponse"],
+    "bulk_reports": ["BulkReportsRequest","NativeResponse"],
+    "report_page": ["ReportPageRequest","NativeResponse"]
+  }
+}

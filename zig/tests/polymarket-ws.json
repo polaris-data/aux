@@ -1,0 +1,283 @@
+[
+  {
+    "service": "market",
+    "params": {
+      "assets_ids": [
+        "65818619657568813474341868652308942079804919287380422192892211131408793125422",
+        "52114319501245915516055106046884209969926127482827954674443846427813813222426"
+      ]
+    },
+    "subscribe": {
+      "assets_ids": [
+        "65818619657568813474341868652308942079804919287380422192892211131408793125422",
+        "52114319501245915516055106046884209969926127482827954674443846427813813222426"
+      ],
+      "type": "market",
+      "custom_feature_enabled": true
+    },
+    "event": [
+      {
+        "event_type": "book",
+        "asset_id": "65818619657568813474341868652308942079804919287380422192892211131408793125422",
+        "market": "0xbd31dc8a20211944f6b70f31557f1001557b59905b7738480ca09bd4532f84af",
+        "bids": [
+          {
+            "price": "0.48",
+            "size": "30"
+          },
+          {
+            "price": "0.49",
+            "size": "20"
+          },
+          {
+            "price": "0.50",
+            "size": "15"
+          }
+        ],
+        "asks": [
+          {
+            "price": "0.52",
+            "size": "25"
+          },
+          {
+            "price": "0.53",
+            "size": "60"
+          },
+          {
+            "price": "0.54",
+            "size": "10"
+          }
+        ],
+        "timestamp": "1757908892351",
+        "hash": "0xabc123..."
+      }
+    ],
+    "login": null,
+    "ack": null
+  },
+  {
+    "service": "sports",
+    "params": {},
+    "subscribe": null,
+    "event": {
+      "slug": "mci-liv-2025-02-03",
+      "live": true,
+      "ended": false,
+      "score": "1-0",
+      "period": "1H",
+      "elapsed": "32:15",
+      "last_update": "2025-02-03T19:50:16.939Z"
+    },
+    "login": null,
+    "ack": null
+  },
+  {
+    "service": "rtds",
+    "params": {
+      "topic": "equity_prices",
+      "type": "update"
+    },
+    "subscribe": {
+      "action": "subscribe",
+      "subscriptions": [
+        {
+          "topic": "equity_prices",
+          "type": "update"
+        }
+      ]
+    },
+    "event": {
+      "topic": "equity_prices",
+      "type": "update",
+      "timestamp": 1,
+      "payload": {
+        "symbol": "fixture",
+        "timestamp": 1,
+        "value": null,
+        "full_accuracy_value": "fixture",
+        "received_at": 1,
+        "is_carried_forward": true
+      }
+    },
+    "login": null,
+    "ack": null
+  },
+  {
+    "service": "user",
+    "params": {},
+    "subscribe": {
+      "type": "user",
+      "markets": [],
+      "auth": {
+        "apiKey": "fixture",
+        "secret": "c2VjcmV0",
+        "passphrase": "fixture-pass"
+      }
+    },
+    "event": {
+      "event_type": "order",
+      "id": "0xff354cd7ca7539dfa9c28d90943ab5779a4eac34b9b37a757d7b32bdfb11790b",
+      "owner": "9180014b-33c8-9240-a14b-bdca11c0a465",
+      "market": "0xbd31dc8a20211944f6b70f31557f1001557b59905b7738480ca09bd4532f84af",
+      "asset_id": "52114319501245915516055106046884209969926127482827954674443846427813813222426",
+      "side": "SELL",
+      "order_owner": "9180014b-33c8-9240-a14b-bdca11c0a465",
+      "original_size": "10",
+      "size_matched": "0",
+      "price": "0.57",
+      "associate_trades": null,
+      "outcome": "YES",
+      "type": "PLACEMENT",
+      "created_at": "1672290687",
+      "expiration": "1234567",
+      "order_type": "GTD",
+      "status": "LIVE",
+      "maker_address": "0x1234...",
+      "timestamp": "1672290687"
+    },
+    "login": null,
+    "ack": null
+  },
+  {
+    "service": "polybolt",
+    "params": {
+      "channel": "price.crypto",
+      "filter": {
+        "symbol": "btcusd"
+      }
+    },
+    "subscribe": {
+      "op": "subscribe",
+      "subscriptions": [
+        {
+          "channel": "price.crypto",
+          "filter": {
+            "symbol": "btcusd"
+          }
+        }
+      ]
+    },
+    "event": {
+      "v": 1,
+      "channel": "price.crypto",
+      "seq": 1,
+      "ts": 1788973000000,
+      "snapshot": true,
+      "payload": {
+        "symbol": "btcusd",
+        "source": "pyth",
+        "data": [
+          {
+            "timestamp": 1788972880000,
+            "value": 64123.5,
+            "full_accuracy_value": "64123.50000000"
+          },
+          {
+            "timestamp": 1788972881000,
+            "value": 64125.1,
+            "full_accuracy_value": "64125.10000000"
+          }
+        ]
+      }
+    },
+    "login": {
+      "op": "auth",
+      "auth": {
+        "apiKey": "fixture",
+        "secret": "c2VjcmV0",
+        "passphrase": "fixture-pass"
+      }
+    },
+    "ack": {
+      "op": "authed"
+    }
+  },
+  {
+    "service": "perps",
+    "params": {
+      "channel": "trades::1"
+    },
+    "subscribe": {
+      "id": 1,
+      "req": "sub",
+      "chs": [
+        "trades::1"
+      ]
+    },
+    "event": {
+      "ch": "trades::1",
+      "ts": 1767225600000,
+      "sq": 1234567890,
+      "data": [
+        {
+          "tid": 1,
+          "iid": 1,
+          "side": "long",
+          "p": "100.00",
+          "qty": "10.00",
+          "ts": 1767225600000,
+          "hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+          "settlement": true
+        }
+      ]
+    },
+    "login": {
+      "id": 0,
+      "req": "post",
+      "op": {
+        "type": "auth",
+        "args": {
+          "proxy": "0x2121212121212121212121212121212121212121",
+          "secret": "fixture-secret"
+        }
+      }
+    },
+    "ack": {
+      "id": 0,
+      "data": {
+        "status": "ok"
+      }
+    }
+  },
+  {
+    "service": "rfq",
+    "params": {},
+    "subscribe": null,
+    "event": {
+      "type": "RFQ_REQUEST",
+      "rfq_id": "rfq_<id>",
+      "requestor_public_id": "req_<public_id>",
+      "leg_position_ids": [
+        "<leg_position_id_1>",
+        "<leg_position_id_2>"
+      ],
+      "condition_id": "0x<condition_id>",
+      "yes_position_id": "<yes_position_id>",
+      "no_position_id": "<no_position_id>",
+      "direction": "BUY",
+      "side": "YES",
+      "requested_size": {
+        "unit": "notional",
+        "value_e6": "1000000"
+      },
+      "submission_deadline": 1780575184000
+    },
+    "login": {
+      "type": "auth",
+      "auth": {
+        "apiKey": "fixture",
+        "secret": "c2VjcmV0",
+        "passphrase": "fixture-pass"
+      },
+      "identity": {
+        "signer_address": "0x2121212121212121212121212121212121212121",
+        "maker_address": "0x2121212121212121212121212121212121212121",
+        "signature_type": 0
+      }
+    },
+    "ack": {
+      "type": "auth",
+      "success": true
+    }
+  }
+]

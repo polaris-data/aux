@@ -1,0 +1,49 @@
+{
+  "reference": "tradeparadex/paradex-py@4ae46b533fc99dbf5fbf33b46611c829fa38b12a",
+  "key": "0x0000000000000000000000000000000000000000000000000000000000000001",
+  "address": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "class_hash": "0x123456",
+  "account": "0x612c66efeb251c4e0489f1950298695a9cd2bf29015d0b9ff3f0b827a0f8d1",
+  "vectors": [
+    {
+      "network": "testnet",
+      "purpose": "Paradex Auth",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "issued_at": "2026-11-03T12:46:40Z",
+      "expiration": "2026-11-03T12:51:40Z",
+      "message": "app.testnet.paradex.trade wants you to sign in with your Ethereum account:\n0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf\n\nParadex Auth\n\nURI: https://app.testnet.paradex.trade\nVersion: 1\nChain ID: 11155111\nNonce: 0123456789abcdef0123456789abcdef\nIssued At: 2026-11-03T12:46:40Z\nExpiration Time: 2026-11-03T12:51:40Z",
+      "digest": "0x036b15cad3c0fc685b44bf179b39bf368193157b55dc1b62a872094ca6e752f9",
+      "signature": "0xbd010c2577d58cfb5a34e348b5d19d20d42eb304f8708c7040ad2e1b2b6d16364001185f350bf48d3b93c2b6ec797c27c0c22f9e42af131aadd46333d24cbfa61c"
+    },
+    {
+      "network": "testnet",
+      "purpose": "Paradex Onboarding",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "issued_at": "2026-11-03T12:46:40Z",
+      "expiration": null,
+      "message": "app.testnet.paradex.trade wants you to sign in with your Ethereum account:\n0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf\n\nParadex Onboarding\n\nURI: https://app.testnet.paradex.trade\nVersion: 1\nChain ID: 11155111\nNonce: 0123456789abcdef0123456789abcdef\nIssued At: 2026-11-03T12:46:40Z",
+      "digest": "0x1609fce082089f2e0730b125bd3064e01aeb59b8baff17e01685b86b88dbfe1e",
+      "signature": "0xc66f087d99d7026b0b7a98f94040881a36e3cc338946a7e8a8fa4caf53f5b79e2ea9901aca611ff755e83ccb66330c869c9998c1e6f8f50929ecacc5e19204421b"
+    },
+    {
+      "network": "mainnet",
+      "purpose": "Paradex Auth",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "issued_at": "2026-11-03T12:46:40Z",
+      "expiration": "2026-11-03T12:51:40Z",
+      "message": "app.paradex.trade wants you to sign in with your Ethereum account:\n0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf\n\nParadex Auth\n\nURI: https://app.paradex.trade\nVersion: 1\nChain ID: 1\nNonce: 0123456789abcdef0123456789abcdef\nIssued At: 2026-11-03T12:46:40Z\nExpiration Time: 2026-11-03T12:51:40Z",
+      "digest": "0x3256810ea0e47f09bc525dafa47c1eaa6f7e83283209f1fba45602dfd8ae0c93",
+      "signature": "0x53e1dae46a57b8d00231178b7bbd62adfdcd420d12860bbadddf6325001212d83dbdafe984d3f2919ea5f8c3308039ae0bc45a331771ac41d775f1296b1a45481c"
+    },
+    {
+      "network": "mainnet",
+      "purpose": "Paradex Onboarding",
+      "nonce": "0123456789abcdef0123456789abcdef",
+      "issued_at": "2026-11-03T12:46:40Z",
+      "expiration": null,
+      "message": "app.paradex.trade wants you to sign in with your Ethereum account:\n0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf\n\nParadex Onboarding\n\nURI: https://app.paradex.trade\nVersion: 1\nChain ID: 1\nNonce: 0123456789abcdef0123456789abcdef\nIssued At: 2026-11-03T12:46:40Z",
+      "digest": "0x52decc3a6a640fa844a26c18464bf2ff4b7b5e1f7f58272f2f98820ccb177ffb",
+      "signature": "0xc74e627deb595210c333c18f4f65ebc6d657fa537fb7cc8756de28a063b236b93fad9271bdd8b8a94be216ff9103c96d9f2a131bad3af0416d12f098d27913cc1b"
+    }
+  ]
+}

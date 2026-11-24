@@ -1,0 +1,9 @@
+/.zig-cache/
+/zig-out/
+/target/
+/dist/
+node_modules/
+/sdk/typescript/*.node
+/sdk/typescript/*.tgz
+/sdk/typescript/native.*
+__pycache__/

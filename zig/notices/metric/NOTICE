@@ -1,0 +1,3 @@
+Metric reference materials
+
+Source packages, commits, artifact hashes and normalization rules are recorded in API_SOURCES.json. Official SDK 0.7.0 and periphery/pusher helpers are MIT-licensed. Contract repositories contain MIT and BUSL-1.1 sources; the original notices and license texts are preserved under notices/. Generated ABI interfaces describe those pinned sources. The official SDK is a compatibility/generation reference and is not a runtime dependency.

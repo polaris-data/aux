@@ -1,0 +1,136 @@
+{
+  "allMids": {
+    "specification": {
+      "channel": "allMids"
+    },
+    "private": false,
+    "frame": {
+      "channel": "allMids",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "exchange": {
+    "specification": {
+      "channel": "exchange"
+    },
+    "private": false,
+    "frame": {
+      "channel": "exchange",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "fundingRate": {
+    "specification": {
+      "channel": "fundingRate",
+      "symbol": "SOL"
+    },
+    "private": false,
+    "frame": {
+      "channel": "fundingRate",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "orderbook": {
+    "specification": {
+      "channel": "orderbook",
+      "symbol": "SOL"
+    },
+    "private": false,
+    "frame": {
+      "channel": "orderbook",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "traderState": {
+    "specification": {
+      "channel": "traderState",
+      "authority": "11111111111111111111111111111111",
+      "traderPdaIndex": 0
+    },
+    "private": false,
+    "frame": {
+      "channel": "traderState",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "market": {
+    "specification": {
+      "channel": "market",
+      "symbol": "SOL"
+    },
+    "private": false,
+    "frame": {
+      "channel": "market",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "trades": {
+    "specification": {
+      "channel": "trades",
+      "symbol": "SOL"
+    },
+    "private": false,
+    "frame": {
+      "channel": "trades",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "candles": {
+    "specification": {
+      "channel": "candles",
+      "symbol": "SOL",
+      "timeframe": "1m"
+    },
+    "private": false,
+    "frame": {
+      "channel": "candles",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  },
+  "notifications": {
+    "specification": {
+      "channel": "notifications"
+    },
+    "private": true,
+    "frame": {
+      "channel": "notifications",
+      "messageType": "snapshot",
+      "sequenceNumber": 1,
+      "future_field": {
+        "exact": "0.1234567890123456789012345"
+      }
+    }
+  }
+}

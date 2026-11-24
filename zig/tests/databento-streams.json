@@ -1,0 +1,9 @@
+[
+  {"client":"HistoricalClient","operation":"download","path":"/files/batch?sig=a%2Fb","accept":"application/json"},
+  {"client":"HistoricalClient","operation":"timeseries","path":"/v0/timeseries.get_range","accept":"application/octet-stream"},
+  {"client":"HistoricalClient","operation":"get_range","path":"/v0/timeseries.get_range","accept":"application/octet-stream"},
+  {"client":"ReferenceClient","operation":"security_master_get_range","path":"/v0/security_master.get_range","accept":"application/json"},
+  {"client":"ReferenceClient","operation":"security_master_get_last","path":"/v0/security_master.get_last","accept":"application/json"},
+  {"client":"ReferenceClient","operation":"corporate_actions_get_range","path":"/v0/corporate_actions.get_range","accept":"application/json"},
+  {"client":"ReferenceClient","operation":"adjustment_factors_get_range","path":"/v0/adjustment_factors.get_range","accept":"application/json"}
+]

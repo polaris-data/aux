@@ -1,0 +1,641 @@
+[
+  {
+    "record": {
+      "action": "N",
+      "channel_id": 255,
+      "flags": 0,
+      "hd": {
+        "instrument_id": 1,
+        "publisher_id": 0,
+        "rtype": 160,
+        "ts_event": "1704067200000000123"
+      },
+      "order_id": "0",
+      "price": "9223372036854775807",
+      "sequence": 0,
+      "side": "N",
+      "size": 0,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "mbo"
+  },
+  {
+    "record": {
+      "action": "N",
+      "depth": 0,
+      "flags": 0,
+      "hd": {
+        "instrument_id": 2,
+        "publisher_id": 0,
+        "rtype": 0,
+        "ts_event": "1704067200000000123"
+      },
+      "price": "123456789123",
+      "sequence": 4294967295,
+      "side": "N",
+      "size": 3,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "trades"
+  },
+  {
+    "record": {
+      "action": "N",
+      "depth": 0,
+      "flags": 0,
+      "hd": {
+        "instrument_id": 3,
+        "publisher_id": 0,
+        "rtype": 1,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "sequence": 0,
+      "side": "N",
+      "size": 0,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "mbp-1"
+  },
+  {
+    "record": {
+      "action": "N",
+      "depth": 0,
+      "flags": 0,
+      "hd": {
+        "instrument_id": 4,
+        "publisher_id": 0,
+        "rtype": 10,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        },
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "sequence": 0,
+      "side": "N",
+      "size": 0,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "mbp-10"
+  },
+  {
+    "record": {
+      "action": "N",
+      "depth": 0,
+      "flags": 0,
+      "hd": {
+        "instrument_id": 5,
+        "publisher_id": 0,
+        "rtype": 1,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "sequence": 0,
+      "side": "N",
+      "size": 0,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "tbbo"
+  },
+  {
+    "record": {
+      "activation": "18446744073709551615",
+      "appl_id": 32767,
+      "asset": "",
+      "cfi": "",
+      "channel_id": 65535,
+      "contract_multiplier": 2147483647,
+      "contract_multiplier_unit": 127,
+      "currency": "",
+      "decay_quantity": 2147483647,
+      "decay_start_date": 65535,
+      "display_factor": "9223372036854775807",
+      "exchange": "",
+      "expiration": "18446744073709551615",
+      "flow_schedule_type": 127,
+      "group": "",
+      "hd": {
+        "instrument_id": 6,
+        "publisher_id": 0,
+        "rtype": 19,
+        "ts_event": "1704067200000000123"
+      },
+      "high_limit_price": "9223372036854775807",
+      "inst_attrib_value": 2147483647,
+      "instrument_class": null,
+      "leg_count": 0,
+      "leg_delta": "9223372036854775807",
+      "leg_index": 0,
+      "leg_instrument_class": null,
+      "leg_instrument_id": 0,
+      "leg_price": "9223372036854775807",
+      "leg_ratio_price_denominator": 0,
+      "leg_ratio_price_numerator": 0,
+      "leg_ratio_qty_denominator": 0,
+      "leg_ratio_qty_numerator": 0,
+      "leg_raw_symbol": "",
+      "leg_side": "N",
+      "leg_underlying_id": 0,
+      "low_limit_price": "9223372036854775807",
+      "main_fraction": 255,
+      "market_depth": 2147483647,
+      "market_depth_implied": 2147483647,
+      "market_segment_id": 4294967295,
+      "match_algorithm": " ",
+      "maturity_day": 255,
+      "maturity_month": 255,
+      "maturity_week": 255,
+      "maturity_year": 65535,
+      "max_price_variation": "9223372036854775807",
+      "max_trade_vol": 4294967295,
+      "min_lot_size": 2147483647,
+      "min_lot_size_block": 2147483647,
+      "min_lot_size_round_lot": 2147483647,
+      "min_price_increment": "9223372036854775807",
+      "min_price_increment_amount": "9223372036854775807",
+      "min_trade_vol": 4294967295,
+      "original_contract_size": 2147483647,
+      "price_display_format": 255,
+      "price_ratio": "9223372036854775807",
+      "raw_instrument_id": "0",
+      "raw_symbol": "",
+      "secsubtype": "",
+      "security_type": "",
+      "security_update_action": "A",
+      "settl_currency": "",
+      "strike_price": "9223372036854775807",
+      "strike_price_currency": "",
+      "sub_fraction": 255,
+      "tick_rule": 255,
+      "ts_recv": "18446744073709551615",
+      "underlying": "",
+      "underlying_id": 0,
+      "underlying_product": 255,
+      "unit_of_measure": "",
+      "unit_of_measure_qty": "9223372036854775807",
+      "user_defined_instrument": "N"
+    },
+    "schema": "definition"
+  },
+  {
+    "record": {
+      "channel_id": 65535,
+      "hd": {
+        "instrument_id": 7,
+        "publisher_id": 0,
+        "rtype": 24,
+        "ts_event": "1704067200000000123"
+      },
+      "price": "9223372036854775807",
+      "quantity": "9223372036854775807",
+      "sequence": 0,
+      "stat_flags": 0,
+      "stat_type": 0,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615",
+      "ts_ref": "18446744073709551615",
+      "update_action": 1
+    },
+    "schema": "statistics"
+  },
+  {
+    "record": {
+      "action": 0,
+      "hd": {
+        "instrument_id": 8,
+        "publisher_id": 0,
+        "rtype": 18,
+        "ts_event": "1704067200000000123"
+      },
+      "is_quoting": "~",
+      "is_short_sell_restricted": "~",
+      "is_trading": "~",
+      "reason": 0,
+      "trading_event": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "status"
+  },
+  {
+    "record": {
+      "auct_interest_clr_price": "9223372036854775807",
+      "auction_status": 0,
+      "auction_time": "18446744073709551615",
+      "auction_type": "~",
+      "cont_book_clr_price": "9223372036854775807",
+      "freeze_status": 0,
+      "hd": {
+        "instrument_id": 9,
+        "publisher_id": 0,
+        "rtype": 20,
+        "ts_event": "1704067200000000123"
+      },
+      "ind_match_price": "9223372036854775807",
+      "lower_collar": "9223372036854775807",
+      "market_imbalance_qty": 4294967295,
+      "num_extensions": 0,
+      "paired_qty": 4294967295,
+      "ref_price": "9223372036854775807",
+      "side": "N",
+      "significant_imbalance": "~",
+      "ssr_filling_price": "9223372036854775807",
+      "total_imbalance_qty": 4294967295,
+      "ts_recv": "18446744073709551615",
+      "unpaired_qty": 4294967295,
+      "unpaired_side": "N",
+      "upper_collar": "9223372036854775807"
+    },
+    "schema": "imbalance"
+  },
+  {
+    "record": {
+      "action": "N",
+      "flags": 0,
+      "hd": {
+        "instrument_id": 10,
+        "publisher_id": 0,
+        "rtype": 177,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_pb": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_pb": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "side": "N",
+      "size": 0,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "cmbp-1"
+  },
+  {
+    "record": {
+      "action": "N",
+      "flags": 0,
+      "hd": {
+        "instrument_id": 11,
+        "publisher_id": 0,
+        "rtype": 194,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_pb": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_pb": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "side": "N",
+      "size": 0,
+      "ts_in_delta": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "tcbbo"
+  },
+  {
+    "record": {
+      "code": 255,
+      "err": "",
+      "hd": {
+        "instrument_id": 12,
+        "publisher_id": 0,
+        "rtype": 21,
+        "ts_event": "1704067200000000123"
+      },
+      "is_last": 255
+    },
+    "schema": "error"
+  },
+  {
+    "record": {
+      "code": 255,
+      "hd": {
+        "instrument_id": 13,
+        "publisher_id": 0,
+        "rtype": 23,
+        "ts_event": "1704067200000000123"
+      },
+      "msg": ""
+    },
+    "schema": "system"
+  },
+  {
+    "record": {
+      "end_ts": "18446744073709551615",
+      "hd": {
+        "instrument_id": 14,
+        "publisher_id": 0,
+        "rtype": 22,
+        "ts_event": "1704067200000000123"
+      },
+      "start_ts": "18446744073709551615",
+      "stype_in": 255,
+      "stype_in_symbol": "",
+      "stype_out": 255,
+      "stype_out_symbol": ""
+    },
+    "schema": "symbol_mapping"
+  },
+  {
+    "record": {
+      "close": "9223372036854775807",
+      "hd": {
+        "instrument_id": 15,
+        "publisher_id": 0,
+        "rtype": 32,
+        "ts_event": "1704067200000000123"
+      },
+      "high": "9223372036854775807",
+      "low": "9223372036854775807",
+      "open": "9223372036854775807",
+      "volume": "0"
+    },
+    "schema": "ohlcv-1s"
+  },
+  {
+    "record": {
+      "close": "9223372036854775807",
+      "hd": {
+        "instrument_id": 16,
+        "publisher_id": 0,
+        "rtype": 33,
+        "ts_event": "1704067200000000123"
+      },
+      "high": "9223372036854775807",
+      "low": "9223372036854775807",
+      "open": "9223372036854775807",
+      "volume": "0"
+    },
+    "schema": "ohlcv-1m"
+  },
+  {
+    "record": {
+      "close": "9223372036854775807",
+      "hd": {
+        "instrument_id": 17,
+        "publisher_id": 0,
+        "rtype": 34,
+        "ts_event": "1704067200000000123"
+      },
+      "high": "9223372036854775807",
+      "low": "9223372036854775807",
+      "open": "9223372036854775807",
+      "volume": "0"
+    },
+    "schema": "ohlcv-1h"
+  },
+  {
+    "record": {
+      "close": "9223372036854775807",
+      "hd": {
+        "instrument_id": 18,
+        "publisher_id": 0,
+        "rtype": 35,
+        "ts_event": "1704067200000000123"
+      },
+      "high": "9223372036854775807",
+      "low": "9223372036854775807",
+      "open": "9223372036854775807",
+      "volume": "0"
+    },
+    "schema": "ohlcv-1d"
+  },
+  {
+    "record": {
+      "close": "9223372036854775807",
+      "hd": {
+        "instrument_id": 19,
+        "publisher_id": 0,
+        "rtype": 36,
+        "ts_event": "1704067200000000123"
+      },
+      "high": "9223372036854775807",
+      "low": "9223372036854775807",
+      "open": "9223372036854775807",
+      "volume": "0"
+    },
+    "schema": "ohlcv-eod"
+  },
+  {
+    "record": {
+      "flags": 0,
+      "hd": {
+        "instrument_id": 20,
+        "publisher_id": 0,
+        "rtype": 195,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "sequence": 0,
+      "side": "N",
+      "size": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "bbo-1s"
+  },
+  {
+    "record": {
+      "flags": 0,
+      "hd": {
+        "instrument_id": 21,
+        "publisher_id": 0,
+        "rtype": 196,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_ct": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_ct": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "sequence": 0,
+      "side": "N",
+      "size": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "bbo-1m"
+  },
+  {
+    "record": {
+      "flags": 0,
+      "hd": {
+        "instrument_id": 22,
+        "publisher_id": 0,
+        "rtype": 192,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_pb": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_pb": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "side": "N",
+      "size": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "cbbo-1s"
+  },
+  {
+    "record": {
+      "flags": 0,
+      "hd": {
+        "instrument_id": 23,
+        "publisher_id": 0,
+        "rtype": 193,
+        "ts_event": "1704067200000000123"
+      },
+      "levels": [
+        {
+          "ask_pb": 0,
+          "ask_px": "9223372036854775807",
+          "ask_sz": 0,
+          "bid_pb": 0,
+          "bid_px": "9223372036854775807",
+          "bid_sz": 0
+        }
+      ],
+      "price": "9223372036854775807",
+      "side": "N",
+      "size": 0,
+      "ts_recv": "18446744073709551615"
+    },
+    "schema": "cbbo-1m"
+  }
+]

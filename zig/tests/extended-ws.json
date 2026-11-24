@@ -1,0 +1,374 @@
+{
+  "orderbooks": {
+    "specification": {
+      "channel": "orderbooks",
+      "market": "BTC-USD",
+      "rpc": false,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v1/orderbooks/BTC-USD",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "rfq_orderbooks": {
+    "specification": {
+      "channel": "rfq_orderbooks",
+      "market": "BTC-USD",
+      "rpc": false,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v1/orderbooks/rfq/BTC-USD",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "trades": {
+    "specification": {
+      "channel": "trades",
+      "market": "BTC-USD",
+      "rpc": false,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v1/publicTrades/BTC-USD",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "funding": {
+    "specification": {
+      "channel": "funding",
+      "market": "BTC-USD",
+      "rpc": false,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v1/funding/BTC-USD",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "candles": {
+    "specification": {
+      "channel": "candles",
+      "market": "BTC-USD",
+      "rpc": false,
+      "params": {
+        "candle_type": "trades",
+        "interval": "PT1M"
+      }
+    },
+    "private": false,
+    "path": "/v1/candles/BTC-USD/trades?interval=PT1M",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "mark_price": {
+    "specification": {
+      "channel": "mark_price",
+      "market": "BTC-USD",
+      "rpc": false,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v1/prices/mark/BTC-USD",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "index_price": {
+    "specification": {
+      "channel": "index_price",
+      "market": "BTC-USD",
+      "rpc": false,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v1/prices/index/BTC-USD",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "account": {
+    "specification": {
+      "channel": "account",
+      "market": null,
+      "rpc": false,
+      "params": {}
+    },
+    "private": true,
+    "path": "/v1/account",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      }
+    }
+  },
+  "orderbooks_rpc": {
+    "specification": {
+      "channel": "orderbooks",
+      "market": "BTC-USD",
+      "rpc": true,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "orderbooks.BTC-USD"
+    }
+  },
+  "rfq_orderbooks_rpc": {
+    "specification": {
+      "channel": "rfq_orderbooks",
+      "market": "BTC-USD",
+      "rpc": true,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "orderbooks.BTC-USD.rfq"
+    }
+  },
+  "trades_rpc": {
+    "specification": {
+      "channel": "trades",
+      "market": "BTC-USD",
+      "rpc": true,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "trades.BTC-USD"
+    }
+  },
+  "funding_rpc": {
+    "specification": {
+      "channel": "funding",
+      "market": "BTC-USD",
+      "rpc": true,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "funding-rates.BTC-USD"
+    }
+  },
+  "candles_rpc": {
+    "specification": {
+      "channel": "candles",
+      "market": "BTC-USD",
+      "rpc": true,
+      "params": {
+        "selector": {
+          "type": "last",
+          "interval": "PT1M"
+        }
+      }
+    },
+    "private": false,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "candles.last.BTC-USD.PT1M"
+    }
+  },
+  "mark_price_rpc": {
+    "specification": {
+      "channel": "mark_price",
+      "market": "BTC-USD",
+      "rpc": true,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "prices.mark.BTC-USD"
+    }
+  },
+  "index_price_rpc": {
+    "specification": {
+      "channel": "index_price",
+      "market": "BTC-USD",
+      "rpc": true,
+      "params": {}
+    },
+    "private": false,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "prices.index.BTC-USD"
+    }
+  },
+  "account_rpc": {
+    "specification": {
+      "channel": "account",
+      "market": null,
+      "rpc": true,
+      "params": {
+        "selector": {
+          "account": "10002"
+        }
+      }
+    },
+    "private": true,
+    "path": "/v2/rpc",
+    "frame": {
+      "type": "SNAPSHOT",
+      "seq": 1,
+      "data": {
+        "m": "BTC-USD",
+        "b": [],
+        "a": [],
+        "future_field": {
+          "exact": "0.1234567890123456789012345"
+        }
+      },
+      "subscription": "account.10002"
+    }
+  }
+}

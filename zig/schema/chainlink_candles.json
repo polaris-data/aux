@@ -1,0 +1,22 @@
+{
+  "client": "ChainlinkCandlestickClient",
+  "fixture": "data-http",
+  "oracle": true,
+  "aliases": {},
+  "strict": ["AuthorizeRequest","NativeResponse","SymbolInfoRequest","GroupsRequest","CandleHistoryRequest","CandleHistoryRowsRequest"],
+  "models": {
+    "AuthorizeRequest": [["login","login","String","required"],["password","password","String","required"]],
+    "NativeResponse": [["status","status","u16","required"],["headers","headers","Vec<[String;2]>","required"],["data","data","serde_json::Value","required"]],
+    "SymbolInfoRequest": [["group","group","Option<String>","default"]],
+    "GroupsRequest": [],
+    "CandleHistoryRequest": [["symbol","symbol","String","required"],["resolution","resolution","String","required"],["from","from","u64","required"],["to","to","u64","required"]],
+    "CandleHistoryRowsRequest": [["symbol","symbol","String","required"],["resolution","resolution","String","required"],["from","from","u64","required"],["to","to","u64","required"]]
+  },
+  "methods": {
+    "authorize": ["AuthorizeRequest","NativeResponse"],
+    "symbol_info": ["SymbolInfoRequest","NativeResponse"],
+    "groups": ["GroupsRequest","NativeResponse"],
+    "candle_history": ["CandleHistoryRequest","NativeResponse"],
+    "candle_history_rows": ["CandleHistoryRowsRequest","NativeResponse"]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "client": "PythProClient",
+  "fixture": "data-http",
+  "oracle": true,
+  "aliases": {},
+  "strict": ["LiveRequest","HealthResponse","ReadyRequest","SymbolsRequest","NativeResponse","ConfigRequest","SearchRequest","ResolveSymbolRequest","HistoryRequest","PriceRequest","PriceRangeRequest","PublisherUpdatesRequest","LatestPriceRequest","PriceAtTimestampRequest","ReducePriceRequest","PublisherStakeCapsRequest","GuardianSetUpgradeRequest"],
+  "models": {
+    "LiveRequest": [],
+    "HealthResponse": [["status","status","u16","required"],["headers","headers","Vec<[String;2]>","required"],["data","data","String","required"]],
+    "ReadyRequest": [],
+    "SymbolsRequest": [["query","query","Option<String>","default"],["asset_type","asset_type","Option<Vec<String>>","default"],["instrument_type","instrument_type","Option<Vec<String>>","default"],["symbol_chain_id","symbol_chain_id","Option<Vec<String>>","default"],["entitled_only","entitled_only","Option<bool>","default"]],
+    "NativeResponse": [["status","status","u16","required"],["headers","headers","Vec<[String;2]>","required"],["data","data","serde_json::Value","required"]],
+    "ConfigRequest": [["channel","channel","String","required"]],
+    "SearchRequest": [["channel","channel","String","required"],["query","query","String","required"],["type","r#type","Option<String>","default"],["exchange","exchange","Option<String>","default"],["limit","limit","Option<u32>","default"]],
+    "ResolveSymbolRequest": [["channel","channel","String","required"],["symbol","symbol","String","required"]],
+    "HistoryRequest": [["channel","channel","String","required"],["symbol","symbol","String","required"],["from","from","u64","required"],["to","to","u64","required"],["resolution","resolution","String","required"],["split_adjusted","split_adjusted","Option<bool>","default"]],
+    "PriceRequest": [["channel","channel","String","required"],["ids","ids","Vec<u32>","required"],["timestamp","timestamp","u64","required"],["split_adjusted","split_adjusted","Option<bool>","default"]],
+    "PriceRangeRequest": [["channel","channel","String","required"],["ids","ids","Vec<u32>","required"],["start_timestamp","start_timestamp","u64","required"],["end_timestamp","end_timestamp","u64","required"],["limit","limit","Option<u32>","default"],["after","after","Option<String>","default"],["split_adjusted","split_adjusted","Option<bool>","default"]],
+    "PublisherUpdatesRequest": [["price_feed_id","price_feed_id","Option<Vec<u32>>","default"],["min_timestamp","min_timestamp","Option<String>","default"],["max_timestamp","max_timestamp","Option<String>","default"],["status","status","Option<String>","default"],["status_reason","status_reason","Option<String>","default"],["status_reason_unset","status_reason_unset","Option<bool>","default"],["sort","sort","String","required"],["limit","limit","Option<u32>","default"]],
+    "LatestPriceRequest": [["channel","channel","String","required"],["priceFeedIds","price_feed_ids","Option<Vec<u32>>","default"],["properties","properties","Option<Vec<String>>","default"],["formats","formats","Vec<String>","required"],["parsed","parsed","Option<bool>","default"],["jsonBinaryEncoding","json_binary_encoding","Option<String>","default"],["symbols","symbols","Option<Vec<String>>","default"]],
+    "PriceAtTimestampRequest": [["channel","channel","String","required"],["priceFeedIds","price_feed_ids","Option<Vec<u32>>","default"],["properties","properties","Option<Vec<String>>","default"],["formats","formats","Vec<String>","required"],["parsed","parsed","Option<bool>","default"],["jsonBinaryEncoding","json_binary_encoding","Option<String>","default"],["timestamp","timestamp","u64","required"],["symbols","symbols","Option<Vec<String>>","default"]],
+    "ReducePriceRequest": [["payload","payload","serde_json::Value","required"],["priceFeedIds","price_feed_ids","Vec<u32>","required"]],
+    "PublisherStakeCapsRequest": [],
+    "GuardianSetUpgradeRequest": []
+  },
+  "methods": {
+    "live": ["LiveRequest","HealthResponse"],
+    "ready": ["ReadyRequest","HealthResponse"],
+    "symbols": ["SymbolsRequest","NativeResponse"],
+    "config": ["ConfigRequest","NativeResponse"],
+    "search": ["SearchRequest","NativeResponse"],
+    "resolve_symbol": ["ResolveSymbolRequest","NativeResponse"],
+    "history": ["HistoryRequest","NativeResponse"],
+    "price": ["PriceRequest","NativeResponse"],
+    "price_range": ["PriceRangeRequest","NativeResponse"],
+    "publisher_updates": ["PublisherUpdatesRequest","NativeResponse"],
+    "latest_price": ["LatestPriceRequest","NativeResponse"],
+    "price_at_timestamp": ["PriceAtTimestampRequest","NativeResponse"],
+    "reduce_price": ["ReducePriceRequest","NativeResponse"],
+    "publisher_stake_caps": ["PublisherStakeCapsRequest","NativeResponse"],
+    "guardian_set_upgrade": ["GuardianSetUpgradeRequest","NativeResponse"]
+  }
+}
