@@ -1,6 +1,7 @@
 name: Check SDKs
 on:
-  pull_request:
+  push:
+    branches: [main, master]
   workflow_dispatch:
     inputs:
       benchmark:
