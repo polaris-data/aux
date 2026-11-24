@@ -1,0 +1,224 @@
+{
+  "StarkNetDomain": [
+    {
+      "name": "name",
+      "type": "felt"
+    },
+    {
+      "name": "chainId",
+      "type": "felt"
+    },
+    {
+      "name": "version",
+      "type": "felt"
+    }
+  ],
+  "Request": [
+    {
+      "name": "method",
+      "type": "felt"
+    },
+    {
+      "name": "path",
+      "type": "felt"
+    },
+    {
+      "name": "body",
+      "type": "felt"
+    },
+    {
+      "name": "timestamp",
+      "type": "felt"
+    },
+    {
+      "name": "expiration",
+      "type": "felt"
+    }
+  ],
+  "Constant": [
+    {
+      "name": "action",
+      "type": "felt"
+    }
+  ],
+  "Order": [
+    {
+      "name": "timestamp",
+      "type": "felt"
+    },
+    {
+      "name": "market",
+      "type": "felt"
+    },
+    {
+      "name": "side",
+      "type": "felt"
+    },
+    {
+      "name": "orderType",
+      "type": "felt"
+    },
+    {
+      "name": "size",
+      "type": "felt"
+    },
+    {
+      "name": "price",
+      "type": "felt"
+    }
+  ],
+  "ModifyOrder": [
+    {
+      "name": "timestamp",
+      "type": "felt"
+    },
+    {
+      "name": "market",
+      "type": "felt"
+    },
+    {
+      "name": "side",
+      "type": "felt"
+    },
+    {
+      "name": "orderType",
+      "type": "felt"
+    },
+    {
+      "name": "size",
+      "type": "felt"
+    },
+    {
+      "name": "price",
+      "type": "felt"
+    },
+    {
+      "name": "id",
+      "type": "felt"
+    }
+  ],
+  "StarknetDomain": [
+    {
+      "name": "name",
+      "type": "shortstring"
+    },
+    {
+      "name": "version",
+      "type": "shortstring"
+    },
+    {
+      "name": "chainId",
+      "type": "shortstring"
+    },
+    {
+      "name": "revision",
+      "type": "shortstring"
+    }
+  ],
+  "BlockTrade": [
+    {
+      "name": "version",
+      "type": "shortstring"
+    },
+    {
+      "name": "nonce",
+      "type": "felt"
+    },
+    {
+      "name": "expiration",
+      "type": "felt"
+    },
+    {
+      "name": "trades",
+      "type": "merkletree",
+      "contains": "Trade"
+    }
+  ],
+  "Trade": [
+    {
+      "name": "market",
+      "type": "shortstring"
+    },
+    {
+      "name": "price",
+      "type": "felt"
+    },
+    {
+      "name": "size",
+      "type": "felt"
+    },
+    {
+      "name": "maker_order",
+      "type": "BlockTradeOrder"
+    },
+    {
+      "name": "taker_order",
+      "type": "BlockTradeOrder"
+    },
+    {
+      "name": "min_size",
+      "type": "felt"
+    },
+    {
+      "name": "max_size",
+      "type": "felt"
+    },
+    {
+      "name": "min_price",
+      "type": "felt"
+    },
+    {
+      "name": "max_price",
+      "type": "felt"
+    },
+    {
+      "name": "oracle_tolerance",
+      "type": "felt"
+    }
+  ],
+  "BlockTradeOrder": [
+    {
+      "name": "account",
+      "type": "felt"
+    },
+    {
+      "name": "side",
+      "type": "shortstring"
+    },
+    {
+      "name": "type",
+      "type": "shortstring"
+    },
+    {
+      "name": "size",
+      "type": "felt"
+    },
+    {
+      "name": "price",
+      "type": "felt"
+    }
+  ],
+  "BlockTradeOffer": [
+    {
+      "name": "version",
+      "type": "shortstring"
+    },
+    {
+      "name": "nonce",
+      "type": "felt"
+    },
+    {
+      "name": "expiration",
+      "type": "felt"
+    },
+    {
+      "name": "block_trade_id",
+      "type": "felt"
+    },
+    {
+      "name": "trades",
+      "type": "merkletree",
+      "contains": "Trade"
+    }
+  ]
+}

@@ -1,0 +1,483 @@
+{
+  "metadata": {
+    "currencies": [
+      {
+        "currency": "USDC",
+        "spot": [
+          {
+            "address": "0x3333333333333333333333333333333333333333",
+            "erc20": {
+              "decimals": 6
+            }
+          }
+        ]
+      }
+    ],
+    "TEST-PERP": {
+      "instrument_name": "TEST-PERP",
+      "base_asset_address": "0x3333333333333333333333333333333333333333",
+      "base_asset_sub_id": "1267650600228229401496703205376"
+    },
+    "ETH-PERP": {
+      "instrument_name": "ETH-PERP",
+      "base_asset_address": "0x3333333333333333333333333333333333333333",
+      "base_asset_sub_id": "0"
+    },
+    "BTC-PERP": {
+      "instrument_name": "BTC-PERP",
+      "base_asset_address": "0x2222222222222222222222222222222222222222",
+      "base_asset_sub_id": "0"
+    }
+  },
+  "orders": {
+    "order": {
+      "params": {
+        "limit_price": "-12.123456789012",
+        "amount": "0.25",
+        "max_fee": "0.01",
+        "instrument_name": "TEST-PERP",
+        "direction": "buy",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xf48970cc1592d1089d4bf5e4d08324281c2293e08b608d93b9acc31c2559e8a8248abcd391ac8a9b5c061f16c030103eccbd99a977b7d51dde7ee8246f63e8de1c"
+    },
+    "replace": {
+      "params": {
+        "limit_price": "-12.123456789012",
+        "amount": "0.25",
+        "max_fee": "0.01",
+        "instrument_name": "TEST-PERP",
+        "direction": "buy",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xf48970cc1592d1089d4bf5e4d08324281c2293e08b608d93b9acc31c2559e8a8248abcd391ac8a9b5c061f16c030103eccbd99a977b7d51dde7ee8246f63e8de1c"
+    },
+    "order_quote": {
+      "params": {
+        "limit_price": "-12.123456789012",
+        "amount": "0.25",
+        "max_fee": "0.01",
+        "instrument_name": "TEST-PERP",
+        "direction": "buy",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xf48970cc1592d1089d4bf5e4d08324281c2293e08b608d93b9acc31c2559e8a8248abcd391ac8a9b5c061f16c030103eccbd99a977b7d51dde7ee8246f63e8de1c"
+    },
+    "transfer_spot": {
+      "params": {
+        "to_subaccount_id": "10",
+        "new_subaccount_manager": "0",
+        "sub_id": "0",
+        "amount": "2.5",
+        "max_fee_usd": "1",
+        "asset_name": "USDC",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x1071d981c0e57367ccf6e1afc8fc2d62f8778f4333c2f96c97c0695e1504d01254984aebb138202572e650093cd69535edbb684ffcdd002253cfb9a8f426cdd91b"
+    },
+    "transfer_spot_external": {
+      "params": {
+        "to_subaccount_id": "10",
+        "new_subaccount_manager": "0",
+        "sub_id": "0",
+        "amount": "2.5",
+        "max_fee_usd": "1",
+        "asset_name": "USDC",
+        "recipient_address": "0x2222222222222222222222222222222222222222",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xb45228a7fd49c35eca06c5e7ed81cf75152c79723c157e8d2f7c28ec0d9d1d5108a8f5b3d026a50b0ce2ab2a30c3f00d45d67ac0a1261e90b1c5b236b410781f1b"
+    },
+    "withdraw": {
+      "params": {
+        "max_fee_usd": "1",
+        "asset_name": "USDC",
+        "amount_in_underlying": "1.123456",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xe02ebbb08995fab4516a20bd61c4c447ad9b5c4ea47e4fdef8f325478d9390a568a09a1b7bf125f450eb1715b0402ca270775adff67ba39a9cd19d9309cb47621c"
+    },
+    "set_session_key": {
+      "params": {
+        "expiry_sec": 1793714000,
+        "subaccount_ids": [
+          9,
+          10
+        ],
+        "public_session_key": "0x3333333333333333333333333333333333333333",
+        "protocol_scopes": [
+          "trade:orderbook:all",
+          "trade:rfq:all"
+        ],
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x04796a578b2ad4012cd0723e42b34eef23fa1032198239247ba15da4fc2d05f017a8b7d7864fb14a6eab8b8cf63a6db6ebc94603ce82fba4df81df16a051a79c1c"
+    },
+    "update_whitelisted_recipients": {
+      "params": {
+        "add": [
+          "0x3333333333333333333333333333333333333333"
+        ],
+        "remove": [
+          "0x2222222222222222222222222222222222222222"
+        ],
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x9dd26a7f6523d671bea984cd39f4f13a7bbf19b0aaec1cdaa6644b87539611366595649703378c8b69ee9c169ffc7ecb34aa7d5950056cb5de9edb23b13ef8151b"
+    },
+    "send_quote": {
+      "params": {
+        "max_fee": "1",
+        "direction": "buy",
+        "legs": [
+          {
+            "instrument_name": "ETH-PERP",
+            "price": "3100.25",
+            "amount": "2",
+            "direction": "sell"
+          },
+          {
+            "instrument_name": "BTC-PERP",
+            "price": "60000",
+            "amount": "0.25",
+            "direction": "buy"
+          }
+        ],
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x2facac76585d0b12bee83d8b34609a6a975250bc8013d3b8cd85239f2fa4adec281dc528b39a4615b39fa9ae93a29f68593c0226bc65360c9dba6079db23efd41b"
+    },
+    "replace_quote": {
+      "params": {
+        "max_fee": "1",
+        "direction": "buy",
+        "legs": [
+          {
+            "instrument_name": "ETH-PERP",
+            "price": "3100.25",
+            "amount": "2",
+            "direction": "sell"
+          },
+          {
+            "instrument_name": "BTC-PERP",
+            "price": "60000",
+            "amount": "0.25",
+            "direction": "buy"
+          }
+        ],
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x2facac76585d0b12bee83d8b34609a6a975250bc8013d3b8cd85239f2fa4adec281dc528b39a4615b39fa9ae93a29f68593c0226bc65360c9dba6079db23efd41b"
+    },
+    "execute_quote": {
+      "params": {
+        "max_fee": "1",
+        "direction": "sell",
+        "legs": [
+          {
+            "instrument_name": "ETH-PERP",
+            "price": "3100.25",
+            "amount": "2",
+            "direction": "sell"
+          },
+          {
+            "instrument_name": "BTC-PERP",
+            "price": "60000",
+            "amount": "0.25",
+            "direction": "buy"
+          }
+        ],
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x30857921860dfd304aafe2e7b87dd7f2515eb778869a1083a50f6c1fa19bc976778907f22d12fd68c0e27105a728f5b5b6fdbb58056aec06f581e3522db7943c1c"
+    },
+    "create_vault": {
+      "params": {
+        "manager_id": "1",
+        "deposit_spot_asset": "0x3333333333333333333333333333333333333333",
+        "initial_deposit": "100",
+        "management_fee_bps": 10,
+        "performance_fee_bps": 100,
+        "max_slippage_bps": 10,
+        "cooldown_sec": 60,
+        "max_fee_usd": "1",
+        "initial_share_price_usd": "1",
+        "benchmark_asset": null,
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xc3c5314310321bf99dfeb5c08e5f40fa47a0821db0f424d27c122fee5e3d041940790d00948bb2117a0b1743331c69e4b19fed436c70215302c4ad6cf47e79431c"
+    },
+    "request_vault_deposit": {
+      "params": {
+        "vault_subaccount_id": "12",
+        "deposit_spot_asset": "0x3333333333333333333333333333333333333333",
+        "amount": "100",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xff73166f0b8f53768a9d07be1b1f7d98d142a3aa8ff7fc234965a8e76bf2cd113eb9af522d4acee3b545dbe8a18845e778ecfa4159cb236b8ec2200e34ae6c021c"
+    },
+    "request_vault_withdraw": {
+      "params": {
+        "vault_subaccount_id": "12",
+        "shares_to_burn": "2",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x2252bedbc738955fa950260b24553b6ead632024a33705725e13764d4c6a3c573cc87cb5f459685db84d697fc3b73e1817538609de07082a805c83a2ec538dc51c"
+    },
+    "cancel_all_vault_requests": {
+      "params": {
+        "vault_subaccount_id": "12",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xa1ae942a1502492f6d874dd091eb6ac021150abb518f933113a3ec32196311a277eff823465c85e34573cd210877df1e53cdb43ae4368d7a1e3647768eac81e61c"
+    },
+    "mint_vault_shares": {
+      "params": {
+        "share_price": "1.25",
+        "deposit_hash": "0x5555555555555555555555555555555555555555555555555555555555555555",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x9a1ca78b611a8be6458c05e8df717b69a56802372026d15face86b019d7ea86435f2af53aa8071a094b0b78db9bfb9def58db314b45f9428659d9d1b6a876bf71c"
+    },
+    "burn_vault_shares": {
+      "params": {
+        "share_price": "1.25",
+        "withdraw_hash": "0x5555555555555555555555555555555555555555555555555555555555555555",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x16af74ed02b49bb6ebf7efec073b7cbdd3d28bf774f82d4bbef612dddeeea0977d9e27d7db26e4351ae0f4840192ead27088f9f2192875919f10f035fbb74ce61b"
+    },
+    "force_burn": {
+      "params": {
+        "holder": "0x2222222222222222222222222222222222222222",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x75d95afa8b417f62018f05a0241dbb69af006b08889cd159dc0dcf542b8935914d04bf6fe3b03545a77eb4b777fc939f7add7c3d3e326f1805e0cd09a27d779d1b"
+    },
+    "liquidate": {
+      "params": {
+        "liquidate_subaccount_id": "9",
+        "percent_of_acc": "0.25",
+        "price_limit": "-123",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xf3c9e38c44c372dc8139751558095d0f91e525c54e8658c74370852a511d945736097bf3f6f553ec14e26e0346949d8a613003d65d300309b3cfc64022aebea91b"
+    },
+    "delete_subaccount": {
+      "params": {
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x930c85c559f1b4f118ef4c7545f1049e9b2b20656f00a804c5a8bbf4e32a86102062dc242e6c4f25ef06501f4033dbe5ef4ec2b24e121304f70f98c62e5259e21b"
+    },
+    "transfer_positions": {
+      "params": {
+        "maker_params": {
+          "max_fee": "1",
+          "direction": "buy",
+          "legs": [
+            {
+              "instrument_name": "ETH-PERP",
+              "price": "3100.25",
+              "amount": "2",
+              "direction": "sell"
+            },
+            {
+              "instrument_name": "BTC-PERP",
+              "price": "60000",
+              "amount": "0.25",
+              "direction": "buy"
+            }
+          ],
+          "nonce": "1793710000000123456",
+          "signature_expiry_sec": 1793710300,
+          "subaccount_id": 9
+        },
+        "taker_params": {
+          "max_fee": "1",
+          "direction": "sell",
+          "legs": [
+            {
+              "instrument_name": "ETH-PERP",
+              "price": "3100.25",
+              "amount": "2",
+              "direction": "sell"
+            },
+            {
+              "instrument_name": "BTC-PERP",
+              "price": "60000",
+              "amount": "0.25",
+              "direction": "buy"
+            }
+          ],
+          "nonce": "1793710000000123456",
+          "signature_expiry_sec": 1793710300,
+          "subaccount_id": 9
+        }
+      },
+      "maker": "0x2facac76585d0b12bee83d8b34609a6a975250bc8013d3b8cd85239f2fa4adec281dc528b39a4615b39fa9ae93a29f68593c0226bc65360c9dba6079db23efd41b",
+      "taker": "0x30857921860dfd304aafe2e7b87dd7f2515eb778869a1083a50f6c1fa19bc976778907f22d12fd68c0e27105a728f5b5b6fdbb58056aec06f581e3522db7943c1c"
+    },
+    "order_debug": {
+      "params": {
+        "limit_price": "-12.123456789012",
+        "amount": "0.25",
+        "max_fee": "0.01",
+        "instrument_name": "TEST-PERP",
+        "direction": "buy",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xf48970cc1592d1089d4bf5e4d08324281c2293e08b608d93b9acc31c2559e8a8248abcd391ac8a9b5c061f16c030103eccbd99a977b7d51dde7ee8246f63e8de1c"
+    },
+    "set_session_key_debug": {
+      "params": {
+        "expiry_sec": 1793714000,
+        "subaccount_ids": [
+          9,
+          10
+        ],
+        "public_session_key": "0x3333333333333333333333333333333333333333",
+        "protocol_scopes": [
+          "trade:orderbook:all",
+          "trade:rfq:all"
+        ],
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x04796a578b2ad4012cd0723e42b34eef23fa1032198239247ba15da4fc2d05f017a8b7d7864fb14a6eab8b8cf63a6db6ebc94603ce82fba4df81df16a051a79c1c"
+    },
+    "transfer_positions_debug": {
+      "params": {
+        "maker_params": {
+          "max_fee": "1",
+          "direction": "buy",
+          "legs": [
+            {
+              "instrument_name": "ETH-PERP",
+              "price": "3100.25",
+              "amount": "2",
+              "direction": "sell"
+            },
+            {
+              "instrument_name": "BTC-PERP",
+              "price": "60000",
+              "amount": "0.25",
+              "direction": "buy"
+            }
+          ],
+          "nonce": "1793710000000123456",
+          "signature_expiry_sec": 1793710300,
+          "subaccount_id": 9
+        },
+        "taker_params": {
+          "max_fee": "1",
+          "direction": "sell",
+          "legs": [
+            {
+              "instrument_name": "ETH-PERP",
+              "price": "3100.25",
+              "amount": "2",
+              "direction": "sell"
+            },
+            {
+              "instrument_name": "BTC-PERP",
+              "price": "60000",
+              "amount": "0.25",
+              "direction": "buy"
+            }
+          ],
+          "nonce": "1793710000000123456",
+          "signature_expiry_sec": 1793710300,
+          "subaccount_id": 9
+        }
+      },
+      "maker": "0x2facac76585d0b12bee83d8b34609a6a975250bc8013d3b8cd85239f2fa4adec281dc528b39a4615b39fa9ae93a29f68593c0226bc65360c9dba6079db23efd41b",
+      "taker": "0x30857921860dfd304aafe2e7b87dd7f2515eb778869a1083a50f6c1fa19bc976778907f22d12fd68c0e27105a728f5b5b6fdbb58056aec06f581e3522db7943c1c"
+    },
+    "transfer_spot_debug": {
+      "params": {
+        "to_subaccount_id": "10",
+        "new_subaccount_manager": "0",
+        "sub_id": "0",
+        "amount": "2.5",
+        "max_fee_usd": "1",
+        "asset_name": "USDC",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x1071d981c0e57367ccf6e1afc8fc2d62f8778f4333c2f96c97c0695e1504d01254984aebb138202572e650093cd69535edbb684ffcdd002253cfb9a8f426cdd91b"
+    },
+    "transfer_spot_external_debug": {
+      "params": {
+        "to_subaccount_id": "10",
+        "new_subaccount_manager": "0",
+        "sub_id": "0",
+        "amount": "2.5",
+        "max_fee_usd": "1",
+        "asset_name": "USDC",
+        "recipient_address": "0x2222222222222222222222222222222222222222",
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0xb45228a7fd49c35eca06c5e7ed81cf75152c79723c157e8d2f7c28ec0d9d1d5108a8f5b3d026a50b0ce2ab2a30c3f00d45d67ac0a1261e90b1c5b236b410781f1b"
+    },
+    "update_whitelisted_recipients_debug": {
+      "params": {
+        "add": [
+          "0x3333333333333333333333333333333333333333"
+        ],
+        "remove": [
+          "0x2222222222222222222222222222222222222222"
+        ],
+        "nonce": "1793710000000123456",
+        "signature_expiry_sec": 1793710300,
+        "subaccount_id": 9
+      },
+      "signature": "0x9dd26a7f6523d671bea984cd39f4f13a7bbf19b0aaec1cdaa6644b87539611366595649703378c8b69ee9c169ffc7ecb34aa7d5950056cb5de9edb23b13ef8151b"
+    }
+  }
+}

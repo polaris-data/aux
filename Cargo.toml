@@ -1,85 +1,15 @@
 [workspace]
-members = ["crates/data/pyth", "crates/data/chainlink", "crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/hyperdash", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/python", "crates/exchanges/metric", "crates/node"]
-default-members = ["crates/data/pyth", "crates/data/chainlink", "crates/exchanges/extended", "crates/exchanges/phoenix", "crates/exchanges/pascal", "crates/exchanges/polymarket", "crates/exchanges/kalshi", "crates/chain/evm", "crates/aux-rs", "crates/core", "crates/data/common", "crates/data/tardis", "crates/data/databento", "crates/data/dune", "crates/data/hyperdash", "crates/data/birdeye", "crates/exchanges/hyperliquid", "crates/exchanges/lighter", "crates/exchanges/arcus", "crates/exchanges/qfex", "crates/exchanges/monaco", "crates/exchanges/derive", "crates/exchanges/paradex", "crates/exchanges/metric"]
+members = ["sdk/rust", "sdk/typescript", "sdk/python"]
+default-members = ["sdk/rust"]
 resolver = "3"
 
 [workspace.package]
 version = "0.0.1"
 edition = "2024"
 rust-version = "1.92"
-publish = ["crates-io"]
-repository = "https://github.com/polaris-data/aux"
-license-file = "LICENSE"
+license = "MIT"
 
 [workspace.dependencies]
-aux-rs-pyth = { version = "0.0.1", path = "crates/data/pyth", default-features = false }
-aux-rs-chainlink = { version = "0.0.1", path = "crates/data/chainlink", default-features = false }
-aux-rs-extended = { version = "0.0.1", path = "crates/exchanges/extended", default-features = false }
-aux-rs-phoenix = { version = "0.0.1", path = "crates/exchanges/phoenix", default-features = false }
-ts-rs = { version = "12", default-features = false, features = ["serde-compat", "serde-json-impl"] }
-aux-rs-pascal = { version = "0.0.1", path = "crates/exchanges/pascal", default-features = false }
-aux-rs-polymarket = { version = "0.0.1", path = "crates/exchanges/polymarket", default-features = false }
-aux-rs-kalshi = { version = "0.0.1", path = "crates/exchanges/kalshi", default-features = false }
-aux-rs-evm = { version = "0.0.1", path = "crates/chain/evm", default-features = false }
-aux-rs-data = { version = "0.0.1", path = "crates/data/common", default-features = false }
-aux-rs-tardis = { version = "0.0.1", path = "crates/data/tardis", default-features = false }
-aux-rs-birdeye = { version = "0.0.1", path = "crates/data/birdeye", default-features = false }
-aux-rs-hyperdash = { version = "0.0.1", path = "crates/data/hyperdash", default-features = false }
-aux-rs-dune = { version = "0.0.1", path = "crates/data/dune", default-features = false }
-aux-rs-databento = { version = "0.0.1", path = "crates/data/databento", default-features = false }
-async-compression = { version = "0.4", default-features = false, features = ["futures-io", "gzip", "zstd"] }
-dbn = { version = "=0.73.0", default-features = false, features = ["serde"] }
-aux-rs-metric = { version = "0.0.1", path = "crates/exchanges/metric", default-features = false }
-alloy-primitives = { version = "=1.4.1", default-features = false, features = ["std", "serde", "k256"] }
-alloy-sol-type-parser = { version = "=1.4.1", default-features = false }
-alloy-sol-types = { version = "=1.4.1", default-features = false, features = ["std", "json"] }
-alloy-json-abi = { version = "=1.4.1", default-features = false, features = ["std", "serde_json"] }
-alloy-dyn-abi = { version = "=1.4.1", default-features = false, features = ["std"] }
-alloy-consensus = { version = "=1.0.42", default-features = false, features = ["std", "k256"] }
-alloy-eips = { version = "=1.0.42", default-features = false }
-alloy-tx-macros = { version = "=1.0.42", default-features = false }
-
-time = { version = "0.3", default-features = false, features = ["std", "formatting"] }
-aux-rs-derive = { version = "0.0.1", path = "crates/exchanges/derive", default-features = false }
-aux-rs-paradex = { version = "0.0.1", path = "crates/exchanges/paradex", default-features = false }
-starknet-core = { version = "=0.16.0", default-features = false }
-starknet-crypto = { version = "=0.8.1", default-features = false }
-aux-rs-monaco = { version = "0.0.1", path = "crates/exchanges/monaco", default-features = false }
-base64 = "0.22"
-url = "2.5"
-sha2 = { version = "0.10", default-features = false }
-ed25519-dalek = { version = "2.2", default-features = false, features = ["std", "zeroize", "fast"] }
-aux-rs-arcus = { version = "0.0.1", path = "crates/exchanges/arcus", default-features = false }
-aux-rs-qfex = { version = "0.0.1", path = "crates/exchanges/qfex", default-features = false }
-aux-rs-core = { version = "0.0.1", path = "crates/core", default-features = false }
-aux-rs = { version = "0.0.1", path = "crates/aux-rs", default-features = false }
-aux-rs-hyperliquid = { version = "0.0.1", path = "crates/exchanges/hyperliquid", default-features = false }
-aux-rs-lighter = { version = "0.0.1", path = "crates/exchanges/lighter", default-features = false }
-goldilocks-crypto = { version = "=0.1.2", default-features = false }
-poseidon-hash = { version = "=0.1.4", default-features = false }
-getrandom = { version = "0.2", default-features = false }
+aux-rs = { version = "0.0.1", path = "sdk/rust" }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", features = ["arbitrary_precision"] }
-reqwest = { version = "0.12.28", default-features = false, features = ["rustls-tls-manual-roots-no-provider"] }
-rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }
-webpki-roots = "1"
-tokio = { version = "1", default-features = false }
-tokio-tungstenite = { version = "0.29", default-features = false, features = ["connect", "rustls-tls-webpki-roots"] }
-futures-util = { version = "0.3", default-features = false, features = ["sink", "std", "io", "async-await"] }
-
-k256 = { version = "0.13.4", default-features = false, features = ["ecdsa"] }
-sha3 = { version = "0.10", default-features = false }
-rmp-serde = "1.3"
-zeroize = { version = "1", default-features = false, features = ["alloc"] }
-
-[workspace.lints.rust]
-unsafe_code = "forbid"
-
-[workspace.lints.clippy]
-all = "warn"
-
-[profile.release.package.aux-rs-python]
-opt-level = 1
-
-[profile.release.package.aux-rs-node]
-opt-level = 1

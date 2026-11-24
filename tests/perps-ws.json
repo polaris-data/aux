@@ -1,0 +1,331 @@
+[
+  {
+    "venue": "hyperliquid",
+    "name": "l2Book",
+    "params": {
+      "type": "l2Book",
+      "coin": "ETH"
+    },
+    "frame": {
+      "method": "subscribe",
+      "subscription": {
+        "type": "l2Book",
+        "coin": "ETH"
+      }
+    },
+    "event": {
+      "channel": "l2Book",
+      "data": {
+        "coin": "ETH",
+        "time": 1754450974231,
+        "levels": [
+          [
+            {
+              "px": "3000.00",
+              "sz": "1.2300",
+              "n": 2
+            }
+          ],
+          [
+            {
+              "px": "3000.10",
+              "sz": "0.0001",
+              "n": 1
+            }
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "venue": "hyperliquid",
+    "name": "trades",
+    "params": {
+      "type": "trades",
+      "coin": "ETH"
+    },
+    "frame": {
+      "method": "subscribe",
+      "subscription": {
+        "type": "trades",
+        "coin": "ETH"
+      }
+    },
+    "event": {
+      "channel": "trades",
+      "data": [
+        {
+          "coin": "ETH",
+          "side": "B",
+          "px": "3000.10",
+          "sz": "0.0100",
+          "hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "time": 1754450974231,
+          "tid": 1125899906842623,
+          "users": [
+            "0x0000000000000000000000000000000000000001",
+            "0x0000000000000000000000000000000000000002"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "venue": "hyperliquid",
+    "name": "orderUpdates",
+    "params": {
+      "type": "orderUpdates",
+      "user": "0x1212121212121212121212121212121212121212"
+    },
+    "frame": {
+      "method": "subscribe",
+      "subscription": {
+        "type": "orderUpdates",
+        "user": "0x1212121212121212121212121212121212121212"
+      }
+    },
+    "event": {
+      "channel": "orderUpdates",
+      "data": [
+        {
+          "order": {
+            "coin": "ETH",
+            "limitPx": "3000.10",
+            "oid": 9007199254740993,
+            "side": "A",
+            "sz": "0.0100",
+            "timestamp": 1754450974231,
+            "cloid": "0x00000000000000000000000000000001",
+            "origSz": "0.0200"
+          },
+          "status": "open",
+          "statusTimestamp": 1754450974231
+        }
+      ]
+    }
+  },
+  {
+    "venue": "hyperliquid",
+    "name": "userFills",
+    "params": {
+      "type": "userFills",
+      "user": "0x1212121212121212121212121212121212121212",
+      "aggregateByTime": true
+    },
+    "frame": {
+      "method": "subscribe",
+      "subscription": {
+        "type": "userFills",
+        "user": "0x1212121212121212121212121212121212121212",
+        "aggregateByTime": true
+      }
+    },
+    "event": {
+      "channel": "userFills",
+      "data": {
+        "user": "0x1212121212121212121212121212121212121212",
+        "fills": []
+      }
+    }
+  },
+  {
+    "venue": "hyperliquid",
+    "name": "openOrders",
+    "params": {
+      "type": "openOrders",
+      "user": "0x1212121212121212121212121212121212121212"
+    },
+    "frame": {
+      "method": "subscribe",
+      "subscription": {
+        "type": "openOrders",
+        "user": "0x1212121212121212121212121212121212121212"
+      }
+    },
+    "event": {
+      "channel": "openOrders",
+      "data": {
+        "user": "0x1212121212121212121212121212121212121212",
+        "orders": [
+          {
+            "coin": "ETH",
+            "limitPx": "3000.10",
+            "oid": 9007199254740993,
+            "side": "A",
+            "sz": "0.0100",
+            "timestamp": 1754450974231,
+            "cloid": "0x00000000000000000000000000000001",
+            "origSz": "0.0200"
+          }
+        ],
+        "dex": ""
+      }
+    }
+  },
+  {
+    "venue": "hyperliquid",
+    "name": "clearinghouseState",
+    "params": {
+      "type": "clearinghouseState",
+      "user": "0x1212121212121212121212121212121212121212"
+    },
+    "frame": {
+      "method": "subscribe",
+      "subscription": {
+        "type": "clearinghouseState",
+        "user": "0x1212121212121212121212121212121212121212"
+      }
+    },
+    "event": {
+      "channel": "clearinghouseState",
+      "data": {
+        "user": "0x1212121212121212121212121212121212121212",
+        "dex": "",
+        "clearinghouseState": {
+          "assetPositions": [
+            {
+              "type": "oneWay",
+              "position": {
+                "coin": "ETH",
+                "szi": "-0.0335",
+                "entryPx": "3000.10",
+                "cumFunding": {
+                  "allTime": "1.0000",
+                  "sinceChange": "0.0",
+                  "sinceOpen": "0.0"
+                },
+                "leverage": {
+                  "type": "isolated",
+                  "value": 5,
+                  "rawUsd": "-10.0000"
+                },
+                "liquidationPx": null,
+                "marginUsed": "20.0000",
+                "maxLeverage": 25,
+                "positionValue": "100.0000",
+                "returnOnEquity": "-0.0020",
+                "unrealizedPnl": "-0.0400"
+              }
+            }
+          ],
+          "crossMaintenanceMarginUsed": "0.0",
+          "crossMarginSummary": {
+            "accountValue": "1000.0000",
+            "totalMarginUsed": "0.0",
+            "totalNtlPos": "0.0",
+            "totalRawUsd": "1000.0000"
+          },
+          "marginSummary": {
+            "accountValue": "1000.0000",
+            "totalMarginUsed": "20.0000",
+            "totalNtlPos": "100.0000",
+            "totalRawUsd": "980.0000"
+          },
+          "withdrawable": "980.0000",
+          "time": 1754450974231
+        }
+      }
+    }
+  },
+  {
+    "venue": "lighter",
+    "name": "order_book",
+    "params": {
+      "channel": "order_book",
+      "market_id": 4
+    },
+    "frame": {
+      "type": "subscribe",
+      "channel": "order_book/4"
+    },
+    "event": {
+      "type": "subscribed/order_book",
+      "channel": "order_book:4",
+      "order_book": {
+        "asks": [
+          {
+            "price": "1.20",
+            "size": "0.01"
+          }
+        ],
+        "bids": [],
+        "nonce": 9007199254740993,
+        "offset": 12
+      }
+    }
+  },
+  {
+    "venue": "lighter",
+    "name": "trade",
+    "params": {
+      "channel": "trade",
+      "market_id": 4
+    },
+    "frame": {
+      "type": "subscribe",
+      "channel": "trade/4"
+    },
+    "event": {
+      "type": "subscribed/trade",
+      "channel": "trade:4",
+      "trades": [
+        {
+          "market_id": 4,
+          "trade_id": 9007199254740993,
+          "size": "1.2",
+          "price": "2.0",
+          "is_maker_ask": false,
+          "timestamp": 946684800
+        }
+      ]
+    }
+  },
+  {
+    "venue": "lighter",
+    "name": "account_all",
+    "params": {
+      "channel": "account_all",
+      "account_index": 37
+    },
+    "frame": {
+      "type": "subscribe",
+      "channel": "account_all/37"
+    },
+    "event": {
+      "type": "subscribed/account_all",
+      "channel": "account_all:37",
+      "assets": {},
+      "positions": {},
+      "trades": {}
+    }
+  },
+  {
+    "venue": "lighter",
+    "name": "account_all_orders",
+    "params": {
+      "channel": "account_all_orders"
+    },
+    "frame": {
+      "type": "subscribe",
+      "channel": "account_all_orders/37"
+    },
+    "event": {
+      "type": "subscribed/account_all_orders",
+      "channel": "account_all_orders:37",
+      "orders": {
+        "4": [
+          {
+            "order_index": 9007199254740993,
+            "client_order_index": 42,
+            "market_index": 4,
+            "owner_account_index": 37,
+            "price": "2.5",
+            "remaining_base_amount": "0.1",
+            "is_ask": false,
+            "status": "open"
+          }
+        ]
+      }
+    }
+  }
+]

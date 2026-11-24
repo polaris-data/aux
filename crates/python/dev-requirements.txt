@@ -1,2 +1,0 @@
-maturin==1.16.0
-websockets==16.1.1

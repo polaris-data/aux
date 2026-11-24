@@ -1,0 +1,12 @@
+write.apply_a_referral_code apply_referral_code
+write.cancel_orders cancel_orders
+write.claim_a_custom_referral_code claim_custom_referral_code
+write.create_a_trading_key create_trading_key
+write.generate_a_referral_code generate_referral_code
+write.mass_cancel_orders mass_cancel
+write.place_and_replace_orders place_orders
+write.register_a_deposit_address register_deposit_address
+write.revoke_a_trading_key revoke_trading_key
+write.set_a_username set_username
+write.set_an_account_bio set_account_bio
+write.withdraw_collateral withdrawal

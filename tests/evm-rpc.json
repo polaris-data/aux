@@ -1,0 +1,175 @@
+[
+  {
+    "operation": "chain_id",
+    "params": {},
+    "method": "eth_chainId",
+    "args": [],
+    "reply": "0x1",
+    "expected": 1
+  },
+  {
+    "operation": "code",
+    "params": {
+      "address": "0x1212121212121212121212121212121212121212",
+      "block": "latest"
+    },
+    "method": "eth_getCode",
+    "args": [
+      "0x1212121212121212121212121212121212121212",
+      "latest"
+    ],
+    "reply": "0x6080",
+    "expected": "0x6080"
+  },
+  {
+    "operation": "eth_call",
+    "params": {
+      "to": "0x1212121212121212121212121212121212121212",
+      "data": "0xaa",
+      "block": "safe"
+    },
+    "method": "eth_call",
+    "args": [
+      {
+        "to": "0x1212121212121212121212121212121212121212",
+        "data": "0xaa",
+        "value": "0x0"
+      },
+      "safe"
+    ],
+    "reply": "0xabcd",
+    "expected": "0xabcd"
+  },
+  {
+    "operation": "logs",
+    "params": {
+      "filter": {
+        "address": "0x1212121212121212121212121212121212121212"
+      }
+    },
+    "method": "eth_getLogs",
+    "args": [
+      {
+        "address": "0x1212121212121212121212121212121212121212"
+      }
+    ],
+    "reply": [
+      {
+        "removed": false
+      }
+    ],
+    "expected": [
+      {
+        "removed": false
+      }
+    ]
+  },
+  {
+    "operation": "transaction_count",
+    "params": {
+      "address": "0x1212121212121212121212121212121212121212"
+    },
+    "method": "eth_getTransactionCount",
+    "args": [
+      "0x1212121212121212121212121212121212121212",
+      "pending"
+    ],
+    "reply": "0xffffffffffffffff",
+    "expected": 18446744073709551615
+  },
+  {
+    "operation": "receipt",
+    "params": {
+      "hash": "0x3434343434343434343434343434343434343434343434343434343434343434"
+    },
+    "method": "eth_getTransactionReceipt",
+    "args": [
+      "0x3434343434343434343434343434343434343434343434343434343434343434"
+    ],
+    "reply": null,
+    "expected": null
+  },
+  {
+    "operation": "transaction",
+    "params": {
+      "hash": "0x3434343434343434343434343434343434343434343434343434343434343434"
+    },
+    "method": "eth_getTransactionByHash",
+    "args": [
+      "0x3434343434343434343434343434343434343434343434343434343434343434"
+    ],
+    "reply": {
+      "hash": "0x3434343434343434343434343434343434343434343434343434343434343434"
+    },
+    "expected": {
+      "hash": "0x3434343434343434343434343434343434343434343434343434343434343434"
+    }
+  },
+  {
+    "operation": "estimate_gas",
+    "params": {
+      "request": {
+        "to": "0x1212121212121212121212121212121212121212",
+        "data": "0xaa",
+        "value": "0x0"
+      }
+    },
+    "method": "eth_estimateGas",
+    "args": [
+      {
+        "to": "0x1212121212121212121212121212121212121212",
+        "data": "0xaa",
+        "value": "0x0"
+      }
+    ],
+    "reply": "0x5208",
+    "expected": 21000
+  },
+  {
+    "operation": "block_number",
+    "params": {},
+    "method": "eth_blockNumber",
+    "args": [],
+    "reply": "0x100000000000001",
+    "expected": 72057594037927937
+  },
+  {
+    "operation": "block",
+    "params": {
+      "block": "0xcc"
+    },
+    "method": "eth_getBlockByNumber",
+    "args": [
+      "0xcc",
+      false
+    ],
+    "reply": {
+      "number": "0xcc"
+    },
+    "expected": {
+      "number": "0xcc"
+    }
+  },
+  {
+    "operation": "native_balance",
+    "params": {
+      "address": "0x1212121212121212121212121212121212121212",
+      "block": "latest"
+    },
+    "method": "eth_getBalance",
+    "args": [
+      "0x1212121212121212121212121212121212121212",
+      "latest"
+    ],
+    "reply": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "expected": 115792089237316195423570985008687907853269984665640564039457584007913129639935
+  },
+  {
+    "operation": "gas_price",
+    "params": {},
+    "method": "eth_gasPrice",
+    "args": [],
+    "reply": "0x1234",
+    "expected": 4660
+  }
+]

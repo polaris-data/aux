@@ -1,0 +1,28 @@
+{
+  "block": {
+    "nonce": "123456",
+    "expiration": 1793710300000,
+    "parent": null,
+    "trades": {
+      "ETH-USD-PERP": {
+        "price": "3100",
+        "size": "1",
+        "maker_order": {"account":"0x1234","side":"BUY","type":"LIMIT","size":"1","price":"3100"},
+        "taker_order": {"account":"0x5678","side":"SELL","type":"LIMIT","size":"1","price":"3100"}
+      },
+      "BTC-USD-PERP": {"trade_constraints":{"min_size":"0.01","max_size":"1","min_price":"60000","max_price":"70000"}}
+    }
+  },
+  "offer": {
+    "nonce": "123456",
+    "expiration": 1793710300000,
+    "parent": "654321",
+    "trades": {
+      "ETH-USD-PERP": {
+        "price":"3100",
+        "size":"1",
+        "offerer_order":{"account":"0x1234","side":"BUY","type":"LIMIT","size":"1","price":"3100"}
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "client": "HistoricalClient",
+  "venue": "databento",
+  "fixture": "data-http",
+  "strict": [],
+  "aliases": {
+    "Params": "serde_json::Map<String,serde_json::Value>"
+  },
+  "models": {},
+  "methods": {
+    "list_publishers": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "list_datasets": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "list_schemas": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "list_fields": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "list_unit_prices": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "get_dataset_condition": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "get_dataset_range": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "get_record_count": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "get_billable_size": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "get_cost": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "resolve": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "submit_job": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "list_jobs": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "get_job_details": [
+      "Params",
+      "serde_json::Value"
+    ],
+    "list_files": [
+      "Params",
+      "serde_json::Value"
+    ]
+  }
+}

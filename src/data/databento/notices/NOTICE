@@ -1,0 +1,4 @@
+Databento Binary Encoding layouts and synthetic fixtures follow dbn 0.73.0
+(https://github.com/databento/dbn, a77693030595b8f29f6b4c58e63b1b1a9d899b3f).
+HTTP and CRAM reference: databento-rs, d75ab48a63732d70d6943e319e986c601bf0dc4f.
+Both references are Apache-2.0. The native implementation is in Zig.

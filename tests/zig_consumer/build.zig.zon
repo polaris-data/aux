@@ -1,0 +1,7 @@
+.{
+    .name = .aux_consumer,
+    .fingerprint = 0x1a5bbb3c81294087,
+    .version = "0.0.0",
+    .dependencies = .{ .aux = .{ .path = "../.." } },
+    .paths = .{ "build.zig", "build.zig.zon", "main.zig", "protocols.zig", "models.zig", "compare.zig" },
+}

@@ -1,5 +1,7 @@
 # TypeScript SDK from Rust connectors — evaluation
 
+Historical design for the [former Rust workspace](https://github.com/polaris-data/aux/tree/0b9b24f29c6ea5d23ddb0d470e196594acb9bccc). See the [current SDK guide](../README.md) for setup.
+
 Date: 2026-11-04
 Scope: aux-rs workspace (pyo3 Python SDK exists at `crates/python`)
 

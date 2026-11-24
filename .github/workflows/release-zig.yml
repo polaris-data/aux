@@ -1,0 +1,54 @@
+name: Release Zig SDK
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: zig-release-${{ github.ref }}
+
+jobs:
+  package:
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'aux-zig-v')
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Validate Zig release version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: python3 tools/check-release-version.py aux-zig
+      - name: Install Zig
+        run: bash tools/install-ci-zig.sh
+      - name: Build and exercise the packaged Zig module
+        run: |
+          zig build test
+          python3 check_zig_sdk.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: aux-zig-package
+          path: dist/aux-zig-native-*.tar.gz
+          if-no-files-found: error
+
+  publish:
+    name: Attach verified package to the GitHub release
+    needs: package
+    if: github.event_name == 'release'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
+        with:
+          name: aux-zig-package
+          path: dist
+      - name: Upload Zig source archive
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" dist/*.tar.gz --repo "$GITHUB_REPOSITORY"

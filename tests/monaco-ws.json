@@ -1,0 +1,68 @@
+[
+  {
+    "params": {
+      "type": "trades",
+      "tradingPairId": "*"
+    },
+    "channel": "trades:*",
+    "private": false
+  },
+  {
+    "params": {
+      "type": "orderbook",
+      "tradingPairId": "550E8400-E29B-41D4-A716-446655440000",
+      "mode": "SPOT",
+      "denomination": "quote"
+    },
+    "channel": "orderbook:550e8400-e29b-41d4-a716-446655440000:SPOT:*:quote",
+    "private": false
+  },
+  {
+    "params": {
+      "type": "depth",
+      "tradingPairId": "550e8400-e29b-41d4-a716-446655440000",
+      "mode": "MARGIN"
+    },
+    "channel": "depth:550e8400-e29b-41d4-a716-446655440000:MARGIN",
+    "private": false
+  },
+  {
+    "params": {
+      "type": "bbo",
+      "tradingPairId": "550e8400-e29b-41d4-a716-446655440000",
+      "mode": "SPOT"
+    },
+    "channel": "bbo:550e8400-e29b-41d4-a716-446655440000:SPOT",
+    "private": false
+  },
+  {
+    "params": {
+      "type": "orders",
+      "mode": "MARGIN"
+    },
+    "channel": "orders:*:MARGIN",
+    "private": true
+  },
+  {
+    "params": {
+      "type": "balances"
+    },
+    "channel": "balances",
+    "private": true
+  },
+  {
+    "params": {
+      "type": "positions",
+      "tradingPairId": "550e8400-e29b-41d4-a716-446655440000"
+    },
+    "channel": "positions:550e8400-e29b-41d4-a716-446655440000",
+    "private": true
+  },
+  {
+    "params": {
+      "type": "account"
+    },
+    "channel": "account",
+    "private": true
+  }
+]
