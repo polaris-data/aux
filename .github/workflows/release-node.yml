@@ -1,18 +1,10 @@
 name: Build Node SDK
 on:
-  pull_request:
-    paths:
-      - .github/workflows/release-node.yml
-      - Cargo.toml
-      - Cargo.lock
-      - crates/**
-      - scripts/**
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
   group: node-sdk-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   native:
     name: Node (${{ matrix.os }})
@@ -36,6 +28,7 @@ jobs:
       - name: Install build tools
         run: npm ci --prefix crates/node
       - name: Validate sources and declarations
+        if: runner.os == 'Linux'
         run: |
           cargo fmt --all --check
           python3 scripts/generate-node-bindings.py --check --models

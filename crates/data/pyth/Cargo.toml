@@ -4,6 +4,10 @@ version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
+repository.workspace = true
+license-file.workspace = true
+description = "Native Pyth Pro and Hermes market data connector"
+
 [features]
 default = []
 http = ["aux-rs-core/http"]

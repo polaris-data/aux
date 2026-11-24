@@ -3,7 +3,9 @@ name = "aux-rs-python"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
-publish.workspace = true
+publish = false
+repository.workspace = true
+license-file.workspace = true
 description = "Thin Python bindings for native Rust exchange connectors"
 
 [lib]
@@ -14,7 +16,7 @@ doctest = false
 
 [dependencies]
 aux-rs = { workspace = true, features = ["pyth", "chainlink", "extended", "phoenix", "polymarket", "kalshi", "pascal", "hyperliquid", "lighter", "qfex", "arcus", "monaco", "derive", "paradex", "metric", "tardis", "databento", "birdeye", "dune", "hyperdash", "http", "ws"] }
-pyo3 = { version = "0.30.1", default-features = false, features = ["macros", "multiple-pymethods"] }
+pyo3 = { version = "0.30.1", default-features = false, features = ["abi3-py310", "macros", "multiple-pymethods"] }
 pyo3-async-runtimes = { version = "0.30", default-features = false, features = ["tokio-runtime"] }
 tokio = { workspace = true, features = ["rt-multi-thread", "sync", "macros"] }
 serde_json.workspace = true

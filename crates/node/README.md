@@ -67,7 +67,7 @@ node scripts/check-node-package.mjs
 
 `src/api.json` records the concrete binding surface. `src/models.json` records the exported Rust model paths. Update these inventories when adding public operations/models, then regenerate. Derive/Paradex operation wrappers and Metric contract helpers are generated alongside their existing Rust/Python counterparts. Source schemas are not needed to build the checked-in SDK.
 
-The build workflow produces and tests an npm tarball containing all supported native binaries. It does not publish to npm. Package naming, registry ownership, and publication are release decisions; `aux-ts` is the local package name.
+The [SDK checks workflow](../../.github/workflows/check-sdks.yml) type-checks pull requests into `main`. Run [Build Node SDK](../../.github/workflows/release-node.yml) manually to build and test an npm tarball containing all supported native binaries. Download the `aux-ts-package` artifact for manual distribution. Package naming, registry ownership, and publication are release decisions; `aux-ts` is the local package name.
 
 The Node crate denies handwritten unsafe code. napi-rs' generated FFI requires its macro-scoped allowance, so this boundary uses `deny` rather than the workspace's `forbid`; the protocol crates retain their existing lint policy.
 
