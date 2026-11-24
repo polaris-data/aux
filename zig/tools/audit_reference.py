@@ -114,7 +114,7 @@ def inventory(crates):
                     for name in re.findall(r"^pub fn (create_\w+_ixs?)\(",path.read_text(),re.M)}
     phoenix_cases = set(json.loads((ROOT/"tests/phoenix-instructions.json").read_text()))
     metric = {(row["contract"],row["signature"]) for row in json.loads((crates/"exchanges/metric/contracts.json").read_text()) if row["kind"]=="function"}
-    named = {tuple(line.split("\t")[:2]) for line in (ROOT/"schema/metric-contract-methods.tsv").read_text().splitlines()}
+    named = {tuple(line.split("\t")[:2]) for line in (ROOT/"src/exchanges/metric/schema/metric-contract-methods.tsv").read_text().splitlines()}
     abi = {(r["contract"],r["signature"]) for r in json.loads((ROOT/"tests/metric-abi.json").read_text()) if r["kind"]=="function"}
     expected = client_surfaces(crates/"python/python/aux_py")
     actual = client_surfaces(ROOT/"sdk/python/python/aux_zig")

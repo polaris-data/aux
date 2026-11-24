@@ -1,4 +1,4 @@
-"""Lighter REST wire models generated from schema/lighter.json."""
+"""Lighter REST wire models generated from src/exchanges/lighter/schema/lighter.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

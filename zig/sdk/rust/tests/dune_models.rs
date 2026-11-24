@@ -1,5 +1,5 @@
 #![cfg(feature = "dune-models")]
-// Generated from schema/dune.json.
+// Generated from src/data/dune/schema/dune.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::dune_models::*;

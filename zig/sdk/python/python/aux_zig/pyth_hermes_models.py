@@ -1,4 +1,4 @@
-"""PythHermes REST wire models generated from schema/pyth_hermes.json."""
+"""PythHermes REST wire models generated from src/data/pyth/schema/pyth_hermes.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

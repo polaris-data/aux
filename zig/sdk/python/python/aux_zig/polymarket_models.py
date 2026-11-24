@@ -1,4 +1,4 @@
-"""Polymarket REST wire models generated from schema/polymarket.json."""
+"""Polymarket REST wire models generated from src/exchanges/polymarket/schema/polymarket.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

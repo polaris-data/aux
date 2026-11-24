@@ -1,4 +1,4 @@
-"""Metric REST wire models generated from schema/metric.json."""
+"""Metric REST wire models generated from src/exchanges/metric/schema/metric.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

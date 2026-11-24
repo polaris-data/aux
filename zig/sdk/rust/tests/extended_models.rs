@@ -1,5 +1,5 @@
 #![cfg(feature = "extended-models")]
-// Generated from schema/extended.json.
+// Generated from src/exchanges/extended/schema/extended.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::extended_models::*;

@@ -1,4 +1,4 @@
-// Generated from schema/hyperliquid.json.
+// Generated from src/exchanges/hyperliquid/schema/hyperliquid.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{HyperliquidClient, Error, Result};

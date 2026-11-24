@@ -1,4 +1,4 @@
-"""PythPro REST wire models generated from schema/pyth_pro.json."""
+"""PythPro REST wire models generated from src/data/pyth/schema/pyth_pro.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

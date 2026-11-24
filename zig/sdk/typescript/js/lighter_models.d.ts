@@ -1,4 +1,4 @@
-// Generated from schema/lighter.json.
+// Generated from src/exchanges/lighter/schema/lighter.json.
 import type { HttpValue } from "./index";
 export type AccountSelector = "index" | "l1_address";
 

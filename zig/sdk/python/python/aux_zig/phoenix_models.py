@@ -1,4 +1,4 @@
-"""Phoenix REST wire models generated from schema/phoenix.json."""
+"""Phoenix REST wire models generated from src/exchanges/phoenix/schema/phoenix.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

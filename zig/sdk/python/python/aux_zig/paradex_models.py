@@ -1,4 +1,4 @@
-"""Paradex REST wire models generated from schema/paradex.json."""
+"""Paradex REST wire models generated from src/exchanges/paradex/schema/paradex.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

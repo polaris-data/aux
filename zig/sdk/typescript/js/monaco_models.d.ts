@@ -1,4 +1,4 @@
-// Generated from schema/monaco.json.
+// Generated from src/exchanges/monaco/schema/monaco.json.
 import type { HttpValue } from "./index";
 
 export interface AccountBalance {

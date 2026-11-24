@@ -1,4 +1,4 @@
-// Generated from schema/kalshi_perps.json.
+// Generated from src/exchanges/kalshi/schema/kalshi_perps.json.
 import type { HttpValue } from "./index";
 export type CancelAllMarginOrdersResponse = HttpValue;
 export type ClearingAssetClass = string;

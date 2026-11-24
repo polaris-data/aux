@@ -1,8 +1,18 @@
 # aux
 
-`aux` connects you to DeFi-native exchange APIs, external trading infrastructure and market data vendors, through SDKs in Rust, Python, and Node/TypeScript.
+`aux` connects you to DeFi-native exchange APIs, external trading infrastructure and market data vendors through SDKs in Rust, Python, Node/TypeScript, and Zig.
 
 ## Installation
+
+### Zig
+
+With **Zig 0.17.1**, add the `zig/` directory as a local package dependency named `aux`, or fetch the verified source archive into your application's project.
+
+```sh
+zig fetch --save=aux /path/to/aux-zig-native-0.0.1.tar.gz
+```
+
+The package exports the `aux` module with typed connector clients, streams, signing, and chain operations. [Zig setup and usage](zig/README.md#zig-native-sdk)
 
 ### Rust
 

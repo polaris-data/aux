@@ -1,4 +1,4 @@
-// Generated from schema/hyperdash.json.
+// Generated from src/data/hyperdash/schema/hyperdash.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{HyperdashClient, Error, Result};

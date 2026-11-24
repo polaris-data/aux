@@ -1,4 +1,4 @@
-// Generated from schema/tardis.json.
+// Generated from src/data/tardis/schema/tardis.json.
 import type { HttpValue } from "./index";
 export type Params = Record<string, HttpValue>;
 

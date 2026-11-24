@@ -1,4 +1,4 @@
-// Generated from schema/dune.json.
+// Generated from src/data/dune/schema/dune.json.
 import type { HttpValue } from "./index";
 export type Performance = "small" | "medium" | "large";
 

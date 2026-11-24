@@ -1,5 +1,5 @@
 #![cfg(feature = "qfex-models")]
-// Generated from schema/qfex.json.
+// Generated from src/exchanges/qfex/schema/qfex.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::qfex_models::*;

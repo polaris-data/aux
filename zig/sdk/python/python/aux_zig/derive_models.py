@@ -1,4 +1,4 @@
-"""Derive REST wire models generated from schema/derive.json."""
+"""Derive REST wire models generated from src/exchanges/derive/schema/derive.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

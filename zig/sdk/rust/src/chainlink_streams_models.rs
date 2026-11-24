@@ -1,4 +1,4 @@
-// Generated from schema/chainlink_streams.json.
+// Generated from src/data/chainlink/schema/chainlink_streams.json.
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use crate::{ChainlinkDataStreamsClient, Error, Result};

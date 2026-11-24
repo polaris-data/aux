@@ -1,4 +1,4 @@
-// Generated from schema/pyth_pro.json.
+// Generated from src/data/pyth/schema/pyth_pro.json.
 import type { HttpValue } from "./index";
 
 export interface LiveRequest {

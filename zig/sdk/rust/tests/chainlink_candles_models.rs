@@ -1,5 +1,5 @@
 #![cfg(feature = "chainlink-candles-models")]
-// Generated from schema/chainlink_candles.json.
+// Generated from src/data/chainlink/schema/chainlink_candles.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::chainlink_candles_models::*;

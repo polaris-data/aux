@@ -1,5 +1,5 @@
 #![cfg(feature = "databento-reference-models")]
-// Generated from schema/databento_reference.json.
+// Generated from src/data/databento/schema/databento_reference.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::databento_reference_models::*;

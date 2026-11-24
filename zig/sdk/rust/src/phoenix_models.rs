@@ -1,4 +1,4 @@
-// Generated from schema/phoenix.json.
+// Generated from src/exchanges/phoenix/schema/phoenix.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{PhoenixClient, Error, Result};

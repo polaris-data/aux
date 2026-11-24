@@ -1,5 +1,5 @@
 #![cfg(feature = "metric-models")]
-// Generated from schema/metric.json.
+// Generated from src/exchanges/metric/schema/metric.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::metric_models::*;

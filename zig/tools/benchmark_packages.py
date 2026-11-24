@@ -60,7 +60,7 @@ def main():
         node = source / "sdk/typescript"
         subprocess.run(["cargo", "fetch", "--locked"], cwd=source, check=True)
         subprocess.run(["npm", "ci", "--no-audit", "--no-fund"], cwd=node, check=True)
-        connector = source / "src/derive_stream.zig"
+        connector = source / "src/exchanges/derive/stream.zig"
         original = connector.read_text()
         # A protocol edit that changes generated machine code in the temporary copy.
         probe = "interval != 1000"

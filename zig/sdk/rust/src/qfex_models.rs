@@ -1,4 +1,4 @@
-// Generated from schema/qfex.json.
+// Generated from src/exchanges/qfex/schema/qfex.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{QfexClient, Error, Result};

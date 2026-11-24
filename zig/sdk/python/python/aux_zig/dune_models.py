@@ -1,4 +1,4 @@
-"""Dune REST wire models generated from schema/dune.json."""
+"""Dune REST wire models generated from src/data/dune/schema/dune.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

@@ -1,4 +1,4 @@
-// Generated from schema/kalshi.json.
+// Generated from src/exchanges/kalshi/schema/kalshi.json.
 import type { HttpValue } from "./index";
 export type AcceptBlockTradeProposalResponse = HttpValue;
 export type AcceptQuoteResponse = HttpValue;

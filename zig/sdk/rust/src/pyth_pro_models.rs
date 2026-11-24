@@ -1,4 +1,4 @@
-// Generated from schema/pyth_pro.json.
+// Generated from src/data/pyth/schema/pyth_pro.json.
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use crate::{PythProClient, Error, Result};

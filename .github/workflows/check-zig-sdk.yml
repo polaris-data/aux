@@ -65,6 +65,8 @@ jobs:
           python rebuild.py --check --target "$TARGET"
           cc tests/abi.c -Iinclude "sdk/rust/prebuilt/$TARGET/libaux_zig_core.a" -o "$RUNNER_TEMP/abi"
           "$RUNNER_TEMP/abi"
+      - name: Build and exercise the Zig consumer
+        run: python check_zig_sdk.py
       - name: Install and test the SDKs
         run: python check_packages.py
       - name: Save verified SDK packages

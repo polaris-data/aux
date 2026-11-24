@@ -1,5 +1,5 @@
 #![cfg(feature = "pyth-hermes-models")]
-// Generated from schema/pyth_hermes.json.
+// Generated from src/data/pyth/schema/pyth_hermes.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::pyth_hermes_models::*;

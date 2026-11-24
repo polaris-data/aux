@@ -1,5 +1,5 @@
 #![cfg(feature = "lighter-models")]
-// Generated from schema/lighter.json.
+// Generated from src/exchanges/lighter/schema/lighter.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::lighter_models::*;

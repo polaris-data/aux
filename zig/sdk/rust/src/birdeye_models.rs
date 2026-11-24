@@ -1,4 +1,4 @@
-// Generated from schema/birdeye.json.
+// Generated from src/data/birdeye/schema/birdeye.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{BirdeyeClient, Error, Result};

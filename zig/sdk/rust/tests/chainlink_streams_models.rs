@@ -1,5 +1,5 @@
 #![cfg(feature = "chainlink-streams-models")]
-// Generated from schema/chainlink_streams.json.
+// Generated from src/data/chainlink/schema/chainlink_streams.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::chainlink_streams_models::*;

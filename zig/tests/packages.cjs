@@ -224,7 +224,7 @@ async function testPerpsAndParadex() {
       proxy:golden.proxy,secret:"fixture",proxy_key:golden.key,owner_key:golden.key,withdrawal_contract:golden.withdrawal_contract
     }});
     const kinds = name => new Map(fs.readFileSync(path.join(__dirname,"../src",name),"utf8").trim().split("\n").map(line => line.split(" ")));
-    const scopes = kinds("paradex-bearer-routes.txt"), actions = kinds("polymarket-perps-routes.txt");
+    const scopes = kinds("exchanges/paradex/bearer-routes.txt"), actions = kinds("exchanges/polymarket/perps-routes.txt");
     for (const row of [...fixture("http"),...fixture("prediction-http")]) {
       const paradex = row.venue === "paradex" && scopes.has(row.operation);
       if (!paradex && (row.venue !== "polymarket" || !actions.has(row.operation))) continue;
@@ -559,7 +559,7 @@ async function testSharedPeer() {
   const address=metricRow.request.pool;
   compare(await contracts.contract("AnchoredPriceProvider",address).bpsBase({block:"safe"}),["-3"]);
   const vectors = new Map(fixture("metric-abi").filter(r=>r.kind==="function").map(r=>[r.contract+"."+r.signature,r]));
-  const methods = fs.readFileSync(path.join(__dirname,"../schema/metric-contract-methods.tsv"),"utf8").trim().split("\n");
+  const methods = fs.readFileSync(path.join(__dirname,"../src/exchanges/metric/schema/metric-contract-methods.tsv"),"utf8").trim().split("\n");
   assert.equal(methods.length,vectors.size);
   for (const line of methods) {
     const [contract,signature,,method,mode] = line.split("\t");

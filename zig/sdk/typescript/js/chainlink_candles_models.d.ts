@@ -1,4 +1,4 @@
-// Generated from schema/chainlink_candles.json.
+// Generated from src/data/chainlink/schema/chainlink_candles.json.
 import type { HttpValue } from "./index";
 
 export interface AuthorizeRequest {

@@ -1,4 +1,4 @@
-// Generated from schema/polymarket_perps.json.
+// Generated from src/exchanges/polymarket/schema/polymarket_perps.json.
 import type { HttpValue } from "./index";
 export type CancelChaseResponse = HttpValue;
 export type PerpsCancelResponse = HttpValue;

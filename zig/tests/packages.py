@@ -72,7 +72,7 @@ def test_solana():
 
 def test_hyperdash_exports():
     base = {r["operation"]:r for r in fixture("data-http") if r["venue"] == "hyperdash"}
-    supported = (HERE.parent / "src/hyperdash-text-routes.txt").read_text().splitlines()
+    supported = (HERE.parent / "src/data/hyperdash/text-routes.txt").read_text().splitlines()
 
     class Handler(BaseHTTPRequestHandler):
         def respond(self):
@@ -360,7 +360,7 @@ async def test_shared_peer(origin):
     address = chain_row["request"]["pool"]
     compare(await contracts.contract("AnchoredPriceProvider",address).bps_base(block="safe"), ["-3"])
     vectors = {(r["contract"],r["signature"]):r for r in fixture("metric-abi") if r["kind"] == "function"}
-    methods = (HERE.parent/"schema/metric-contract-methods.tsv").read_text().splitlines()
+    methods = (HERE.parent/"src/exchanges/metric/schema/metric-contract-methods.tsv").read_text().splitlines()
     assert len(vectors) == len(methods)
     for line in methods:
         contract, signature, method, _, mode = line.split("\t")
@@ -457,7 +457,7 @@ async def test_shared_peer(origin):
     assert abs(generated["signature_expiry_sec"] - time.time() - 300) < 5
     refs = [r for r in fixture("http") if r["venue"] == "derive"]
     orders = fixture("derive-orders")["orders"]
-    methods = dict(line.split() for line in (HERE.parent / "src/derive-rpc-routes.txt").read_text().splitlines())
+    methods = dict(line.split() for line in (HERE.parent / "src/exchanges/derive/rpc-routes.txt").read_text().splitlines())
     async with await sdk.DeriveClient(api_key=d["owner"],api_secret=d["key"],chain_id=1).open_rpc(endpoint=ws_url+"derive/full") as rpc:
         for row in refs:
             name = row["operation"]
@@ -1427,7 +1427,7 @@ async def test_socket(venue="qfex"):
 
 def test_clob():
     credentials = {"address": "0x" + "22" * 20, "key": "test-key", "passphrase": "test-pass", "secret": "cHVibGljLXRlc3Qtc2VjcmV0"}
-    signed_ops = set((HERE.parent / "src/polymarket-l2-routes.txt").read_text().splitlines())
+    signed_ops = set((HERE.parent / "src/exchanges/polymarket/l2-routes.txt").read_text().splitlines())
     rows = [row for row in fixture("prediction-http") if row["operation"] in signed_ops]
     assert len(rows) == len(signed_ops)
 
@@ -1468,8 +1468,8 @@ def test_clob():
 
 def test_paradex_and_perps():
     routes = HERE.parent / "src"
-    paradex = dict(line.split() for line in (routes / "paradex-bearer-routes.txt").read_text().splitlines())
-    perps = dict(line.split() for line in (routes / "polymarket-perps-routes.txt").read_text().splitlines())
+    paradex = dict(line.split() for line in (routes / "exchanges/paradex/bearer-routes.txt").read_text().splitlines())
+    perps = dict(line.split() for line in (routes / "exchanges/polymarket/perps-routes.txt").read_text().splitlines())
     golden = fixture("polymarket-perps-signing")
     token = "fixture." + base64.urlsafe_b64encode(b'{"exp":4102444800}').decode().rstrip("=") + ".fixture"
     credentials = dict(owner_key=golden["key"], proxy_key=golden["key"], proxy=golden["proxy"],
@@ -1534,7 +1534,7 @@ def test_paradex_and_perps():
             assert await method(request=params) == loads(row.get("response_json", dump(row["response"]))), name
 
         vectors = {row["operation"]:row for row in fixture("pascal-permits")}
-        services = dict(line.split() for line in (routes / "polymarket-service-routes.txt").read_text().splitlines())
+        services = dict(line.split() for line in (routes / "exchanges/polymarket/service-routes.txt").read_text().splitlines())
         clob = {"address":golden["proxy"], "key":"api", "secret":"YQ==", "passphrase":"pass"}
         builder = {"key":"builder", "secret":"Yg==", "passphrase":"builder-pass"}
         for row in fixture("prediction-http"):
@@ -1697,7 +1697,7 @@ def test_paradex_and_perps():
 
 def test_network():
     orders = fixture("derive-orders")
-    login_ops = set((HERE.parent / "src/derive-login-routes.txt").read_text().splitlines())
+    login_ops = set((HERE.parent / "src/exchanges/derive/login-routes.txt").read_text().splitlines())
     login_rows = {r["route"]: r for r in fixture("http") if r["venue"] == "derive" and r["operation"] in login_ops}
     seen_nonces = set()
     rpc_rows = {r["method"]: r for r in fixture("evm-rpc")}

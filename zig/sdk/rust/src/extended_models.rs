@@ -1,4 +1,4 @@
-// Generated from schema/extended.json.
+// Generated from src/exchanges/extended/schema/extended.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{ExtendedClient, Error, Result};

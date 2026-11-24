@@ -1,4 +1,4 @@
-"""Qfex REST wire models generated from schema/qfex.json."""
+"""Qfex REST wire models generated from src/exchanges/qfex/schema/qfex.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

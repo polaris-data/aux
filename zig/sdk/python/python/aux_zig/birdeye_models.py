@@ -1,4 +1,4 @@
-"""Birdeye REST wire models generated from schema/birdeye.json."""
+"""Birdeye REST wire models generated from src/data/birdeye/schema/birdeye.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

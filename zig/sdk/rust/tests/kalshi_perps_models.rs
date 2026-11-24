@@ -1,5 +1,5 @@
 #![cfg(feature = "kalshi-perps-models")]
-// Generated from schema/kalshi_perps.json.
+// Generated from src/exchanges/kalshi/schema/kalshi_perps.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::kalshi_perps_models::*;

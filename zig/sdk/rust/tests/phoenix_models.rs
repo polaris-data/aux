@@ -1,5 +1,5 @@
 #![cfg(feature = "phoenix-models")]
-// Generated from schema/phoenix.json.
+// Generated from src/exchanges/phoenix/schema/phoenix.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::phoenix_models::*;

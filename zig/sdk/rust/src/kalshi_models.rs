@@ -1,4 +1,4 @@
-// Generated from schema/kalshi.json.
+// Generated from src/exchanges/kalshi/schema/kalshi.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{KalshiClient, Error, Result};

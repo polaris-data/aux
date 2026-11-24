@@ -1,4 +1,4 @@
-// Generated from schema/lighter.json.
+// Generated from src/exchanges/lighter/schema/lighter.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{LighterClient, Error, Result};

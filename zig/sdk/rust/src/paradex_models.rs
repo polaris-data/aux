@@ -1,4 +1,4 @@
-// Generated from schema/paradex.json.
+// Generated from src/exchanges/paradex/schema/paradex.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{ParadexClient, Error, Result};

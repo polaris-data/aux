@@ -1,4 +1,4 @@
-// Generated from schema/pyth_hermes.json.
+// Generated from src/data/pyth/schema/pyth_hermes.json.
 import type { HttpValue } from "./index";
 
 export interface HermesLiveRequest {

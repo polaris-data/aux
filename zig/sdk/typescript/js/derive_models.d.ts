@@ -1,4 +1,4 @@
-// Generated from schema/derive.json.
+// Generated from src/exchanges/derive/schema/derive.json.
 import type { HttpValue } from "./index";
 export type Address = string;
 export type AddressKind = string;

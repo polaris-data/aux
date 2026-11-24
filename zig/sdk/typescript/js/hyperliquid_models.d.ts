@@ -1,4 +1,4 @@
-// Generated from schema/hyperliquid.json.
+// Generated from src/exchanges/hyperliquid/schema/hyperliquid.json.
 import type { HttpValue } from "./index";
 export type Tif = "Alo" | "Ioc" | "Gtc";
 export type Tpsl = "tp" | "sl";

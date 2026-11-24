@@ -6,7 +6,12 @@ from graphlib import TopologicalSorter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMAS = {path.stem: json.loads(path.read_text()) for path in sorted((ROOT / "schema").glob("*.json"))}
+SCHEMA_PATHS = {}
+for path in sorted((ROOT / "src").glob("*/*/schema/*.json"), key=lambda path: path.stem):
+    if path.stem in SCHEMA_PATHS:
+        raise ValueError(f"Duplicate SDK schema name in {SCHEMA_PATHS[path.stem]} and {path}")
+    SCHEMA_PATHS[path.stem] = path
+SCHEMAS = {venue: json.loads(path.read_text()) for venue, path in SCHEMA_PATHS.items()}
 
 
 def typename(ty, lang, prefix=""):
@@ -53,7 +58,7 @@ def emit_models(emit, venue, exposed):
     client = schema.get("client", entity + "Client")
     fixture = schema.get("fixture", "http")
     service_venue = schema.get("venue", venue)
-    source = f"schema/{venue}.json"
+    source = SCHEMA_PATHS[venue].relative_to(ROOT).as_posix()
     feature = f"{venue.replace('_', '-')}-models"
     data_models = venue in {"hyperdash", "birdeye", "dune", "qfex", "metric", "lighter", "monaco", "hyperliquid"}
     native_number = venue in {"extended", "phoenix"}

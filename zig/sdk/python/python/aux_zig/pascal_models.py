@@ -1,4 +1,4 @@
-"""Pascal REST wire models generated from schema/pascal.json."""
+"""Pascal REST wire models generated from src/exchanges/pascal/schema/pascal.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

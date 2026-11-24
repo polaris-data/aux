@@ -1,4 +1,4 @@
-// Generated from schema/chainlink_candles.json.
+// Generated from src/data/chainlink/schema/chainlink_candles.json.
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use crate::{ChainlinkCandlestickClient, Error, Result};

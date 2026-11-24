@@ -1,4 +1,4 @@
-"""Hyperdash REST wire models generated from schema/hyperdash.json."""
+"""Hyperdash REST wire models generated from src/data/hyperdash/schema/hyperdash.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

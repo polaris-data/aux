@@ -1,4 +1,4 @@
-// Generated from schema/polymarket.json.
+// Generated from src/exchanges/polymarket/schema/polymarket.json.
 import type { HttpValue } from "./index";
 export type BridgeAddress = string;
 export type BuilderGatewayAcceptRfqResponse = HttpValue;

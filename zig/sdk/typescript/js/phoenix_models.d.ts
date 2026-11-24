@@ -1,4 +1,4 @@
-// Generated from schema/phoenix.json.
+// Generated from src/exchanges/phoenix/schema/phoenix.json.
 import type { HttpValue } from "./index";
 export type AckNotificationItem = HttpValue;
 export type ActivateReferralTxStatus = string;

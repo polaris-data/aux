@@ -1,4 +1,4 @@
-// Generated from schema/pascal.json.
+// Generated from src/exchanges/pascal/schema/pascal.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{PascalClient, Error, Result};

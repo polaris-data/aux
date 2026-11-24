@@ -1,4 +1,4 @@
-"""Extended REST wire models generated from schema/extended.json."""
+"""Extended REST wire models generated from src/exchanges/extended/schema/extended.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

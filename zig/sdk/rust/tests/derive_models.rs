@@ -1,5 +1,5 @@
 #![cfg(feature = "derive-models")]
-// Generated from schema/derive.json.
+// Generated from src/exchanges/derive/schema/derive.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::derive_models::*;

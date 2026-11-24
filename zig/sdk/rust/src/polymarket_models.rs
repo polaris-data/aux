@@ -1,4 +1,4 @@
-// Generated from schema/polymarket.json.
+// Generated from src/exchanges/polymarket/schema/polymarket.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{PolymarketClient, Error, Result};

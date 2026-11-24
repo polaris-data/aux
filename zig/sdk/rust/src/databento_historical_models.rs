@@ -1,4 +1,4 @@
-// Generated from schema/databento_historical.json.
+// Generated from src/data/databento/schema/databento_historical.json.
 
 use serde_json::json;
 use crate::{HistoricalClient, Error, Result};

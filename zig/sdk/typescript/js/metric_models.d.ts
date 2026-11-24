@@ -1,4 +1,4 @@
-// Generated from schema/metric.json.
+// Generated from src/exchanges/metric/schema/metric.json.
 import type { HttpValue } from "./index";
 export type TradeType = "exact_in" | "exact_out";
 export type FactorySettingsResponse = Record<string, HttpValue>;

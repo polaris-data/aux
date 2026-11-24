@@ -1,4 +1,4 @@
-// Generated from schema/chainlink_streams.json.
+// Generated from src/data/chainlink/schema/chainlink_streams.json.
 import type { HttpValue } from "./index";
 
 export interface DiscoveryRequest {

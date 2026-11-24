@@ -1,5 +1,5 @@
 #![cfg(feature = "paradex-models")]
-// Generated from schema/paradex.json.
+// Generated from src/exchanges/paradex/schema/paradex.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::paradex_models::*;

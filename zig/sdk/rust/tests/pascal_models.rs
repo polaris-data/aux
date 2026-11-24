@@ -1,5 +1,5 @@
 #![cfg(feature = "pascal-models")]
-// Generated from schema/pascal.json.
+// Generated from src/exchanges/pascal/schema/pascal.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::pascal_models::*;

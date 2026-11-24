@@ -1,4 +1,4 @@
-// Generated from schema/extended.json.
+// Generated from src/exchanges/extended/schema/extended.json.
 import type { HttpValue } from "./index";
 export type AssetOperationStatus = string;
 export type AssetOperationType = string;

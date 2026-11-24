@@ -2,11 +2,15 @@
 from pathlib import Path
 
 
-def emit_sessions(root: Path, emit, camel):
-    derive = [line.split()[0] for line in (root / "src/derive-rpc-routes.txt").read_text().splitlines()]
+def session_commands(root: Path):
+    derive = [line.split()[0] for line in (root / "src/exchanges/derive/rpc-routes.txt").read_text().splitlines()]
     perps = ("create_orders modify_orders modify_orders_coid cancel_orders cancel_orders_coid "
              "cancel_all auto_cancel update_leverage update_leverages update_margin subscribe unsubscribe ping").split()
-    sessions = {"Derive": derive, "PolymarketPerps": perps, "PolymarketRfq": ["quote", "cancel_quote", "last_look"]}
+    return {"Derive": derive, "PolymarketPerps": perps, "PolymarketRfq": ["quote", "cancel_quote", "last_look"]}
+
+
+def emit_sessions(root: Path, emit, camel):
+    sessions = session_commands(root)
     sdk = root / "sdk"
     rust, js, ts = [], ['"use strict";', 'exports.commands = {'], []
     py = ['"""Generated from the native RPC command inventory."""', 'from . import _RpcSession', '']

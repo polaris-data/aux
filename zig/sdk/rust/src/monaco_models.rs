@@ -1,4 +1,4 @@
-// Generated from schema/monaco.json.
+// Generated from src/exchanges/monaco/schema/monaco.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{MonacoClient, Error, Result};

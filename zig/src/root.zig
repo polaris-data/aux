@@ -5,16 +5,16 @@ fn abort(_: []const u8, _: ?usize) noreturn {
 }
 
 comptime {
-    _ = @import("native.zig");
-    _ = @import("stream.zig");
-    _ = @import("encoding.zig");
-    _ = @import("hermes.zig");
-    _ = @import("json.zig");
+    _ = @import("core/native.zig");
+    _ = @import("core/stream.zig");
+    _ = @import("core/encoding.zig");
+    _ = @import("data/pyth/hermes.zig");
+    _ = @import("core/json.zig");
 }
 
 test "native JSON depth and exact token preservation" {
     const std = @import("std");
-    const wire = @import("wire.zig");
+    const wire = @import("core/wire.zig");
     var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
     defer arena.deinit();
     const a = arena.allocator();

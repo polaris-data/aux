@@ -1,5 +1,5 @@
 #![cfg(feature = "polymarket-perps-models")]
-// Generated from schema/polymarket_perps.json.
+// Generated from src/exchanges/polymarket/schema/polymarket_perps.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::polymarket_perps_models::*;

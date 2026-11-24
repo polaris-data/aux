@@ -1,4 +1,4 @@
-"""ChainlinkStreams REST wire models generated from schema/chainlink_streams.json."""
+"""ChainlinkStreams REST wire models generated from src/data/chainlink/schema/chainlink_streams.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

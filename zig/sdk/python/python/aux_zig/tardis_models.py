@@ -1,4 +1,4 @@
-"""Tardis REST wire models generated from schema/tardis.json."""
+"""Tardis REST wire models generated from src/data/tardis/schema/tardis.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

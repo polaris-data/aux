@@ -1,4 +1,4 @@
-// Generated from schema/dune.json.
+// Generated from src/data/dune/schema/dune.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{DuneClient, Error, Result};

@@ -1,4 +1,4 @@
-// Generated from schema/qfex.json.
+// Generated from src/exchanges/qfex/schema/qfex.json.
 import type { HttpValue } from "./index";
 
 export interface Symbol {

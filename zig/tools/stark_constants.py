@@ -10,7 +10,7 @@ BASES = [
     (0x04ba4cc166be8dec764910f75b45f74b40c690c74709e90f3aa372f0bd2d6997,0x0040301cf5c1751f4b971e46c4ede85fcac5c59a5ce5ae7c48151f27b24b219c,248),
     (0x054302dcb0e6cc1c6e44cca8f61a63bb2ca65048d53fb325d36ff12c49a58202,0x01b77b3e37d13504b348046268d8ae25ce98ad783c25561a879dcc77e99c2426,4),
 ]
-out = Path(__file__).resolve().parents[1] / "src"
+out = Path(__file__).resolve().parents[1] / "src/core"
 table = bytearray()
 for x,y,count in BASES:
     for _ in range(count):

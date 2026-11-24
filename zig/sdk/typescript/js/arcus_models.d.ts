@@ -1,4 +1,4 @@
-// Generated from schema/arcus.json.
+// Generated from src/exchanges/arcus/schema/arcus.json.
 import type { HttpValue } from "./index";
 export type Side = "BUY" | "SELL";
 export type OrderType = "LIMIT" | "MARKET";

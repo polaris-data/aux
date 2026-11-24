@@ -1,4 +1,4 @@
-"""Kalshi REST wire models generated from schema/kalshi.json."""
+"""Kalshi REST wire models generated from src/exchanges/kalshi/schema/kalshi.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

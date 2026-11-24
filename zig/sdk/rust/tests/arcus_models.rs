@@ -1,5 +1,5 @@
 #![cfg(feature = "arcus-models")]
-// Generated from schema/arcus.json.
+// Generated from src/exchanges/arcus/schema/arcus.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::arcus_models::*;

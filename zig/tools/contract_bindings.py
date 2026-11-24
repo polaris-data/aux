@@ -10,7 +10,7 @@ def generate():
     js = ['"use strict";', '']
     ts = ['import type { MetricChainClient, HttpValue } from "./index";', '']
     contracts = defaultdict(list)
-    for line in (ROOT / "schema/metric-contract-methods.tsv").read_text().splitlines():
+    for line in (ROOT / "src/exchanges/metric/schema/metric-contract-methods.tsv").read_text().splitlines():
         contract, signature, python, node, mode = line.split("\t")
         contracts[contract].append((signature, python, node, mode))
     rust = ['// Named Metric contract calls backed by the Zig ABI registry.',

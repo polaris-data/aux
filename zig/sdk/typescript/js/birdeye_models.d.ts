@@ -1,4 +1,4 @@
-// Generated from schema/birdeye.json.
+// Generated from src/data/birdeye/schema/birdeye.json.
 import type { HttpValue } from "./index";
 
 export interface PriceRequest {

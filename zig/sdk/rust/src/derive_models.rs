@@ -1,4 +1,4 @@
-// Generated from schema/derive.json.
+// Generated from src/exchanges/derive/schema/derive.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{DeriveClient, Error, Result};

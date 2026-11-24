@@ -1,4 +1,4 @@
-// Generated from schema/pascal.json.
+// Generated from src/exchanges/pascal/schema/pascal.json.
 import type { HttpValue } from "./index";
 export type CancelOrdersResponse = Array<CancelOrdersResponseValueItem>;
 export type MassCancelOrdersResponse = Array<MassCancelOrdersResponseValueItem>;

@@ -1,4 +1,4 @@
-"""Monaco REST wire models generated from schema/monaco.json."""
+"""Monaco REST wire models generated from src/exchanges/monaco/schema/monaco.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

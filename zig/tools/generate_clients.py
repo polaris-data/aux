@@ -56,18 +56,18 @@ def main():
     from rpc_bindings import emit_sessions
     emit_sessions(ROOT, emit, camel)
 
-    derive_login = set((ROOT / "src/derive-login-routes.txt").read_text().splitlines())
+    derive_login = set((ROOT / "src/exchanges/derive/login-routes.txt").read_text().splitlines())
     # Mirror the native write enumeration. Every variant has an order-dispatch fixture.
     import re
-    enum = (ROOT / "src/derive_orders.zig").read_text().split("enum {", 1)[1].split("}", 1)[0]
+    enum = (ROOT / "src/exchanges/derive/orders.zig").read_text().split("enum {", 1)[1].split("}", 1)[0]
     signed = re.findall(r"private_\w+", enum)
     derive_login.update(signed)
     derive_login.update(name + "_debug" for name in signed)
-    clob_l2 = set((ROOT / "src/polymarket-l2-routes.txt").read_text().splitlines())
+    clob_l2 = set((ROOT / "src/exchanges/polymarket/l2-routes.txt").read_text().splitlines())
     private = {"hyperliquid":{"order","cancel","cancel_by_cloid"},"derive": derive_login, "polymarket": clob_l2}
-    for venue, filename in (("paradex", "paradex-bearer-routes.txt"), ("polymarket", "polymarket-perps-routes.txt"), ("polymarket", "polymarket-service-routes.txt"), ("pascal", "pascal-permit-routes.txt")):
-        private.setdefault(venue, set()).update(line.split()[0] for line in (ROOT / "src" / filename).read_text().splitlines())
-    private["polymarket"].update((ROOT / "src/polymarket-wallet-routes.txt").read_text().splitlines())
+    for venue, filename in (("paradex", "bearer-routes.txt"), ("polymarket", "perps-routes.txt"), ("polymarket", "service-routes.txt"), ("pascal", "permit-routes.txt")):
+        private.setdefault(venue, set()).update(line.split()[0] for line in (ROOT / "src/exchanges" / venue / filename).read_text().splitlines())
+    private["polymarket"].update((ROOT / "src/exchanges/polymarket/wallet-routes.txt").read_text().splitlines())
     groups = defaultdict(list)
     for filename in ("http.json", "prediction-http.json", "data-http.json", "text-http.json"):
         for row in json.loads((ROOT / "tests" / filename).read_text()):
@@ -87,7 +87,7 @@ def main():
             ):
                 cls = v.title() + "PerpsClient"
             groups[(cls, v)].append((name, op))
-    for name in (ROOT / "src/hyperdash-text-routes.txt").read_text().splitlines():
+    for name in (ROOT / "src/data/hyperdash/text-routes.txt").read_text().splitlines():
         for suffix in ("_csv", "_ndjson"):
             groups[("HyperdashClient", "hyperdash")].append((name + suffix, name + suffix))
     groups[("TardisMachineClient","tardis")] = []
@@ -715,6 +715,8 @@ def main():
     for (cls, v), methods in groups.items():
         if cls in models_for:
             emit_models(emit, models_for[cls], {op: name for name, op in methods})
+    from zig_bindings import generate as generate_zig
+    generate_zig(emit, groups, models_for)
     sdk = ROOT / "sdk"
     emit(sdk / "rust/src/clients_generated.rs", "\n".join(rust) + "\n")
     emit(sdk / "typescript/js/clients.cjs", "\n".join(js) + "\n")

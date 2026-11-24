@@ -1,4 +1,4 @@
-// Generated from schema/databento_reference.json.
+// Generated from src/data/databento/schema/databento_reference.json.
 
 use serde_json::json;
 use crate::{ReferenceClient, Error, Result};

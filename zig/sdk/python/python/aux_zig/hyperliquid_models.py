@@ -1,4 +1,4 @@
-"""Hyperliquid REST wire models generated from schema/hyperliquid.json."""
+"""Hyperliquid REST wire models generated from src/exchanges/hyperliquid/schema/hyperliquid.json."""
 from __future__ import annotations
 from decimal import Decimal
 from typing import Any, TypedDict

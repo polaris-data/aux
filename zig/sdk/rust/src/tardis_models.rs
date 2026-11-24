@@ -1,4 +1,4 @@
-// Generated from schema/tardis.json.
+// Generated from src/data/tardis/schema/tardis.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{TardisClient, Error, Result};

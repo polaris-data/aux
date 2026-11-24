@@ -1,4 +1,4 @@
-// Generated from schema/paradex.json.
+// Generated from src/exchanges/paradex/schema/paradex.json.
 import type { HttpValue } from "./index";
 export type ResponsesAccountKind = string;
 export type ResponsesAlgoType = string;

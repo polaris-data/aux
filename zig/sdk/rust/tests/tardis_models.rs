@@ -1,5 +1,5 @@
 #![cfg(feature = "tardis-models")]
-// Generated from schema/tardis.json.
+// Generated from src/data/tardis/schema/tardis.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::tardis_models::*;

@@ -1,4 +1,4 @@
-// Generated from schema/metric.json.
+// Generated from src/exchanges/metric/schema/metric.json.
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{MetricClient, Error, Result};

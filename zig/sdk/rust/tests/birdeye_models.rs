@@ -1,5 +1,5 @@
 #![cfg(feature = "birdeye-models")]
-// Generated from schema/birdeye.json.
+// Generated from src/data/birdeye/schema/birdeye.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::birdeye_models::*;

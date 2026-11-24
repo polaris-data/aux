@@ -1,5 +1,5 @@
 #![cfg(feature = "hyperliquid-models")]
-// Generated from schema/hyperliquid.json.
+// Generated from src/exchanges/hyperliquid/schema/hyperliquid.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::hyperliquid_models::*;

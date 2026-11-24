@@ -1,5 +1,5 @@
 #![cfg(feature = "monaco-models")]
-// Generated from schema/monaco.json.
+// Generated from src/exchanges/monaco/schema/monaco.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::monaco_models::*;

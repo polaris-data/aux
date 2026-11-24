@@ -2,6 +2,44 @@
 
 This directory is a standalone port of aux. The Zig library owns HTTP and TLS, JSON tokenization, request encoding, exchange response handling and the binary codecs listed below. The Rust, TypeScript and Python packages call its versioned C ABI. Everything needed to build and test the port lives here. The reference snapshot for the initial fixtures is aux commit `0b9b24f29c6ea5d23ddb0d470e196594acb9bccc`.
 
+Zig applications import the public `aux` module from `sdk/zig/root.zig`. The static library for the other SDKs builds from `src/root.zig`. Shared transport, wire formats and the C ABI live in `src/core/`. Exchange protocols live in `src/exchanges/<vendor>/` and data providers in `src/data/<vendor>/`. Each vendor keeps its SDK model inputs in `schema/` and its third-party attributions in `notices/` where applicable.
+
+## Zig-native SDK
+
+Use Zig 0.17.1 and add this directory as the `aux` dependency in your application's `build.zig.zon`. The external consumer in `tests/zig_consumer` shows a complete local path dependency. To use the verified source archive, run `zig fetch --save=aux /absolute/path/to/aux-zig-native-0.0.1.tar.gz` in the consuming project. Import the module in your application's build script.
+
+```zig
+const aux = b.dependency("aux", .{ .target = target, .optimize = optimize });
+exe.root_module.addImport("aux", aux.module("aux"));
+```
+
+All 1,880 named HTTP methods use the shared SDK schemas. Model declarations live beside their client, for example `aux.clients.pyth_hermes.LatestPriceUpdatesRequest`. The compiler checks the request and infers the response type.
+
+```zig
+const aux = @import("aux");
+const std = @import("std");
+
+pub fn latest(allocator: std.mem.Allocator, ids: []const []const u8) !void {
+    const client = aux.clients.PythHermesClient.init(allocator, .{});
+    var reply = try client.latest_price_updates(.{ .ids = ids, .parsed = true });
+    defer reply.deinit();
+    std.debug.print("Hermes HTTP status {d}\n", .{reply.value.status});
+}
+```
+
+Clients borrow their allocator, endpoint strings, credentials and callback contexts. Each successful request returns an `Owned(T)` whose arena owns the response. `aux.parseAs(T, allocator, bytes)` applies the same decoder to caller-supplied JSON. Open JSON fields preserve numeric tokens as `number_string`. Schema fields that accept arbitrary JSON numbers use `Number.text`. Supply a separate `Diagnostic` per concurrent operation to retain the venue's structured error. Streams own their handles. A single reader can call `next()` for JSON or `nextBytes()` for binary data. Call `cancel()` to wake a blocked reader, join it, then call `deinit()`. Each returned JSON event owns its storage. Free byte chunks with the client allocator.
+
+| Zig API | Functionality |
+| --- | --- |
+| `aux.clients` | Named HTTP clients, schema types, streaming endpoints, trading and RPC session openers |
+| `aux.sessions` | Commands for open exchange, Databento and Tardis sessions |
+| `aux.chain`, `aux.contracts` | EVM reads, coordinated writes, Metric's named contract methods, Polymarket ABI calls, Phoenix and Pascal Solana transactions |
+| `aux.workflows`, `aux.wallet`, `aux.identity` | Offline helpers, Phoenix instruction builders, local and callback signing, onboarding, login and restore |
+| `aux.Client.invoke`, `invokeBytes`, `openDbn` | Direct access to the native operation inventory, raw report decoding and DBN files |
+| `aux.Options.signer`, `transport`, `dial` | Application signing callbacks, unary HTTP exchanges and connected sockets for custom transport policies |
+
+From this directory run `python3 check_zig_sdk.py` to fetch the source archive into a fresh Zig project, compile the consumer, and exercise the fixtures. It writes the verified archive to `dist/`. The generator check is `python3 tools/generate_clients.py --check`. The consumer itself builds using Zig and libc.
+
 ## Using the SDKs
 
 The Python and Node clients run network I/O off the application's event loop. Rust offers synchronous methods and optional Tokio adapters for unary requests, event subscriptions and trading sessions. These examples use the same request parameters.
@@ -30,7 +68,7 @@ Rust applications can enable the optional `rustls` Cargo feature and pass a `rus
 
 Python and TypeScript expose the core's authentication, transport, exchange, validation, decode and uncertain-outcome errors as subclasses of `ConnectorError`. Rust exposes these as `aux_zig::Error` variants.
 
-The HTTP methods accept wire-shaped objects. Named Python unary calls accept the reference `request=` keyword and the standalone `params=` keyword. Dune also accepts separate query or execution identifiers and result options in Python, and the corresponding `queryId` or `executionId` options in TypeScript. Python and TypeScript expose request and response models for all 1,880 named unary methods in the standalone catalog. Rust provides the same contracts through venue Cargo features such as `metric-models` and `lighter-models` and the client's `typed()` interface. Some reference methods return arbitrary JSON or accept open parameter maps. Their SDK types preserve that flexibility. The default Rust interface accepts JSON with arbitrary precision. Python decodes decimal tokens to `Decimal`. Node returns unsafe integers as `bigint` and fractional or exponent tokens as strings. [Model snapshots](schema/)
+The HTTP methods accept wire-shaped objects. Named Python unary calls accept the reference `request=` keyword and the standalone `params=` keyword. Dune also accepts separate query or execution identifiers and result options in Python, and the corresponding `queryId` or `executionId` options in TypeScript. Python and TypeScript expose request and response models for all 1,880 named unary methods in the standalone catalog. Rust provides the same contracts through venue Cargo features such as `metric-models` and `lighter-models` and the client's `typed()` interface. Some reference methods return arbitrary JSON or accept open parameter maps. Their SDK types preserve that flexibility. The default Rust interface accepts JSON with arbitrary precision. Python decodes decimal tokens to `Decimal`. Node returns unsafe integers as `bigint` and fractional or exponent tokens as strings. [Exchange sources](src/exchanges/) · [Data sources](src/data/)
 
 The default native HTTP client reuses keep-alive connections. Up to eight pooled clients each retain one idle connection. Overlapping calls can still open additional connections. Common unary exchange errors carry the venue, HTTP status and lossless response body. Hyperdash masks secrets in its error payloads.
 
@@ -163,6 +201,6 @@ An edit to one connector recompiles the single native object that contains all c
 
 ## Adding an operation
 
-Add the native implementation and independent expected wire data under `tests/`. The REST catalog is in `src/routes.zig`. Shared fixtures run in Rust and against the installed npm and Python packages. Add authenticated dispatch only after the signing and headers have fixture coverage. Run `python3 tools/generate_clients.py` to regenerate named SDK methods, then run the package checks. The native headers in `include/` specify buffer ownership and stream handle lifetimes.
+Add the native implementation to the vendor folder and expected wire data to `tests/`. Each vendor owns a `routes.zig` table. Register new vendor tables in `src/core/routes.zig`. Shared fixtures run in Rust and against the installed npm and Python packages. Add authenticated dispatch only after the signing and headers have fixture coverage. Run `python3 tools/generate_clients.py` to regenerate named SDK methods, then run the package checks. The native headers in `include/` specify buffer ownership and stream handle lifetimes.
 
 To measure standalone release-package builds on a native runner, run `python3 tools/benchmark_packages.py --output timings.json` with `ZIG` and `MATURIN` set. The harness prefetches dependencies and measures each SDK in a temporary source copy. It records three clean builds and three rebuilds after a connector edit, including time in native compilation and wrapper packaging.

@@ -1,5 +1,5 @@
 #![cfg(feature = "hyperdash-models")]
-// Generated from schema/hyperdash.json.
+// Generated from src/data/hyperdash/schema/hyperdash.json.
 #[rustfmt::skip]
 mod fixtures {
     use aux_zig::hyperdash_models::*;

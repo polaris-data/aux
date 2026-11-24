@@ -1,4 +1,4 @@
-// Generated from schema/hyperdash.json.
+// Generated from src/data/hyperdash/schema/hyperdash.json.
 import type { HttpValue } from "./index";
 export type CreateJobRequestBodyKind = "account_fills_summary";
 export type GetAccountFillsRequestAggregate = "false" | "true";

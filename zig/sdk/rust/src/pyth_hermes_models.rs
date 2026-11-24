@@ -1,4 +1,4 @@
-// Generated from schema/pyth_hermes.json.
+// Generated from src/data/pyth/schema/pyth_hermes.json.
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use crate::{PythHermesClient, Error, Result};
