@@ -1,6 +1,7 @@
 {
   "name": "aux-ts",
   "version": "0.0.1",
+  "repository": { "type": "git", "url": "git+https://github.com/polaris-data/aux.git", "directory": "sdk/typescript" },
   "description": "TypeScript SDK for the aux Zig core",
   "engines": { "node": ">=22" },
   "main": "./js/index.cjs",

@@ -1,12 +1,26 @@
-name: Build Node SDK
+name: Release TypeScript SDK
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 permissions:
   contents: read
 concurrency:
   group: node-sdk-${{ github.ref }}
 jobs:
+  validate:
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'aux-ts-v')
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Validate npm release version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: python3 tools/check-release-version.py aux-ts
   native:
+    needs: validate
     name: Node (${{ matrix.os }})
     strategy:
       fail-fast: false
@@ -36,8 +50,10 @@ jobs:
         run: |
           npm --prefix sdk/typescript run build
           cd sdk/typescript
-          npm pack --pack-destination "$RUNNER_TEMP"
-          cd "$RUNNER_TEMP"
+          consumer=$(mktemp -d)
+          npm pack --pack-destination "$consumer"
+          cd "$consumer"
+          echo '{"private":true}' > package.json
           npm install --ignore-scripts --offline --no-audit --no-fund ./aux-ts-*.tgz
           node "$GITHUB_WORKSPACE/tests/packages.cjs"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -64,6 +80,7 @@ jobs:
           for target in darwin-arm64 darwin-x64 linux-x64-gnu; do test -s "aux.$target.node"; done
           npm pack
           cd "$(mktemp -d)"
+          echo '{"private":true}' > package.json
           npm install --offline --ignore-scripts --no-audit --no-fund "$GITHUB_WORKSPACE"/sdk/typescript/aux-ts-*.tgz
           node --input-type=module -e 'import {PhoenixClient} from "aux-ts"; import {createRequire} from "node:module"; if (PhoenixClient !== createRequire(import.meta.url)("aux-ts").PhoenixClient) process.exit(1)'
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -71,3 +88,34 @@ jobs:
           name: aux-ts-package
           path: sdk/typescript/*.tgz
           if-no-files-found: error
+
+  publish:
+    name: Publish to npm
+    needs: package
+    if: github.event_name == 'release'
+    runs-on: ubuntu-24.04
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
+        with:
+          name: aux-ts-package
+          path: dist
+      - name: Publish verified tarball with trusted publishing
+        env:
+          PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          if [[ "$PRERELEASE" == true ]]; then
+            npm publish dist/*.tgz --tag next --access public
+          else
+            npm publish dist/*.tgz --access public
+          fi

@@ -27,7 +27,7 @@ jobs:
       - name: Check Python, Rust, and release tag versions agree
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: python tools/check-python-release-version.py
+        run: python tools/check-release-version.py aux-py
 
   wheels:
     name: Build wheel (${{ matrix.os }})

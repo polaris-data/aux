@@ -16,13 +16,9 @@ jobs:
       matrix:
         include:
           - os: macos-15
-            arch: aarch64-macos
             target: aarch64-apple-darwin
-            sha: 75f1bc7a1e9852f17ec9a0c1895f767c4ec56d46bc8a834920eece1d0359dd8d
           - os: ubuntu-24.04
-            arch: x86_64-linux
             target: x86_64-unknown-linux-gnu
-            sha: 3581863e3cbcfd0fce0efc682ce7e9e93da96668a977791d356a26d2a7e9b17a
     runs-on: ${{ matrix.os }}
     env:
       RUSTUP_TOOLCHAIN: 1.92.0
@@ -38,18 +34,10 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install pinned build tools
-        env:
-          ZIG_ARCH: ${{ matrix.arch }}
-          SHA: ${{ matrix.sha }}
         run: |
           rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
           python -m pip install maturin==1.16.0
-          version=$(cat .zigversion)
-          archive="zig-$ZIG_ARCH-$version"
-          curl --fail --silent --show-error --location --retry 3 "https://ziglang.org/download/$version/$archive.tar.xz" -o "$RUNNER_TEMP/$archive.tar.xz"
-          printf '%s  %s\n' "$SHA" "$RUNNER_TEMP/$archive.tar.xz" | shasum -a 256 -c
-          tar xf "$RUNNER_TEMP/$archive.tar.xz" -C "$RUNNER_TEMP"
-          echo "$RUNNER_TEMP/$archive" >> "$GITHUB_PATH"
+          bash tools/install-ci-zig.sh
       - name: Verify native sources and the packaged archive
         env:
           TARGET: ${{ matrix.target }}
