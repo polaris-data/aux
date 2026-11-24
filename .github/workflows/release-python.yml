@@ -27,13 +27,12 @@ jobs:
       - name: Check Python, Rust, and release tag versions agree
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: python scripts/check-python-release-version.py
+        run: python tools/check-python-release-version.py
 
   wheels:
     name: Build wheel (${{ matrix.os }})
     needs: validate
     runs-on: ${{ matrix.os }}
-    # Cold arm64 builds can exceed 90 minutes compiling the Python extension.
     timeout-minutes: ${{ matrix.os == 'macos-15' && 150 || matrix.os == 'macos-15-intel' && 90 || 45 }}
     strategy:
       fail-fast: false
@@ -63,7 +62,7 @@ jobs:
           rust-toolchain: '1.92.0'
           manylinux: '2_28'
           args: >-
-            --release --locked --manifest-path crates/python/Cargo.toml
+            --release --locked --manifest-path sdk/python/Cargo.toml
             --interpreter ${{ matrix.interpreter }} --out dist
       - name: Verify the stable ABI wheel tag
         env:
@@ -104,9 +103,8 @@ jobs:
       - name: Install and test the built wheel
         run: |
           python -m pip install --only-binary=:all: dist/*.whl
-          python -m pip install -r crates/python/dev-requirements.txt
           python -c 'import aux_py; from importlib.metadata import version; assert aux_py.__version__ == version("aux-py")'
-          python -m unittest discover -s crates/python/tests -v
+          python -I tests/packages.py
 
   sdist:
     name: Source distribution
@@ -127,19 +125,14 @@ jobs:
         with:
           maturin-version: v1.16.0
           command: sdist
-          args: --manifest-path crates/python/Cargo.toml --out dist
+          args: --manifest-path sdk/python/Cargo.toml --out dist
       - name: Install and test from the source distribution
         run: |
           python -m pip install dist/*.tar.gz
-          python -m pip install -r crates/python/dev-requirements.txt
           python -c 'import aux_py; from importlib.metadata import version; assert aux_py.__version__ == version("aux-py")'
-          python -m unittest discover -s crates/python/tests -v
-      - name: Verify pinned API coverage and dependency isolation offline
-        run: |
-          python scripts/check-data-coverage.py
-          python scripts/check-native-coverage.py
-          python scripts/check-prediction-coverage.py
-          python scripts/dependencies.py --check --target x86_64-unknown-linux-gnu
+          python -I tests/packages.py
+      - name: Verify generated SDK coverage
+        run: python tools/check_coverage.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: python-dist-sdist

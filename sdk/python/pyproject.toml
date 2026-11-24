@@ -1,0 +1,14 @@
+[build-system]
+requires = ["maturin>=1.16,<2"]
+build-backend = "maturin"
+[project]
+name = "aux-py"
+version = "0.0.1"
+description = "Python SDK for the aux Zig core"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.10"
+[tool.maturin]
+python-source = "python"
+module-name = "aux_py._native"
+features = ["pyo3/extension-module"]

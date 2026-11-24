@@ -22,30 +22,28 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-          cache-dependency-path: crates/node/package-lock.json
+          cache-dependency-path: sdk/typescript/package-lock.json
       - name: Install Rust
-        run: rustup toolchain install 1.92.0 --profile minimal --component rustfmt --component clippy && rustup default 1.92.0
+        run: rustup toolchain install 1.92.0 --profile minimal && rustup default 1.92.0
       - name: Install build tools
-        run: npm ci --prefix crates/node
+        run: npm ci --prefix sdk/typescript
       - name: Validate sources and declarations
         if: runner.os == 'Linux'
         run: |
-          cargo fmt --all --check
-          python3 scripts/generate-node-bindings.py --check --models
-          python3 scripts/generate-metric-bindings.py --check
-          python3 scripts/check-node-coverage.py
-          cargo clippy --locked -p aux-rs-node --all-targets --all-features -- -D warnings
-          cargo test --locked -p aux-rs-node --test values
-          npm --prefix crates/node run typecheck
+          python3 tools/check_coverage.py
+          sdk/typescript/node_modules/.bin/tsc --strict --noEmit --target es2022 sdk/typescript/js/index.d.ts
       - name: Build and test release addon
         run: |
-          npm --prefix crates/node run build:release
-          NODE_OPTIONS=--unhandled-rejections=strict npm --prefix crates/node test
-          node scripts/check-node-package.mjs
+          npm --prefix sdk/typescript run build
+          cd sdk/typescript
+          npm pack --pack-destination "$RUNNER_TEMP"
+          cd "$RUNNER_TEMP"
+          npm install --ignore-scripts --offline --no-audit --no-fund ./aux-ts-*.tgz
+          node "$GITHUB_WORKSPACE/tests/packages.cjs"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: node-${{ matrix.os }}
-          path: crates/node/aux.*.node
+          path: sdk/typescript/aux.*.node
           if-no-files-found: error
   package:
     needs: native
@@ -58,16 +56,18 @@ jobs:
       - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
         with:
           pattern: node-*
-          path: crates/node
+          path: sdk/typescript
           merge-multiple: true
       - name: Pack all supported platforms
         run: |
-          npm ci --prefix crates/node
-          node scripts/check-node-package.mjs
-          cd crates/node
+          cd sdk/typescript
+          for target in darwin-arm64 darwin-x64 linux-x64-gnu; do test -s "aux.$target.node"; done
           npm pack
+          cd "$(mktemp -d)"
+          npm install --offline --ignore-scripts --no-audit --no-fund "$GITHUB_WORKSPACE"/sdk/typescript/aux-ts-*.tgz
+          node --input-type=module -e 'import {PhoenixClient} from "aux-ts"; import {createRequire} from "node:module"; if (PhoenixClient !== createRequire(import.meta.url)("aux-ts").PhoenixClient) process.exit(1)'
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: aux-ts-package
-          path: crates/node/*.tgz
+          path: sdk/typescript/*.tgz
           if-no-files-found: error
