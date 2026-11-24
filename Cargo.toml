@@ -77,3 +77,9 @@ unsafe_code = "forbid"
 
 [workspace.lints.clippy]
 all = "warn"
+
+[profile.release.package.aux-rs-python]
+opt-level = 1
+
+[profile.release.package.aux-rs-node]
+opt-level = 1
