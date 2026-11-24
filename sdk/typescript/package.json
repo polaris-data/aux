@@ -1,5 +1,5 @@
 {
-  "name": "aux-ts",
+  "name": "aux-connectors",
   "version": "0.0.1",
   "repository": { "type": "git", "url": "git+https://github.com/polaris-data/aux.git", "directory": "sdk/typescript" },
   "description": "TypeScript SDK for the aux Zig core",

@@ -125,7 +125,7 @@ def main():
             "node",
             "--input-type=module",
             "--eval",
-            'import { decodeResponse, PhoenixClient } from "aux-ts";'
+            'import { decodeResponse, PhoenixClient } from "aux-connectors";'
             'if (decodeResponse("extended",200,"123456789123456789") !== 123456789123456789n'
             ' || typeof new PhoenixClient().subscribe !== "function") process.exit(1);',
             cwd=clean,

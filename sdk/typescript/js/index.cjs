@@ -1,7 +1,7 @@
 "use strict";
 const targets = { "darwin-arm64": "darwin-arm64", "darwin-x64": "darwin-x64", "linux-x64": "linux-x64-gnu" };
 const target = targets[process.platform + "-" + process.arch];
-if (!target) throw new Error("No aux-ts binary for " + process.platform + "/" + process.arch);
+if (!target) throw new Error("No aux-connectors binary for " + process.platform + "/" + process.arch);
 const {errors,bind,parseHttp} = require("./errors.cjs");
 const native = bind(require("../aux." + target + ".node"));
 

@@ -1,4 +1,4 @@
-import { DeriveClient, EvmReader, type DeriveModels } from "aux-ts";
+import { DeriveClient, EvmReader, type DeriveModels } from "aux-connectors";
 
 export async function getOrders(client: DeriveClient, request: DeriveModels.GetOpenOrdersRequest): Promise<DeriveModels.AggregatedOrdersResult> {
   return client.privateGetOpenOrders(request);
@@ -8,7 +8,7 @@ export async function blockHeight(reader: EvmReader): Promise<bigint> {
   return reader.blockNumber();
 }
 
-import { ExtendedClient, PhoenixClient, type ExtendedModels, type PhoenixModels } from "aux-ts";
+import { ExtendedClient, PhoenixClient, type ExtendedModels, type PhoenixModels } from "aux-connectors";
 
 export function markets(client: ExtendedClient): Promise<ExtendedModels.GetMarketsResult> {
   return client.getMarkets();
@@ -18,7 +18,7 @@ export function exchange(client: PhoenixClient): Promise<PhoenixModels.ExchangeV
   return client.getExchange();
 }
 
-import { ParadexClient, type ParadexModels, PolymarketPerpsClient, solana, type DepositParams, type SignedDeposit } from "aux-ts";
+import { ParadexClient, type ParadexModels, PolymarketPerpsClient, solana, type DepositParams, type SignedDeposit } from "aux-connectors";
 
 export function paradexAccount(token: string): Promise<ParadexModels.ResponsesAccountSummaryResponse> {
   return new ParadexClient({bearer:{token, read_only:true}}).getAccount();

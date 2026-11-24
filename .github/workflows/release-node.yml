@@ -9,7 +9,7 @@ concurrency:
   group: node-sdk-${{ github.ref }}
 jobs:
   validate:
-    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'aux-ts-v')
+    if: github.event_name != 'release' || startsWith(github.event.release.tag_name, 'aux-connectors-v')
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
@@ -18,7 +18,7 @@ jobs:
       - name: Validate npm release version
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: python3 tools/check-release-version.py aux-ts
+        run: python3 tools/check-release-version.py aux-connectors
   native:
     needs: validate
     name: Node (${{ matrix.os }})
@@ -54,7 +54,7 @@ jobs:
           npm pack --pack-destination "$consumer"
           cd "$consumer"
           echo '{"private":true}' > package.json
-          npm install --ignore-scripts --offline --no-audit --no-fund ./aux-ts-*.tgz
+          npm install --ignore-scripts --offline --no-audit --no-fund ./aux-connectors-*.tgz
           node "$GITHUB_WORKSPACE/tests/packages.cjs"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -81,11 +81,11 @@ jobs:
           npm pack
           cd "$(mktemp -d)"
           echo '{"private":true}' > package.json
-          npm install --offline --ignore-scripts --no-audit --no-fund "$GITHUB_WORKSPACE"/sdk/typescript/aux-ts-*.tgz
-          node --input-type=module -e 'import {PhoenixClient} from "aux-ts"; import {createRequire} from "node:module"; if (PhoenixClient !== createRequire(import.meta.url)("aux-ts").PhoenixClient) process.exit(1)'
+          npm install --offline --ignore-scripts --no-audit --no-fund "$GITHUB_WORKSPACE"/sdk/typescript/aux-connectors-*.tgz
+          node --input-type=module -e 'import {PhoenixClient} from "aux-connectors"; import {createRequire} from "node:module"; if (PhoenixClient !== createRequire(import.meta.url)("aux-connectors").PhoenixClient) process.exit(1)'
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: aux-ts-package
+          name: aux-connectors-package
           path: sdk/typescript/*.tgz
           if-no-files-found: error
 
@@ -108,7 +108,7 @@ jobs:
           package-manager-cache: false
       - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
         with:
-          name: aux-ts-package
+          name: aux-connectors-package
           path: dist
       - name: Publish verified tarball with trusted publishing
         env:

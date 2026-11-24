@@ -22,7 +22,7 @@ def package_version(sdk):
         if version != rust:
             raise SystemExit(f"Python version {version} differs from Rust version {rust}")
         return version
-    if sdk == "aux-ts":
+    if sdk == "aux-connectors":
         package = ROOT / "sdk/typescript"
         manifest = json.loads((package / "package.json").read_text())
         lock = json.loads((package / "package-lock.json").read_text())
@@ -36,7 +36,7 @@ def package_version(sdk):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("sdk", choices=("aux-rs", "aux-ts", "aux-py", "aux-zig"))
+    parser.add_argument("sdk", choices=("aux-rs", "aux-connectors", "aux-py", "aux-zig"))
     sdk = parser.parse_args().sdk
     version = package_version(sdk)
     expected = f"{sdk}-v{version}"

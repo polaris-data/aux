@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const http = require("node:http");
-const sdk = require(require.resolve("aux-ts", {paths: [process.cwd()]}));
+const sdk = require(require.resolve("aux-connectors", {paths: [process.cwd()]}));
 
 function lossless(text, inputs = false) {
   return JSON.parse(text, (_, value, context) => {

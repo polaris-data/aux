@@ -42,7 +42,7 @@ From this directory run `python3 check_zig_sdk.py` to fetch the source archive i
 
 ## Using the SDKs
 
-The package names are `aux-rs` for Rust, `aux-ts` for Node and TypeScript, and `aux-py` for Python (import `aux_py`). These packages expose the Zig-backed client interfaces documented below. Applications moving from the Rust-core releases should review constructor options, Cargo features and method signatures.
+The package names are `aux-rs` for Rust, `aux-connectors` for Node and TypeScript, and `aux-py` for Python (import `aux_py`). These packages expose the Zig-backed client interfaces documented below. Applications moving from the Rust-core releases should review constructor options, Cargo features and method signatures.
 
 The Python and Node clients run network I/O off the application's event loop. Rust offers synchronous methods and optional Tokio adapters for unary requests, event subscriptions and trading sessions. These examples use the same request parameters.
 
@@ -54,7 +54,7 @@ async def eth_price():
 ```
 
 ```ts
-import { ExtendedClient } from "aux-ts";
+import { ExtendedClient } from "aux-connectors";
 
 const price = await new ExtendedClient().getAssetPrice({asset: "ETH"});
 ```
@@ -185,7 +185,7 @@ With Rust 1.92+, Python 3.10+, Node 22+ and maturin 1.16 installed, run `python3
 
 ```sh
 python3 -m pip install dist/*arm64.whl
-npm install ./dist/aux-ts-0.0.1.tgz
+npm install ./dist/aux-connectors-0.0.1.tgz
 cargo add --path /absolute/path/to/aux/sdk/rust
 ```
 
