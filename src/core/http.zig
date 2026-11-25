@@ -1,4 +1,6 @@
 const std = @import("std");
+const perps = @import("perps.zig");
+const hip3 = @import("../exchanges/hyperliquid/hip3.zig");
 const market = @import("market.zig");
 const routes = @import("routes.zig");
 const wire = @import("wire.zig");
@@ -76,8 +78,9 @@ fn formFields(a: A, fields: V, out: *Bytes) !void {
 pub fn venue(input: V) !routes.Venue {
     return std.meta.stringToEnum(routes.Venue, try wire.string(try wire.field(input, "venue"))) orelse error.InvalidVenue;
 }
-pub const Framing = enum { sse, objects, dbn, lines, bytes, download, hosted_feed, machine_feed, dataset };
+pub const Framing = enum { grpc_injective, sse, objects, dbn, lines, bytes, download, hosted_feed, machine_feed, dataset };
 pub fn streamFraming(v: routes.Venue, name: []const u8) ?Framing {
+    if (v == .injective and eq(u8, name, "subscribe")) return .grpc_injective;
     if (v == .tardis) {
         if (eq(u8, name, "data_feeds")) return .hosted_feed;
         if (eq(u8, name, "machine_replay") or eq(u8, name, "machine_replay_normalized")) return .machine_feed;
@@ -184,8 +187,8 @@ pub fn prepare(a: A, input: V) !Request {
             .ndjson => "application/x-ndjson",
         }));
         if (op.venue == .birdeye) try headers.object.put(a, "x-chain", wire.text("solana"));
-    } else if (op.venue != .lighter and op.venue != .qfex and op.venue != .arcus) try headers.object.put(a, if (prediction or op.venue == .hyperliquid or op.venue == .metric) "content-type" else "Content-Type", wire.text("application/json"));
-    if (op.venue == .phoenix or op.venue == .extended or op.venue == .monaco) try headers.object.put(a, "User-Agent", wire.text("aux-zig/0.0.1"));
+    } else if (op.venue != .lighter and op.venue != .qfex and op.venue != .arcus) try headers.object.put(a, if (prediction or op.venue == .hyperliquid or op.venue == .metric or perps.isVenue(op.venue)) "content-type" else "Content-Type", wire.text("application/json"));
+    if (op.venue == .phoenix or op.venue == .extended or op.venue == .monaco or perps.isVenue(op.venue)) try headers.object.put(a, "User-Agent", wire.text("aux-zig/0.0.1"));
     if (op.venue == .arcus and op.private) {
         try headers.object.put(a, "content-type", wire.text("application/json"));
         const order = try @import("../exchanges/arcus/trading.zig").order(a, eq(u8, op.name, "place_order"), fields);
@@ -199,6 +202,9 @@ pub fn prepare(a: A, input: V) !Request {
     var body: V = .null;
     var path = op.path;
     var q: Bytes = .empty;
+    if (op.venue == .nado) {
+        if (@import("../exchanges/nado/trading.zig").queryType(op.name)) |kind| try pair(a, &q, "type", kind, false);
+    }
     if (op.venue == .qfex) try pair(a, &q, "api_version", "2026-10-29", false);
     if (op.venue == .qfex or op.venue == .arcus or op.venue == .metric or op.venue == .monaco) try market.validateSpot(a, op.venue, op.name, &fields);
     if (op.venue == .dune) try market.dune(fields);
@@ -234,6 +240,8 @@ pub fn prepare(a: A, input: V) !Request {
         }
     } else if (op.venue == .hyperliquid) {
         body = if (op.private) try @import("../exchanges/hyperliquid/trading.zig").action(a, op.name, fields) else try market.hyperliquid(a, op.name, fields);
+    } else if (hip3.dex(op.venue)) |dex| {
+        body = try hip3.request(a, dex, op.name, fields);
     } else if (op.venue == .derive) {
         body = fields;
     } else {
@@ -303,7 +311,9 @@ pub fn prepare(a: A, input: V) !Request {
             while (iter.next()) |entry| try body.object.put(a, entry.key_ptr.*, entry.value_ptr.*);
         }
     }
-    return .{ .method = op.verb, .path = try std.mem.concat(a, u8, &.{ path, q.items }), .body = body, .headers = headers, .authenticated = private, .origin = op.origin };
+    if (op.venue == .ondo_perps and eq(u8, op.name, "open_orders")) try pair(a, &q, "status", "open", false);
+    const origin = if (perps.isVenue(op.venue)) try perps.origin(op.venue, op.name, input, op.origin) else op.origin;
+    return .{ .method = op.verb, .path = try std.mem.concat(a, u8, &.{ path, q.items }), .body = body, .headers = headers, .authenticated = private, .origin = origin };
 }
 
 pub fn decode(a: A, v: routes.Venue, status: u16, body: []const u8) !V {
@@ -334,6 +344,10 @@ fn decodeBody(a: A, v: routes.Venue, status: u16, body: []const u8) !V {
         if (result == .object) if (result.object.get("code")) |code| {
             if (code == .number_string and !eq(u8, code.number_string, "200")) return error.ExchangeApi;
         };
+        return result;
+    }
+    if (perps.isVenue(v)) {
+        if (perps.replyError(v, result)) return error.ExchangeApi;
         return result;
     }
     if (v == .hyperliquid) {

@@ -1,0 +1,278 @@
+{
+  "client": "NadoClient",
+  "venue": "nado",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "MarketsRequest": [],
+    "OrderBookRequest": [
+      [
+        "product_id",
+        "product_id",
+        "u64",
+        "required"
+      ],
+      [
+        "depth",
+        "depth",
+        "u64",
+        "required"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "ticker_id",
+        "ticker_id",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "subaccount",
+        "subaccount",
+        "String",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "subaccount",
+        "subaccount",
+        "String",
+        "required"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "sender",
+        "sender",
+        "String",
+        "required"
+      ],
+      [
+        "product_id",
+        "product_id",
+        "u64",
+        "required"
+      ]
+    ],
+    "ContractsRequest": [],
+    "OrderStatusRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "PlaceOrder",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrder",
+        "required"
+      ]
+    ],
+    "Subscription": [
+      [
+        "type",
+        "kind",
+        "String",
+        "required"
+      ],
+      [
+        "subaccount",
+        "subaccount",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "product_id",
+        "product_id",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "snapshot_timestamp",
+        "snapshot_timestamp",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceOrder": [
+      [
+        "product_id",
+        "product_id",
+        "u32",
+        "required"
+      ],
+      [
+        "order",
+        "order",
+        "Order",
+        "required"
+      ],
+      [
+        "id",
+        "id",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "CancelOrder": [
+      [
+        "tx",
+        "tx",
+        "Cancellation",
+        "required"
+      ]
+    ],
+    "GatewayReply": [
+      [
+        "status",
+        "status",
+        "String",
+        "required"
+      ],
+      [
+        "data",
+        "data",
+        "Option<serde_json::Value>",
+        "optional"
+      ],
+      [
+        "error",
+        "error",
+        "Option<serde_json::Value>",
+        "optional"
+      ],
+      [
+        "request_type",
+        "request_type",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "Order": [
+      [
+        "sender",
+        "sender",
+        "String",
+        "required"
+      ],
+      [
+        "priceX18",
+        "price_x18",
+        "String",
+        "required"
+      ],
+      [
+        "amount",
+        "amount",
+        "String",
+        "required"
+      ],
+      [
+        "expiration",
+        "expiration",
+        "String",
+        "required"
+      ],
+      [
+        "nonce",
+        "nonce",
+        "String",
+        "required"
+      ],
+      [
+        "appendix",
+        "appendix",
+        "String",
+        "required"
+      ]
+    ],
+    "Cancellation": [
+      [
+        "sender",
+        "sender",
+        "String",
+        "required"
+      ],
+      [
+        "productIds",
+        "product_ids",
+        "Vec<u32>",
+        "required"
+      ],
+      [
+        "digests",
+        "digests",
+        "Vec<String>",
+        "required"
+      ],
+      [
+        "nonce",
+        "nonce",
+        "String",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "serde_json::Value"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "GatewayReply"
+    ],
+    "trades": [
+      "TradesRequest",
+      "Vec<serde_json::Value>"
+    ],
+    "account": [
+      "AccountRequest",
+      "GatewayReply"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "GatewayReply"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "GatewayReply"
+    ],
+    "contracts": [
+      "ContractsRequest",
+      "GatewayReply"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "serde_json::Value"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "GatewayReply"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "GatewayReply"
+    ]
+  }
+}

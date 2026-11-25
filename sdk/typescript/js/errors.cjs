@@ -54,7 +54,7 @@ function stream(handle) {
     nextBytes:task(() => handle.nextBytes()),
     nextJson:task(() => handle.nextJson()),
     commandJson:task(command => handle.commandJson(command)),
-    close:() => handle.close(),
+    close:background => handle.close(background),
   };
 }
 function bind(native) {

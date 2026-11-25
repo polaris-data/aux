@@ -1,6 +1,8 @@
 // Native HTTP(S) dispatch and optional application-owned transport.
 const std = @import("std");
 const wire = @import("wire.zig");
+const perps = @import("perps.zig");
+const hip3 = @import("../exchanges/hyperliquid/hip3.zig");
 const http = @import("http.zig");
 const routes = @import("routes.zig");
 const A = wire.A;
@@ -92,6 +94,47 @@ fn dispatch(a: A, input: V, io: std.Io, stream: bool) !Dispatch {
             std.ascii.eqlIgnoreCase(try uri.host.?.toRawMaybeAlloc(a), try target.host.?.toRawMaybeAlloc(a));
         break :target request.path;
     } else try std.mem.concat(a, u8, &.{ std.mem.trimEnd(u8, base, "/"), request.path });
+    if (perps.isVenue(venue) and request.authenticated) {
+        const auth = perps.get(input, "auth");
+        switch (venue) {
+            .aster => {
+                const signed = try @import("../exchanges/aster/trading.zig").sign(a, auth, request.method, request.path, request.body, try perps.epoch(io, .us));
+                try perps.put(&request.headers, a, "content-type", wire.text("application/x-www-form-urlencoded"));
+                request.path = signed.path;
+                return .{ .request = request, .url = try std.mem.concat(a, u8, &.{ std.mem.trimEnd(u8, base, "/"), signed.path }), .payload = signed.body };
+            },
+            .ondo_perps => {
+                const target = try kalshiTarget(a, uri, request);
+                const payload = if (request.body == .null) null else try std.json.Stringify.valueAlloc(a, request.body, .{});
+                try @import("../exchanges/ondo_perps/auth.zig").sign(a, input, &request, target, payload orelse "", try perps.epoch(io, .ms));
+                return .{ .request = request, .url = url, .payload = payload };
+            },
+            .pacifica => request.body = try @import("../exchanges/pacifica/trading.zig").sign(a, operation_name, auth, request.body, try perps.epoch(io, .ms)),
+            .nado => {
+                const metadata = try wire.field(input, "metadata");
+                request.body = try @import("../exchanges/nado/trading.zig").sign(a, operation_name, auth, try wire.field(metadata, "contracts"), request.body);
+            },
+            .paragon, .trade_xyz => {
+                const name = hip3.dex(venue).?;
+                var config = input;
+                var signing_auth = perps.object();
+                if (auth == .object) for (auth.object.keys(), auth.object.values()) |key, value| {
+                    try perps.put(&signing_auth, a, key, value);
+                };
+                try perps.put(&signing_auth, a, "network", wire.text(if (try perps.testnet(input)) "Testnet" else "Mainnet"));
+                const host = try uri.host.?.toRawMaybeAlloc(a);
+                const expected = (try std.Uri.parse(request.origin)).host.?;
+                if ((std.ascii.eqlIgnoreCase(host, "api.hyperliquid.xyz") or std.ascii.eqlIgnoreCase(host, "api.hyperliquid-testnet.xyz")) and
+                    !std.ascii.eqlIgnoreCase(host, try expected.toRawMaybeAlloc(a))) return error.InvalidNetwork;
+                try perps.put(&config, a, "auth", signing_auth);
+                const action = try hip3.action(a, name, operation_name, request.body, try wire.field(input, "metadata"));
+                request.body = try @import("../exchanges/hyperliquid/trading.zig").envelope(a, action, config, io);
+            },
+            .injective => return error.InvalidOperation,
+            else => unreachable,
+        }
+        return .{ .request = request, .url = url, .payload = if (request.body == .null) null else try std.json.Stringify.valueAlloc(a, request.body, .{}) };
+    }
     const supplied_key = input.object.get("api_key");
     const signing_kalshi = venue == .kalshi and (request.authenticated or supplied_key != null);
     if (venue == .arcus and request.authenticated) {
@@ -324,20 +367,51 @@ pub fn bodyReader(a: A, response: *std.http.Client.Response, buffer: []u8, decom
 pub fn execute(a: A, config: V) !V {
     return executeWithDial(a, config, null);
 }
+pub fn dependencies(a: A, input: V) !V {
+    const venue = try http.venue(input);
+    if (venue == .derive) return @import("../exchanges/derive/orders.zig").dependency(a, input);
+    const operation = try perps.text(input, "operation");
+    var jobs = perps.object();
+    if (!perps.isWrite(venue, operation)) return jobs;
+    const names: []const []const u8 = switch (venue) {
+        .nado => &.{"contracts"},
+        .paragon, .trade_xyz => &.{ "perp_dexs", "markets" },
+        else => &.{},
+    };
+    for (names) |name| {
+        var job = perps.object();
+        try perps.put(&job, a, "venue", wire.text(@tagName(venue)));
+        try perps.put(&job, a, "operation", wire.text(name));
+        try perps.put(&job, a, "params", perps.object());
+        const base = perps.get(input, "origin");
+        if (base != .null) try perps.put(&job, a, "origin", base);
+        if (try perps.testnet(input)) try perps.put(&job, a, "auth", try perps.toValue(a, .{ .network = "Testnet" }));
+        try perps.put(&jobs, a, name, job);
+    }
+    return jobs;
+}
+
 pub fn executeWithDial(a: A, config: V, dial: ?@import("host_stream.zig").Dial) !V {
     var input = config;
-    if (std.mem.eql(u8, try wire.string(try wire.field(input, "venue")), "lighter")) {
-        const name = try wire.string(try wire.field(input, "operation"));
-        for ([_]([]const u8){ "auth_token", "create_order", "cancel_order", "resync_nonce", "prepare_transaction" }) |op| if (std.mem.eql(u8, op, name)) return @import("../exchanges/lighter/trading.zig").execute(a, input, name, dial);
+    const venue = try http.venue(input);
+    const operation = try perps.text(input, "operation");
+    if (venue == .injective and (perps.isWrite(venue, operation) or std.mem.eql(u8, operation, "pending")))
+        return @import("../exchanges/injective/trading.zig").execute(a, input, operation, dial);
+    if (venue == .lighter) {
+        for ([_]([]const u8){ "auth_token", "create_order", "cancel_order", "resync_nonce", "prepare_transaction" }) |op| if (std.mem.eql(u8, op, operation)) return @import("../exchanges/lighter/trading.zig").execute(a, input, operation, dial);
     }
-    if (std.mem.eql(u8, try wire.string(try wire.field(input, "venue")), "derive")) {
-        var deps = try @import("../exchanges/derive/orders.zig").dependency(a, input);
-        var metadata: V = .{ .object = .empty };
-        var it = deps.object.iterator();
-        while (it.next()) |entry| try metadata.object.put(a, entry.key_ptr.*, try executePrepared(a, entry.value_ptr.*, dial));
-        try input.object.put(a, "metadata", metadata);
+    const jobs = try dependencies(a, input);
+    if (jobs.object.count() != 0 or venue == .derive) {
+        var metadata = perps.object();
+        var it = jobs.object.iterator();
+        while (it.next()) |entry| try perps.put(&metadata, a, entry.key_ptr.*, try executePrepared(a, entry.value_ptr.*, dial));
+        try perps.put(&input, a, "metadata", metadata);
     }
-    return executePrepared(a, input, dial);
+    const result = try executePrepared(a, input, dial);
+    if (hip3.dex(venue)) |name| {
+        if (std.mem.eql(u8, operation, "order_status")) try hip3.validateOrderStatus(name, try perps.text(try wire.field(input, "params"), "coin"), result);
+    }
+    return result;
 }
 fn executePrepared(a: A, input: V, dial: ?@import("host_stream.zig").Dial) !V {
     const venue = try http.venue(input);
@@ -352,15 +426,16 @@ fn executePrepared(a: A, input: V, dial: ?@import("host_stream.zig").Dial) !V {
     var attempted = false;
     var confirmed = false;
     defer if (reservation) |r| r.finish(!attempted or confirmed);
-    const monaco_write = venue == .monaco and @import("../exchanges/monaco/orders.zig").isWrite(try wire.string(try wire.field(input, "operation")));
+    const operation = try perps.text(input, "operation");
+    const uncertain_write = (venue == .monaco and @import("../exchanges/monaco/orders.zig").isWrite(operation)) or perps.isWrite(venue, operation);
     var req = sendWithOptions(a, client, prepared.request.method, prepared.url, prepared.request.headers, prepared.payload, &attempted, lease != null) catch |err| {
-        return if (monaco_write and attempted) error.PendingOutcome else err;
+        return if (uncertain_write and attempted) error.PendingOutcome else err;
     };
     defer req.deinit();
     errdefer if (req.connection) |conn| {
         conn.closing = true;
     };
-    var response = req.receiveHead(&.{}) catch return if (monaco_write) error.PendingOutcome else error.Network;
+    var response = req.receiveHead(&.{}) catch return if (uncertain_write) error.PendingOutcome else error.Network;
     const status = @backingInt(response.head.status);
     confirmed = status >= 400 and status < 500 and status != 408;
     // Header strings belong to the HTTP read buffer until the body is read.
@@ -371,8 +446,8 @@ fn executePrepared(a: A, input: V, dial: ?@import("host_stream.zig").Dial) !V {
     }
     var buffer: [8192]u8 = undefined;
     var decompressor: std.http.Decompress = undefined;
-    const reader = bodyReader(a, &response, &buffer, &decompressor) catch |err| return if (monaco_write and !confirmed) error.PendingOutcome else err;
-    const bytes = reader.allocRemaining(a, .limited(16 * 1024 * 1024)) catch return if (monaco_write and !confirmed) error.PendingOutcome else error.Network;
+    const reader = bodyReader(a, &response, &buffer, &decompressor) catch |err| return if (uncertain_write and !confirmed) error.PendingOutcome else err;
+    const bytes = reader.allocRemaining(a, .limited(16 * 1024 * 1024)) catch return if (uncertain_write and !confirmed) error.PendingOutcome else error.Network;
     const result = try finish(a, venue, status, headers.items, bytes, input.object.get("api_key"), input.object.get("operation"));
     confirmed = true;
     try refreshMonaco(input, result, client.io);
@@ -381,6 +456,23 @@ fn executePrepared(a: A, input: V, dial: ?@import("host_stream.zig").Dial) !V {
 
 pub fn finish(a: A, venue: routes.Venue, status: u16, headers: []const std.http.Header, bytes: []const u8, key: ?V, operation: ?V) !V {
     if (bytes.len > 16 * 1024 * 1024) return error.BodyTooLarge;
+    if (operation) |raw_op| {
+        const op = try wire.string(raw_op);
+        if (perps.isWrite(venue, op)) {
+            if (status == 408 or status >= 500) return error.PendingOutcome;
+            if (status >= 200 and status < 300) {
+                const value = wire.parse(a, bytes) catch return error.PendingOutcome;
+                if (hip3.dex(venue) != null and !perps.replyError(venue, value)) {
+                    const statuses = perps.get(perps.get(perps.get(value, "response"), "data"), "statuses");
+                    if (statuses != .array or statuses.array.items.len != 1) return error.PendingOutcome;
+                    if (perps.get(statuses.array.items[0], "error") != .null) {
+                        @import("http_failure.zig").record(@tagName(venue), status, bytes);
+                        return error.ExchangeApi;
+                    }
+                } else if (value != .object and !perps.replyError(venue, value)) return error.PendingOutcome;
+            }
+        }
+    }
     if (venue == .hyperliquid and operation != null and status >= 200 and status < 300) {
         const op = try wire.string(operation.?);
         if (std.mem.eql(u8, op, "order") or std.mem.eql(u8, op, "cancel") or std.mem.eql(u8, op, "cancel_by_cloid")) {
@@ -481,6 +573,11 @@ pub fn finishDispatch(a: A, args: V) !V {
     }
     const result = try finish(a, try http.venue(args), try std.fmt.parseInt(u16, status.number_string, 10), headers.items, try wire.string(try wire.field(args, "body")), args.object.get("api_key"), args.object.get("operation"));
     var io: std.Io.Threaded = .init_single_threaded;
+    if (hip3.dex(try http.venue(args))) |name| {
+        const coin = perps.get(args, "scope_coin");
+        if (coin != .null and std.mem.eql(u8, try perps.text(args, "operation"), "order_status"))
+            try hip3.validateOrderStatus(name, try wire.string(coin), result);
+    }
     try refreshMonaco(args, result, io.io());
     return result;
 }

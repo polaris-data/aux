@@ -1183,7 +1183,7 @@ def test_derive():
 
 
 def test_http():
-    for row in fixture("http") + fixture("prediction-http") + fixture("data-http"):
+    for row in fixture("http") + fixture("prediction-http") + fixture("data-http") + fixture("perps-http"):
         venue, name = row["venue"], row["operation"]
         params = (
             loads(row["request_json"]) if row.get("request_json") else row["request"]
@@ -1874,6 +1874,128 @@ def test_network():
             worker.join()
 
 
+async def test_perps_connectors(origin):
+    sign = fixture("perps-signing")
+    routes = fixture("perps-http")
+    ws = origin.replace("http:", "ws:")
+    address = sign["owner"].lower()
+    market = "0x" + "33" * 32
+
+    def row(venue, operation):
+        return next(r for r in routes if r["venue"] == venue and r["operation"] == operation)
+
+    clients = {}
+    for venue, cls in [
+        ("injective", sdk.InjectiveClient), ("nado", sdk.NadoClient),
+        ("ondo_perps", sdk.OndoPerpsClient), ("pacifica", sdk.PacificaClient),
+        ("paragon", sdk.ParagonClient), ("trade_xyz", sdk.TradeXyzClient),
+        ("aster", sdk.AsterClient),
+    ]:
+        clients[venue] = cls(origin=f"{origin}/perps/{venue}")
+        assert await clients[venue].markets(row(venue, "markets")["request"]) == row(venue, "markets")["response"]
+
+    injective = sdk.InjectiveClient(origin=origin + "/perps/injective", auth={"key": sign["key"]})
+    async with await injective.subscribe({"channel": "order_book", "market_id": market}) as stream:
+        event = await anext(stream)
+        assert event["orderbook"] == {"buys": [], "sells": [], "sequence": 9007199254740993}
+        assert await anext(stream, None) is None
+    async with await injective.subscribe({"channel": "order_book", "market_id": market}, endpoint=origin + "/perps/injective/trailer-error") as stream:
+        try:
+            await anext(stream)
+        except sdk.ExchangeError as err:
+            assert err.venue == "injective" and err.body["grpc_status"] == 13
+        else:
+            raise AssertionError("expected an Injective gRPC error trailer")
+    subaccount = address + "00" * 12
+    body = dict(row("injective", "place_order")["request"]["body"], subaccount_id=subaccount, client_order_id="lost-ack")
+    try:
+        await injective.place_order({"body": body})
+    except sdk.OutcomeUncertainError:
+        pending = await injective.pending()
+        assert len(pending["hash"]) == 64 and pending["timeout_height"] == 9020
+    else:
+        raise AssertionError("expected uncertain broadcast")
+    tx = await injective.transaction({"hash": pending["hash"]})
+    assert tx["tx_response"]["txhash"] == pending["hash"]
+    cancel = dict(row("injective", "cancel_order")["request"]["body"], subaccount_id=subaccount)
+    assert (await injective.cancel_order({"body": cancel}))["tx_response"]["code"] == 0
+
+    nado = sdk.NadoClient(origin=origin + "/perps/nado", auth={"key": sign["key"]})
+    for operation in ("place_order", "cancel_order"):
+        assert await getattr(nado, operation)(row("nado", operation)["request"]) == row("nado", operation)["response"]
+    async with await nado.subscribe({"type": "book_depth", "product_id": 4, "snapshot_timestamp":"100"}, endpoint=ws + "/perps/nado/ws") as stream:
+        assert (await anext(stream))["bids"][0] == ["123000000000000000000", "4200000000000000000"]
+        assert (await anext(stream))["max_timestamp"] == "120"
+        try:
+            await anext(stream)
+        except sdk.StreamGapError:
+            pass
+        else:
+            raise AssertionError("expected Nado depth gap")
+
+    nado = sdk.NadoClient(auth={"key": sign["key"], "rest_origin": origin + "/perps/nado"})
+    async with await nado.subscribe({"type": "order_update", "product_id": 4, "subaccount": "0x" + "22" * 32}, endpoint=ws + "/perps/nado/private") as stream:
+        first = await anext(stream)
+        second = await anext(stream)
+        assert int(second["timestamp"]) == int(first["timestamp"]) + 1
+
+    ondo = sdk.OndoPerpsClient(origin=origin + "/perps/ondo_perps", api_key="fixture-key", api_secret="fixture-secret")
+    assert (await ondo.account())["success"]
+    assert (await ondo.place_order(row("ondo_perps", "place_order")["request"]))["success"]
+    request = dict(row("ondo_perps", "place_order")["request"]["body"], clientOrderId="lost-ack")
+    try:
+        await ondo.place_order({"body": request})
+    except sdk.OutcomeUncertainError:
+        assert (await ondo.order_status(row("ondo_perps", "order_status")["request"]))["success"]
+    else:
+        raise AssertionError("expected ambiguous Ondo write")
+    ondo = sdk.OndoPerpsClient(auth={"token": "fixture-token"})
+    async with await ondo.subscribe({"channel": "fillsPerps"}, endpoint=ws + "/perps/ondo_perps/ws") as stream:
+        first = (await anext(stream))["data"]
+        second = (await anext(stream))["data"]
+        assert first["id"] == 9007199254740993 and second["seq"] == first["seq"] + 1
+    async with await ondo.subscribe({"channel": "fillsPerps"}, endpoint=ws + "/perps/ondo_perps/denied") as stream:
+        try:
+            await anext(stream)
+        except sdk.ExchangeError as err:
+            assert err.venue == "ondo_perps" and err.body["code"] == "invalid_token"
+        else:
+            raise AssertionError("expected rejected login")
+
+    pacifica = sdk.PacificaClient(origin=origin + "/perps/pacifica", auth={
+        "account": "FAe4sisG95oZ42w7buUn5qEE4TAnfTTFPiguZUHmhiF", "seed": bytes(range(32)).hex(),
+    })
+    for operation in ("place_order", "place_market_order", "cancel_order"):
+        assert await getattr(pacifica, operation)(row("pacifica", operation)["request"]) == row("pacifica", operation)["response"]
+    async with await pacifica.subscribe({"source": "trades", "symbol": "BTC"}, endpoint=ws + "/perps/pacifica/ws") as stream:
+        assert (await anext(stream))["data"] == [{"s": "BTC", "p": "10000.001"}]
+    async with await pacifica.subscribe({"source": "book", "symbol": "BTC"}, endpoint=ws + "/perps/pacifica/book") as stream:
+        assert (await anext(stream))["data"]["l"] == [[], []]
+
+    for venue, cls, coin in [
+        ("paragon", sdk.ParagonClient, "para:TOTAL2"), ("trade_xyz", sdk.TradeXyzClient, "xyz:TSLA"),
+    ]:
+        client = cls(origin=f"{origin}/perps/{venue}", auth={"key": sign["key"]})
+        for operation in ("place_order", "cancel_order"):
+            params = dict(row(venue, operation)["request"], options={"nonce": 1754450974231})
+            assert await getattr(client, operation)(params) == row(venue, operation)["response"]
+        async with await client.subscribe({"type": "orderUpdates", "user": address}, endpoint=f"{ws}/perps/{venue}/ws") as stream:
+            assert [r["order"]["coin"] for r in (await anext(stream))["data"]] == [coin]
+        try:
+            sdk.prepare_request(venue, "order_book", {"coin": "OTHER:BTC"})
+        except sdk.ValidationError:
+            pass
+        else:
+            raise AssertionError("expected rejection for a foreign market")
+
+    aster = sdk.AsterClient(origin=origin + "/perps/aster", auth={"user": address, "key": sign["key"], "rest_origin": origin + "/perps/aster"})
+    for operation in ("account", "place_order", "cancel_order"):
+        assert await getattr(aster, operation)(row("aster", operation)["request"]) == row("aster", operation)["response"]
+    async with await aster.subscribe({"channel": "account"}, endpoint=ws + "/perps/aster/ws") as stream:
+        assert (await anext(stream))["E"] == 1
+        assert (await anext(stream))["E"] == 2
+
+
 if __name__ == "__main__":
     for row in fixture("extended-settlement"):
         args = (row["kind"], row["chain_id"], row["public_key"], row["message"])
@@ -1894,6 +2016,7 @@ if __name__ == "__main__":
     test_hyperdash_exports()
     if origin := os.environ.get("AUX_FIXTURE_ORIGIN"):
         asyncio.run(test_shared_peer(origin))
+        asyncio.run(test_perps_connectors(origin))
         asyncio.run(test_live(os.environ["AUX_DBN_GATEWAY"]))
     test_trading_signatures()
     test_derive()

@@ -1,0 +1,268 @@
+{
+  "client": "AsterClient",
+  "venue": "aster",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "MarketsRequest": [],
+    "OrderBookRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [],
+    "PositionsRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "origClientOrderId",
+        "orig_client_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "Order",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrder",
+        "required"
+      ]
+    ],
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "Order": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "side",
+        "side",
+        "String",
+        "required"
+      ],
+      [
+        "type",
+        "kind",
+        "String",
+        "required"
+      ],
+      [
+        "timeInForce",
+        "time_in_force",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "price",
+        "price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "quantity",
+        "quantity",
+        "String",
+        "required"
+      ],
+      [
+        "reduceOnly",
+        "reduce_only",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "positionSide",
+        "position_side",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "newClientOrderId",
+        "new_client_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrder": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "origClientOrderId",
+        "orig_client_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "Markets": [
+      [
+        "symbols",
+        "symbols",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "Orderbook": [
+      [
+        "lastUpdateId",
+        "last_update_id",
+        "u64",
+        "required"
+      ],
+      [
+        "bids",
+        "bids",
+        "Vec<Vec<String>>",
+        "required"
+      ],
+      [
+        "asks",
+        "asks",
+        "Vec<Vec<String>>",
+        "required"
+      ]
+    ],
+    "Account": [
+      [
+        "assets",
+        "assets",
+        "Vec<serde_json::Value>",
+        "required"
+      ],
+      [
+        "positions",
+        "positions",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "OrderReply": [
+      [
+        "orderId",
+        "order_id",
+        "u64",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "Markets"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "Orderbook"
+    ],
+    "trades": [
+      "TradesRequest",
+      "Vec<serde_json::Value>"
+    ],
+    "account": [
+      "AccountRequest",
+      "Account"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "Vec<serde_json::Value>"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "Vec<serde_json::Value>"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderReply"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "OrderReply"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "OrderReply"
+    ]
+  }
+}

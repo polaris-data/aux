@@ -313,6 +313,13 @@ export type * as TardisModels from "./tardis_models";
 export type * as LighterModels from "./lighter_models";
 export type * as MonacoModels from "./monaco_models";
 export type * as HyperliquidModels from "./hyperliquid_models";
+export type * as AsterModels from "./aster_models";
+export type * as InjectiveModels from "./injective_models";
+export type * as NadoModels from "./nado_models";
+export type * as OndoPerpsModels from "./ondo_perps_models";
+export type * as PacificaModels from "./pacifica_models";
+export type * as ParagonModels from "./paragon_models";
+export type * as TradeXyzModels from "./trade_xyz_models";
 
 export * as contracts from "./contracts";
 type MetricContracts = typeof import("./contracts");

@@ -144,6 +144,7 @@ async function openStream(venue, operation, params, origin, apiKey, apiSecret, a
     return parseHttp(await stream.commandJson(stringifyHttp({operation,params})));
   };
   const bytes = operation === "dataset" || operation === "timeseries" || operation === "download";
+  const backgroundClose = venue === "aster" && params?.channel === "account";
   return {
     ...(operation === "open_rpc" ? {
       pending: () => tradeCommand("pending", {}),
@@ -196,8 +197,8 @@ async function openStream(venue, operation, params, origin, apiKey, apiSecret, a
       const event = await stream.nextJson();
       return event == null ? {done:true, value:undefined} : {done:false, value:parseHttp(event)};
     },
-    async return() { stream.close(); return {done:true, value:undefined}; },
-    close() { stream.close(); },
+    async return() { stream.close(backgroundClose); return {done:true, value:undefined}; },
+    close() { stream.close(backgroundClose); },
   };
 }
 

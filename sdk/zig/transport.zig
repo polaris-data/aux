@@ -23,8 +23,8 @@ pub const Transport = struct {
 
     pub fn execute(self: Transport, a: w.A, input: w.V) !w.V {
         var args = input;
-        if (std.mem.eql(u8, try w.string(try w.field(input, "venue")), "derive")) {
-            const jobs = try core.dependencies(a, input);
+        const jobs = try core.dependencies(a, input);
+        if (jobs.object.count() != 0 or try core.venue(input) == .derive) {
             var it = jobs.object.iterator();
             var metadata: w.V = .{ .object = .empty };
             while (it.next()) |job| try metadata.object.put(a, job.key_ptr.*, try self.prepared(a, job.value_ptr.*));
@@ -34,19 +34,24 @@ pub const Transport = struct {
     }
 
     fn prepared(self: Transport, a: w.A, input: w.V) !w.V {
-        const req = try core.transport.prepareDispatch(a, input);
         const venue = try w.string(try w.field(input, "venue"));
         const operation = try w.string(try w.field(input, "operation"));
+        const scope_coin = if (std.mem.eql(u8, operation, "order_status") and
+            (std.mem.eql(u8, venue, "paragon") or std.mem.eql(u8, venue, "trade_xyz")))
+            try w.field(try w.field(input, "params"), "coin")
+        else
+            null;
+        const req = try core.transport.prepareDispatch(a, input);
         const request = try std.json.parseFromValueLeaky(Request, a, req, .{});
         const reservation = try core.reserve(input);
         var confirmed = false;
         defer if (reservation) |r| r.finish(confirmed);
         const response = self.send(self.context, a, request) catch |err| {
-            if (err == error.Network and std.mem.eql(u8, venue, "monaco") and core.monacoWrite(operation)) return error.PendingOutcome;
+            if (err == error.Network and ((std.mem.eql(u8, venue, "monaco") and core.monacoWrite(operation)) or core.perpsWrite(try core.venue(input), operation))) return error.PendingOutcome;
             return err;
         };
         confirmed = response.status >= 400 and response.status < 500 and response.status != 408;
-        const fields = .{ .venue = venue, .operation = operation, .api_key = input.object.get("api_key"), .auth = input.object.get("auth"), .status = response.status, .headers = response.headers, .body = response.body };
+        const fields = .{ .venue = venue, .operation = operation, .scope_coin = scope_coin, .api_key = input.object.get("api_key"), .auth = input.object.get("auth"), .status = response.status, .headers = response.headers, .body = response.body };
         const result = try core.transport.finishDispatch(a, try @import("signing.zig").value(a, fields));
         confirmed = true;
         return result;

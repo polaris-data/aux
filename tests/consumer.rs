@@ -86,6 +86,20 @@ fn main() -> aux_rs::Result<()> {
         "0x5d05989e9302dcebc74e241001e3e3ac3f4402ccf2f8e6f74b034b07ad6a904", &order, None)?;
     assert_eq!(settlement["hash"], "0x4de4c009e0d0c5a70a7da0e2039fb2b99f376d53496f89d9f437e736add6b48");
     let origin = std::env::var("AUX_FIXTURE_ORIGIN").unwrap();
+    let perps: Vec<serde_json::Value> = serde_json::from_str(include_str!("../perps-http.json")).unwrap();
+    macro_rules! perpetuals {
+        ($($client:ident => $venue:literal),+ $(,)?) => {{
+            $(let row = perps.iter().find(|r| r["venue"] == $venue && r["operation"] == "markets").unwrap();
+              let client = aux_rs::$client::new().with_origin(format!("{origin}/perps/{}", $venue));
+              assert_eq!(client.markets(&row["request"])?, row["response"]);)+
+        }};
+    }
+    perpetuals!(InjectiveClient => "injective", NadoClient => "nado", OndoPerpsClient => "ondo_perps",
+        PacificaClient => "pacifica", ParagonClient => "paragon", TradeXyzClient => "trade_xyz", AsterClient => "aster");
+    let injective = aux_rs::InjectiveClient::new().with_origin(format!("{origin}/perps/injective"));
+    let book = injective.subscribe(&serde_json::json!({"channel":"order_book","market_id":format!("0x{}", "33".repeat(32))}), None)?;
+    assert_eq!(book.next_event()?.unwrap()["orderbook"]["sequence"], 9007199254740993u64);
+    assert!(book.next_event()?.is_none());
     let hermes = aux_rs::PythHermesClient::new().with_origin(format!("{origin}/stream-refused")).with_api_key("fixture-stream-credential");
     let rejected = hermes.stream_price_updates(&serde_json::json!({"ids":["ab".repeat(32)]}));
     assert!(matches!(rejected,Err(aux_rs::Error::ExchangeResponse(e)) if e.venue == "pyth_hermes" && e.status == 403 && e.body == serde_json::json!({"message":"invalid Bearer [redacted]", "seq":9007199254740993u64})));

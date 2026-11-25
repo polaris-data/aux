@@ -9,7 +9,7 @@ import sys
 from rest_models import SCHEMAS
 
 ROOT = Path(__file__).resolve().parents[1]
-groups = ("http", "prediction-http", "data-http", "text-http")
+groups = ("http", "prediction-http", "data-http", "text-http", "perps-http")
 fixtures = {
     (r["venue"], r["operation"])
     for group in groups
@@ -30,7 +30,7 @@ routes = [
 if set(routes) != fixtures or len(set(routes)) != len(routes):
     sys.exit(f"HTTP catalog and fixtures disagree: {sorted(set(routes) ^ fixtures)}")
 subprocess.run(
-    [sys.executable, ROOT / "tools/generate_clients.py", "--check"], check=True
+    [sys.executable, ROOT / "tools/generate_clients.py", "--check", "--tracked-only"], check=True
 )
 exports = (ROOT / "src/data/hyperdash/text-routes.txt").read_text().splitlines()
 if len(set(exports)) != len(exports) or any(("hyperdash", name) not in fixtures for name in exports):

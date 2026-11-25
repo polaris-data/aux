@@ -965,6 +965,26 @@ socket_subscription!(PolymarketClient, "polymarket");
 socket_subscription!(PolymarketPerpsClient, "polymarket_perps");
 socket_subscription!(MonacoClient, "monaco");
 socket_subscription!(HyperliquidClient, "hyperliquid");
+
+macro_rules! perps_client {
+    ($client:ident, $venue:literal) => {
+        socket_subscription!($client, $venue);
+        impl $client {
+            /// Set venue-specific credentials and network options.
+            pub fn with_auth(mut self, auth: Value) -> Self {
+                self.venue_auth = Some(std::sync::Arc::new(auth));
+                self
+            }
+        }
+    };
+}
+perps_client!(AsterClient, "aster");
+perps_client!(InjectiveClient, "injective");
+perps_client!(NadoClient, "nado");
+perps_client!(OndoPerpsClient, "ondo_perps");
+perps_client!(PacificaClient, "pacifica");
+perps_client!(ParagonClient, "paragon");
+perps_client!(TradeXyzClient, "trade_xyz");
 socket_subscription!(LighterClient, "lighter");
 impl LighterClient {
     pub fn subscribe_account_orders(&self, endpoint: Option<&str>) -> Result<crate::EventStream> {

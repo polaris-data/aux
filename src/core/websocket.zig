@@ -13,7 +13,7 @@ fn headerToken(list: []const u8, wanted: []const u8) bool {
     return false;
 }
 
-fn headerValid(head: std.http.Client.Response.Head, key: []const u8) bool {
+fn headerValid(head: std.http.Client.Response.Head, key: []const u8, inflate: ?*Deflate) bool {
     if (head.status != .switching_protocols) return false;
     var hash = std.crypto.hash.Sha1.init(.{});
     hash.update(key);
@@ -23,6 +23,7 @@ fn headerValid(head: std.http.Client.Response.Head, key: []const u8) bool {
     var upgrade = false;
     var connection = false;
     var matched = false;
+    var compression = false;
     var it = head.iterateHeaders();
     while (it.next()) |h| {
         if (std.ascii.eqlIgnoreCase(h.name, "upgrade")) upgrade = headerToken(h.value, "websocket");
@@ -31,10 +32,31 @@ fn headerValid(head: std.http.Client.Response.Head, key: []const u8) bool {
             if (matched or !eq(u8, h.value, accept)) return false;
             matched = true;
         }
-        if (std.ascii.eqlIgnoreCase(h.name, "sec-websocket-extensions") or std.ascii.eqlIgnoreCase(h.name, "sec-websocket-protocol")) return false;
+        if (std.ascii.eqlIgnoreCase(h.name, "sec-websocket-extensions")) {
+            const state = inflate orelse return false;
+            if (compression) return false;
+            var parts = std.mem.splitScalar(u8, h.value, ';');
+            if (!eq(u8, std.mem.trim(u8, parts.first(), " \t"), "permessage-deflate")) return false;
+            var server_no_takeover = false;
+            var client_no_takeover = false;
+            while (parts.next()) |part| {
+                const parameter = std.mem.trim(u8, part, " \t");
+                if (eq(u8, parameter, "server_no_context_takeover") and !server_no_takeover) {
+                    server_no_takeover = true;
+                } else if (eq(u8, parameter, "client_no_context_takeover") and !client_no_takeover) {
+                    client_no_takeover = true;
+                } else return false;
+            }
+            state.reset(server_no_takeover);
+            compression = true;
+        }
+        if (std.ascii.eqlIgnoreCase(h.name, "sec-websocket-protocol")) return false;
     }
-    return upgrade and connection and matched;
+    return upgrade and connection and matched and (inflate == null or compression);
 }
+
+const Deflate = @import("websocket_deflate.zig").Inflate;
+const Heartbeat = struct { payload: []const u8, opcode: u8 = 1, seconds: u32 = 10 };
 
 const Topic = struct { frame: []u8, references: usize };
 
@@ -60,6 +82,11 @@ pub const Session = struct {
     monaco: ?@import("../exchanges/monaco/stream.zig").State = null,
     hyperliquid: ?@import("../exchanges/hyperliquid/stream.zig").State = null,
     lighter: ?@import("../exchanges/lighter/stream.zig").State = null,
+    nado: ?@import("../exchanges/nado/stream.zig").State = null,
+    ondo: ?@import("../exchanges/ondo_perps/stream.zig").State = null,
+    pacifica: ?@import("../exchanges/pacifica/stream.zig").State = null,
+    aster: ?@import("../exchanges/aster/stream.zig").State = null,
+    deflate: ?Deflate = null,
     polymarket: ?@import("../exchanges/polymarket/stream.zig").State = null,
     multiplex: bool = false,
     topics: std.ArrayList(Topic) = .empty,
@@ -90,6 +117,7 @@ pub const Session = struct {
         self.venue = venue;
         const is_derive = eq(u8, venue, "derive");
         errdefer if (self.monaco) |*state| state.deinit();
+        errdefer if (self.aster) |*state| state.deinit(dial);
         if (eq(u8, venue, "arcus")) {
             self.arcus = try @import("../exchanges/arcus/stream.zig").State.init(a, params);
             self.channel = @tagName(self.arcus.?.channel);
@@ -102,6 +130,27 @@ pub const Session = struct {
             self.monaco = try @import("../exchanges/monaco/stream.zig").State.init(a, args, params, self);
             self.channel = self.monaco.?.channel;
             self.subscribe = self.monaco.?.frame;
+        } else if (eq(u8, venue, "nado")) {
+            self.nado = try @import("../exchanges/nado/stream.zig").State.init(a, args, params);
+            self.deflate = .{ .history = try a.alloc(u8, 32 * 1024) };
+            self.channel = @tagName(self.nado.?.channel);
+            self.subscribe = self.nado.?.frame;
+        } else if (eq(u8, venue, "ondo_perps")) {
+            self.ondo = try @import("../exchanges/ondo_perps/stream.zig").State.init(a, args, params);
+            self.channel = @tagName(self.ondo.?.channel);
+            self.subscribe = self.ondo.?.frame;
+        } else if (eq(u8, venue, "pacifica")) {
+            self.pacifica = try @import("../exchanges/pacifica/stream.zig").State.init(a, args, params);
+            self.channel = @tagName(self.pacifica.?.channel);
+            self.subscribe = self.pacifica.?.frame;
+        } else if (eq(u8, venue, "aster")) {
+            self.aster = try @import("../exchanges/aster/stream.zig").State.init(a, args, params);
+            self.channel = @tagName(self.aster.?.channel);
+            self.subscribe = "";
+        } else if (eq(u8, venue, "paragon") or eq(u8, venue, "trade_xyz")) {
+            self.hyperliquid = try @import("../exchanges/hyperliquid/stream.zig").State.scoped(a, args, params, if (eq(u8, venue, "paragon")) "para" else "xyz");
+            self.subscribe = self.hyperliquid.?.frame;
+            self.channel = @tagName(self.hyperliquid.?.channel);
         } else if (eq(u8, venue, "hyperliquid")) {
             self.hyperliquid = try @import("../exchanges/hyperliquid/stream.zig").State.init(a, args, params);
             self.subscribe = self.hyperliquid.?.frame;
@@ -141,11 +190,11 @@ pub const Session = struct {
                 self.phoenix = try @import("../exchanges/phoenix/stream.zig").State.init(params, authenticated);
                 self.subscribe = try std.json.Stringify.valueAlloc(a, .{ .type = "subscribe", .subscription = params }, .{});
             }
-        } else if (self.arcus == null and self.chainlink == null and !is_derive and self.paradex == null and self.prediction == null and self.polymarket == null and self.hyperliquid == null and self.lighter == null and self.monaco == null) {
+        } else if (self.arcus == null and self.chainlink == null and !is_derive and self.paradex == null and self.prediction == null and self.polymarket == null and self.hyperliquid == null and self.lighter == null and self.monaco == null and self.nado == null and self.ondo == null and self.pacifica == null and self.aster == null) {
             self.qfex = try @import("../exchanges/qfex/stream.zig").State.init(a, params);
             self.subscribe = self.qfex.?.frame;
         }
-        const endpoint = if (self.chainlink) |c| c.endpoint else if (self.monaco) |m| m.endpoint else if (self.extended) |state| state.endpoint else if (args.object.get("origin")) |v| try wire.string(v) else if (self.arcus != null) "wss://api.arcus.xyz/v1/ws" else if (self.hyperliquid) |state| state.endpoint else if (self.lighter) |state| state.endpoint else if (self.polymarket) |state| state.endpoint() else if (self.prediction) |state| state.endpoint() else if (self.paradex != null) "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=3" else if (is_derive) "wss://api.derive.xyz/v3/ws" else if (self.phoenix != null) "wss://perp-api.phoenix.trade/v1/ws" else "wss://mds.qfex.com/";
+        const endpoint = if (self.aster) |state| state.endpoint else if (self.chainlink) |c| c.endpoint else if (self.monaco) |m| m.endpoint else if (self.extended) |state| state.endpoint else if (args.object.get("origin")) |v| try wire.string(v) else if (self.nado) |state| state.endpoint else if (self.ondo) |state| state.endpoint else if (self.pacifica) |state| state.endpoint else if (self.arcus != null) "wss://api.arcus.xyz/v1/ws" else if (self.hyperliquid) |state| state.endpoint else if (self.lighter) |state| state.endpoint else if (self.polymarket) |state| state.endpoint() else if (self.prediction) |state| state.endpoint() else if (self.paradex != null) "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=3" else if (is_derive) "wss://api.derive.xyz/v3/ws" else if (self.phoenix != null) "wss://perp-api.phoenix.trade/v1/ws" else "wss://mds.qfex.com/";
         try self.openEndpoint(endpoint);
         return self;
     }
@@ -221,11 +270,15 @@ pub const Session = struct {
         defer self.topic_lock.unlock(self.io.io());
         self.disconnect();
     }
-    fn openEndpoint(self: *Session, endpoint: []const u8) !void {
+    fn parseEndpoint(endpoint: []const u8) !std.Uri {
         for (endpoint) |b| if (b <= 32 or b == 127 or b == '\\') return error.InvalidEndpoint;
-        self.url = try std.Uri.parse(endpoint);
-        if (self.url.host == null or self.url.user != null or self.url.password != null or self.url.fragment != null) return error.InvalidEndpoint;
-        self.url.scheme = if (eq(u8, self.url.scheme, "wss")) "https" else if (eq(u8, self.url.scheme, "ws")) "http" else return error.InvalidEndpoint;
+        var url = try std.Uri.parse(endpoint);
+        if (url.host == null or url.user != null or url.password != null or url.fragment != null) return error.InvalidEndpoint;
+        url.scheme = if (eq(u8, url.scheme, "wss")) "https" else if (eq(u8, url.scheme, "ws")) "http" else return error.InvalidEndpoint;
+        return url;
+    }
+    fn openEndpoint(self: *Session, endpoint: []const u8) !void {
+        self.url = try parseEndpoint(endpoint);
         self.client = .{ .io = self.io.io(), .allocator = gpa };
         errdefer self.client.deinit();
         try self.connect();
@@ -251,6 +304,7 @@ pub const Session = struct {
         if (self.arcus) |*s| s.snapshot = false;
         if (self.chainlink) |s| try s.headers(a, io, &headers);
         try headers.appendSlice(a, self.opening_headers);
+        if (self.deflate != null) try headers.append(a, .{ .name = "Sec-WebSocket-Extensions", .value = "permessage-deflate; server_no_context_takeover; client_no_context_takeover" });
         if (self.bearer) |t| try headers.append(a, .{ .name = "Authorization", .value = t });
         if (self.api_key) |k| try headers.append(a, .{ .name = "X-Api-Key", .value = k });
         if (self.prediction) |*state| {
@@ -266,7 +320,8 @@ pub const Session = struct {
                 while (it.next()) |h| try headers.append(a, .{ .name = h.key_ptr.*, .value = try wire.string(h.value_ptr.*) });
             }
         }
-        var req = try host.request(&self.client, .GET, self.url, .{ .redirect_behavior = .unhandled, .headers = .{ .connection = .{ .override = "Upgrade" }, .user_agent = if (self.extended != null) .omit else .default }, .extra_headers = headers.items });
+        const url = if (self.aster) |*state| if (state.hasListenKey()) try parseEndpoint(try state.connect(a, self.io.dial)) else self.url else self.url;
+        var req = try host.request(&self.client, .GET, url, .{ .redirect_behavior = .unhandled, .headers = .{ .connection = .{ .override = "Upgrade" }, .user_agent = if (self.extended != null) .omit else .default }, .extra_headers = headers.items });
         // We own the connection after 101. Avoid HTTP body draining on cleanup.
         defer {
             if (req.connection) |c| c.closing = true;
@@ -287,27 +342,39 @@ pub const Session = struct {
             @import("http_failure.zig").recordStreamResponse(&response, headers.items);
             return error.ExchangeApi;
         }
-        if (!headerValid(response.head, key)) return error.InvalidHandshake;
-        const first = if (self.monaco) |*state| try state.start(a, io) else if (self.lighter) |*state| try state.start(io) else if (self.polymarket) |*state| try state.start(io) else if (self.paradex) |*state| try state.start(scratch.allocator(), io, self.subscribe) else if (self.derive) |*state| try state.start(scratch.allocator(), io, self.subscribe) else self.subscribe;
+        if (!headerValid(response.head, key, if (self.deflate) |*state| state else null)) return error.InvalidHandshake;
+        const first = if (self.monaco) |*state| try state.start(a, io) else if (self.lighter) |*state| try state.start(io) else if (self.polymarket) |*state| try state.start(io) else if (self.paradex) |*state| try state.start(scratch.allocator(), io, self.subscribe) else if (self.derive) |*state| try state.start(scratch.allocator(), io, self.subscribe) else if (self.nado) |*state| try state.start(a, io, self.io.dial) else if (self.ondo) |*state| state.start() else self.subscribe;
         if (self.multiplex) {
             for (self.topics.items) |topic| try self.write(conn, 1, topic.frame);
         } else if (first.len > 0) try self.write(conn, 1, first);
-        const beat: ?[]const u8 = if (self.monaco != null) "{\"type\":\"Ping\"}" else if (self.polymarket) |state| state.heartbeat() else if (self.hyperliquid != null) "{\"method\":\"ping\"}" else null;
-        if (beat) |payload| {
+        const beat: ?Heartbeat = if (self.monaco != null)
+            .{ .payload = "{\"type\":\"Ping\"}" }
+        else if (self.polymarket) |state| (if (state.heartbeat()) |payload| .{ .payload = payload } else null) else if (self.hyperliquid != null or self.pacifica != null)
+            .{ .payload = "{\"method\":\"ping\"}" }
+        else if (self.nado != null)
+            .{ .payload = "", .opcode = 9, .seconds = 20 }
+        else if (self.ondo != null)
+            .{ .payload = "{\"op\":\"ping\"}", .seconds = 30 }
+        else if (self.aster != null and self.aster.?.hasListenKey())
+            .{ .payload = "", .opcode = 0, .seconds = 30 * 60 }
+        else
+            null;
+        if (beat) |policy| {
             self.heartbeat_stop = .unset;
-            self.heartbeat_thread = try std.Thread.spawn(.{}, heartbeat, .{ self, conn, payload });
+            self.heartbeat_thread = try std.Thread.spawn(.{}, heartbeat, .{ self, conn, policy });
         }
         self.generation += 1;
         self.conn = conn;
         if (self.phoenix) |*state| state.reset();
         req.connection = null;
     }
-    fn heartbeat(self: *Session, conn: *std.http.Client.Connection, payload: []const u8) void {
+    fn heartbeat(self: *Session, conn: *std.http.Client.Connection, policy: Heartbeat) void {
         const io = self.io.io();
         while (!self.canceled.load(.acquire)) {
-            self.heartbeat_stop.waitTimeout(io, .{ .duration = .{ .clock = .awake, .raw = .fromSeconds(10) } }) catch |e| switch (e) {
+            self.heartbeat_stop.waitTimeout(io, .{ .duration = .{ .clock = .awake, .raw = .fromSeconds(policy.seconds) } }) catch |e| switch (e) {
                 error.Timeout => {
-                    self.write(conn, 1, payload) catch {
+                    const result = if (policy.opcode == 0) self.aster.?.renew(self.io.dial) else self.write(conn, policy.opcode, policy.payload);
+                    result catch {
                         conn.stream_reader.stream.shutdown(io, .both) catch {};
                         return;
                     };
@@ -357,6 +424,7 @@ pub const Session = struct {
         self.close();
         if (self.monaco) |*state| state.deinit();
         self.disconnect();
+        if (self.aster) |*state| state.deinit(self.io.dial);
         for (self.topics.items) |topic| gpa.free(topic.frame);
         self.topics.deinit(gpa);
         if (self.rejection) |payload| gpa.free(payload);
@@ -398,12 +466,14 @@ pub const Session = struct {
         var fragments: std.ArrayList(u8) = .empty;
         defer fragments.deinit(gpa);
         var fragmented = false;
+        var compressed = false;
         while (true) {
             const first = reader.takeByte() catch return error.Network;
             const size = reader.takeByte() catch return error.Network;
             const op = first & 15;
             const fin = first & 128 != 0;
-            if (first & 0x70 != 0 or size & 128 != 0) return error.InvalidFrame;
+            const rsv1 = first & 0x40 != 0;
+            if (first & 0x30 != 0 or size & 128 != 0 or (rsv1 and (op == 0 or op >= 8 or self.deflate == null))) return error.InvalidFrame;
             const n: u64 = switch (size) {
                 126 => reader.takeInt(u16, .big) catch return error.Network,
                 127 => reader.takeInt(u64, .big) catch return error.Network,
@@ -441,11 +511,12 @@ pub const Session = struct {
             } else {
                 if (fragmented or (op != 1 and !(op == 2 and (self.paradex != null or self.bearer != null)))) return error.InvalidOpcode;
                 self.binary = op == 2;
+                compressed = rsv1;
             }
             if (n > max_bytes - fragments.items.len) return error.FrameTooLarge;
             const dest = try fragments.addManyAsSlice(gpa, @intCast(n));
             reader.readSliceAll(dest) catch return error.Network;
-            if (fin) return try fragments.toOwnedSlice(gpa);
+            if (fin) return if (compressed) try self.deflate.?.message(fragments.items, max_bytes) else try fragments.toOwnedSlice(gpa);
             fragmented = true;
         }
     }
@@ -466,7 +537,12 @@ pub const Session = struct {
                 if (err != error.Network) return err;
                 self.disconnectSubscription();
                 continue;
-            } orelse return null;
+            } orelse {
+                const new_venue = self.nado != null or self.ondo != null or self.pacifica != null or self.aster != null or (self.hyperliquid != null and self.hyperliquid.?.namespace != null);
+                if (!new_venue) return null;
+                self.disconnectSubscription();
+                continue;
+            };
             if (self.multiplex and self.lighter != null) {
                 var arena = std.heap.ArenaAllocator.init(gpa);
                 defer arena.deinit();
@@ -499,8 +575,8 @@ pub const Session = struct {
             const raw = try self.subscriptionMessage() orelse break;
             var arena = std.heap.ArenaAllocator.init(gpa);
             defer arena.deinit();
-            if (self.qfex != null or self.arcus != null or self.chainlink != null or self.monaco != null or self.hyperliquid != null or self.lighter != null or self.polymarket != null or self.derive != null or self.paradex != null) {
-                const parsed = if (self.qfex) |*s| s.event(arena.allocator(), raw) else if (self.arcus) |*s| s.event(arena.allocator(), raw) else if (self.chainlink) |s| s.event(arena.allocator(), raw) else if (self.monaco) |*state| state.event(arena.allocator(), raw) else if (self.hyperliquid) |*state| state.event(arena.allocator(), raw) else if (self.lighter) |*state| state.event(arena.allocator(), raw) else if (self.polymarket) |*state| state.event(arena.allocator(), raw) else if (self.paradex) |*state| state.event(arena.allocator(), raw, self.binary) else self.derive.?.event(arena.allocator(), self.channel, raw);
+            if (self.qfex != null or self.arcus != null or self.chainlink != null or self.monaco != null or self.hyperliquid != null or self.lighter != null or self.polymarket != null or self.derive != null or self.paradex != null or self.nado != null or self.ondo != null or self.pacifica != null or self.aster != null) {
+                const parsed = if (self.qfex) |*s| s.event(arena.allocator(), raw) else if (self.arcus) |*s| s.event(arena.allocator(), raw) else if (self.chainlink) |s| s.event(arena.allocator(), raw) else if (self.monaco) |*state| state.event(arena.allocator(), raw) else if (self.hyperliquid) |*state| state.event(arena.allocator(), raw) else if (self.lighter) |*state| state.event(arena.allocator(), raw) else if (self.polymarket) |*state| state.event(arena.allocator(), raw) else if (self.paradex) |*state| state.event(arena.allocator(), raw, self.binary) else if (self.nado) |*state| state.event(arena.allocator(), raw) else if (self.ondo) |*state| state.event(arena.allocator(), raw) else if (self.pacifica) |*state| state.event(arena.allocator(), raw) else if (self.aster) |*state| state.event(arena.allocator(), raw) else self.derive.?.event(arena.allocator(), self.channel, raw);
                 const event = parsed catch |err| {
                     self.recordRejection(err, raw);
                     recoverable = err == error.RecoverableStreamGap;

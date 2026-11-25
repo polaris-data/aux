@@ -37,6 +37,7 @@ pub fn run(init: std.process.Init, client: aux.Client, args: []const []const u8)
     try pascalPermits(init, client, args[2]);
     try authChecks(client, args[5]);
     try liveCheck(init, client, args);
+    try perpsCheck(init, client.allocator, args[5], args[2]);
     try feedsCheck(client.allocator, args[5]);
     var decoder = try aux.codec.EventDecoder.init(64);
     defer decoder.deinit();
@@ -289,4 +290,49 @@ fn pascalPermits(init: std.process.Init, base: aux.Client, dir: []const u8) !voi
         try check(signed.value, expected.value);
         try check(signed.value.object.get("auth").?.object.get("signature").?, row.object.get("signature").?);
     }
+}
+
+fn perpsCheck(init: std.process.Init, a: std.mem.Allocator, origin: []const u8, fixtures: []const u8) !void {
+    var rows = try fixture(init, fixtures, "perps-http.json");
+    defer rows.deinit();
+    const clients = .{
+        .{ "injective", aux.clients.InjectiveClient },  .{ "nado", aux.clients.NadoClient },
+        .{ "ondo_perps", aux.clients.OndoPerpsClient }, .{ "pacifica", aux.clients.PacificaClient },
+        .{ "paragon", aux.clients.ParagonClient },      .{ "trade_xyz", aux.clients.TradeXyzClient },
+        .{ "aster", aux.clients.AsterClient },
+    };
+    inline for (clients) |entry| {
+        const venue = entry[0];
+        const Client = entry[1];
+        const url = try std.mem.concat(a, u8, &.{ origin, "/perps/", venue });
+        defer a.free(url);
+        const client = Client.init(a, .{ .origin = url });
+        for (rows.value.array.items) |row| {
+            if (std.mem.eql(u8, row.object.get("venue").?.string, venue) and
+                std.mem.eql(u8, row.object.get("operation").?.string, "markets"))
+            {
+                const model = @field(aux.clients, venue).MarketsRequest;
+                const request_bytes = try std.json.Stringify.valueAlloc(a, row.object.get("request").?, .{});
+                defer a.free(request_bytes);
+                var request = try aux.parseAs(model, a, request_bytes);
+                defer request.deinit();
+                var reply = try client.markets(request.value);
+                defer reply.deinit();
+                const bytes = try std.json.Stringify.valueAlloc(a, reply.value, .{});
+                defer a.free(bytes);
+                var wire = try aux.parse(a, bytes);
+                defer wire.deinit();
+                try check(wire.value, row.object.get("response").?);
+            }
+        }
+    }
+    const url = try std.mem.concat(a, u8, &.{ origin, "/perps/injective" });
+    defer a.free(url);
+    const injective = aux.clients.InjectiveClient.init(a, .{ .origin = url });
+    var stream = try injective.subscribe(.{ .channel = "order_book", .market_id = "0x3333333333333333333333333333333333333333333333333333333333333333" });
+    defer stream.deinit();
+    var event = (try stream.next()).?;
+    defer event.deinit();
+    try std.testing.expectEqualStrings("9007199254740993", event.value.object.get("orderbook").?.object.get("sequence").?.number_string);
+    try std.testing.expect((try stream.next()) == null);
 }

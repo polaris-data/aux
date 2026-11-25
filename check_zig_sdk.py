@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tarfile
 import tempfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -31,7 +32,7 @@ def pair(group, operation, request, response):
 def model_rows():
     files = {
         name: json.loads((ROOT / f"tests/{name}.json").read_text())
-        for name in ("http", "data-http", "prediction-http", "text-http")
+        for name in ("http", "data-http", "prediction-http", "text-http", "perps-http")
     }
     for group, schema in SCHEMAS.items():
         venue = schema.get("venue", group)
@@ -139,6 +140,10 @@ def package(directory):
 
 
 def main():
+    subprocess.run(
+        [sys.executable, ROOT / "tools/generate_clients.py", "--zig-generated-only"],
+        check=True,
+    )
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp)
         zig = os.environ.get("ZIG", "zig")

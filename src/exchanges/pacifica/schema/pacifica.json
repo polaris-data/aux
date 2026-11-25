@@ -1,0 +1,283 @@
+{
+  "client": "PacificaClient",
+  "venue": "pacifica",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "MarketsRequest": [],
+    "OrderBookRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "agg_level",
+        "agg_level",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "order_id",
+        "order_id",
+        "u64",
+        "required"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "LimitOrder",
+        "required"
+      ]
+    ],
+    "PlaceMarketOrderRequest": [
+      [
+        "body",
+        "body",
+        "MarketOrder",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrder",
+        "required"
+      ]
+    ],
+    "Subscription": [
+      [
+        "source",
+        "source",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "account",
+        "account",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "agg_level",
+        "agg_level",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "LimitOrder": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "side",
+        "side",
+        "String",
+        "required"
+      ],
+      [
+        "amount",
+        "amount",
+        "String",
+        "required"
+      ],
+      [
+        "reduce_only",
+        "reduce_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "price",
+        "price",
+        "String",
+        "required"
+      ],
+      [
+        "tif",
+        "tif",
+        "String",
+        "required"
+      ]
+    ],
+    "MarketOrder": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "side",
+        "side",
+        "String",
+        "required"
+      ],
+      [
+        "amount",
+        "amount",
+        "String",
+        "required"
+      ],
+      [
+        "reduce_only",
+        "reduce_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "slippage_percent",
+        "slippage_percent",
+        "String",
+        "required"
+      ]
+    ],
+    "CancelOrder": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "order_id",
+        "order_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PacificaReply": [
+      [
+        "success",
+        "success",
+        "bool",
+        "required"
+      ],
+      [
+        "data",
+        "data",
+        "Option<serde_json::Value>",
+        "optional"
+      ],
+      [
+        "code",
+        "code",
+        "Option<serde_json::Number>",
+        "optional"
+      ],
+      [
+        "error",
+        "error",
+        "Option<serde_json::Value>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "PacificaReply"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "PacificaReply"
+    ],
+    "trades": [
+      "TradesRequest",
+      "PacificaReply"
+    ],
+    "account": [
+      "AccountRequest",
+      "PacificaReply"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PacificaReply"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "PacificaReply"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "PacificaReply"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PacificaReply"
+    ],
+    "place_market_order": [
+      "PlaceMarketOrderRequest",
+      "PacificaReply"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "PacificaReply"
+    ]
+  }
+}

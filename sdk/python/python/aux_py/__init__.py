@@ -329,8 +329,10 @@ class EventStream:
         return json.loads(text, parse_float=Decimal)
 
     async def close(self):
+        import asyncio
+
         self.closed = True
-        self._native.close()
+        await asyncio.to_thread(self._native.close)
 
     async def aclose(self):
         await self.close()

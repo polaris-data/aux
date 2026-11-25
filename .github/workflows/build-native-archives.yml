@@ -1,0 +1,24 @@
+name: Build native SDK archives
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Install pinned Zig compiler
+        run: bash tools/install-ci-zig.sh
+      - name: Build archives for all supported targets
+        run: python3 rebuild.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: native-sdk-archives
+          path: sdk/rust/prebuilt/
+          if-no-files-found: error

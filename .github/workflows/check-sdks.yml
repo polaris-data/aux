@@ -19,6 +19,10 @@ jobs:
           python-version: '3.12'
       - name: Verify generated SDK coverage
         run: python tools/check_coverage.py
+      - name: Install Zig
+        run: bash tools/install-ci-zig.sh
+      - name: Build the Linux native archive
+        run: python rebuild.py --target x86_64-unknown-linux-gnu
       - name: Install Rust
         run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
       - name: Run default Rust tests
