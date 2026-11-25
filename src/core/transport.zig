@@ -5,6 +5,7 @@ const perps = @import("perps.zig");
 const hip3 = @import("../exchanges/hyperliquid/hip3.zig");
 const http = @import("http.zig");
 const routes = @import("routes.zig");
+const connectors = @import("perps_connectors.zig");
 const A = wire.A;
 const V = wire.V;
 
@@ -18,7 +19,12 @@ fn origin(v: routes.Venue) []const u8 {
     };
 }
 
-const Dispatch = struct { request: http.Request, url: []const u8, payload: ?[]const u8 };
+const Dispatch = struct {
+    request: http.Request,
+    url: []const u8,
+    payload: ?[]const u8,
+    binary: bool = false,
+};
 
 fn kalshiTarget(a: A, uri: std.Uri, request: http.Request) ![]const u8 {
     const prefix = switch (uri.path) {
@@ -94,6 +100,8 @@ fn dispatch(a: A, input: V, io: std.Io, stream: bool) !Dispatch {
             std.ascii.eqlIgnoreCase(try uri.host.?.toRawMaybeAlloc(a), try target.host.?.toRawMaybeAlloc(a));
         break :target request.path;
     } else try std.mem.concat(a, u8, &.{ std.mem.trimEnd(u8, base, "/"), request.path });
+    if (connectors.supports(venue))
+        return connectorDispatch(a, input, venue, operation_name, base, request, io);
     if (perps.isVenue(venue) and request.authenticated) {
         const auth = perps.get(input, "auth");
         switch (venue) {
@@ -304,6 +312,62 @@ fn dispatch(a: A, input: V, io: std.Io, stream: bool) !Dispatch {
     return .{ .request = request, .url = url, .payload = payload };
 }
 
+fn connectorDispatch(a: A, input: V, venue: routes.Venue, op: []const u8, base: []const u8, source: http.Request, io: std.Io) !Dispatch {
+    var request = source;
+    const write = perps.isWrite(venue, op);
+    switch (venue) {
+        .perpl => if (write) {
+            request.body = try @import("../exchanges/perpl/trading.zig").order(a, op, request.body);
+        },
+        .risex => if (write) {
+            request.body = try @import("../exchanges/risex/trading.zig").sign(a, input, io, op, request.body);
+        },
+        .decibel => {
+            if (perps.get(input, "api_key") != .null or !std.mem.startsWith(u8, request.path, "/v1")) try connectors.bearer(a, input, &request.headers);
+            if (write) {
+                try perps.put(&request.headers, a, "content-type", wire.text("application/x.aptos.signed_transaction+bcs"));
+                const payload = try @import("../exchanges/decibel/trading.zig").build(a, input, request.body, op, io);
+                return .{ .request = request, .url = try targetUrl(a, base, request.path), .payload = payload, .binary = true };
+            }
+        },
+        .edgex => if (request.authenticated) {
+            const trade = @import("../exchanges/edgex/trading.zig");
+            const now = try perps.epoch(io, .ms);
+            if (write) {
+                if (perps.eq(u8, op, "place_order")) request.body = try trade.order(a, input, request.body, now) else try trade.cancel(input, request.body);
+            }
+            try trade.headers(a, input, request.method, request.path, request.body, try std.fmt.allocPrint(a, "{d}", .{now}), &request.headers);
+        },
+        .grvt => if (request.authenticated) {
+            const trade = @import("../exchanges/grvt/trading.zig");
+            if (perps.eq(u8, op, "login")) {
+                request.body = try trade.loginRequest(a, input, &request.headers);
+            } else {
+                try trade.sessionHeaders(a, input, &request.headers);
+                if (write) {
+                    if (perps.eq(u8, op, "place_order")) request.body = try trade.order(a, input, request.body, io) else try trade.cancel(request.body);
+                }
+            }
+        },
+        .katana => if (request.authenticated) {
+            const trade = @import("../exchanges/katana/trading.zig");
+            if (perps.eq(u8, request.method, "GET")) request.path = try trade.query(a, request.path, io);
+            if (write) request.body = try trade.order(a, input, op, request.body, io);
+        },
+        else => unreachable,
+    }
+    const payload = try connectors.json(a, request.body);
+    if (request.authenticated) {
+        if (venue == .perpl) try @import("../exchanges/perpl/trading.zig").headers(a, input, io, &request, payload orelse "");
+        if (venue == .katana) try @import("../exchanges/katana/trading.zig").headers(a, input, request.method, request.path, payload orelse "", &request.headers);
+    }
+    return .{ .request = request, .url = try targetUrl(a, base, request.path), .payload = payload };
+}
+
+fn targetUrl(a: A, base: []const u8, path: []const u8) ![]const u8 {
+    return std.mem.concat(a, u8, &.{ std.mem.trimEnd(u8, base, "/"), path });
+}
+
 // Produce the exact bytes and headers for a host-provided TLS policy.
 pub fn prepareDispatch(a: A, input: V) !V {
     var io: std.Io.Threaded = .init_single_threaded;
@@ -312,7 +376,13 @@ pub fn prepareDispatch(a: A, input: V) !V {
     try out.object.put(a, "method", wire.text(prepared.request.method));
     try out.object.put(a, "url", wire.text(prepared.url));
     try out.object.put(a, "headers", prepared.request.headers);
-    try out.object.put(a, "body", if (prepared.payload) |body| wire.text(body) else .null);
+    if (prepared.binary) {
+        const body = prepared.payload.?;
+        try out.object.put(a, "body_hex", wire.text(try std.fmt.allocPrint(a, "{x}", .{body})));
+        try out.object.put(a, "transaction_hash", wire.text(try @import("../exchanges/decibel/trading.zig").hash(a, body)));
+    } else {
+        try out.object.put(a, "body", if (prepared.payload) |body| wire.text(body) else .null);
+    }
     return out;
 }
 
@@ -373,6 +443,7 @@ pub fn dependencies(a: A, input: V) !V {
     const operation = try perps.text(input, "operation");
     var jobs = perps.object();
     if (!perps.isWrite(venue, operation)) return jobs;
+    if (connectors.supports(venue)) return connectors.dependencies(a, venue, operation, input);
     const names: []const []const u8 = switch (venue) {
         .nado => &.{"contracts"},
         .paragon, .trade_xyz => &.{ "perp_dexs", "markets" },
@@ -429,29 +500,53 @@ fn executePrepared(a: A, input: V, dial: ?@import("host_stream.zig").Dial) !V {
     const operation = try perps.text(input, "operation");
     const uncertain_write = (venue == .monaco and @import("../exchanges/monaco/orders.zig").isWrite(operation)) or perps.isWrite(venue, operation);
     var req = sendWithOptions(a, client, prepared.request.method, prepared.url, prepared.request.headers, prepared.payload, &attempted, lease != null) catch |err| {
-        return if (uncertain_write and attempted) error.PendingOutcome else err;
+        if (!uncertain_write or !attempted) return err;
+        recordUncertain(a, prepared);
+        return error.PendingOutcome;
     };
     defer req.deinit();
     errdefer if (req.connection) |conn| {
         conn.closing = true;
     };
-    var response = req.receiveHead(&.{}) catch return if (uncertain_write) error.PendingOutcome else error.Network;
+    var response = req.receiveHead(&.{}) catch {
+        if (!uncertain_write) return error.Network;
+        recordUncertain(a, prepared);
+        return error.PendingOutcome;
+    };
     const status = @backingInt(response.head.status);
     confirmed = status >= 400 and status < 500 and status != 408;
     // Header strings belong to the HTTP read buffer until the body is read.
     var headers: std.ArrayList(std.http.Header) = .empty;
-    if (http.oracleVenue(venue) or venue == .hyperdash or venue == .dune) {
+    if (http.oracleVenue(venue) or venue == .hyperdash or venue == .dune or (venue == .grvt and perps.eq(u8, operation, "login"))) {
         var it = response.head.iterateHeaders();
         while (it.next()) |h| try headers.append(a, .{ .name = try a.dupe(u8, h.name), .value = try a.dupe(u8, h.value) });
     }
     var buffer: [8192]u8 = undefined;
     var decompressor: std.http.Decompress = undefined;
-    const reader = bodyReader(a, &response, &buffer, &decompressor) catch |err| return if (uncertain_write and !confirmed) error.PendingOutcome else err;
-    const bytes = reader.allocRemaining(a, .limited(16 * 1024 * 1024)) catch return if (uncertain_write and !confirmed) error.PendingOutcome else error.Network;
-    const result = try finish(a, venue, status, headers.items, bytes, input.object.get("api_key"), input.object.get("operation"));
+    const reader = bodyReader(a, &response, &buffer, &decompressor) catch |err| {
+        if (!uncertain_write or confirmed) return err;
+        recordUncertain(a, prepared);
+        return error.PendingOutcome;
+    };
+    const bytes = reader.allocRemaining(a, .limited(16 * 1024 * 1024)) catch {
+        if (!uncertain_write or confirmed) return error.Network;
+        recordUncertain(a, prepared);
+        return error.PendingOutcome;
+    };
+    const result = finish(a, venue, status, headers.items, bytes, input.object.get("api_key"), input.object.get("operation")) catch |err| {
+        if (err == error.PendingOutcome) recordUncertain(a, prepared);
+        return err;
+    };
     confirmed = true;
     try refreshMonaco(input, result, client.io);
     return result;
+}
+
+fn recordUncertain(a: A, prepared: Dispatch) void {
+    if (!prepared.binary) return;
+    const hash = @import("../exchanges/decibel/trading.zig").hash(a, prepared.payload.?) catch return;
+    const detail = std.json.Stringify.valueAlloc(a, .{ .hash = hash }, .{}) catch return;
+    @import("http_failure.zig").record("decibel", 0, detail);
 }
 
 pub fn finish(a: A, venue: routes.Venue, status: u16, headers: []const std.http.Header, bytes: []const u8, key: ?V, operation: ?V) !V {
@@ -462,7 +557,12 @@ pub fn finish(a: A, venue: routes.Venue, status: u16, headers: []const std.http.
             if (status == 408 or status >= 500) return error.PendingOutcome;
             if (status >= 200 and status < 300) {
                 const value = wire.parse(a, bytes) catch return error.PendingOutcome;
-                if (hip3.dex(venue) != null and !perps.replyError(venue, value)) {
+                if (connectors.supports(venue) and !perps.replyError(venue, value)) {
+                    connectors.checkWrite(venue, op, value) catch |err| {
+                        if (err == error.ExchangeApi) @import("http_failure.zig").record(@tagName(venue), status, bytes);
+                        return err;
+                    };
+                } else if (hip3.dex(venue) != null and !perps.replyError(venue, value)) {
                     const statuses = perps.get(perps.get(perps.get(value, "response"), "data"), "statuses");
                     if (statuses != .array or statuses.array.items.len != 1) return error.PendingOutcome;
                     if (perps.get(statuses.array.items[0], "error") != .null) {
@@ -517,6 +617,8 @@ pub fn finish(a: A, venue: routes.Venue, status: u16, headers: []const std.http.
         };
     }
     const result = if (format == .json or status < 200 or status >= 300) try http.decode(a, venue, status, bytes) else if (std.unicode.utf8ValidateSlice(bytes)) wire.text(bytes) else return error.InvalidUtf8;
+    if (venue == .grvt and operation != null and perps.eq(u8, try wire.string(operation.?), "login"))
+        return @import("../exchanges/grvt/trading.zig").loginResponse(a, result, headers);
     if (venue == .dune and format == .csv) {
         var out: V = .{ .object = .empty };
         var offset: V = .null;

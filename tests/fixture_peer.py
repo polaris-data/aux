@@ -40,6 +40,9 @@ class Peer(BaseHTTPRequestHandler):
         self.wfile.write(row["response_json"].encode())
 
     def do_GET(self):
+        if self.path.startswith("/new-exchanges/"):
+            from .exchange_peer import serve
+            return serve(self)
         if self.path.startswith("/perps/"):
             from .perps_peer import serve
             return serve(self)
@@ -203,6 +206,9 @@ class Peer(BaseHTTPRequestHandler):
         self.wfile.write(row["body"].encode())
 
     def do_DELETE(self):
+        if self.path.startswith("/new-exchanges/"):
+            from .exchange_peer import serve
+            return serve(self)
         if self.path.startswith("/perps/"):
             from .perps_peer import serve
             return serve(self)
@@ -216,6 +222,9 @@ class Peer(BaseHTTPRequestHandler):
         return monaco(self)
 
     def do_POST(self):
+        if self.path.startswith("/new-exchanges/"):
+            from .exchange_peer import serve
+            return serve(self)
         if self.path.startswith("/perps/"):
             from .perps_peer import serve
             return serve(self)

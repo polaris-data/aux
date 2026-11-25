@@ -1996,6 +1996,116 @@ async def test_perps_connectors(origin):
         assert (await anext(stream))["E"] == 2
 
 
+
+async def test_new_exchanges(origin):
+    origin += "/new-exchanges"
+    websocket = origin.replace("http:", "ws:", 1)
+    key = "0x" + "00" * 31 + "01"
+    wallet = "0x7e5f4552091a69125d5dfcb7b8c2659029395bdf"
+    seed = bytes(range(32)).hex()
+    market = "0x" + "33" * 32
+    account = "0x" + "22" * 32
+    credentials = dict(api_key="fixture-key", api_secret="fixture-secret")
+    clients = {
+        "perpl": sdk.PerplClient(origin=origin + "/perpl", api_key="fixture-key", api_secret=seed),
+        "risex": sdk.RisexClient(origin=origin + "/risex", auth=dict(key=key, account="0x" + "11" * 20, rest_origin=origin + "/risex")),
+        "decibel": sdk.DecibelClient(origin=origin + "/decibel", api_key="fixture-key", auth=dict(seed=seed, subaccount=account, rest_origin=origin + "/decibel")),
+        "edgex": sdk.EdgeXClient(origin=origin + "/edgex", auth=dict(key=key, passphrase="fixture-passphrase", account_id="123456789012345678"), **credentials),
+        "grvt": sdk.GrvtClient(origin=origin + "/grvt", auth=dict(key=key, cookie="gravity=fixture", account_id="123"), **credentials),
+        "katana": sdk.KatanaClient(origin=origin + "/katana", auth=dict(key=key, wallet=wallet, rest_origin=origin + "/katana"), **credentials),
+        "variational": sdk.VariationalClient(origin=origin + "/variational"),
+    }
+    for row in fixture("perps-http"):
+        venue, method = row["venue"], row["operation"]
+        if venue not in clients:
+            continue
+        request = row["request"]
+        if venue == "katana":
+            if "wallet" in request:
+                request = {**request, "wallet": wallet}
+            elif "body" in request:
+                request = {"body": {**request["body"], "wallet": wallet}}
+        result = await getattr(clients[venue], method)(request)
+        if venue == "edgex" and method == "markets":
+            assert result["data"]["contractList"][0]["resolution"] == "10000000000"
+        elif venue == "decibel" and method in {"place_order", "cancel_order"}:
+            assert result["type"] == "pending_transaction" and len(result["hash"]) == 66
+        else:
+            assert result == row["response"], (venue, method, result)
+
+    streams = {
+        "perpl": [{"channel":"order_book","market_id":1},{"channel":"trades","market_id":1},{"channel":"account"}],
+        "risex": [{"channel":"orderbook","market_ids":[1]},{"channel":"trades","market_ids":[1]},{"channel":"account"}],
+        "decibel": [{"channel":"depth","market":market},{"channel":"trades","market":market},{"channel":"order_updates","account":account}],
+        "edgex": [{"channel":"depth","contract_id":"10000001"},{"channel":"trades","contract_id":"10000001"},{"channel":"account"}],
+        "grvt": [{"channel":"v1.book.s","instrument":"BTC_USDT_Perp"},{"channel":"v1.trade","instrument":"BTC_USDT_Perp"},{"channel":"v1.order","sub_account_id":"123456789"}],
+        "katana": [{"channel":"l2orderbook","market":"ETH-USD"},{"channel":"trades","market":"ETH-USD"},{"channel":"orders"}],
+    }
+    for venue, specs in streams.items():
+        for name, spec in zip(("book", "trades", "account"), specs):
+            async with await clients[venue].subscribe(spec, endpoint=f"{websocket}/{venue}/ws/{name}") as stream:
+                event = await asyncio.wait_for(anext(stream), 8)
+                if venue == "perpl" and name == "book":
+                    assert event["mt"] == 15 and event["bid"][0]["p"] == 9007199254740993
+                if venue == "risex" and name == "book":
+                    assert event["type"] == "snapshot" and event["market_id"] == "1"
+                if venue == "katana" and name == "book":
+                    assert event["snapshot"] and event["data"]["sequence"] == 9007199254740993
+                    assert (await asyncio.wait_for(anext(stream), 8))["data"]["u"] == 9007199254740994
+                    assert (await asyncio.wait_for(anext(stream), 8))["snapshot"]
+                if venue == "decibel":
+                    assert event["unix_ms"] == 9007199254740993
+
+    async with await clients["perpl"].subscribe({"channel":"order_book","market_id":1}, endpoint=websocket + "/perpl/ws/reject") as stream:
+        try:
+            await anext(stream)
+        except sdk.ExchangeError as error:
+            assert error.venue == "perpl" and error.body["subs"][0]["status"]["code"] == 404
+        else:
+            raise AssertionError("accepted rejected subscription")
+
+    async with await clients["perpl"].subscribe({"channel":"account"}, endpoint=websocket + "/perpl/ws/account-denied") as stream:
+        try:
+            await anext(stream)
+        except sdk.ExchangeError as error:
+            assert error.venue == "perpl" and error.body["status"]["code"] == 401
+        else:
+            raise AssertionError("private feed accepted revoked credentials")
+
+    rise_order = next(row["request"]["body"] for row in fixture("perps-http") if row["venue"] == "risex" and row["operation"] == "place_order")
+    placed = await asyncio.gather(*(
+        clients["risex"].place_order({"body": {**rise_order, "client_order_id": str(request_id)}})
+        for request_id in (9007199254740997, 9007199254740998)
+    ))
+    assert all(result["data"]["tx_hash"].startswith("0x") for result in placed)
+
+    perpl_order = next(row["request"]["body"] for row in fixture("perps-http") if row["venue"] == "perpl" and row["operation"] == "place_order")
+    try:
+        await clients["perpl"].place_order({"body": {**perpl_order, "rq":9007199254740995}})
+    except sdk.ExchangeError as error:
+        assert error.body["statuses"][0]["code"] == 403
+    else:
+        raise AssertionError("accepted rejected order")
+
+    lost = sdk.DecibelClient(origin=origin + "/decibel/lost", api_key="fixture-key", auth=dict(seed=seed, subaccount=account, rest_origin=origin + "/decibel"))
+    order = next(row["request"] for row in fixture("perps-http") if row["venue"] == "decibel" and row["operation"] == "place_order")
+    try:
+        await lost.place_order(order)
+    except sdk.OutcomeUncertainError as error:
+        assert error.transaction_hash.startswith("0x") and len(error.transaction_hash) == 66
+    else:
+        raise AssertionError("lost Aptos acknowledgement treated as success")
+    from urllib.request import urlopen
+    with urlopen(origin + "/decibel/lost-count", timeout=5) as reply:
+        assert json.load(reply)["count"] == 1
+
+    try:
+        await sdk.VariationalClient(origin=origin + "/variational/rate-limited").market_stats()
+    except sdk.ExchangeError as error:
+        assert error.status == 429 and error.body["retry_after_seconds"] == 4
+    else:
+        raise AssertionError("rate limit treated as success")
+
 if __name__ == "__main__":
     for row in fixture("extended-settlement"):
         args = (row["kind"], row["chain_id"], row["public_key"], row["message"])
@@ -2017,6 +2127,7 @@ if __name__ == "__main__":
     if origin := os.environ.get("AUX_FIXTURE_ORIGIN"):
         asyncio.run(test_shared_peer(origin))
         asyncio.run(test_perps_connectors(origin))
+        asyncio.run(test_new_exchanges(origin))
         asyncio.run(test_live(os.environ["AUX_DBN_GATEWAY"]))
     test_trading_signatures()
     test_derive()

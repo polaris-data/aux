@@ -443,6 +443,8 @@ fn open(config: []const u8, dial: ?host.Dial) !*Handle {
         handle.* = .{ .rpc = try @import("command_session.zig").Session.open(arena.allocator(), input, dial) };
     } else if (std.mem.eql(u8, venue, "qfex") and std.mem.eql(u8, operation, "trading_session")) {
         handle.* = .{ .trading = try @import("../exchanges/qfex/trading.zig").Session.open(arena.allocator(), input, dial) };
+    } else if (@import("perps_stream.zig").venue(venue) != null and std.mem.eql(u8, operation, "subscribe")) {
+        handle.* = .{ .websocket = try Socket.open(config, dial) };
     } else if ((std.mem.eql(u8, venue, "arcus") or std.mem.eql(u8, venue, "chainlink_streams") or std.mem.eql(u8, venue, "monaco") or std.mem.eql(u8, venue, "hyperliquid") or std.mem.eql(u8, venue, "paragon") or std.mem.eql(u8, venue, "trade_xyz") or std.mem.eql(u8, venue, "aster") or std.mem.eql(u8, venue, "nado") or std.mem.eql(u8, venue, "ondo_perps") or std.mem.eql(u8, venue, "pacifica") or std.mem.eql(u8, venue, "lighter") or std.mem.eql(u8, venue, "polymarket") or std.mem.eql(u8, venue, "polymarket_perps") or std.mem.eql(u8, venue, "extended") or std.mem.eql(u8, venue, "pascal") or std.mem.eql(u8, venue, "kalshi") or std.mem.eql(u8, venue, "paradex") or std.mem.eql(u8, venue, "qfex") or std.mem.eql(u8, venue, "phoenix") or std.mem.eql(u8, venue, "derive")) and std.mem.eql(u8, operation, "subscribe")) {
         const shared = @import("shared_stream.zig");
         handle.* = if (dial == null and shared.eligible(venue, try wire.field(input, "params")))

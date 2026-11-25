@@ -42,17 +42,31 @@ pub const Transport = struct {
         else
             null;
         const req = try core.transport.prepareDispatch(a, input);
-        const request = try std.json.parseFromValueLeaky(Request, a, req, .{});
+        var value = req;
+        const binary = value.object.fetchSwapRemove("body_hex");
+        const transaction_hash = value.object.fetchSwapRemove("transaction_hash");
+        var request = try std.json.parseFromValueLeaky(Request, a, value, .{});
+        if (binary) |hex| {
+            const text = try w.string(hex.value);
+            const bytes = try a.alloc(u8, text.len / 2);
+            request.body = try std.fmt.hexToBytes(bytes, text);
+        }
         const reservation = try core.reserve(input);
         var confirmed = false;
         defer if (reservation) |r| r.finish(confirmed);
         const response = self.send(self.context, a, request) catch |err| {
-            if (err == error.Network and ((std.mem.eql(u8, venue, "monaco") and core.monacoWrite(operation)) or core.perpsWrite(try core.venue(input), operation))) return error.PendingOutcome;
+            if (err == error.Network and ((std.mem.eql(u8, venue, "monaco") and core.monacoWrite(operation)) or core.perpsWrite(try core.venue(input), operation))) {
+                recordPending(a, if (transaction_hash) |hash| hash.value else .null);
+                return error.PendingOutcome;
+            }
             return err;
         };
         confirmed = response.status >= 400 and response.status < 500 and response.status != 408;
         const fields = .{ .venue = venue, .operation = operation, .scope_coin = scope_coin, .api_key = input.object.get("api_key"), .auth = input.object.get("auth"), .status = response.status, .headers = response.headers, .body = response.body };
-        const result = try core.transport.finishDispatch(a, try @import("signing.zig").value(a, fields));
+        const result = core.transport.finishDispatch(a, try @import("signing.zig").value(a, fields)) catch |err| {
+            if (err == error.PendingOutcome) recordPending(a, if (transaction_hash) |hash| hash.value else .null);
+            return err;
+        };
         confirmed = true;
         return result;
     }
@@ -65,3 +79,9 @@ pub const Transport = struct {
         return core.rpc.finish(a, try @import("signing.zig").value(a, .{ .id = try w.field(prepared_rpc, "id"), .operation = try w.field(args, "operation"), .status = reply.status, .body = reply.body }));
     }
 };
+
+fn recordPending(a: w.A, hash: w.V) void {
+    if (hash == .null) return;
+    const bytes = std.json.Stringify.valueAlloc(a, .{ .hash = hash }, .{}) catch return;
+    core.failure.record("decibel", 0, bytes);
+}

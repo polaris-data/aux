@@ -66,14 +66,14 @@ pub fn origin(venue: Venue, op: []const u8, config: V, fallback: []const u8) ![]
         .pacifica => return if (test_network) "https://test-api.pacifica.fi" else fallback,
         .paragon, .aster => if (test_network) return error.InvalidNetwork,
         .trade_xyz => return if (test_network) "https://api.hyperliquid-testnet.xyz" else fallback,
-        else => {},
+        else => if (@import("perps_connectors.zig").supports(venue)) return @import("perps_connectors.zig").origin(venue, op, config, fallback),
     }
     return fallback;
 }
 
 pub fn isVenue(venue: Venue) bool {
     return switch (venue) {
-        .injective, .nado, .ondo_perps, .pacifica, .paragon, .trade_xyz, .aster => true,
+        .injective, .nado, .ondo_perps, .pacifica, .paragon, .trade_xyz, .aster, .perpl, .risex, .decibel, .edgex, .grvt, .katana => true,
         else => false,
     };
 }
@@ -120,6 +120,10 @@ pub fn replyError(venue: Venue, result: V) bool {
         .ondo_perps, .pacifica => success == .bool and !success.bool,
         .aster, .injective => code == .number_string and code.number_string.len > 0 and code.number_string[0] == '-',
         .paragon, .trade_xyz => result == .string or (status == .string and eq(u8, status.string, "err")),
+        .edgex => code == .string and !eq(u8, code.string, "SUCCESS"),
+        .grvt => code != .null and get(result, "result") == .null,
+        .risex => (code == .number_string and !eq(u8, code.number_string, "0")) or (code == .string and !eq(u8, code.string, "OK") and !eq(u8, code.string, "0")),
+        .katana => get(result, "errorCode") != .null and get(result, "orderId") == .null,
         else => false,
     };
 }

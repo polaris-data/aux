@@ -122,6 +122,11 @@ pub struct TransportResponse {
 pub trait Transport: Send + Sync {
     fn send(&self, request: OutboundRequest) -> Result<TransportResponse>;
 
+    /// Submit a binary request body, such as an Aptos signed BCS transaction.
+    fn send_bytes(&self, _request: OutboundRequest, _body: &[u8]) -> Result<TransportResponse> {
+        Err(Error::InvalidRequest("transport does not support binary requests"))
+    }
+
     /// Supply a connected blocking socket for Zig to frame HTTP/1.1 or WebSocket data.
     /// For TLS, authenticate the named host and apply the application client identity,
     /// then forward decrypted data over a socket pair. Ownership of the returned end
@@ -143,7 +148,7 @@ where
 }
 
 pub(crate) fn with_transport(transport: &dyn Transport, mut args: Value) -> Result<Value> {
-    if matches!(args["venue"].as_str(), Some("derive" | "nado" | "paragon" | "trade_xyz")) {
+    if matches!(args["venue"].as_str(), Some("derive" | "nado" | "paragon" | "trade_xyz" | "risex" | "decibel" | "edgex" | "grvt")) {
         let jobs: BTreeMap<String, Value> = call(28, args.clone())?;
         let mut metadata = serde_json::Map::new();
         for (key, job) in jobs {
@@ -167,7 +172,14 @@ fn send_prepared(transport: &dyn Transport, args: Value) -> Result<Value> {
         && args["operation"]
             .as_str()
             .is_some_and(|op| op.starts_with("write."));
-    let (request, mut reservation) = if is_pascal_write {
+    #[derive(Deserialize)]
+    struct Prepared {
+        #[serde(flatten)]
+        request: OutboundRequest,
+        body_hex: Option<String>,
+        transaction_hash: Option<String>,
+    }
+    let (prepared, mut reservation): (Prepared, _) = if is_pascal_write {
         (
             call(20, args.clone())?,
             call::<Option<Value>>(33, args)?.map(WalletReservation),
@@ -189,10 +201,23 @@ fn send_prepared(transport: &dyn Transport, args: Value) -> Result<Value> {
                     | "cancel_all"
             )
         );
-    let perps_write = matches!(venue.as_str(), Some("nado" | "ondo_perps" | "pacifica" | "paragon" | "trade_xyz" | "aster"))
+    let perps_write = matches!(venue.as_str(), Some("nado" | "ondo_perps" | "pacifica" | "paragon" | "trade_xyz" | "aster" | "perpl" | "risex" | "decibel" | "edgex" | "grvt" | "katana"))
         && matches!(operation.as_str(), Some("place_order" | "place_market_order" | "cancel_order"));
-    let response = transport.send(request).map_err(|error| match error {
-        Error::Network if monaco_write || perps_write => Error::PendingOutcome,
+    let transaction_hash = prepared.transaction_hash;
+    let pending = || match &transaction_hash {
+        Some(hash) => Error::PendingTransaction { hash: hash.clone() },
+        None => Error::PendingOutcome,
+    };
+    let response = if let Some(hex) = prepared.body_hex {
+        let bytes = hex.as_bytes().chunks_exact(2).map(|pair| {
+            let text = std::str::from_utf8(pair).map_err(|_| Error::Decode("invalid native binary body"))?;
+            u8::from_str_radix(text, 16).map_err(|_| Error::Decode("invalid native binary body"))
+        }).collect::<Result<Vec<_>>>()?;
+        transport.send_bytes(prepared.request, &bytes)
+    } else {
+        transport.send(prepared.request)
+    }.map_err(|error| match error {
+        Error::Network if monaco_write || perps_write => pending(),
         other => other,
     })?;
     let rejected = (400..500).contains(&response.status) && response.status != 408;
@@ -203,7 +228,10 @@ fn send_prepared(transport: &dyn Transport, args: Value) -> Result<Value> {
     if let Some(key) = key {
         input["api_key"] = key;
     }
-    let result = call(21, input);
+    let result = call(21, input).map_err(|error| match error {
+        Error::PendingOutcome => pending(),
+        other => other,
+    });
     if let Some(r) = reservation.as_mut() {
         r.0["confirmed"] = (rejected || result.is_ok()).into();
     }

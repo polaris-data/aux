@@ -27,8 +27,31 @@ pub fn main(init: std.process.Init) !void {
     stream.deinit();
     try std.testing.expect((try stream.next()) == null);
     try @import("protocols.zig").run(init, client.runtime, args);
+    try exchanges(a, args[5]);
 }
 
 fn waitForClose(stream: *aux.Stream) void {
     std.debug.assert((stream.next() catch @panic("stream read failed")) == null);
+}
+
+fn exchanges(a: std.mem.Allocator, origin: []const u8) !void {
+    const rest = try std.mem.concat(a, u8, &.{ origin, "/new-exchanges/variational" });
+    defer a.free(rest);
+    const client = aux.clients.VariationalClient.init(a, .{ .origin = rest });
+    var stats = try client.market_stats(.{});
+    defer stats.deinit();
+    try std.testing.expectEqualStrings("perpetual", stats.value.listings[0].contract_type);
+    try std.testing.expectEqualStrings("swap", stats.value.listings[1].contract_type);
+    try std.testing.expect(stats.value.listings[1].funding == null);
+
+    const colon = std.mem.findScalar(u8, origin, ':').?;
+    const endpoint = try std.mem.concat(a, u8, &.{ "ws", origin[colon..], "/new-exchanges/perpl/ws/book" });
+    defer a.free(endpoint);
+    const perpl = aux.clients.PerplClient.init(a, .{ .endpoint = endpoint });
+    var book = try perpl.subscribe(.{ .channel = "order_book", .market_id = @as(u32, 1) });
+    defer book.deinit();
+    var snapshot = (try book.next()).?;
+    defer snapshot.deinit();
+    const bids = snapshot.value.object.get("bid").?.array.items;
+    try std.testing.expectEqualStrings("9007199254740993", bids[0].object.get("p").?.number_string);
 }

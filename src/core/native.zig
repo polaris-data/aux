@@ -178,7 +178,7 @@ export fn aux_v1_invoke_detailed(id: u32, ptr: [*]const u8, len: usize, dial: ?*
     failure.current = &capture;
     defer failure.current = previous;
     const code = invoke(id, ptr, len, if (dial) |d| d.* else null, out);
-    if (code == 4) if (capture.value) |detail| {
+    if (code == 4 or code == 7) if (capture.value) |detail| {
         const owned = gpa.dupe(u8, detail) catch return 2;
         out.* = .{ .ptr = owned.ptr, .len = owned.len };
     };

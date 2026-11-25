@@ -22,7 +22,7 @@ fn redactCredentials(a: w.A, config: w.V, body: w.V) !w.V {
         if (value == .object) {
             result = try redactCredentials(a, value, result);
         } else if (value == .string and value.string.len != 0) {
-            for ([_][]const u8{ "api_key", "api_secret", "access_token", "token", "key", "seed", "secret", "passphrase", "stark_key", "evm_key", "owner_key", "proxy_key" }) |name| {
+            for ([_][]const u8{ "api_key", "api_secret", "access_token", "token", "key", "seed", "secret", "passphrase", "stark_key", "evm_key", "owner_key", "proxy_key", "cookie" }) |name| {
                 if (std.mem.eql(u8, field, name)) {
                     result = try @import("redact.zig").redact(a, result, value.string);
                     break;

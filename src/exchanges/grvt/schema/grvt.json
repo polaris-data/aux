@@ -1,0 +1,525 @@
+{
+  "client": "GrvtClient",
+  "venue": "grvt",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "instrument",
+        "instrument",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "depth",
+        "depth",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "rate",
+        "rate",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "InstrumentRequest": [
+      [
+        "instrument",
+        "instrument",
+        "String",
+        "required"
+      ]
+    ],
+    "InstrumentResponseResult": [
+      [
+        "instrument",
+        "instrument",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instrument_hash",
+        "instrument_hash",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "base_decimals",
+        "base_decimals",
+        "Option<i8>",
+        "optional"
+      ],
+      [
+        "kind",
+        "kind",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "tick_size",
+        "tick_size",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "min_size",
+        "min_size",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "InstrumentResponse": [
+      [
+        "result",
+        "result",
+        "Option<InstrumentResponseResult>",
+        "optional"
+      ]
+    ],
+    "MarketsBody": [
+      [
+        "is_active",
+        "is_active",
+        "bool",
+        "required"
+      ]
+    ],
+    "MarketsRequest": [
+      [
+        "body",
+        "body",
+        "MarketsBody",
+        "required"
+      ]
+    ],
+    "MarketsResponse": [
+      [
+        "result",
+        "result",
+        "Option<Vec<InstrumentResponseResult>>",
+        "optional"
+      ]
+    ],
+    "OrderBookRequest": [
+      [
+        "instrument",
+        "instrument",
+        "String",
+        "required"
+      ],
+      [
+        "depth",
+        "depth",
+        "u64",
+        "required"
+      ]
+    ],
+    "OrderBookResponseResult": [
+      [
+        "instrument",
+        "instrument",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "bids",
+        "bids",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ],
+      [
+        "asks",
+        "asks",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "OrderBookResponse": [
+      [
+        "result",
+        "result",
+        "Option<OrderBookResponseResult>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "instrument",
+        "instrument",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "u64",
+        "required"
+      ]
+    ],
+    "TradesResponse": [
+      [
+        "result",
+        "result",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "LoginRequest": [],
+    "LoginResponse": [
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "location",
+        "location",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "cookie",
+        "cookie",
+        "String",
+        "required"
+      ],
+      [
+        "account_id",
+        "account_id",
+        "String",
+        "required"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "String",
+        "required"
+      ]
+    ],
+    "AccountResponseResult": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "AccountResponse": [
+      [
+        "result",
+        "result",
+        "Option<AccountResponseResult>",
+        "optional"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "String",
+        "required"
+      ]
+    ],
+    "PositionsResponse": [
+      [
+        "result",
+        "result",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "String",
+        "required"
+      ]
+    ],
+    "OpenOrdersResponse": [
+      [
+        "result",
+        "result",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "String",
+        "required"
+      ],
+      [
+        "order_id",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusResponseResult": [
+      [
+        "order_id",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusResponse": [
+      [
+        "result",
+        "result",
+        "Option<OrderStatusResponseResult>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "FillsResponse": [
+      [
+        "result",
+        "result",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderBody": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "String",
+        "required"
+      ],
+      [
+        "is_market",
+        "is_market",
+        "bool",
+        "required"
+      ],
+      [
+        "time_in_force",
+        "time_in_force",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "post_only",
+        "post_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "reduce_only",
+        "reduce_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "legs",
+        "legs",
+        "Vec<OrderLeg>",
+        "required"
+      ],
+      [
+        "metadata",
+        "metadata",
+        "OrderMetadata",
+        "required"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "PlaceOrderBody",
+        "required"
+      ]
+    ],
+    "PlaceOrderResponseResult": [
+      [
+        "order_id",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderResponse": [
+      [
+        "result",
+        "result",
+        "Option<PlaceOrderResponseResult>",
+        "optional"
+      ]
+    ],
+    "CancelOrderBody": [
+      [
+        "sub_account_id",
+        "sub_account_id",
+        "String",
+        "required"
+      ],
+      [
+        "order_id",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrderBody",
+        "required"
+      ]
+    ],
+    "CancelOrderResponseResult": [
+      [
+        "ack",
+        "ack",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "CancelOrderResponse": [
+      [
+        "result",
+        "result",
+        "Option<CancelOrderResponseResult>",
+        "optional"
+      ]
+    ],
+    "OrderLeg": [
+      [
+        "instrument",
+        "instrument",
+        "String",
+        "required"
+      ],
+      [
+        "size",
+        "size",
+        "String",
+        "required"
+      ],
+      [
+        "limit_price",
+        "limit_price",
+        "String",
+        "required"
+      ],
+      [
+        "is_buying_asset",
+        "is_buying_asset",
+        "bool",
+        "required"
+      ]
+    ],
+    "OrderMetadata": [
+      [
+        "client_order_id",
+        "client_order_id",
+        "String",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "instrument": [
+      "InstrumentRequest",
+      "InstrumentResponse"
+    ],
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "OrderBookResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "login": [
+      "LoginRequest",
+      "LoginResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ]
+  }
+}

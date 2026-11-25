@@ -20,6 +20,9 @@ fn native_error(error: aux_rs::Error) -> napi::Error {
         ExchangeApi => "ExchangeError",
         StreamGap => "StreamGapError",
         PendingOutcome => "OutcomeUncertainError",
+        PendingTransaction { hash } => {
+            return napi::Error::from_reason(format!("[aux:PendingTransaction] {hash}"));
+        }
         InvalidRequest(_) => "ValidationError",
         Decode(_) => "DecodeError",
         OutOfMemory => "ConnectorError",

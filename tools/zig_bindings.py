@@ -7,6 +7,12 @@ from rest_models import ROOT, SCHEMAS
 from rpc_bindings import session_commands
 
 STREAMS = {
+    "PerplClient": "subscribe",
+    "RisexClient": "subscribe",
+    "DecibelClient": "subscribe",
+    "EdgeXClient": "subscribe",
+    "GrvtClient": "subscribe",
+    "KatanaClient": "subscribe",
     **dict.fromkeys(("AsterClient", "InjectiveClient", "NadoClient", "OndoPerpsClient", "PacificaClient", "ParagonClient", "TradeXyzClient"), "subscribe"),
     "ArcusClient": "subscribe",
     "ChainlinkDataStreamsClient": "subscribe",
