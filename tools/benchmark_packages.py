@@ -62,6 +62,7 @@ def main():
             ),
         )
         node = source / "sdk/typescript"
+        subprocess.run([sys.executable, "tools/generate_clients.py", "--typescript-only"], cwd=source, check=True)
         subprocess.run(["cargo", "fetch", "--locked"], cwd=source, check=True)
         subprocess.run(["npm", "ci", "--no-audit", "--no-fund"], cwd=node, check=True)
         connector = source / "src/exchanges/derive/stream.zig"

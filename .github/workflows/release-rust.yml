@@ -27,8 +27,12 @@ jobs:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: python3 tools/check-release-version.py aux-rs
 
-  package:
+  archives:
     needs: validate
+    uses: ./.github/workflows/build-native-archives.yml
+
+  package:
+    needs: archives
     strategy:
       fail-fast: false
       matrix:
@@ -38,12 +42,18 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
+      - name: Download native SDK archives
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
+        with:
+          name: native-sdk-archives
+          path: sdk/rust/prebuilt
       - name: Install Rust
         run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
       - name: Test SDK and verify the packaged crate
         run: |
           cargo test -p aux-rs --all-features --locked
-          cargo package -p aux-rs --locked
+          git diff --quiet HEAD --
+          cargo package -p aux-rs --locked --allow-dirty
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: runner.os == 'Linux'
         with:
@@ -64,6 +74,11 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
+      - name: Download native SDK archives
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
+        with:
+          name: native-sdk-archives
+          path: sdk/rust/prebuilt
       - name: Install Rust
         run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
       - name: Authenticate with crates.io
@@ -72,4 +87,6 @@ jobs:
       - name: Publish verified revision
         env:
           CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
-        run: cargo publish --locked --registry crates-io -p aux-rs
+        run: |
+          git diff --quiet HEAD --
+          cargo publish --locked --allow-dirty --registry crates-io -p aux-rs

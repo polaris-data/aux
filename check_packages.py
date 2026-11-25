@@ -41,6 +41,7 @@ def rust_consumer(work, crate, fixtures_env):
 
 def main():
     run(sys.executable, ROOT / "tools/check_coverage.py")
+    run(sys.executable, ROOT / "tools/generate_clients.py", "--typescript-only")
     rust = ROOT / "sdk/rust/Cargo.toml"
     node = ROOT / "sdk/typescript"
     run("cargo", "test", "--locked", "--all-features", "--manifest-path", ROOT / "Cargo.toml")

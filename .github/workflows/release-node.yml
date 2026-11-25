@@ -19,8 +19,12 @@ jobs:
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: python3 tools/check-release-version.py aux-connectors
-  native:
+  archives:
     needs: validate
+    uses: ./.github/workflows/build-native-archives.yml
+
+  native:
+    needs: archives
     name: Node (${{ matrix.os }})
     strategy:
       fail-fast: false
@@ -32,11 +36,21 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
+      - name: Download native SDK archives
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
+        with:
+          name: native-sdk-archives
+          path: sdk/rust/prebuilt
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: sdk/typescript/package-lock.json
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Generate TypeScript SDK bindings
+        run: python tools/generate_clients.py --typescript-only
       - name: Install Rust
         run: rustup toolchain install 1.92.0 --profile minimal && rustup default 1.92.0
       - name: Install build tools
@@ -69,6 +83,11 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '22'
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Generate TypeScript SDK bindings
+        run: python tools/generate_clients.py --typescript-only
       - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
         with:
           pattern: node-*

@@ -29,9 +29,13 @@ jobs:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: python tools/check-release-version.py aux-py
 
+  archives:
+    needs: validate
+    uses: ./.github/workflows/build-native-archives.yml
+
   wheels:
     name: Build wheel (${{ matrix.os }})
-    needs: validate
+    needs: archives
     runs-on: ${{ matrix.os }}
     timeout-minutes: ${{ matrix.os == 'macos-15' && 150 || matrix.os == 'macos-15-intel' && 90 || 45 }}
     strategy:
@@ -51,6 +55,11 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
+      - name: Download native SDK archives
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
+        with:
+          name: native-sdk-archives
+          path: sdk/rust/prebuilt
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         if: runner.os == 'macOS'
         with:
@@ -108,13 +117,18 @@ jobs:
 
   sdist:
     name: Source distribution
-    needs: validate
+    needs: archives
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
+      - name: Download native SDK archives
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53
+        with:
+          name: native-sdk-archives
+          path: sdk/rust/prebuilt
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'

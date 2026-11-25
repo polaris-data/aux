@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tarfile
 import tempfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -139,6 +140,10 @@ def package(directory):
 
 
 def main():
+    subprocess.run(
+        [sys.executable, ROOT / "tools/generate_clients.py", "--zig-generated-only"],
+        check=True,
+    )
     with tempfile.TemporaryDirectory() as tmp:
         out = Path(tmp)
         zig = os.environ.get("ZIG", "zig")

@@ -2,7 +2,9 @@
 
 Build from the repository root with Zig 0.17.1. Shared transport and wire handling live in `src/core/`. Place exchange and data protocols under their respective vendor in `src/exchanges/` or `src/data/`. Keep the SDK wrappers in `sdk/` and extend the wire fixtures in `tests/` alongside protocol changes.
 
-Run `zig build test` for the native core. After changing protocol sources, run `python3 rebuild.py` to refresh the archives used by the SDKs. Run `python3 tools/generate_clients.py` after editing the vendor schemas. Commit generated SDK sources and updated archives with their inputs.
+Run `zig build test` for the native core. From a source checkout, run `python3 rebuild.py` before building the Rust, Python, or Node SDKs, and rerun it after changing native protocol sources. Run `python3 tools/generate_clients.py --zig-generated-only` before using a source checkout as a Zig dependency. Run `python3 tools/generate_clients.py --typescript-only` before building the npm package from source.
+
+After changing vendor schemas, run `python3 tools/generate_clients.py` and commit the updates to tracked SDK sources with their inputs. CI generates the native archives, Zig client modules, and TypeScript bindings for the packages that use them.
 
 Use `python3 check_zig_sdk.py` to verify the packaged Zig module and `python3 check_packages.py` for the Rust crate, Python wheel and npm tarball. These commands exercise locally installed packages against fixtures. The [build guide](README.md#build-and-verify) lists the toolchain requirements.
 

@@ -6,7 +6,7 @@ Zig applications import the public `aux` module from `sdk/zig/root.zig`. The sta
 
 ## Zig-native SDK
 
-Use Zig 0.17.1 and add this directory as the `aux` dependency in your application's `build.zig.zon`. The external consumer in `tests/zig_consumer` shows a complete local path dependency. To use the verified source archive, run `zig fetch --save=aux /absolute/path/to/aux-zig-native-0.0.1.tar.gz` in the consuming project. Import the module in your application's build script.
+Use Zig 0.17.1. For a local source checkout, run `python3 tools/generate_clients.py --zig-generated-only` from the aux root, then add the checkout as the `aux` dependency in your application's `build.zig.zon`. The external consumer in `tests/zig_consumer` shows a complete local path dependency. To use the verified source archive, run `zig fetch --save=aux /absolute/path/to/aux-zig-native-0.0.1.tar.gz` in the consuming project. Import the module in your application's build script.
 
 ```zig
 const aux = b.dependency("aux", .{ .target = target, .optimize = optimize });
@@ -38,7 +38,7 @@ Clients borrow their allocator, endpoint strings, credentials and callback conte
 | `aux.Client.invoke`, `invokeBytes`, `openDbn` | Direct access to the native operation inventory, raw report decoding and DBN files |
 | `aux.Options.signer`, `transport`, `dial` | Application signing callbacks, unary HTTP exchanges and connected sockets for custom transport policies |
 
-From this directory run `python3 check_zig_sdk.py` to fetch the source archive into a fresh Zig project, compile the consumer, and exercise the fixtures. It writes the verified archive to `dist/`. The generator check is `python3 tools/generate_clients.py --check`. The consumer itself builds using Zig and libc.
+From this directory run `python3 check_zig_sdk.py` to fetch the source archive into a fresh Zig project, compile the consumer, and exercise the fixtures. It generates the Zig client modules and writes the verified archive to `dist/`. Use `python3 tools/check_coverage.py` to check the tracked SDK sources. The consumer itself builds using Zig and libc.
 
 ## Using the SDKs
 
@@ -190,11 +190,13 @@ Run the following from this directory. Generating native archives requires Zig *
 
 ```sh
 zig build test
-python3 rebuild.py --check
+python3 rebuild.py
 cargo test --locked
 ```
 
-To rebuild the archives after changing Zig code, run `python3 rebuild.py`. Set `ZIG` to select a specific compiler executable. For a host-only build, add `--target aarch64-apple-darwin`, `--target x86_64-apple-darwin` or `--target x86_64-unknown-linux-gnu`.
+Rerun `python3 rebuild.py` after changing Zig code. CI generates the native archives for Rust, Python, and Node packages and includes generated Zig client modules in the Zig source archive. Set `ZIG` to select a specific compiler executable. For a host-only build, add `--target aarch64-apple-darwin`, `--target x86_64-apple-darwin` or `--target x86_64-unknown-linux-gnu`.
+
+The npm release workflow generates the TypeScript bindings before building and packaging the SDK. For a local npm build, run `python3 tools/generate_clients.py --typescript-only` from the repository root first.
 
 With Rust 1.92+, Python 3.10+, Node 22+ and maturin 1.16 installed, run `python3 check_packages.py`. This verifies catalog coverage, runs the Rust fixtures, builds all three packages, installs the wheel and npm tarball into fresh consumer environments, and runs their fixtures. The verified files are copied to `dist/`. The npm tarball and wheel are specific to the packaging host. Example local installs on Apple Silicon follow.
 
