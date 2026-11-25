@@ -14,7 +14,20 @@ esac
 
 archive="zig-$arch-$version"
 cd "$RUNNER_TEMP"
-curl --fail --silent --show-error --location --retry 3 "https://ziglang.org/download/$version/$archive.tar.xz" -o "$archive.tar.xz"
-printf '%s  %s\n' "$sha" "$archive.tar.xz" | shasum -a 256 -c
+
+verify_archive() {
+  printf '%s  %s\n' "$sha" "$archive.tar.xz" | shasum -a 256 -c
+}
+
+if curl --fail --silent --show-error --location --max-time 30 \
+    "https://pkg.hexops.org/zig/$archive.tar.xz" -o "$archive.tar.xz" && verify_archive; then
+  echo 'Verified Zig download from the Hexops mirror'
+else
+  echo 'Fetching Zig from ziglang.org'
+  curl --fail --silent --show-error --location --retry 3 \
+    "https://ziglang.org/download/$version/$archive.tar.xz" -o "$archive.tar.xz"
+  verify_archive
+fi
+
 tar xf "$archive.tar.xz"
 echo "$RUNNER_TEMP/$archive" >> "$GITHUB_PATH"

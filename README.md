@@ -206,20 +206,6 @@ npm install ./dist/aux-connectors-0.0.1.tgz
 cargo add --path /absolute/path/to/aux/sdk/rust
 ```
 
-
-## Package build times
-
-These historical medians cover an earlier revision of the standalone port on an Apple M2 Pro with 16 GB of memory running macOS 26.6.2 on November 24, 2026. Each total runs from Zig 0.17.1 ReleaseSafe compilation through creation of the installable package. Dependencies were prefetched. Each package had three trials with empty Zig and Cargo caches, each followed by a rebuild after changing interval validation in the Derive connector. The core and binding columns report their individual medians.
-
-| Package | Clean total | Clean core | Clean bindings and packaging | Edited total | Edited core | Edited bindings and packaging | Packed size | Unpacked native binary |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Python abi3 wheel | 41.8 s | 32.1 s | 9.7 s | 38.0 s | 32.9 s | 5.1 s | 1.47 MiB | 3.09 MiB |
-| Node npm tarball | 47.6 s | 34.1 s | 13.6 s | 40.3 s | 34.3 s | 5.7 s | 1.47 MiB | 3.14 MiB |
-
-An edit to one connector recompiles the single native object that contains all connectors. The edited build reuses compiled binding dependencies. These local results measure absolute package build times. The optional CI benchmark uses the same harness on macOS arm64 and Linux x86-64. [Raw times and package sizes](benchmarks/macos-arm64-2026-11-24.json)
-
 ## Adding an operation
 
 Add the native implementation to the vendor folder and expected wire data to `tests/`. Each vendor owns a `routes.zig` table. Register new vendor tables in `src/core/routes.zig`. Shared fixtures run in Rust and against the installed npm and Python packages. Add authenticated dispatch only after the signing and headers have fixture coverage. Run `python3 tools/generate_clients.py` to regenerate named SDK methods, then run the package checks. The native headers in `include/` specify buffer ownership and stream handle lifetimes.
-
-To measure standalone release-package builds on a native runner, run `python3 tools/benchmark_packages.py --output timings.json` with `ZIG` and `MATURIN` set. The harness prefetches dependencies and measures each SDK in a temporary source copy. It records three clean builds and three rebuilds after a connector edit, including time in native compilation and wrapper packaging.

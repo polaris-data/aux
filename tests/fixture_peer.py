@@ -448,3 +448,18 @@ def fixture_peer():
                 thread.join()
     if failures:
         raise AssertionError("loopback peer failed a protocol check") from failures[0]
+
+
+if __name__ == "__main__":
+    import argparse
+    import os
+    import subprocess
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--cwd", type=Path)
+    parser.add_argument("command", nargs="+")
+    args = parser.parse_args()
+    with fixture_peer() as (origin, gateway):
+        env = {**os.environ, "AUX_FIXTURE_ORIGIN": origin, "AUX_DBN_GATEWAY": gateway}
+        result = subprocess.run(args.command, cwd=args.cwd, env=env)
+    sys.exit(result.returncode)

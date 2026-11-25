@@ -10,6 +10,8 @@ Use `python3 check_zig_sdk.py` to verify the packaged Zig module and `python3 ch
 
 ## Releases
 
+Pushes to `main` and `master` run generated SDK coverage validation and the default Rust tests on Linux. The release workflows run the native and installed-package checks and produce the downloadable packages.
+
 Each SDK has its own workflow. Run the workflow manually on the release commit to build and test the package. Download the resulting artifact from the Actions run. Publishing a GitHub release with the matching tag runs the same checks and then publishes that SDK.
 
 | SDK | Workflow | Example release tag | Destination |
