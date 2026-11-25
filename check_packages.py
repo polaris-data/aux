@@ -1,5 +1,6 @@
 """Build and install the local SDKs in empty environments and run their fixtures."""
 
+import argparse
 import json
 import os
 import re
@@ -137,4 +138,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--rust-crate", type=Path, help="test an already verified Rust crate")
+    args = parser.parse_args()
+    if args.rust_crate:
+        with tempfile.TemporaryDirectory() as tmp, fixture_peer() as (origin, gateway):
+            fixtures_env = {"AUX_FIXTURE_ORIGIN": origin, "AUX_DBN_GATEWAY": gateway}
+            rust_consumer(Path(tmp), args.rust_crate.resolve(), fixtures_env)
+    else:
+        main()

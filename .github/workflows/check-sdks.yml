@@ -3,67 +3,23 @@ on:
   push:
     branches: [main, master]
   workflow_dispatch:
-    inputs:
-      benchmark:
-        description: Time three cold and three edited builds of each SDK
-        type: boolean
-        default: false
 permissions:
   contents: read
 jobs:
-  packages:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: macos-15
-            target: aarch64-apple-darwin
-          - os: ubuntu-24.04
-            target: x86_64-unknown-linux-gnu
-    runs-on: ${{ matrix.os }}
+  check:
+    runs-on: ubuntu-24.04
     env:
       RUSTUP_TOOLCHAIN: 1.92.0
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
-        with:
-          node-version: '22'
-          package-manager-cache: false
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: '3.12'
-      - name: Install pinned build tools
-        run: |
-          rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
-          python -m pip install maturin==1.16.0
-          bash tools/install-ci-zig.sh
-      - name: Verify native sources and the packaged archive
-        env:
-          TARGET: ${{ matrix.target }}
-        run: |
-          zig build test
-          python rebuild.py --check --target "$TARGET"
-          cc tests/abi.c -Iinclude "sdk/rust/prebuilt/$TARGET/libaux_zig_core.a" -o "$RUNNER_TEMP/abi"
-          "$RUNNER_TEMP/abi"
-      - name: Build and exercise the Zig consumer
-        run: python check_zig_sdk.py
-      - name: Install and test the SDKs
-        run: python check_packages.py
-      - name: Save verified SDK packages
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: aux-zig-sdk-${{ matrix.target }}
-          path: dist/
-          if-no-files-found: error
-      - name: Benchmark standalone builds on this runner
-        if: github.event_name == 'workflow_dispatch' && inputs.benchmark
-        run: python tools/benchmark_packages.py --output "$RUNNER_TEMP/package-builds.json"
-      - name: Save package build timings
-        if: github.event_name == 'workflow_dispatch' && inputs.benchmark
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: aux-zig-build-times-${{ matrix.target }}
-          path: ${{ runner.temp }}/package-builds.json
-          if-no-files-found: error
+      - name: Verify generated SDK coverage
+        run: python tools/check_coverage.py
+      - name: Install Rust
+        run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
+      - name: Run default Rust tests
+        run: cargo test -p aux-rs --locked

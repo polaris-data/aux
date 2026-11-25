@@ -49,13 +49,20 @@ jobs:
       - name: Build and test release addon
         run: |
           npm --prefix sdk/typescript run build
-          cd sdk/typescript
           consumer=$(mktemp -d)
-          npm pack --pack-destination "$consumer"
-          cd "$consumer"
-          echo '{"private":true}' > package.json
-          npm install --ignore-scripts --offline --no-audit --no-fund ./aux-connectors-*.tgz
-          node "$GITHUB_WORKSPACE/tests/packages.cjs"
+          (cd sdk/typescript && npm pack --pack-destination "$consumer")
+          (
+            cd "$consumer"
+            echo '{"private":true}' > package.json
+            npm install --ignore-scripts --offline --no-audit --no-fund ./aux-connectors-*.tgz
+            cp "$GITHUB_WORKSPACE/tests/consumer.ts" .
+            "$GITHUB_WORKSPACE/sdk/typescript/node_modules/.bin/tsc" --strict --noEmit --target es2022 \
+              --module node16 --moduleResolution node16 consumer.ts
+            node --input-type=module -e 'import {decodeResponse, PhoenixClient} from "aux-connectors";
+              if (decodeResponse("extended", 200, "123456789123456789") !== 123456789123456789n ||
+                  typeof new PhoenixClient().subscribe !== "function") process.exit(1)'
+          )
+          python3 -m tests.fixture_peer --cwd "$consumer" -- node "$GITHUB_WORKSPACE/tests/packages.cjs"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: node-${{ matrix.os }}
