@@ -115,7 +115,7 @@ jobs:
           PRERELEASE: ${{ github.event.release.prerelease }}
         run: |
           if [[ "$PRERELEASE" == true ]]; then
-            npm publish dist/*.tgz --tag next --access public
+            npm publish ./dist/*.tgz --tag next --access public
           else
-            npm publish dist/*.tgz --access public
+            npm publish ./dist/*.tgz --access public
           fi
