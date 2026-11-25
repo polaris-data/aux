@@ -735,7 +735,7 @@ def main():
                 f"    subscribe(params, endpoint) {{ return openStream('{ws_venue}','subscribe',args.unwrap(params,'{spec_key}'),endpoint ?? this.origin,this.apiKey,this.apiSecret{bearer_js}); }}"
             )
             params = (
-                "{channel: string; symbol: string}"
+                "{channel: string; symbol: string; intervals?: readonly [string]}"
                 if cls == "QfexClient"
                 else f"{namespace_for[v]}.Subscription" if v in PERP_CLIENTS else "Record<string,HttpValue>"
             )
