@@ -117,6 +117,66 @@ def serve_qfex(peer):
     peer.connection.sendall(frame(8, b"\x03\xe8"))
 
 
+def serve_qfex_candles(peer):
+    with _lock:
+        attempt = _attempts.get(peer.path, 0) + 1
+        _attempts[peer.path] = attempt
+    assert attempt <= 2, "QFEX opened an extra connection for a public filter"
+    upgrade(peer)
+    peer.connection.settimeout(8)
+    symbol = "AAPL-USD"
+
+    def receive():
+        opcode, raw = read_frame(peer.rfile)
+        assert opcode == 1
+        return json.loads(raw)
+
+    def send(message):
+        peer.connection.sendall(frame(1, json.dumps(message, separators=(",", ":")).encode()))
+
+    def candle(interval, sequence, ticker=symbol):
+        send({"type": "candle", "symbol": ticker, "resolution": interval, "sequence": sequence})
+
+    funding = {"type": "subscribe", "channels": ["funding"], "symbols": [symbol]}
+    one_minute = {"type": "subscribe", "channels": ["candle"], "symbols": [symbol], "intervals": ["1MIN"]}
+    five_minutes = {**one_minute, "intervals": ["5MINS"]}
+    if attempt == 1:
+        assert receive() == funding
+        assert receive() == one_minute
+        send({**funding, "type": "subscribed"})
+        send({"type": "funding", "symbol": "MSFT-USD", "sequence": 91})
+        send({"type": "funding", "symbol": symbol, "funding_rate": "0.00015", "sequence": 1})
+        send({**one_minute, "type": "subscribed", "symbols": ["MSFT-USD"]})
+        send({**one_minute, "type": "subscribed", "symbols": ["*"]})
+        send({**five_minutes, "type": "subscribed"})
+        send({**one_minute, "type": "subscribed"})
+        candle("1MIN", 92, "MSFT-USD")
+        candle("5MINS", 93)
+        candle("1MIN", 2)
+
+        # The alias still holds the funding subscription when the first reader closes.
+        assert receive() == five_minutes
+        send({**five_minutes, "type": "subscribed"})
+        candle("5MINS", 3)
+        candle("1MIN", 4)
+        send({"type": "funding", "symbol": symbol, "sequence": 5})
+        peer.close_connection = True
+        return
+
+    replay = [funding, one_minute, five_minutes]
+    for _ in range(len(replay)):
+        replay.remove(receive())
+    candle("1MIN", 94, "MSFT-USD")
+    candle("5MINS", 6)
+    candle("1MIN", 7)
+    send({"type": "funding", "symbol": symbol, "sequence": 8})
+    assert receive() == {**funding, "type": "unsubscribe"}
+    assert receive() == {**one_minute, "type": "unsubscribe"}
+    candle("1MIN", 95)
+    candle("5MINS", 9)
+    peer.connection.sendall(frame(8, b"\x03\xe8"))
+
+
 def serve_hyperliquid_accounts(peer):
     """Order updates omit their owner. Each connection represents exactly one account."""
     with _lock:

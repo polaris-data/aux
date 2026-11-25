@@ -167,7 +167,7 @@ pub const Reader = struct {
             const params = try w.field(saved, "params");
             if (qfex) {
                 const state = try @import("../exchanges/qfex/stream.zig").State.init(ra, params);
-                r.unsubscribe = try std.json.Stringify.valueAlloc(ra, .{ .type = "unsubscribe", .channels = .{state.channel}, .symbols = .{state.symbol} }, .{});
+                r.unsubscribe = try state.unsubscribeFrame(ra);
                 r.topic = .{ .qfex = state };
             } else if (lighter) {
                 const state = try @import("../exchanges/lighter/stream.zig").State.init(ra, saved, params, runtime.io());

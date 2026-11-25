@@ -78,6 +78,11 @@ class Peer(BaseHTTPRequestHandler):
         if self.path.startswith("/qfex-multiplex/"):
             from .multiplex_peer import serve_qfex
             return serve_qfex(self)
+        if self.path == "/qfex-candles/invalid":
+            raise AssertionError("Invalid QFEX candle subscription reached the peer")
+        if self.path == "/qfex-candles/zig":
+            from .multiplex_peer import serve_qfex_candles
+            return serve_qfex_candles(self)
         if self.path.startswith("/lighter-multiplex/"):
             from .multiplex_peer import serve_lighter
             return serve_lighter(self)

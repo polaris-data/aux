@@ -28,6 +28,7 @@ pub fn main(init: std.process.Init) !void {
     try std.testing.expect((try stream.next()) == null);
     try @import("protocols.zig").run(init, client.runtime, args);
     try exchanges(a, args[5]);
+    try qfexSubscriptions(a, args[5]);
 }
 
 fn waitForClose(stream: *aux.Stream) void {
@@ -54,4 +55,63 @@ fn exchanges(a: std.mem.Allocator, origin: []const u8) !void {
     defer snapshot.deinit();
     const bids = snapshot.value.object.get("bid").?.array.items;
     try std.testing.expectEqualStrings("9007199254740993", bids[0].object.get("p").?.number_string);
+}
+
+fn qfexSubscriptions(a: std.mem.Allocator, origin: []const u8) !void {
+    const colon = std.mem.findScalar(u8, origin, ':').?;
+    const invalid_endpoint = try std.mem.concat(a, u8, &.{ "ws", origin[colon..], "/qfex-candles/invalid" });
+    defer a.free(invalid_endpoint);
+    const invalid = aux.clients.QfexClient.init(a, .{ .endpoint = invalid_endpoint });
+    const symbol = "AAPL-USD";
+    try std.testing.expectError(error.InvalidRequest, invalid.subscribe(.{ .channel = "candle", .symbol = symbol }));
+    inline for (.{ [0][]const u8{}, .{ "1MIN", "5MINS" }, "1MIN", .{1}, .{""}, .{"2MIN"} }) |intervals| {
+        try std.testing.expectError(error.InvalidRequest, invalid.subscribe(.{ .channel = "candle", .symbol = symbol, .intervals = intervals }));
+    }
+
+    const endpoint = try std.mem.concat(a, u8, &.{ "ws", origin[colon..], "/qfex-candles/zig" });
+    defer a.free(endpoint);
+    const client = aux.clients.QfexClient.init(a, .{ .endpoint = endpoint });
+    var funding = try client.subscribe(.{ .channel = "funding", .symbol = symbol });
+    defer funding.deinit();
+    var alias = try client.subscribe(.{ .channel = "funding_rate", .symbol = symbol });
+    defer alias.deinit();
+    var one_minute = try client.subscribe(.{ .channel = "candle", .symbol = symbol, .intervals = .{"1MIN"} });
+    defer one_minute.deinit();
+
+    const funding_ack = "{\"type\":\"subscribed\",\"channels\":[\"funding\"],\"symbols\":[\"AAPL-USD\"]}";
+    const funding_update = "{\"type\":\"funding\",\"symbol\":\"AAPL-USD\",\"funding_rate\":\"0.00015\",\"sequence\":1}";
+    for ([_]*const aux.Stream{ &funding, &alias }) |reader| {
+        try expectStreamBytes(a, reader, funding_ack);
+        try expectStreamBytes(a, reader, funding_update);
+    }
+    try expectStreamBytes(a, &one_minute, "{\"type\":\"subscribed\",\"channels\":[\"candle\"],\"symbols\":[\"AAPL-USD\"],\"intervals\":[\"1MIN\"]}");
+    try expectStreamSequence(&one_minute, "2");
+
+    funding.deinit();
+    var five_minutes = try client.subscribe(.{ .channel = "candle", .symbol = symbol, .intervals = .{"5MINS"} });
+    defer five_minutes.deinit();
+    try expectStreamBytes(a, &five_minutes, "{\"type\":\"subscribed\",\"channels\":[\"candle\"],\"symbols\":[\"AAPL-USD\"],\"intervals\":[\"5MINS\"]}");
+    try expectStreamSequence(&five_minutes, "3");
+    try expectStreamSequence(&one_minute, "4");
+    try expectStreamSequence(&alias, "5");
+
+    try expectStreamSequence(&five_minutes, "6");
+    try expectStreamSequence(&one_minute, "7");
+    try expectStreamSequence(&alias, "8");
+    alias.deinit();
+    one_minute.deinit();
+    try expectStreamSequence(&five_minutes, "9");
+}
+
+fn expectStreamBytes(a: std.mem.Allocator, reader: *const aux.Stream, expected: []const u8) !void {
+    const bytes = try reader.nextBytes() orelse return error.UnexpectedEndOfStream;
+    defer a.free(bytes);
+    try std.testing.expectEqualStrings(expected, bytes);
+}
+
+fn expectStreamSequence(reader: *const aux.Stream, expected: []const u8) !void {
+    var event = try reader.next() orelse return error.UnexpectedEndOfStream;
+    defer event.deinit();
+    const sequence = event.value.object.get("sequence") orelse return error.MissingSequence;
+    try std.testing.expectEqualStrings(expected, sequence.number_string);
 }
