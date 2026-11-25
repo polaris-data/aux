@@ -9,6 +9,12 @@ from rest_models import SCHEMAS, emit_models, typename
 
 ROOT = Path(__file__).resolve().parents[1]
 PERP_CLIENTS = {
+    "perpl": "PerplClient",
+    "risex": "RisexClient",
+    "decibel": "DecibelClient",
+    "edgex": "EdgeXClient",
+    "grvt": "GrvtClient",
+    "katana": "KatanaClient",
     "aster": "AsterClient",
     "injective": "InjectiveClient",
     "nado": "NadoClient",
@@ -18,6 +24,12 @@ PERP_CLIENTS = {
     "trade_xyz": "TradeXyzClient",
 }
 PERP_AUTH = {
+    "perpl": "{network?:'Mainnet'|'Testnet'; rest_origin?:string}",
+    "risex": "{network?:'Mainnet'|'Testnet'; account?:string; key?:string; rest_origin?:string}",
+    "decibel": "{network?:'Mainnet'|'Testnet'; seed?:string; subaccount?:string; rest_origin?:string; aptos_origin?:string; max_gas_amount?:number|bigint}",
+    "edgex": "{account_id?:string; passphrase?:string; key?:string; rest_origin?:string}",
+    "grvt": "{network?:'Mainnet'|'Testnet'; cookie?:string; account_id?:string; key?:string; rest_origin?:string}",
+    "katana": "{network?:'Mainnet'|'Testnet'; wallet?:string; key?:string; rest_origin?:string}",
     "aster": "{user?:string; key?:string; signer?:string; rest_origin?:string}",
     "injective": "{key?:string; network?:'Mainnet'|'Testnet'; lcd_origin?:string}",
     "nado": "{key?:string; network?:'Mainnet'|'Testnet'; subaccount?:string; rest_origin?:string}",

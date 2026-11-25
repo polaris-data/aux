@@ -58,6 +58,14 @@ fn response_status(code: u32, out: &Owned) -> Error {
     {
         return Error::ExchangeResponse(detail);
     }
+    if code == 7
+        && let Ok(bytes) = out.bytes()
+        && let Ok(detail) = serde_json::from_slice::<crate::ExchangeResponse>(bytes)
+        && detail.venue == "decibel"
+        && let Some(hash) = detail.body["hash"].as_str()
+    {
+        return Error::PendingTransaction { hash: hash.to_owned() };
+    }
     status(code)
 }
 impl Drop for Owned {

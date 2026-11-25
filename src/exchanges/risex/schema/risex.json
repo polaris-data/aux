@@ -1,0 +1,654 @@
+{
+  "client": "RisexClient",
+  "venue": "risex",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "market_ids",
+        "market_ids",
+        "Option<Vec<u64>>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [],
+    "MarketsResponseDataMarketsItemConfig": [
+      [
+        "name",
+        "name",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "step_size",
+        "step_size",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "step_price",
+        "step_price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "min_order_size",
+        "min_order_size",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsResponseDataMarketsItem": [
+      [
+        "market_id",
+        "market_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "config",
+        "config",
+        "Option<MarketsResponseDataMarketsItemConfig>",
+        "optional"
+      ]
+    ],
+    "MarketsResponseData": [
+      [
+        "markets",
+        "markets",
+        "Option<Vec<MarketsResponseDataMarketsItem>>",
+        "optional"
+      ]
+    ],
+    "MarketsResponse": [
+      [
+        "data",
+        "data",
+        "Option<MarketsResponseData>",
+        "optional"
+      ]
+    ],
+    "OrderBookRequest": [
+      [
+        "market_id",
+        "market_id",
+        "u64",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OrderBookResponseData": [
+      [
+        "bids",
+        "bids",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ],
+      [
+        "asks",
+        "asks",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "OrderBookResponse": [
+      [
+        "data",
+        "data",
+        "Option<OrderBookResponseData>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "market_id",
+        "market_id",
+        "u64",
+        "required"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "TradesResponseData": [
+      [
+        "market_id",
+        "market_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "trades",
+        "trades",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "TradesResponse": [
+      [
+        "data",
+        "data",
+        "Option<TradesResponseData>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ]
+    ],
+    "AccountResponseData": [
+      [
+        "balance",
+        "balance",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "AccountResponse": [
+      [
+        "data",
+        "data",
+        "Option<AccountResponseData>",
+        "optional"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ],
+      [
+        "market_id",
+        "market_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "page_size",
+        "page_size",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "PositionsResponse": [
+      [
+        "data",
+        "data",
+        "Option<PositionsResponseData>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ],
+      [
+        "market_id",
+        "market_id",
+        "u64",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "start_index",
+        "start_index",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersResponse": [
+      [
+        "data",
+        "data",
+        "Option<OpenOrdersResponseData>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ],
+      [
+        "market_id",
+        "market_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "order_ids",
+        "order_ids",
+        "Option<Vec<String>>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryResponse": [
+      [
+        "data",
+        "data",
+        "Option<OrderHistoryResponseData>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ],
+      [
+        "market_id",
+        "market_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "FillsResponse": [
+      [
+        "data",
+        "data",
+        "Option<FillsResponseData>",
+        "optional"
+      ]
+    ],
+    "SigningDomainRequest": [],
+    "SigningDomainResponseData": [
+      [
+        "name",
+        "name",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "version",
+        "version",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "chain_id",
+        "chain_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "verifying_contract",
+        "verifying_contract",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "SigningDomainResponse": [
+      [
+        "data",
+        "data",
+        "Option<SigningDomainResponseData>",
+        "optional"
+      ]
+    ],
+    "SystemConfigRequest": [],
+    "SystemConfigResponseDataAddresses": [
+      [
+        "router",
+        "router",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "SystemConfigResponseData": [
+      [
+        "addresses",
+        "addresses",
+        "Option<SystemConfigResponseDataAddresses>",
+        "optional"
+      ]
+    ],
+    "SystemConfigResponse": [
+      [
+        "data",
+        "data",
+        "Option<SystemConfigResponseData>",
+        "optional"
+      ]
+    ],
+    "NonceStateRequest": [
+      [
+        "account",
+        "account",
+        "String",
+        "required"
+      ]
+    ],
+    "NonceStateResponseData": [
+      [
+        "nonce_anchor",
+        "nonce_anchor",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "current_bitmap_index",
+        "current_bitmap_index",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "bitmap",
+        "bitmap",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "NonceStateResponse": [
+      [
+        "data",
+        "data",
+        "Option<NonceStateResponseData>",
+        "optional"
+      ]
+    ],
+    "AuthNonceRequest": [],
+    "AuthNonceResponse": [
+      [
+        "nonce",
+        "nonce",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderBody": [
+      [
+        "market_id",
+        "market_id",
+        "u64",
+        "required"
+      ],
+      [
+        "size_steps",
+        "size_steps",
+        "u64",
+        "required"
+      ],
+      [
+        "price_ticks",
+        "price_ticks",
+        "u64",
+        "required"
+      ],
+      [
+        "side",
+        "side",
+        "String",
+        "required"
+      ],
+      [
+        "order_type",
+        "order_type",
+        "String",
+        "required"
+      ],
+      [
+        "time_in_force",
+        "time_in_force",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "post_only",
+        "post_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "reduce_only",
+        "reduce_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "stp_mode",
+        "stp_mode",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "ttl_units",
+        "ttl_units",
+        "Option<u16>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "PlaceOrderBody",
+        "required"
+      ]
+    ],
+    "PlaceOrderResponseData": [
+      [
+        "tx_hash",
+        "tx_hash",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderResponse": [
+      [
+        "data",
+        "data",
+        "Option<PlaceOrderResponseData>",
+        "optional"
+      ]
+    ],
+    "CancelOrderBody": [
+      [
+        "market_id",
+        "market_id",
+        "u64",
+        "required"
+      ],
+      [
+        "order_id",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "resting_order_id",
+        "resting_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrderBody",
+        "required"
+      ]
+    ],
+    "CancelOrderResponseData": [
+      [
+        "tx_hash",
+        "tx_hash",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrderResponse": [
+      [
+        "data",
+        "data",
+        "Option<CancelOrderResponseData>",
+        "optional"
+      ]
+    ],
+    "PositionsResponseData": [
+      [
+        "positions",
+        "positions",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersResponseData": [
+      [
+        "orders",
+        "orders",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryResponseData": [
+      [
+        "orders",
+        "orders",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "FillsResponseData": [
+      [
+        "trades",
+        "trades",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "OrderBookResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "signing_domain": [
+      "SigningDomainRequest",
+      "SigningDomainResponse"
+    ],
+    "system_config": [
+      "SystemConfigRequest",
+      "SystemConfigResponse"
+    ],
+    "nonce_state": [
+      "NonceStateRequest",
+      "NonceStateResponse"
+    ],
+    "auth_nonce": [
+      "AuthNonceRequest",
+      "AuthNonceResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ]
+  }
+}

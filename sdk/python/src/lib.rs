@@ -33,6 +33,13 @@ fn native_error(error: aux_rs::Error) -> PyErr {
         InvalidRequest(_) => ValidationError::new_err(message),
         StreamGap => StreamGapError::new_err(message),
         PendingOutcome => OutcomeUncertainError::new_err(message),
+        PendingTransaction { hash } => Python::attach(|py| {
+            let error = OutcomeUncertainError::new_err(message);
+            match error.value(py).setattr("transaction_hash", hash) {
+                Ok(()) => error,
+                Err(other) => other,
+            }
+        }),
     }
 }
 

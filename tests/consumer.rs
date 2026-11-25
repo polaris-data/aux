@@ -96,6 +96,35 @@ fn main() -> aux_rs::Result<()> {
     }
     perpetuals!(InjectiveClient => "injective", NadoClient => "nado", OndoPerpsClient => "ondo_perps",
         PacificaClient => "pacifica", ParagonClient => "paragon", TradeXyzClient => "trade_xyz", AsterClient => "aster");
+    let added = format!("{origin}/new-exchanges");
+    macro_rules! market_discovery {
+        ($($client:ident => $venue:literal),+ $(,)?) => {{
+            $(let request = perps.iter().find(|row| row["venue"] == $venue && row["operation"] == "markets").unwrap();
+              let client = aux_rs::$client::new()
+                .with_origin(format!("{added}/{}", $venue))
+                .with_credentials("fixture-key", "fixture-secret");
+              let reply = client.markets(&request["request"])?;
+              if $venue == "edgex" {
+                  assert_eq!(reply["data"]["contractList"][0]["contractId"], "10000001");
+              } else {
+                  assert_eq!(reply, request["response"]);
+              })+
+        }};
+    }
+    market_discovery!(PerplClient => "perpl", RisexClient => "risex", DecibelClient => "decibel",
+        EdgeXClient => "edgex", GrvtClient => "grvt", KatanaClient => "katana");
+    let stats = aux_rs::VariationalClient::new().with_origin(format!("{added}/variational"))
+        .market_stats(&serde_json::json!({}))?;
+    assert_eq!(stats["listings"][0]["contract_type"], "perpetual");
+    assert_eq!(stats["listings"][1]["funding"], serde_json::Value::Null);
+    let seed = (0..32).map(|i| format!("{i:02x}")).collect::<String>();
+    let perpl = aux_rs::PerplClient::new().with_origin(format!("{added}/perpl")).with_credentials("fixture-key", seed);
+    let order = perps.iter().find(|row| row["venue"] == "perpl" && row["operation"] == "place_order").unwrap();
+    assert_eq!(perpl.place_order(&order["request"] )?, order["response"]);
+    let endpoint = added.replacen("http:", "ws:", 1) + "/perpl/ws/book";
+    let book = perpl.subscribe(&serde_json::json!({"channel":"order_book","market_id":1}), Some(&endpoint))?;
+    assert_eq!(book.next_event()?.unwrap()["bid"][0]["p"], 9007199254740993u64);
+    book.close();
     let injective = aux_rs::InjectiveClient::new().with_origin(format!("{origin}/perps/injective"));
     let book = injective.subscribe(&serde_json::json!({"channel":"order_book","market_id":format!("0x{}", "33".repeat(32))}), None)?;
     assert_eq!(book.next_event()?.unwrap()["orderbook"]["sequence"], 9007199254740993u64);

@@ -10,14 +10,18 @@ from . import chainlink_candles_models as ChainlinkCandles
 from . import chainlink_streams_models as ChainlinkStreams
 from . import databento_historical_models as DatabentoHistorical
 from . import databento_reference_models as DatabentoReference
+from . import decibel_models as Decibel
 from . import derive_models as Derive
 from . import dune_models as Dune
+from . import edgex_models as Edgex
 from . import extended_models as Extended
+from . import grvt_models as Grvt
 from . import hyperdash_models as Hyperdash
 from . import hyperliquid_models as Hyperliquid
 from . import injective_models as Injective
 from . import kalshi_models as Kalshi
 from . import kalshi_perps_models as KalshiPerps
+from . import katana_models as Katana
 from . import lighter_models as Lighter
 from . import metric_models as Metric
 from . import monaco_models as Monaco
@@ -27,14 +31,17 @@ from . import pacifica_models as Pacifica
 from . import paradex_models as Paradex
 from . import paragon_models as Paragon
 from . import pascal_models as Pascal
+from . import perpl_models as Perpl
 from . import phoenix_models as Phoenix
 from . import polymarket_models as Polymarket
 from . import polymarket_perps_models as PolymarketPerps
 from . import pyth_hermes_models as PythHermes
 from . import pyth_pro_models as PythPro
 from . import qfex_models as Qfex
+from . import risex_models as Risex
 from . import tardis_models as Tardis
 from . import trade_xyz_models as TradeXyz
+from . import variational_models as Variational
 
 from .lifecycle import ClientLifecycle
 from . import BookSubscription
@@ -320,6 +327,55 @@ class ChainlinkDataStreamsClient(_Client):
     async def subscribe(self, specification=None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('chainlink_streams', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret)
+
+
+class DecibelClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Decibel.AccountRequest | None = None, *, params: Decibel.AccountRequest | None = None) -> Decibel.AccountResponse:
+        return await execute("decibel", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Decibel.CancelOrderRequest | None = None, *, params: Decibel.CancelOrderRequest | None = None) -> Decibel.CancelOrderResponse:
+        return await execute("decibel", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Decibel.FillsRequest | None = None, *, params: Decibel.FillsRequest | None = None) -> Decibel.FillsResponse:
+        return await execute("decibel", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def gas_price(self, request: Decibel.GasPriceRequest | None = None, *, params: Decibel.GasPriceRequest | None = None) -> Decibel.GasPriceResponse:
+        return await execute("decibel", "gas_price", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ledger(self, request: Decibel.LedgerRequest | None = None, *, params: Decibel.LedgerRequest | None = None) -> Decibel.LedgerResponse:
+        return await execute("decibel", "ledger", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Decibel.MarketsRequest | None = None, *, params: Decibel.MarketsRequest | None = None) -> Decibel.MarketsResponse:
+        return await execute("decibel", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Decibel.OpenOrdersRequest | None = None, *, params: Decibel.OpenOrdersRequest | None = None) -> Decibel.OpenOrdersResponse:
+        return await execute("decibel", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Decibel.OrderBookRequest | None = None, *, params: Decibel.OrderBookRequest | None = None) -> Decibel.OrderBookResponse:
+        return await execute("decibel", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Decibel.OrderHistoryRequest | None = None, *, params: Decibel.OrderHistoryRequest | None = None) -> Decibel.OrderHistoryResponse:
+        return await execute("decibel", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Decibel.PlaceOrderRequest | None = None, *, params: Decibel.PlaceOrderRequest | None = None) -> Decibel.PlaceOrderResponse:
+        return await execute("decibel", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Decibel.PositionsRequest | None = None, *, params: Decibel.PositionsRequest | None = None) -> Decibel.PositionsResponse:
+        return await execute("decibel", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Decibel.TradesRequest | None = None, *, params: Decibel.TradesRequest | None = None) -> Decibel.TradesResponse:
+        return await execute("decibel", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def transaction(self, request: Decibel.TransactionRequest | None = None, *, params: Decibel.TransactionRequest | None = None) -> Decibel.TransactionResponse:
+        return await execute("decibel", "transaction", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Decibel.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('decibel', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class DeriveClient(_Client):
@@ -774,6 +830,46 @@ class DuneClient(_Client):
         return await execute('dune', 'get_latest_query_results_csv', payload, origin=self._origin, api_key=self._api_key)
 
 
+class EdgeXClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Edgex.AccountRequest | None = None, *, params: Edgex.AccountRequest | None = None) -> Edgex.AccountResponse:
+        return await execute("edgex", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Edgex.CancelOrderRequest | None = None, *, params: Edgex.CancelOrderRequest | None = None) -> Edgex.CancelOrderResponse:
+        return await execute("edgex", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Edgex.FillsRequest | None = None, *, params: Edgex.FillsRequest | None = None) -> Edgex.FillsResponse:
+        return await execute("edgex", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Edgex.MarketsRequest | None = None, *, params: Edgex.MarketsRequest | None = None) -> Edgex.MarketsResponse:
+        return await execute("edgex", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Edgex.OpenOrdersRequest | None = None, *, params: Edgex.OpenOrdersRequest | None = None) -> Edgex.OpenOrdersResponse:
+        return await execute("edgex", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Edgex.OrderBookRequest | None = None, *, params: Edgex.OrderBookRequest | None = None) -> Edgex.OrderBookResponse:
+        return await execute("edgex", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_by_client_id(self, request: Edgex.OrderByClientIdRequest | None = None, *, params: Edgex.OrderByClientIdRequest | None = None) -> Edgex.OrderStatusResponse:
+        return await execute("edgex", "order_by_client_id", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Edgex.OrderStatusRequest | None = None, *, params: Edgex.OrderStatusRequest | None = None) -> Edgex.OrderStatusResponse:
+        return await execute("edgex", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Edgex.PlaceOrderRequest | None = None, *, params: Edgex.PlaceOrderRequest | None = None) -> Edgex.PlaceOrderResponse:
+        return await execute("edgex", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Edgex.PositionsRequest | None = None, *, params: Edgex.PositionsRequest | None = None) -> Edgex.PositionsResponse:
+        return await execute("edgex", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Edgex.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('edgex', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class ExtendedClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, credentials=None, access_token=None, expires_at=None, chain_id=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -1186,6 +1282,52 @@ class ExtendedClient(_Client):
     async def subscribe(self, specification=None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('extended', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._credentials)
+
+
+class GrvtClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Grvt.AccountRequest | None = None, *, params: Grvt.AccountRequest | None = None) -> Grvt.AccountResponse:
+        return await execute("grvt", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Grvt.CancelOrderRequest | None = None, *, params: Grvt.CancelOrderRequest | None = None) -> Grvt.CancelOrderResponse:
+        return await execute("grvt", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Grvt.FillsRequest | None = None, *, params: Grvt.FillsRequest | None = None) -> Grvt.FillsResponse:
+        return await execute("grvt", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def instrument(self, request: Grvt.InstrumentRequest | None = None, *, params: Grvt.InstrumentRequest | None = None) -> Grvt.InstrumentResponse:
+        return await execute("grvt", "instrument", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def login(self, request: Grvt.LoginRequest | None = None, *, params: Grvt.LoginRequest | None = None) -> Grvt.LoginResponse:
+        return await execute("grvt", "login", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Grvt.MarketsRequest | None = None, *, params: Grvt.MarketsRequest | None = None) -> Grvt.MarketsResponse:
+        return await execute("grvt", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Grvt.OpenOrdersRequest | None = None, *, params: Grvt.OpenOrdersRequest | None = None) -> Grvt.OpenOrdersResponse:
+        return await execute("grvt", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Grvt.OrderBookRequest | None = None, *, params: Grvt.OrderBookRequest | None = None) -> Grvt.OrderBookResponse:
+        return await execute("grvt", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Grvt.OrderStatusRequest | None = None, *, params: Grvt.OrderStatusRequest | None = None) -> Grvt.OrderStatusResponse:
+        return await execute("grvt", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Grvt.PlaceOrderRequest | None = None, *, params: Grvt.PlaceOrderRequest | None = None) -> Grvt.PlaceOrderResponse:
+        return await execute("grvt", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Grvt.PositionsRequest | None = None, *, params: Grvt.PositionsRequest | None = None) -> Grvt.PositionsResponse:
+        return await execute("grvt", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Grvt.TradesRequest | None = None, *, params: Grvt.TradesRequest | None = None) -> Grvt.TradesResponse:
+        return await execute("grvt", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Grvt.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('grvt', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class HistoricalClient(_Client):
@@ -4352,6 +4494,49 @@ class KalshiPerpsClient(_Client):
         return await _open_stream('kalshi', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret)
 
 
+class KatanaClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Katana.AccountRequest | None = None, *, params: Katana.AccountRequest | None = None) -> Katana.AccountResponse:
+        return await execute("katana", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Katana.CancelOrderRequest | None = None, *, params: Katana.CancelOrderRequest | None = None) -> Katana.CancelOrderResponse:
+        return await execute("katana", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Katana.FillsRequest | None = None, *, params: Katana.FillsRequest | None = None) -> Katana.FillsResponse:
+        return await execute("katana", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Katana.MarketsRequest | None = None, *, params: Katana.MarketsRequest | None = None) -> Katana.MarketsResponse:
+        return await execute("katana", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Katana.OpenOrdersRequest | None = None, *, params: Katana.OpenOrdersRequest | None = None) -> Katana.OpenOrdersResponse:
+        return await execute("katana", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Katana.OrderBookRequest | None = None, *, params: Katana.OrderBookRequest | None = None) -> Katana.OrderBookResponse:
+        return await execute("katana", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Katana.OrderStatusRequest | None = None, *, params: Katana.OrderStatusRequest | None = None) -> Katana.OrderStatusResponse:
+        return await execute("katana", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Katana.PlaceOrderRequest | None = None, *, params: Katana.PlaceOrderRequest | None = None) -> Katana.PlaceOrderResponse:
+        return await execute("katana", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Katana.PositionsRequest | None = None, *, params: Katana.PositionsRequest | None = None) -> Katana.PositionsResponse:
+        return await execute("katana", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Katana.TradesRequest | None = None, *, params: Katana.TradesRequest | None = None) -> Katana.TradesResponse:
+        return await execute("katana", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ws_token(self, request: Katana.WsTokenRequest | None = None, *, params: Katana.WsTokenRequest | None = None) -> Katana.WsTokenResponse:
+        return await execute("katana", "ws_token", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Katana.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('katana', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class LighterClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, signer=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -5325,6 +5510,43 @@ class PascalClient(_Client):
     async def subscribe(self, specification=None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('pascal', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret)
+
+
+class PerplClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Perpl.AccountRequest | None = None, *, params: Perpl.AccountRequest | None = None) -> Perpl.AccountResponse:
+        return await execute("perpl", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Perpl.CancelOrderRequest | None = None, *, params: Perpl.CancelOrderRequest | None = None) -> Perpl.CancelOrderResponse:
+        return await execute("perpl", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Perpl.FillsRequest | None = None, *, params: Perpl.FillsRequest | None = None) -> Perpl.FillsResponse:
+        return await execute("perpl", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Perpl.MarketsRequest | None = None, *, params: Perpl.MarketsRequest | None = None) -> Perpl.MarketsResponse:
+        return await execute("perpl", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Perpl.OpenOrdersRequest | None = None, *, params: Perpl.OpenOrdersRequest | None = None) -> Perpl.OpenOrdersResponse:
+        return await execute("perpl", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Perpl.OrderBookRequest | None = None, *, params: Perpl.OrderBookRequest | None = None) -> Perpl.OrderBookResponse:
+        return await execute("perpl", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Perpl.OrderHistoryRequest | None = None, *, params: Perpl.OrderHistoryRequest | None = None) -> Perpl.OrderHistoryResponse:
+        return await execute("perpl", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Perpl.PlaceOrderRequest | None = None, *, params: Perpl.PlaceOrderRequest | None = None) -> Perpl.PlaceOrderResponse:
+        return await execute("perpl", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Perpl.PositionsRequest | None = None, *, params: Perpl.PositionsRequest | None = None) -> Perpl.PositionsResponse:
+        return await execute("perpl", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Perpl.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('perpl', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class PhoenixClient(_Client):
@@ -6466,6 +6688,58 @@ class ReferenceClient(_Client):
         return await _open_stream('databento', 'adjustment_factors_get_range', payload, self._origin, self._api_key)
 
 
+class RisexClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Risex.AccountRequest | None = None, *, params: Risex.AccountRequest | None = None) -> Risex.AccountResponse:
+        return await execute("risex", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def auth_nonce(self, request: Risex.AuthNonceRequest | None = None, *, params: Risex.AuthNonceRequest | None = None) -> Risex.AuthNonceResponse:
+        return await execute("risex", "auth_nonce", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Risex.CancelOrderRequest | None = None, *, params: Risex.CancelOrderRequest | None = None) -> Risex.CancelOrderResponse:
+        return await execute("risex", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Risex.FillsRequest | None = None, *, params: Risex.FillsRequest | None = None) -> Risex.FillsResponse:
+        return await execute("risex", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Risex.MarketsRequest | None = None, *, params: Risex.MarketsRequest | None = None) -> Risex.MarketsResponse:
+        return await execute("risex", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def nonce_state(self, request: Risex.NonceStateRequest | None = None, *, params: Risex.NonceStateRequest | None = None) -> Risex.NonceStateResponse:
+        return await execute("risex", "nonce_state", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Risex.OpenOrdersRequest | None = None, *, params: Risex.OpenOrdersRequest | None = None) -> Risex.OpenOrdersResponse:
+        return await execute("risex", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Risex.OrderBookRequest | None = None, *, params: Risex.OrderBookRequest | None = None) -> Risex.OrderBookResponse:
+        return await execute("risex", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Risex.OrderHistoryRequest | None = None, *, params: Risex.OrderHistoryRequest | None = None) -> Risex.OrderHistoryResponse:
+        return await execute("risex", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Risex.PlaceOrderRequest | None = None, *, params: Risex.PlaceOrderRequest | None = None) -> Risex.PlaceOrderResponse:
+        return await execute("risex", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Risex.PositionsRequest | None = None, *, params: Risex.PositionsRequest | None = None) -> Risex.PositionsResponse:
+        return await execute("risex", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def signing_domain(self, request: Risex.SigningDomainRequest | None = None, *, params: Risex.SigningDomainRequest | None = None) -> Risex.SigningDomainResponse:
+        return await execute("risex", "signing_domain", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def system_config(self, request: Risex.SystemConfigRequest | None = None, *, params: Risex.SystemConfigRequest | None = None) -> Risex.SystemConfigResponse:
+        return await execute("risex", "system_config", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Risex.TradesRequest | None = None, *, params: Risex.TradesRequest | None = None) -> Risex.TradesResponse:
+        return await execute("risex", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Risex.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('risex', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class TardisClient(_Client):
     async def api_key_info(self, request: Tardis.EmptyRequest | None = None, *, params: Tardis.EmptyRequest | None = None) -> Any:
         return await execute("tardis", "api_key_info", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
@@ -6558,4 +6832,9 @@ class TradeXyzClient(_Client):
         params = _request_params(specification, params)
         return await _open_stream('trade_xyz', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
-__all__ = ['ArcusClient', 'AsterClient', 'BirdeyeClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DeriveClient', 'DuneClient', 'ExtendedClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'NadoClient', 'OndoPerpsClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient']
+
+class VariationalClient(_Client):
+    async def market_stats(self, request: Variational.MarketStatsRequest | None = None, *, params: Variational.MarketStatsRequest | None = None) -> Variational.MarketStatsResponse:
+        return await execute("variational", "market_stats", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
+
+__all__ = ['ArcusClient', 'AsterClient', 'BirdeyeClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DecibelClient', 'DeriveClient', 'DuneClient', 'EdgeXClient', 'ExtendedClient', 'GrvtClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'KatanaClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'NadoClient', 'OndoPerpsClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PerplClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'RisexClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient', 'VariationalClient']

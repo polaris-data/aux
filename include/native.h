@@ -20,7 +20,7 @@ enum aux_operation {
 /* Borrow input for this call. Pass raw report hex for Chainlink or UTF-8 JSON
  * for the contract operations. Release successful JSON output exactly once.
  * Statuses are 0 for success, 1 for invalid input, 2 for allocation failure,
- * 3 for transport errors, 4 for exchange errors, 5 for missing authentication, and 7 for a wallet operation awaiting reconciliation. */
+ * 3 for transport errors, 4 for exchange errors, 5 for missing authentication, and 7 for a submission awaiting reconciliation. */
 uint32_t aux_v1_invoke(uint32_t operation, const uint8_t *input, size_t len, aux_buffer *out);
 void aux_v1_result_free(aux_buffer out);
 typedef struct aux_stream aux_stream;
@@ -37,7 +37,8 @@ typedef struct {
                         uint16_t port, bool tls, int *out_fd);
 } aux_stream_dial;
 /* As invoke, with optional connection policy. On exchange status 4 a
- * nonempty buffer contains JSON {venue,status,body}. Free it as for success. */
+ * nonempty buffer contains JSON {venue,status,body}. Status 7 may carry the
+ * same envelope with a transaction hash in body. Free owned buffers as for success. */
 uint32_t aux_v1_invoke_detailed(uint32_t operation, const uint8_t *input, size_t len,
                                 const aux_stream_dial *dial, aux_buffer *out);
 uint32_t aux_v1_stream_open_with_transport(const uint8_t *config, size_t length,

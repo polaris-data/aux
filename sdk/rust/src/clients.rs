@@ -978,6 +978,12 @@ macro_rules! perps_client {
         }
     };
 }
+perps_client!(PerplClient, "perpl");
+perps_client!(RisexClient, "risex");
+perps_client!(DecibelClient, "decibel");
+perps_client!(EdgeXClient, "edgex");
+perps_client!(GrvtClient, "grvt");
+perps_client!(KatanaClient, "katana");
 perps_client!(AsterClient, "aster");
 perps_client!(InjectiveClient, "injective");
 perps_client!(NadoClient, "nado");

@@ -418,10 +418,39 @@ async function testPerpsConnectors(origin) {
   }
   assert.deepEqual(lifecycle, ["POST", "PUT", "DELETE"]);
 }
+async function testNewExchanges(origin) {
+  const root = origin + "/new-exchanges";
+  const rows = fixture("perps-http");
+  for (const [venue, Client] of Object.entries({
+    perpl:sdk.PerplClient, risex:sdk.RisexClient, decibel:sdk.DecibelClient,
+    edgex:sdk.EdgeXClient, grvt:sdk.GrvtClient, katana:sdk.KatanaClient,
+  })) {
+    const row = rows.find(item => item.venue === venue && item.operation === "markets");
+    const result = await new Client({origin:root + "/" + venue, apiKey:"fixture-key"}).markets(row.request);
+    if (venue === "edgex") assert.equal(result.data.contractList[0].contractId, "10000001");
+    else assert.deepEqual(result, row.response);
+  }
+  const stats = await new sdk.VariationalClient({origin:root + "/variational"}).marketStats();
+  assert.deepEqual(stats.listings.map(listing => listing.contract_type), ["perpetual", "swap"]);
+  const ws = root.replace("http:", "ws:");
+  const book = await new sdk.KatanaClient({auth:{rest_origin:root + "/katana"}})
+    .subscribe({channel:"l2orderbook", market:"ETH-USD"}, ws + "/katana/ws/book");
+  try {
+    assert.equal((await book.next()).value.data.sequence, 9007199254740993n);
+    assert.equal((await book.next()).value.data.u, 9007199254740994n);
+  } finally {
+    book.close();
+  }
+  const perpl = new sdk.PerplClient({origin:root + "/perpl", apiKey:"fixture-key",
+    apiSecret:Buffer.from(Array.from({length:32}, (_, i) => i)).toString("hex")});
+  const order = rows.find(row => row.venue === "perpl" && row.operation === "place_order");
+  assert.deepEqual(await perpl.placeOrder(order.request), order.response);
+}
 async function testSharedPeer() {
   const origin = process.env.AUX_FIXTURE_ORIGIN;
   if (!origin) return;
   await testPerpsConnectors(origin);
+  await testNewExchanges(origin);
   const deniedHermes = new sdk.PythHermesClient({origin:origin+"/stream-refused",apiKey:"fixture-stream-credential"});
   for (const [venue,open,message] of [
     ["pyth_hermes", () => deniedHermes.streamPriceUpdates({ids:["ab".repeat(32)]}), "invalid Bearer [redacted]"],

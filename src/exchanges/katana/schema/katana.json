@@ -1,0 +1,364 @@
+{
+  "client": "KatanaClient",
+  "venue": "katana",
+  "fixture": "perps-http",
+  "aliases": {
+    "MarketsResponse": "Vec<MarketsResponseItem>",
+    "TradesResponse": "Vec<serde_json::Value>",
+    "AccountResponse": "Vec<serde_json::Value>",
+    "PositionsResponse": "Vec<serde_json::Value>",
+    "OpenOrdersResponse": "Vec<serde_json::Value>",
+    "OrderStatusResponse": "Vec<serde_json::Value>",
+    "FillsResponse": "Vec<serde_json::Value>",
+    "CancelOrderResponse": "Vec<CancelOrderResponseItem>"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "market",
+        "market",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "wallet",
+        "wallet",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [],
+    "MarketsResponseItem": [
+      [
+        "market",
+        "market",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderBookRequest": [
+      [
+        "market",
+        "market",
+        "String",
+        "required"
+      ],
+      [
+        "level",
+        "level",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OrderBookResponse": [
+      [
+        "sequence",
+        "sequence",
+        "u64",
+        "required"
+      ],
+      [
+        "bids",
+        "bids",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ],
+      [
+        "asks",
+        "asks",
+        "Option<Vec<serde_json::Value>>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "market",
+        "market",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ],
+      [
+        "market",
+        "market",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ],
+      [
+        "market",
+        "market",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "closed",
+        "closed",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ],
+      [
+        "market",
+        "market",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "WsTokenRequest": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ]
+    ],
+    "WsTokenResponse": [
+      [
+        "token",
+        "token",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderBody": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ],
+      [
+        "market",
+        "market",
+        "String",
+        "required"
+      ],
+      [
+        "type",
+        "type_",
+        "String",
+        "required"
+      ],
+      [
+        "side",
+        "side",
+        "String",
+        "required"
+      ],
+      [
+        "quantity",
+        "quantity",
+        "String",
+        "required"
+      ],
+      [
+        "price",
+        "price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "clientOrderId",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "timeInForce",
+        "time_in_force",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "selfTradePrevention",
+        "self_trade_prevention",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "reduceOnly",
+        "reduce_only",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "PlaceOrderBody",
+        "required"
+      ]
+    ],
+    "PlaceOrderResponse": [
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrderBody": [
+      [
+        "wallet",
+        "wallet",
+        "String",
+        "required"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrderBody",
+        "required"
+      ]
+    ],
+    "CancelOrderResponseItem": [
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "OrderBookResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "ws_token": [
+      "WsTokenRequest",
+      "WsTokenResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ]
+  }
+}

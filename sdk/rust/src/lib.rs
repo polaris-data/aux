@@ -24,6 +24,7 @@ pub enum Error {
     SessionResponse(SessionResponse),
     AuthenticationRequired,
     PendingOutcome,
+    PendingTransaction { hash: String },
     StreamGap,
     InvalidRequest(&'static str),
     Decode(&'static str),
@@ -49,6 +50,7 @@ impl std::fmt::Display for Error {
         match self {
             Self::StreamGap => fmt.write_str("stream sequence or snapshot missing"),
             Self::PendingOutcome => fmt.write_str("submission outcome pending reconciliation"),
+            Self::PendingTransaction { hash } => write!(fmt, "submission outcome pending reconciliation for {hash}"),
             Self::Network => fmt.write_str("HTTP transport failed"),
             Self::ExchangeResponse(response) => write!(
                 fmt,
@@ -280,6 +282,27 @@ pub mod monaco_models;
 #[cfg(feature = "hyperliquid-models")]
 #[rustfmt::skip]
 pub mod hyperliquid_models;
+#[cfg(feature = "perpl-models")]
+#[allow(clippy::all)]
+pub mod perpl_models;
+#[cfg(feature = "risex-models")]
+#[allow(clippy::all)]
+pub mod risex_models;
+#[cfg(feature = "decibel-models")]
+#[allow(clippy::all)]
+pub mod decibel_models;
+#[cfg(feature = "edgex-models")]
+#[allow(clippy::all)]
+pub mod edgex_models;
+#[cfg(feature = "grvt-models")]
+#[allow(clippy::all)]
+pub mod grvt_models;
+#[cfg(feature = "katana-models")]
+#[allow(clippy::all)]
+pub mod katana_models;
+#[cfg(feature = "variational-models")]
+#[allow(clippy::all)]
+pub mod variational_models;
 #[cfg(feature = "aster-models")]
 #[rustfmt::skip]
 pub mod aster_models;

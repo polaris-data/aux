@@ -26,6 +26,10 @@ function parseHttp(text) {
 }
 function rethrow(error) {
   const match = /^\[aux:(\w+)\] ([\s\S]*)$/.exec(error.message);
+  if (match && match[1] === "PendingTransaction") {
+    const transactionHash = match[2];
+    throw Object.assign(new OutcomeUncertainError("submission outcome pending reconciliation for " + transactionHash, {cause:error}), {transactionHash});
+  }
   if (match && match[1] === "SessionResponse") {
     const {venue,body} = parseHttp(match[2]);
     throw Object.assign(new ExchangeError(venue + " returned a session error"), {venue,body});

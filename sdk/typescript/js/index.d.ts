@@ -296,7 +296,7 @@ export class StreamGapError extends TransportError {}
 export class ExchangeError extends ConnectorError { readonly venue?: string; readonly status?: number; readonly body?: HttpValue; }
 export class DecodeError extends ConnectorError {}
 export class ValidationError extends ConnectorError {}
-export class OutcomeUncertainError extends ConnectorError {}
+export class OutcomeUncertainError extends ConnectorError { readonly transactionHash?: string; }
 
 export interface QfexTradingSession extends AsyncIterableIterator<HttpValue> {
   subscribeAccount():Promise<void>;
@@ -313,6 +313,13 @@ export type * as TardisModels from "./tardis_models";
 export type * as LighterModels from "./lighter_models";
 export type * as MonacoModels from "./monaco_models";
 export type * as HyperliquidModels from "./hyperliquid_models";
+export type * as PerplModels from "./perpl_models";
+export type * as RisexModels from "./risex_models";
+export type * as DecibelModels from "./decibel_models";
+export type * as EdgeXModels from "./edgex_models";
+export type * as GrvtModels from "./grvt_models";
+export type * as KatanaModels from "./katana_models";
+export type * as VariationalModels from "./variational_models";
 export type * as AsterModels from "./aster_models";
 export type * as InjectiveModels from "./injective_models";
 export type * as NadoModels from "./nado_models";

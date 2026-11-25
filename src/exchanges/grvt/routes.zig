@@ -1,0 +1,16 @@
+const r = @import("../../core/routes.zig");
+
+pub const operations = [_]r.Operation{
+    .{ .venue = .grvt, .name = "instrument", .verb = "POST", .path = "/full/v1/instrument", .private = false, .origin = "https://market-data.grvt.io", .params = &.{.{ .key = "instrument", .loc = .member, .required = true, .collection = "" }} },
+    .{ .venue = .grvt, .name = "markets", .verb = "POST", .path = "/full/v1/all_instruments", .private = false, .origin = "https://market-data.grvt.io", .params = &.{.{ .key = "body", .loc = .body, .required = true, .collection = "" }} },
+    .{ .venue = .grvt, .name = "order_book", .verb = "POST", .path = "/full/v1/book", .private = false, .origin = "https://market-data.grvt.io", .params = &.{ .{ .key = "instrument", .loc = .member, .required = true, .collection = "" }, .{ .key = "depth", .loc = .member, .required = true, .collection = "" } } },
+    .{ .venue = .grvt, .name = "trades", .verb = "POST", .path = "/full/v1/trade", .private = false, .origin = "https://market-data.grvt.io", .params = &.{ .{ .key = "instrument", .loc = .member, .required = true, .collection = "" }, .{ .key = "limit", .loc = .member, .required = true, .collection = "" } } },
+    .{ .venue = .grvt, .name = "login", .verb = "POST", .path = "/auth/api_key/login", .private = true, .origin = "https://edge.grvt.io", .params = &.{} },
+    .{ .venue = .grvt, .name = "account", .verb = "POST", .path = "/full/v1/account_summary", .private = true, .origin = "https://trades.grvt.io", .params = &.{.{ .key = "sub_account_id", .loc = .member, .required = true, .collection = "" }} },
+    .{ .venue = .grvt, .name = "positions", .verb = "POST", .path = "/full/v1/positions", .private = true, .origin = "https://trades.grvt.io", .params = &.{.{ .key = "sub_account_id", .loc = .member, .required = true, .collection = "" }} },
+    .{ .venue = .grvt, .name = "open_orders", .verb = "POST", .path = "/full/v1/open_orders", .private = true, .origin = "https://trades.grvt.io", .params = &.{.{ .key = "sub_account_id", .loc = .member, .required = true, .collection = "" }} },
+    .{ .venue = .grvt, .name = "order_status", .verb = "POST", .path = "/full/v1/order", .private = true, .origin = "https://trades.grvt.io", .params = &.{ .{ .key = "sub_account_id", .loc = .member, .required = true, .collection = "" }, .{ .key = "order_id", .loc = .member, .required = false, .collection = "" }, .{ .key = "client_order_id", .loc = .member, .required = false, .collection = "" } } },
+    .{ .venue = .grvt, .name = "fills", .verb = "POST", .path = "/full/v1/fill_history", .private = true, .origin = "https://trades.grvt.io", .params = &.{ .{ .key = "sub_account_id", .loc = .member, .required = true, .collection = "" }, .{ .key = "limit", .loc = .member, .required = false, .collection = "" } } },
+    .{ .venue = .grvt, .name = "place_order", .verb = "POST", .path = "/full/v1/create_order", .private = true, .origin = "https://trades.grvt.io", .params = &.{.{ .key = "body", .loc = .body, .required = true, .collection = "" }} },
+    .{ .venue = .grvt, .name = "cancel_order", .verb = "POST", .path = "/full/v1/cancel_order", .private = true, .origin = "https://trades.grvt.io", .params = &.{.{ .key = "body", .loc = .body, .required = true, .collection = "" }} },
+};
