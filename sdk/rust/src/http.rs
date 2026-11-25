@@ -23,6 +23,8 @@ impl Policy {
     }
     pub(crate) fn execute(&self, args: Value) -> Result<Value> {
         match self {
+            Self::Application(t) if args["venue"] == "injective" && matches!(args["operation"].as_str(), Some("place_order" | "cancel_order" | "pending")) =>
+                crate::native::execute_with_transport(&args, t),
             Self::Application(t) => with_transport(t.as_ref(), args),
             #[cfg(feature = "rustls")]
             Self::Tls(t) => crate::native::execute_with_transport(&args, t),
@@ -141,7 +143,7 @@ where
 }
 
 pub(crate) fn with_transport(transport: &dyn Transport, mut args: Value) -> Result<Value> {
-    if args["venue"] == "derive" {
+    if matches!(args["venue"].as_str(), Some("derive" | "nado" | "paragon" | "trade_xyz")) {
         let jobs: BTreeMap<String, Value> = call(28, args.clone())?;
         let mut metadata = serde_json::Map::new();
         for (key, job) in jobs {
@@ -154,6 +156,7 @@ pub(crate) fn with_transport(transport: &dyn Transport, mut args: Value) -> Resu
 fn send_prepared(transport: &dyn Transport, args: Value) -> Result<Value> {
     let venue = args["venue"].clone();
     let key = args.get("api_key").cloned();
+    let scope_coin = args["params"].get("coin").cloned();
     let operation = args["operation"].clone();
     let session = if venue == "monaco" && operation == "refresh_session" {
         args.get("auth").cloned()
@@ -186,12 +189,14 @@ fn send_prepared(transport: &dyn Transport, args: Value) -> Result<Value> {
                     | "cancel_all"
             )
         );
+    let perps_write = matches!(venue.as_str(), Some("nado" | "ondo_perps" | "pacifica" | "paragon" | "trade_xyz" | "aster"))
+        && matches!(operation.as_str(), Some("place_order" | "place_market_order" | "cancel_order"));
     let response = transport.send(request).map_err(|error| match error {
-        Error::Network if monaco_write => Error::PendingOutcome,
+        Error::Network if monaco_write || perps_write => Error::PendingOutcome,
         other => other,
     })?;
     let rejected = (400..500).contains(&response.status) && response.status != 408;
-    let mut input = json!({"venue":venue,"operation":operation,"status":response.status,"headers":response.headers,"body":response.body});
+    let mut input = json!({"venue":venue,"operation":operation,"scope_coin":scope_coin,"status":response.status,"headers":response.headers,"body":response.body});
     if let Some(auth) = session {
         input["auth"] = auth;
     }

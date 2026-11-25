@@ -18,6 +18,20 @@ module.exports = function clients(execute, openStream, call, phoenix) {
     subscribe(params, endpoint) { return openStream('arcus','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret); }
   };
   require("./lifecycle.cjs").managed(classes.ArcusClient,["signingPayload"]);
+  classes.AsterClient = class AsterClient {
+    constructor({origin, apiKey, apiSecret, auth} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.auth = auth; }
+    account(params = {}) { return execute("aster", "account", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    cancelOrder(params = {}) { return execute("aster", "cancel_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    markets(params = {}) { return execute("aster", "markets", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    openOrders(params = {}) { return execute("aster", "open_orders", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderBook(params = {}) { return execute("aster", "order_book", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderStatus(params = {}) { return execute("aster", "order_status", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeOrder(params = {}) { return execute("aster", "place_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    positions(params = {}) { return execute("aster", "positions", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    trades(params = {}) { return execute("aster", "trades", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    subscribe(params, endpoint) { return openStream('aster','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.auth); }
+  };
+  require("./lifecycle.cjs").managed(classes.AsterClient,[]);
   classes.BirdeyeClient = class BirdeyeClient {
     constructor({origin, apiKey, apiSecret} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; }
     historicalPriceUnix(params = {}) { return execute("birdeye", "historical_price_unix", args.unwrap(params), this.origin, this.apiKey, this.apiSecret); }
@@ -1197,6 +1211,21 @@ module.exports = function clients(execute, openStream, call, phoenix) {
     subscribe(params, endpoint) { return openStream('hyperliquid','subscribe',args.unwrap(params,'spec'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.signer); }
   };
   require("./lifecycle.cjs").managed(classes.HyperliquidClient,["signUserAction"]);
+  classes.InjectiveClient = class InjectiveClient {
+    constructor({origin, apiKey, apiSecret, auth} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.auth = auth; }
+    account(params = {}) { return execute("injective", "account", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    cancelOrder(params = {}) { return execute("injective", "cancel_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    markets(params = {}) { return execute("injective", "markets", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    openOrders(params = {}) { return execute("injective", "open_orders", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderBook(params = {}) { return execute("injective", "order_book", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    pending(params = {}) { return execute("injective", "pending", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeOrder(params = {}) { return execute("injective", "place_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    positions(params = {}) { return execute("injective", "positions", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    trades(params = {}) { return execute("injective", "trades", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    transaction(params = {}) { return execute("injective", "transaction", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    subscribe(params, endpoint) { return openStream('injective','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.auth); }
+  };
+  require("./lifecycle.cjs").managed(classes.InjectiveClient,[]);
   classes.KalshiClient = class KalshiClient {
     constructor({origin, apiKey, apiSecret, signer} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.signer = signer; }
     acceptBlockTradeProposal(params = {}) { return execute("kalshi", "predictions.accept_block_trade_proposal", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.signer); }
@@ -1520,6 +1549,50 @@ module.exports = function clients(execute, openStream, call, phoenix) {
     subscribe(params, endpoint) { return openStream('monaco','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.session); }
   };
   require("./lifecycle.cjs").managed(classes.MonacoClient,["restoreSession"]);
+  classes.NadoClient = class NadoClient {
+    constructor({origin, apiKey, apiSecret, auth} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.auth = auth; }
+    account(params = {}) { return execute("nado", "account", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    cancelOrder(params = {}) { return execute("nado", "cancel_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    contracts(params = {}) { return execute("nado", "contracts", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    markets(params = {}) { return execute("nado", "markets", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    openOrders(params = {}) { return execute("nado", "open_orders", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderBook(params = {}) { return execute("nado", "order_book", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderStatus(params = {}) { return execute("nado", "order_status", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeOrder(params = {}) { return execute("nado", "place_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    positions(params = {}) { return execute("nado", "positions", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    trades(params = {}) { return execute("nado", "trades", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    subscribe(params, endpoint) { return openStream('nado','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.auth); }
+  };
+  require("./lifecycle.cjs").managed(classes.NadoClient,[]);
+  classes.OndoPerpsClient = class OndoPerpsClient {
+    constructor({origin, apiKey, apiSecret, auth} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.auth = auth; }
+    account(params = {}) { return execute("ondo_perps", "account", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    cancelOrder(params = {}) { return execute("ondo_perps", "cancel_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    markets(params = {}) { return execute("ondo_perps", "markets", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    openOrders(params = {}) { return execute("ondo_perps", "open_orders", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderBook(params = {}) { return execute("ondo_perps", "order_book", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderStatus(params = {}) { return execute("ondo_perps", "order_status", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeOrder(params = {}) { return execute("ondo_perps", "place_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    positions(params = {}) { return execute("ondo_perps", "positions", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    trades(params = {}) { return execute("ondo_perps", "trades", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    subscribe(params, endpoint) { return openStream('ondo_perps','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.auth); }
+  };
+  require("./lifecycle.cjs").managed(classes.OndoPerpsClient,[]);
+  classes.PacificaClient = class PacificaClient {
+    constructor({origin, apiKey, apiSecret, auth} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.auth = auth; }
+    account(params = {}) { return execute("pacifica", "account", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    cancelOrder(params = {}) { return execute("pacifica", "cancel_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    markets(params = {}) { return execute("pacifica", "markets", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    openOrders(params = {}) { return execute("pacifica", "open_orders", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderBook(params = {}) { return execute("pacifica", "order_book", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderStatus(params = {}) { return execute("pacifica", "order_status", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeMarketOrder(params = {}) { return execute("pacifica", "place_market_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeOrder(params = {}) { return execute("pacifica", "place_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    positions(params = {}) { return execute("pacifica", "positions", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    trades(params = {}) { return execute("pacifica", "trades", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    subscribe(params, endpoint) { return openStream('pacifica','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.auth); }
+  };
+  require("./lifecycle.cjs").managed(classes.PacificaClient,[]);
   classes.ParadexClient = class ParadexClient {
     constructor({origin, apiKey, apiSecret, bearer} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.bearer = bearer; }
     get authenticated() { return Boolean(this.bearer); }
@@ -1677,6 +1750,21 @@ module.exports = function clients(execute, openStream, call, phoenix) {
     subscribe(params, endpoint) { return openStream('paradex','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.bearer); }
   };
   require("./lifecycle.cjs").managed(classes.ParadexClient,["evmAccountAddress", "onboardingTypedData", "setToken", "signTypedData"]);
+  classes.ParagonClient = class ParagonClient {
+    constructor({origin, apiKey, apiSecret, auth} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.auth = auth; }
+    account(params = {}) { return execute("paragon", "account", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    cancelOrder(params = {}) { return execute("paragon", "cancel_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    markets(params = {}) { return execute("paragon", "markets", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    openOrders(params = {}) { return execute("paragon", "open_orders", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderBook(params = {}) { return execute("paragon", "order_book", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderStatus(params = {}) { return execute("paragon", "order_status", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    perpDexs(params = {}) { return execute("paragon", "perp_dexs", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeOrder(params = {}) { return execute("paragon", "place_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    positions(params = {}) { return execute("paragon", "positions", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    trades(params = {}) { return execute("paragon", "trades", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    subscribe(params, endpoint) { return openStream('paragon','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.auth); }
+  };
+  require("./lifecycle.cjs").managed(classes.ParagonClient,[]);
   classes.PascalClient = class PascalClient {
     constructor({origin, apiKey, apiSecret, permit} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.permit = permit; }
     accountBio(params = {}) { return execute("pascal", "read.account_bio", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.permit); }
@@ -2138,5 +2226,20 @@ module.exports = function clients(execute, openStream, call, phoenix) {
     streamNormalized(options) { return openStream('tardis','stream_normalized',{options},this.origin,this.apiKey); }
   };
   require("./lifecycle.cjs").managed(classes.TardisMachineClient,[]);
+  classes.TradeXyzClient = class TradeXyzClient {
+    constructor({origin, apiKey, apiSecret, auth} = {}) { this.origin = origin; this.apiKey = apiKey; this.apiSecret = apiSecret; this.auth = auth; }
+    account(params = {}) { return execute("trade_xyz", "account", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    cancelOrder(params = {}) { return execute("trade_xyz", "cancel_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    markets(params = {}) { return execute("trade_xyz", "markets", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    openOrders(params = {}) { return execute("trade_xyz", "open_orders", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderBook(params = {}) { return execute("trade_xyz", "order_book", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    orderStatus(params = {}) { return execute("trade_xyz", "order_status", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    perpDexs(params = {}) { return execute("trade_xyz", "perp_dexs", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    placeOrder(params = {}) { return execute("trade_xyz", "place_order", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    positions(params = {}) { return execute("trade_xyz", "positions", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    trades(params = {}) { return execute("trade_xyz", "trades", params, this.origin, this.apiKey, this.apiSecret, undefined, undefined, this.auth); }
+    subscribe(params, endpoint) { return openStream('trade_xyz','subscribe',args.unwrap(params,'specification'),endpoint ?? this.origin,this.apiKey,this.apiSecret, this.auth); }
+  };
+  require("./lifecycle.cjs").managed(classes.TradeXyzClient,[]);
   return classes;
 };

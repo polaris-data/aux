@@ -36,7 +36,7 @@ function compare(actual, expected) {
   assert.throws(()=>sdk.solana.signDeposit("08".repeat(32),prepared));
 }
 
-for (const dataset of ["http", "prediction-http", "data-http"]) {
+for (const dataset of ["http", "prediction-http", "data-http", "perps-http"]) {
   for (const row of lossless(file(dataset), true)) {
     const {venue, operation} = row;
     const params = row.request_json ? lossless(row.request_json, true) : row.request;
@@ -383,9 +383,45 @@ async function testNetwork() {
     stream.close();
   } finally { await new Promise(resolve => server.close(resolve)); }
 }
+async function testPerpsConnectors(origin) {
+  for (const [venue, Client] of Object.entries({
+    injective: sdk.InjectiveClient, nado: sdk.NadoClient, ondo_perps: sdk.OndoPerpsClient,
+    pacifica: sdk.PacificaClient, paragon: sdk.ParagonClient, trade_xyz: sdk.TradeXyzClient, aster: sdk.AsterClient,
+  })) {
+    const row = fixture("perps-http").find(item => item.venue === venue && item.operation === "markets");
+    assert.deepEqual(await new Client({origin:origin + "/perps/" + venue}).markets(row.request), row.response);
+  }
+  const injective = new sdk.InjectiveClient({origin:origin + "/perps/injective"});
+  const book = await injective.subscribe({channel:"order_book",market_id:"0x" + "33".repeat(32)});
+  try {
+    assert.equal((await book.next()).value.orderbook.sequence, 9007199254740993n);
+    assert.equal((await book.next()).done, true);
+  } finally {
+    book.close();
+  }
+  const root = origin + "/perps/aster";
+  const {key, owner} = fixture("perps-signing");
+  const aster = new sdk.AsterClient({auth:{user:owner.toLowerCase(), key, rest_origin:root + "/background"}});
+  const account = await aster.subscribe({channel:"account"}, root.replace("http:", "ws:") + "/ws");
+  try {
+    assert.equal((await account.next()).value.E, 1);
+    assert.equal((await account.next()).value.E, 2);
+  } finally {
+    account.close();
+  }
+  assert.equal((await account.next()).done, true);
+  let lifecycle;
+  for (let attempt = 0; attempt < 150; attempt++) {
+    lifecycle = await fetch(root + "/background/listen-key-test").then(response => response.json());
+    if (lifecycle.includes("DELETE")) break;
+    await new Promise(resolve => setTimeout(resolve, 20));
+  }
+  assert.deepEqual(lifecycle, ["POST", "PUT", "DELETE"]);
+}
 async function testSharedPeer() {
   const origin = process.env.AUX_FIXTURE_ORIGIN;
   if (!origin) return;
+  await testPerpsConnectors(origin);
   const deniedHermes = new sdk.PythHermesClient({origin:origin+"/stream-refused",apiKey:"fixture-stream-credential"});
   for (const [venue,open,message] of [
     ["pyth_hermes", () => deniedHermes.streamPriceUpdates({ids:["ab".repeat(32)]}), "invalid Bearer [redacted]"],

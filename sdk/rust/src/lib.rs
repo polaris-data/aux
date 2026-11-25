@@ -280,6 +280,27 @@ pub mod monaco_models;
 #[cfg(feature = "hyperliquid-models")]
 #[rustfmt::skip]
 pub mod hyperliquid_models;
+#[cfg(feature = "aster-models")]
+#[rustfmt::skip]
+pub mod aster_models;
+#[cfg(feature = "injective-models")]
+#[rustfmt::skip]
+pub mod injective_models;
+#[cfg(feature = "nado-models")]
+#[rustfmt::skip]
+pub mod nado_models;
+#[cfg(feature = "ondo-perps-models")]
+#[rustfmt::skip]
+pub mod ondo_perps_models;
+#[cfg(feature = "pacifica-models")]
+#[rustfmt::skip]
+pub mod pacifica_models;
+#[cfg(feature = "paragon-models")]
+#[rustfmt::skip]
+pub mod paragon_models;
+#[cfg(feature = "trade-xyz-models")]
+#[rustfmt::skip]
+pub mod trade_xyz_models;
 #[cfg(feature = "databento-historical-models")]
 #[rustfmt::skip]
 pub mod databento_historical_models;

@@ -8,6 +8,7 @@ const sse = @import("../data/pyth/hermes.zig");
 const gpa = std.heap.c_allocator;
 const Buffer = @import("native.zig").Buffer;
 const failure = @import("http_failure.zig");
+const injective = @import("../exchanges/injective/stream.zig");
 
 const Stream = struct {
     arena: std.heap.ArenaAllocator,
@@ -23,6 +24,7 @@ const Stream = struct {
     framing: @import("http.zig").Framing,
     cursor: @import("../data/databento/dbn_file.zig").Cursor,
     batch_error: ?anyerror,
+    grpc: ?injective.Decoder,
     canceled: std.atomic.Value(bool) = .init(false),
     finished: bool = false,
 
@@ -45,7 +47,8 @@ const Stream = struct {
         const params = try wire.field(args, "params");
         if (params != .object) return error.InvalidConfig;
         const compression = params.object.get("compression");
-        self.req = try http.send(a, args, &self.client, true);
+        self.grpc = if (self.framing == .grpc_injective) .{ .sub = try injective.Subscription.init(params) } else null;
+        self.req = if (self.grpc) |decoder| try decoder.sub.open(a, args, &self.client) else try http.send(a, args, &self.client, true);
         errdefer self.req.deinit();
         self.response = self.req.receiveHead(&.{}) catch return error.Network;
         const status = @backingInt(self.response.head.status);
@@ -63,12 +66,12 @@ const Stream = struct {
                 if (std.ascii.eqlIgnoreCase(h.name, "content-encoding")) break;
             } else self.response.head.content_encoding = .zstd;
         }
+        self.finished = if (self.grpc) |*state| try state.responseHead(a, self.response.head) else false;
         self.reader = if (self.framing == .bytes or self.framing == .download or self.framing == .dataset) self.response.reader(&self.buffer) else try http.bodyReader(a, &self.response, &self.buffer, &self.decompress);
         self.events = if (self.framing == .sse)
             sse.aux_v1_hermes_sse_create(16 * 1024 * 1024) orelse return error.OutOfMemory
         else
             null;
-        self.finished = false;
         self.canceled = .init(false);
         return self;
     }
@@ -192,6 +195,7 @@ const Stream = struct {
         if (self.finished or self.canceled.load(.acquire)) return null;
         errdefer self.finished = true;
         switch (self.framing) {
+            .grpc_injective => return self.grpc.?.next(self.reader, self.arena.allocator()),
             .objects => return self.nextObject(),
             .hosted_feed, .machine_feed, .lines => return self.nextLine(),
             .dbn => return self.cursor.next(self.reader),
@@ -331,7 +335,85 @@ const Replay = struct {
         return null;
     }
 };
-pub const Handle = union(enum) { rpc: *@import("command_session.zig").Session, shared: *@import("shared_stream.zig").Reader, hyperdash: *@import("../data/hyperdash/stream.zig").Session, pyth: *@import("../data/pyth/pro_stream.zig").Session, replay: *Replay, machine: *@import("../data/tardis/replay.zig").Machine, trading: *@import("../exchanges/qfex/trading.zig").Session, http_stream: *Stream, websocket: *Socket, live: *@import("../data/databento/live.zig").Session, dbn: *@import("../data/databento/dbn_file.zig").File };
+const InjectiveStream = struct {
+    config: []const u8,
+    dial: ?host.Dial,
+    current: ?*Stream,
+    mutex: std.Io.Mutex = .init,
+    canceled: std.atomic.Value(bool) = .init(false),
+    retries: u8 = 0,
+    finished: bool = false,
+    rejection: ?[]u8 = null,
+
+    fn open(config: []const u8, dial: ?host.Dial) !*InjectiveStream {
+        const result = try gpa.create(InjectiveStream);
+        errdefer gpa.destroy(result);
+        const owned = try gpa.dupe(u8, config);
+        errdefer gpa.free(owned);
+        result.* = .{ .config = owned, .dial = dial, .current = try Stream.open(config, dial) };
+        return result;
+    }
+
+    fn replace(self: *InjectiveStream, replacement: ?*Stream) void {
+        var runtime: host.Runtime = .{};
+        self.mutex.lockUncancelable(runtime.io());
+        defer self.mutex.unlock(runtime.io());
+        if (self.current) |stream| stream.destroy();
+        self.current = replacement;
+        if (self.canceled.load(.acquire)) if (replacement) |stream| stream.close();
+    }
+
+    fn next(self: *InjectiveStream) !?[]u8 {
+        if (self.finished) return null;
+        errdefer self.finished = true;
+        while (!self.canceled.load(.acquire)) {
+            if (self.current == null) {
+                if (self.retries == 3) return error.Network;
+                self.retries += 1;
+                self.replace(Stream.open(self.config, self.dial) catch |err| switch (err) {
+                    error.Network, error.Timeout => continue,
+                    else => return err,
+                });
+            }
+            const stream = self.current.?;
+            const item = stream.next() catch |err| switch (err) {
+                error.Network, error.Timeout, error.Truncated => {
+                    self.replace(null);
+                    continue;
+                },
+                else => {
+                    if (stream.grpc.?.rejection) |frame| self.rejection = try gpa.dupe(u8, frame);
+                    return err;
+                },
+            };
+            if (item) |data| {
+                self.retries = 0;
+                return data;
+            }
+            self.finished = true;
+            return null;
+        }
+        return null;
+    }
+
+    fn close(self: *InjectiveStream) void {
+        self.canceled.store(true, .release);
+        var runtime: host.Runtime = .{};
+        self.mutex.lockUncancelable(runtime.io());
+        defer self.mutex.unlock(runtime.io());
+        if (self.current) |stream| stream.close();
+    }
+
+    fn destroy(self: *InjectiveStream) void {
+        self.close();
+        if (self.current) |stream| stream.destroy();
+        if (self.rejection) |frame| gpa.free(frame);
+        gpa.free(self.config);
+        gpa.destroy(self);
+    }
+};
+
+pub const Handle = union(enum) { rpc: *@import("command_session.zig").Session, shared: *@import("shared_stream.zig").Reader, hyperdash: *@import("../data/hyperdash/stream.zig").Session, pyth: *@import("../data/pyth/pro_stream.zig").Session, replay: *Replay, machine: *@import("../data/tardis/replay.zig").Machine, trading: *@import("../exchanges/qfex/trading.zig").Session, http_stream: *Stream, injective: *InjectiveStream, websocket: *Socket, live: *@import("../data/databento/live.zig").Session, dbn: *@import("../data/databento/dbn_file.zig").File };
 
 fn open(config: []const u8, dial: ?host.Dial) !*Handle {
     if (config.len > 1024 * 1024) return error.ConfigTooLarge;
@@ -361,12 +443,14 @@ fn open(config: []const u8, dial: ?host.Dial) !*Handle {
         handle.* = .{ .rpc = try @import("command_session.zig").Session.open(arena.allocator(), input, dial) };
     } else if (std.mem.eql(u8, venue, "qfex") and std.mem.eql(u8, operation, "trading_session")) {
         handle.* = .{ .trading = try @import("../exchanges/qfex/trading.zig").Session.open(arena.allocator(), input, dial) };
-    } else if ((std.mem.eql(u8, venue, "arcus") or std.mem.eql(u8, venue, "chainlink_streams") or std.mem.eql(u8, venue, "monaco") or std.mem.eql(u8, venue, "hyperliquid") or std.mem.eql(u8, venue, "lighter") or std.mem.eql(u8, venue, "polymarket") or std.mem.eql(u8, venue, "polymarket_perps") or std.mem.eql(u8, venue, "extended") or std.mem.eql(u8, venue, "pascal") or std.mem.eql(u8, venue, "kalshi") or std.mem.eql(u8, venue, "paradex") or std.mem.eql(u8, venue, "qfex") or std.mem.eql(u8, venue, "phoenix") or std.mem.eql(u8, venue, "derive")) and std.mem.eql(u8, operation, "subscribe")) {
+    } else if ((std.mem.eql(u8, venue, "arcus") or std.mem.eql(u8, venue, "chainlink_streams") or std.mem.eql(u8, venue, "monaco") or std.mem.eql(u8, venue, "hyperliquid") or std.mem.eql(u8, venue, "paragon") or std.mem.eql(u8, venue, "trade_xyz") or std.mem.eql(u8, venue, "aster") or std.mem.eql(u8, venue, "nado") or std.mem.eql(u8, venue, "ondo_perps") or std.mem.eql(u8, venue, "pacifica") or std.mem.eql(u8, venue, "lighter") or std.mem.eql(u8, venue, "polymarket") or std.mem.eql(u8, venue, "polymarket_perps") or std.mem.eql(u8, venue, "extended") or std.mem.eql(u8, venue, "pascal") or std.mem.eql(u8, venue, "kalshi") or std.mem.eql(u8, venue, "paradex") or std.mem.eql(u8, venue, "qfex") or std.mem.eql(u8, venue, "phoenix") or std.mem.eql(u8, venue, "derive")) and std.mem.eql(u8, operation, "subscribe")) {
         const shared = @import("shared_stream.zig");
         handle.* = if (dial == null and shared.eligible(venue, try wire.field(input, "params")))
             .{ .shared = try shared.Reader.open(arena.allocator(), config, input) }
         else
             .{ .websocket = try Socket.open(config, dial) };
+    } else if (std.mem.eql(u8, venue, "injective") and std.mem.eql(u8, operation, "subscribe")) {
+        handle.* = .{ .injective = try InjectiveStream.open(config, dial) };
     } else if (std.mem.eql(u8, venue, "databento") and std.mem.eql(u8, operation, "connect")) {
         if (dial != null) return error.UnsupportedTransport;
         handle.* = .{ .live = try @import("../data/databento/live.zig").Session.open(arena.allocator(), input) };
@@ -429,7 +513,7 @@ pub export fn aux_v1_stream_next_detailed(handle: *Handle, out: *Buffer) u32 {
     if (code != 4) return code;
     // Reads are serialized. Terminal errors retain the frame until handle destruction.
     const detail: ?[]const u8 = switch (handle.*) {
-        inline .websocket, .shared => |s| s.rejection,
+        inline .websocket, .shared, .injective => |s| s.rejection,
         else => null,
     };
     const bytes = gpa.dupe(u8, detail orelse return code) catch return 2;
@@ -439,7 +523,7 @@ pub export fn aux_v1_stream_next_detailed(handle: *Handle, out: *Buffer) u32 {
 export fn aux_v1_stream_next(handle: *Handle, out: *Buffer) u32 {
     out.* = .{};
     const result = switch (handle.*) {
-        .http_stream => |s| s.next(),
+        inline .http_stream, .injective => |s| s.next(),
         .shared => |s| s.next(),
         .websocket => |s| s.next(),
         .pyth => |s| s.next(),
@@ -452,7 +536,7 @@ export fn aux_v1_stream_next(handle: *Handle, out: *Buffer) u32 {
     };
     const bytes = (result catch |err| {
         const canceled = switch (handle.*) {
-            .http_stream => |s| s.canceled.load(.acquire),
+            inline .http_stream, .injective => |s| s.canceled.load(.acquire),
             .shared => false,
             .websocket => |s| s.canceled.load(.acquire),
             .hyperdash => |s| s.ws.canceled.load(.acquire),
@@ -473,7 +557,7 @@ pub export fn aux_v1_stream_cancel(handle: *Handle) void {
         .pyth => |s| s.close(),
         .replay => |s| s.close(),
         .machine => |s| s.ws.close(),
-        .http_stream => |s| s.close(),
+        inline .http_stream, .injective => |s| s.close(),
         .shared => |s| s.close(),
         .websocket => |s| s.close(),
         .hyperdash => |s| s.close(),
@@ -487,7 +571,7 @@ pub export fn aux_v1_stream_destroy(handle: *Handle) void {
         .pyth => |s| s.destroy(),
         .replay => |s| s.destroy(),
         .machine => |s| s.destroy(),
-        .http_stream => |s| s.destroy(),
+        inline .http_stream, .injective => |s| s.destroy(),
         .shared => |s| s.destroy(),
         .websocket => |s| s.destroy(),
         .hyperdash => |s| s.destroy(),

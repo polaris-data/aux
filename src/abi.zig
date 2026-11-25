@@ -26,3 +26,11 @@ test "native JSON depth and exact token preservation" {
     @memset(nested[129..], ']');
     try std.testing.expectError(error.TooDeep, wire.parse(a, &nested));
 }
+
+test "Aster v3 typed data signing vector" {
+    const std = @import("std");
+    const aster = @import("exchanges/aster/trading.zig");
+    const evm = @import("core/evm.zig");
+    const actual = aster.digest("symbol=BTCUSDT&user=0x7e5f4552091a69125d5dfcb7b8c2659029395bdf&signer=0x7e5f4552091a69125d5dfcb7b8c2659029395bdf&nonce=1754450974231000");
+    try std.testing.expectEqual(try evm.hex(32, "b6255e3a5fe88b27bd4b7d98fe7e8133ddf0b9811a3aeeafdbbf5827a4018a2b"), actual);
+}

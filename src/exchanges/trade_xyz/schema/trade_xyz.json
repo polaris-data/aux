@@ -1,0 +1,322 @@
+{
+  "client": "TradeXyzClient",
+  "venue": "trade_xyz",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "MarketsRequest": [],
+    "OrderBookRequest": [
+      [
+        "coin",
+        "coin",
+        "String",
+        "required"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "coin",
+        "coin",
+        "String",
+        "required"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "user",
+        "user",
+        "String",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "user",
+        "user",
+        "String",
+        "required"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "user",
+        "user",
+        "String",
+        "required"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "user",
+        "user",
+        "String",
+        "required"
+      ],
+      [
+        "coin",
+        "coin",
+        "String",
+        "required"
+      ],
+      [
+        "oid",
+        "oid",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "coin",
+        "coin",
+        "String",
+        "required"
+      ],
+      [
+        "body",
+        "body",
+        "Order",
+        "required"
+      ],
+      [
+        "options",
+        "options",
+        "Option<serde_json::Value>",
+        "optional"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "coin",
+        "coin",
+        "String",
+        "required"
+      ],
+      [
+        "body",
+        "body",
+        "CancelOrder",
+        "required"
+      ],
+      [
+        "options",
+        "options",
+        "Option<serde_json::Value>",
+        "optional"
+      ]
+    ],
+    "PerpDexsRequest": [],
+    "Subscription": [
+      [
+        "type",
+        "kind",
+        "String",
+        "required"
+      ],
+      [
+        "coin",
+        "coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "user",
+        "user",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "aggregateByTime",
+        "aggregate_by_time",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "Order": [
+      [
+        "b",
+        "b",
+        "bool",
+        "required"
+      ],
+      [
+        "p",
+        "p",
+        "String",
+        "required"
+      ],
+      [
+        "s",
+        "s",
+        "String",
+        "required"
+      ],
+      [
+        "r",
+        "r",
+        "bool",
+        "required"
+      ],
+      [
+        "t",
+        "t",
+        "Limit",
+        "required"
+      ],
+      [
+        "c",
+        "c",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrder": [
+      [
+        "o",
+        "o",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cloid",
+        "cloid",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "Markets": [
+      [
+        "universe",
+        "universe",
+        "Vec<Market>",
+        "required"
+      ]
+    ],
+    "Account": [
+      [
+        "assetPositions",
+        "asset_positions",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "Orderbook": [
+      [
+        "coin",
+        "coin",
+        "String",
+        "required"
+      ],
+      [
+        "levels",
+        "levels",
+        "Vec<Vec<BookLevel>>",
+        "required"
+      ]
+    ],
+    "Market": [
+      [
+        "name",
+        "name",
+        "String",
+        "required"
+      ],
+      [
+        "szDecimals",
+        "sz_decimals",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "maxLeverage",
+        "max_leverage",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "isDelisted",
+        "is_delisted",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "BookLevel": [
+      [
+        "px",
+        "px",
+        "String",
+        "required"
+      ],
+      [
+        "sz",
+        "sz",
+        "String",
+        "required"
+      ],
+      [
+        "n",
+        "n",
+        "u64",
+        "required"
+      ]
+    ],
+    "Limit": [
+      [
+        "limit",
+        "limit",
+        "TimeInForce",
+        "required"
+      ]
+    ],
+    "TimeInForce": [
+      [
+        "tif",
+        "tif",
+        "String",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "Markets"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "Orderbook"
+    ],
+    "trades": [
+      "TradesRequest",
+      "Vec<serde_json::Value>"
+    ],
+    "account": [
+      "AccountRequest",
+      "Account"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "Account"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "Vec<serde_json::Value>"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "serde_json::Value"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "serde_json::Value"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "serde_json::Value"
+    ],
+    "perp_dexs": [
+      "PerpDexsRequest",
+      "serde_json::Value"
+    ]
+  }
+}

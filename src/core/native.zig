@@ -133,7 +133,7 @@ pub fn evaluate(a: std.mem.Allocator, op: Operation, bytes: []const u8, dial: ?@
             .evm_chain => try @import("evm_chain.zig").execute(a, parsed),
             .solana_chain => try @import("../exchanges/pascal/solana_rpc.zig").execute(a, parsed),
             .paradex_sign_typed => try @import("../exchanges/paradex/sign.zig").typed(a, parsed),
-            .http_dependency => try @import("../exchanges/derive/orders.zig").dependency(a, parsed),
+            .http_dependency => try transport.dependencies(a, parsed),
             .derive_login => try @import("../exchanges/derive/signing.zig").loginProof(a, parsed),
             .derive_offline_action => try @import("../exchanges/derive/orders.zig").offlineAction(a, parsed),
             .derive_sign_action => try @import("../exchanges/derive/signing.zig").signAction(a, parsed),

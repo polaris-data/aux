@@ -7,6 +7,7 @@ from rest_models import ROOT, SCHEMAS
 from rpc_bindings import session_commands
 
 STREAMS = {
+    **dict.fromkeys(("AsterClient", "InjectiveClient", "NadoClient", "OndoPerpsClient", "PacificaClient", "ParagonClient", "TradeXyzClient"), "subscribe"),
     "ArcusClient": "subscribe",
     "ChainlinkDataStreamsClient": "subscribe",
     "ChainlinkCandlestickClient": "stream_prices",

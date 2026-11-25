@@ -8,7 +8,26 @@ from pathlib import Path
 from rest_models import SCHEMAS, emit_models, typename
 
 ROOT = Path(__file__).resolve().parents[1]
+PERP_CLIENTS = {
+    "aster": "AsterClient",
+    "injective": "InjectiveClient",
+    "nado": "NadoClient",
+    "ondo_perps": "OndoPerpsClient",
+    "pacifica": "PacificaClient",
+    "paragon": "ParagonClient",
+    "trade_xyz": "TradeXyzClient",
+}
+PERP_AUTH = {
+    "aster": "{user?:string; key?:string; signer?:string; rest_origin?:string}",
+    "injective": "{key?:string; network?:'Mainnet'|'Testnet'; lcd_origin?:string}",
+    "nado": "{key?:string; network?:'Mainnet'|'Testnet'; subaccount?:string; rest_origin?:string}",
+    "ondo_perps": "{token?:string; network?:'Mainnet'|'Testnet'}",
+    "pacifica": "{account?:string; seed?:string; agent_wallet?:string; expiry_window?:number|bigint; network?:'Mainnet'|'Testnet'}",
+    "paragon": "{key?:string; address?:string; vault_address?:string}",
+    "trade_xyz": "{key?:string; address?:string; vault_address?:string; network?:'Mainnet'|'Testnet'}",
+}
 KEY_AUTH = {
+    *PERP_CLIENTS,
     "arcus",
     "metric",
     "lighter",
@@ -25,6 +44,7 @@ KEY_AUTH = {
     "chainlink_streams",
 }
 NAMES = {
+    **PERP_CLIENTS,
     "pyth_hermes": "PythHermesClient",
     "pyth_pro": "PythProClient",
     "chainlink_streams": "ChainlinkDataStreamsClient",
@@ -69,7 +89,7 @@ def main():
         private.setdefault(venue, set()).update(line.split()[0] for line in (ROOT / "src/exchanges" / venue / filename).read_text().splitlines())
     private["polymarket"].update((ROOT / "src/exchanges/polymarket/wallet-routes.txt").read_text().splitlines())
     groups = defaultdict(list)
-    for filename in ("http.json", "prediction-http.json", "data-http.json", "text-http.json"):
+    for filename in ("http.json", "prediction-http.json", "data-http.json", "text-http.json", "perps-http.json"):
         for row in json.loads((ROOT / "tests" / filename).read_text()):
             v, op = row["venue"], row["operation"]
             if row["private"] and v not in KEY_AUTH and op not in private.get(v, ()):
@@ -155,6 +175,8 @@ def main():
                 ("wallet", "wallet", "auth", "{key: string; address?: string; nonce?: number | bigint; order_domain?: {version: 2 | 3; exchange: string; chain_id: number | bigint}; session_signer?: boolean}"),
             ],
         }.get(cls, [])
+        if v in PERP_AUTH:
+            extras = [("auth", "auth", "auth", PERP_AUTH[v])]
         fields = "; ".join(f"{js_name}?: {ty}" for js_name, _, _, ty in extras)
         options = "ClientOptions" + (" & {" + fields + "}" if fields else "")
         class_ts_start = len(ts)
@@ -640,10 +662,12 @@ def main():
             batch = "readBatch(limit:number): Promise<HttpValue[]>;" if v == "databento" and method != "timeseries" else ""
             value_type = "Uint8Array" if method == "timeseries" else "HttpValue"
             ts.append(f"  {camel(method)}(params: Record<string,HttpValue>): Promise<AsyncIterableIterator<{value_type}> & {{close():void;{batch}}}>;")
-        if cls in {"ArcusClient","ChainlinkDataStreamsClient","MonacoClient","HyperliquidClient","LighterClient","PolymarketClient","PolymarketPerpsClient","ExtendedClient", "QfexClient", "PhoenixClient", "DeriveClient", "ParadexClient", "PascalClient", "KalshiClient", "KalshiPerpsClient"}:
+        if v in PERP_CLIENTS or cls in {"ArcusClient","ChainlinkDataStreamsClient","MonacoClient","HyperliquidClient","LighterClient","PolymarketClient","PolymarketPerpsClient","ExtendedClient", "QfexClient", "PhoenixClient", "DeriveClient", "ParadexClient", "PascalClient", "KalshiClient", "KalshiPerpsClient"}:
             bearer_py = ", auth=self._bearer" if v == "paradex" else ""
             bearer_js = ", this.bearer" if v == "paradex" else ""
             ws_venue = "polymarket_perps" if cls == "PolymarketPerpsClient" else v
+            if v in PERP_CLIENTS:
+                bearer_py, bearer_js = ", auth=self._auth", ", this.auth"
             if cls in ("ExtendedClient", "PhoenixClient"):
                 bearer_py, bearer_js = ", auth=self._credentials", ", this.credentials"
             if cls == "MonacoClient":
@@ -669,6 +693,7 @@ def main():
             py.extend(
                 [
                     ("    async def subscribe(self, channel=None, symbol=None, *, params=None, endpoint=None):" if cls == "QfexClient" else
+                     f"    async def subscribe(self, specification: {namespace_for[v]}.Subscription | None = None, *, params=None, endpoint=None):" if v in PERP_CLIENTS else
                      "    async def subscribe(self, specification=None, *, params=None, endpoint=None):"),
                     ("        params = _args.identifier('channel', channel, None, params, symbol=symbol)" if cls == "QfexClient" else
                      "        params = _request_params(specification, params)"),
@@ -683,7 +708,7 @@ def main():
             params = (
                 "{channel: string; symbol: string}"
                 if cls == "QfexClient"
-                else "Record<string,HttpValue>"
+                else f"{namespace_for[v]}.Subscription" if v in PERP_CLIENTS else "Record<string,HttpValue>"
             )
             ts.append(
                 "  subscribe(params: "

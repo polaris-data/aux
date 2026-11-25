@@ -3,6 +3,8 @@ const w = @import("../../core/wire.zig");
 const A = w.A;
 const V = w.V;
 const E = @import("../derive/stream.zig").State.Event;
+const hip3 = @import("hip3.zig");
+const perps = @import("../../core/perps.zig");
 const encode = std.json.Stringify.valueAlloc;
 const Channel = enum { l2Book, trades, orderUpdates, userFills, clearinghouseState, openOrders };
 
@@ -36,6 +38,22 @@ pub const State = struct {
     sub: V,
     frame: []const u8,
     endpoint: []const u8,
+    namespace: ?[]const u8 = null,
+
+    pub fn scoped(a: A, config: V, params: V, name: []const u8) !State {
+        const testnet = try perps.testnet(config);
+        if (testnet and std.mem.eql(u8, name, "para")) return error.InvalidNetwork;
+        var state = try init(a, config, params);
+        state.namespace = name;
+        if (optional(params, "dex") != .null and !std.mem.eql(u8, try text(params, "dex"), name)) return error.InvalidMarket;
+        switch (state.channel) {
+            .trades, .l2Book => if (!hip3.own(name, try text(params, "coin"))) return error.InvalidMarket,
+            .openOrders, .clearinghouseState => try state.sub.object.put(a, "dex", w.text(name)),
+            .orderUpdates, .userFills => {},
+        }
+        state.frame = try encode(a, .{ .method = "subscribe", .subscription = state.sub }, .{});
+        return state;
+    }
     pub fn init(a: A, config: V, p: V) !State {
         const channel = std.meta.stringToEnum(Channel, try text(p, "type")) orelse return error.InvalidSubscription;
         var sub = V{ .object = .empty };
@@ -80,7 +98,7 @@ pub const State = struct {
             _ = try text(data, "method");
             return if (try self.matches(a, try w.field(data, "subscription"))) .{ .deliver = raw } else .skip;
         }
-        const channel = std.meta.stringToEnum(Channel, tag) orelse return .{ .deliver = raw };
+        const channel = std.meta.stringToEnum(Channel, tag) orelse return if (self.namespace == null) .{ .deliver = raw } else .skip;
         if (channel != self.channel) return .skip;
         if (optional(self.sub, "user") == .string and channel != .orderUpdates) {
             if (!std.mem.eql(u8, try address(a, try text(data, "user")), self.sub.object.get("user").?.string)) return .skip;
@@ -127,6 +145,28 @@ pub const State = struct {
                     for ([_][]const u8{ "crossMarginSummary", "marginSummary" }) |k| try strings(try w.field(account, k), &.{ "accountValue", "totalMarginUsed", "totalNtlPos", "totalRawUsd" });
                 }
             },
+        }
+        if (self.namespace) |name| {
+            if (channel == .orderUpdates or channel == .userFills) {
+                const source = if (channel == .orderUpdates) data else try w.field(data, "fills");
+                var scoped_items = try perps.array(a, &.{});
+                for (try array(source)) |item| {
+                    const order_or_fill = if (channel == .orderUpdates) try w.field(item, "order") else item;
+                    if (hip3.own(name, try text(order_or_fill, "coin"))) try scoped_items.array.append(item);
+                }
+                if (scoped_items.array.items.len == 0 and source.array.items.len != 0) return .skip;
+                if (scoped_items.array.items.len != source.array.items.len) {
+                    var event_value = v;
+                    if (channel == .orderUpdates) {
+                        try perps.put(&event_value, a, "data", scoped_items);
+                    } else {
+                        var fills_data = data;
+                        try perps.put(&fills_data, a, "fills", scoped_items);
+                        try perps.put(&event_value, a, "data", fills_data);
+                    }
+                    return .{ .deliver = try encode(a, event_value, .{}) };
+                }
+            }
         }
         return .{ .deliver = raw };
     }

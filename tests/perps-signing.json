@@ -1,0 +1,104 @@
+{
+  "key": "0x0000000000000000000000000000000000000000000000000000000000000001",
+  "owner": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf",
+  "nado_order": "0x96e8cf6480bf9fc38f31d50b0fcb8809ee635ba40e52b7df8c407af37f28f81754564b95c025734929b1e54ef1fec3a93ac69066022f94d259ccb7bb00b67e121c",
+  "nado_cancel": "0xdc25653637355a3f2d31bc99917cc6b4312e66d3a643459b8f4dbe1677c07f61653639c0479af098bfa859a56d6112f89c2bbb15d6aff4bd5cec97035152f0c11b",
+  "hyperliquid": {
+    "paragon.place_order": {
+      "action": {
+        "type": "order",
+        "orders": [
+          {
+            "a": 120000,
+            "b": true,
+            "p": "250",
+            "s": "0.1",
+            "r": false,
+            "t": {
+              "limit": {
+                "tif": "Gtc"
+              }
+            }
+          }
+        ],
+        "grouping": "na"
+      },
+      "nonce": 1754450974231,
+      "signature": {
+        "r": "0x4b7cf2c220aabc80b07169469bc330b35131953f6d2f15100ef90ee2a25b2c3",
+        "s": "0x6d038594a4bef45c24c76a90253868332f8ec8de09fbb1e06c6048476f4cc38e",
+        "v": 27
+      }
+    },
+    "paragon.cancel_order": {
+      "action": {
+        "type": "cancel",
+        "cancels": [
+          {
+            "a": 120000,
+            "o": 9007199254740993
+          }
+        ]
+      },
+      "nonce": 1754450974231,
+      "signature": {
+        "r": "0x1bbac956cf0af1341ac055ef067f03a43913bd330bfc264b03b7ec9e507efe9",
+        "s": "0x627c97b4eea1680cfa85e6cce898df14abc7c19da7bc3cd855fa0adf85a2d4a4",
+        "v": 28
+      }
+    },
+    "trade_xyz.place_order": {
+      "action": {
+        "type": "order",
+        "orders": [
+          {
+            "a": 110000,
+            "b": true,
+            "p": "250",
+            "s": "0.1",
+            "r": false,
+            "t": {
+              "limit": {
+                "tif": "Gtc"
+              }
+            }
+          }
+        ],
+        "grouping": "na"
+      },
+      "nonce": 1754450974231,
+      "signature": {
+        "r": "0xe03010c37dfceff7ac8d4e4abb8e6c7e9acf676f308566f1cc307e7966c4e483",
+        "s": "0x3ac1198043679521e7e2bce5e2df50cecabe953c10481eaf5e20545ab5f9a6cd",
+        "v": 28
+      }
+    },
+    "trade_xyz.cancel_order": {
+      "action": {
+        "type": "cancel",
+        "cancels": [
+          {
+            "a": 110000,
+            "o": 9007199254740993
+          }
+        ]
+      },
+      "nonce": 1754450974231,
+      "signature": {
+        "r": "0x541f012d1246def500e21dfae2c0bdd0c2f23da3fac19ac9be6883d6649cc382",
+        "s": "0x3230dbf9924b846d5d318bff1f13caa6fb7fc293f9d1e14d9081b5d390cb403f",
+        "v": 27
+      }
+    }
+  },
+  "aster": {
+    "fields": "symbol=BTCUSDT&user=0x7e5f4552091a69125d5dfcb7b8c2659029395bdf&signer=0x7e5f4552091a69125d5dfcb7b8c2659029395bdf&nonce=1754450974231000",
+    "signature": "0x057eb2419514cd21aa30ef98c717a60ae82c1136e6c917bce66df22903f026c35d7eec62667bc43ff1983490c66988e758d4323bfb6714d7db7356dfaa8c267a1c",
+    "digest": "b6255e3a5fe88b27bd4b7d98fe7e8133ddf0b9811a3aeeafdbbf5827a4018a2b"
+  },
+  "injective": {
+    "sender": "inj10e0525sfrf53yh2aljmm3sn9jq5njk7lwfmzjf",
+    "place_hash": "16F07A027DB1F4E91E98D7759166F71C121915AC0536C2CDAC51324D7669BCC0",
+    "cancel_hash": "0B0C6D69C0A9E771CBEB988B27DA38E48DEEE4C8337C322F1AF6F68414D94B3D"
+  }
+}

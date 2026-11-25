@@ -337,8 +337,23 @@ impl PriceStream {
             .transpose()
     }
     pub fn close(&self) {
-        if let Some(handle) = self.0.lock().unwrap().take() {
+        drop(self.cancel());
+    }
+
+    #[doc(hidden)]
+    pub fn close_in_background(&self) {
+        if let Some(handle) = self.cancel() {
+            // Some streams release a venue-side resource during destruction.
+            // Keep its dial policy alive until that cleanup finishes.
+            let _ = std::thread::Builder::new().spawn(move || drop(handle));
+        }
+    }
+
+    fn cancel(&self) -> Option<Arc<Handle>> {
+        let handle = self.0.lock().unwrap().take();
+        if let Some(handle) = &handle {
             unsafe { aux_v1_stream_cancel(handle.ptr.as_ptr()) };
         }
+        handle
     }
 }

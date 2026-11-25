@@ -93,6 +93,14 @@ pub const Client = struct {
                 }
             }
         }
+        if (self.options.transport != null and std.mem.eql(u8, venue, "injective") and
+            (std.mem.eql(u8, operation, "place_order") or std.mem.eql(u8, operation, "cancel_order") or std.mem.eql(u8, operation, "pending")))
+        {
+            if (self.options.dial == null and !std.mem.eql(u8, operation, "pending")) return error.StreamTransportRequired;
+            var native = self;
+            native.options.transport = null;
+            return native.invokeAs(T, .http_execute, self.config(venue, operation, params, false));
+        }
         const cfg = self.config(venue, operation, params, false);
         if (self.options.signer) |signer| {
             var arena = std.heap.ArenaAllocator.init(self.allocator);

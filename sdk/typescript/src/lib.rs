@@ -152,8 +152,12 @@ impl PriceStream {
         napi::bindgen_prelude::AsyncTask::new(NextStreamTask(self.0.clone()))
     }
     #[napi]
-    pub fn close(&self) {
-        self.0.close();
+    pub fn close(&self, background: Option<bool>) {
+        if background.unwrap_or(false) {
+            self.0.close_in_background();
+        } else {
+            self.0.close();
+        }
     }
 }
 

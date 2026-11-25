@@ -141,7 +141,7 @@ impl PriceStream {
     fn next_json(&self, py: Python<'_>) -> PyResult<Option<String>> {
         py.detach(|| self.0.next_json()).map_err(native_error)
     }
-    fn close(&self) {
-        self.0.close();
+    fn close(&self, py: Python<'_>) {
+        py.detach(|| self.0.close());
     }
 }

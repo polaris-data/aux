@@ -9,7 +9,7 @@ import sys
 from rest_models import SCHEMAS
 
 ROOT = Path(__file__).resolve().parents[1]
-groups = ("http", "prediction-http", "data-http", "text-http")
+groups = ("http", "prediction-http", "data-http", "text-http", "perps-http")
 fixtures = {
     (r["venue"], r["operation"])
     for group in groups

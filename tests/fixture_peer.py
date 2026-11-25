@@ -40,6 +40,9 @@ class Peer(BaseHTTPRequestHandler):
         self.wfile.write(row["response_json"].encode())
 
     def do_GET(self):
+        if self.path.startswith("/perps/"):
+            from .perps_peer import serve
+            return serve(self)
         if self.path.startswith("/stream-refused/"):
             if self.path == "/stream-refused/ws":
                 assert self.headers["Upgrade"].lower() == "websocket"
@@ -199,11 +202,23 @@ class Peer(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(row["body"].encode())
 
+    def do_DELETE(self):
+        if self.path.startswith("/perps/"):
+            from .perps_peer import serve
+            return serve(self)
+        self.send_error(404)
+
     def do_PUT(self):
+        if self.path.startswith("/perps/"):
+            from .perps_peer import serve
+            return serve(self)
         from .trading_peer import monaco
         return monaco(self)
 
     def do_POST(self):
+        if self.path.startswith("/perps/"):
+            from .perps_peer import serve
+            return serve(self)
         if self.path.startswith("/dune-args/"):
             return self.dune_request()
         if self.path.startswith("/poly-contract/"):

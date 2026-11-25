@@ -4,6 +4,7 @@ from typing import Any
 from decimal import Decimal
 from . import execute, _open_stream, _call
 from . import arcus_models as Arcus
+from . import aster_models as Aster
 from . import birdeye_models as Birdeye
 from . import chainlink_candles_models as ChainlinkCandles
 from . import chainlink_streams_models as ChainlinkStreams
@@ -14,12 +15,17 @@ from . import dune_models as Dune
 from . import extended_models as Extended
 from . import hyperdash_models as Hyperdash
 from . import hyperliquid_models as Hyperliquid
+from . import injective_models as Injective
 from . import kalshi_models as Kalshi
 from . import kalshi_perps_models as KalshiPerps
 from . import lighter_models as Lighter
 from . import metric_models as Metric
 from . import monaco_models as Monaco
+from . import nado_models as Nado
+from . import ondo_perps_models as OndoPerps
+from . import pacifica_models as Pacifica
 from . import paradex_models as Paradex
+from . import paragon_models as Paragon
 from . import pascal_models as Pascal
 from . import phoenix_models as Phoenix
 from . import polymarket_models as Polymarket
@@ -28,6 +34,7 @@ from . import pyth_hermes_models as PythHermes
 from . import pyth_pro_models as PythPro
 from . import qfex_models as Qfex
 from . import tardis_models as Tardis
+from . import trade_xyz_models as TradeXyz
 
 from .lifecycle import ClientLifecycle
 from . import BookSubscription
@@ -87,6 +94,43 @@ class ArcusClient(_Client):
     async def subscribe(self, specification=None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('arcus', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret)
+
+
+class AsterClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Aster.AccountRequest | None = None, *, params: Aster.AccountRequest | None = None) -> Aster.Account:
+        return await execute("aster", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Aster.CancelOrderRequest | None = None, *, params: Aster.CancelOrderRequest | None = None) -> Aster.OrderReply:
+        return await execute("aster", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Aster.MarketsRequest | None = None, *, params: Aster.MarketsRequest | None = None) -> Aster.Markets:
+        return await execute("aster", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Aster.OpenOrdersRequest | None = None, *, params: Aster.OpenOrdersRequest | None = None) -> list[Any]:
+        return await execute("aster", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Aster.OrderBookRequest | None = None, *, params: Aster.OrderBookRequest | None = None) -> Aster.Orderbook:
+        return await execute("aster", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Aster.OrderStatusRequest | None = None, *, params: Aster.OrderStatusRequest | None = None) -> Aster.OrderReply:
+        return await execute("aster", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Aster.PlaceOrderRequest | None = None, *, params: Aster.PlaceOrderRequest | None = None) -> Aster.OrderReply:
+        return await execute("aster", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Aster.PositionsRequest | None = None, *, params: Aster.PositionsRequest | None = None) -> list[Any]:
+        return await execute("aster", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Aster.TradesRequest | None = None, *, params: Aster.TradesRequest | None = None) -> list[Any]:
+        return await execute("aster", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Aster.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('aster', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class BirdeyeClient(_Client):
@@ -3587,6 +3631,46 @@ class HyperliquidClient(_Client):
         return await _open_stream('hyperliquid', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._signer)
 
 
+class InjectiveClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Injective.AccountRequest | None = None, *, params: Injective.AccountRequest | None = None) -> Any:
+        return await execute("injective", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Injective.CancelOrderRequest | None = None, *, params: Injective.CancelOrderRequest | None = None) -> Injective.TransactionResult:
+        return await execute("injective", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Injective.MarketsRequest | None = None, *, params: Injective.MarketsRequest | None = None) -> Injective.Markets:
+        return await execute("injective", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Injective.OpenOrdersRequest | None = None, *, params: Injective.OpenOrdersRequest | None = None) -> Injective.Orders:
+        return await execute("injective", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Injective.OrderBookRequest | None = None, *, params: Injective.OrderBookRequest | None = None) -> Injective.Orderbook:
+        return await execute("injective", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def pending(self, request: Injective.PendingRequest | None = None, *, params: Injective.PendingRequest | None = None) -> Any:
+        return await execute("injective", "pending", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Injective.PlaceOrderRequest | None = None, *, params: Injective.PlaceOrderRequest | None = None) -> Injective.TransactionResult:
+        return await execute("injective", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Injective.PositionsRequest | None = None, *, params: Injective.PositionsRequest | None = None) -> Injective.Positions:
+        return await execute("injective", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Injective.TradesRequest | None = None, *, params: Injective.TradesRequest | None = None) -> Injective.Trades:
+        return await execute("injective", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def transaction(self, request: Injective.TransactionRequest | None = None, *, params: Injective.TransactionRequest | None = None) -> Injective.TransactionResult:
+        return await execute("injective", "transaction", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Injective.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('injective', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class KalshiClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, signer=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -4461,6 +4545,123 @@ class MonacoClient(MonacoSessions, _Client):
         return await _open_stream('monaco', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._session)
 
 
+class NadoClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Nado.AccountRequest | None = None, *, params: Nado.AccountRequest | None = None) -> Nado.GatewayReply:
+        return await execute("nado", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Nado.CancelOrderRequest | None = None, *, params: Nado.CancelOrderRequest | None = None) -> Nado.GatewayReply:
+        return await execute("nado", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def contracts(self, request: Nado.ContractsRequest | None = None, *, params: Nado.ContractsRequest | None = None) -> Nado.GatewayReply:
+        return await execute("nado", "contracts", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Nado.MarketsRequest | None = None, *, params: Nado.MarketsRequest | None = None) -> Any:
+        return await execute("nado", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Nado.OpenOrdersRequest | None = None, *, params: Nado.OpenOrdersRequest | None = None) -> Nado.GatewayReply:
+        return await execute("nado", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Nado.OrderBookRequest | None = None, *, params: Nado.OrderBookRequest | None = None) -> Nado.GatewayReply:
+        return await execute("nado", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Nado.OrderStatusRequest | None = None, *, params: Nado.OrderStatusRequest | None = None) -> Any:
+        return await execute("nado", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Nado.PlaceOrderRequest | None = None, *, params: Nado.PlaceOrderRequest | None = None) -> Nado.GatewayReply:
+        return await execute("nado", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Nado.PositionsRequest | None = None, *, params: Nado.PositionsRequest | None = None) -> Nado.GatewayReply:
+        return await execute("nado", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Nado.TradesRequest | None = None, *, params: Nado.TradesRequest | None = None) -> list[Any]:
+        return await execute("nado", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Nado.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('nado', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class OndoPerpsClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: OndoPerps.AccountRequest | None = None, *, params: OndoPerps.AccountRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: OndoPerps.CancelOrderRequest | None = None, *, params: OndoPerps.CancelOrderRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: OndoPerps.MarketsRequest | None = None, *, params: OndoPerps.MarketsRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: OndoPerps.OpenOrdersRequest | None = None, *, params: OndoPerps.OpenOrdersRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: OndoPerps.OrderBookRequest | None = None, *, params: OndoPerps.OrderBookRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: OndoPerps.OrderStatusRequest | None = None, *, params: OndoPerps.OrderStatusRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: OndoPerps.PlaceOrderRequest | None = None, *, params: OndoPerps.PlaceOrderRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: OndoPerps.PositionsRequest | None = None, *, params: OndoPerps.PositionsRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: OndoPerps.TradesRequest | None = None, *, params: OndoPerps.TradesRequest | None = None) -> OndoPerps.OndoReply:
+        return await execute("ondo_perps", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: OndoPerps.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('ondo_perps', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class PacificaClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Pacifica.AccountRequest | None = None, *, params: Pacifica.AccountRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Pacifica.CancelOrderRequest | None = None, *, params: Pacifica.CancelOrderRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Pacifica.MarketsRequest | None = None, *, params: Pacifica.MarketsRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Pacifica.OpenOrdersRequest | None = None, *, params: Pacifica.OpenOrdersRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Pacifica.OrderBookRequest | None = None, *, params: Pacifica.OrderBookRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Pacifica.OrderStatusRequest | None = None, *, params: Pacifica.OrderStatusRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_market_order(self, request: Pacifica.PlaceMarketOrderRequest | None = None, *, params: Pacifica.PlaceMarketOrderRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "place_market_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Pacifica.PlaceOrderRequest | None = None, *, params: Pacifica.PlaceOrderRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Pacifica.PositionsRequest | None = None, *, params: Pacifica.PositionsRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Pacifica.TradesRequest | None = None, *, params: Pacifica.TradesRequest | None = None) -> Pacifica.PacificaReply:
+        return await execute("pacifica", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Pacifica.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('pacifica', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class ParadexClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, bearer=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -4930,6 +5131,46 @@ class ParadexClient(_Client):
     async def subscribe(self, specification=None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('paradex', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._bearer)
+
+
+class ParagonClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Paragon.AccountRequest | None = None, *, params: Paragon.AccountRequest | None = None) -> Paragon.Account:
+        return await execute("paragon", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Paragon.CancelOrderRequest | None = None, *, params: Paragon.CancelOrderRequest | None = None) -> Any:
+        return await execute("paragon", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Paragon.MarketsRequest | None = None, *, params: Paragon.MarketsRequest | None = None) -> Paragon.Markets:
+        return await execute("paragon", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Paragon.OpenOrdersRequest | None = None, *, params: Paragon.OpenOrdersRequest | None = None) -> list[Any]:
+        return await execute("paragon", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: Paragon.OrderBookRequest | None = None, *, params: Paragon.OrderBookRequest | None = None) -> Paragon.Orderbook:
+        return await execute("paragon", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Paragon.OrderStatusRequest | None = None, *, params: Paragon.OrderStatusRequest | None = None) -> Any:
+        return await execute("paragon", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def perp_dexs(self, request: Paragon.PerpDexsRequest | None = None, *, params: Paragon.PerpDexsRequest | None = None) -> Any:
+        return await execute("paragon", "perp_dexs", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Paragon.PlaceOrderRequest | None = None, *, params: Paragon.PlaceOrderRequest | None = None) -> Any:
+        return await execute("paragon", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Paragon.PositionsRequest | None = None, *, params: Paragon.PositionsRequest | None = None) -> Paragon.Account:
+        return await execute("paragon", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Paragon.TradesRequest | None = None, *, params: Paragon.TradesRequest | None = None) -> list[Any]:
+        return await execute("paragon", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Paragon.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('paragon', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class PascalClient(_Client):
@@ -6277,4 +6518,44 @@ class TardisMachineClient(_Client):
     async def stream_normalized(self, options):
         return await _open_stream('tardis','stream_normalized',{'options': options},self._origin,self._api_key)
 
-__all__ = ['ArcusClient', 'BirdeyeClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DeriveClient', 'DuneClient', 'ExtendedClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'KalshiClient', 'KalshiPerpsClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'ParadexClient', 'PascalClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'TardisClient', 'TardisMachineClient']
+
+class TradeXyzClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: TradeXyz.AccountRequest | None = None, *, params: TradeXyz.AccountRequest | None = None) -> TradeXyz.Account:
+        return await execute("trade_xyz", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: TradeXyz.CancelOrderRequest | None = None, *, params: TradeXyz.CancelOrderRequest | None = None) -> Any:
+        return await execute("trade_xyz", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: TradeXyz.MarketsRequest | None = None, *, params: TradeXyz.MarketsRequest | None = None) -> TradeXyz.Markets:
+        return await execute("trade_xyz", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: TradeXyz.OpenOrdersRequest | None = None, *, params: TradeXyz.OpenOrdersRequest | None = None) -> list[Any]:
+        return await execute("trade_xyz", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_book(self, request: TradeXyz.OrderBookRequest | None = None, *, params: TradeXyz.OrderBookRequest | None = None) -> TradeXyz.Orderbook:
+        return await execute("trade_xyz", "order_book", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: TradeXyz.OrderStatusRequest | None = None, *, params: TradeXyz.OrderStatusRequest | None = None) -> Any:
+        return await execute("trade_xyz", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def perp_dexs(self, request: TradeXyz.PerpDexsRequest | None = None, *, params: TradeXyz.PerpDexsRequest | None = None) -> Any:
+        return await execute("trade_xyz", "perp_dexs", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: TradeXyz.PlaceOrderRequest | None = None, *, params: TradeXyz.PlaceOrderRequest | None = None) -> Any:
+        return await execute("trade_xyz", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: TradeXyz.PositionsRequest | None = None, *, params: TradeXyz.PositionsRequest | None = None) -> TradeXyz.Account:
+        return await execute("trade_xyz", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: TradeXyz.TradesRequest | None = None, *, params: TradeXyz.TradesRequest | None = None) -> list[Any]:
+        return await execute("trade_xyz", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: TradeXyz.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('trade_xyz', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+__all__ = ['ArcusClient', 'AsterClient', 'BirdeyeClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DeriveClient', 'DuneClient', 'ExtendedClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'NadoClient', 'OndoPerpsClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient']

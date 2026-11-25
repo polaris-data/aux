@@ -1,0 +1,242 @@
+{
+  "client": "OndoPerpsClient",
+  "venue": "ondo_perps",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "MarketsRequest": [
+      [
+        "sparkline",
+        "sparkline",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "OrderBookRequest": [
+      [
+        "market",
+        "market",
+        "String",
+        "required"
+      ],
+      [
+        "depth",
+        "depth",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "market",
+        "market",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [],
+    "PositionsRequest": [],
+    "OpenOrdersRequest": [
+      [
+        "market",
+        "market",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "orderID",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "Order",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "orderID",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "markets",
+        "markets",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "numPastTrades",
+        "num_past_trades",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "depthLevels",
+        "depth_levels",
+        "Option<serde_json::Value>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "Order": [
+      [
+        "market",
+        "market",
+        "String",
+        "required"
+      ],
+      [
+        "side",
+        "side",
+        "String",
+        "required"
+      ],
+      [
+        "type",
+        "kind",
+        "String",
+        "required"
+      ],
+      [
+        "size",
+        "size",
+        "String",
+        "required"
+      ],
+      [
+        "price",
+        "price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "clientOrderId",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "reduceOnly",
+        "reduce_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "postOnly",
+        "post_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "builderCode",
+        "builder_code",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OndoReply": [
+      [
+        "success",
+        "success",
+        "bool",
+        "required"
+      ],
+      [
+        "result",
+        "result",
+        "Option<serde_json::Value>",
+        "optional"
+      ],
+      [
+        "error",
+        "error",
+        "Option<serde_json::Value>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "OndoReply"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "OndoReply"
+    ],
+    "trades": [
+      "TradesRequest",
+      "OndoReply"
+    ],
+    "account": [
+      "AccountRequest",
+      "OndoReply"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "OndoReply"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OndoReply"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OndoReply"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "OndoReply"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "OndoReply"
+    ]
+  }
+}

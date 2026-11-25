@@ -1,0 +1,369 @@
+{
+  "client": "InjectiveClient",
+  "venue": "injective",
+  "fixture": "perps-http",
+  "aliases": {},
+  "models": {
+    "MarketsRequest": [
+      [
+        "marketStatus",
+        "market_status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "quoteDenom",
+        "quote_denom",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderBookRequest": [
+      [
+        "marketId",
+        "market_id",
+        "String",
+        "required"
+      ],
+      [
+        "depth",
+        "depth",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "marketId",
+        "market_id",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "subaccountId",
+        "subaccount_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "subaccountId",
+        "subaccount_id",
+        "String",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "subaccountId",
+        "subaccount_id",
+        "String",
+        "required"
+      ],
+      [
+        "marketId",
+        "market_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "skip",
+        "skip",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "subaccountId",
+        "subaccount_id",
+        "String",
+        "required"
+      ],
+      [
+        "marketId",
+        "market_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "skip",
+        "skip",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cid",
+        "cid",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "TransactionRequest": [
+      [
+        "hash",
+        "hash",
+        "String",
+        "required"
+      ]
+    ],
+    "PendingRequest": [],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "Order",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrder",
+        "required"
+      ]
+    ],
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "market_id",
+        "market_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "subaccount_id",
+        "subaccount_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "Order": [
+      [
+        "market_id",
+        "market_id",
+        "String",
+        "required"
+      ],
+      [
+        "subaccount_id",
+        "subaccount_id",
+        "String",
+        "required"
+      ],
+      [
+        "gas_limit",
+        "gas_limit",
+        "String",
+        "required"
+      ],
+      [
+        "fee_amount",
+        "fee_amount",
+        "String",
+        "required"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "quote_decimals",
+        "quote_decimals",
+        "u8",
+        "required"
+      ],
+      [
+        "price",
+        "price",
+        "String",
+        "required"
+      ],
+      [
+        "quantity",
+        "quantity",
+        "String",
+        "required"
+      ],
+      [
+        "margin",
+        "margin",
+        "String",
+        "required"
+      ],
+      [
+        "side",
+        "side",
+        "String",
+        "required"
+      ],
+      [
+        "kind",
+        "kind",
+        "String",
+        "required"
+      ],
+      [
+        "fee_recipient",
+        "fee_recipient",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrder": [
+      [
+        "market_id",
+        "market_id",
+        "String",
+        "required"
+      ],
+      [
+        "subaccount_id",
+        "subaccount_id",
+        "String",
+        "required"
+      ],
+      [
+        "gas_limit",
+        "gas_limit",
+        "String",
+        "required"
+      ],
+      [
+        "fee_amount",
+        "fee_amount",
+        "String",
+        "required"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "order_hash",
+        "order_hash",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "Markets": [
+      [
+        "markets",
+        "markets",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "Trades": [
+      [
+        "trades",
+        "trades",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "Positions": [
+      [
+        "positions",
+        "positions",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "Orders": [
+      [
+        "orders",
+        "orders",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "Orderbook": [
+      [
+        "orderbook",
+        "orderbook",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "TransactionResult": [
+      [
+        "tx_response",
+        "tx_response",
+        "serde_json::Value",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "Markets"
+    ],
+    "order_book": [
+      "OrderBookRequest",
+      "Orderbook"
+    ],
+    "trades": [
+      "TradesRequest",
+      "Trades"
+    ],
+    "account": [
+      "AccountRequest",
+      "serde_json::Value"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "Positions"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "Orders"
+    ],
+    "transaction": [
+      "TransactionRequest",
+      "TransactionResult"
+    ],
+    "pending": [
+      "PendingRequest",
+      "serde_json::Value"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "TransactionResult"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "TransactionResult"
+    ]
+  }
+}

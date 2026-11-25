@@ -1,0 +1,1709 @@
+[
+  {
+    "venue": "injective",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/exchange/derivative/v1/markets",
+    "query": {
+      "marketStatus": "active",
+      "quoteDenom": "usdt"
+    },
+    "request": {
+      "marketStatus": "active",
+      "quoteDenom": "usdt"
+    },
+    "body": null,
+    "response": {
+      "markets": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "injective",
+    "operation": "order_book",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/exchange/derivative/v2/orderbook/0x3333333333333333333333333333333333333333333333333333333333333333",
+    "query": {
+      "depth": "20"
+    },
+    "request": {
+      "marketId": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "depth": 20
+    },
+    "body": null,
+    "response": {
+      "orderbook": {
+        "buys": [],
+        "sells": [],
+        "sequence": 9007199254740993
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "injective",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/exchange/derivative/v2/trades",
+    "query": {
+      "marketId": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "limit": "25",
+      "subaccountId": "0x2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "request": {
+      "marketId": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "limit": 25,
+      "subaccountId": "0x2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "body": null,
+    "response": {
+      "trades": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "injective",
+    "operation": "account",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/exchange/account/v1/subaccountBalancesList/0x2222222222222222222222222222222222222222222222222222222222222222",
+    "query": {},
+    "request": {
+      "subaccountId": "0x2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "body": null,
+    "response": {
+      "balances": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "injective",
+    "operation": "positions",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/exchange/derivative/v2/positions",
+    "query": {
+      "subaccountId": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "marketId": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "skip": "0",
+      "limit": "10"
+    },
+    "request": {
+      "subaccountId": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "marketId": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "skip": 0,
+      "limit": 10
+    },
+    "body": null,
+    "response": {
+      "positions": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "injective",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/exchange/derivative/v1/orders",
+    "query": {
+      "subaccountId": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "marketId": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "skip": "0",
+      "limit": "10",
+      "cid": "client-42"
+    },
+    "request": {
+      "subaccountId": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "marketId": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "skip": 0,
+      "limit": 10,
+      "cid": "client-42"
+    },
+    "body": null,
+    "response": {
+      "orders": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "injective",
+    "operation": "transaction",
+    "verb": "GET",
+    "private": false,
+    "path": "/cosmos/tx/v1beta1/txs/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "query": {},
+    "request": {
+      "hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "body": null,
+    "response": {
+      "tx_response": {
+        "txhash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "code": 0
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "origin": "https://sentry.lcd.injective.network"
+  },
+  {
+    "venue": "injective",
+    "operation": "pending",
+    "verb": "GET",
+    "private": false,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": null,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "origin": "https://sentry.lcd.injective.network"
+  },
+  {
+    "venue": "injective",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "market_id": "0x3333333333333333333333333333333333333333333333333333333333333333",
+        "subaccount_id": "0x2222222222222222222222222222222222222222222222222222222222222222",
+        "price": "20",
+        "quantity": "1",
+        "margin": "5",
+        "side": "buy",
+        "kind": "limit",
+        "gas_limit": "250000",
+        "fee_amount": "125000000000000",
+        "quote_decimals": 6
+      }
+    },
+    "body": {
+      "market_id": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "subaccount_id": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "price": "20",
+      "quantity": "1",
+      "margin": "5",
+      "side": "buy",
+      "kind": "limit",
+      "gas_limit": "250000",
+      "fee_amount": "125000000000000",
+      "quote_decimals": 6
+    },
+    "response": {
+      "tx_response": {
+        "txhash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "code": 0
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "origin": "https://sentry.lcd.injective.network"
+  },
+  {
+    "venue": "injective",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "market_id": "0x3333333333333333333333333333333333333333333333333333333333333333",
+        "subaccount_id": "0x2222222222222222222222222222222222222222222222222222222222222222",
+        "order_hash": "0x3333333333333333333333333333333333333333333333333333333333333333",
+        "gas_limit": "250000",
+        "fee_amount": "125000000000000"
+      }
+    },
+    "body": {
+      "market_id": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "subaccount_id": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "order_hash": "0x3333333333333333333333333333333333333333333333333333333333333333",
+      "gas_limit": "250000",
+      "fee_amount": "125000000000000"
+    },
+    "response": {
+      "tx_response": {
+        "txhash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "code": 0
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    },
+    "origin": "https://sentry.lcd.injective.network"
+  },
+  {
+    "venue": "nado",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/archive/v2/contracts",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "ETH-PERP_USDT0": {
+        "product_id": 4
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "order_book",
+    "verb": "GET",
+    "private": false,
+    "path": "/gateway/v1/query",
+    "query": {
+      "type": "market_liquidity",
+      "product_id": "4",
+      "depth": "10"
+    },
+    "request": {
+      "product_id": 4,
+      "depth": 10
+    },
+    "body": null,
+    "response": {
+      "status": "success",
+      "data": {
+        "timestamp": "1790000000000000000",
+        "bids": [],
+        "asks": []
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/archive/v2/trades",
+    "query": {
+      "ticker_id": "ETH-PERP_USDT0",
+      "limit": "25"
+    },
+    "request": {
+      "ticker_id": "ETH-PERP_USDT0",
+      "limit": 25
+    },
+    "body": null,
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "account",
+    "verb": "GET",
+    "private": false,
+    "path": "/gateway/v1/query",
+    "query": {
+      "type": "subaccount_info",
+      "subaccount": "0x2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "request": {
+      "subaccount": "0x2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "body": null,
+    "response": {
+      "status": "success",
+      "data": {
+        "spot_balances": [],
+        "perp_balances": []
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "positions",
+    "verb": "GET",
+    "private": false,
+    "path": "/gateway/v1/query",
+    "query": {
+      "type": "subaccount_info",
+      "subaccount": "0x2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "request": {
+      "subaccount": "0x2222222222222222222222222222222222222222222222222222222222222222"
+    },
+    "body": null,
+    "response": {
+      "status": "success",
+      "data": {
+        "perp_balances": []
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": false,
+    "path": "/gateway/v1/query",
+    "query": {
+      "type": "subaccount_orders",
+      "sender": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "product_id": "4"
+    },
+    "request": {
+      "sender": "0x2222222222222222222222222222222222222222222222222222222222222222",
+      "product_id": 4
+    },
+    "body": null,
+    "response": {
+      "status": "success",
+      "data": {
+        "orders": []
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "contracts",
+    "verb": "GET",
+    "private": false,
+    "path": "/gateway/v1/query",
+    "query": {
+      "type": "contracts"
+    },
+    "request": {},
+    "body": null,
+    "response": {
+      "status": "success",
+      "data": {
+        "chain_id": "57073",
+        "endpoint_addr": "0x1111111111111111111111111111111111111111"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "order_status",
+    "verb": "POST",
+    "private": false,
+    "path": "/archive/v1",
+    "query": {},
+    "request": {
+      "body": {
+        "orders": {
+          "digests": [
+            "0x3333333333333333333333333333333333333333333333333333333333333333"
+          ]
+        }
+      }
+    },
+    "body": {
+      "orders": {
+        "digests": [
+          "0x3333333333333333333333333333333333333333333333333333333333333333"
+        ]
+      }
+    },
+    "response": {
+      "orders": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/gateway/v1/execute",
+    "query": {},
+    "request": {
+      "body": {
+        "product_id": 4,
+        "order": {
+          "sender": "0x2222222222222222222222222222222222222222222222222222222222222222",
+          "priceX18": "20000000000000000000",
+          "amount": "1000000000000000000",
+          "expiration": "1790000000",
+          "nonce": "1876951040000000000",
+          "appendix": "1"
+        }
+      }
+    },
+    "body": {
+      "product_id": 4,
+      "order": {
+        "sender": "0x2222222222222222222222222222222222222222222222222222222222222222",
+        "priceX18": "20000000000000000000",
+        "amount": "1000000000000000000",
+        "expiration": "1790000000",
+        "nonce": "1876951040000000000",
+        "appendix": "1"
+      }
+    },
+    "response": {
+      "status": "success",
+      "data": {
+        "digest": "0x3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "nado",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/gateway/v1/execute",
+    "query": {},
+    "request": {
+      "body": {
+        "tx": {
+          "sender": "0x2222222222222222222222222222222222222222222222222222222222222222",
+          "productIds": [
+            4
+          ],
+          "digests": [
+            "0x3333333333333333333333333333333333333333333333333333333333333333"
+          ],
+          "nonce": "1876951040000000001"
+        }
+      }
+    },
+    "body": {
+      "tx": {
+        "sender": "0x2222222222222222222222222222222222222222222222222222222222222222",
+        "productIds": [
+          4
+        ],
+        "digests": [
+          "0x3333333333333333333333333333333333333333333333333333333333333333"
+        ],
+        "nonce": "1876951040000000001"
+      }
+    },
+    "response": {
+      "status": "success"
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/v1/perps/contracts",
+    "query": {
+      "sparkline": "false"
+    },
+    "request": {
+      "sparkline": false
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "result": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "order_book",
+    "verb": "GET",
+    "private": false,
+    "path": "/v1/perps/depth",
+    "query": {
+      "market": "AAPL-USD.P",
+      "depth": "20"
+    },
+    "request": {
+      "market": "AAPL-USD.P",
+      "depth": 20
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "result": {
+        "bids": [],
+        "asks": []
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/v1/perps/trades",
+    "query": {
+      "market": "AAPL-USD.P",
+      "limit": "25",
+      "cursor": "fixture"
+    },
+    "request": {
+      "market": "AAPL-USD.P",
+      "limit": 25,
+      "cursor": "fixture"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "result": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/perps/balance",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "result": {
+        "balance": "100.0000"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/perps/positions",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "result": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/perps/orders",
+    "query": {
+      "market": "AAPL-USD.P",
+      "limit": "10",
+      "cursor": "fixture",
+      "status": "open"
+    },
+    "request": {
+      "market": "AAPL-USD.P",
+      "limit": 10,
+      "cursor": "fixture"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "result": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/perps/orders/client%3Afixture",
+    "query": {},
+    "request": {
+      "orderID": "client:fixture"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "result": {
+        "orderId": "fixture"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/v1/perps/orders",
+    "query": {},
+    "request": {
+      "body": {
+        "market": "AAPL-USD.P",
+        "side": "buy",
+        "type": "limit",
+        "price": "200",
+        "size": "1"
+      }
+    },
+    "body": {
+      "market": "AAPL-USD.P",
+      "side": "buy",
+      "type": "limit",
+      "price": "200",
+      "size": "1"
+    },
+    "response": {
+      "success": true,
+      "result": {
+        "orderId": "fixture"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "ondo_perps",
+    "operation": "cancel_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/perps/orders/client%3Afixture",
+    "query": {},
+    "request": {
+      "orderID": "client:fixture"
+    },
+    "body": null,
+    "response": {
+      "success": true
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/info",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "order_book",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/book",
+    "query": {
+      "symbol": "BTC",
+      "agg_level": "1"
+    },
+    "request": {
+      "symbol": "BTC",
+      "agg_level": 1
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "l": [
+          [],
+          []
+        ]
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/trades",
+    "query": {
+      "symbol": "BTC"
+    },
+    "request": {
+      "symbol": "BTC"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "account",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/account",
+    "query": {
+      "account": "11111111111111111111111111111111"
+    },
+    "request": {
+      "account": "11111111111111111111111111111111"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "balance": "100"
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "positions",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/positions",
+    "query": {
+      "account": "11111111111111111111111111111111"
+    },
+    "request": {
+      "account": "11111111111111111111111111111111"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/orders",
+    "query": {
+      "account": "11111111111111111111111111111111"
+    },
+    "request": {
+      "account": "11111111111111111111111111111111"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/orders/history_by_id",
+    "query": {
+      "order_id": "9007199254740993"
+    },
+    "request": {
+      "order_id": 9007199254740993
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v1/orders/create",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "BTC",
+        "side": "bid",
+        "price": "61000",
+        "amount": "0.01",
+        "tif": "GTC",
+        "reduce_only": false
+      }
+    },
+    "body": {
+      "symbol": "BTC",
+      "side": "bid",
+      "price": "61000",
+      "amount": "0.01",
+      "tif": "GTC",
+      "reduce_only": false
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "order_id": 9007199254740993
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "place_market_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v1/orders/create_market",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "BTC",
+        "side": "bid",
+        "amount": "0.01",
+        "slippage_percent": "0.5",
+        "reduce_only": false
+      }
+    },
+    "body": {
+      "symbol": "BTC",
+      "side": "bid",
+      "amount": "0.01",
+      "slippage_percent": "0.5",
+      "reduce_only": false
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "order_id": 9007199254740993
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "pacifica",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v1/orders/cancel",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "BTC",
+        "order_id": 9007199254740993
+      }
+    },
+    "body": {
+      "symbol": "BTC",
+      "order_id": 9007199254740993
+    },
+    "response": {
+      "success": true
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "markets",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {},
+    "body": {
+      "type": "meta",
+      "dex": "para"
+    },
+    "response": {
+      "universe": [
+        {
+          "name": "para:TOTAL2"
+        }
+      ]
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "order_book",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "coin": "para:TOTAL2"
+    },
+    "body": {
+      "type": "l2Book",
+      "coin": "para:TOTAL2"
+    },
+    "response": {
+      "coin": "para:TOTAL2",
+      "levels": [
+        [],
+        []
+      ]
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "trades",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "coin": "para:TOTAL2"
+    },
+    "body": {
+      "type": "recentTrades",
+      "coin": "para:TOTAL2"
+    },
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "account",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111"
+    },
+    "body": {
+      "type": "clearinghouseState",
+      "user": "0x1111111111111111111111111111111111111111",
+      "dex": "para"
+    },
+    "response": {
+      "assetPositions": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "positions",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111"
+    },
+    "body": {
+      "type": "clearinghouseState",
+      "user": "0x1111111111111111111111111111111111111111",
+      "dex": "para"
+    },
+    "response": {
+      "assetPositions": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "open_orders",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111"
+    },
+    "body": {
+      "type": "openOrders",
+      "user": "0x1111111111111111111111111111111111111111",
+      "dex": "para"
+    },
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "order_status",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111",
+      "coin": "para:TOTAL2",
+      "oid": 9007199254740993
+    },
+    "body": {
+      "type": "orderStatus",
+      "user": "0x1111111111111111111111111111111111111111",
+      "oid": 9007199254740993
+    },
+    "response": {
+      "status": "order",
+      "order": {
+        "order": {
+          "coin": "para:TOTAL2"
+        }
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/exchange",
+    "query": {},
+    "request": {
+      "coin": "para:TOTAL2",
+      "body": {
+        "b": true,
+        "p": "250",
+        "s": "0.1",
+        "r": false,
+        "t": {
+          "limit": {
+            "tif": "Gtc"
+          }
+        }
+      }
+    },
+    "body": {
+      "coin": "para:TOTAL2",
+      "body": {
+        "b": true,
+        "p": "250",
+        "s": "0.1",
+        "r": false,
+        "t": {
+          "limit": {
+            "tif": "Gtc"
+          }
+        }
+      }
+    },
+    "response": {
+      "status": "ok",
+      "response": {
+        "data": {
+          "statuses": [
+            "success"
+          ]
+        }
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/exchange",
+    "query": {},
+    "request": {
+      "coin": "para:TOTAL2",
+      "body": {
+        "o": 9007199254740993
+      }
+    },
+    "body": {
+      "coin": "para:TOTAL2",
+      "body": {
+        "o": 9007199254740993
+      }
+    },
+    "response": {
+      "status": "ok",
+      "response": {
+        "data": {
+          "statuses": [
+            "success"
+          ]
+        }
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "markets",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {},
+    "body": {
+      "type": "meta",
+      "dex": "xyz"
+    },
+    "response": {
+      "universe": [
+        {
+          "name": "xyz:TSLA"
+        }
+      ]
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "order_book",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "coin": "xyz:TSLA"
+    },
+    "body": {
+      "type": "l2Book",
+      "coin": "xyz:TSLA"
+    },
+    "response": {
+      "coin": "xyz:TSLA",
+      "levels": [
+        [],
+        []
+      ]
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "trades",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "coin": "xyz:TSLA"
+    },
+    "body": {
+      "type": "recentTrades",
+      "coin": "xyz:TSLA"
+    },
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "account",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111"
+    },
+    "body": {
+      "type": "clearinghouseState",
+      "user": "0x1111111111111111111111111111111111111111",
+      "dex": "xyz"
+    },
+    "response": {
+      "assetPositions": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "positions",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111"
+    },
+    "body": {
+      "type": "clearinghouseState",
+      "user": "0x1111111111111111111111111111111111111111",
+      "dex": "xyz"
+    },
+    "response": {
+      "assetPositions": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "open_orders",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111"
+    },
+    "body": {
+      "type": "openOrders",
+      "user": "0x1111111111111111111111111111111111111111",
+      "dex": "xyz"
+    },
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "order_status",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {
+      "user": "0x1111111111111111111111111111111111111111",
+      "coin": "xyz:TSLA",
+      "oid": 9007199254740993
+    },
+    "body": {
+      "type": "orderStatus",
+      "user": "0x1111111111111111111111111111111111111111",
+      "oid": 9007199254740993
+    },
+    "response": {
+      "status": "order",
+      "order": {
+        "order": {
+          "coin": "xyz:TSLA"
+        }
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/exchange",
+    "query": {},
+    "request": {
+      "coin": "xyz:TSLA",
+      "body": {
+        "b": true,
+        "p": "250",
+        "s": "0.1",
+        "r": false,
+        "t": {
+          "limit": {
+            "tif": "Gtc"
+          }
+        }
+      }
+    },
+    "body": {
+      "coin": "xyz:TSLA",
+      "body": {
+        "b": true,
+        "p": "250",
+        "s": "0.1",
+        "r": false,
+        "t": {
+          "limit": {
+            "tif": "Gtc"
+          }
+        }
+      }
+    },
+    "response": {
+      "status": "ok",
+      "response": {
+        "data": {
+          "statuses": [
+            "success"
+          ]
+        }
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/exchange",
+    "query": {},
+    "request": {
+      "coin": "xyz:TSLA",
+      "body": {
+        "o": 9007199254740993
+      }
+    },
+    "body": {
+      "coin": "xyz:TSLA",
+      "body": {
+        "o": 9007199254740993
+      }
+    },
+    "response": {
+      "status": "ok",
+      "response": {
+        "data": {
+          "statuses": [
+            "success"
+          ]
+        }
+      }
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/fapi/v3/exchangeInfo",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "symbols": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "order_book",
+    "verb": "GET",
+    "private": false,
+    "path": "/fapi/v3/depth",
+    "query": {
+      "symbol": "BTCUSDT",
+      "limit": "20"
+    },
+    "request": {
+      "symbol": "BTCUSDT",
+      "limit": 20
+    },
+    "body": null,
+    "response": {
+      "lastUpdateId": 9007199254740993,
+      "bids": [],
+      "asks": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/fapi/v3/trades",
+    "query": {
+      "symbol": "BTCUSDT",
+      "limit": "25"
+    },
+    "request": {
+      "symbol": "BTCUSDT",
+      "limit": 25
+    },
+    "body": null,
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/fapi/v3/account",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "assets": [],
+      "positions": []
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/fapi/v3/positionRisk",
+    "query": {
+      "symbol": "BTCUSDT"
+    },
+    "request": {
+      "symbol": "BTCUSDT"
+    },
+    "body": null,
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/fapi/v3/openOrders",
+    "query": {
+      "symbol": "BTCUSDT"
+    },
+    "request": {
+      "symbol": "BTCUSDT"
+    },
+    "body": null,
+    "response": [],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/fapi/v3/order",
+    "query": {
+      "symbol": "BTCUSDT",
+      "orderId": "9007199254740993",
+      "origClientOrderId": "fixture"
+    },
+    "request": {
+      "symbol": "BTCUSDT",
+      "orderId": 9007199254740993,
+      "origClientOrderId": "fixture"
+    },
+    "body": null,
+    "response": {
+      "orderId": 9007199254740993
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/fapi/v3/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "BTCUSDT",
+        "side": "BUY",
+        "type": "LIMIT",
+        "timeInForce": "GTC",
+        "price": "61000",
+        "quantity": "0.01"
+      }
+    },
+    "body": {
+      "symbol": "BTCUSDT",
+      "side": "BUY",
+      "type": "LIMIT",
+      "timeInForce": "GTC",
+      "price": "61000",
+      "quantity": "0.01"
+    },
+    "response": {
+      "orderId": 9007199254740993
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "aster",
+    "operation": "cancel_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/fapi/v3/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "BTCUSDT",
+        "orderId": 9007199254740993
+      }
+    },
+    "body": {
+      "symbol": "BTCUSDT",
+      "orderId": 9007199254740993
+    },
+    "response": {
+      "orderId": 9007199254740993
+    },
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "paragon",
+    "operation": "perp_dexs",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {},
+    "body": {
+      "type": "perpDexs"
+    },
+    "response": [
+      null,
+      {
+        "name": "xyz"
+      },
+      {
+        "name": "para"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json"
+    }
+  },
+  {
+    "venue": "trade_xyz",
+    "operation": "perp_dexs",
+    "verb": "POST",
+    "private": false,
+    "path": "/info",
+    "query": {},
+    "request": {},
+    "body": {
+      "type": "perpDexs"
+    },
+    "response": [
+      null,
+      {
+        "name": "xyz"
+      },
+      {
+        "name": "para"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json"
+    }
+  }
+]
