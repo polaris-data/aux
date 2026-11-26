@@ -31,3 +31,17 @@ export function proxyBalances(proxy: string, secret: string) {
 export function signDeposit(seed: string, params: DepositParams): SignedDeposit {
   return solana.signDeposit(seed, solana.prepareDeposit(params));
 }
+
+import { ApexOmniClient, KuruClient, ReyaClient, type KuruModels, type ReyaModels } from "aux-connectors";
+
+export function replayTrades(request: KuruModels.Subscription) {
+  return new KuruClient().subscribe(request);
+}
+
+export function perpExecutions(request: ReyaModels.MarketExecutionsRequest) {
+  return new ReyaClient().marketExecutions(request);
+}
+
+export function apexMarkets() {
+  return new ApexOmniClient().markets();
+}

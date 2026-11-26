@@ -1,0 +1,298 @@
+{
+  "client": "AevoClient",
+  "venue": "aevo",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "IndexResponse": "serde_json::Value",
+    "StatisticsResponse": "serde_json::Value",
+    "AccountResponse": "serde_json::Value",
+    "BalancesResponse": "serde_json::Value",
+    "OpenOrdersResponse": "serde_json::Value",
+    "PlaceOrderResponse": "serde_json::Value",
+    "CancelOrderResponse": "serde_json::Value",
+    "CancelAllOrdersResponse": "serde_json::Value",
+    "PositionsResponse": "serde_json::Value",
+    "OrderHistoryResponse": "serde_json::Value",
+    "FillsResponse": "serde_json::Value",
+    "OrderStatusResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value",
+    "AmendOrderResponse": "serde_json::Value",
+    "CancelOrdersResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "asset",
+        "asset",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instrument_type",
+        "instrument_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "topic",
+        "topic",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "interval",
+        "interval",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [
+      [
+        "asset",
+        "asset",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instrument_type",
+        "instrument_type",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "IndexRequest": [
+      [
+        "asset",
+        "asset",
+        "String",
+        "required"
+      ]
+    ],
+    "StatisticsRequest": [
+      [
+        "asset",
+        "asset",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [],
+    "BalancesRequest": [],
+    "OpenOrdersRequest": [],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "order_id",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "CancelAllOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "instrument_name",
+        "instrument_name",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "instrument_name",
+        "instrument_name",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instrument_type",
+        "instrument_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "offset",
+        "offset",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "instrument_name",
+        "instrument_name",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instrument_type",
+        "instrument_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "offset",
+        "offset",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "order_id",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "instrument_name",
+        "instrument_name",
+        "String",
+        "required"
+      ]
+    ],
+    "AmendOrderRequest": [
+      [
+        "order_id",
+        "order_id",
+        "String",
+        "required"
+      ],
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrdersRequest": [
+      [
+        "body",
+        "body",
+        "CancelOrdersBody",
+        "required"
+      ]
+    ],
+    "CancelOrdersBody": [
+      [
+        "order_ids",
+        "order_ids",
+        "Vec<String>",
+        "required"
+      ],
+      [
+        "instrument_type",
+        "instrument_type",
+        "Option<String>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "index": [
+      "IndexRequest",
+      "IndexResponse"
+    ],
+    "statistics": [
+      "StatisticsRequest",
+      "StatisticsResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "balances": [
+      "BalancesRequest",
+      "BalancesResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ],
+    "cancel_all_orders": [
+      "CancelAllOrdersRequest",
+      "CancelAllOrdersResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "amend_order": [
+      "AmendOrderRequest",
+      "AmendOrderResponse"
+    ],
+    "cancel_orders": [
+      "CancelOrdersRequest",
+      "CancelOrdersResponse"
+    ]
+  }
+}

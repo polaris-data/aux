@@ -86,6 +86,52 @@ fn main() -> aux_rs::Result<()> {
         "0x5d05989e9302dcebc74e241001e3e3ac3f4402ccf2f8e6f74b034b07ad6a904", &order, None)?;
     assert_eq!(settlement["hash"], "0x4de4c009e0d0c5a70a7da0e2039fb2b99f376d53496f89d9f437e736add6b48");
     let origin = std::env::var("AUX_FIXTURE_ORIGIN").unwrap();
+    let catalog: Vec<serde_json::Value> = serde_json::from_str(include_str!("../exchange-http.json")).unwrap();
+    let books: Vec<serde_json::Value> = serde_json::from_str(include_str!("../exchange-ws.json")).unwrap();
+    macro_rules! native_exchanges {
+        ($($client:ident => $venue:literal),+ $(,)?) => {{
+            $(let market = catalog.iter().find(|r| r["venue"] == $venue && r["operation"] == "markets").unwrap();
+              let book = books.iter().find(|r| r["venue"] == $venue).unwrap();
+              let rest = format!("{origin}/native-exchanges/{}/rest/public", $venue);
+              let endpoint = format!("{}/native-exchanges/{}/ws/book", origin.replacen("http:", "ws:", 1), $venue);
+              let client = aux_rs::$client::new().with_origin(rest);
+              assert_eq!(client.markets(&market["request"])?, market["response"]);
+              let stream = client.subscribe(&book["params"], Some(&endpoint))?;
+              assert_eq!(stream.next_event()?.unwrap(), book["event"]);
+              assert!(stream.next_event()?.is_none());)+
+        }};
+    }
+    native_exchanges!(AevoClient => "aevo", BackpackClient => "backpack", BinanceSpotClient => "binance_spot",
+        BybitClient => "bybit", DeribitClient => "deribit", DydxV4Client => "dydx_v4", HibachiClient => "hibachi",
+        KrakenSpotClient => "kraken_spot", OkxClient => "okx", OrderlyClient => "orderly");
+    let market_streams: Vec<serde_json::Value> = serde_json::from_str(include_str!("../market-data-ws.json")).unwrap();
+    macro_rules! market_data {
+        ($($client:ident => $venue:literal),+ $(,)?) => {$(
+            let rest = format!("{origin}/native-exchanges/{}/rest/public", $venue);
+            let client = aux_rs::$client::new().with_origin(rest);
+            let market = catalog.iter().find(|r| r["venue"] == $venue && r["operation"] == "markets").unwrap();
+            assert_eq!(client.markets(&market["request"])?, market["response"]);
+            for row in market_streams.iter().filter(|r| r["venue"] == $venue) {
+                let endpoint = format!("{}/native-exchanges/{}/ws/{}", origin.replacen("http:", "ws:", 1),
+                    $venue, row["case"].as_str().unwrap());
+                let stream = client.subscribe(&row["params"], Some(&endpoint))?;
+                for event in row["events"].as_array().unwrap() {
+                    assert_eq!(&stream.next_event()?.unwrap(), event);
+                }
+                if row["keep_open"] != true {
+                    assert!(stream.next_event()?.is_none());
+                }
+                stream.close();
+            }
+        )+};
+    }
+    market_data!(ApexOmniClient => "apex_omni", KuruClient => "kuru", ReyaClient => "reya");
+    let commands = origin.replacen("http:", "ws:", 1) + "/native-exchanges/binance_spot/ws/orders";
+    let trader = aux_rs::BinanceSpotClient::new().with_credentials("fixture-key", "fixture-secret");
+    let order_session = trader.open_rpc(Some(&commands), &serde_json::json!({}))?;
+    let receipt = order_session.place_order(&serde_json::json!({"symbol":"ETHUSDT","side":"BUY","type":"LIMIT","price":"100","quantity":"0.01"}))?;
+    assert_eq!(receipt["result"]["orderId"], 9007199254740993u64);
+    order_session.close();
     let perps: Vec<serde_json::Value> = serde_json::from_str(include_str!("../perps-http.json")).unwrap();
     macro_rules! perpetuals {
         ($($client:ident => $venue:literal),+ $(,)?) => {{

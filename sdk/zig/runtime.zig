@@ -79,10 +79,25 @@ pub const Client = struct {
 
     fn config(self: Client, venue: []const u8, operation: []const u8, params: anytype, streaming: bool) Config(@TypeOf(paramsObject(params))) {
         const o = self.options;
-        return .{ .venue = venue, .operation = operation, .params = paramsObject(params), .origin = if (streaming) o.endpoint orelse o.origin else o.origin, .endpoints = if (streaming) o.endpoints else null, .timeout_ms = if (streaming) o.timeout_ms else null, .idle_timeout_ms = if (streaming) o.idle_timeout_ms else null, .api_key = o.api_key, .api_secret = o.api_secret, .chain_id = o.chain_id, .auth = o.auth, .clob = o.clob, .services = o.services };
+        const endpoint = o.endpoint orelse if (@import("aux_core").exchangeVenue(venue) and o.origin != null and !std.mem.startsWith(u8, o.origin.?, "ws")) null else o.origin;
+        return .{ .venue = venue, .operation = operation, .params = paramsObject(params), .origin = if (streaming) endpoint else o.origin, .endpoints = if (streaming) o.endpoints else null, .timeout_ms = if (streaming) o.timeout_ms else null, .idle_timeout_ms = if (streaming) o.idle_timeout_ms else null, .api_key = o.api_key, .api_secret = o.api_secret, .chain_id = o.chain_id, .auth = o.auth, .clob = o.clob, .services = o.services };
     }
 
     pub fn request(self: Client, comptime T: type, venue: []const u8, operation: []const u8, params: anytype) !Owned(T) {
+        if (self.options.transport != null and (std.mem.eql(u8, venue, "dydx_v4") or std.mem.eql(u8, venue, "kraken_spot"))) {
+            const cfg = self.config(venue, operation, params, false);
+            var arena = std.heap.ArenaAllocator.init(self.allocator);
+            defer arena.deinit();
+            const input = try signing.value(arena.allocator(), cfg);
+            const chain_write = std.mem.eql(u8, venue, "dydx_v4") and core.exchangeWrite(try core.venue(input), operation);
+            const kraken_private = std.mem.eql(u8, venue, "kraken_spot") and try core.operationPrivate(input);
+            if (chain_write or kraken_private) {
+                if (self.options.dial == null) return error.StreamTransportRequired;
+                var native = self;
+                native.options.transport = null;
+                return native.invokeAs(T, .http_execute, cfg);
+            }
+        }
         if (self.options.transport != null and std.mem.eql(u8, venue, "lighter")) {
             for ([_][]const u8{ "auth_token", "create_order", "cancel_order", "resync_nonce", "prepare_transaction" }) |workflow| {
                 if (std.mem.eql(u8, operation, workflow)) {

@@ -4,9 +4,23 @@ import json
 import re
 
 from rest_models import ROOT, SCHEMAS
-from rpc_bindings import session_commands
+from rpc_bindings import EXCHANGE_SESSIONS, session_commands
 
 STREAMS = {
+    "AevoClient": "subscribe open_rpc",
+    "ApexOmniClient": "subscribe",
+    "BackpackClient": "subscribe",
+    "BinanceSpotClient": "subscribe open_rpc",
+    "BybitClient": "subscribe open_rpc",
+    "DeribitClient": "subscribe open_rpc",
+    "DydxV4Client": "subscribe",
+    "HibachiClient": "subscribe open_rpc",
+    "KrakenSpotClient": "subscribe open_rpc",
+    "KuruClient": "subscribe",
+    "OkxClient": "subscribe open_rpc",
+    "OrderlyClient": "subscribe",
+    "ReyaClient": "subscribe",
+
     "PerplClient": "subscribe",
     "RisexClient": "subscribe",
     "DecibelClient": "subscribe",
@@ -333,6 +347,7 @@ def sessions(emit):
         "derive": shared["Derive"],
         "polymarket_perps": shared["PolymarketPerps"],
         "polymarket_rfq": shared["PolymarketRfq"],
+        **{venue: shared[label] for label, venue in EXCHANGE_SESSIONS.items()},
         "kalshi": [
             "subscribe",
             "unsubscribe",

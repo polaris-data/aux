@@ -32,7 +32,7 @@ def pair(group, operation, request, response):
 def model_rows():
     files = {
         name: json.loads((ROOT / f"tests/{name}.json").read_text())
-        for name in ("http", "data-http", "prediction-http", "text-http", "perps-http")
+        for name in ("http", "data-http", "prediction-http", "text-http", "perps-http", "exchange-http")
     }
     for group, schema in SCHEMAS.items():
         venue = schema.get("venue", group)

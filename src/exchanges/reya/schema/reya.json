@@ -1,0 +1,142 @@
+{
+  "client": "ReyaClient",
+  "venue": "reya",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "MarketSummariesResponse": "serde_json::Value",
+    "MarketSummaryResponse": "serde_json::Value",
+    "MarketExecutionsResponse": "serde_json::Value",
+    "WalletExecutionsResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "address",
+        "address",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [],
+    "MarketSummariesRequest": [],
+    "MarketSummaryRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "MarketExecutionsRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "startTime",
+        "start_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "endTime",
+        "end_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "type",
+        "type_",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "WalletExecutionsRequest": [
+      [
+        "address",
+        "address",
+        "String",
+        "required"
+      ],
+      [
+        "startTime",
+        "start_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "endTime",
+        "end_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "type",
+        "type_",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "market_summaries": [
+      "MarketSummariesRequest",
+      "MarketSummariesResponse"
+    ],
+    "market_summary": [
+      "MarketSummaryRequest",
+      "MarketSummaryResponse"
+    ],
+    "market_executions": [
+      "MarketExecutionsRequest",
+      "MarketExecutionsResponse"
+    ],
+    "wallet_executions": [
+      "WalletExecutionsRequest",
+      "WalletExecutionsResponse"
+    ]
+  }
+}

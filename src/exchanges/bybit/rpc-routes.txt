@@ -1,0 +1,6 @@
+place_order order.create
+amend_order order.amend
+cancel_order order.cancel
+place_orders order.create-batch
+amend_orders order.amend-batch
+cancel_orders order.cancel-batch

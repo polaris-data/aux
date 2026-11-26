@@ -1,0 +1,551 @@
+{
+  "client": "BybitClient",
+  "venue": "bybit",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "TickerResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value",
+    "AccountResponse": "serde_json::Value",
+    "BalancesResponse": "serde_json::Value",
+    "PositionsResponse": "serde_json::Value",
+    "OrderStatusResponse": "serde_json::Value",
+    "OpenOrdersResponse": "serde_json::Value",
+    "OrderHistoryResponse": "serde_json::Value",
+    "FillsResponse": "serde_json::Value",
+    "PlaceOrderResponse": "serde_json::Value",
+    "AmendOrderResponse": "serde_json::Value",
+    "CancelOrderResponse": "serde_json::Value",
+    "PlaceOrdersResponse": "serde_json::Value",
+    "AmendOrdersResponse": "serde_json::Value",
+    "CancelOrdersResponse": "serde_json::Value",
+    "CancelAllOrdersResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "category",
+        "category",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "depth",
+        "depth",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "topic",
+        "topic",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "baseCoin",
+        "base_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "TickerRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "baseCoin",
+        "base_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "expDate",
+        "exp_date",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "baseCoin",
+        "base_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "optionType",
+        "option_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [],
+    "BalancesRequest": [
+      [
+        "accountType",
+        "account_type",
+        "String",
+        "required"
+      ],
+      [
+        "coin",
+        "coin",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "baseCoin",
+        "base_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "settleCoin",
+        "settle_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderLinkId",
+        "order_link_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderFilter",
+        "order_filter",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "baseCoin",
+        "base_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "settleCoin",
+        "settle_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderFilter",
+        "order_filter",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "openOnly",
+        "open_only",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "baseCoin",
+        "base_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "settleCoin",
+        "settle_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderLinkId",
+        "order_link_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderFilter",
+        "order_filter",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderStatus",
+        "order_status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "startTime",
+        "start_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "endTime",
+        "end_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "category",
+        "category",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderLinkId",
+        "order_link_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "baseCoin",
+        "base_coin",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "startTime",
+        "start_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "endTime",
+        "end_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "execType",
+        "exec_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "AmendOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "PlaceOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "AmendOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelAllOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "ticker": [
+      "TickerRequest",
+      "TickerResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "balances": [
+      "BalancesRequest",
+      "BalancesResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "amend_order": [
+      "AmendOrderRequest",
+      "AmendOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ],
+    "place_orders": [
+      "PlaceOrdersRequest",
+      "PlaceOrdersResponse"
+    ],
+    "amend_orders": [
+      "AmendOrdersRequest",
+      "AmendOrdersResponse"
+    ],
+    "cancel_orders": [
+      "CancelOrdersRequest",
+      "CancelOrdersResponse"
+    ],
+    "cancel_all_orders": [
+      "CancelAllOrdersRequest",
+      "CancelAllOrdersResponse"
+    ]
+  }
+}

@@ -6,6 +6,7 @@ const hip3 = @import("../exchanges/hyperliquid/hip3.zig");
 const http = @import("http.zig");
 const routes = @import("routes.zig");
 const connectors = @import("perps_connectors.zig");
+const exchange = @import("exchange_http.zig");
 const A = wire.A;
 const V = wire.V;
 
@@ -64,6 +65,10 @@ fn dispatch(a: A, input: V, io: std.Io, stream: bool) !Dispatch {
         try params.object.put(a, "account_index", account);
         try prepared_input.object.put(a, "params", params);
     }
+    if (venue == .backpack) {
+        const params = try wire.field(input, "params");
+        try perps.put(&prepared_input, a, "wire_params", try perps.toValue(a, params));
+    }
     var request = try http.prepare(a, prepared_input);
     const lighter_chain: ?u32 = if (venue == .lighter and (active_orders or std.mem.eql(u8, operation_name, "next_nonce")) and input.object.get("auth") != null)
         try wire.unsigned(u32, try wire.field(try wire.field(input, "auth"), "chain_id"))
@@ -79,7 +84,9 @@ fn dispatch(a: A, input: V, io: std.Io, stream: bool) !Dispatch {
         const network = try wire.string(try wire.field(auth, "network"));
         if (std.mem.eql(u8, network, "Testnet")) request.origin = "https://api.hyperliquid-testnet.xyz";
     }
-    const base = if (input.object.get("origin")) |v| try wire.string(v) else if (request.origin.len > 0) request.origin else origin(venue);
+    const base = if (venue == .dydx_v4 and std.mem.eql(u8, operation_name, "transaction"))
+        try perps.credential(perps.get(perps.get(input, "auth"), "node_origin"))
+    else if (input.object.get("origin")) |v| try wire.string(v) else if (request.origin.len > 0) request.origin else origin(venue);
     const uri = try std.Uri.parse(base);
     if (!(std.mem.eql(u8, uri.scheme, "http") or std.mem.eql(u8, uri.scheme, "https")) or uri.host == null or
         uri.user != null or uri.password != null or uri.query != null or uri.fragment != null) return error.InvalidOrigin;
@@ -100,6 +107,10 @@ fn dispatch(a: A, input: V, io: std.Io, stream: bool) !Dispatch {
             std.ascii.eqlIgnoreCase(try uri.host.?.toRawMaybeAlloc(a), try target.host.?.toRawMaybeAlloc(a));
         break :target request.path;
     } else try std.mem.concat(a, u8, &.{ std.mem.trimEnd(u8, base, "/"), request.path });
+    if (exchange.supports(venue)) {
+        const payload = try exchange.authorize(a, venue, operation_name, prepared_input, &request, io);
+        return .{ .request = request, .url = try targetUrl(a, base, request.path), .payload = payload };
+    }
     if (connectors.supports(venue))
         return connectorDispatch(a, input, venue, operation_name, base, request, io);
     if (perps.isVenue(venue) and request.authenticated) {
@@ -442,6 +453,7 @@ pub fn dependencies(a: A, input: V) !V {
     if (venue == .derive) return @import("../exchanges/derive/orders.zig").dependency(a, input);
     const operation = try perps.text(input, "operation");
     var jobs = perps.object();
+    if (exchange.supports(venue)) return exchange.dependencies(a, input, venue, operation);
     if (!perps.isWrite(venue, operation)) return jobs;
     if (connectors.supports(venue)) return connectors.dependencies(a, venue, operation, input);
     const names: []const []const u8 = switch (venue) {
@@ -466,6 +478,8 @@ pub fn executeWithDial(a: A, config: V, dial: ?@import("host_stream.zig").Dial) 
     var input = config;
     const venue = try http.venue(input);
     const operation = try perps.text(input, "operation");
+    if (venue == .dydx_v4 and exchange.isWrite(venue, operation))
+        return @import("../exchanges/dydx_v4/trading.zig").execute(a, input, operation, dial);
     if (venue == .injective and (perps.isWrite(venue, operation) or std.mem.eql(u8, operation, "pending")))
         return @import("../exchanges/injective/trading.zig").execute(a, input, operation, dial);
     if (venue == .lighter) {
@@ -487,6 +501,8 @@ pub fn executeWithDial(a: A, config: V, dial: ?@import("host_stream.zig").Dial) 
 fn executePrepared(a: A, input: V, dial: ?@import("host_stream.zig").Dial) !V {
     const venue = try http.venue(input);
     var io: @import("host_stream.zig").Runtime = .{ .dial = dial };
+    const nonce_lock = if (venue == .kraken_spot and try http.operationPrivate(input)) try exchange.lockKraken(input, io.io()) else null;
+    defer if (nonce_lock) |lock| lock.unlock(io.io());
     var local: std.http.Client = .{ .io = io.io(), .allocator = std.heap.c_allocator };
     defer local.deinit();
     const prepared = try dispatch(a, input, local.io, false);
@@ -498,7 +514,7 @@ fn executePrepared(a: A, input: V, dial: ?@import("host_stream.zig").Dial) !V {
     var confirmed = false;
     defer if (reservation) |r| r.finish(!attempted or confirmed);
     const operation = try perps.text(input, "operation");
-    const uncertain_write = (venue == .monaco and @import("../exchanges/monaco/orders.zig").isWrite(operation)) or perps.isWrite(venue, operation);
+    const uncertain_write = (venue == .monaco and @import("../exchanges/monaco/orders.zig").isWrite(operation)) or perps.isWrite(venue, operation) or exchange.isWrite(venue, operation);
     var req = sendWithOptions(a, client, prepared.request.method, prepared.url, prepared.request.headers, prepared.payload, &attempted, lease != null) catch |err| {
         if (!uncertain_write or !attempted) return err;
         recordUncertain(a, prepared);
@@ -553,6 +569,13 @@ pub fn finish(a: A, venue: routes.Venue, status: u16, headers: []const std.http.
     if (bytes.len > 16 * 1024 * 1024) return error.BodyTooLarge;
     if (operation) |raw_op| {
         const op = try wire.string(raw_op);
+        if (exchange.isWrite(venue, op)) {
+            if (status == 408 or status >= 500) return error.PendingOutcome;
+            if (status >= 200 and status < 300) {
+                const value = wire.parse(a, bytes) catch return error.PendingOutcome;
+                if (value != .object and value != .array) return error.PendingOutcome;
+            }
+        }
         if (perps.isWrite(venue, op)) {
             if (status == 408 or status >= 500) return error.PendingOutcome;
             if (status >= 200 and status < 300) {

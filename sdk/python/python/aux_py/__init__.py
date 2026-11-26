@@ -585,6 +585,8 @@ async def _open_stream(venue, operation, params, origin, key=None, secret=None, 
     if operation == "open_rpc":
         if venue == "pascal":
             return PascalRpcSession(handle, auth)
+        if venue in _EXCHANGE_RPC_SESSIONS:
+            return _EXCHANGE_RPC_SESSIONS[venue](handle)
         return {"derive":DeriveRpcSession, "polymarket":PolymarketRfqRpcSession, "polymarket_perps":PolymarketPerpsRpcSession, "paradex":ParadexRpcSession, "kalshi":KalshiRpcSession, "kalshi_perps":KalshiRpcSession}[venue](handle)
     if venue == "qfex" and operation == "trading_session":
         return QfexTradingSession(handle)
@@ -601,6 +603,7 @@ async def _open_stream(venue, operation, params, origin, key=None, secret=None, 
     return DataStream(handle) if venue == "databento" else EventStream(handle)
 
 
+from .rpc_generated import EXCHANGE_SESSIONS as _EXCHANGE_RPC_SESSIONS
 from .rpc_generated import DeriveRpcSession, PolymarketPerpsRpcSession, PolymarketRfqRpcSession
 from .clients import *
 

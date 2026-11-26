@@ -1,0 +1,15 @@
+buy private/buy
+sell private/sell
+amend_order private/edit
+amend_by_label private/edit_by_label
+cancel_order private/cancel
+cancel_by_label private/cancel_by_label
+cancel_all_orders private/cancel_all
+cancel_instrument_orders private/cancel_all_by_instrument
+cancel_currency_orders private/cancel_all_by_currency
+cancel_kind_orders private/cancel_all_by_kind_or_type
+cancel_currency_pair_orders private/cancel_all_by_currency_pair
+mass_quote private/mass_quote
+cancel_quotes private/cancel_quotes
+order_status private/get_order_state
+open_orders private/get_open_orders

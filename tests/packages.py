@@ -14,6 +14,7 @@ import time
 import threading
 import sys
 from urllib.parse import parse_qsl, urlsplit
+import urllib.request
 
 import aux_py as sdk
 
@@ -2106,6 +2107,206 @@ async def test_new_exchanges(origin):
     else:
         raise AssertionError("rate limit treated as success")
 
+async def test_native_exchange_clients(origin):
+    base = origin + "/native-exchanges/"
+    ws = base.replace("http:", "ws:", 1)
+    markets = {row["venue"]: row for row in fixture("exchange-http") if row["operation"] == "markets"}
+    for row in fixture("exchange-ws"):
+        venue = row["venue"]
+        market = markets[venue]
+        client = getattr(sdk, row["client"])(origin=base + venue + "/rest/public", api_key="fixture-key", api_secret="fixture-secret")
+        assert await client.markets(market["request"]) == market["response"], venue
+        async with await client.subscribe(row["params"], endpoint=ws + venue + "/ws/book") as stream:
+            assert await anext(stream) == row["event"], venue
+            assert await anext(stream, None) is None, venue
+
+    market_clients = {"kuru": sdk.KuruClient, "reya": sdk.ReyaClient, "apex_omni": sdk.ApexOmniClient}
+    for row in fixture("exchange-http"):
+        venue = row["venue"]
+        if venue in market_clients:
+            client = market_clients[venue](origin=base + venue + "/rest/public")
+            assert await getattr(client, row["operation"])(row["request"]) == row["response"]
+    market_streams = fixture("market-data-ws")
+    for row in market_streams:
+        client = getattr(sdk, row["client"])()
+        async with await client.subscribe(row["params"], endpoint=ws + row["venue"] + "/ws/" + row["case"]) as stream:
+            for event in row["events"]:
+                assert await anext(stream) == event, row["case"]
+            if not row.get("keep_open"):
+                assert await anext(stream, None) is None
+
+    kuru = sdk.KuruClient()
+    book = next(row["params"] for row in market_streams if row["case"] == "l2-bootstrap")
+    async with await kuru.subscribe(dict(book, feedEpoch=12, seq=2**53+1), endpoint=ws + "kuru/ws/epoch-mismatch") as stream:
+        try:
+            await anext(stream)
+        except sdk.ExchangeError as error:
+            assert error.body["c"] == "feed_epoch_mismatch" and error.body["feedEpoch"] == 13
+        else:
+            raise AssertionError("stale cursor accepted")
+    async with await kuru.subscribe(book, endpoint=ws + "kuru/ws/truncated") as stream:
+        try:
+            await anext(stream)
+        except sdk.ValidationError:
+            pass
+        else:
+            raise AssertionError("truncated Kuru frame accepted")
+
+    orderly = sdk.OrderlyClient(origin=base + "orderly/rest/public")
+    for name in ("market_summary", "market_trades"):
+        row = next(item for item in fixture("exchange-http") if item["venue"] == "orderly" and item["operation"] == name)
+        assert await getattr(orderly, name)(row["request"]) == row["response"]
+
+    key = dict(api_key="fixture-key", api_secret="fixture-secret")
+    order = {"symbol": "ETHUSDT", "side": "BUY", "type": "LIMIT", "quantity": "0.01", "price": "100"}
+    binance = sdk.BinanceSpotClient(origin=base + "binance_spot/rest/private", **key)
+    assert (await binance.place_order(order))["orderId"] == 2**53 + 1
+    unsigned = sdk.BinanceSpotClient(origin=base + "binance_spot/rest/private")
+    try:
+        await unsigned.place_order(order)
+    except sdk.ConnectorError:
+        pass
+    else:
+        raise AssertionError("unsigned order reached Binance")
+    lost_order = sdk.BinanceSpotClient(origin=base + "binance_spot/rest/lost", **key)
+    with urllib.request.urlopen(base + "binance_spot/count/lost") as reply:
+        count = json.load(reply)["count"]
+    try:
+        await lost_order.place_order(order)
+    except sdk.ConnectorError:
+        pass
+    else:
+        raise AssertionError("lost REST response treated as confirmed")
+    with urllib.request.urlopen(base + "binance_spot/count/lost") as reply:
+        assert json.load(reply)["count"] == count + 1
+    async with await binance.subscribe({"channel":"fills"}, endpoint=ws + "binance_spot/ws/fills") as stream:
+        assert (await anext(stream))["event"]["i"] == 2**53 + 1
+    async with await binance.open_rpc(endpoint=ws + "binance_spot/ws/partial") as session:
+        try:
+            await session.cancel_replace_order(order)
+        except sdk.ExchangeError as error:
+            assert error.body["error"]["data"]["cancelResult"] == "SUCCESS"
+        else:
+            raise AssertionError("partial cancel-replace reported full success")
+
+    async with await binance.open_rpc(endpoint=ws + "binance_spot/ws/late", timeout_ms=50) as session:
+        for _ in range(2):
+            try:
+                await session.place_order(order)
+            except sdk.ConnectorError:
+                assert session.pending["id"] == 1
+            else:
+                raise AssertionError("pending request was resent")
+        for _ in range(10):
+            try:
+                result = await session.reconcile()
+                break
+            except sdk.ConnectorError:
+                continue
+        else:
+            raise AssertionError("late acknowledgement was not reconciled")
+        assert result["result"]["orderId"] == 2**53 + 1
+
+
+    def base58(data):
+        alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+        zeros = len(data) - len(data.lstrip(b"\0"))
+        value = int.from_bytes(data, "big")
+        digits = []
+        while value:
+            value, digit = divmod(value, 58)
+            digits.append(alphabet[digit])
+        return "1" * zeros + "".join(reversed(digits))
+
+    ed_seed = bytes(range(32))
+    ed_public = bytes.fromhex("03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8")
+    orderly = sdk.OrderlyClient(origin=base + "orderly/rest/private", api_key="ed25519:" + base58(ed_public),
+                                api_secret=base58(ed_seed), auth={"account_id": "fixture-account"})
+    assert (await orderly.balances())["data"]["holding"] == []
+    backpack = sdk.BackpackClient(origin=base + "backpack/rest/private",
+                                  api_key=base64.b64encode(ed_public).decode(), api_secret=base64.b64encode(ed_seed).decode())
+    assert (await backpack.balances())["USDC"]["available"] == "1.23"
+    deribit = sdk.DeribitClient(origin=base + "deribit/rest/private", **key)
+    assert (await deribit.account({"currency":"ETH"}))["result"]["equity"] == 1
+    okx = sdk.OkxClient(origin=base + "okx/rest/private", **key,
+                        auth={"network":"Testnet", "passphrase":"fixture-passphrase"})
+    assert (await okx.balances({"ccy":"USDT"}))["data"][0]["totalEq"] == "1.23"
+    hibachi_body = {"symbol":"ETH/USDT-P", "side":"BID", "orderType":"LIMIT",
+                    "quantity":"0.01", "price":"100", "maxFeesPercent":"0.00045"}
+    hibachi = sdk.HibachiClient(origin=base + "hibachi/rest/private", **key, auth={"account_id":123})
+    assert (await hibachi.place_order({"body":hibachi_body}))["orderId"] == 2**53 + 1
+    trustless = sdk.HibachiClient(origin=base + "hibachi/rest/private", api_key="fixture-key", api_secret="0" * 63 + "1",
+                                  auth={"account_id":123, "signing":"ecdsa"})
+    assert (await trustless.place_order({"body":hibachi_body}))["orderId"] == 2**53 + 1
+    aevo = sdk.AevoClient(origin=base + "aevo/rest/private", **key, auth={"wallet":"0x" + "11" * 20, "key":"0" * 63 + "1"})
+    aevo_order = {"instrument":1, "is_buy":True, "amount":"10000", "limit_price":"100000000"}
+    assert (await aevo.place_order({"body":aevo_order}))["order_id"] == "fixture-order"
+    assert (await aevo.amend_order({"order_id":"old-order","body":aevo_order}))["order_id"] == "fixture-order"
+    assert (await aevo.cancel_orders({"body":{"order_ids":["old-order","other-order"]}}))["order_ids"] == ["old-order"]
+    aevo_public = sdk.AevoClient(origin=base + "aevo/rest/public")
+    assert (await aevo_public.trades({"instrument_name":"ETH-PERP"}))["trade_history"] == []
+    bybit_rest = sdk.BybitClient(origin=base + "bybit/rest/private", **key)
+    assert (await bybit_rest.place_order({"body":{"category":"linear", "symbol":"ETHUSDT", "side":"Buy",
+                                                  "orderType":"Limit", "qty":"0.01", "price":"100"}}))["result"]["orderId"] == "fixture-order"
+    bybit = sdk.BybitClient(**key)
+    async with await bybit.open_rpc(endpoint=ws + "bybit/ws/mixed") as session:
+        result = await session.place_orders({"category": "linear", "request": [order, order]})
+        assert [item["code"] for item in result["retExtInfo"]["list"]] == [0, 10001]
+
+    kraken = sdk.KrakenSpotClient(api_key="fixture-key", api_secret="Zml4dHVyZS1zZWNyZXQ=",
+                                  origin=base + "kraken_spot/rest/concurrent")
+    assert all(response["result"]["fixture"] for response in await asyncio.gather(*(kraken.balances() for _ in range(8))))
+
+    async with await deribit.open_rpc(endpoint=ws + "deribit/ws/orders") as session:
+        result = await session.buy({"instrument_name":"ETH-PERPETUAL","amount":1,"type":"market"})
+        assert result["result"]["order"]["order_id"] == "test"
+    async with await okx.open_rpc(endpoint=ws + "okx/ws/orders") as session:
+        item = {"instId":"ETH-USDT","tdMode":"cash","side":"buy","ordType":"limit","px":"100","sz":"0.01"}
+        result = await session.place_orders([item,item])
+        assert [entry["sCode"] for entry in result["data"]] == ["0","51000"]
+    kraken_auth = sdk.KrakenSpotClient(api_key="fixture-key", api_secret="Zml4dHVyZS1zZWNyZXQ=",
+                                       auth={"rest_origin":base + "kraken_spot/rest/token"})
+    async with await kraken_auth.open_rpc(endpoint=ws + "kraken_spot/ws/orders") as session:
+        result = await session.place_order({"symbol":"ETH/USD","side":"buy","order_type":"limit",
+                                            "order_qty":"0.01","limit_price":"100"})
+        assert result["result"]["order_id"] == "test"
+    async with await aevo.open_rpc(endpoint=ws + "aevo/ws/orders") as session:
+        result = await session.place_order({"instrument":1,"is_buy":True,"amount":"10000","limit_price":"100000000"})
+        assert result["data"]["order_id"] == "test"
+    hibachi = sdk.HibachiClient(**key, auth={"account_id":123, "market_origin":base + "hibachi/rest/private"})
+    async with await hibachi.open_rpc(endpoint=ws + "hibachi/ws/orders") as session:
+        result = await session.place_order({"symbol":"ETH/USDT-P","side":"BID","orderType":"LIMIT",
+                                            "quantity":"0.01","price":"100","maxFeesPercent":"0.00045"})
+        assert result["result"]["orderId"] == 2**53 + 1
+
+    signer = "0" * 63 + "1"
+    body = {"subaccount_number": 0, "client_id": 42, "clob_pair_id": 0, "order_flags": 0,
+            "good_til_block": 120, "side": 1, "quantums": 1000, "subticks": 10000}
+    dydx = sdk.DydxV4Client(auth={"key": signer, "node_origin": base + "dydx_v4/rest/private"})
+    assert (await dydx.place_order({"body": body}))["tx_response"]["code"] == 0
+    broken = sdk.DydxV4Client(auth={"key": signer, "node_origin": base + "dydx_v4/rest/wrong-chain"})
+    try:
+        await broken.place_order({"body": body})
+    except sdk.ConnectorError:
+        pass
+    else:
+        raise AssertionError("wrong dYdX chain was accepted")
+    lost = sdk.DydxV4Client(auth={"key": signer, "node_origin": base + "dydx_v4/rest/lost"})
+    stateful = dict(body, order_flags=64, good_til_block_time=4102444800)
+    stateful.pop("good_til_block")
+    with urllib.request.urlopen(base + "dydx_v4/count/lost") as reply:
+        before = json.load(reply)["count"]
+    for _ in range(2):
+        try:
+            await lost.place_order({"body": stateful})
+        except sdk.ConnectorError:
+            pass
+        else:
+            raise AssertionError("lost transaction treated as confirmed")
+    with urllib.request.urlopen(base + "dydx_v4/count/lost") as reply:
+        assert json.load(reply)["count"] == before + 1
+
+
 if __name__ == "__main__":
     for row in fixture("extended-settlement"):
         args = (row["kind"], row["chain_id"], row["public_key"], row["message"])
@@ -2128,6 +2329,7 @@ if __name__ == "__main__":
         asyncio.run(test_shared_peer(origin))
         asyncio.run(test_perps_connectors(origin))
         asyncio.run(test_new_exchanges(origin))
+        asyncio.run(test_native_exchange_clients(origin))
         asyncio.run(test_live(os.environ["AUX_DBN_GATEWAY"]))
     test_trading_signatures()
     test_derive()

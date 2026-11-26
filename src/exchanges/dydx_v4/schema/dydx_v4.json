@@ -1,0 +1,497 @@
+{
+  "client": "DydxV4Client",
+  "venue": "dydx_v4",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value",
+    "AccountResponse": "serde_json::Value",
+    "BalancesResponse": "serde_json::Value",
+    "PositionsResponse": "serde_json::Value",
+    "OrderStatusResponse": "serde_json::Value",
+    "OpenOrdersResponse": "serde_json::Value",
+    "OrderHistoryResponse": "serde_json::Value",
+    "FillsResponse": "serde_json::Value",
+    "TransactionResponse": "serde_json::Value",
+    "PlaceOrderResponse": "serde_json::Value",
+    "ReplaceOrderResponse": "serde_json::Value",
+    "CancelOrderResponse": "serde_json::Value",
+    "CancelOrdersResponse": "serde_json::Value",
+    "PlaceOrdersResponse": "serde_json::Value",
+    "CancelStatefulOrdersResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "ticker",
+        "ticker",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "id",
+        "id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "address",
+        "address",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "subaccount_number",
+        "subaccount_number",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "batched",
+        "batched",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [
+      [
+        "ticker",
+        "ticker",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "createdBeforeOrAtHeight",
+        "created_before_or_at_height",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "createdBeforeOrAt",
+        "created_before_or_at",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "ticker",
+        "ticker",
+        "String",
+        "required"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "address",
+        "address",
+        "String",
+        "required"
+      ],
+      [
+        "subaccountNumber",
+        "subaccount_number",
+        "String",
+        "required"
+      ]
+    ],
+    "BalancesRequest": [
+      [
+        "address",
+        "address",
+        "String",
+        "required"
+      ],
+      [
+        "subaccountNumber",
+        "subaccount_number",
+        "u64",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "address",
+        "address",
+        "String",
+        "required"
+      ],
+      [
+        "subaccountNumber",
+        "subaccount_number",
+        "u64",
+        "required"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "createdBeforeOrAtHeight",
+        "created_before_or_at_height",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "createdBeforeOrAt",
+        "created_before_or_at",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "orderId",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "address",
+        "address",
+        "String",
+        "required"
+      ],
+      [
+        "subaccountNumber",
+        "subaccount_number",
+        "u64",
+        "required"
+      ],
+      [
+        "ticker",
+        "ticker",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "side",
+        "side",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "type",
+        "type_",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "returnLatestOrders",
+        "return_latest_orders",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "address",
+        "address",
+        "String",
+        "required"
+      ],
+      [
+        "subaccountNumber",
+        "subaccount_number",
+        "u64",
+        "required"
+      ],
+      [
+        "ticker",
+        "ticker",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "side",
+        "side",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "type",
+        "type_",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "includeTypes",
+        "include_types",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "excludeTypes",
+        "exclude_types",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "goodTilBlockBeforeOrAt",
+        "good_til_block_before_or_at",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "goodTilBlockAfter",
+        "good_til_block_after",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "goodTilBlockTimeBeforeOrAt",
+        "good_til_block_time_before_or_at",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "goodTilBlockTimeAfter",
+        "good_til_block_time_after",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "returnLatestOrders",
+        "return_latest_orders",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "address",
+        "address",
+        "String",
+        "required"
+      ],
+      [
+        "subaccountNumber",
+        "subaccount_number",
+        "u64",
+        "required"
+      ],
+      [
+        "market",
+        "market",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "marketType",
+        "market_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "includeTypes",
+        "include_types",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "excludeTypes",
+        "exclude_types",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "createdBeforeOrAtHeight",
+        "created_before_or_at_height",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "createdBeforeOrAt",
+        "created_before_or_at",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "TransactionRequest": [
+      [
+        "hash",
+        "hash",
+        "String",
+        "required"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "ReplaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "PlaceOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelStatefulOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "balances": [
+      "BalancesRequest",
+      "BalancesResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "transaction": [
+      "TransactionRequest",
+      "TransactionResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "replace_order": [
+      "ReplaceOrderRequest",
+      "ReplaceOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ],
+    "cancel_orders": [
+      "CancelOrdersRequest",
+      "CancelOrdersResponse"
+    ],
+    "place_orders": [
+      "PlaceOrdersRequest",
+      "PlaceOrdersResponse"
+    ],
+    "cancel_stateful_orders": [
+      "CancelStatefulOrdersRequest",
+      "CancelStatefulOrdersResponse"
+    ]
+  }
+}

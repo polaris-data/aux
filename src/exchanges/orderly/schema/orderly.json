@@ -1,0 +1,637 @@
+{
+  "client": "OrderlyClient",
+  "venue": "orderly",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "TickerResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value",
+    "AccountResponse": "serde_json::Value",
+    "BalancesResponse": "serde_json::Value",
+    "PositionsResponse": "serde_json::Value",
+    "OrderStatusResponse": "serde_json::Value",
+    "OrderByClientIdResponse": "serde_json::Value",
+    "OpenOrdersResponse": "serde_json::Value",
+    "OrderHistoryResponse": "serde_json::Value",
+    "FillsResponse": "serde_json::Value",
+    "PlaceOrderResponse": "serde_json::Value",
+    "AmendOrderResponse": "serde_json::Value",
+    "CancelOrderResponse": "serde_json::Value",
+    "CancelByClientIdResponse": "serde_json::Value",
+    "PlaceOrdersResponse": "serde_json::Value",
+    "CancelOrdersResponse": "serde_json::Value",
+    "CancelOrdersByClientIdResponse": "serde_json::Value",
+    "CancelAllOrdersResponse": "serde_json::Value",
+    "PlaceAlgoOrderResponse": "serde_json::Value",
+    "AmendAlgoOrderResponse": "serde_json::Value",
+    "CancelAlgoOrderResponse": "serde_json::Value",
+    "CancelAlgoByClientIdResponse": "serde_json::Value",
+    "CancelAllAlgoOrdersResponse": "serde_json::Value",
+    "AlgoOrderStatusResponse": "serde_json::Value",
+    "AlgoOrderByClientIdResponse": "serde_json::Value",
+    "AlgoOrdersResponse": "serde_json::Value"
+  },
+  "models": {
+    "MarketSummaryBody": [
+      [
+        "symbols",
+        "symbols",
+        "Option<Vec<String>>",
+        "optional"
+      ]
+    ],
+    "MarketTradesBody": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "topic",
+        "topic",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [],
+    "TickerRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "MarketSummaryRequest": [
+      [
+        "body",
+        "body",
+        "MarketSummaryBody",
+        "required"
+      ]
+    ],
+    "MarketTradesRequest": [
+      [
+        "body",
+        "body",
+        "MarketTradesBody",
+        "required"
+      ]
+    ],
+    "AccountRequest": [],
+    "BalancesRequest": [
+      [
+        "all",
+        "all",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "PositionsRequest": [],
+    "OrderStatusRequest": [
+      [
+        "order_id",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "OrderByClientIdRequest": [
+      [
+        "client_order_id",
+        "client_order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "side",
+        "side",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "order_type",
+        "order_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "size",
+        "size",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "side",
+        "side",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "order_type",
+        "order_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "start_t",
+        "start_t",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "end_t",
+        "end_t",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "size",
+        "size",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "start_t",
+        "start_t",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "end_t",
+        "end_t",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "size",
+        "size",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "AmendOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "order_id",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelByClientIdRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "PlaceOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrdersRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "order_ids",
+        "order_ids",
+        "String",
+        "required"
+      ]
+    ],
+    "CancelOrdersByClientIdRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "client_order_ids",
+        "client_order_ids",
+        "String",
+        "required"
+      ]
+    ],
+    "CancelAllOrdersRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PlaceAlgoOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "AmendAlgoOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelAlgoOrderRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "order_id",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "CancelAlgoByClientIdRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "client_order_id",
+        "client_order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "CancelAllAlgoOrdersRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "AlgoOrderStatusRequest": [
+      [
+        "order_id",
+        "order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "AlgoOrderByClientIdRequest": [
+      [
+        "client_order_id",
+        "client_order_id",
+        "String",
+        "required"
+      ]
+    ],
+    "AlgoOrdersRequest": [
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "size",
+        "size",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "MarketSummaryResponse": [
+      [
+        "success",
+        "success",
+        "bool",
+        "required"
+      ],
+      [
+        "data",
+        "data",
+        "MarketSummaryData",
+        "required"
+      ],
+      [
+        "ts",
+        "ts",
+        "u64",
+        "required"
+      ]
+    ],
+    "MarketSummaryData": [
+      [
+        "total_24h_volume",
+        "total_24h_volume",
+        "Option<Option<String>>",
+        "nullable"
+      ],
+      [
+        "total_open_interest",
+        "total_open_interest",
+        "Option<Option<String>>",
+        "nullable"
+      ],
+      [
+        "markets",
+        "markets",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "MarketTradesResponse": [
+      [
+        "success",
+        "success",
+        "bool",
+        "required"
+      ],
+      [
+        "data",
+        "data",
+        "MarketTradesData",
+        "required"
+      ],
+      [
+        "ts",
+        "ts",
+        "u64",
+        "required"
+      ]
+    ],
+    "MarketTradesData": [
+      [
+        "rows",
+        "rows",
+        "Vec<serde_json::Value>",
+        "required"
+      ],
+      [
+        "next_cursor",
+        "next_cursor",
+        "Option<serde_json::Value>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "ticker": [
+      "TickerRequest",
+      "TickerResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "market_summary": [
+      "MarketSummaryRequest",
+      "MarketSummaryResponse"
+    ],
+    "market_trades": [
+      "MarketTradesRequest",
+      "MarketTradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "balances": [
+      "BalancesRequest",
+      "BalancesResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "order_by_client_id": [
+      "OrderByClientIdRequest",
+      "OrderByClientIdResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "amend_order": [
+      "AmendOrderRequest",
+      "AmendOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ],
+    "cancel_by_client_id": [
+      "CancelByClientIdRequest",
+      "CancelByClientIdResponse"
+    ],
+    "place_orders": [
+      "PlaceOrdersRequest",
+      "PlaceOrdersResponse"
+    ],
+    "cancel_orders": [
+      "CancelOrdersRequest",
+      "CancelOrdersResponse"
+    ],
+    "cancel_orders_by_client_id": [
+      "CancelOrdersByClientIdRequest",
+      "CancelOrdersByClientIdResponse"
+    ],
+    "cancel_all_orders": [
+      "CancelAllOrdersRequest",
+      "CancelAllOrdersResponse"
+    ],
+    "place_algo_order": [
+      "PlaceAlgoOrderRequest",
+      "PlaceAlgoOrderResponse"
+    ],
+    "amend_algo_order": [
+      "AmendAlgoOrderRequest",
+      "AmendAlgoOrderResponse"
+    ],
+    "cancel_algo_order": [
+      "CancelAlgoOrderRequest",
+      "CancelAlgoOrderResponse"
+    ],
+    "cancel_algo_by_client_id": [
+      "CancelAlgoByClientIdRequest",
+      "CancelAlgoByClientIdResponse"
+    ],
+    "cancel_all_algo_orders": [
+      "CancelAllAlgoOrdersRequest",
+      "CancelAllAlgoOrdersResponse"
+    ],
+    "algo_order_status": [
+      "AlgoOrderStatusRequest",
+      "AlgoOrderStatusResponse"
+    ],
+    "algo_order_by_client_id": [
+      "AlgoOrderByClientIdRequest",
+      "AlgoOrderByClientIdResponse"
+    ],
+    "algo_orders": [
+      "AlgoOrdersRequest",
+      "AlgoOrdersResponse"
+    ]
+  }
+}

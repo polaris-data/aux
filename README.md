@@ -13,7 +13,7 @@ const aux = b.dependency("aux", .{ .target = target, .optimize = optimize });
 exe.root_module.addImport("aux", aux.module("aux"));
 ```
 
-All 1,948 named HTTP methods use the shared SDK schemas. Model declarations live beside their client, for example `aux.clients.pyth_hermes.LatestPriceUpdatesRequest`. The compiler checks the request and infers the response type.
+All 2,223 named HTTP methods use the shared SDK schemas. Model declarations live beside their client, for example `aux.clients.pyth_hermes.LatestPriceUpdatesRequest`. The compiler checks the request and infers the response type.
 
 ```zig
 const aux = @import("aux");
@@ -70,17 +70,17 @@ Rust applications can enable the optional `rustls` Cargo feature and pass a `rus
 
 Python and TypeScript expose the core's authentication, transport, exchange, validation, decode and uncertain-outcome errors as subclasses of `ConnectorError`. Rust exposes these as `aux_rs::Error` variants.
 
-The HTTP methods accept wire-shaped objects. Named Python unary calls accept the reference `request=` keyword and the standalone `params=` keyword. Dune also accepts separate query or execution identifiers and result options in Python, and the corresponding `queryId` or `executionId` options in TypeScript. Python and TypeScript expose request and response models for all 1,948 named unary methods in the standalone catalog. Rust provides the same contracts through venue Cargo features such as `metric-models` and `lighter-models` and the client's `typed()` interface. Some reference methods return arbitrary JSON or accept open parameter maps. Their SDK types preserve that flexibility. The default Rust interface accepts JSON with arbitrary precision. Python decodes decimal tokens to `Decimal`. Node returns unsafe integers as `bigint` and fractional or exponent tokens as strings. [Exchange sources](src/exchanges/) · [Data sources](src/data/)
+The HTTP methods accept wire-shaped objects. Named Python unary calls accept the reference `request=` keyword and the standalone `params=` keyword. Dune also accepts separate query or execution identifiers and result options in Python, and the corresponding `queryId` or `executionId` options in TypeScript. Python and TypeScript expose request and response models for all 2,223 named unary methods in the standalone catalog. Rust provides the same contracts through venue Cargo features such as `metric-models` and `lighter-models` and the client's `typed()` interface. Some reference methods return arbitrary JSON or accept open parameter maps. Their SDK types preserve that flexibility. The default Rust interface accepts JSON with arbitrary precision. Python decodes decimal tokens to `Decimal`. Node returns unsafe integers as `bigint` and fractional or exponent tokens as strings. [Exchange sources](src/exchanges/) · [Data sources](src/data/)
 
 The default native HTTP client reuses keep-alive connections. Up to eight pooled clients each retain one idle connection. Overlapping calls can still open additional connections. Common unary exchange errors carry the venue, HTTP status and lossless response body. Hyperdash masks secrets in its error payloads.
 
 ## Port coverage
 
-The REST catalog has 1,518 fixture-backed unary routes. Hyperdash adds CSV and NDJSON variants for 250 routes, bringing the catalog to 2,018 named unary methods. Nine cataloged HTTP streams cover Hermes SSE, Chainlink candlesticks and Databento data. Tardis adds four HTTP streaming operations outside this catalog, including dataset downloads. Injective uses gRPC-Web for indexer subscriptions. Session commands, subscriptions, chain calls and offline signing helpers have separate coverage.
+The REST catalog has 1,723 fixture-backed unary routes. Hyperdash adds CSV and NDJSON variants for 250 routes, bringing the catalog to 2,223 named unary methods. Nine cataloged HTTP streams cover Hermes SSE, Chainlink candlesticks and Databento data. Tardis adds four HTTP streaming operations outside this catalog, including dataset downloads. Injective uses gRPC-Web for indexer subscriptions. Session commands, subscriptions, chain calls and offline signing helpers have separate coverage.
 
 | Area | Implemented in Zig |
 | --- | --- |
-| Exchange and data HTTP | Derive, Extended, Paradex, Phoenix, Kalshi, Pascal, Polymarket, Birdeye, Hyperdash, Dune, Tardis, Hyperliquid, Lighter, Databento, Pyth, Chainlink, QFEX, Arcus, Metric, Monaco, Injective, Nado, Ondo Perps, Pacifica, Paragon, trade.xyz, Aster, Perpl, RISEx, Decibel, EdgeX, GRVT, Katana and Variational. Pyth and Chainlink each have two service catalogs. |
+| Exchange and data HTTP | Derive, Extended, Paradex, Phoenix, Kalshi, Pascal, Polymarket, Birdeye, Hyperdash, Dune, Tardis, Hyperliquid, Lighter, Databento, Pyth, Chainlink, QFEX, Arcus, Metric, Monaco, Injective, Nado, Ondo Perps, Pacifica, Paragon, trade.xyz, Aster, Perpl, RISEx, Decibel, EdgeX, GRVT, Katana, Variational, Orderly, Binance Spot, Deribit, Bybit, OKX, Backpack, dYdX v4, Kraken Spot, Aevo, Hibachi, Reya, Kuru, and ApeX Omni. Pyth and Chainlink each have two service catalogs. |
 | HTTP credentials | QFEX positions and account balances use fresh HMAC headers. Derive uses wallet login proofs. Polymarket CLOB supports wallet login, order signing and L2 HMAC. Polymarket Perps supports proxy credentials and signed operations. Paradex accepts scoped bearer tokens and signs single, batch and modified orders, block trades and offers with Stark or EVM keys. Pascal signs all 12 owner permits. Polymarket supports relayer and builder service credentials. Other services use venue-specific key, bearer, Basic and Chainlink HMAC headers. Extended supports Stark settlement hashes and signatures for orders, limit orders, transfers and withdrawals. Order preparation uses exact decimal quantities, side-dependent price rounding and rounded-up fees. Attached and position-sized take-profit and stop-loss legs are signed independently. Extended and Phoenix support API keys. Kalshi predictions and perps use a key ID and a hex Ed25519 seed. Clearing uses a bearer token. |
 | Streaming | Hermes SSE price updates and Chainlink concatenated JSON price records handle fragmented inputs, cancellation and repeatable close. Extended supports eight market and account channels through path-based and JSON-RPC subscriptions, with topic filtering and order-book snapshot recovery. Pascal read subscriptions and Kalshi predictions, perps and warp subscriptions support reconnects and subscription replay. QFEX and Phoenix market-data sockets support fragmented messages, ping/pong, disconnect recovery and subscription replay. Phoenix detects sequence gaps and decodes compressed snapshots. Paradex supports 19 channel types with JSON and SBE notifications, account and market checks on binary frames, and a fresh order-book snapshot on reconnect. Derive supports 13 public and private channels, with fresh wallet authentication on private reconnects. |
 | Order workflows | Arcus place and cancel with local or external Ed25519 signing. QFEX authenticated trading sessions. Dedicated Kalshi predictions and perps sessions handle subscription changes. Pascal command sessions sign place, cancel and mass-cancel permits. Paradex command sessions authenticate, gate writes on token scope and sign order creation, batch and modification. A pending command can be reconciled after its deadline. Hyperliquid L1 order, cancel and cancel-by-client-ID with optional vault, expiry and builder. Lighter signed create and cancel, explicit nonce reconciliation and short-lived auth tokens. Monaco session login, refresh and revoke, signed reads and single and batch order operations. |
@@ -147,6 +147,47 @@ The first six clients expose venue-native market and account data plus single-or
 | `VariationalClient` | `market_stats` exposes the public mainnet v2 stats endpoint. It preserves perpetual and swap listings, nullable funding data, and decimal strings. HTTP 429 retains `retry_after_seconds`. | REST only. |
 
 Perpl, RISEx, Decibel, GRVT and Katana accept `auth.network` set to `Testnet`. Pass `auth.aptos_origin` for a custom Decibel fullnode and `auth.rest_origin` for a separate data gateway. A Rust custom `Transport` can implement `send_bytes` to submit signed Aptos BCS requests.
+
+### Orderly, Binance Spot, Deribit, Bybit, OKX, Backpack, dYdX v4, Kraken Spot, Aevo, and Hibachi
+
+Use the named clients to discover markets, read accounts and orders, subscribe to market or order events, and send venue-native orders. The Rust and Zig typed clients and the Python and TypeScript request models retain the venue's request field names. JSON order bodies use the `body` field on unary methods. Command sessions take the native order fields directly.
+
+A `book` subscription delivers each native event with its original prices, quantities, sequence fields, and checksum. The subscription ends on disconnect. Discard the old book and bootstrap again after reopening.
+
+- For **Binance Spot diff depth**, subscribe with `channel: "book"` and buffer updates while fetching `GET /api/v3/depth` directly from the venue. Use the snapshot's `lastUpdateId` and the native `U` and `u` fields to establish continuity. Use `partial_depth` with depth 5, 10, or 20 for periodic native WebSocket snapshots. [Binance depth guide](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#how-to-manage-a-local-order-book-correctly)
+- For **Backpack**, subscribe with `channel: "book"` and buffer updates while fetching `GET /api/v1/depth` directly from the venue. Seed the book with that snapshot, discard buffered events through its `lastUpdateId`, and apply compatible deltas. [Backpack Depth stream](https://docs.backpack.exchange/#tag/Streams/Depth)
+
+| Client | Example book subscription | Credentials for private methods |
+| --- | --- | --- |
+| `OrderlyClient` | `{channel: "book", symbol: "PERP_ETH_USDC"}` | Registered public key and base58 Ed25519 seed as API key and secret. Set `auth.account_id`. |
+| `BinanceSpotClient` | `{channel: "book", symbol: "ETHUSDT"}` | Spot HMAC API key and secret. |
+| `DeribitClient` | `{channel: "book", instrument_name: "ETH-PERPETUAL"}` | Client ID and client secret. |
+| `BybitClient` | `{channel: "book", category: "linear", symbol: "ETHUSDT", depth: 50}` | V5 HMAC API key and secret. |
+| `OkxClient` | `{channel: "book", instId: "ETH-USDT"}` | API key, secret, and `auth.passphrase`. Select demo trading with `auth.network: "Testnet"`. |
+| `BackpackClient` | `{channel: "book", symbol: "ETH_USDC"}` | Base64 Ed25519 public key and 32-byte seed. |
+| `DydxV4Client` | `{channel: "book", ticker: "ETH-USD"}` | Indexer reads use public addresses. Trading uses `auth.key` for the hex secp256k1 key and `auth.node_origin` for the validator REST gateway. |
+| `KrakenSpotClient` | `{channel: "book", symbol: "ETH/USD", depth: 10}` | API key and base64 secret. Set `auth.rest_origin` when a custom endpoint also needs a token from a custom REST peer. |
+| `AevoClient` | `{channel: "book", symbol: "ETH-PERP"}` | API key and secret, `auth.wallet` for the maker, and `auth.key` for the registered EIP-712 signer. Supply price and amount in instrument wire units. The book defaults to the native 100 ms channel. |
+| `HibachiClient` | `{channel: "book", symbol: "ETH/USDT-P"}` | API key, signing secret, and `auth.account_id`. Set `auth.signing` to `ecdsa` for a trustless account or `hmac` for an exchange-managed account. `auth.market_origin` selects a custom contract-metadata endpoint. |
+
+Binance Spot, Deribit, Bybit, OKX, Kraken Spot, Aevo, and Hibachi expose `open_rpc` (`openRpc` in TypeScript) for supported WebSocket order commands. If a session has a pending command, call `reconcile` to read its late reply. If the connection is gone, use the venue's order status, order history, or account stream before sending another order. A successful submission acknowledgement can precede matching or settlement.
+
+For dYdX v4, supply native subaccount and order IDs, quantums, subticks, and expiry. Stateful transactions support `gas_limit`, `fee_amount`, and `fee_denom` in the body. Use `transaction` to look up a stateful transaction hash and the indexer subaccount stream or order reads to reconcile short-term orders. [dYdX validator client](https://docs.dydx.exchange/api_integration-clients/validator_client)
+
+### Reya, Kuru, and ApeX Omni
+
+These clients use public market data endpoints. Each supports the `Testnet` network option.
+
+| Client | HTTP methods | Subscription channels |
+| --- | --- | --- |
+| `ReyaClient` | `markets`, `market_summaries`, `market_summary`, `market_executions`, `wallet_executions` | `market_summaries`, `market_summary` and `market_executions` with `symbol`, and `wallet_executions` with `address`. |
+| `KuruClient` | `markets` with optional `status`, `market`, `trades` | `book` (`l2Delta@f`) and `trades` (`trades@f`), both with `marketAddress`. |
+| `ApexOmniClient` | `markets`, `ticker`, `trades` | `book`, `ticker`, and `trades` with the catalog's `crossSymbolName` as `symbol`. Use `tickers` for all symbols. |
+
+- Reya execution streams end on disconnect. Reconcile through the matching HTTP history and advance using `meta.nextCursor`. The HTTP time filters use Unix milliseconds. [Reya OpenAPI](https://raw.githubusercontent.com/Reya-Labs/reya-api-specs/main/openapi-trading-v2.yaml) · [Reya AsyncAPI](https://raw.githubusercontent.com/Reya-Labs/reya-api-specs/main/asyncapi-trading-v2.yaml)
+- Kuru subscriptions decode the gateway's binary frames into `{id, message}` with exact integer prices, quantities, and sequences in native units. Open a book without `seq` to receive the gateway's initial `l2Book` before applying `l2Delta` updates. For finalized trades, start with REST `trades` and pass its `feedEpoch` and `marketSeq` as `feedEpoch` and `seq` when both are present. Convert the REST sequence string to an exact integer, such as `BigInt(marketSeq)` in TypeScript.
+- Kuru streams end on disconnect or after delivering the venue's `resync` or `resub` control frame. Keep the epoch and last applied sequence together for replay. On a book resync, open without a cursor to obtain a new snapshot. Refresh the REST history when a trade gap cannot be replayed. [Kuru market data and recovery](https://docs.kuru.io/api/market-data)
+- ApeX Omni books default to depth 200 and high frequency. Set `depth` to 25 or 200 and `frequency` to `H` or `M`. The subscription delivers the venue's snapshot and deltas and ends on disconnect. [ApeX Omni order book stream](https://api-docs.omni.apex.exchange/#public-websocket-depth)
 
 ### Trading credentials and streaming accounts
 

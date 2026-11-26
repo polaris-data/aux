@@ -1,0 +1,75 @@
+{
+  "client": "ApexOmniClient",
+  "venue": "apex_omni",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "TickerResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "depth",
+        "depth",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "frequency",
+        "frequency",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [],
+    "TickerRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u32>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "ticker": [
+      "TickerRequest",
+      "TickerResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ]
+  }
+}

@@ -327,6 +327,9 @@ export type * as OndoPerpsModels from "./ondo_perps_models";
 export type * as PacificaModels from "./pacifica_models";
 export type * as ParagonModels from "./paragon_models";
 export type * as TradeXyzModels from "./trade_xyz_models";
+export type * as ApexOmniModels from "./apex_omni_models";
+export type * as KuruModels from "./kuru_models";
+export type * as ReyaModels from "./reya_models";
 
 export * as contracts from "./contracts";
 type MetricContracts = typeof import("./contracts");

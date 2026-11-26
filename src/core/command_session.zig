@@ -8,7 +8,9 @@ const A = w.A;
 const V = w.V;
 const gpa = std.heap.c_allocator;
 const eq = std.mem.eql;
-const Mode = enum { kalshi, kalshi_perps, pascal, paradex, derive, polymarket, polymarket_perps };
+const Mode = enum { kalshi, kalshi_perps, pascal, paradex, derive, polymarket, polymarket_perps, aevo, binance_spot, bybit, deribit, hibachi, kraken_spot, okx };
+const Exchange = @import("exchange_rpc.zig");
+const TradeVenue = @import("routes.zig").Venue;
 const poly = @import("../exchanges/polymarket/rpc.zig");
 const Pending = struct { id: u64, method: []const u8 };
 fn text(v: V, key: []const u8) ![]const u8 {
@@ -31,6 +33,8 @@ pub const Session = struct {
     timeout_ms: u32,
     capacity: u32,
     endpoint: []const u8,
+    exchange: ?TradeVenue = null,
+    exchange_token: ?[]const u8 = null,
     correlation: ?[]u8 = null,
     quote_id: ?[]u8 = null,
     next_id: u64 = 1,
@@ -50,6 +54,9 @@ pub const Session = struct {
         if (options != .object) return error.InvalidParameter;
         const timeout = try optNum(options, "timeout_ms", 10000);
         const capacity = try optNum(options, "capacity", 128);
+        if (std.meta.stringToEnum(TradeVenue, @tagName(mode))) |venue| {
+            if (Exchange.supports(venue)) return openExchange(a, input, mode, venue, timeout, capacity, dial);
+        }
         const endpoint = if (input.object.get("origin")) |v| try w.string(v) else switch (mode) {
             .kalshi => "wss://external-api-ws.kalshi.com/trade-api/ws/v2",
             .kalshi_perps => "wss://external-api-margin-ws.kalshi.com/trade-api/ws/v2/margin",
@@ -58,6 +65,7 @@ pub const Session = struct {
             .polymarket_perps => "wss://ws.perpetuals.polymarket.com/v1/ws",
             .paradex => "wss://ws.api.prod.paradex.trade/v1",
             .pascal => "wss://trade.pascal.trade/ws",
+            else => unreachable,
         };
         const uri = try std.Uri.parse(endpoint);
         const host = try (uri.host orelse return error.InvalidEndpoint).toRawMaybeAlloc(a);
@@ -132,6 +140,72 @@ pub const Session = struct {
         }
         return self;
     }
+    fn openExchange(a: A, input: V, mode: Mode, venue: TradeVenue, timeout: u32, capacity: u32, dial: ?Dial) !*Session {
+        const ws_protocol = @import("exchange_stream.zig");
+        const credentials = @import("exchange_http.zig");
+        var arena = std.heap.ArenaAllocator.init(gpa);
+        errdefer arena.deinit();
+        const owned = arena.allocator();
+        const endpoint = try Exchange.endpoint(owned, venue, input);
+        const config = try w.parse(owned, try std.json.Stringify.valueAlloc(owned, input, .{}));
+        var headers: []const std.http.Header = &.{};
+        if (venue == .hibachi) headers = &.{.{ .name = "Authorization", .value = try credentials.apiKey(config) }};
+        if (venue == .binance_spot) {
+            _ = try credentials.apiKey(config);
+            _ = try credentials.secret(config);
+        }
+        const token = if (venue == .kraken_spot) try ws_protocol.krakenToken(owned, config, dial) else null;
+        const self = try gpa.create(Session);
+        errdefer gpa.destroy(self);
+        self.* = .{
+            .arena = arena,
+            .ws = try Socket.dedicatedHeaders(endpoint, headers, dial),
+            .mode = mode,
+            .auth = config,
+            .timeout_ms = timeout,
+            .capacity = capacity,
+            .endpoint = endpoint,
+            .exchange = venue,
+            .exchange_token = token,
+        };
+        errdefer self.releaseSocket();
+        if (Exchange.requiresLogin(venue)) {
+            const login = try ws_protocol.login(a, venue, config, self.next_id, self.ws.io.io());
+            _ = try self.send(a, "aux_exchange_login", login);
+        }
+        if (ws_protocol.heartbeat(venue)) |beat| try self.ws.beginHeartbeat(self.ws.conn orelse return error.Network, beat);
+        if (venue == .deribit) try self.ws.sendText("{\"jsonrpc\":\"2.0\",\"id\":0,\"method\":\"public/set_heartbeat\",\"params\":{\"interval\":30}}");
+        return self;
+    }
+
+    fn exchangeControl(self: *Session, raw: []const u8, frame: V) !bool {
+        const venue = self.exchange orelse return false;
+        switch (Exchange.control(venue, raw, frame)) {
+            .pass => return false,
+            .skip => return true,
+            .reply => |data| {
+                try self.ws.sendText(data);
+                return true;
+            },
+        }
+    }
+
+    fn exchangeReply(self: *Session, a: A, raw: []const u8, accepted: bool, login: bool) !V {
+        self.pending = null;
+        if (accepted) return w.parse(a, raw);
+        if (self.failure_out) |out| {
+            var detail = V{ .object = .empty };
+            try detail.object.put(a, "venue", w.text(@tagName(self.mode)));
+            try detail.object.put(a, "body", try w.parse(a, raw));
+            out.* = detail;
+        }
+        if (login) {
+            // Authentication frames may echo credentials in a rejection.
+            return error.AuthenticationRequired;
+        }
+        return error.VenueRejected;
+    }
+
     fn receive(self: *Session) void {
         self.result = self.ws.message();
         self.ready.set(self.ws.io.io());
@@ -155,16 +229,35 @@ pub const Session = struct {
         const limit: std.Io.Timeout = .{ .deadline = timeout.toTimestamp(self.ws.io.io()).? };
         while (true) {
             const raw = (self.read(limit) catch return error.PendingOutcome) orelse return error.PendingOutcome;
-            if (self.isJsonRpc() and eq(u8, raw, "pong")) {
+            if ((self.isJsonRpc() or self.exchange != null) and eq(u8, raw, "pong")) {
                 gpa.free(raw);
                 continue;
             }
             var scratch = std.heap.ArenaAllocator.init(gpa);
             defer scratch.deinit();
-            const frame = w.parse(scratch.allocator(), raw) catch |e| {
+            const plain_ping = self.exchange != null and eq(u8, raw, "ping");
+            const frame = if (plain_ping) V.null else w.parse(scratch.allocator(), raw) catch |e| {
                 gpa.free(raw);
-                return e;
+                return if (self.exchange != null) error.PendingOutcome else e;
             };
+            if (self.exchange) |venue| {
+                const handled = self.exchangeControl(raw, frame) catch {
+                    gpa.free(raw);
+                    return error.PendingOutcome;
+                };
+                if (handled) {
+                    gpa.free(raw);
+                    continue;
+                }
+                const answer = Exchange.match(venue, frame, p.id, p.method) catch |err| {
+                    gpa.free(raw);
+                    return err;
+                };
+                if (answer) |accepted| {
+                    defer gpa.free(raw);
+                    return self.exchangeReply(a, raw, accepted, eq(u8, p.method, "aux_exchange_login"));
+                }
+            }
             const id = w.field(frame, "id") catch V.null;
             if (self.isJsonRpc() and id != .null) {
                 defer gpa.free(raw);
@@ -183,7 +276,7 @@ pub const Session = struct {
                 const decoded = try w.parse(a, raw);
                 return decoded.object.get("result") orelse .null;
             }
-            const matches = if (self.mode == .polymarket) poly.matches(frame, p.method, self.correlation, self.quote_id) else (w.unsigned(u64, id) catch 0) == p.id;
+            const matches = if (self.exchange != null) false else if (self.mode == .polymarket) poly.matches(frame, p.method, self.correlation, self.quote_id) else (w.unsigned(u64, id) catch 0) == p.id;
             if (matches) {
                 defer gpa.free(raw);
                 self.pending = null;
@@ -208,7 +301,13 @@ pub const Session = struct {
         if (self.ws.canceled.load(.acquire)) return null;
         const raw = while (true) {
             const msg = try self.read(.none) orelse return null;
-            if (!self.isJsonRpc() or !eq(u8, msg, "pong")) break msg;
+            if (self.exchange != null) {
+                errdefer gpa.free(msg);
+                var scratch = std.heap.ArenaAllocator.init(gpa);
+                defer scratch.deinit();
+                const frame = if (eq(u8, msg, "ping") or eq(u8, msg, "pong")) V.null else try w.parse(scratch.allocator(), msg);
+                if (!try self.exchangeControl(msg, frame)) break msg;
+            } else if (!self.isJsonRpc() or !eq(u8, msg, "pong")) break msg;
             gpa.free(msg);
         };
         errdefer gpa.free(raw);
@@ -234,6 +333,10 @@ pub const Session = struct {
         if (self.pending != null) return error.PendingOutcome;
         if (self.ws.canceled.load(.acquire)) return error.Network;
         var params = try w.field(input, "params");
+        if (self.exchange) |venue| {
+            const prepared = try Exchange.prepare(a, venue, self.auth, self.exchange_token, op, params, self.next_id, self.ws.io.io(), self.ws.io.dial);
+            return self.send(a, prepared.method, prepared.frame);
+        }
         if (self.mode == .derive) return self.deriveCommand(a, op, params);
         if (self.mode == .polymarket_perps) return self.polySend(a, try poly.perps(a, op, params, self.auth, self.ws.io.io()));
         if (self.mode == .polymarket) return self.polySend(a, try poly.rfq(a, op, params, self.auth));

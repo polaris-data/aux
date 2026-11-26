@@ -1,6 +1,7 @@
 // One market-data subscription per connection. Only the subscription
 // is replayed after a disconnect. The SDK serializes calls to next().
 const host = @import("host_stream.zig");
+const exchange_stream = @import("exchange_stream.zig");
 const perps_stream = @import("perps_stream.zig");
 const std = @import("std");
 const wire = @import("wire.zig");
@@ -61,7 +62,7 @@ fn headerValid(head: std.http.Client.Response.Head, key: []const u8, inflate: ?*
 }
 
 const Deflate = @import("websocket_deflate.zig").Inflate;
-const Heartbeat = struct { payload: []const u8, opcode: u8 = 1, seconds: u32 = 10, perpl: bool = false };
+const Heartbeat = exchange_stream.Heartbeat;
 
 const Topic = struct { frame: []u8, references: usize };
 
@@ -77,6 +78,8 @@ pub const Session = struct {
     credential_expiry: ?u64 = null,
     binary: bool = false,
     perps: ?perps_stream.State = null,
+    exchange: ?exchange_stream.State = null,
+    exchange_heartbeat: ?[]u8 = null,
     frame_remainder: ?[]u8 = null,
     frame_cursor: usize = 0,
     opening_headers: []const std.http.Header = &.{},
@@ -127,7 +130,11 @@ pub const Session = struct {
         errdefer if (self.monaco) |*state| state.deinit();
         errdefer if (self.aster) |*state| state.deinit(dial);
         errdefer if (self.perps) |*state| state.deinit();
-        if (perps_stream.venue(venue)) |kind| {
+        if (exchange_stream.venue(venue)) |kind| {
+            self.exchange = try exchange_stream.State.init(a, kind, args, params);
+            self.channel = self.exchange.?.channel;
+            self.subscribe = self.exchange.?.frame;
+        } else if (perps_stream.venue(venue)) |kind| {
             self.perps = try perps_stream.State.init(a, kind, args, params);
             self.channel = self.perps.?.channel;
             self.subscribe = self.perps.?.request;
@@ -203,11 +210,11 @@ pub const Session = struct {
                 self.phoenix = try @import("../exchanges/phoenix/stream.zig").State.init(params, authenticated);
                 self.subscribe = try std.json.Stringify.valueAlloc(a, .{ .type = "subscribe", .subscription = params }, .{});
             }
-        } else if (self.perps == null and self.arcus == null and self.chainlink == null and !is_derive and self.paradex == null and self.prediction == null and self.polymarket == null and self.hyperliquid == null and self.lighter == null and self.monaco == null and self.nado == null and self.ondo == null and self.pacifica == null and self.aster == null) {
+        } else if (self.exchange == null and self.perps == null and self.arcus == null and self.chainlink == null and !is_derive and self.paradex == null and self.prediction == null and self.polymarket == null and self.hyperliquid == null and self.lighter == null and self.monaco == null and self.nado == null and self.ondo == null and self.pacifica == null and self.aster == null) {
             self.qfex = try @import("../exchanges/qfex/stream.zig").State.init(a, params);
             self.subscribe = self.qfex.?.frame;
         }
-        const endpoint = if (self.aster) |state| state.endpoint else if (self.chainlink) |c| c.endpoint else if (self.monaco) |m| m.endpoint else if (self.extended) |state| state.endpoint else if (args.object.get("origin")) |v| try wire.string(v) else if (self.perps) |state| state.endpoint else if (self.nado) |state| state.endpoint else if (self.ondo) |state| state.endpoint else if (self.pacifica) |state| state.endpoint else if (self.arcus != null) "wss://api.arcus.xyz/v1/ws" else if (self.hyperliquid) |state| state.endpoint else if (self.lighter) |state| state.endpoint else if (self.polymarket) |state| state.endpoint() else if (self.prediction) |state| state.endpoint() else if (self.paradex != null) "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=3" else if (is_derive) "wss://api.derive.xyz/v3/ws" else if (self.phoenix != null) "wss://perp-api.phoenix.trade/v1/ws" else "wss://mds.qfex.com/";
+        const endpoint = if (self.exchange) |state| state.endpoint else if (self.aster) |state| state.endpoint else if (self.chainlink) |c| c.endpoint else if (self.monaco) |m| m.endpoint else if (self.extended) |state| state.endpoint else if (args.object.get("origin")) |v| try wire.string(v) else if (self.perps) |state| state.endpoint else if (self.nado) |state| state.endpoint else if (self.ondo) |state| state.endpoint else if (self.pacifica) |state| state.endpoint else if (self.arcus != null) "wss://api.arcus.xyz/v1/ws" else if (self.hyperliquid) |state| state.endpoint else if (self.lighter) |state| state.endpoint else if (self.polymarket) |state| state.endpoint() else if (self.prediction) |state| state.endpoint() else if (self.paradex != null) "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=3" else if (is_derive) "wss://api.derive.xyz/v3/ws" else if (self.phoenix != null) "wss://perp-api.phoenix.trade/v1/ws" else "wss://mds.qfex.com/";
         try self.openEndpoint(endpoint);
         return self;
     }
@@ -333,7 +340,7 @@ pub const Session = struct {
                 while (it.next()) |h| try headers.append(a, .{ .name = h.key_ptr.*, .value = try wire.string(h.value_ptr.*) });
             }
         }
-        const opening = if (self.perps) |*state| try state.start(a, io, self.io.dial, self.url, &headers) else perps_stream.Opening{ .frame = self.subscribe };
+        const opening = if (self.exchange) |*state| try state.start(a, io, self.io.dial, self.url, &headers) else if (self.perps) |*state| try state.start(a, io, self.io.dial, self.url, &headers) else perps_stream.Opening{ .frame = self.subscribe };
         const url = if (opening.url) |custom| custom else if (self.aster) |*state| if (state.hasListenKey()) try parseEndpoint(try state.connect(a, self.io.dial)) else self.url else self.url;
         var req = try host.request(&self.client, .GET, url, .{ .redirect_behavior = .unhandled, .headers = .{ .connection = .{ .override = "Upgrade" }, .user_agent = if (self.extended != null) .omit else .default }, .extra_headers = headers.items });
         // We own the connection after 101. Avoid HTTP body draining on cleanup.
@@ -362,7 +369,10 @@ pub const Session = struct {
             for (self.topics.items) |topic| try self.write(conn, 1, topic.frame);
         } else if (first.len > 0) try self.write(conn, 1, first);
         if (self.perps) |*state| try state.connected(a, self.io.dial);
-        const beat: ?Heartbeat = if (self.perps != null and self.perps.?.kind == .perpl and self.perps.?.private)
+        if (self.exchange != null and self.exchange.?.kind == .deribit) {
+            try self.write(conn, 1, "{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"public/set_heartbeat\",\"params\":{\"interval\":30}}");
+        }
+        const beat: ?Heartbeat = if (self.exchange) |state| exchange_stream.heartbeat(state.kind) else if (self.perps != null and self.perps.?.kind == .perpl and self.perps.?.private)
             .{ .payload = "", .perpl = true, .seconds = 30 }
         else if (self.monaco != null)
             .{ .payload = "{\"type\":\"Ping\"}" }
@@ -377,14 +387,19 @@ pub const Session = struct {
         else
             null;
         if (beat) |policy| {
-            self.heartbeat_stop = .unset;
-            self.heartbeat_thread = try std.Thread.spawn(.{}, heartbeat, .{ self, conn, policy });
+            try self.beginHeartbeat(conn, policy);
         }
         self.generation += 1;
         self.conn = conn;
         if (self.phoenix) |*state| state.reset();
         req.connection = null;
     }
+    pub fn beginHeartbeat(self: *Session, conn: *std.http.Client.Connection, policy: Heartbeat) !void {
+        if (self.heartbeat_thread != null) return;
+        self.heartbeat_stop = .unset;
+        self.heartbeat_thread = try std.Thread.spawn(.{}, heartbeat, .{ self, conn, policy });
+    }
+
     fn heartbeat(self: *Session, conn: *std.http.Client.Connection, policy: Heartbeat) void {
         const io = self.io.io();
         while (!self.canceled.load(.acquire)) {
@@ -392,6 +407,8 @@ pub const Session = struct {
                 error.Timeout => {
                     const result = if (policy.perpl)
                         self.perplPing(conn)
+                    else if (policy.apex_omni)
+                        self.apexPing(conn)
                     else if (policy.opcode == 0)
                         self.aster.?.renew(self.io.dial)
                     else
@@ -417,6 +434,12 @@ pub const Session = struct {
         var buffer: [80]u8 = undefined;
         const time = try @import("perps.zig").epoch(self.io.io(), .ms);
         const text = try std.fmt.bufPrint(&buffer, "{{\"mt\":1,\"t\":{d}}}", .{time});
+        try self.write(conn, 1, text);
+    }
+
+    fn apexPing(self: *Session, conn: *std.http.Client.Connection) !void {
+        var buffer: [80]u8 = undefined;
+        const text = try @import("../exchanges/apex_omni/stream.zig").heartbeat(&buffer, self.io.io(), "ping");
         try self.write(conn, 1, text);
     }
 
@@ -454,6 +477,8 @@ pub const Session = struct {
             thread.join();
             self.heartbeat_thread = null;
         }
+        if (self.exchange_heartbeat) |payload| gpa.free(payload);
+        self.exchange_heartbeat = null;
         self.clearSocket();
         if (self.conn) |conn| {
             conn.closing = true;
@@ -566,7 +591,8 @@ pub const Session = struct {
             if (op == 0) {
                 if (!fragmented) return error.InvalidOpcode;
             } else {
-                if (fragmented or (op != 1 and !(op == 2 and (self.paradex != null or self.bearer != null)))) return error.InvalidOpcode;
+                const binary_allowed = self.paradex != null or self.bearer != null or (self.exchange != null and self.exchange.?.kuru != null);
+                if (fragmented or (op != 1 and !(op == 2 and binary_allowed))) return error.InvalidOpcode;
                 self.binary = op == 2;
                 compressed = rsv1;
             }
@@ -591,12 +617,13 @@ pub const Session = struct {
                 };
             }
             if (self.frame_remainder != null) return try self.katanaMessage();
+            if (self.exchange) |state| if (state.book or !state.auto_reconnect) return self.message();
             const raw = self.message() catch |err| {
                 if (err != error.Network) return err;
                 self.disconnectSubscription();
                 continue;
             } orelse {
-                const new_venue = self.perps != null or self.nado != null or self.ondo != null or self.pacifica != null or self.aster != null or (self.hyperliquid != null and self.hyperliquid.?.namespace != null);
+                const new_venue = self.exchange != null or self.perps != null or self.nado != null or self.ondo != null or self.pacifica != null or self.aster != null or (self.hyperliquid != null and self.hyperliquid.?.namespace != null);
                 if (!new_venue) return null;
                 self.disconnectSubscription();
                 continue;
@@ -644,6 +671,42 @@ pub const Session = struct {
             const raw = try self.subscriptionMessage() orelse break;
             var arena = std.heap.ArenaAllocator.init(gpa);
             defer arena.deinit();
+            if (self.exchange) |*state| {
+                if (self.binary) {
+                    defer gpa.free(raw);
+                    const decoded = try @import("../exchanges/kuru/binary.zig").decode(arena.allocator(), state.kuru.?, raw) orelse continue;
+                    return try gpa.dupe(u8, decoded);
+                }
+                const event = state.event(arena.allocator(), raw, self.io.io()) catch |err| {
+                    self.recordRejection(err, raw);
+                    gpa.free(raw);
+                    return err;
+                };
+                if (event == .deliver or event == .deliver_final) {
+                    self.retries = 0;
+                    if (event == .deliver_final) {
+                        self.ended = true;
+                        self.disconnectSubscription();
+                    }
+                    return raw;
+                }
+                defer gpa.free(raw);
+                switch (event) {
+                    .skip => {},
+                    .reply => |msg| try self.sendText(msg),
+                    .subscribe => try self.sendText(state.frame),
+                    .heartbeat => |payload| {
+                        if (self.exchange_heartbeat == null) {
+                            const saved = try gpa.dupe(u8, payload);
+                            errdefer gpa.free(saved);
+                            try self.beginHeartbeat(self.conn orelse return error.Network, .{ .payload = saved, .seconds = 4 });
+                            self.exchange_heartbeat = saved;
+                        }
+                    },
+                    .deliver, .deliver_final => unreachable,
+                }
+                continue;
+            }
             if (self.perps != null or self.qfex != null or self.arcus != null or self.chainlink != null or self.monaco != null or self.hyperliquid != null or self.lighter != null or self.polymarket != null or self.derive != null or self.paradex != null or self.nado != null or self.ondo != null or self.pacifica != null or self.aster != null) {
                 const parsed = if (self.perps) |*state| state.event(arena.allocator(), raw) else if (self.qfex) |*s| s.event(arena.allocator(), raw) else if (self.arcus) |*s| s.event(arena.allocator(), raw) else if (self.chainlink) |s| s.event(arena.allocator(), raw) else if (self.monaco) |*state| state.event(arena.allocator(), raw) else if (self.hyperliquid) |*state| state.event(arena.allocator(), raw) else if (self.lighter) |*state| state.event(arena.allocator(), raw) else if (self.polymarket) |*state| state.event(arena.allocator(), raw) else if (self.paradex) |*state| state.event(arena.allocator(), raw, self.binary) else if (self.nado) |*state| state.event(arena.allocator(), raw) else if (self.ondo) |*state| state.event(arena.allocator(), raw) else if (self.pacifica) |*state| state.event(arena.allocator(), raw) else if (self.aster) |*state| state.event(arena.allocator(), raw) else self.derive.?.event(arena.allocator(), self.channel, raw);
                 const event = parsed catch |err| {

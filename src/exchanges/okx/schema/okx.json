@@ -1,0 +1,630 @@
+{
+  "client": "OkxClient",
+  "venue": "okx",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "TickerResponse": "serde_json::Value",
+    "TickersResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value",
+    "AccountResponse": "serde_json::Value",
+    "BalancesResponse": "serde_json::Value",
+    "PositionsResponse": "serde_json::Value",
+    "OrderStatusResponse": "serde_json::Value",
+    "OpenOrdersResponse": "serde_json::Value",
+    "OrderHistoryResponse": "serde_json::Value",
+    "FillsResponse": "serde_json::Value",
+    "PlaceOrderResponse": "serde_json::Value",
+    "AmendOrderResponse": "serde_json::Value",
+    "CancelOrderResponse": "serde_json::Value",
+    "PlaceOrdersResponse": "serde_json::Value",
+    "AmendOrdersResponse": "serde_json::Value",
+    "CancelOrdersResponse": "serde_json::Value",
+    "PlaceAlgoOrderResponse": "serde_json::Value",
+    "AmendAlgoOrderResponse": "serde_json::Value",
+    "CancelAlgoOrdersResponse": "serde_json::Value",
+    "CancelAdvanceAlgoOrdersResponse": "serde_json::Value",
+    "AlgoOrderStatusResponse": "serde_json::Value",
+    "OpenAlgoOrdersResponse": "serde_json::Value",
+    "AlgoOrderHistoryResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instType",
+        "inst_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instFamily",
+        "inst_family",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "topic",
+        "topic",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [
+      [
+        "instType",
+        "inst_type",
+        "String",
+        "required"
+      ],
+      [
+        "instFamily",
+        "inst_family",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "TickerRequest": [
+      [
+        "instId",
+        "inst_id",
+        "String",
+        "required"
+      ]
+    ],
+    "TickersRequest": [
+      [
+        "instType",
+        "inst_type",
+        "String",
+        "required"
+      ],
+      [
+        "instFamily",
+        "inst_family",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "instId",
+        "inst_id",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [],
+    "BalancesRequest": [
+      [
+        "ccy",
+        "ccy",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "instType",
+        "inst_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "posId",
+        "pos_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "instId",
+        "inst_id",
+        "String",
+        "required"
+      ],
+      [
+        "ordId",
+        "ord_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "clOrdId",
+        "cl_ord_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "instType",
+        "inst_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instFamily",
+        "inst_family",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "ordType",
+        "ord_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "state",
+        "state",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "after",
+        "after",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "before",
+        "before",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "instType",
+        "inst_type",
+        "String",
+        "required"
+      ],
+      [
+        "instFamily",
+        "inst_family",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "ordType",
+        "ord_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "state",
+        "state",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "after",
+        "after",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "before",
+        "before",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "begin",
+        "begin",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "end",
+        "end",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "instType",
+        "inst_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instFamily",
+        "inst_family",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "ordId",
+        "ord_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "subType",
+        "sub_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "after",
+        "after",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "before",
+        "before",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "begin",
+        "begin",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "end",
+        "end",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "AmendOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "PlaceOrdersRequest": [
+      [
+        "body",
+        "body",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "AmendOrdersRequest": [
+      [
+        "body",
+        "body",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "CancelOrdersRequest": [
+      [
+        "body",
+        "body",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "PlaceAlgoOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "AmendAlgoOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelAlgoOrdersRequest": [
+      [
+        "body",
+        "body",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "CancelAdvanceAlgoOrdersRequest": [
+      [
+        "body",
+        "body",
+        "Vec<serde_json::Value>",
+        "required"
+      ]
+    ],
+    "AlgoOrderStatusRequest": [
+      [
+        "algoId",
+        "algo_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "algoClOrdId",
+        "algo_cl_ord_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OpenAlgoOrdersRequest": [
+      [
+        "ordType",
+        "ord_type",
+        "String",
+        "required"
+      ],
+      [
+        "algoId",
+        "algo_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instType",
+        "inst_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "after",
+        "after",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "before",
+        "before",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AlgoOrderHistoryRequest": [
+      [
+        "ordType",
+        "ord_type",
+        "String",
+        "required"
+      ],
+      [
+        "state",
+        "state",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "algoId",
+        "algo_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instType",
+        "inst_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "instId",
+        "inst_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "after",
+        "after",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "before",
+        "before",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "ticker": [
+      "TickerRequest",
+      "TickerResponse"
+    ],
+    "tickers": [
+      "TickersRequest",
+      "TickersResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "balances": [
+      "BalancesRequest",
+      "BalancesResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "amend_order": [
+      "AmendOrderRequest",
+      "AmendOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ],
+    "place_orders": [
+      "PlaceOrdersRequest",
+      "PlaceOrdersResponse"
+    ],
+    "amend_orders": [
+      "AmendOrdersRequest",
+      "AmendOrdersResponse"
+    ],
+    "cancel_orders": [
+      "CancelOrdersRequest",
+      "CancelOrdersResponse"
+    ],
+    "place_algo_order": [
+      "PlaceAlgoOrderRequest",
+      "PlaceAlgoOrderResponse"
+    ],
+    "amend_algo_order": [
+      "AmendAlgoOrderRequest",
+      "AmendAlgoOrderResponse"
+    ],
+    "cancel_algo_orders": [
+      "CancelAlgoOrdersRequest",
+      "CancelAlgoOrdersResponse"
+    ],
+    "cancel_advance_algo_orders": [
+      "CancelAdvanceAlgoOrdersRequest",
+      "CancelAdvanceAlgoOrdersResponse"
+    ],
+    "algo_order_status": [
+      "AlgoOrderStatusRequest",
+      "AlgoOrderStatusResponse"
+    ],
+    "open_algo_orders": [
+      "OpenAlgoOrdersRequest",
+      "OpenAlgoOrdersResponse"
+    ],
+    "algo_order_history": [
+      "AlgoOrderHistoryRequest",
+      "AlgoOrderHistoryResponse"
+    ]
+  }
+}

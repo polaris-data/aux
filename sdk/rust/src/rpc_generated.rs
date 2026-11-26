@@ -2,3 +2,10 @@ rpc_session!(DeriveRpcSession, private_burn_vault_shares, private_cancel, privat
 rpc_session!(PolymarketPerpsRpcSession, create_orders, modify_orders, modify_orders_coid, cancel_orders, cancel_orders_coid, cancel_all, auto_cancel, update_leverage, update_leverages, update_margin, subscribe, unsubscribe);
 impl PolymarketPerpsRpcSession { pub fn ping(&self) -> Result<Value> { self.send("ping", &Value::Null) } }
 rpc_session!(PolymarketRfqRpcSession, quote, cancel_quote, last_look);
+rpc_session!(AevoRpcSession, place_order, amend_order, cancel_order, cancel_all_orders);
+rpc_session!(BinanceSpotRpcSession, place_order, amend_order, cancel_order, cancel_replace_order, cancel_all_orders, place_oco, place_oto, place_otoco, place_opo, place_opoco, cancel_order_list, order_status, open_orders, order_history, order_list_status, open_order_lists, fills);
+rpc_session!(BybitRpcSession, place_order, amend_order, cancel_order, place_orders, amend_orders, cancel_orders);
+rpc_session!(DeribitRpcSession, buy, sell, amend_order, amend_by_label, cancel_order, cancel_by_label, cancel_all_orders, cancel_instrument_orders, cancel_currency_orders, cancel_kind_orders, cancel_currency_pair_orders, mass_quote, cancel_quotes, order_status, open_orders);
+rpc_session!(HibachiRpcSession, place_order, amend_order, cancel_order, order_status, open_orders, cancel_all_orders, place_orders);
+rpc_session!(KrakenSpotRpcSession, place_order, amend_order, cancel_order, cancel_all_orders, place_orders, cancel_orders);
+rpc_session!(OkxRpcSession, place_order, amend_order, cancel_order, place_orders, amend_orders, cancel_orders);

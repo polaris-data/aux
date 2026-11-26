@@ -445,3 +445,202 @@ class PolymarketRfqRpcSession(_RpcSession):
     async def last_look(self, request):
         return await self._command("last_look", request)
 
+class AevoRpcSession(_RpcSession):
+    async def place_order(self, request):
+        return await self._command("place_order", request)
+
+    async def amend_order(self, request):
+        return await self._command("amend_order", request)
+
+    async def cancel_order(self, request):
+        return await self._command("cancel_order", request)
+
+    async def cancel_all_orders(self, request):
+        return await self._command("cancel_all_orders", request)
+
+class BinanceSpotRpcSession(_RpcSession):
+    async def place_order(self, request):
+        return await self._command("place_order", request)
+
+    async def amend_order(self, request):
+        return await self._command("amend_order", request)
+
+    async def cancel_order(self, request):
+        return await self._command("cancel_order", request)
+
+    async def cancel_replace_order(self, request):
+        return await self._command("cancel_replace_order", request)
+
+    async def cancel_all_orders(self, request):
+        return await self._command("cancel_all_orders", request)
+
+    async def place_oco(self, request):
+        return await self._command("place_oco", request)
+
+    async def place_oto(self, request):
+        return await self._command("place_oto", request)
+
+    async def place_otoco(self, request):
+        return await self._command("place_otoco", request)
+
+    async def place_opo(self, request):
+        return await self._command("place_opo", request)
+
+    async def place_opoco(self, request):
+        return await self._command("place_opoco", request)
+
+    async def cancel_order_list(self, request):
+        return await self._command("cancel_order_list", request)
+
+    async def order_status(self, request):
+        return await self._command("order_status", request)
+
+    async def open_orders(self, request):
+        return await self._command("open_orders", request)
+
+    async def order_history(self, request):
+        return await self._command("order_history", request)
+
+    async def order_list_status(self, request):
+        return await self._command("order_list_status", request)
+
+    async def open_order_lists(self, request):
+        return await self._command("open_order_lists", request)
+
+    async def fills(self, request):
+        return await self._command("fills", request)
+
+class BybitRpcSession(_RpcSession):
+    async def place_order(self, request):
+        return await self._command("place_order", request)
+
+    async def amend_order(self, request):
+        return await self._command("amend_order", request)
+
+    async def cancel_order(self, request):
+        return await self._command("cancel_order", request)
+
+    async def place_orders(self, request):
+        return await self._command("place_orders", request)
+
+    async def amend_orders(self, request):
+        return await self._command("amend_orders", request)
+
+    async def cancel_orders(self, request):
+        return await self._command("cancel_orders", request)
+
+class DeribitRpcSession(_RpcSession):
+    async def buy(self, request):
+        return await self._command("buy", request)
+
+    async def sell(self, request):
+        return await self._command("sell", request)
+
+    async def amend_order(self, request):
+        return await self._command("amend_order", request)
+
+    async def amend_by_label(self, request):
+        return await self._command("amend_by_label", request)
+
+    async def cancel_order(self, request):
+        return await self._command("cancel_order", request)
+
+    async def cancel_by_label(self, request):
+        return await self._command("cancel_by_label", request)
+
+    async def cancel_all_orders(self, request):
+        return await self._command("cancel_all_orders", request)
+
+    async def cancel_instrument_orders(self, request):
+        return await self._command("cancel_instrument_orders", request)
+
+    async def cancel_currency_orders(self, request):
+        return await self._command("cancel_currency_orders", request)
+
+    async def cancel_kind_orders(self, request):
+        return await self._command("cancel_kind_orders", request)
+
+    async def cancel_currency_pair_orders(self, request):
+        return await self._command("cancel_currency_pair_orders", request)
+
+    async def mass_quote(self, request):
+        return await self._command("mass_quote", request)
+
+    async def cancel_quotes(self, request):
+        return await self._command("cancel_quotes", request)
+
+    async def order_status(self, request):
+        return await self._command("order_status", request)
+
+    async def open_orders(self, request):
+        return await self._command("open_orders", request)
+
+class HibachiRpcSession(_RpcSession):
+    async def place_order(self, request):
+        return await self._command("place_order", request)
+
+    async def amend_order(self, request):
+        return await self._command("amend_order", request)
+
+    async def cancel_order(self, request):
+        return await self._command("cancel_order", request)
+
+    async def order_status(self, request):
+        return await self._command("order_status", request)
+
+    async def open_orders(self, request):
+        return await self._command("open_orders", request)
+
+    async def cancel_all_orders(self, request):
+        return await self._command("cancel_all_orders", request)
+
+    async def place_orders(self, request):
+        return await self._command("place_orders", request)
+
+class KrakenSpotRpcSession(_RpcSession):
+    async def place_order(self, request):
+        return await self._command("place_order", request)
+
+    async def amend_order(self, request):
+        return await self._command("amend_order", request)
+
+    async def cancel_order(self, request):
+        return await self._command("cancel_order", request)
+
+    async def cancel_all_orders(self, request):
+        return await self._command("cancel_all_orders", request)
+
+    async def place_orders(self, request):
+        return await self._command("place_orders", request)
+
+    async def cancel_orders(self, request):
+        return await self._command("cancel_orders", request)
+
+class OkxRpcSession(_RpcSession):
+    async def place_order(self, request):
+        return await self._command("place_order", request)
+
+    async def amend_order(self, request):
+        return await self._command("amend_order", request)
+
+    async def cancel_order(self, request):
+        return await self._command("cancel_order", request)
+
+    async def place_orders(self, request):
+        return await self._command("place_orders", request)
+
+    async def amend_orders(self, request):
+        return await self._command("amend_orders", request)
+
+    async def cancel_orders(self, request):
+        return await self._command("cancel_orders", request)
+
+EXCHANGE_SESSIONS = {
+    'aevo': AevoRpcSession,
+    'binance_spot': BinanceSpotRpcSession,
+    'bybit': BybitRpcSession,
+    'deribit': DeribitRpcSession,
+    'hibachi': HibachiRpcSession,
+    'kraken_spot': KrakenSpotRpcSession,
+    'okx': OkxRpcSession,
+}

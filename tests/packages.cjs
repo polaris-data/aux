@@ -36,7 +36,7 @@ function compare(actual, expected) {
   assert.throws(()=>sdk.solana.signDeposit("08".repeat(32),prepared));
 }
 
-for (const dataset of ["http", "prediction-http", "data-http", "perps-http"]) {
+for (const dataset of ["http", "prediction-http", "data-http", "perps-http", "exchange-http"]) {
   for (const row of lossless(file(dataset), true)) {
     const {venue, operation} = row;
     const params = row.request_json ? lossless(row.request_json, true) : row.request;
@@ -446,11 +446,56 @@ async function testNewExchanges(origin) {
   const order = rows.find(row => row.venue === "perpl" && row.operation === "place_order");
   assert.deepEqual(await perpl.placeOrder(order.request), order.response);
 }
+async function testNativeExchangeClients(origin) {
+  const base = origin + "/native-exchanges/";
+  const ws = base.replace("http:", "ws:");
+  const httpRows = fixture("exchange-http");
+  for (const row of fixture("exchange-ws")) {
+    const {venue} = row;
+    const market = httpRows.find(item => item.venue === venue && item.operation === "markets");
+    const client = new sdk[row.client]({origin: base + venue + "/rest/public"});
+    assert.deepEqual(await client.markets(market.request), market.response, venue);
+    const stream = await client.subscribe(row.params, ws + venue + "/ws/book");
+    try {
+      assert.deepEqual((await stream.next()).value, row.event, venue);
+      assert.equal((await stream.next()).done, true, venue);
+    } finally {
+      stream.close();
+    }
+  }
+  const marketClients = {kuru: sdk.KuruClient, reya: sdk.ReyaClient, apex_omni: sdk.ApexOmniClient};
+  for (const row of httpRows.filter(row => row.venue in marketClients)) {
+    const MarketClient = marketClients[row.venue];
+    const client = new MarketClient({origin: base + row.venue + "/rest/public"});
+    const method = row.operation.replace(/_(.)/g, (_, c) => c.toUpperCase());
+    assert.deepEqual(await client[method](row.request), row.response);
+  }
+  for (const row of fixture("market-data-ws")) {
+    const client = new sdk[row.client]();
+    const stream = await client.subscribe(row.params, ws + row.venue + "/ws/" + row.case);
+    try {
+      for (const event of row.events) assert.deepEqual((await stream.next()).value, event, row.case);
+      if (!row.keep_open) assert.equal((await stream.next()).done, true);
+    } finally {
+      stream.close();
+    }
+  }
+  const client = new sdk.BinanceSpotClient({apiKey: "fixture-key", apiSecret: "fixture-secret"});
+  const trading = await client.openRpc(ws + "binance_spot/ws/orders");
+  try {
+    const order = {symbol: "ETHUSDT", side: "BUY", type: "LIMIT", quantity: "0.01", price: "100"};
+    assert.equal((await trading.placeOrder(order)).result.orderId, 9007199254740993n);
+  } finally {
+    trading.close();
+  }
+}
+
 async function testSharedPeer() {
   const origin = process.env.AUX_FIXTURE_ORIGIN;
   if (!origin) return;
   await testPerpsConnectors(origin);
   await testNewExchanges(origin);
+  await testNativeExchangeClients(origin);
   const deniedHermes = new sdk.PythHermesClient({origin:origin+"/stream-refused",apiKey:"fixture-stream-credential"});
   for (const [venue,open,message] of [
     ["pyth_hermes", () => deniedHermes.streamPriceUpdates({ids:["ab".repeat(32)]}), "invalid Bearer [redacted]"],
