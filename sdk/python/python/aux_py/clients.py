@@ -3,30 +3,42 @@ from __future__ import annotations
 from typing import Any
 from decimal import Decimal
 from . import execute, _open_stream, _call
+from . import aevo_models as Aevo
+from . import apex_omni_models as ApexOmni
 from . import arcus_models as Arcus
 from . import aster_models as Aster
+from . import backpack_models as Backpack
+from . import binance_spot_models as BinanceSpot
 from . import birdeye_models as Birdeye
+from . import bybit_models as Bybit
 from . import chainlink_candles_models as ChainlinkCandles
 from . import chainlink_streams_models as ChainlinkStreams
 from . import databento_historical_models as DatabentoHistorical
 from . import databento_reference_models as DatabentoReference
 from . import decibel_models as Decibel
+from . import deribit_models as Deribit
 from . import derive_models as Derive
 from . import dune_models as Dune
+from . import dydx_v4_models as DydxV4
 from . import edgex_models as Edgex
 from . import extended_models as Extended
 from . import grvt_models as Grvt
+from . import hibachi_models as Hibachi
 from . import hyperdash_models as Hyperdash
 from . import hyperliquid_models as Hyperliquid
 from . import injective_models as Injective
 from . import kalshi_models as Kalshi
 from . import kalshi_perps_models as KalshiPerps
 from . import katana_models as Katana
+from . import kraken_spot_models as KrakenSpot
+from . import kuru_models as Kuru
 from . import lighter_models as Lighter
 from . import metric_models as Metric
 from . import monaco_models as Monaco
 from . import nado_models as Nado
+from . import okx_models as Okx
 from . import ondo_perps_models as OndoPerps
+from . import orderly_models as Orderly
 from . import pacifica_models as Pacifica
 from . import paradex_models as Paradex
 from . import paragon_models as Paragon
@@ -38,6 +50,7 @@ from . import polymarket_perps_models as PolymarketPerps
 from . import pyth_hermes_models as PythHermes
 from . import pyth_pro_models as PythPro
 from . import qfex_models as Qfex
+from . import reya_models as Reya
 from . import risex_models as Risex
 from . import tardis_models as Tardis
 from . import trade_xyz_models as TradeXyz
@@ -59,6 +72,87 @@ class _Client(ClientLifecycle):
         self._origin = origin
         self._api_key = api_key
         self._api_secret = api_secret
+
+
+class AevoClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Aevo.AccountRequest | None = None, *, params: Aevo.AccountRequest | None = None) -> Aevo.AccountResponse:
+        return await execute("aevo", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: Aevo.AmendOrderRequest | None = None, *, params: Aevo.AmendOrderRequest | None = None) -> Aevo.AmendOrderResponse:
+        return await execute("aevo", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: Aevo.BalancesRequest | None = None, *, params: Aevo.BalancesRequest | None = None) -> Aevo.BalancesResponse:
+        return await execute("aevo", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: Aevo.CancelAllOrdersRequest | None = None, *, params: Aevo.CancelAllOrdersRequest | None = None) -> Aevo.CancelAllOrdersResponse:
+        return await execute("aevo", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Aevo.CancelOrderRequest | None = None, *, params: Aevo.CancelOrderRequest | None = None) -> Aevo.CancelOrderResponse:
+        return await execute("aevo", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_orders(self, request: Aevo.CancelOrdersRequest | None = None, *, params: Aevo.CancelOrdersRequest | None = None) -> Aevo.CancelOrdersResponse:
+        return await execute("aevo", "cancel_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Aevo.FillsRequest | None = None, *, params: Aevo.FillsRequest | None = None) -> Aevo.FillsResponse:
+        return await execute("aevo", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def index(self, request: Aevo.IndexRequest | None = None, *, params: Aevo.IndexRequest | None = None) -> Aevo.IndexResponse:
+        return await execute("aevo", "index", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Aevo.MarketsRequest | None = None, *, params: Aevo.MarketsRequest | None = None) -> Aevo.MarketsResponse:
+        return await execute("aevo", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Aevo.OpenOrdersRequest | None = None, *, params: Aevo.OpenOrdersRequest | None = None) -> Aevo.OpenOrdersResponse:
+        return await execute("aevo", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Aevo.OrderHistoryRequest | None = None, *, params: Aevo.OrderHistoryRequest | None = None) -> Aevo.OrderHistoryResponse:
+        return await execute("aevo", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Aevo.OrderStatusRequest | None = None, *, params: Aevo.OrderStatusRequest | None = None) -> Aevo.OrderStatusResponse:
+        return await execute("aevo", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Aevo.PlaceOrderRequest | None = None, *, params: Aevo.PlaceOrderRequest | None = None) -> Aevo.PlaceOrderResponse:
+        return await execute("aevo", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Aevo.PositionsRequest | None = None, *, params: Aevo.PositionsRequest | None = None) -> Aevo.PositionsResponse:
+        return await execute("aevo", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def statistics(self, request: Aevo.StatisticsRequest | None = None, *, params: Aevo.StatisticsRequest | None = None) -> Aevo.StatisticsResponse:
+        return await execute("aevo", "statistics", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Aevo.TradesRequest | None = None, *, params: Aevo.TradesRequest | None = None) -> Aevo.TradesResponse:
+        return await execute("aevo", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_rpc(self, *, endpoint=None, capacity=128, timeout_ms=10000):
+        options = dict(capacity=capacity, timeout_ms=timeout_ms)
+        return await _open_stream('aevo', 'open_rpc', options, endpoint, self._api_key, self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Aevo.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('aevo', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class ApexOmniClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def markets(self, request: ApexOmni.MarketsRequest | None = None, *, params: ApexOmni.MarketsRequest | None = None) -> ApexOmni.MarketsResponse:
+        return await execute("apex_omni", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: ApexOmni.TickerRequest | None = None, *, params: ApexOmni.TickerRequest | None = None) -> ApexOmni.TickerResponse:
+        return await execute("apex_omni", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: ApexOmni.TradesRequest | None = None, *, params: ApexOmni.TradesRequest | None = None) -> ApexOmni.TradesResponse:
+        return await execute("apex_omni", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: ApexOmni.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('apex_omni', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class ArcusClient(_Client):
@@ -138,6 +232,141 @@ class AsterClient(_Client):
     async def subscribe(self, specification: Aster.Subscription | None = None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('aster', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class BackpackClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Backpack.AccountRequest | None = None, *, params: Backpack.AccountRequest | None = None) -> Backpack.AccountResponse:
+        return await execute("backpack", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: Backpack.BalancesRequest | None = None, *, params: Backpack.BalancesRequest | None = None) -> Backpack.BalancesResponse:
+        return await execute("backpack", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: Backpack.CancelAllOrdersRequest | None = None, *, params: Backpack.CancelAllOrdersRequest | None = None) -> Backpack.CancelAllOrdersResponse:
+        return await execute("backpack", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Backpack.CancelOrderRequest | None = None, *, params: Backpack.CancelOrderRequest | None = None) -> Backpack.CancelOrderResponse:
+        return await execute("backpack", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Backpack.FillsRequest | None = None, *, params: Backpack.FillsRequest | None = None) -> Backpack.FillsResponse:
+        return await execute("backpack", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Backpack.MarketsRequest | None = None, *, params: Backpack.MarketsRequest | None = None) -> Backpack.MarketsResponse:
+        return await execute("backpack", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Backpack.OpenOrdersRequest | None = None, *, params: Backpack.OpenOrdersRequest | None = None) -> Backpack.OpenOrdersResponse:
+        return await execute("backpack", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Backpack.OrderHistoryRequest | None = None, *, params: Backpack.OrderHistoryRequest | None = None) -> Backpack.OrderHistoryResponse:
+        return await execute("backpack", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Backpack.OrderStatusRequest | None = None, *, params: Backpack.OrderStatusRequest | None = None) -> Backpack.OrderStatusResponse:
+        return await execute("backpack", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Backpack.PlaceOrderRequest | None = None, *, params: Backpack.PlaceOrderRequest | None = None) -> Backpack.PlaceOrderResponse:
+        return await execute("backpack", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_orders(self, request: Backpack.PlaceOrdersRequest | None = None, *, params: Backpack.PlaceOrdersRequest | None = None) -> Backpack.PlaceOrdersResponse:
+        return await execute("backpack", "place_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Backpack.PositionsRequest | None = None, *, params: Backpack.PositionsRequest | None = None) -> Backpack.PositionsResponse:
+        return await execute("backpack", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: Backpack.TickerRequest | None = None, *, params: Backpack.TickerRequest | None = None) -> Backpack.TickerResponse:
+        return await execute("backpack", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Backpack.TradesRequest | None = None, *, params: Backpack.TradesRequest | None = None) -> Backpack.TradesResponse:
+        return await execute("backpack", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Backpack.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('backpack', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class BinanceSpotClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: BinanceSpot.AccountRequest | None = None, *, params: BinanceSpot.AccountRequest | None = None) -> BinanceSpot.AccountResponse:
+        return await execute("binance_spot", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def agg_trades(self, request: BinanceSpot.AggTradesRequest | None = None, *, params: BinanceSpot.AggTradesRequest | None = None) -> BinanceSpot.AggTradesResponse:
+        return await execute("binance_spot", "agg_trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: BinanceSpot.AmendOrderRequest | None = None, *, params: BinanceSpot.AmendOrderRequest | None = None) -> BinanceSpot.AmendOrderResponse:
+        return await execute("binance_spot", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: BinanceSpot.CancelAllOrdersRequest | None = None, *, params: BinanceSpot.CancelAllOrdersRequest | None = None) -> BinanceSpot.CancelAllOrdersResponse:
+        return await execute("binance_spot", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: BinanceSpot.CancelOrderRequest | None = None, *, params: BinanceSpot.CancelOrderRequest | None = None) -> BinanceSpot.CancelOrderResponse:
+        return await execute("binance_spot", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order_list(self, request: BinanceSpot.CancelOrderListRequest | None = None, *, params: BinanceSpot.CancelOrderListRequest | None = None) -> BinanceSpot.CancelOrderListResponse:
+        return await execute("binance_spot", "cancel_order_list", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_replace_order(self, request: BinanceSpot.CancelReplaceOrderRequest | None = None, *, params: BinanceSpot.CancelReplaceOrderRequest | None = None) -> BinanceSpot.CancelReplaceOrderResponse:
+        return await execute("binance_spot", "cancel_replace_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: BinanceSpot.FillsRequest | None = None, *, params: BinanceSpot.FillsRequest | None = None) -> BinanceSpot.FillsResponse:
+        return await execute("binance_spot", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: BinanceSpot.MarketsRequest | None = None, *, params: BinanceSpot.MarketsRequest | None = None) -> BinanceSpot.MarketsResponse:
+        return await execute("binance_spot", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_order_lists(self, request: BinanceSpot.OpenOrderListsRequest | None = None, *, params: BinanceSpot.OpenOrderListsRequest | None = None) -> BinanceSpot.OpenOrderListsResponse:
+        return await execute("binance_spot", "open_order_lists", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: BinanceSpot.OpenOrdersRequest | None = None, *, params: BinanceSpot.OpenOrdersRequest | None = None) -> BinanceSpot.OpenOrdersResponse:
+        return await execute("binance_spot", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: BinanceSpot.OrderHistoryRequest | None = None, *, params: BinanceSpot.OrderHistoryRequest | None = None) -> BinanceSpot.OrderHistoryResponse:
+        return await execute("binance_spot", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_list_history(self, request: BinanceSpot.OrderListHistoryRequest | None = None, *, params: BinanceSpot.OrderListHistoryRequest | None = None) -> BinanceSpot.OrderListHistoryResponse:
+        return await execute("binance_spot", "order_list_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_list_status(self, request: BinanceSpot.OrderListStatusRequest | None = None, *, params: BinanceSpot.OrderListStatusRequest | None = None) -> BinanceSpot.OrderListStatusResponse:
+        return await execute("binance_spot", "order_list_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: BinanceSpot.OrderStatusRequest | None = None, *, params: BinanceSpot.OrderStatusRequest | None = None) -> BinanceSpot.OrderStatusResponse:
+        return await execute("binance_spot", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_oco(self, request: BinanceSpot.PlaceOcoRequest | None = None, *, params: BinanceSpot.PlaceOcoRequest | None = None) -> BinanceSpot.PlaceOcoResponse:
+        return await execute("binance_spot", "place_oco", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_opo(self, request: BinanceSpot.PlaceOpoRequest | None = None, *, params: BinanceSpot.PlaceOpoRequest | None = None) -> BinanceSpot.PlaceOpoResponse:
+        return await execute("binance_spot", "place_opo", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_opoco(self, request: BinanceSpot.PlaceOpocoRequest | None = None, *, params: BinanceSpot.PlaceOpocoRequest | None = None) -> BinanceSpot.PlaceOpocoResponse:
+        return await execute("binance_spot", "place_opoco", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: BinanceSpot.PlaceOrderRequest | None = None, *, params: BinanceSpot.PlaceOrderRequest | None = None) -> BinanceSpot.PlaceOrderResponse:
+        return await execute("binance_spot", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_oto(self, request: BinanceSpot.PlaceOtoRequest | None = None, *, params: BinanceSpot.PlaceOtoRequest | None = None) -> BinanceSpot.PlaceOtoResponse:
+        return await execute("binance_spot", "place_oto", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_otoco(self, request: BinanceSpot.PlaceOtocoRequest | None = None, *, params: BinanceSpot.PlaceOtocoRequest | None = None) -> BinanceSpot.PlaceOtocoResponse:
+        return await execute("binance_spot", "place_otoco", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: BinanceSpot.TickerRequest | None = None, *, params: BinanceSpot.TickerRequest | None = None) -> BinanceSpot.TickerResponse:
+        return await execute("binance_spot", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: BinanceSpot.TradesRequest | None = None, *, params: BinanceSpot.TradesRequest | None = None) -> BinanceSpot.TradesResponse:
+        return await execute("binance_spot", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_rpc(self, *, endpoint=None, capacity=128, timeout_ms=10000):
+        options = dict(capacity=capacity, timeout_ms=timeout_ms)
+        return await _open_stream('binance_spot', 'open_rpc', options, endpoint, self._api_key, self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: BinanceSpot.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('binance_spot', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class BirdeyeClient(_Client):
@@ -280,6 +509,71 @@ class BirdeyeClient(_Client):
         return await execute("birdeye", "trades_v3", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
 
 
+class BybitClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Bybit.AccountRequest | None = None, *, params: Bybit.AccountRequest | None = None) -> Bybit.AccountResponse:
+        return await execute("bybit", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: Bybit.AmendOrderRequest | None = None, *, params: Bybit.AmendOrderRequest | None = None) -> Bybit.AmendOrderResponse:
+        return await execute("bybit", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_orders(self, request: Bybit.AmendOrdersRequest | None = None, *, params: Bybit.AmendOrdersRequest | None = None) -> Bybit.AmendOrdersResponse:
+        return await execute("bybit", "amend_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: Bybit.BalancesRequest | None = None, *, params: Bybit.BalancesRequest | None = None) -> Bybit.BalancesResponse:
+        return await execute("bybit", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: Bybit.CancelAllOrdersRequest | None = None, *, params: Bybit.CancelAllOrdersRequest | None = None) -> Bybit.CancelAllOrdersResponse:
+        return await execute("bybit", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Bybit.CancelOrderRequest | None = None, *, params: Bybit.CancelOrderRequest | None = None) -> Bybit.CancelOrderResponse:
+        return await execute("bybit", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_orders(self, request: Bybit.CancelOrdersRequest | None = None, *, params: Bybit.CancelOrdersRequest | None = None) -> Bybit.CancelOrdersResponse:
+        return await execute("bybit", "cancel_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Bybit.FillsRequest | None = None, *, params: Bybit.FillsRequest | None = None) -> Bybit.FillsResponse:
+        return await execute("bybit", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Bybit.MarketsRequest | None = None, *, params: Bybit.MarketsRequest | None = None) -> Bybit.MarketsResponse:
+        return await execute("bybit", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Bybit.OpenOrdersRequest | None = None, *, params: Bybit.OpenOrdersRequest | None = None) -> Bybit.OpenOrdersResponse:
+        return await execute("bybit", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Bybit.OrderHistoryRequest | None = None, *, params: Bybit.OrderHistoryRequest | None = None) -> Bybit.OrderHistoryResponse:
+        return await execute("bybit", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Bybit.OrderStatusRequest | None = None, *, params: Bybit.OrderStatusRequest | None = None) -> Bybit.OrderStatusResponse:
+        return await execute("bybit", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Bybit.PlaceOrderRequest | None = None, *, params: Bybit.PlaceOrderRequest | None = None) -> Bybit.PlaceOrderResponse:
+        return await execute("bybit", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_orders(self, request: Bybit.PlaceOrdersRequest | None = None, *, params: Bybit.PlaceOrdersRequest | None = None) -> Bybit.PlaceOrdersResponse:
+        return await execute("bybit", "place_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Bybit.PositionsRequest | None = None, *, params: Bybit.PositionsRequest | None = None) -> Bybit.PositionsResponse:
+        return await execute("bybit", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: Bybit.TickerRequest | None = None, *, params: Bybit.TickerRequest | None = None) -> Bybit.TickerResponse:
+        return await execute("bybit", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Bybit.TradesRequest | None = None, *, params: Bybit.TradesRequest | None = None) -> Bybit.TradesResponse:
+        return await execute("bybit", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_rpc(self, *, endpoint=None, capacity=128, timeout_ms=10000):
+        options = dict(capacity=capacity, timeout_ms=timeout_ms)
+        return await _open_stream('bybit', 'open_rpc', options, endpoint, self._api_key, self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Bybit.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('bybit', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class ChainlinkCandlestickClient(_Client):
     async def authorize(self, request: ChainlinkCandles.AuthorizeRequest | None = None, *, params: ChainlinkCandles.AuthorizeRequest | None = None) -> ChainlinkCandles.NativeResponse:
         return await execute("chainlink_candles", "authorize", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
@@ -376,6 +670,86 @@ class DecibelClient(_Client):
     async def subscribe(self, specification: Decibel.Subscription | None = None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('decibel', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class DeribitClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Deribit.AccountRequest | None = None, *, params: Deribit.AccountRequest | None = None) -> Deribit.AccountResponse:
+        return await execute("deribit", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_by_label(self, request: Deribit.AmendByLabelRequest | None = None, *, params: Deribit.AmendByLabelRequest | None = None) -> Deribit.AmendByLabelResponse:
+        return await execute("deribit", "amend_by_label", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: Deribit.AmendOrderRequest | None = None, *, params: Deribit.AmendOrderRequest | None = None) -> Deribit.AmendOrderResponse:
+        return await execute("deribit", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def authenticate(self, request: Deribit.AuthenticateRequest | None = None, *, params: Deribit.AuthenticateRequest | None = None) -> Deribit.AuthenticateResponse:
+        return await execute("deribit", "authenticate", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def buy(self, request: Deribit.BuyRequest | None = None, *, params: Deribit.BuyRequest | None = None) -> Deribit.BuyResponse:
+        return await execute("deribit", "buy", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: Deribit.CancelAllOrdersRequest | None = None, *, params: Deribit.CancelAllOrdersRequest | None = None) -> Deribit.CancelAllOrdersResponse:
+        return await execute("deribit", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_by_label(self, request: Deribit.CancelByLabelRequest | None = None, *, params: Deribit.CancelByLabelRequest | None = None) -> Deribit.CancelByLabelResponse:
+        return await execute("deribit", "cancel_by_label", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_currency_orders(self, request: Deribit.CancelCurrencyOrdersRequest | None = None, *, params: Deribit.CancelCurrencyOrdersRequest | None = None) -> Deribit.CancelCurrencyOrdersResponse:
+        return await execute("deribit", "cancel_currency_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_currency_pair_orders(self, request: Deribit.CancelCurrencyPairOrdersRequest | None = None, *, params: Deribit.CancelCurrencyPairOrdersRequest | None = None) -> Deribit.CancelCurrencyPairOrdersResponse:
+        return await execute("deribit", "cancel_currency_pair_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_instrument_orders(self, request: Deribit.CancelInstrumentOrdersRequest | None = None, *, params: Deribit.CancelInstrumentOrdersRequest | None = None) -> Deribit.CancelInstrumentOrdersResponse:
+        return await execute("deribit", "cancel_instrument_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_kind_orders(self, request: Deribit.CancelKindOrdersRequest | None = None, *, params: Deribit.CancelKindOrdersRequest | None = None) -> Deribit.CancelKindOrdersResponse:
+        return await execute("deribit", "cancel_kind_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Deribit.CancelOrderRequest | None = None, *, params: Deribit.CancelOrderRequest | None = None) -> Deribit.CancelOrderResponse:
+        return await execute("deribit", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_quotes(self, request: Deribit.CancelQuotesRequest | None = None, *, params: Deribit.CancelQuotesRequest | None = None) -> Deribit.CancelQuotesResponse:
+        return await execute("deribit", "cancel_quotes", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Deribit.FillsRequest | None = None, *, params: Deribit.FillsRequest | None = None) -> Deribit.FillsResponse:
+        return await execute("deribit", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Deribit.MarketsRequest | None = None, *, params: Deribit.MarketsRequest | None = None) -> Deribit.MarketsResponse:
+        return await execute("deribit", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Deribit.OpenOrdersRequest | None = None, *, params: Deribit.OpenOrdersRequest | None = None) -> Deribit.OpenOrdersResponse:
+        return await execute("deribit", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Deribit.OrderHistoryRequest | None = None, *, params: Deribit.OrderHistoryRequest | None = None) -> Deribit.OrderHistoryResponse:
+        return await execute("deribit", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Deribit.OrderStatusRequest | None = None, *, params: Deribit.OrderStatusRequest | None = None) -> Deribit.OrderStatusResponse:
+        return await execute("deribit", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Deribit.PositionsRequest | None = None, *, params: Deribit.PositionsRequest | None = None) -> Deribit.PositionsResponse:
+        return await execute("deribit", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def sell(self, request: Deribit.SellRequest | None = None, *, params: Deribit.SellRequest | None = None) -> Deribit.SellResponse:
+        return await execute("deribit", "sell", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: Deribit.TickerRequest | None = None, *, params: Deribit.TickerRequest | None = None) -> Deribit.TickerResponse:
+        return await execute("deribit", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Deribit.TradesRequest | None = None, *, params: Deribit.TradesRequest | None = None) -> Deribit.TradesResponse:
+        return await execute("deribit", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_rpc(self, *, endpoint=None, capacity=128, timeout_ms=10000):
+        options = dict(capacity=capacity, timeout_ms=timeout_ms)
+        return await _open_stream('deribit', 'open_rpc', options, endpoint, self._api_key, self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Deribit.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('deribit', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class DeriveClient(_Client):
@@ -828,6 +1202,64 @@ class DuneClient(_Client):
     async def get_latest_query_results_csv(self, query_id: int | Dune.GetLatestQueryResultsCsvParams | None = None, request: Dune.ResultOptions | Dune.GetLatestQueryResultsCsvParams | None = None, *, params: Dune.GetLatestQueryResultsCsvParams | None = None) -> Dune.CsvResults:
         payload = _dune_args('query_id', query_id, request, params, post=False)
         return await execute('dune', 'get_latest_query_results_csv', payload, origin=self._origin, api_key=self._api_key)
+
+
+class DydxV4Client(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: DydxV4.AccountRequest | None = None, *, params: DydxV4.AccountRequest | None = None) -> DydxV4.AccountResponse:
+        return await execute("dydx_v4", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: DydxV4.BalancesRequest | None = None, *, params: DydxV4.BalancesRequest | None = None) -> DydxV4.BalancesResponse:
+        return await execute("dydx_v4", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: DydxV4.CancelOrderRequest | None = None, *, params: DydxV4.CancelOrderRequest | None = None) -> DydxV4.CancelOrderResponse:
+        return await execute("dydx_v4", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_orders(self, request: DydxV4.CancelOrdersRequest | None = None, *, params: DydxV4.CancelOrdersRequest | None = None) -> DydxV4.CancelOrdersResponse:
+        return await execute("dydx_v4", "cancel_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_stateful_orders(self, request: DydxV4.CancelStatefulOrdersRequest | None = None, *, params: DydxV4.CancelStatefulOrdersRequest | None = None) -> DydxV4.CancelStatefulOrdersResponse:
+        return await execute("dydx_v4", "cancel_stateful_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: DydxV4.FillsRequest | None = None, *, params: DydxV4.FillsRequest | None = None) -> DydxV4.FillsResponse:
+        return await execute("dydx_v4", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: DydxV4.MarketsRequest | None = None, *, params: DydxV4.MarketsRequest | None = None) -> DydxV4.MarketsResponse:
+        return await execute("dydx_v4", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: DydxV4.OpenOrdersRequest | None = None, *, params: DydxV4.OpenOrdersRequest | None = None) -> DydxV4.OpenOrdersResponse:
+        return await execute("dydx_v4", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: DydxV4.OrderHistoryRequest | None = None, *, params: DydxV4.OrderHistoryRequest | None = None) -> DydxV4.OrderHistoryResponse:
+        return await execute("dydx_v4", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: DydxV4.OrderStatusRequest | None = None, *, params: DydxV4.OrderStatusRequest | None = None) -> DydxV4.OrderStatusResponse:
+        return await execute("dydx_v4", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: DydxV4.PlaceOrderRequest | None = None, *, params: DydxV4.PlaceOrderRequest | None = None) -> DydxV4.PlaceOrderResponse:
+        return await execute("dydx_v4", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_orders(self, request: DydxV4.PlaceOrdersRequest | None = None, *, params: DydxV4.PlaceOrdersRequest | None = None) -> DydxV4.PlaceOrdersResponse:
+        return await execute("dydx_v4", "place_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: DydxV4.PositionsRequest | None = None, *, params: DydxV4.PositionsRequest | None = None) -> DydxV4.PositionsResponse:
+        return await execute("dydx_v4", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def replace_order(self, request: DydxV4.ReplaceOrderRequest | None = None, *, params: DydxV4.ReplaceOrderRequest | None = None) -> DydxV4.ReplaceOrderResponse:
+        return await execute("dydx_v4", "replace_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: DydxV4.TradesRequest | None = None, *, params: DydxV4.TradesRequest | None = None) -> DydxV4.TradesResponse:
+        return await execute("dydx_v4", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def transaction(self, request: DydxV4.TransactionRequest | None = None, *, params: DydxV4.TransactionRequest | None = None) -> DydxV4.TransactionResponse:
+        return await execute("dydx_v4", "transaction", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: DydxV4.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('dydx_v4', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class EdgeXClient(_Client):
@@ -1328,6 +1760,68 @@ class GrvtClient(_Client):
     async def subscribe(self, specification: Grvt.Subscription | None = None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('grvt', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class HibachiClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Hibachi.AccountRequest | None = None, *, params: Hibachi.AccountRequest | None = None) -> Hibachi.AccountResponse:
+        return await execute("hibachi", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: Hibachi.AmendOrderRequest | None = None, *, params: Hibachi.AmendOrderRequest | None = None) -> Hibachi.AmendOrderResponse:
+        return await execute("hibachi", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: Hibachi.BalancesRequest | None = None, *, params: Hibachi.BalancesRequest | None = None) -> Hibachi.BalancesResponse:
+        return await execute("hibachi", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: Hibachi.CancelAllOrdersRequest | None = None, *, params: Hibachi.CancelAllOrdersRequest | None = None) -> Hibachi.CancelAllOrdersResponse:
+        return await execute("hibachi", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Hibachi.CancelOrderRequest | None = None, *, params: Hibachi.CancelOrderRequest | None = None) -> Hibachi.CancelOrderResponse:
+        return await execute("hibachi", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Hibachi.FillsRequest | None = None, *, params: Hibachi.FillsRequest | None = None) -> Hibachi.FillsResponse:
+        return await execute("hibachi", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Hibachi.MarketsRequest | None = None, *, params: Hibachi.MarketsRequest | None = None) -> Hibachi.MarketsResponse:
+        return await execute("hibachi", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Hibachi.OpenOrdersRequest | None = None, *, params: Hibachi.OpenOrdersRequest | None = None) -> Hibachi.OpenOrdersResponse:
+        return await execute("hibachi", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Hibachi.OrderHistoryRequest | None = None, *, params: Hibachi.OrderHistoryRequest | None = None) -> Hibachi.OrderHistoryResponse:
+        return await execute("hibachi", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Hibachi.OrderStatusRequest | None = None, *, params: Hibachi.OrderStatusRequest | None = None) -> Hibachi.OrderStatusResponse:
+        return await execute("hibachi", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Hibachi.PlaceOrderRequest | None = None, *, params: Hibachi.PlaceOrderRequest | None = None) -> Hibachi.PlaceOrderResponse:
+        return await execute("hibachi", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_orders(self, request: Hibachi.PlaceOrdersRequest | None = None, *, params: Hibachi.PlaceOrdersRequest | None = None) -> Hibachi.PlaceOrdersResponse:
+        return await execute("hibachi", "place_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Hibachi.PositionsRequest | None = None, *, params: Hibachi.PositionsRequest | None = None) -> Hibachi.PositionsResponse:
+        return await execute("hibachi", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def prices(self, request: Hibachi.PricesRequest | None = None, *, params: Hibachi.PricesRequest | None = None) -> Hibachi.PricesResponse:
+        return await execute("hibachi", "prices", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: Hibachi.TickerRequest | None = None, *, params: Hibachi.TickerRequest | None = None) -> Hibachi.TickerResponse:
+        return await execute("hibachi", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Hibachi.TradesRequest | None = None, *, params: Hibachi.TradesRequest | None = None) -> Hibachi.TradesResponse:
+        return await execute("hibachi", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_rpc(self, *, endpoint=None, capacity=128, timeout_ms=10000):
+        options = dict(capacity=capacity, timeout_ms=timeout_ms)
+        return await _open_stream('hibachi', 'open_rpc', options, endpoint, self._api_key, self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Hibachi.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('hibachi', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class HistoricalClient(_Client):
@@ -4537,6 +5031,90 @@ class KatanaClient(_Client):
         return await _open_stream('katana', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
+class KrakenSpotClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: KrakenSpot.AccountRequest | None = None, *, params: KrakenSpot.AccountRequest | None = None) -> KrakenSpot.AccountResponse:
+        return await execute("kraken_spot", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: KrakenSpot.AmendOrderRequest | None = None, *, params: KrakenSpot.AmendOrderRequest | None = None) -> KrakenSpot.AmendOrderResponse:
+        return await execute("kraken_spot", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: KrakenSpot.BalancesRequest | None = None, *, params: KrakenSpot.BalancesRequest | None = None) -> KrakenSpot.BalancesResponse:
+        return await execute("kraken_spot", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: KrakenSpot.CancelAllOrdersRequest | None = None, *, params: KrakenSpot.CancelAllOrdersRequest | None = None) -> KrakenSpot.CancelAllOrdersResponse:
+        return await execute("kraken_spot", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: KrakenSpot.CancelOrderRequest | None = None, *, params: KrakenSpot.CancelOrderRequest | None = None) -> KrakenSpot.CancelOrderResponse:
+        return await execute("kraken_spot", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_orders(self, request: KrakenSpot.CancelOrdersRequest | None = None, *, params: KrakenSpot.CancelOrdersRequest | None = None) -> KrakenSpot.CancelOrdersResponse:
+        return await execute("kraken_spot", "cancel_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: KrakenSpot.FillsRequest | None = None, *, params: KrakenSpot.FillsRequest | None = None) -> KrakenSpot.FillsResponse:
+        return await execute("kraken_spot", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: KrakenSpot.MarketsRequest | None = None, *, params: KrakenSpot.MarketsRequest | None = None) -> KrakenSpot.MarketsResponse:
+        return await execute("kraken_spot", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: KrakenSpot.OpenOrdersRequest | None = None, *, params: KrakenSpot.OpenOrdersRequest | None = None) -> KrakenSpot.OpenOrdersResponse:
+        return await execute("kraken_spot", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: KrakenSpot.OrderHistoryRequest | None = None, *, params: KrakenSpot.OrderHistoryRequest | None = None) -> KrakenSpot.OrderHistoryResponse:
+        return await execute("kraken_spot", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: KrakenSpot.OrderStatusRequest | None = None, *, params: KrakenSpot.OrderStatusRequest | None = None) -> KrakenSpot.OrderStatusResponse:
+        return await execute("kraken_spot", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: KrakenSpot.PlaceOrderRequest | None = None, *, params: KrakenSpot.PlaceOrderRequest | None = None) -> KrakenSpot.PlaceOrderResponse:
+        return await execute("kraken_spot", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_orders(self, request: KrakenSpot.PlaceOrdersRequest | None = None, *, params: KrakenSpot.PlaceOrdersRequest | None = None) -> KrakenSpot.PlaceOrdersResponse:
+        return await execute("kraken_spot", "place_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: KrakenSpot.PositionsRequest | None = None, *, params: KrakenSpot.PositionsRequest | None = None) -> KrakenSpot.PositionsResponse:
+        return await execute("kraken_spot", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: KrakenSpot.TickerRequest | None = None, *, params: KrakenSpot.TickerRequest | None = None) -> KrakenSpot.TickerResponse:
+        return await execute("kraken_spot", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: KrakenSpot.TradesRequest | None = None, *, params: KrakenSpot.TradesRequest | None = None) -> KrakenSpot.TradesResponse:
+        return await execute("kraken_spot", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def websocket_token(self, request: KrakenSpot.WebsocketTokenRequest | None = None, *, params: KrakenSpot.WebsocketTokenRequest | None = None) -> KrakenSpot.WebsocketTokenResponse:
+        return await execute("kraken_spot", "websocket_token", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_rpc(self, *, endpoint=None, capacity=128, timeout_ms=10000):
+        options = dict(capacity=capacity, timeout_ms=timeout_ms)
+        return await _open_stream('kraken_spot', 'open_rpc', options, endpoint, self._api_key, self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: KrakenSpot.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('kraken_spot', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class KuruClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def market(self, request: Kuru.MarketRequest | None = None, *, params: Kuru.MarketRequest | None = None) -> Kuru.MarketResponse:
+        return await execute("kuru", "market", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Kuru.MarketsRequest | None = None, *, params: Kuru.MarketsRequest | None = None) -> Kuru.MarketsResponse:
+        return await execute("kuru", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Kuru.TradesRequest | None = None, *, params: Kuru.TradesRequest | None = None) -> Kuru.TradesResponse:
+        return await execute("kuru", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Kuru.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('kuru', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class LighterClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, signer=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -4770,6 +5348,92 @@ class NadoClient(_Client):
         return await _open_stream('nado', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
+class OkxClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Okx.AccountRequest | None = None, *, params: Okx.AccountRequest | None = None) -> Okx.AccountResponse:
+        return await execute("okx", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def algo_order_history(self, request: Okx.AlgoOrderHistoryRequest | None = None, *, params: Okx.AlgoOrderHistoryRequest | None = None) -> Okx.AlgoOrderHistoryResponse:
+        return await execute("okx", "algo_order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def algo_order_status(self, request: Okx.AlgoOrderStatusRequest | None = None, *, params: Okx.AlgoOrderStatusRequest | None = None) -> Okx.AlgoOrderStatusResponse:
+        return await execute("okx", "algo_order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_algo_order(self, request: Okx.AmendAlgoOrderRequest | None = None, *, params: Okx.AmendAlgoOrderRequest | None = None) -> Okx.AmendAlgoOrderResponse:
+        return await execute("okx", "amend_algo_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: Okx.AmendOrderRequest | None = None, *, params: Okx.AmendOrderRequest | None = None) -> Okx.AmendOrderResponse:
+        return await execute("okx", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_orders(self, request: Okx.AmendOrdersRequest | None = None, *, params: Okx.AmendOrdersRequest | None = None) -> Okx.AmendOrdersResponse:
+        return await execute("okx", "amend_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: Okx.BalancesRequest | None = None, *, params: Okx.BalancesRequest | None = None) -> Okx.BalancesResponse:
+        return await execute("okx", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_advance_algo_orders(self, request: Okx.CancelAdvanceAlgoOrdersRequest | None = None, *, params: Okx.CancelAdvanceAlgoOrdersRequest | None = None) -> Okx.CancelAdvanceAlgoOrdersResponse:
+        return await execute("okx", "cancel_advance_algo_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_algo_orders(self, request: Okx.CancelAlgoOrdersRequest | None = None, *, params: Okx.CancelAlgoOrdersRequest | None = None) -> Okx.CancelAlgoOrdersResponse:
+        return await execute("okx", "cancel_algo_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Okx.CancelOrderRequest | None = None, *, params: Okx.CancelOrderRequest | None = None) -> Okx.CancelOrderResponse:
+        return await execute("okx", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_orders(self, request: Okx.CancelOrdersRequest | None = None, *, params: Okx.CancelOrdersRequest | None = None) -> Okx.CancelOrdersResponse:
+        return await execute("okx", "cancel_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Okx.FillsRequest | None = None, *, params: Okx.FillsRequest | None = None) -> Okx.FillsResponse:
+        return await execute("okx", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Okx.MarketsRequest | None = None, *, params: Okx.MarketsRequest | None = None) -> Okx.MarketsResponse:
+        return await execute("okx", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_algo_orders(self, request: Okx.OpenAlgoOrdersRequest | None = None, *, params: Okx.OpenAlgoOrdersRequest | None = None) -> Okx.OpenAlgoOrdersResponse:
+        return await execute("okx", "open_algo_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Okx.OpenOrdersRequest | None = None, *, params: Okx.OpenOrdersRequest | None = None) -> Okx.OpenOrdersResponse:
+        return await execute("okx", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Okx.OrderHistoryRequest | None = None, *, params: Okx.OrderHistoryRequest | None = None) -> Okx.OrderHistoryResponse:
+        return await execute("okx", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Okx.OrderStatusRequest | None = None, *, params: Okx.OrderStatusRequest | None = None) -> Okx.OrderStatusResponse:
+        return await execute("okx", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_algo_order(self, request: Okx.PlaceAlgoOrderRequest | None = None, *, params: Okx.PlaceAlgoOrderRequest | None = None) -> Okx.PlaceAlgoOrderResponse:
+        return await execute("okx", "place_algo_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Okx.PlaceOrderRequest | None = None, *, params: Okx.PlaceOrderRequest | None = None) -> Okx.PlaceOrderResponse:
+        return await execute("okx", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_orders(self, request: Okx.PlaceOrdersRequest | None = None, *, params: Okx.PlaceOrdersRequest | None = None) -> Okx.PlaceOrdersResponse:
+        return await execute("okx", "place_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Okx.PositionsRequest | None = None, *, params: Okx.PositionsRequest | None = None) -> Okx.PositionsResponse:
+        return await execute("okx", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: Okx.TickerRequest | None = None, *, params: Okx.TickerRequest | None = None) -> Okx.TickerResponse:
+        return await execute("okx", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def tickers(self, request: Okx.TickersRequest | None = None, *, params: Okx.TickersRequest | None = None) -> Okx.TickersResponse:
+        return await execute("okx", "tickers", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Okx.TradesRequest | None = None, *, params: Okx.TradesRequest | None = None) -> Okx.TradesResponse:
+        return await execute("okx", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_rpc(self, *, endpoint=None, capacity=128, timeout_ms=10000):
+        options = dict(capacity=capacity, timeout_ms=timeout_ms)
+        return await _open_stream('okx', 'open_rpc', options, endpoint, self._api_key, self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Okx.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('okx', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class OndoPerpsClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -4805,6 +5469,103 @@ class OndoPerpsClient(_Client):
     async def subscribe(self, specification: OndoPerps.Subscription | None = None, *, params=None, endpoint=None):
         params = _request_params(specification, params)
         return await _open_stream('ondo_perps', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
+class OrderlyClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def account(self, request: Orderly.AccountRequest | None = None, *, params: Orderly.AccountRequest | None = None) -> Orderly.AccountResponse:
+        return await execute("orderly", "account", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def algo_order_by_client_id(self, request: Orderly.AlgoOrderByClientIdRequest | None = None, *, params: Orderly.AlgoOrderByClientIdRequest | None = None) -> Orderly.AlgoOrderByClientIdResponse:
+        return await execute("orderly", "algo_order_by_client_id", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def algo_order_status(self, request: Orderly.AlgoOrderStatusRequest | None = None, *, params: Orderly.AlgoOrderStatusRequest | None = None) -> Orderly.AlgoOrderStatusResponse:
+        return await execute("orderly", "algo_order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def algo_orders(self, request: Orderly.AlgoOrdersRequest | None = None, *, params: Orderly.AlgoOrdersRequest | None = None) -> Orderly.AlgoOrdersResponse:
+        return await execute("orderly", "algo_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_algo_order(self, request: Orderly.AmendAlgoOrderRequest | None = None, *, params: Orderly.AmendAlgoOrderRequest | None = None) -> Orderly.AmendAlgoOrderResponse:
+        return await execute("orderly", "amend_algo_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def amend_order(self, request: Orderly.AmendOrderRequest | None = None, *, params: Orderly.AmendOrderRequest | None = None) -> Orderly.AmendOrderResponse:
+        return await execute("orderly", "amend_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def balances(self, request: Orderly.BalancesRequest | None = None, *, params: Orderly.BalancesRequest | None = None) -> Orderly.BalancesResponse:
+        return await execute("orderly", "balances", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_algo_by_client_id(self, request: Orderly.CancelAlgoByClientIdRequest | None = None, *, params: Orderly.CancelAlgoByClientIdRequest | None = None) -> Orderly.CancelAlgoByClientIdResponse:
+        return await execute("orderly", "cancel_algo_by_client_id", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_algo_order(self, request: Orderly.CancelAlgoOrderRequest | None = None, *, params: Orderly.CancelAlgoOrderRequest | None = None) -> Orderly.CancelAlgoOrderResponse:
+        return await execute("orderly", "cancel_algo_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_algo_orders(self, request: Orderly.CancelAllAlgoOrdersRequest | None = None, *, params: Orderly.CancelAllAlgoOrdersRequest | None = None) -> Orderly.CancelAllAlgoOrdersResponse:
+        return await execute("orderly", "cancel_all_algo_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_all_orders(self, request: Orderly.CancelAllOrdersRequest | None = None, *, params: Orderly.CancelAllOrdersRequest | None = None) -> Orderly.CancelAllOrdersResponse:
+        return await execute("orderly", "cancel_all_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_by_client_id(self, request: Orderly.CancelByClientIdRequest | None = None, *, params: Orderly.CancelByClientIdRequest | None = None) -> Orderly.CancelByClientIdResponse:
+        return await execute("orderly", "cancel_by_client_id", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_order(self, request: Orderly.CancelOrderRequest | None = None, *, params: Orderly.CancelOrderRequest | None = None) -> Orderly.CancelOrderResponse:
+        return await execute("orderly", "cancel_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_orders(self, request: Orderly.CancelOrdersRequest | None = None, *, params: Orderly.CancelOrdersRequest | None = None) -> Orderly.CancelOrdersResponse:
+        return await execute("orderly", "cancel_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def cancel_orders_by_client_id(self, request: Orderly.CancelOrdersByClientIdRequest | None = None, *, params: Orderly.CancelOrdersByClientIdRequest | None = None) -> Orderly.CancelOrdersByClientIdResponse:
+        return await execute("orderly", "cancel_orders_by_client_id", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def fills(self, request: Orderly.FillsRequest | None = None, *, params: Orderly.FillsRequest | None = None) -> Orderly.FillsResponse:
+        return await execute("orderly", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def market_summary(self, request: Orderly.MarketSummaryRequest | None = None, *, params: Orderly.MarketSummaryRequest | None = None) -> Orderly.MarketSummaryResponse:
+        return await execute("orderly", "market_summary", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def market_trades(self, request: Orderly.MarketTradesRequest | None = None, *, params: Orderly.MarketTradesRequest | None = None) -> Orderly.MarketTradesResponse:
+        return await execute("orderly", "market_trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Orderly.MarketsRequest | None = None, *, params: Orderly.MarketsRequest | None = None) -> Orderly.MarketsResponse:
+        return await execute("orderly", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def open_orders(self, request: Orderly.OpenOrdersRequest | None = None, *, params: Orderly.OpenOrdersRequest | None = None) -> Orderly.OpenOrdersResponse:
+        return await execute("orderly", "open_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_by_client_id(self, request: Orderly.OrderByClientIdRequest | None = None, *, params: Orderly.OrderByClientIdRequest | None = None) -> Orderly.OrderByClientIdResponse:
+        return await execute("orderly", "order_by_client_id", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_history(self, request: Orderly.OrderHistoryRequest | None = None, *, params: Orderly.OrderHistoryRequest | None = None) -> Orderly.OrderHistoryResponse:
+        return await execute("orderly", "order_history", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def order_status(self, request: Orderly.OrderStatusRequest | None = None, *, params: Orderly.OrderStatusRequest | None = None) -> Orderly.OrderStatusResponse:
+        return await execute("orderly", "order_status", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_algo_order(self, request: Orderly.PlaceAlgoOrderRequest | None = None, *, params: Orderly.PlaceAlgoOrderRequest | None = None) -> Orderly.PlaceAlgoOrderResponse:
+        return await execute("orderly", "place_algo_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_order(self, request: Orderly.PlaceOrderRequest | None = None, *, params: Orderly.PlaceOrderRequest | None = None) -> Orderly.PlaceOrderResponse:
+        return await execute("orderly", "place_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def place_orders(self, request: Orderly.PlaceOrdersRequest | None = None, *, params: Orderly.PlaceOrdersRequest | None = None) -> Orderly.PlaceOrdersResponse:
+        return await execute("orderly", "place_orders", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def positions(self, request: Orderly.PositionsRequest | None = None, *, params: Orderly.PositionsRequest | None = None) -> Orderly.PositionsResponse:
+        return await execute("orderly", "positions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def ticker(self, request: Orderly.TickerRequest | None = None, *, params: Orderly.TickerRequest | None = None) -> Orderly.TickerResponse:
+        return await execute("orderly", "ticker", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def trades(self, request: Orderly.TradesRequest | None = None, *, params: Orderly.TradesRequest | None = None) -> Orderly.TradesResponse:
+        return await execute("orderly", "trades", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Orderly.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('orderly', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
 
 
 class PacificaClient(_Client):
@@ -6688,6 +7449,31 @@ class ReferenceClient(_Client):
         return await _open_stream('databento', 'adjustment_factors_get_range', payload, self._origin, self._api_key)
 
 
+class ReyaClient(_Client):
+    def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
+        super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
+        self._auth = auth
+
+    async def market_executions(self, request: Reya.MarketExecutionsRequest | None = None, *, params: Reya.MarketExecutionsRequest | None = None) -> Reya.MarketExecutionsResponse:
+        return await execute("reya", "market_executions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def market_summaries(self, request: Reya.MarketSummariesRequest | None = None, *, params: Reya.MarketSummariesRequest | None = None) -> Reya.MarketSummariesResponse:
+        return await execute("reya", "market_summaries", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def market_summary(self, request: Reya.MarketSummaryRequest | None = None, *, params: Reya.MarketSummaryRequest | None = None) -> Reya.MarketSummaryResponse:
+        return await execute("reya", "market_summary", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def markets(self, request: Reya.MarketsRequest | None = None, *, params: Reya.MarketsRequest | None = None) -> Reya.MarketsResponse:
+        return await execute("reya", "markets", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def wallet_executions(self, request: Reya.WalletExecutionsRequest | None = None, *, params: Reya.WalletExecutionsRequest | None = None) -> Reya.WalletExecutionsResponse:
+        return await execute("reya", "wallet_executions", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
+    async def subscribe(self, specification: Reya.Subscription | None = None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('reya', 'subscribe', params, endpoint,self._api_key,self._api_secret, auth=self._auth)
+
+
 class RisexClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -6837,4 +7623,4 @@ class VariationalClient(_Client):
     async def market_stats(self, request: Variational.MarketStatsRequest | None = None, *, params: Variational.MarketStatsRequest | None = None) -> Variational.MarketStatsResponse:
         return await execute("variational", "market_stats", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
 
-__all__ = ['ArcusClient', 'AsterClient', 'BirdeyeClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DecibelClient', 'DeriveClient', 'DuneClient', 'EdgeXClient', 'ExtendedClient', 'GrvtClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'KatanaClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'NadoClient', 'OndoPerpsClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PerplClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'RisexClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient', 'VariationalClient']
+__all__ = ['AevoClient', 'ApexOmniClient', 'ArcusClient', 'AsterClient', 'BackpackClient', 'BinanceSpotClient', 'BirdeyeClient', 'BybitClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DecibelClient', 'DeribitClient', 'DeriveClient', 'DuneClient', 'DydxV4Client', 'EdgeXClient', 'ExtendedClient', 'GrvtClient', 'HibachiClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'KatanaClient', 'KrakenSpotClient', 'KuruClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'NadoClient', 'OkxClient', 'OndoPerpsClient', 'OrderlyClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PerplClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'ReyaClient', 'RisexClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient', 'VariationalClient']

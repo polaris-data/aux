@@ -466,6 +466,245 @@ pub const polymarket_rfq = struct {
         return stream.command(.{ .operation = "reconcile" });
     }
 };
+pub const aevo = struct {
+    pub fn place_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_order", params);
+    }
+    pub fn amend_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_order", params);
+    }
+    pub fn cancel_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order", params);
+    }
+    pub fn cancel_all_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_all_orders", params);
+    }
+    pub fn pending(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "pending" });
+    }
+    pub fn reconcile(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "reconcile" });
+    }
+};
+pub const binance_spot = struct {
+    pub fn place_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_order", params);
+    }
+    pub fn amend_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_order", params);
+    }
+    pub fn cancel_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order", params);
+    }
+    pub fn cancel_replace_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_replace_order", params);
+    }
+    pub fn cancel_all_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_all_orders", params);
+    }
+    pub fn place_oco(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_oco", params);
+    }
+    pub fn place_oto(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_oto", params);
+    }
+    pub fn place_otoco(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_otoco", params);
+    }
+    pub fn place_opo(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_opo", params);
+    }
+    pub fn place_opoco(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_opoco", params);
+    }
+    pub fn cancel_order_list(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order_list", params);
+    }
+    pub fn order_status(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("order_status", params);
+    }
+    pub fn open_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("open_orders", params);
+    }
+    pub fn order_history(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("order_history", params);
+    }
+    pub fn order_list_status(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("order_list_status", params);
+    }
+    pub fn open_order_lists(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("open_order_lists", params);
+    }
+    pub fn fills(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("fills", params);
+    }
+    pub fn pending(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "pending" });
+    }
+    pub fn reconcile(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "reconcile" });
+    }
+};
+pub const bybit = struct {
+    pub fn place_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_order", params);
+    }
+    pub fn amend_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_order", params);
+    }
+    pub fn cancel_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order", params);
+    }
+    pub fn place_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_orders", params);
+    }
+    pub fn amend_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_orders", params);
+    }
+    pub fn cancel_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_orders", params);
+    }
+    pub fn pending(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "pending" });
+    }
+    pub fn reconcile(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "reconcile" });
+    }
+};
+pub const deribit = struct {
+    pub fn buy(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("buy", params);
+    }
+    pub fn sell(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("sell", params);
+    }
+    pub fn amend_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_order", params);
+    }
+    pub fn amend_by_label(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_by_label", params);
+    }
+    pub fn cancel_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order", params);
+    }
+    pub fn cancel_by_label(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_by_label", params);
+    }
+    pub fn cancel_all_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_all_orders", params);
+    }
+    pub fn cancel_instrument_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_instrument_orders", params);
+    }
+    pub fn cancel_currency_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_currency_orders", params);
+    }
+    pub fn cancel_kind_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_kind_orders", params);
+    }
+    pub fn cancel_currency_pair_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_currency_pair_orders", params);
+    }
+    pub fn mass_quote(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("mass_quote", params);
+    }
+    pub fn cancel_quotes(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_quotes", params);
+    }
+    pub fn order_status(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("order_status", params);
+    }
+    pub fn open_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("open_orders", params);
+    }
+    pub fn pending(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "pending" });
+    }
+    pub fn reconcile(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "reconcile" });
+    }
+};
+pub const hibachi = struct {
+    pub fn place_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_order", params);
+    }
+    pub fn amend_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_order", params);
+    }
+    pub fn cancel_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order", params);
+    }
+    pub fn order_status(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("order_status", params);
+    }
+    pub fn open_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("open_orders", params);
+    }
+    pub fn cancel_all_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_all_orders", params);
+    }
+    pub fn place_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_orders", params);
+    }
+    pub fn pending(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "pending" });
+    }
+    pub fn reconcile(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "reconcile" });
+    }
+};
+pub const kraken_spot = struct {
+    pub fn place_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_order", params);
+    }
+    pub fn amend_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_order", params);
+    }
+    pub fn cancel_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order", params);
+    }
+    pub fn cancel_all_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_all_orders", params);
+    }
+    pub fn place_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_orders", params);
+    }
+    pub fn cancel_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_orders", params);
+    }
+    pub fn pending(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "pending" });
+    }
+    pub fn reconcile(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "reconcile" });
+    }
+};
+pub const okx = struct {
+    pub fn place_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_order", params);
+    }
+    pub fn amend_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_order", params);
+    }
+    pub fn cancel_order(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_order", params);
+    }
+    pub fn place_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("place_orders", params);
+    }
+    pub fn amend_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("amend_orders", params);
+    }
+    pub fn cancel_orders(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
+        return stream.rpc("cancel_orders", params);
+    }
+    pub fn pending(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "pending" });
+    }
+    pub fn reconcile(stream: *const rt.Stream) !rt.Owned(rt.Value) {
+        return stream.command(.{ .operation = "reconcile" });
+    }
+};
 pub const kalshi = struct {
     pub fn subscribe(stream: *const rt.Stream, params: anytype) !rt.Owned(rt.Value) {
         return stream.rpc("subscribe", params);

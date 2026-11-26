@@ -1,0 +1,112 @@
+{
+  "client": "KuruClient",
+  "venue": "kuru",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "MarketResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "marketAddress",
+        "market_address",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "feedEpoch",
+        "feed_epoch",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "seq",
+        "seq",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketRequest": [
+      [
+        "marketAddress",
+        "market_address",
+        "String",
+        "required"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "marketAddress",
+        "market_address",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u32>",
+        "optional"
+      ],
+      [
+        "cursor",
+        "cursor",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "from",
+        "from",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "to",
+        "to",
+        "Option<u64>",
+        "optional"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "market": [
+      "MarketRequest",
+      "MarketResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ]
+  }
+}

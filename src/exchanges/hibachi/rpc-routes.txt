@@ -1,0 +1,7 @@
+place_order order.place
+amend_order order.modify
+cancel_order order.cancel
+order_status order.status
+open_orders orders.status
+cancel_all_orders orders.cancel
+place_orders orders.batch

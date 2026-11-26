@@ -1,0 +1,20 @@
+const r = @import("../../core/routes.zig");
+
+pub const operations = [_]r.Operation{
+    .{ .venue = .aevo, .name = "markets", .verb = "GET", .path = "/markets", .private = false, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "asset", .loc = .query, .required = false, .collection = "" }, .{ .key = "instrument_type", .loc = .query, .required = false, .collection = "" }} },
+    .{ .venue = .aevo, .name = "index", .verb = "GET", .path = "/index", .private = false, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "asset", .loc = .query, .required = true, .collection = "" }} },
+    .{ .venue = .aevo, .name = "statistics", .verb = "GET", .path = "/statistics", .private = false, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "asset", .loc = .query, .required = false, .collection = "" }} },
+    .{ .venue = .aevo, .name = "account", .verb = "GET", .path = "/account", .private = true, .origin = "https://api.aevo.xyz", .params = &.{} },
+    .{ .venue = .aevo, .name = "balances", .verb = "GET", .path = "/portfolio", .private = true, .origin = "https://api.aevo.xyz", .params = &.{} },
+    .{ .venue = .aevo, .name = "open_orders", .verb = "GET", .path = "/orders", .private = true, .origin = "https://api.aevo.xyz", .params = &.{} },
+    .{ .venue = .aevo, .name = "place_order", .verb = "POST", .path = "/orders", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "body", .loc = .body, .required = true, .collection = "" }} },
+    .{ .venue = .aevo, .name = "cancel_order", .verb = "DELETE", .path = "/orders/{order_id}", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "order_id", .loc = .path, .required = true, .collection = "" }} },
+    .{ .venue = .aevo, .name = "cancel_all_orders", .verb = "DELETE", .path = "/orders-all", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "body", .loc = .body, .required = true, .collection = "" }} },
+    .{ .venue = .aevo, .name = "positions", .verb = "GET", .path = "/positions", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "instrument_name", .loc = .query, .required = false, .collection = "" }} },
+    .{ .venue = .aevo, .name = "order_history", .verb = "GET", .path = "/order-history", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "instrument_name", .loc = .query, .required = false, .collection = "" }, .{ .key = "instrument_type", .loc = .query, .required = false, .collection = "" }, .{ .key = "limit", .loc = .query, .required = false, .collection = "" }, .{ .key = "offset", .loc = .query, .required = false, .collection = "" }} },
+    .{ .venue = .aevo, .name = "fills", .verb = "GET", .path = "/trade-history", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "instrument_name", .loc = .query, .required = false, .collection = "" }, .{ .key = "instrument_type", .loc = .query, .required = false, .collection = "" }, .{ .key = "limit", .loc = .query, .required = false, .collection = "" }, .{ .key = "offset", .loc = .query, .required = false, .collection = "" }} },
+    .{ .venue = .aevo, .name = "order_status", .verb = "GET", .path = "/orders/{order_id}", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "order_id", .loc = .path, .required = true, .collection = "" }} },
+    .{ .venue = .aevo, .name = "trades", .verb = "GET", .path = "/instrument/{instrument_name}/trade-history", .private = false, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "instrument_name", .loc = .path, .required = true, .collection = "" }} },
+    .{ .venue = .aevo, .name = "amend_order", .verb = "POST", .path = "/orders/{order_id}", .private = true, .origin = "https://api.aevo.xyz", .params = &.{ .{ .key = "order_id", .loc = .path, .required = true, .collection = "" }, .{ .key = "body", .loc = .body, .required = true, .collection = "" } } },
+    .{ .venue = .aevo, .name = "cancel_orders", .verb = "DELETE", .path = "/orders", .private = true, .origin = "https://api.aevo.xyz", .params = &.{.{ .key = "body", .loc = .body, .required = true, .collection = "" }} },
+};

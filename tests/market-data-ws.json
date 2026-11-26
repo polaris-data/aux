@@ -1,0 +1,463 @@
+[
+  {
+    "venue": "kuru",
+    "client": "KuruClient",
+    "case": "l2-bootstrap",
+    "params": {
+      "channel": "book",
+      "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a"
+    },
+    "subscribe": {
+      "op": "sub",
+      "id": 1,
+      "t": "l2Delta@f",
+      "m": "0x8121ee960066e4344a213f9ac7502395502aee7a"
+    },
+    "events": [
+      {
+        "id": 1,
+        "message": {
+          "wireVersion": 1,
+          "feedEpoch": 13,
+          "view": "finalized",
+          "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+          "kind": "l2Book",
+          "marketSeq": 9007199254740993,
+          "globalSeq": 9007199254740996,
+          "stateHead": {
+            "blockNumber": 125426399,
+            "blockId": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7"
+          },
+          "durationMs": 0,
+          "maxDepthPerSide": 0,
+          "grouping": {
+            "kind": "none"
+          },
+          "levelFormat": "compact",
+          "bids": [
+            {
+              "price": -1208925819614629174706156,
+              "totalBase": 1267650600228229401496703205501
+            }
+          ],
+          "asks": [
+            {
+              "price": 1208925819614629174706176,
+              "totalBase": 80
+            }
+          ]
+        }
+      },
+      {
+        "id": 1,
+        "message": {
+          "wireVersion": 1,
+          "feedEpoch": 13,
+          "view": "finalized",
+          "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+          "kind": "l2Delta",
+          "marketSeq": 9007199254741002,
+          "previousMarketSeq": 9007199254740993,
+          "globalSeq": 9007199254741008,
+          "sourceBlock": {
+            "blockNumber": 125426399,
+            "blockId": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7"
+          },
+          "updates": [
+            {
+              "side": "buy",
+              "price": -9007199254740993,
+              "totalBaseAfter": 1267650600228229401496703205501,
+              "activeBaseAfter": 1267650600228229401496703205500,
+              "passiveBaseAfter": 1,
+              "activeOrderCountAfter": 5
+            }
+          ]
+        }
+      }
+    ],
+    "binary": [
+      "00000000000000014b584d4401010301000000000000000d8121ee960066e4344a213f9ac7502395502aee7a00200000000000010020000000000004000000000779dadfa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7000000000000000000000000000000000000000000000000000000000100000001ffffffffffff000000000000000000140000001000000000000000000000007d0000000000010000000000000000000000000000000000000000000000000050",
+      "00000000000000014b584d4401020300000000000000000d8121ee960066e4344a213f9ac7502395502aee7a002000000000000a00200000000000010020000000000010000000000779dadfa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a70000000101ffdfffffffffffff0000001000000000000000000000007d0000001000000000000000000000007c0000000000000000000000000000000100000005"
+    ]
+  },
+  {
+    "venue": "kuru",
+    "client": "KuruClient",
+    "case": "trade-replay",
+    "params": {
+      "channel": "trades@f",
+      "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+      "feedEpoch": 13,
+      "seq": 9007199254740993
+    },
+    "subscribe": {
+      "op": "sub",
+      "id": 1,
+      "t": "trades@f",
+      "m": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+      "feedEpoch": 13,
+      "seq": 9007199254740993
+    },
+    "events": [
+      {
+        "id": 1,
+        "message": {
+          "wireVersion": 1,
+          "feedEpoch": 13,
+          "view": "finalized",
+          "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+          "kind": "trades",
+          "marketSeq": 9007199254740997,
+          "previousMarketSeq": null,
+          "globalSeq": 9007199254740999,
+          "sourceBlock": {
+            "blockNumber": 125426399,
+            "blockId": "0xa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7"
+          },
+          "trades": [
+            {
+              "tradeId": 9007199254741004,
+              "recordIndex": 5,
+              "takerSide": "sell",
+              "price": 600880,
+              "baseFilled": 1267650600228229401496703205501,
+              "blockTimestamp": 1795651140
+            }
+          ]
+        }
+      },
+      {
+        "op": "resub",
+        "feedEpoch": 13,
+        "id": 1,
+        "t": "trades@f",
+        "r": "publication_gap"
+      }
+    ],
+    "binary": [
+      "00000000000000014b584d4401030300000000000000000d8121ee960066e4344a213f9ac7502395502aee7a002000000000000500000000000000000020000000000007000000000779dadfa7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a7a700000001002000000000000c0005020000000000092b300000001000000000000000000000007d000000006b077644"
+    ],
+    "final": {
+      "op": "resub",
+      "feedEpoch": 13,
+      "id": 1,
+      "t": "trades@f",
+      "r": "publication_gap"
+    }
+  },
+  {
+    "venue": "kuru",
+    "client": "KuruClient",
+    "case": "market-resync",
+    "params": {
+      "channel": "book",
+      "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a"
+    },
+    "subscribe": {
+      "op": "sub",
+      "id": 1,
+      "t": "l2Delta@f",
+      "m": "0x8121ee960066e4344a213f9ac7502395502aee7a"
+    },
+    "events": [
+      {
+        "op": "resync",
+        "feedEpoch": 13,
+        "t": "l2Delta@f",
+        "m": "0x8121EE960066E4344A213F9AC7502395502AEE7A",
+        "seq": 9007199254740993
+      }
+    ],
+    "final": {
+      "op": "resync",
+      "feedEpoch": 13,
+      "t": "l2Delta@f",
+      "m": "0x8121EE960066E4344A213F9AC7502395502AEE7A",
+      "seq": 9007199254740993
+    }
+  },
+  {
+    "venue": "reya",
+    "client": "ReyaClient",
+    "case": "market_summaries",
+    "params": {
+      "channel": "market_summaries"
+    },
+    "subscribe": {
+      "type": "subscribe",
+      "channel": "/v2/perpMarkets/summary"
+    },
+    "events": [
+      {
+        "type": "channel_data",
+        "channel": "/v2/perpMarkets/summary",
+        "data": [
+          {
+            "symbol": "BTCRUSDPERP",
+            "status": "TRADING",
+            "updatedAt": 1795651200000,
+            "oiQty": "12.345678901234567891",
+            "fundingRate": "0.000001",
+            "longFundingValue": "0.01",
+            "shortFundingValue": "-0.01",
+            "volume24h": "300.004",
+            "markPrice": "60880.2"
+          }
+        ]
+      }
+    ],
+    "keep_open": true
+  },
+  {
+    "venue": "reya",
+    "client": "ReyaClient",
+    "case": "market_summary",
+    "params": {
+      "channel": "market_summary",
+      "symbol": "BTCRUSDPERP"
+    },
+    "subscribe": {
+      "type": "subscribe",
+      "channel": "/v2/perpMarket/BTCRUSDPERP/summary"
+    },
+    "events": [
+      {
+        "type": "channel_data",
+        "channel": "/v2/perpMarket/BTCRUSDPERP/summary",
+        "data": {
+          "symbol": "BTCRUSDPERP",
+          "status": "TRADING",
+          "updatedAt": 1795651200000,
+          "oiQty": "12.345678901234567891",
+          "fundingRate": "0.000001",
+          "longFundingValue": "0.01",
+          "shortFundingValue": "-0.01",
+          "volume24h": "300.004",
+          "markPrice": "60880.2"
+        }
+      }
+    ],
+    "keep_open": true
+  },
+  {
+    "venue": "reya",
+    "client": "ReyaClient",
+    "case": "market_executions",
+    "params": {
+      "channel": "market_executions",
+      "symbol": "BTCRUSDPERP"
+    },
+    "subscribe": {
+      "type": "subscribe",
+      "channel": "/v2/market/BTCRUSDPERP/perpExecutions"
+    },
+    "events": [
+      {
+        "type": "channel_data",
+        "channel": "/v2/market/BTCRUSDPERP/perpExecutions",
+        "data": [
+          {
+            "exchangeId": 1,
+            "symbol": "BTCRUSDPERP",
+            "takerAccountId": 24,
+            "makerAccountId": 25,
+            "qty": "0.00001",
+            "side": "B",
+            "price": "60880.200000000000001",
+            "takerFee": "0.00012",
+            "type": "ORDER_MATCH",
+            "timestamp": 1795651200010,
+            "sequenceNumber": 9007199254740993,
+            "fillId": "100000000001"
+          }
+        ]
+      }
+    ],
+    "keep_open": false
+  },
+  {
+    "venue": "reya",
+    "client": "ReyaClient",
+    "case": "wallet_executions",
+    "params": {
+      "channel": "wallet_executions",
+      "address": "0x1234567890123456789012345678901234567890"
+    },
+    "subscribe": {
+      "type": "subscribe",
+      "channel": "/v2/wallet/0x1234567890123456789012345678901234567890/perpExecutions"
+    },
+    "events": [
+      {
+        "type": "channel_data",
+        "channel": "/v2/wallet/0x1234567890123456789012345678901234567890/perpExecutions",
+        "data": [
+          {
+            "exchangeId": 1,
+            "symbol": "BTCRUSDPERP",
+            "takerAccountId": 24,
+            "makerAccountId": 25,
+            "qty": "0.00001",
+            "side": "B",
+            "price": "60880.200000000000001",
+            "takerFee": "0.00012",
+            "type": "ORDER_MATCH",
+            "timestamp": 1795651200010,
+            "sequenceNumber": 9007199254740993,
+            "fillId": "100000000001"
+          }
+        ]
+      }
+    ],
+    "keep_open": false
+  },
+  {
+    "venue": "apex_omni",
+    "client": "ApexOmniClient",
+    "case": "book",
+    "params": {
+      "channel": "book",
+      "symbol": "BTCUSDT",
+      "depth": 25
+    },
+    "subscribe": {
+      "op": "subscribe",
+      "args": [
+        "orderBook25.H.BTCUSDT"
+      ]
+    },
+    "events": [
+      {
+        "topic": "orderBook25.H.BTCUSDT",
+        "type": "snapshot",
+        "data": {
+          "s": "BTCUSDT",
+          "b": [
+            [
+              "60456.5",
+              "0.325"
+            ]
+          ],
+          "a": [
+            [
+              "60457",
+              "0.004"
+            ]
+          ],
+          "u": 1
+        },
+        "cs": 9007199254740993,
+        "ts": 1795651130329001
+      },
+      {
+        "topic": "orderBook25.H.BTCUSDT",
+        "type": "delta",
+        "data": {
+          "s": "BTCUSDT",
+          "b": [
+            [
+              "60456.5",
+              "0"
+            ]
+          ],
+          "a": [],
+          "u": 2
+        },
+        "cs": 9007199254740993,
+        "ts": 1795651130329001
+      }
+    ],
+    "keep_open": false
+  },
+  {
+    "venue": "apex_omni",
+    "client": "ApexOmniClient",
+    "case": "ticker",
+    "params": {
+      "channel": "ticker",
+      "symbol": "BTCUSDT"
+    },
+    "subscribe": {
+      "op": "subscribe",
+      "args": [
+        "instrumentInfo.H.BTCUSDT"
+      ]
+    },
+    "events": [
+      {
+        "topic": "instrumentInfo.H.BTCUSDT",
+        "type": "snapshot",
+        "data": {
+          "symbol": "BTCUSDT",
+          "lastPrice": "60456.500000000000001"
+        },
+        "cs": 9007199254740993,
+        "ts": 1795651130329001
+      }
+    ],
+    "keep_open": true
+  },
+  {
+    "venue": "apex_omni",
+    "client": "ApexOmniClient",
+    "case": "tickers",
+    "params": {
+      "channel": "tickers"
+    },
+    "subscribe": {
+      "op": "subscribe",
+      "args": [
+        "instrumentInfo.all"
+      ]
+    },
+    "events": [
+      {
+        "topic": "instrumentInfo.all",
+        "type": "snapshot",
+        "data": [
+          {
+            "symbol": "BTCUSDT",
+            "lastPrice": "60456.500000000000001"
+          }
+        ],
+        "cs": 9007199254740993,
+        "ts": 1795651130329001
+      }
+    ],
+    "keep_open": true
+  },
+  {
+    "venue": "apex_omni",
+    "client": "ApexOmniClient",
+    "case": "trades",
+    "params": {
+      "channel": "trades",
+      "symbol": "BTCUSDT"
+    },
+    "subscribe": {
+      "op": "subscribe",
+      "args": [
+        "recentlyTrade.H.BTCUSDT"
+      ]
+    },
+    "events": [
+      {
+        "topic": "recentlyTrade.H.BTCUSDT",
+        "type": "snapshot",
+        "data": [
+          {
+            "s": "BTCUSDT",
+            "p": "60456.5",
+            "v": "0.325",
+            "S": "Buy",
+            "T": 1795651130329
+          }
+        ],
+        "cs": 9007199254740993,
+        "ts": 1795651130329001
+      }
+    ],
+    "keep_open": true
+  }
+]

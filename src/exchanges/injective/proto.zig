@@ -17,6 +17,21 @@ pub const Encoder = struct {
         try self.appendVarint(value);
     }
 
+    pub fn fixed32(self: *Encoder, field: u32, value: u32) !void {
+        if (value == 0) return;
+        try self.appendVarint((@as(u64, field) << 3) | 5);
+        var bytes: [4]u8 = undefined;
+        std.mem.writeInt(u32, &bytes, value, .little);
+        try self.bytes.appendSlice(self.allocator, &bytes);
+    }
+
+    pub fn packedU32(self: *Encoder, field: u32, values: []const u32) !void {
+        var packed_values: Encoder = .{ .allocator = self.allocator };
+        defer packed_values.bytes.deinit(self.allocator);
+        for (values) |value| try packed_values.appendVarint(value);
+        try self.data(field, packed_values.slice());
+    }
+
     pub fn data(self: *Encoder, field: u32, value: []const u8) !void {
         if (value.len == 0) return;
         try self.appendVarint((@as(u64, field) << 3) | 2);

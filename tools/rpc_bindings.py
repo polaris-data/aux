@@ -2,11 +2,18 @@
 from pathlib import Path
 
 
+EXCHANGE_SESSIONS = {'Aevo': 'aevo', 'BinanceSpot': 'binance_spot', 'Bybit': 'bybit', 'Deribit': 'deribit', 'Hibachi': 'hibachi', 'KrakenSpot': 'kraken_spot', 'Okx': 'okx'}
+
+
 def session_commands(root: Path):
     derive = [line.split()[0] for line in (root / "src/exchanges/derive/rpc-routes.txt").read_text().splitlines()]
     perps = ("create_orders modify_orders modify_orders_coid cancel_orders cancel_orders_coid "
              "cancel_all auto_cancel update_leverage update_leverages update_margin subscribe unsubscribe ping").split()
-    return {"Derive": derive, "PolymarketPerps": perps, "PolymarketRfq": ["quote", "cancel_quote", "last_look"]}
+    exchange = {
+        label: [line.split()[0] for line in (root / f"src/exchanges/{venue}/rpc-routes.txt").read_text().splitlines()]
+        for label, venue in EXCHANGE_SESSIONS.items()
+    }
+    return {"Derive": derive, "PolymarketPerps": perps, "PolymarketRfq": ["quote", "cancel_quote", "last_look"], **exchange}
 
 
 def emit_sessions(root: Path, emit, camel):
@@ -19,7 +26,7 @@ def emit_sessions(root: Path, emit, camel):
         rust.append(f'rpc_session!({session}, ' + ', '.join(m for m in commands if m != 'ping') + ');')
         py.append(f'class {session}(_RpcSession):')
         ts.append(f'export interface {session}Commands {{')
-        venue = {"Derive":"derive", "PolymarketPerps":"polymarket_perps", "PolymarketRfq":"polymarket"}[label]
+        venue = {"Derive":"derive", "PolymarketPerps":"polymarket_perps", "PolymarketRfq":"polymarket", **EXCHANGE_SESSIONS}[label]
         js.append(f'  {venue}: send => ({{')
         for method in commands:
             channels = label == "PolymarketPerps" and method in ("subscribe","unsubscribe")
@@ -39,6 +46,9 @@ def emit_sessions(root: Path, emit, camel):
         js.append('  }),')
         ts.append('}')
     js.append('};')
+    py.append('EXCHANGE_SESSIONS = {')
+    py.extend(f'    {venue!r}: {label}RpcSession,' for label, venue in EXCHANGE_SESSIONS.items())
+    py.append('}')
     for path, lines in ((sdk/'rust/src/rpc_generated.rs', rust),(sdk/'python/python/aux_py/rpc_generated.py', py),
                         (sdk/'typescript/js/rpc.cjs', js),(sdk/'typescript/js/rpc.d.ts', ts)):
         emit(path, '\n'.join(lines)+'\n')

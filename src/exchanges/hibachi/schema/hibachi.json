@@ -1,0 +1,376 @@
+{
+  "client": "HibachiClient",
+  "venue": "hibachi",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "TickerResponse": "serde_json::Value",
+    "PricesResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value",
+    "AccountResponse": "serde_json::Value",
+    "BalancesResponse": "serde_json::Value",
+    "PositionsResponse": "serde_json::Value",
+    "OrderStatusResponse": "serde_json::Value",
+    "OpenOrdersResponse": "serde_json::Value",
+    "OrderHistoryResponse": "serde_json::Value",
+    "FillsResponse": "serde_json::Value",
+    "PlaceOrderResponse": "serde_json::Value",
+    "AmendOrderResponse": "serde_json::Value",
+    "CancelOrderResponse": "serde_json::Value",
+    "CancelAllOrdersResponse": "serde_json::Value",
+    "PlaceOrdersResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "accountId",
+        "account_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "interval",
+        "interval",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "topic",
+        "topic",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "depth",
+        "depth",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "granularity",
+        "granularity",
+        "Option<serde_json::Value>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [],
+    "TickerRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "PricesRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "symbol",
+        "symbol",
+        "String",
+        "required"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "accountId",
+        "account_id",
+        "u64",
+        "required"
+      ]
+    ],
+    "BalancesRequest": [
+      [
+        "accountId",
+        "account_id",
+        "u64",
+        "required"
+      ]
+    ],
+    "PositionsRequest": [
+      [
+        "accountId",
+        "account_id",
+        "u64",
+        "required"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "accountId",
+        "account_id",
+        "u64",
+        "required"
+      ],
+      [
+        "orderId",
+        "order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "clientId",
+        "client_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "nonce",
+        "nonce",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "accountId",
+        "account_id",
+        "u64",
+        "required"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "accountId",
+        "account_id",
+        "u64",
+        "required"
+      ],
+      [
+        "cursorOrderId",
+        "cursor_order_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "endTime",
+        "end_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "marketSymbols",
+        "market_symbols",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "side",
+        "side",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "startTime",
+        "start_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "status",
+        "status",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "accountId",
+        "account_id",
+        "u64",
+        "required"
+      ],
+      [
+        "contractId",
+        "contract_id",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "endTime",
+        "end_time",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "limit",
+        "limit",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "marketSymbols",
+        "market_symbols",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "maxJournalId",
+        "max_journal_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "orderType",
+        "order_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "page",
+        "page",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "side",
+        "side",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "startTime",
+        "start_time",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "PlaceOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "AmendOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelAllOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "PlaceOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "ticker": [
+      "TickerRequest",
+      "TickerResponse"
+    ],
+    "prices": [
+      "PricesRequest",
+      "PricesResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "balances": [
+      "BalancesRequest",
+      "BalancesResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "amend_order": [
+      "AmendOrderRequest",
+      "AmendOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ],
+    "cancel_all_orders": [
+      "CancelAllOrdersRequest",
+      "CancelAllOrdersResponse"
+    ],
+    "place_orders": [
+      "PlaceOrdersRequest",
+      "PlaceOrdersResponse"
+    ]
+  }
+}

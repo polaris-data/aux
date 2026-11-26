@@ -25,6 +25,16 @@ impl Policy {
         match self {
             Self::Application(t) if args["venue"] == "injective" && matches!(args["operation"].as_str(), Some("place_order" | "cancel_order" | "pending")) =>
                 crate::native::execute_with_transport(&args, t),
+            Self::Application(t) if args["venue"] == "dydx_v4" && exchange_write(&args["venue"], &args["operation"]) =>
+                crate::native::execute_with_transport(&args, t),
+            Self::Application(t) if args["venue"] == "kraken_spot" => {
+                let operation = args["operation"].as_str().ok_or(Error::InvalidRequest("missing operation"))?;
+                if prepare("kraken_spot", operation, &args["params"])?.authenticated {
+                    crate::native::execute_with_transport(&args, t)
+                } else {
+                    with_transport(t.as_ref(), args)
+                }
+            },
             Self::Application(t) => with_transport(t.as_ref(), args),
             #[cfg(feature = "rustls")]
             Self::Tls(t) => crate::native::execute_with_transport(&args, t),
@@ -147,8 +157,16 @@ where
     }
 }
 
+fn exchange_write(venue: &Value, operation: &Value) -> bool {
+    matches!(venue.as_str(), Some("aevo" | "backpack" | "binance_spot" | "bybit" | "deribit" | "dydx_v4" | "hibachi" | "kraken_spot" | "okx" | "orderly"))
+        && operation.as_str().is_some_and(|operation| {
+            ["place_", "cancel_", "amend_", "replace_"].iter().any(|prefix| operation.starts_with(prefix))
+                || (venue == "deribit" && matches!(operation, "buy" | "sell"))
+        })
+}
+
 pub(crate) fn with_transport(transport: &dyn Transport, mut args: Value) -> Result<Value> {
-    if matches!(args["venue"].as_str(), Some("derive" | "nado" | "paragon" | "trade_xyz" | "risex" | "decibel" | "edgex" | "grvt")) {
+    if matches!(args["venue"].as_str(), Some("derive" | "nado" | "paragon" | "trade_xyz" | "risex" | "decibel" | "edgex" | "grvt" | "deribit" | "hibachi")) {
         let jobs: BTreeMap<String, Value> = call(28, args.clone())?;
         let mut metadata = serde_json::Map::new();
         for (key, job) in jobs {
@@ -203,6 +221,7 @@ fn send_prepared(transport: &dyn Transport, args: Value) -> Result<Value> {
         );
     let perps_write = matches!(venue.as_str(), Some("nado" | "ondo_perps" | "pacifica" | "paragon" | "trade_xyz" | "aster" | "perpl" | "risex" | "decibel" | "edgex" | "grvt" | "katana"))
         && matches!(operation.as_str(), Some("place_order" | "place_market_order" | "cancel_order"));
+    let exchange_write = exchange_write(&venue, &operation);
     let transaction_hash = prepared.transaction_hash;
     let pending = || match &transaction_hash {
         Some(hash) => Error::PendingTransaction { hash: hash.clone() },
@@ -217,7 +236,7 @@ fn send_prepared(transport: &dyn Transport, args: Value) -> Result<Value> {
     } else {
         transport.send(prepared.request)
     }.map_err(|error| match error {
-        Error::Network if monaco_write || perps_write => pending(),
+        Error::Network if monaco_write || perps_write || exchange_write => pending(),
         other => other,
     })?;
     let rejected = (400..500).contains(&response.status) && response.status != 408;

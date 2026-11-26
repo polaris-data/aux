@@ -1,0 +1,4251 @@
+[
+  {
+    "venue": "orderly",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/v1/public/futures",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/v1/public/futures/PERP_ETH_USDC",
+    "query": {},
+    "request": {
+      "symbol": "PERP_ETH_USDC"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/v1/public/market_trades",
+    "query": {
+      "symbol": "PERP_ETH_USDC"
+    },
+    "request": {
+      "symbol": "PERP_ETH_USDC"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "market_summary",
+    "verb": "POST",
+    "private": false,
+    "path": "/v1/public/query",
+    "query": {},
+    "request": {
+      "body": {
+        "symbols": [
+          "PERP_ETH_USDC"
+        ]
+      }
+    },
+    "body": {
+      "symbols": [
+        "PERP_ETH_USDC"
+      ],
+      "type": "marketSummary"
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "markets": [
+          {
+            "symbol": "PERP_ETH_USDC",
+            "mark_price": "1600.00000000000000019"
+          }
+        ]
+      },
+      "ts": 1779269143700
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "market_trades",
+    "verb": "POST",
+    "private": false,
+    "path": "/v1/public/query",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "PERP_ETH_USDC"
+      }
+    },
+    "body": {
+      "symbol": "PERP_ETH_USDC",
+      "type": "marketTrades"
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "rows": [
+          {
+            "symbol": "PERP_ETH_USDC",
+            "executed_price": "1600.00000000000000019"
+          }
+        ]
+      },
+      "ts": 1779269143700
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/client/info",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "balances",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/client/holding",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/positions",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/order/12345",
+    "query": {},
+    "request": {
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "order_by_client_id",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/client/order/example",
+    "query": {},
+    "request": {
+      "client_order_id": "example"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/orders",
+    "query": {
+      "status": "INCOMPLETE"
+    },
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "fills",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/trades",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/v1/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "PERP_ETH_USDC",
+        "order_type": "LIMIT",
+        "side": "BUY",
+        "order_quantity": 0.01,
+        "order_price": 100
+      }
+    },
+    "body": {
+      "symbol": "PERP_ETH_USDC",
+      "order_type": "LIMIT",
+      "side": "BUY",
+      "order_quantity": 0.01,
+      "order_price": 100
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "amend_order",
+    "verb": "PUT",
+    "private": true,
+    "path": "/v1/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "PERP_ETH_USDC",
+        "order_type": "LIMIT",
+        "side": "BUY",
+        "order_quantity": 0.01,
+        "order_price": 100,
+        "order_id": 12345
+      }
+    },
+    "body": {
+      "symbol": "PERP_ETH_USDC",
+      "order_type": "LIMIT",
+      "side": "BUY",
+      "order_quantity": 0.01,
+      "order_price": 100,
+      "order_id": 12345
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/order",
+    "query": {
+      "symbol": "PERP_ETH_USDC",
+      "order_id": "12345"
+    },
+    "request": {
+      "symbol": "PERP_ETH_USDC",
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_by_client_id",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/client/order",
+    "query": {
+      "symbol": "PERP_ETH_USDC",
+      "client_order_id": "example"
+    },
+    "request": {
+      "symbol": "PERP_ETH_USDC",
+      "client_order_id": "example"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "place_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/v1/batch-order",
+    "query": {},
+    "request": {
+      "body": {
+        "orders": [
+          {
+            "symbol": "PERP_ETH_USDC",
+            "order_type": "LIMIT",
+            "side": "BUY",
+            "order_quantity": 0.01,
+            "order_price": 100
+          }
+        ]
+      }
+    },
+    "body": {
+      "orders": [
+        {
+          "symbol": "PERP_ETH_USDC",
+          "order_type": "LIMIT",
+          "side": "BUY",
+          "order_quantity": 0.01,
+          "order_price": 100
+        }
+      ]
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/batch-order",
+    "query": {
+      "symbol": "PERP_ETH_USDC",
+      "order_ids": "example"
+    },
+    "request": {
+      "symbol": "PERP_ETH_USDC",
+      "order_ids": "example"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_orders_by_client_id",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/client/batch-order",
+    "query": {
+      "symbol": "PERP_ETH_USDC",
+      "client_order_ids": "example"
+    },
+    "request": {
+      "symbol": "PERP_ETH_USDC",
+      "client_order_ids": "example"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_all_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "place_algo_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/v1/algo/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "PERP_ETH_USDC",
+        "order_type": "LIMIT",
+        "side": "BUY",
+        "order_quantity": 0.01,
+        "order_price": 100
+      }
+    },
+    "body": {
+      "symbol": "PERP_ETH_USDC",
+      "order_type": "LIMIT",
+      "side": "BUY",
+      "order_quantity": 0.01,
+      "order_price": 100
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "amend_algo_order",
+    "verb": "PUT",
+    "private": true,
+    "path": "/v1/algo/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "PERP_ETH_USDC",
+        "order_type": "LIMIT",
+        "side": "BUY",
+        "order_quantity": 0.01,
+        "order_price": 100,
+        "order_id": 12345
+      }
+    },
+    "body": {
+      "symbol": "PERP_ETH_USDC",
+      "order_type": "LIMIT",
+      "side": "BUY",
+      "order_quantity": 0.01,
+      "order_price": 100,
+      "order_id": 12345
+    },
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_algo_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/algo/order",
+    "query": {
+      "symbol": "PERP_ETH_USDC",
+      "order_id": "12345"
+    },
+    "request": {
+      "symbol": "PERP_ETH_USDC",
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_algo_by_client_id",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/algo/client/order",
+    "query": {
+      "symbol": "PERP_ETH_USDC",
+      "client_order_id": "example"
+    },
+    "request": {
+      "symbol": "PERP_ETH_USDC",
+      "client_order_id": "example"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "cancel_all_algo_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/v1/algo/orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "algo_order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/algo/order/12345",
+    "query": {},
+    "request": {
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "algo_order_by_client_id",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/algo/client/order/example",
+    "query": {},
+    "request": {
+      "client_order_id": "example"
+    },
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "orderly",
+    "operation": "algo_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/v1/algo/orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "success": true,
+      "data": {
+        "rows": []
+      }
+    }
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/exchangeInfo",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/ticker/24hr",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/trades",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "agg_trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/aggTrades",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/account",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/order",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/openOrders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/allOrders",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "fills",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/myTrades",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v3/order",
+    "query": {
+      "symbol": "ETHUSDT",
+      "side": "BUY",
+      "type": "LIMIT",
+      "timeInForce": "GTC",
+      "quantity": "0.1",
+      "price": "100"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "side": "BUY",
+      "type": "LIMIT",
+      "timeInForce": "GTC",
+      "quantity": "0.1",
+      "price": "100"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "cancel_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/api/v3/order",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "cancel_all_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/api/v3/openOrders",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "cancel_replace_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v3/order/cancelReplace",
+    "query": {
+      "symbol": "ETHUSDT",
+      "side": "BUY",
+      "type": "LIMIT",
+      "cancelReplaceMode": "STOP_ON_FAILURE",
+      "timeInForce": "GTC",
+      "quantity": "0.1",
+      "price": "100",
+      "cancelOrderId": "12345"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "side": "BUY",
+      "type": "LIMIT",
+      "cancelReplaceMode": "STOP_ON_FAILURE",
+      "timeInForce": "GTC",
+      "quantity": "0.1",
+      "price": "100",
+      "cancelOrderId": 12345
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "amend_order",
+    "verb": "PUT",
+    "private": true,
+    "path": "/api/v3/order/amend/keepPriority",
+    "query": {
+      "symbol": "ETHUSDT",
+      "newQty": "example"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "newQty": "example"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "place_oco",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v3/orderList/oco",
+    "query": {
+      "symbol": "ETHUSDT",
+      "side": "buy",
+      "quantity": "0.1",
+      "aboveType": "LIMIT_MAKER",
+      "abovePrice": "105",
+      "belowType": "STOP_LOSS_LIMIT",
+      "belowPrice": "95",
+      "belowStopPrice": "96",
+      "belowTimeInForce": "GTC"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "side": "buy",
+      "quantity": "0.1",
+      "aboveType": "LIMIT_MAKER",
+      "abovePrice": "105",
+      "belowType": "STOP_LOSS_LIMIT",
+      "belowPrice": "95",
+      "belowStopPrice": "96",
+      "belowTimeInForce": "GTC"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "place_oto",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v3/orderList/oto",
+    "query": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "pendingType": "example",
+      "pendingSide": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingPrice": "105",
+      "pendingQuantity": "0.1",
+      "pendingTimeInForce": "GTC"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "pendingType": "example",
+      "pendingSide": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingPrice": "105",
+      "pendingQuantity": "0.1",
+      "pendingTimeInForce": "GTC"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "place_otoco",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v3/orderList/otoco",
+    "query": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "pendingSide": "example",
+      "pendingQuantity": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingAboveType": "LIMIT_MAKER",
+      "pendingAbovePrice": "105",
+      "pendingBelowType": "STOP_LOSS_LIMIT",
+      "pendingBelowPrice": "95",
+      "pendingBelowStopPrice": "96",
+      "pendingBelowTimeInForce": "GTC"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "pendingSide": "example",
+      "pendingQuantity": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingAboveType": "LIMIT_MAKER",
+      "pendingAbovePrice": "105",
+      "pendingBelowType": "STOP_LOSS_LIMIT",
+      "pendingBelowPrice": "95",
+      "pendingBelowStopPrice": "96",
+      "pendingBelowTimeInForce": "GTC"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "place_opo",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v3/orderList/opo",
+    "query": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "pendingType": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingSide": "SELL",
+      "pendingPrice": "105",
+      "pendingTimeInForce": "GTC"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "pendingType": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingSide": "SELL",
+      "pendingPrice": "105",
+      "pendingTimeInForce": "GTC"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "place_opoco",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v3/orderList/opoco",
+    "query": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingSide": "SELL",
+      "pendingAboveType": "LIMIT_MAKER",
+      "pendingAbovePrice": "105",
+      "pendingBelowType": "STOP_LOSS_LIMIT",
+      "pendingBelowPrice": "95",
+      "pendingBelowStopPrice": "96",
+      "pendingBelowTimeInForce": "GTC"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "workingType": "example",
+      "workingSide": "example",
+      "workingQuantity": "example",
+      "workingPrice": "100",
+      "workingTimeInForce": "GTC",
+      "pendingSide": "SELL",
+      "pendingAboveType": "LIMIT_MAKER",
+      "pendingAbovePrice": "105",
+      "pendingBelowType": "STOP_LOSS_LIMIT",
+      "pendingBelowPrice": "95",
+      "pendingBelowStopPrice": "96",
+      "pendingBelowTimeInForce": "GTC"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "cancel_order_list",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/api/v3/orderList",
+    "query": {
+      "symbol": "ETHUSDT"
+    },
+    "request": {
+      "symbol": "ETHUSDT"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "order_list_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/orderList",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "order_list_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/allOrderList",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "binance_spot",
+    "operation": "open_order_lists",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v3/openOrderList",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "deribit",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v2/public/get_instruments",
+    "query": {
+      "currency": "BTC"
+    },
+    "request": {
+      "currency": "BTC"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v2/public/ticker",
+    "query": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v2/public/get_last_trades_by_instrument",
+    "query": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/get_account_summary",
+    "query": {
+      "currency": "BTC"
+    },
+    "request": {
+      "currency": "BTC"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/get_positions",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/get_order_state",
+    "query": {
+      "order_id": "12345"
+    },
+    "request": {
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/get_open_orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/get_order_history_by_instrument",
+    "query": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "fills",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/get_user_trades_by_instrument",
+    "query": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "buy",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/buy",
+    "query": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "sell",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/sell",
+    "query": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "amend_order",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/edit",
+    "query": {
+      "order_id": "12345"
+    },
+    "request": {
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_order",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/cancel",
+    "query": {
+      "order_id": "12345"
+    },
+    "request": {
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_by_label",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/cancel_by_label",
+    "query": {
+      "label": "example"
+    },
+    "request": {
+      "label": "example"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_all_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/cancel_all",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_instrument_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/cancel_all_by_instrument",
+    "query": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_currency_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/cancel_all_by_currency",
+    "query": {
+      "currency": "BTC"
+    },
+    "request": {
+      "currency": "BTC"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_kind_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/private/cancel_all_by_kind_or_type",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/v5/market/instruments-info",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/v5/market/tickers",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/v5/market/recent-trade",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/v5/account/info",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "balances",
+    "verb": "GET",
+    "private": true,
+    "path": "/v5/account/wallet-balance",
+    "query": {
+      "accountType": "UNIFIED"
+    },
+    "request": {
+      "accountType": "UNIFIED"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/v5/position/list",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/v5/order/realtime",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/v5/order/realtime",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/v5/order/history",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "fills",
+    "verb": "GET",
+    "private": true,
+    "path": "/v5/execution/list",
+    "query": {
+      "category": "spot"
+    },
+    "request": {
+      "category": "spot"
+    },
+    "body": null,
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/v5/order/create",
+    "query": {},
+    "request": {
+      "body": {
+        "category": "linear",
+        "symbol": "ETHUSDT",
+        "side": "Buy",
+        "orderType": "Limit",
+        "qty": "0.01",
+        "price": "100"
+      }
+    },
+    "body": {
+      "category": "linear",
+      "symbol": "ETHUSDT",
+      "side": "Buy",
+      "orderType": "Limit",
+      "qty": "0.01",
+      "price": "100"
+    },
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "amend_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/v5/order/amend",
+    "query": {},
+    "request": {
+      "body": {
+        "category": "linear",
+        "symbol": "ETHUSDT",
+        "orderId": "venue-order",
+        "price": "100"
+      }
+    },
+    "body": {
+      "category": "linear",
+      "symbol": "ETHUSDT",
+      "orderId": "venue-order",
+      "price": "100"
+    },
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/v5/order/cancel",
+    "query": {},
+    "request": {
+      "body": {
+        "category": "linear",
+        "symbol": "ETHUSDT",
+        "orderId": "venue-order"
+      }
+    },
+    "body": {
+      "category": "linear",
+      "symbol": "ETHUSDT",
+      "orderId": "venue-order"
+    },
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "place_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/v5/order/create-batch",
+    "query": {},
+    "request": {
+      "body": {
+        "category": "linear",
+        "request": [
+          {
+            "symbol": "ETHUSDT",
+            "side": "Buy",
+            "orderType": "Limit",
+            "qty": "0.01",
+            "price": "100"
+          }
+        ]
+      }
+    },
+    "body": {
+      "category": "linear",
+      "request": [
+        {
+          "symbol": "ETHUSDT",
+          "side": "Buy",
+          "orderType": "Limit",
+          "qty": "0.01",
+          "price": "100"
+        }
+      ]
+    },
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "amend_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/v5/order/amend-batch",
+    "query": {},
+    "request": {
+      "body": {
+        "category": "linear",
+        "request": [
+          {
+            "symbol": "ETHUSDT",
+            "orderId": "venue-order",
+            "price": "100"
+          }
+        ]
+      }
+    },
+    "body": {
+      "category": "linear",
+      "request": [
+        {
+          "symbol": "ETHUSDT",
+          "orderId": "venue-order",
+          "price": "100"
+        }
+      ]
+    },
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "cancel_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/v5/order/cancel-batch",
+    "query": {},
+    "request": {
+      "body": {
+        "category": "linear",
+        "request": [
+          {
+            "symbol": "ETHUSDT",
+            "orderId": "venue-order"
+          }
+        ]
+      }
+    },
+    "body": {
+      "category": "linear",
+      "request": [
+        {
+          "symbol": "ETHUSDT",
+          "orderId": "venue-order"
+        }
+      ]
+    },
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "bybit",
+    "operation": "cancel_all_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/v5/order/cancel-all",
+    "query": {},
+    "request": {
+      "body": {
+        "category": "linear",
+        "symbol": "ETHUSDT"
+      }
+    },
+    "body": {
+      "category": "linear",
+      "symbol": "ETHUSDT"
+    },
+    "response": {
+      "retCode": 0,
+      "retMsg": "OK",
+      "result": {
+        "list": []
+      }
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v5/public/instruments",
+    "query": {
+      "instType": "SPOT"
+    },
+    "request": {
+      "instType": "SPOT"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v5/market/ticker",
+    "query": {
+      "instId": "ETH-USDT"
+    },
+    "request": {
+      "instId": "ETH-USDT"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "tickers",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v5/market/tickers",
+    "query": {
+      "instType": "SPOT"
+    },
+    "request": {
+      "instType": "SPOT"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v5/market/trades",
+    "query": {
+      "instId": "ETH-USDT"
+    },
+    "request": {
+      "instId": "ETH-USDT"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/account/config",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "balances",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/account/balance",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/account/positions",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/trade/order",
+    "query": {
+      "instId": "ETH-USDT"
+    },
+    "request": {
+      "instId": "ETH-USDT"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/trade/orders-pending",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/trade/orders-history",
+    "query": {
+      "instType": "SPOT"
+    },
+    "request": {
+      "instType": "SPOT"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "fills",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/trade/fills",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/order",
+    "query": {},
+    "request": {
+      "body": {
+        "instId": "ETH-USDT",
+        "tdMode": "cash",
+        "side": "buy",
+        "ordType": "limit",
+        "px": "100",
+        "sz": "0.01"
+      }
+    },
+    "body": {
+      "instId": "ETH-USDT",
+      "tdMode": "cash",
+      "side": "buy",
+      "ordType": "limit",
+      "px": "100",
+      "sz": "0.01"
+    },
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "amend_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/amend-order",
+    "query": {},
+    "request": {
+      "body": {
+        "instId": "ETH-USDT",
+        "ordId": "12345",
+        "newPx": "100"
+      }
+    },
+    "body": {
+      "instId": "ETH-USDT",
+      "ordId": "12345",
+      "newPx": "100"
+    },
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/cancel-order",
+    "query": {},
+    "request": {
+      "body": {
+        "instId": "ETH-USDT",
+        "ordId": "12345"
+      }
+    },
+    "body": {
+      "instId": "ETH-USDT",
+      "ordId": "12345"
+    },
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "place_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/batch-orders",
+    "query": {},
+    "request": {
+      "body": [
+        {
+          "instId": "ETH-USDT",
+          "tdMode": "cash",
+          "side": "buy",
+          "ordType": "limit",
+          "px": "100",
+          "sz": "0.01"
+        }
+      ]
+    },
+    "body": [
+      {
+        "instId": "ETH-USDT",
+        "tdMode": "cash",
+        "side": "buy",
+        "ordType": "limit",
+        "px": "100",
+        "sz": "0.01"
+      }
+    ],
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "amend_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/amend-batch-orders",
+    "query": {},
+    "request": {
+      "body": [
+        {
+          "instId": "ETH-USDT",
+          "ordId": "12345",
+          "newPx": "100"
+        }
+      ]
+    },
+    "body": [
+      {
+        "instId": "ETH-USDT",
+        "ordId": "12345",
+        "newPx": "100"
+      }
+    ],
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "cancel_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/cancel-batch-orders",
+    "query": {},
+    "request": {
+      "body": [
+        {
+          "instId": "ETH-USDT",
+          "ordId": "12345"
+        }
+      ]
+    },
+    "body": [
+      {
+        "instId": "ETH-USDT",
+        "ordId": "12345"
+      }
+    ],
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "place_algo_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/order-algo",
+    "query": {},
+    "request": {
+      "body": {
+        "instId": "ETH-USDT",
+        "tdMode": "cash",
+        "side": "buy",
+        "ordType": "limit",
+        "px": "100",
+        "sz": "0.01"
+      }
+    },
+    "body": {
+      "instId": "ETH-USDT",
+      "tdMode": "cash",
+      "side": "buy",
+      "ordType": "limit",
+      "px": "100",
+      "sz": "0.01"
+    },
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "amend_algo_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/amend-algos",
+    "query": {},
+    "request": {
+      "body": {
+        "instId": "ETH-USDT",
+        "algoId": "12345"
+      }
+    },
+    "body": {
+      "instId": "ETH-USDT",
+      "algoId": "12345"
+    },
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "cancel_algo_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/cancel-algos",
+    "query": {},
+    "request": {
+      "body": [
+        {
+          "instId": "ETH-USDT",
+          "algoId": "12345"
+        }
+      ]
+    },
+    "body": [
+      {
+        "instId": "ETH-USDT",
+        "algoId": "12345"
+      }
+    ],
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "cancel_advance_algo_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v5/trade/cancel-advance-algos",
+    "query": {},
+    "request": {
+      "body": [
+        {
+          "instId": "ETH-USDT",
+          "algoId": "12345"
+        }
+      ]
+    },
+    "body": [
+      {
+        "instId": "ETH-USDT",
+        "algoId": "12345"
+      }
+    ],
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "algo_order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/trade/order-algo",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "open_algo_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/trade/orders-algo-pending",
+    "query": {
+      "ordType": "conditional"
+    },
+    "request": {
+      "ordType": "conditional"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "okx",
+    "operation": "algo_order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v5/trade/orders-algo-history",
+    "query": {
+      "ordType": "conditional"
+    },
+    "request": {
+      "ordType": "conditional"
+    },
+    "body": null,
+    "response": {
+      "code": "0",
+      "msg": "",
+      "data": []
+    }
+  },
+  {
+    "venue": "backpack",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/markets",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "backpack",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/ticker",
+    "query": {
+      "symbol": "ETH_USDC"
+    },
+    "request": {
+      "symbol": "ETH_USDC"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/trades",
+    "query": {
+      "symbol": "ETH_USDC"
+    },
+    "request": {
+      "symbol": "ETH_USDC"
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "backpack",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v1/account",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "balances",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v1/capital",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v1/position",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "backpack",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v1/order",
+    "query": {
+      "symbol": "ETH_USDC"
+    },
+    "request": {
+      "symbol": "ETH_USDC"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v1/orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "backpack",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/wapi/v1/history/orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "fills",
+    "verb": "GET",
+    "private": true,
+    "path": "/wapi/v1/history/fills",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "backpack",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v1/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "ETH_USDC",
+        "side": "Bid",
+        "orderType": "Limit",
+        "price": "100",
+        "quantity": "0.01"
+      }
+    },
+    "body": {
+      "symbol": "ETH_USDC",
+      "side": "Bid",
+      "orderType": "Limit",
+      "price": "100",
+      "quantity": "0.01"
+    },
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "place_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/api/v1/orders",
+    "query": {},
+    "request": {
+      "body": [
+        {
+          "symbol": "ETH_USDC",
+          "side": "Bid",
+          "orderType": "Limit",
+          "price": "100",
+          "quantity": "0.01"
+        }
+      ]
+    },
+    "body": [
+      {
+        "symbol": "ETH_USDC",
+        "side": "Bid",
+        "orderType": "Limit",
+        "price": "100",
+        "quantity": "0.01"
+      }
+    ],
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "cancel_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/api/v1/order",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "ETH_USDC",
+        "orderId": "venue-order"
+      }
+    },
+    "body": {
+      "symbol": "ETH_USDC",
+      "orderId": "venue-order"
+    },
+    "response": {}
+  },
+  {
+    "venue": "backpack",
+    "operation": "cancel_all_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/api/v1/orders",
+    "query": {},
+    "request": {
+      "body": {
+        "symbol": "ETH_USDC"
+      }
+    },
+    "body": {
+      "symbol": "ETH_USDC"
+    },
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/perpetualMarkets",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "markets": {}
+    }
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/trades/perpetualMarket/ETH-USD",
+    "query": {},
+    "request": {
+      "ticker": "ETH-USD"
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "account",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/addresses/dydx1fixture/subaccountNumber/0",
+    "query": {},
+    "request": {
+      "address": "dydx1fixture",
+      "subaccountNumber": "0"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "balances",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/assetPositions",
+    "query": {
+      "address": "dydx1fixture",
+      "subaccountNumber": "1"
+    },
+    "request": {
+      "address": "dydx1fixture",
+      "subaccountNumber": 1
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "positions",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/perpetualPositions",
+    "query": {
+      "address": "dydx1fixture",
+      "subaccountNumber": "1"
+    },
+    "request": {
+      "address": "dydx1fixture",
+      "subaccountNumber": 1
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/orders/12345",
+    "query": {},
+    "request": {
+      "orderId": "12345"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/orders",
+    "query": {
+      "address": "dydx1fixture",
+      "subaccountNumber": "1",
+      "status": "OPEN"
+    },
+    "request": {
+      "address": "dydx1fixture",
+      "subaccountNumber": 1
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/orders",
+    "query": {
+      "address": "dydx1fixture",
+      "subaccountNumber": "1"
+    },
+    "request": {
+      "address": "dydx1fixture",
+      "subaccountNumber": 1
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "fills",
+    "verb": "GET",
+    "private": false,
+    "path": "/v4/fills",
+    "query": {
+      "address": "dydx1fixture",
+      "subaccountNumber": "1"
+    },
+    "request": {
+      "address": "dydx1fixture",
+      "subaccountNumber": 1
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "transaction",
+    "verb": "GET",
+    "private": false,
+    "path": "/cosmos/tx/v1beta1/txs/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "query": {},
+    "request": {
+      "hash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "subaccount_number": 0,
+        "client_id": 42,
+        "clob_pair_id": 0,
+        "order_flags": 0,
+        "good_til_block": 120,
+        "side": 1,
+        "quantums": 1000,
+        "subticks": 10000,
+        "time_in_force": 0
+      }
+    },
+    "body": {
+      "subaccount_number": 0,
+      "client_id": 42,
+      "clob_pair_id": 0,
+      "order_flags": 0,
+      "good_til_block": 120,
+      "side": 1,
+      "quantums": 1000,
+      "subticks": 10000,
+      "time_in_force": 0
+    },
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "replace_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "subaccount_number": 0,
+        "client_id": 42,
+        "clob_pair_id": 0,
+        "order_flags": 0,
+        "good_til_block": 120,
+        "side": 1,
+        "quantums": 1000,
+        "subticks": 10000,
+        "time_in_force": 0
+      }
+    },
+    "body": {
+      "subaccount_number": 0,
+      "client_id": 42,
+      "clob_pair_id": 0,
+      "order_flags": 0,
+      "good_til_block": 120,
+      "side": 1,
+      "quantums": 1000,
+      "subticks": 10000,
+      "time_in_force": 0
+    },
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "subaccount_number": 0,
+        "client_id": 42,
+        "clob_pair_id": 0,
+        "order_flags": 0,
+        "good_til_block": 120,
+        "side": 1,
+        "quantums": 1000,
+        "subticks": 10000,
+        "time_in_force": 0
+      }
+    },
+    "body": {
+      "subaccount_number": 0,
+      "client_id": 42,
+      "clob_pair_id": 0,
+      "order_flags": 0,
+      "good_til_block": 120,
+      "side": 1,
+      "quantums": 1000,
+      "subticks": 10000,
+      "time_in_force": 0
+    },
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "cancel_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "subaccount_number": 0,
+        "good_til_block": 120,
+        "short_term_cancels": [
+          {
+            "clob_pair_id": 0,
+            "client_ids": [
+              42
+            ]
+          }
+        ]
+      }
+    },
+    "body": {
+      "subaccount_number": 0,
+      "good_til_block": 120,
+      "short_term_cancels": [
+        {
+          "clob_pair_id": 0,
+          "client_ids": [
+            42
+          ]
+        }
+      ]
+    },
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "place_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "orders": [
+          {
+            "subaccount_number": 0,
+            "client_id": 42,
+            "clob_pair_id": 0,
+            "order_flags": 64,
+            "good_til_block": null,
+            "side": 1,
+            "quantums": 1000,
+            "subticks": 10000,
+            "time_in_force": 0,
+            "good_til_block_time": 1800000000
+          }
+        ]
+      }
+    },
+    "body": {
+      "orders": [
+        {
+          "subaccount_number": 0,
+          "client_id": 42,
+          "clob_pair_id": 0,
+          "order_flags": 64,
+          "good_til_block": null,
+          "side": 1,
+          "quantums": 1000,
+          "subticks": 10000,
+          "time_in_force": 0,
+          "good_til_block_time": 1800000000
+        }
+      ]
+    },
+    "response": {}
+  },
+  {
+    "venue": "dydx_v4",
+    "operation": "cancel_stateful_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/cosmos/tx/v1beta1/txs",
+    "query": {},
+    "request": {
+      "body": {
+        "orders": [
+          {
+            "subaccount_number": 0,
+            "client_id": 42,
+            "clob_pair_id": 0,
+            "order_flags": 64,
+            "good_til_block": null,
+            "side": 1,
+            "quantums": 1000,
+            "subticks": 10000,
+            "time_in_force": 0,
+            "good_til_block_time": 1800000000
+          }
+        ]
+      }
+    },
+    "body": {
+      "orders": [
+        {
+          "subaccount_number": 0,
+          "client_id": 42,
+          "clob_pair_id": 0,
+          "order_flags": 64,
+          "good_til_block": null,
+          "side": 1,
+          "quantums": 1000,
+          "subticks": 10000,
+          "time_in_force": 0,
+          "good_til_block_time": 1800000000
+        }
+      ]
+    },
+    "response": {}
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/0/public/AssetPairs",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/0/public/Ticker",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/0/public/Trades",
+    "query": {
+      "pair": "ETHUSD"
+    },
+    "request": {
+      "pair": "ETHUSD"
+    },
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "account",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/TradeBalance",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "balances",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/Balance",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "positions",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/OpenPositions",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "order_status",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/QueryOrders",
+    "query": {
+      "txid": "OEXAMPLE"
+    },
+    "request": {
+      "txid": "OEXAMPLE"
+    },
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "open_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/OpenOrders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "order_history",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/ClosedOrders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "fills",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/TradesHistory",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "websocket_token",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/GetWebSocketsToken",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/AddOrder",
+    "query": {
+      "pair": "ETHUSD",
+      "type": "LIMIT",
+      "ordertype": "example",
+      "volume": "0.1"
+    },
+    "request": {
+      "pair": "ETHUSD",
+      "type": "LIMIT",
+      "ordertype": "example",
+      "volume": "0.1"
+    },
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "amend_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/AmendOrder",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "cancel_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/CancelOrder",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "cancel_all_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/CancelAll",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "place_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/AddOrderBatch",
+    "query": {},
+    "request": {
+      "body": {
+        "pair": "ETHUSD",
+        "orders": [
+          {
+            "ordertype": "limit",
+            "type": "buy",
+            "volume": "0.01",
+            "price": "100"
+          },
+          {
+            "ordertype": "limit",
+            "type": "buy",
+            "volume": "0.01",
+            "price": "99"
+          }
+        ]
+      }
+    },
+    "body": {
+      "pair": "ETHUSD",
+      "orders": [
+        {
+          "ordertype": "limit",
+          "type": "buy",
+          "volume": "0.01",
+          "price": "100"
+        },
+        {
+          "ordertype": "limit",
+          "type": "buy",
+          "volume": "0.01",
+          "price": "99"
+        }
+      ]
+    },
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "kraken_spot",
+    "operation": "cancel_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/0/private/CancelOrderBatch",
+    "query": {},
+    "request": {
+      "body": {
+        "orders": [
+          "OEXAMPLE"
+        ]
+      }
+    },
+    "body": {
+      "orders": [
+        "OEXAMPLE"
+      ]
+    },
+    "response": {
+      "error": [],
+      "result": {}
+    }
+  },
+  {
+    "venue": "aevo",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/markets",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "aevo",
+    "operation": "index",
+    "verb": "GET",
+    "private": false,
+    "path": "/index",
+    "query": {
+      "asset": "ETH"
+    },
+    "request": {
+      "asset": "ETH"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "aevo",
+    "operation": "statistics",
+    "verb": "GET",
+    "private": false,
+    "path": "/statistics",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "aevo",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/account",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "aevo",
+    "operation": "balances",
+    "verb": "GET",
+    "private": true,
+    "path": "/portfolio",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "aevo",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/orders",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "aevo",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/orders",
+    "query": {},
+    "request": {
+      "body": {
+        "instrument": 1,
+        "maker": "0x1111111111111111111111111111111111111111",
+        "is_buy": true,
+        "amount": "10000",
+        "limit_price": "100000000",
+        "post_only": true
+      }
+    },
+    "body": {
+      "instrument": 1,
+      "maker": "0x1111111111111111111111111111111111111111",
+      "is_buy": true,
+      "amount": "10000",
+      "limit_price": "100000000",
+      "post_only": true
+    },
+    "response": {}
+  },
+  {
+    "venue": "aevo",
+    "operation": "cancel_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/orders/12345",
+    "query": {},
+    "request": {
+      "order_id": "12345"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "aevo",
+    "operation": "cancel_all_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/orders-all",
+    "query": {},
+    "request": {
+      "body": {}
+    },
+    "body": {},
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/market/exchange-info",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "hibachi",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/market/data/stats",
+    "query": {
+      "symbol": "ETH/USDT-P"
+    },
+    "request": {
+      "symbol": "ETH/USDT-P"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "prices",
+    "verb": "GET",
+    "private": false,
+    "path": "/market/data/prices",
+    "query": {
+      "symbol": "ETH/USDT-P"
+    },
+    "request": {
+      "symbol": "ETH/USDT-P"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/market/data/trades",
+    "query": {
+      "symbol": "ETH/USDT-P"
+    },
+    "request": {
+      "symbol": "ETH/USDT-P"
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "hibachi",
+    "operation": "account",
+    "verb": "GET",
+    "private": true,
+    "path": "/trade/account/info",
+    "query": {
+      "accountId": "1"
+    },
+    "request": {
+      "accountId": 1
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "balances",
+    "verb": "GET",
+    "private": true,
+    "path": "/capital/balance",
+    "query": {
+      "accountId": "1"
+    },
+    "request": {
+      "accountId": 1
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "positions",
+    "verb": "GET",
+    "private": true,
+    "path": "/capital/positions",
+    "query": {
+      "accountId": "1"
+    },
+    "request": {
+      "accountId": 1
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "hibachi",
+    "operation": "order_status",
+    "verb": "GET",
+    "private": true,
+    "path": "/trade/order",
+    "query": {
+      "accountId": "1"
+    },
+    "request": {
+      "accountId": 1
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "open_orders",
+    "verb": "GET",
+    "private": true,
+    "path": "/trade/orders",
+    "query": {
+      "accountId": "1"
+    },
+    "request": {
+      "accountId": 1
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "hibachi",
+    "operation": "order_history",
+    "verb": "GET",
+    "private": true,
+    "path": "/trade/orders/history",
+    "query": {
+      "accountId": "1"
+    },
+    "request": {
+      "accountId": 1
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "fills",
+    "verb": "GET",
+    "private": true,
+    "path": "/trade/account/trades",
+    "query": {
+      "accountId": "1"
+    },
+    "request": {
+      "accountId": 1
+    },
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "hibachi",
+    "operation": "place_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/trade/order",
+    "query": {},
+    "request": {
+      "body": {
+        "accountId": 123,
+        "symbol": "ETH/USDT-P",
+        "side": "BID",
+        "orderType": "LIMIT",
+        "quantity": "0.01",
+        "price": "100",
+        "maxFeesPercent": "0.00045",
+        "nonce": 1714701600000000
+      }
+    },
+    "body": {
+      "accountId": 123,
+      "symbol": "ETH/USDT-P",
+      "side": "BID",
+      "orderType": "LIMIT",
+      "quantity": "0.01",
+      "price": "100",
+      "maxFeesPercent": "0.00045",
+      "nonce": 1714701600000000
+    },
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "amend_order",
+    "verb": "PUT",
+    "private": true,
+    "path": "/trade/order",
+    "query": {},
+    "request": {
+      "body": {
+        "accountId": 123,
+        "symbol": "ETH/USDT-P",
+        "side": "BID",
+        "orderType": "LIMIT",
+        "quantity": "0.01",
+        "price": "100",
+        "maxFeesPercent": "0.00045",
+        "nonce": 1714701600000000,
+        "orderId": "578404507400316928"
+      }
+    },
+    "body": {
+      "accountId": 123,
+      "symbol": "ETH/USDT-P",
+      "side": "BID",
+      "orderType": "LIMIT",
+      "quantity": "0.01",
+      "price": "100",
+      "maxFeesPercent": "0.00045",
+      "nonce": 1714701600000000,
+      "orderId": "578404507400316928"
+    },
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "cancel_order",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/trade/order",
+    "query": {},
+    "request": {
+      "body": {
+        "accountId": 123,
+        "orderId": "578404507400316928"
+      }
+    },
+    "body": {
+      "accountId": 123,
+      "orderId": "578404507400316928"
+    },
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "cancel_all_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/trade/orders",
+    "query": {},
+    "request": {
+      "body": {
+        "accountId": 123
+      }
+    },
+    "body": {
+      "accountId": 123
+    },
+    "response": {}
+  },
+  {
+    "venue": "hibachi",
+    "operation": "place_orders",
+    "verb": "POST",
+    "private": true,
+    "path": "/trade/orders",
+    "query": {},
+    "request": {
+      "body": {
+        "accountId": 123,
+        "orders": [
+          {
+            "accountId": 123,
+            "symbol": "ETH/USDT-P",
+            "side": "BID",
+            "orderType": "LIMIT",
+            "quantity": "0.01",
+            "price": "100",
+            "maxFeesPercent": "0.00045",
+            "nonce": 1714701600000000,
+            "action": "place"
+          }
+        ]
+      }
+    },
+    "body": {
+      "accountId": 123,
+      "orders": [
+        {
+          "accountId": 123,
+          "symbol": "ETH/USDT-P",
+          "side": "BID",
+          "orderType": "LIMIT",
+          "quantity": "0.01",
+          "price": "100",
+          "maxFeesPercent": "0.00045",
+          "nonce": 1714701600000000,
+          "action": "place"
+        }
+      ]
+    },
+    "response": {}
+  },
+  {
+    "venue": "deribit",
+    "operation": "authenticate",
+    "verb": "GET",
+    "private": true,
+    "path": "/api/v2/public/auth",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": {
+        "access_token": "fixture-token",
+        "token_type": "bearer",
+        "expires_in": 900
+      }
+    }
+  },
+  {
+    "venue": "aevo",
+    "operation": "positions",
+    "verb": "GET",
+    "path": "/positions",
+    "private": true,
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "aevo",
+    "operation": "order_history",
+    "verb": "GET",
+    "path": "/order-history",
+    "private": true,
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "aevo",
+    "operation": "fills",
+    "verb": "GET",
+    "path": "/trade-history",
+    "private": true,
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": []
+  },
+  {
+    "venue": "aevo",
+    "operation": "order_status",
+    "verb": "GET",
+    "path": "/orders/0x12345",
+    "private": true,
+    "query": {},
+    "request": {
+      "order_id": "0x12345"
+    },
+    "body": null,
+    "response": {}
+  },
+  {
+    "venue": "deribit",
+    "operation": "amend_by_label",
+    "verb": "GET",
+    "path": "/api/v2/private/edit_by_label",
+    "private": true,
+    "query": {
+      "label": "open_order",
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "request": {
+      "label": "open_order",
+      "instrument_name": "ETH-PERPETUAL"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_currency_pair_orders",
+    "verb": "GET",
+    "path": "/api/v2/private/cancel_all_by_currency_pair",
+    "private": true,
+    "query": {
+      "currency_pair": "btc_usd"
+    },
+    "request": {
+      "currency_pair": "btc_usd"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "deribit",
+    "operation": "cancel_quotes",
+    "verb": "GET",
+    "path": "/api/v2/private/cancel_quotes",
+    "private": true,
+    "query": {
+      "currency": "BTC",
+      "currency_pair": "btc_usd",
+      "cancel_type": "all"
+    },
+    "request": {
+      "currency": "BTC",
+      "currency_pair": "btc_usd",
+      "cancel_type": "all"
+    },
+    "body": null,
+    "response": {
+      "jsonrpc": "2.0",
+      "result": []
+    }
+  },
+  {
+    "venue": "aevo",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/instrument/ETH-PERP/trade-history",
+    "query": {},
+    "request": {
+      "instrument_name": "ETH-PERP"
+    },
+    "body": null,
+    "response": {
+      "count": "0",
+      "trade_history": []
+    }
+  },
+  {
+    "venue": "aevo",
+    "operation": "amend_order",
+    "verb": "POST",
+    "private": true,
+    "path": "/orders/0x12345",
+    "query": {},
+    "request": {
+      "order_id": "0x12345",
+      "body": {
+        "instrument": 1,
+        "maker": "0x1111111111111111111111111111111111111111",
+        "is_buy": true,
+        "amount": "10000",
+        "limit_price": "100000000",
+        "post_only": true
+      }
+    },
+    "body": {
+      "instrument": 1,
+      "maker": "0x1111111111111111111111111111111111111111",
+      "is_buy": true,
+      "amount": "10000",
+      "limit_price": "100000000",
+      "post_only": true
+    },
+    "response": {
+      "order_id": "fixture-order"
+    }
+  },
+  {
+    "venue": "aevo",
+    "operation": "cancel_orders",
+    "verb": "DELETE",
+    "private": true,
+    "path": "/orders",
+    "query": {},
+    "request": {
+      "body": {
+        "order_ids": [
+          "0x12345"
+        ]
+      }
+    },
+    "body": {
+      "order_ids": [
+        "0x12345"
+      ]
+    },
+    "response": {
+      "success": true,
+      "order_ids": [
+        "0x12345"
+      ]
+    }
+  },
+  {
+    "venue": "reya",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/v2/perpMarketDefinitions",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": [
+      {
+        "symbol": "BTCRUSDPERP",
+        "marketId": 1,
+        "minOrderQty": "0.00001",
+        "qtyStepSize": "0.00001",
+        "tickSize": "0.1",
+        "liquidationMarginParameter": "0.02",
+        "initialMarginParameter": "0.04",
+        "maxLeverage": 25,
+        "oiCap": "10000",
+        "status": "TRADING"
+      }
+    ]
+  },
+  {
+    "venue": "reya",
+    "operation": "market_summaries",
+    "verb": "GET",
+    "private": false,
+    "path": "/v2/perpMarkets/summary",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": [
+      {
+        "symbol": "BTCRUSDPERP",
+        "status": "TRADING",
+        "updatedAt": 1795651200000,
+        "oiQty": "12.345678901234567891",
+        "fundingRate": "0.000001",
+        "longFundingValue": "0.01",
+        "shortFundingValue": "-0.01",
+        "volume24h": "300.004",
+        "markPrice": "60880.2"
+      }
+    ]
+  },
+  {
+    "venue": "reya",
+    "operation": "market_summary",
+    "verb": "GET",
+    "private": false,
+    "path": "/v2/perpMarket/BTCRUSDPERP/summary",
+    "query": {},
+    "request": {
+      "symbol": "BTCRUSDPERP"
+    },
+    "body": null,
+    "response": {
+      "symbol": "BTCRUSDPERP",
+      "status": "TRADING",
+      "updatedAt": 1795651200000,
+      "oiQty": "12.345678901234567891",
+      "fundingRate": "0.000001",
+      "longFundingValue": "0.01",
+      "shortFundingValue": "-0.01",
+      "volume24h": "300.004",
+      "markPrice": "60880.2"
+    }
+  },
+  {
+    "venue": "reya",
+    "operation": "market_executions",
+    "verb": "GET",
+    "private": false,
+    "path": "/v2/market/BTCRUSDPERP/perpExecutions",
+    "query": {
+      "startTime": "1795651200000",
+      "endTime": "1795651201000",
+      "type": "ORDER_MATCH",
+      "limit": "10",
+      "cursor": "fixture+cursor="
+    },
+    "request": {
+      "symbol": "BTCRUSDPERP",
+      "startTime": 1795651200000,
+      "endTime": 1795651201000,
+      "type": "ORDER_MATCH",
+      "limit": 10,
+      "cursor": "fixture+cursor="
+    },
+    "body": null,
+    "response": {
+      "data": [
+        {
+          "exchangeId": 1,
+          "symbol": "BTCRUSDPERP",
+          "takerAccountId": 24,
+          "makerAccountId": 25,
+          "qty": "0.00001",
+          "side": "B",
+          "price": "60880.200000000000001",
+          "takerFee": "0.00012",
+          "type": "ORDER_MATCH",
+          "timestamp": 1795651200010,
+          "sequenceNumber": 9007199254740993,
+          "fillId": "100000000001"
+        }
+      ],
+      "meta": {
+        "nextCursor": "next-page"
+      }
+    }
+  },
+  {
+    "venue": "reya",
+    "operation": "wallet_executions",
+    "verb": "GET",
+    "private": false,
+    "path": "/v2/wallet/0x1234567890123456789012345678901234567890/perpExecutions",
+    "query": {
+      "limit": "1"
+    },
+    "request": {
+      "address": "0x1234567890123456789012345678901234567890",
+      "limit": 1
+    },
+    "body": null,
+    "response": {
+      "data": [
+        {
+          "exchangeId": 1,
+          "symbol": "BTCRUSDPERP",
+          "takerAccountId": 24,
+          "makerAccountId": 25,
+          "qty": "0.00001",
+          "side": "B",
+          "price": "60880.200000000000001",
+          "takerFee": "0.00012",
+          "type": "ORDER_MATCH",
+          "timestamp": 1795651200010,
+          "sequenceNumber": 9007199254740993,
+          "fillId": "100000000001"
+        }
+      ],
+      "meta": {
+        "nextCursor": null
+      }
+    }
+  },
+  {
+    "venue": "kuru",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/markets",
+    "query": {
+      "status": "active",
+      "limit": "1",
+      "cursor": "next-page"
+    },
+    "request": {
+      "status": "active",
+      "limit": 1,
+      "cursor": "next-page"
+    },
+    "body": null,
+    "response": {
+      "feedEpoch": null,
+      "data": [
+        {
+          "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+          "symbol": "WETHUSDC",
+          "baseToken": {
+            "tokenAddress": "0xee8c0e9f1bffb4eb878d8f15f368a02a35481242",
+            "name": "Wrapped Ether",
+            "symbol": "WETH",
+            "decimals": 18,
+            "logoUrl": "https://d1zzuytetv7tb9.cloudfront.net/WETH.png",
+            "description": null,
+            "websiteUrl": null,
+            "verified": false,
+            "contractRenounced": false,
+            "isErc20": true,
+            "isMintable": true,
+            "isStrict": false,
+            "firstPoolAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a"
+          },
+          "quoteToken": {
+            "tokenAddress": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
+            "name": "USDC",
+            "symbol": "USDC",
+            "decimals": 6,
+            "logoUrl": "https://d1zzuytetv7tb9.cloudfront.net/USDC.png",
+            "description": null,
+            "websiteUrl": null,
+            "verified": false,
+            "contractRenounced": false,
+            "isErc20": true,
+            "isMintable": true,
+            "isStrict": false,
+            "firstPoolAddress": null
+          },
+          "status": "active",
+          "pricePrecision": "10000",
+          "sizePrecision": "10000000000",
+          "tickSize": "100",
+          "minQuoteNotionalX18": "10000000000000000000",
+          "takerFeePps": 100000,
+          "makerFeePps": 100000,
+          "createdAt": 1792022400,
+          "lastPrice": "16915300",
+          "priceChange24hPct": "0.896510587533552043",
+          "volume24h": "942199442554000000000000",
+          "tradeCount24h": 6673
+        }
+      ],
+      "pagination": {
+        "nextCursor": "more"
+      }
+    }
+  },
+  {
+    "venue": "kuru",
+    "operation": "market",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/markets/0x8121ee960066e4344a213f9ac7502395502aee7a",
+    "query": {},
+    "request": {
+      "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a"
+    },
+    "body": null,
+    "response": {
+      "feedEpoch": null,
+      "data": {
+        "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+        "symbol": "WETHUSDC",
+        "baseToken": {
+          "tokenAddress": "0xee8c0e9f1bffb4eb878d8f15f368a02a35481242",
+          "name": "Wrapped Ether",
+          "symbol": "WETH",
+          "decimals": 18,
+          "logoUrl": "https://d1zzuytetv7tb9.cloudfront.net/WETH.png",
+          "description": null,
+          "websiteUrl": null,
+          "verified": false,
+          "contractRenounced": false,
+          "isErc20": true,
+          "isMintable": true,
+          "isStrict": false,
+          "firstPoolAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a"
+        },
+        "quoteToken": {
+          "tokenAddress": "0x754704bc059f8c67012fed69bc8a327a5aafb603",
+          "name": "USDC",
+          "symbol": "USDC",
+          "decimals": 6,
+          "logoUrl": "https://d1zzuytetv7tb9.cloudfront.net/USDC.png",
+          "description": null,
+          "websiteUrl": null,
+          "verified": false,
+          "contractRenounced": false,
+          "isErc20": true,
+          "isMintable": true,
+          "isStrict": false,
+          "firstPoolAddress": null
+        },
+        "status": "active",
+        "pricePrecision": "10000",
+        "sizePrecision": "10000000000",
+        "tickSize": "100",
+        "minQuoteNotionalX18": "10000000000000000000",
+        "takerFeePps": 100000,
+        "makerFeePps": 100000,
+        "createdAt": 1792022400,
+        "lastPrice": "16915300",
+        "priceChange24hPct": "0.896510587533552043",
+        "volume24h": "942199442554000000000000",
+        "tradeCount24h": 6673
+      }
+    }
+  },
+  {
+    "venue": "kuru",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/markets/0x8121ee960066e4344a213f9ac7502395502aee7a/trades",
+    "query": {
+      "limit": "1",
+      "cursor": "opaque.cursor",
+      "from": "1795651000",
+      "to": "1795651200"
+    },
+    "request": {
+      "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+      "limit": 1,
+      "cursor": "opaque.cursor",
+      "from": 1795651000,
+      "to": 1795651200
+    },
+    "body": null,
+    "response": {
+      "feedEpoch": 13,
+      "marketSeq": "9007199254740993",
+      "data": [
+        {
+          "tradeId": "9007199254740993",
+          "recordIdx": 0,
+          "marketAddress": "0x8121ee960066e4344a213f9ac7502395502aee7a",
+          "symbol": "WETHUSDC",
+          "isBuy": false,
+          "price": "16915300",
+          "filledSize": "298071195",
+          "remainingSize": "0",
+          "blockTimestamp": 1795651140,
+          "blockNumber": "125426399",
+          "transactionHash": "0x3f0e8ee9d9311170afdbce2a7ccbf64e4c37585a73c4ecb4c6aa5274e1128c02"
+        }
+      ],
+      "pagination": {
+        "nextCursor": null
+      }
+    }
+  },
+  {
+    "venue": "apex_omni",
+    "operation": "markets",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/symbols",
+    "query": {},
+    "request": {},
+    "body": null,
+    "response": {
+      "data": {
+        "contractConfig": {
+          "perpetualContract": [
+            {
+              "symbol": "BTC-USDT",
+              "crossSymbolName": "BTCUSDT",
+              "tickSize": "0.1",
+              "stepSize": "0.001"
+            }
+          ]
+        },
+        "spotConfig": {
+          "spot": []
+        }
+      },
+      "timeCost": 973
+    }
+  },
+  {
+    "venue": "apex_omni",
+    "operation": "ticker",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/ticker",
+    "query": {
+      "symbol": "BTCUSDT"
+    },
+    "request": {
+      "symbol": "BTCUSDT"
+    },
+    "body": null,
+    "response": {
+      "data": [
+        {
+          "symbol": "BTCUSDT",
+          "lastPrice": "60456.500000000000001"
+        }
+      ],
+      "timeCost": 973
+    }
+  },
+  {
+    "venue": "apex_omni",
+    "operation": "trades",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/trades",
+    "query": {
+      "symbol": "BTCUSDT",
+      "limit": "1"
+    },
+    "request": {
+      "symbol": "BTCUSDT",
+      "limit": 1
+    },
+    "body": null,
+    "response": {
+      "data": [
+        {
+          "i": "44775018-fa16-5fd5-8c13-cce39f8bba07",
+          "p": "60456.5",
+          "S": "Buy",
+          "v": "0.325",
+          "s": "BTCUSDT",
+          "T": 1795651130329
+        }
+      ],
+      "timeCost": 973
+    }
+  }
+]

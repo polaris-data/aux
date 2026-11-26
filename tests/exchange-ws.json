@@ -1,0 +1,72 @@
+[
+  {
+    "venue": "aevo",
+    "client": "AevoClient",
+    "params": {"channel": "book", "symbol": "ETH-PERP"},
+    "subscribe": {"id": 1, "op": "subscribe", "data": ["orderbook-100ms:ETH-PERP"]},
+    "event": {"channel": "orderbook-100ms:ETH-PERP", "data": {"type": "update", "sequence": 9007199254740993, "bids": [["1200.000000000000001", "1"]], "asks": []}}
+  },
+  {
+    "venue": "backpack",
+    "client": "BackpackClient",
+    "params": {"channel": "book", "symbol": "ETH_USDC"},
+    "subscribe": {"id": "1", "method": "SUBSCRIBE", "params": ["depth.ETH_USDC"]},
+    "event": {"stream":"depth.ETH_USDC","data":{"e":"depth","s":"ETH_USDC","U":9007199254740993,"u":9007199254740994,"b":[["1200.000000000000001","1"]],"a":[]}}
+  },
+  {
+    "venue": "binance_spot",
+    "client": "BinanceSpotClient",
+    "params": {"channel": "book", "symbol": "ETHUSDT"},
+    "subscribe": {"id": 1, "method": "SUBSCRIBE", "params": ["ethusdt@depth@100ms"]},
+    "event": {"e":"depthUpdate","s":"ETHUSDT","U":9007199254740993,"u":9007199254740994,"b":[["1200.000000000000001","1"]],"a":[]}
+  },
+  {
+    "venue": "bybit",
+    "client": "BybitClient",
+    "params": {"channel": "book", "category": "linear", "symbol": "ETHUSDT"},
+    "subscribe": {"op":"subscribe","args":["orderbook.50.ETHUSDT"]},
+    "event": {"topic":"orderbook.50.ETHUSDT","type":"delta","data":{"s":"ETHUSDT","u":9007199254740993,"seq":9007199254740994,"b":[["1200.000000000000001","1"]],"a":[]}}
+  },
+  {
+    "venue": "deribit",
+    "client": "DeribitClient",
+    "params": {"channel": "book", "instrument_name": "ETH-PERPETUAL"},
+    "subscribe": {"jsonrpc":"2.0","id":1,"method":"public/subscribe","params":{"channels":["book.ETH-PERPETUAL.100ms"]}},
+    "event": {"jsonrpc":"2.0","method":"subscription","params":{"channel":"book.ETH-PERPETUAL.100ms","data":{"type":"change","change_id":9007199254740993,"prev_change_id":4,"bids":[["change","1200.000000000000001","1"]],"asks":[]}}}
+  },
+  {
+    "venue": "dydx_v4",
+    "client": "DydxV4Client",
+    "params": {"channel": "book", "ticker": "ETH-USD"},
+    "subscribe": {"type":"subscribe","channel":"v4_orderbook","id":"ETH-USD","batched":false},
+    "event": {"type":"channel_data","channel":"v4_orderbook","id":"ETH-USD","message_id":9007199254740993,"contents":{"bids":[["1200.000000000000001","1"]],"asks":[]}}
+  },
+  {
+    "venue": "hibachi",
+    "client": "HibachiClient",
+    "params": {"channel": "book", "symbol": "ETH/USDT-P"},
+    "subscribe": {"method":"subscribe","parameters":{"subscriptions":[{"symbol":"ETH/USDT-P","topic":"orderbook"}]}},
+    "event": {"topic":"orderbook","symbol":"ETH/USDT-P","messageType":"Update","timestamp_ms":9007199254740993,"data":{"bid":{"levels":[{"price":"1200.000000000000001","quantity":"1"}]},"ask":null}}
+  },
+  {
+    "venue": "kraken_spot",
+    "client": "KrakenSpotClient",
+    "params": {"channel": "book", "symbol": "ETH/USD"},
+    "subscribe": {"method":"subscribe","req_id":1,"params":{"channel":"book","symbol":["ETH/USD"],"depth":10}},
+    "event": {"channel":"book","type":"update","data":[{"symbol":"ETH/USD","checksum":1234,"bids":[{"price":"1200.000000000000001","qty":9007199254740993}],"asks":[]}]}
+  },
+  {
+    "venue": "okx",
+    "client": "OkxClient",
+    "params": {"channel": "book", "instId": "ETH-USDT"},
+    "subscribe": {"op":"subscribe","args":[{"channel":"books","instId":"ETH-USDT"}]},
+    "event": {"arg":{"channel":"books","instId":"ETH-USDT"},"action":"update","data":[{"bids":[["1200.000000000000001","1","0","1"]],"asks":[],"seqId":9007199254740993,"prevSeqId":1,"checksum":10}]}
+  },
+  {
+    "venue": "orderly",
+    "client": "OrderlyClient",
+    "params": {"channel": "book", "symbol": "PERP_ETH_USDC"},
+    "subscribe": {"id":"1","event":"subscribe","topic":"PERP_ETH_USDC@orderbook"},
+    "event": {"topic":"PERP_ETH_USDC@orderbook","ts":9007199254740993,"data":{"symbol":"PERP_ETH_USDC","bids":[["1200.000000000000001","1"]],"asks":[]}}
+  }
+]

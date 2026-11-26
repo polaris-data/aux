@@ -646,13 +646,17 @@ data_stream!(
     adjustment_factors_get_range
 );
 
+fn is_native_exchange(venue: &str) -> bool {
+    matches!(venue, "aevo" | "apex_omni" | "backpack" | "binance_spot" | "bybit" | "deribit" | "dydx_v4" | "hibachi" | "kraken_spot" | "kuru" | "okx" | "orderly" | "reya")
+}
+
 macro_rules! socket_subscription {
     ($client:ident, $venue:literal) => {
         impl $client {
             /// Open a subscription on the default socket or a caller-selected endpoint.
             pub fn subscribe(&self, params: &Value, endpoint: Option<&str>) -> Result<crate::EventStream> {
                 let mut cfg=serde_json::json!({"venue":$venue,"operation":"subscribe","params":params});
-                if let Some(url)=endpoint.or(self.origin.as_deref()) {cfg["origin"]=url.into();}
+                if let Some(url)=endpoint.or(self.origin.as_deref().filter(|url| !is_native_exchange($venue) || url.starts_with("ws"))) {cfg["origin"]=url.into();}
                 if let Some(key)=self.api_key.as_deref() {cfg["api_key"]=key.into();}
                 if let Some(secret)=self.api_secret.as_deref() {cfg["api_secret"]=secret.into();}
                 if let Some(auth)=&self.venue_auth {cfg["auth"]=(**auth).clone();}
@@ -671,6 +675,20 @@ macro_rules! socket_subscription {
         }
     }
 }
+socket_subscription!(AevoClient, "aevo");
+socket_subscription!(ApexOmniClient, "apex_omni");
+socket_subscription!(BackpackClient, "backpack");
+socket_subscription!(BinanceSpotClient, "binance_spot");
+socket_subscription!(BybitClient, "bybit");
+socket_subscription!(DeribitClient, "deribit");
+socket_subscription!(DydxV4Client, "dydx_v4");
+socket_subscription!(HibachiClient, "hibachi");
+socket_subscription!(KrakenSpotClient, "kraken_spot");
+socket_subscription!(KuruClient, "kuru");
+socket_subscription!(OkxClient, "okx");
+socket_subscription!(OrderlyClient, "orderly");
+socket_subscription!(ReyaClient, "reya");
+
 struct RpcPermit {
     auth: std::sync::Arc<Value>,
     sign: SignCallback,
@@ -782,7 +800,7 @@ macro_rules! open_rpc {
         impl $client {
             pub fn open_rpc(&self, endpoint: Option<&str>, options: &Value) -> Result<$session> {
                 let mut cfg = serde_json::json!({"venue":$venue, "operation":"open_rpc", "params":options});
-                if let Some(url) = endpoint.or(self.origin.as_deref()) {cfg["origin"]=url.into();}
+                if let Some(url) = endpoint.or(self.origin.as_deref().filter(|url| !is_native_exchange($venue) || url.starts_with("ws"))) {cfg["origin"]=url.into();}
                 if let Some(key) = self.api_key.as_deref() {cfg["api_key"]=key.into();}
                 if let Some(secret) = self.api_secret.as_deref() {cfg["api_secret"]=secret.into();}
                 if let Some(auth) = &self.venue_auth {cfg["auth"]=(**auth).clone();}
@@ -833,6 +851,13 @@ macro_rules! kalshi_request_signer {
 }
 kalshi_request_signer!(KalshiClient);
 kalshi_request_signer!(KalshiPerpsClient);
+open_rpc!(AevoClient, AevoRpcSession, "aevo");
+open_rpc!(BinanceSpotClient, BinanceSpotRpcSession, "binance_spot");
+open_rpc!(BybitClient, BybitRpcSession, "bybit");
+open_rpc!(DeribitClient, DeribitRpcSession, "deribit");
+open_rpc!(HibachiClient, HibachiRpcSession, "hibachi");
+open_rpc!(KrakenSpotClient, KrakenSpotRpcSession, "kraken_spot");
+open_rpc!(OkxClient, OkxRpcSession, "okx");
 open_rpc!(KalshiClient, KalshiRpcSession, "kalshi");
 open_rpc!(KalshiPerpsClient, KalshiRpcSession, "kalshi_perps");
 open_rpc!(ParadexClient, ParadexRpcSession, "paradex");

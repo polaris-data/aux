@@ -29,6 +29,7 @@ pub fn main(init: std.process.Init) !void {
     try @import("protocols.zig").run(init, client.runtime, args);
     try exchanges(a, args[5]);
     try qfexSubscriptions(a, args[5]);
+    try nativeExchanges(a, args[5]);
 }
 
 fn waitForClose(stream: *aux.Stream) void {
@@ -114,4 +115,45 @@ fn expectStreamSequence(reader: *const aux.Stream, expected: []const u8) !void {
     defer event.deinit();
     const sequence = event.value.object.get("sequence") orelse return error.MissingSequence;
     try std.testing.expectEqualStrings(expected, sequence.number_string);
+}
+
+fn nativeExchanges(a: std.mem.Allocator, origin: []const u8) !void {
+    const rest = try std.mem.concat(a, u8, &.{ origin, "/native-exchanges/orderly/rest/public" });
+    defer a.free(rest);
+    const client = aux.clients.OrderlyClient.init(a, .{ .origin = rest });
+    var summary = try client.market_summary(.{ .body = .{ .symbols = &.{"PERP_ETH_USDC"} } });
+    defer summary.deinit();
+    try std.testing.expectEqualStrings("1600.00000000000000019", summary.value.data.markets[0].object.get("mark_price").?.string);
+
+    const colon = std.mem.findScalar(u8, origin, ':').?;
+    const endpoint = try std.mem.concat(a, u8, &.{ "ws", origin[colon..], "/native-exchanges/binance_spot/ws/book" });
+    defer a.free(endpoint);
+    const binance = aux.clients.BinanceSpotClient.init(a, .{ .endpoint = endpoint });
+    var book = try binance.subscribe(.{ .channel = "book", .symbol = "ETHUSDT" });
+    defer book.deinit();
+    var update = (try book.next()).?;
+    defer update.deinit();
+    try std.testing.expectEqualStrings("9007199254740993", update.value.object.get("U").?.number_string);
+    try std.testing.expect((try book.next()) == null);
+
+    const kuru_rest = try std.mem.concat(a, u8, &.{ origin, "/native-exchanges/kuru/rest/public" });
+    defer a.free(kuru_rest);
+    const kuru_endpoint = try std.mem.concat(a, u8, &.{ "ws", origin[colon..], "/native-exchanges/kuru/ws/l2-bootstrap" });
+    defer a.free(kuru_endpoint);
+    const kuru = aux.clients.KuruClient.init(a, .{ .origin = kuru_rest, .endpoint = kuru_endpoint });
+    var catalog = try kuru.markets(.{ .status = "active", .limit = 1, .cursor = "next-page" });
+    defer catalog.deinit();
+    const market = catalog.value.object.get("data").?.array.items[0].object.get("marketAddress").?.string;
+    var l2 = try kuru.subscribe(.{ .channel = "book", .marketAddress = market });
+    defer l2.deinit();
+    var snapshot = (try l2.next()).?;
+    defer snapshot.deinit();
+    const message = snapshot.value.object.get("message").?.object;
+    try std.testing.expectEqualStrings("9007199254740993", message.get("marketSeq").?.number_string);
+    const level = message.get("bids").?.array.items[0].object;
+    try std.testing.expectEqualStrings("1267650600228229401496703205501", level.get("totalBase").?.number_string);
+    var delta = (try l2.next()).?;
+    defer delta.deinit();
+    try std.testing.expectEqualStrings("l2Delta", delta.value.object.get("message").?.object.get("kind").?.string);
+    try std.testing.expect((try l2.next()) == null);
 }

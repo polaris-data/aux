@@ -1,0 +1,6 @@
+place_order order
+amend_order amend-order
+cancel_order cancel-order
+place_orders batch-orders
+amend_orders batch-amend-orders
+cancel_orders batch-cancel-orders

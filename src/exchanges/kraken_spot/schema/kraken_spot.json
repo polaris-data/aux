@@ -1,0 +1,567 @@
+{
+  "client": "KrakenSpotClient",
+  "venue": "kraken_spot",
+  "fixture": "exchange-http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value",
+    "TickerResponse": "serde_json::Value",
+    "TradesResponse": "serde_json::Value",
+    "AccountResponse": "serde_json::Value",
+    "BalancesResponse": "serde_json::Value",
+    "PositionsResponse": "serde_json::Value",
+    "OrderStatusResponse": "serde_json::Value",
+    "OpenOrdersResponse": "serde_json::Value",
+    "OrderHistoryResponse": "serde_json::Value",
+    "FillsResponse": "serde_json::Value",
+    "WebsocketTokenResponse": "serde_json::Value",
+    "PlaceOrderResponse": "serde_json::Value",
+    "AmendOrderResponse": "serde_json::Value",
+    "CancelOrderResponse": "serde_json::Value",
+    "CancelAllOrdersResponse": "serde_json::Value",
+    "PlaceOrdersResponse": "serde_json::Value",
+    "CancelOrdersResponse": "serde_json::Value"
+  },
+  "models": {
+    "Subscription": [
+      [
+        "channel",
+        "channel",
+        "String",
+        "required"
+      ],
+      [
+        "symbol",
+        "symbol",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "symbols",
+        "symbols",
+        "Option<Vec<String>>",
+        "optional"
+      ],
+      [
+        "depth",
+        "depth",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "snapshot",
+        "snapshot",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "topic",
+        "topic",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "MarketsRequest": [
+      [
+        "pair",
+        "pair",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "info",
+        "info",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "country_code",
+        "country_code",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "execution_venue",
+        "execution_venue",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "TickerRequest": [
+      [
+        "pair",
+        "pair",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "execution_venue",
+        "execution_venue",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "TradesRequest": [
+      [
+        "pair",
+        "pair",
+        "String",
+        "required"
+      ],
+      [
+        "since",
+        "since",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "count",
+        "count",
+        "Option<u64>",
+        "optional"
+      ]
+    ],
+    "AccountRequest": [
+      [
+        "asset",
+        "asset",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "BalancesRequest": [],
+    "PositionsRequest": [
+      [
+        "txid",
+        "txid",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "docalcs",
+        "docalcs",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "consolidation",
+        "consolidation",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderStatusRequest": [
+      [
+        "txid",
+        "txid",
+        "String",
+        "required"
+      ],
+      [
+        "trades",
+        "trades",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "userref",
+        "userref",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "consolidate_taker",
+        "consolidate_taker",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "OpenOrdersRequest": [
+      [
+        "trades",
+        "trades",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "userref",
+        "userref",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cl_ord_id",
+        "cl_ord_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "OrderHistoryRequest": [
+      [
+        "trades",
+        "trades",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "userref",
+        "userref",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "start",
+        "start",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "end",
+        "end",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "ofs",
+        "ofs",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "closetime",
+        "closetime",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "consolidate_taker",
+        "consolidate_taker",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "FillsRequest": [
+      [
+        "type",
+        "type_",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "trades",
+        "trades",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "start",
+        "start",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "end",
+        "end",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "ofs",
+        "ofs",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "consolidate_taker",
+        "consolidate_taker",
+        "Option<bool>",
+        "optional"
+      ]
+    ],
+    "WebsocketTokenRequest": [],
+    "PlaceOrderRequest": [
+      [
+        "pair",
+        "pair",
+        "String",
+        "required"
+      ],
+      [
+        "type",
+        "type_",
+        "String",
+        "required"
+      ],
+      [
+        "ordertype",
+        "ordertype",
+        "String",
+        "required"
+      ],
+      [
+        "volume",
+        "volume",
+        "String",
+        "required"
+      ],
+      [
+        "price",
+        "price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "price2",
+        "price2",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "leverage",
+        "leverage",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "oflags",
+        "oflags",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "starttm",
+        "starttm",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "expiretm",
+        "expiretm",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "timeinforce",
+        "timeinforce",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "userref",
+        "userref",
+        "Option<u64>",
+        "optional"
+      ],
+      [
+        "cl_ord_id",
+        "cl_ord_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "validate",
+        "validate",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "reduce_only",
+        "reduce_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "deadline",
+        "deadline",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "stptype",
+        "stptype",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "close_ordertype",
+        "close_ordertype",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "close_price",
+        "close_price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "close_price2",
+        "close_price2",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "AmendOrderRequest": [
+      [
+        "txid",
+        "txid",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "cl_ord_id",
+        "cl_ord_id",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "order_qty",
+        "order_qty",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "display_qty",
+        "display_qty",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit_price",
+        "limit_price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "limit_price_type",
+        "limit_price_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "trigger_price",
+        "trigger_price",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "trigger_price_type",
+        "trigger_price_type",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "post_only",
+        "post_only",
+        "Option<bool>",
+        "optional"
+      ],
+      [
+        "deadline",
+        "deadline",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelOrderRequest": [
+      [
+        "txid",
+        "txid",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "cl_ord_id",
+        "cl_ord_id",
+        "Option<String>",
+        "optional"
+      ]
+    ],
+    "CancelAllOrdersRequest": [],
+    "PlaceOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ],
+    "CancelOrdersRequest": [
+      [
+        "body",
+        "body",
+        "serde_json::Value",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ],
+    "ticker": [
+      "TickerRequest",
+      "TickerResponse"
+    ],
+    "trades": [
+      "TradesRequest",
+      "TradesResponse"
+    ],
+    "account": [
+      "AccountRequest",
+      "AccountResponse"
+    ],
+    "balances": [
+      "BalancesRequest",
+      "BalancesResponse"
+    ],
+    "positions": [
+      "PositionsRequest",
+      "PositionsResponse"
+    ],
+    "order_status": [
+      "OrderStatusRequest",
+      "OrderStatusResponse"
+    ],
+    "open_orders": [
+      "OpenOrdersRequest",
+      "OpenOrdersResponse"
+    ],
+    "order_history": [
+      "OrderHistoryRequest",
+      "OrderHistoryResponse"
+    ],
+    "fills": [
+      "FillsRequest",
+      "FillsResponse"
+    ],
+    "websocket_token": [
+      "WebsocketTokenRequest",
+      "WebsocketTokenResponse"
+    ],
+    "place_order": [
+      "PlaceOrderRequest",
+      "PlaceOrderResponse"
+    ],
+    "amend_order": [
+      "AmendOrderRequest",
+      "AmendOrderResponse"
+    ],
+    "cancel_order": [
+      "CancelOrderRequest",
+      "CancelOrderResponse"
+    ],
+    "cancel_all_orders": [
+      "CancelAllOrdersRequest",
+      "CancelAllOrdersResponse"
+    ],
+    "place_orders": [
+      "PlaceOrdersRequest",
+      "PlaceOrdersResponse"
+    ],
+    "cancel_orders": [
+      "CancelOrdersRequest",
+      "CancelOrdersResponse"
+    ]
+  }
+}

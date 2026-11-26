@@ -55,7 +55,7 @@ pub const Transport = struct {
         var confirmed = false;
         defer if (reservation) |r| r.finish(confirmed);
         const response = self.send(self.context, a, request) catch |err| {
-            if (err == error.Network and ((std.mem.eql(u8, venue, "monaco") and core.monacoWrite(operation)) or core.perpsWrite(try core.venue(input), operation))) {
+            if (err == error.Network and ((std.mem.eql(u8, venue, "monaco") and core.monacoWrite(operation)) or core.perpsWrite(try core.venue(input), operation) or core.exchangeWrite(try core.venue(input), operation))) {
                 recordPending(a, if (transaction_hash) |hash| hash.value else .null);
                 return error.PendingOutcome;
             }

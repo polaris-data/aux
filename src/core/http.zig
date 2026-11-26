@@ -2,6 +2,7 @@ const std = @import("std");
 const perps = @import("perps.zig");
 const hip3 = @import("../exchanges/hyperliquid/hip3.zig");
 const market = @import("market.zig");
+const exchange = @import("exchange_http.zig");
 const routes = @import("routes.zig");
 const wire = @import("wire.zig");
 const A = wire.A;
@@ -44,6 +45,7 @@ pub fn pair(a: A, out: *Bytes, key: []const u8, value: []const u8, form: bool) !
 }
 fn query(a: A, out: *Bytes, p: routes.Param, v: V, form: bool) !void {
     if (v != .array) return pair(a, out, p.key, try scalar(v), form);
+    if (eq(u8, p.collection, "json")) return pair(a, out, p.key, try std.json.Stringify.valueAlloc(a, v, .{}), form);
     if (eq(u8, p.collection, "multi")) {
         for (v.array.items) |item| try pair(a, out, p.key, try scalar(item), form);
     } else {
@@ -116,6 +118,10 @@ fn lookup(input: V) !routes.Operation {
     const base = if (v == .hyperdash) (try hyperdashFormat(name)).base else name;
     for (&routes.operations) |*op| if (op.venue == v and eq(u8, op.name, base)) return op.*;
     return error.UnknownOperation;
+}
+
+pub fn operationPrivate(input: V) !bool {
+    return (try lookup(input)).private;
 }
 
 pub const Request = struct {
@@ -312,7 +318,12 @@ pub fn prepare(a: A, input: V) !Request {
         }
     }
     if (op.venue == .ondo_perps and eq(u8, op.name, "open_orders")) try pair(a, &q, "status", "open", false);
-    const origin = if (perps.isVenue(op.venue)) try perps.origin(op.venue, op.name, input, op.origin) else op.origin;
+    if (op.venue == .orderly and (eq(u8, op.name, "market_summary") or eq(u8, op.name, "market_trades"))) {
+        try perps.put(&body, a, "type", wire.text(if (eq(u8, op.name, "market_summary")) "marketSummary" else "marketTrades"));
+    }
+    if (op.venue == .orderly and eq(u8, op.name, "open_orders")) try pair(a, &q, "status", "INCOMPLETE", false);
+    if (op.venue == .dydx_v4 and eq(u8, op.name, "open_orders")) try pair(a, &q, "status", "OPEN", false);
+    const origin = if (perps.isVenue(op.venue)) try perps.origin(op.venue, op.name, input, op.origin) else if (exchange.supports(op.venue)) try exchange.origin(op.venue, op.name, input, op.origin) else op.origin;
     return .{ .method = op.verb, .path = try std.mem.concat(a, u8, &.{ path, q.items }), .body = body, .headers = headers, .authenticated = private, .origin = origin };
 }
 
@@ -325,6 +336,7 @@ pub fn decode(a: A, v: routes.Venue, status: u16, body: []const u8) !V {
 fn decodeBody(a: A, v: routes.Venue, status: u16, body: []const u8) !V {
     if (status < 200 or status >= 300) return error.ExchangeApi;
     const result: V = if (body.len == 0 and v != .derive) .null else try wire.parse(a, body);
+    if (exchange.supports(v)) return exchange.validateResponse(v, result);
     if (oracleVenue(v)) {
         if (result == .object) if (result.object.get("s")) |s| if (s == .string and eq(u8, s.string, "error")) return error.ExchangeApi;
         return result;
