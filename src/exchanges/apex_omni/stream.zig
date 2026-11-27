@@ -26,13 +26,21 @@ pub fn init(s: *x.State, a: w.A, params: w.V, channel: []const u8, endpoint: ?[]
             s.topic = try std.fmt.allocPrint(a, "recentlyTrade.H.{s}", .{symbol});
         } else return error.InvalidSubscription;
     }
-    s.frame = try x.stringify(a, .{ .op = "subscribe", .args = .{s.topic} });
+    s.frame = try subscriptionFrame(a, true, &.{s.topic});
+}
+
+pub fn subscriptionFrame(a: w.A, subscribe: bool, topics: []const []const u8) ![]const u8 {
+    return x.stringify(a, .{ .op = if (subscribe) "subscribe" else "unsubscribe", .args = topics });
 }
 
 pub fn openingUrl(a: w.A, input: w.V, io: std.Io, url: std.Uri) !?std.Uri {
     if (p.get(input, "origin") != .null) return null;
+    return try timestampedUrl(a, url, try p.epoch(io, .ms));
+}
+
+pub fn timestampedUrl(a: w.A, url: std.Uri, timestamp_ms: u64) !std.Uri {
     var endpoint = url;
-    endpoint.query = .{ .raw = try std.fmt.allocPrint(a, "v=2&timestamp={d}", .{try p.epoch(io, .ms)}) };
+    endpoint.query = .{ .raw = try std.fmt.allocPrint(a, "v=2&timestamp={d}", .{timestamp_ms}) };
     return endpoint;
 }
 

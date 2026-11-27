@@ -2,6 +2,7 @@ const std = @import("std");
 const w = @import("../../core/wire.zig");
 const Event = @import("../derive/stream.zig").State.Event;
 const Channel = enum { markets, l2Orderbook, l2OrderbookUpdates, trades, bbo, account, positions, orders, userFills };
+pub const endpoint = "wss://api.arcus.xyz/v1/ws";
 
 pub const State = struct {
     channel: Channel,
@@ -47,6 +48,10 @@ pub const State = struct {
     fn integer(value: w.V) !u8 {
         if (value != .number_string) return error.InvalidInteger;
         return w.unsigned(u8, value);
+    }
+
+    pub fn unsubscribeFrame(self: State, a: w.A) ![]const u8 {
+        return std.json.Stringify.valueAlloc(a, .{ .type = "unsubscribe", .channel = @tagName(self.channel), .id = self.id }, .{ .emit_null_optional_fields = false });
     }
 
     pub fn event(self: *State, a: w.A, raw: []const u8) !Event {

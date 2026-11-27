@@ -192,6 +192,11 @@ async def test_named_arguments():
 
 
 async def test_shared_peer(origin):
+    n1_endpoint = origin.replace("http:", "ws:") + "/caller-websocket/n1/sdk"
+    async with await sdk.N1Client().subscribe(
+        {"subscriptions": [{"channel": "liquidations"}]}, endpoint=n1_endpoint
+    ) as stream:
+        assert (await anext(stream))["liquidation"]["update_id"] == 42
     await test_named_arguments()
     hermes = sdk.PythHermesClient(origin=origin + "/stream-refused", api_key="fixture-stream-credential")
     qfex = sdk.QfexClient()

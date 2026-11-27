@@ -8,6 +8,7 @@ pub const subscription_id = 1;
 pub const Subscription = struct {
     address: [20]u8,
     expected_epoch: ?u64,
+    resume_sequence: ?u64 = null,
     epoch: ?u64 = null,
     book: bool,
 };
@@ -32,8 +33,17 @@ pub fn init(s: *x.State, a: w.A, params: w.V, channel: []const u8, endpoint: ?[]
     const epoch = try cursor(params, "feedEpoch");
     const seq = try cursor(params, "seq");
     if (seq != null and (epoch == null or seq.? == 0)) return error.InvalidSubscription;
-    s.kuru = .{ .address = address, .expected_epoch = epoch, .book = book };
-    s.frame = try x.stringify(a, .{ .op = "sub", .id = subscription_id, .t = s.topic, .m = s.symbol.?, .feedEpoch = epoch, .seq = seq });
+    s.kuru = .{ .address = address, .expected_epoch = epoch, .resume_sequence = seq, .book = book };
+    s.frame = try subscriptionFrame(a, s.*, subscription_id);
+}
+
+pub fn subscriptionFrame(a: w.A, state: x.State, id: u64) ![]const u8 {
+    const sub = state.kuru.?;
+    return x.stringify(a, .{ .op = "sub", .id = id, .t = state.topic, .m = state.symbol.?, .feedEpoch = sub.expected_epoch, .seq = sub.resume_sequence });
+}
+
+pub fn unsubscribeFrame(a: w.A, id: u64) ![]const u8 {
+    return x.stringify(a, .{ .op = "unsub", .id = id });
 }
 
 pub fn event(s: *x.State, frame: w.V) !x.Event {

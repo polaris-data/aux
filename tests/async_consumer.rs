@@ -1,4 +1,4 @@
-use aux_rs::{DeriveClient, Error, KalshiClient};
+use aux_rs::{DeriveClient, Error, KalshiClient, N1Client};
 use serde_json::json;
 use std::time::Duration;
 
@@ -7,6 +7,13 @@ async fn main() -> aux_rs::Result<()> {
     let origin = std::env::var("AUX_FIXTURE_ORIGIN")
         .unwrap()
         .replace("http:", "ws:");
+    let n1 = N1Client::new()
+        .with_origin(format!("{origin}/caller-websocket/n1/sdk"))
+        .into_async()
+        .subscribe(&json!({"subscriptions":[{"channel":"liquidations"}]}), None)
+        .await?;
+    assert_eq!(n1.next_event().await?.unwrap()["liquidation"]["update_id"], 42);
+    n1.close();
     let derive = DeriveClient::new()
         .into_async()
         .open_public_rpc(Some(&format!("{origin}/rpc/derive-public")), &json!({}))

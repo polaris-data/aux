@@ -783,6 +783,15 @@ async function testSharedPeer() {
     assert.deepEqual(await new sdk.ArcusClient({origin,signer})[fn](row.request), row.response);
   }
   const socketOrigin = origin.replace("http:", "ws:");
+  const n1 = await new sdk.N1Client().subscribe(
+    {subscriptions: [{channel: "liquidations"}]},
+    socketOrigin + "/caller-websocket/n1/sdk",
+  );
+  try {
+    assert.equal((await n1.next()).value.liquidation.update_id, 42);
+  } finally {
+    n1.close();
+  }
   const hdSession = await new sdk.HyperdashClient({apiKey:"hyperdash-key"}).openStream(socketOrigin+"/hd/stream");
   assert.equal((await hdSession.next()).value.op,"ready");
   const pendingData = hdSession.next();

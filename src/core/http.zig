@@ -208,6 +208,11 @@ pub fn prepare(a: A, input: V) !Request {
     var body: V = .null;
     var path = op.path;
     var q: Bytes = .empty;
+    if (op.venue == .vest) {
+        const group = if (fields.object.fetchSwapRemove("account_group")) |entry| entry.value else .null;
+        const id = if (group == .null) 0 else try wire.unsigned(u64, group);
+        try headers.object.put(a, "xrestservermm", wire.text(try std.fmt.allocPrint(a, "restserver{d}", .{id})));
+    }
     if (op.venue == .nado) {
         if (@import("../exchanges/nado/trading.zig").queryType(op.name)) |kind| try pair(a, &q, "type", kind, false);
     }
@@ -244,6 +249,8 @@ pub fn prepare(a: A, input: V) !Request {
             q = .empty;
             try headers.object.put(a, "content-type", wire.text("application/x-www-form-urlencoded"));
         }
+    } else if (op.venue == .synfutures) {
+        body = try @import("../exchanges/synfutures/graph.zig").request(a, op.name, fields);
     } else if (op.venue == .hyperliquid) {
         body = if (op.private) try @import("../exchanges/hyperliquid/trading.zig").action(a, op.name, fields) else try market.hyperliquid(a, op.name, fields);
     } else if (hip3.dex(op.venue)) |dex| {

@@ -25,7 +25,11 @@ pub fn init(s: *State, a: w.A, _: w.V, params: w.V, channel: []const u8, t: ?[]c
         });
     } else try std.fmt.allocPrint(a, "{s}:{s}", .{ native, try requiredText(params, "symbol") });
     s.book = std.mem.startsWith(u8, s.topic, "orderbook-") or std.mem.startsWith(u8, s.topic, "orderbook:");
-    s.frame = try stringify(a, .{ .id = 1, .op = "subscribe", .data = .{s.topic} });
+    s.frame = try subscriptionFrame(a, true, &.{s.topic});
+}
+
+pub fn subscriptionFrame(a: w.A, subscribe: bool, topics: []const []const u8) ![]const u8 {
+    return stringify(a, .{ .id = @as(u64, if (subscribe) 1 else 2), .op = if (subscribe) "subscribe" else "unsubscribe", .data = topics });
 }
 
 pub fn event(s: *State, _: w.A, frame: w.V) !core.Event {

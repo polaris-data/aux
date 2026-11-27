@@ -30,7 +30,12 @@ pub fn main(init: std.process.Init) !void {
     try exchanges(a, args[5]);
     try qfexSubscriptions(a, args[5]);
     try nativeExchanges(a, args[5]);
-    try @import("raw_websocket.zig").run(a, init.io, args[5]);
+    try @import("onchain_markets.zig").run(a, args[5]);
+    const vest = aux.clients.VestClient.init(a, .{ .origin = args[5] });
+    var info = try vest.exchange_info(.{ .account_group = 7 });
+    defer info.deinit();
+    try std.testing.expectEqualStrings("BTC-PERP", info.value.object.get("symbols").?.array.items[0].object.get("symbol").?.string);
+    try @import("raw_websocket.zig").run(a, init.io, args[2], args[5]);
 }
 
 fn waitForClose(stream: *aux.Stream) void {

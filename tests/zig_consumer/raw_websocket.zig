@@ -4,7 +4,7 @@ const t = std.testing;
 const Allocator = std.mem.Allocator;
 const RawWebSocket = aux.RawWebSocket;
 
-pub fn run(a: Allocator, io: std.Io, origin: []const u8) !void {
+pub fn run(a: Allocator, io: std.Io, fixture_dir: []const u8, origin: []const u8) !void {
     const base = try std.mem.concat(a, u8, &.{ "ws:", origin[5..], "/caller-websocket/" });
     defer a.free(base);
     try qfex(a, base);
@@ -12,6 +12,7 @@ pub fn run(a: Allocator, io: std.Io, origin: []const u8) !void {
     try rawFrames(a, base);
     try connectionLifecycle(a, io, base);
     try @import("subscription_prepare.zig").run(a, base);
+    try @import("market_subscriptions.zig").run(a, io, fixture_dir, base);
 }
 
 fn expectMessage(ws: *RawWebSocket, kind: RawWebSocket.Kind, bytes: []const u8, index: u64) !void {

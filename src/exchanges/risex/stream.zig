@@ -1,27 +1,44 @@
 const std = @import("std");
 const w = @import("../../core/wire.zig");
 const p = @import("../../core/perps.zig");
-const connectors = @import("../../core/perps_connectors.zig");
 const shared = @import("../../core/perps_stream.zig");
 const Event = shared.Event;
 const eq = std.mem.eql;
 const gpa = std.heap.c_allocator;
 
-pub fn init(self: *shared.State, a: p.A, testnet: bool, params: p.V) !void {
-    const channel = self.channel;
-    const i = try connectors.enumIndex(channel, &.{ "orderbook", "trades", "orders", "positions", "fills", "account" });
-    self.private = i >= 2;
-    self.book = i == 0;
-    self.endpoint = if (testnet) "wss://api.testnet.rise.trade/ws/" else "wss://ws.rise.trade/ws";
+const Channel = enum { orderbook, trades, oracle, orders, positions, fills, account };
+
+pub fn endpoint(testnet: bool) []const u8 {
+    return if (testnet) "wss://api.testnet.rise.trade/ws/" else "wss://ws.rise.trade/ws";
+}
+
+pub fn marketIds(a: p.A, params: p.V) ![]const u64 {
     const filters = p.get(params, "market_ids");
-    if (filters != .null) {
-        if (filters != .array or filters.array.items.len > 4096 or i == 5) return error.InvalidSubscription;
-        const ids = try a.alloc(u64, filters.array.items.len);
-        for (filters.array.items, ids) |id, *dest| dest.* = try w.unsigned(u64, id);
-        self.ids = ids;
-    }
+    if (filters == .null) return &.{};
+    if (filters != .array or filters.array.items.len > 4096) return error.InvalidSubscription;
+    const ids = try a.alloc(u64, filters.array.items.len);
+    errdefer a.free(ids);
+    for (filters.array.items, ids) |id, *dest| dest.* = try w.unsigned(u64, id);
+    return ids;
+}
+
+pub fn subscriptionFrame(a: p.A, subscribe: bool, channel: []const u8, ids: ?[]const u64) ![]const u8 {
+    const method: []const u8 = if (subscribe) "subscribe" else "unsubscribe";
+    return std.json.Stringify.valueAlloc(a, .{ .method = method, .params = .{ .channel = channel, .market_ids = ids } }, .{ .emit_null_optional_fields = false });
+}
+
+pub fn init(self: *shared.State, a: p.A, testnet: bool, params: p.V) !void {
+    const channel = std.meta.stringToEnum(Channel, self.channel) orelse return error.InvalidParameter;
+    self.private = switch (channel) {
+        .orders, .positions, .fills, .account => true,
+        else => false,
+    };
+    self.book = channel == .orderbook;
+    self.endpoint = endpoint(testnet);
+    if (channel == .account and p.get(params, "market_ids") != .null) return error.InvalidSubscription;
+    self.ids = try marketIds(a, params);
     if (self.private) self.account = try p.credential(p.get(p.get(self.config, "auth"), "account"));
-    self.request = try std.json.Stringify.valueAlloc(a, .{ .method = "subscribe", .params = .{ .channel = channel, .market_ids = if (i == 5) null else self.ids } }, .{ .emit_null_optional_fields = false });
+    self.request = try subscriptionFrame(a, true, self.channel, if (channel == .account) null else self.ids);
 }
 
 pub fn event(self: *shared.State, message: p.V, raw: []const u8) !Event {

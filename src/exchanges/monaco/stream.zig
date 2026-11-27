@@ -6,7 +6,7 @@ const E = @import("../derive/stream.zig").State.Event;
 const A = w.A;
 const V = w.V;
 const eq = std.mem.eql;
-const Kind = enum { trades, orderbook, depth, bbo, balances, positions, orders, account };
+const Kind = enum { trades, orderbook, ohlcv, depth, bbo, balances, positions, orders, account };
 fn text(v: V, k: []const u8) ![]const u8 {
     return w.string(try w.field(v, k));
 }
@@ -35,6 +35,76 @@ fn sameChannel(pattern: []const u8, actual: []const u8) bool {
     }
     return true;
 }
+fn channelKind(p: V) !Kind {
+    return std.meta.stringToEnum(Kind, try text(p, "type")) orelse error.UnknownChannel;
+}
+
+fn isPrivate(kind: Kind) bool {
+    return switch (kind) {
+        .orders, .account, .balances, .positions => true,
+        else => false,
+    };
+}
+
+fn topic(a: A, kind: Kind, p: V) ![]const u8 {
+    const acct = isPrivate(kind);
+    var chan: std.Io.Writer.Allocating = .init(a);
+    errdefer chan.deinit();
+    try chan.writer.writeAll(@tagName(kind));
+    const pair = get(p, "tradingPairId");
+    const mode = get(p, "mode");
+    if (!acct or kind == .orders or kind == .positions) {
+        if (pair != .null) {
+            const id = try w.string(pair);
+            if (kind != .trades or !eq(u8, id, "*")) try @import("orders.zig").uuid(pair);
+            try chan.writer.print(":{s}", .{try std.ascii.allocLowerString(a, id)});
+        } else if (!acct) return error.InvalidMarket else if (kind == .orders and mode != .null) try chan.writer.writeAll(":*");
+    } else if (pair != .null) return error.InvalidSubscription;
+    if (mode != .null) {
+        if (kind != .orders and kind != .orderbook and kind != .depth and kind != .bbo and kind != .ohlcv) return error.InvalidSubscription;
+        const m = try w.string(mode);
+        if (!in(m, &.{ "MARGIN", "SPOT" })) return error.InvalidMode;
+        try chan.writer.print(":{s}", .{m});
+    } else if (!acct and kind != .trades) return error.InvalidMode;
+    const interval = get(p, "interval");
+    if (kind == .ohlcv) {
+        const period = w.string(interval) catch return error.InvalidInterval;
+        if (!in(period, &.{ "1m", "5m", "15m", "1h", "4h", "1d" })) return error.InvalidInterval;
+        try chan.writer.print(":{s}", .{period});
+    } else if (p.object.contains("interval")) return error.UnknownParameter;
+    const mag = get(p, "magnitude");
+    const denom = get(p, "denomination");
+    if (mag != .null or denom != .null) {
+        if (kind != .orderbook) return error.InvalidSubscription;
+        const m = if (mag == .null) "*" else try w.string(mag);
+        if (!in(m, &.{ "*", "0.000001", "0.00001", "0.0001", "0.001", "0.01", "0.1", "1", "10", "100", "1000", "10000" })) return error.InvalidMagnitude;
+        try chan.writer.print(":{s}", .{m});
+        if (denom != .null) {
+            const d = try w.string(denom);
+            if (!in(d, &.{ "*", "base", "quote" })) return error.InvalidDenomination;
+            try chan.writer.print(":{s}", .{d});
+        }
+    }
+    for (p.object.keys()) |k| if (!in(k, &.{ "type", "tradingPairId", "mode", "magnitude", "denomination", "interval" })) return error.UnknownParameter;
+    return chan.toOwnedSlice();
+}
+
+pub fn preparedTopic(a: A, p: V) ![]const u8 {
+    const kind = try channelKind(p);
+    if (isPrivate(kind)) return error.AuthenticationRequired;
+    if (kind != .orderbook and kind != .trades and kind != .ohlcv) return error.UnknownChannel;
+    return topic(a, kind, p);
+}
+
+pub fn publicEndpoint(a: A, origin: ?[]const u8) ![]const u8 {
+    return endpoint(a, origin orelse "https://apimonaco.xyz");
+}
+
+pub fn subscriptionFrame(a: A, subscribe: bool, channels: []const []const u8) ![]const u8 {
+    const action: []const u8 = if (subscribe) "Subscribe" else "Unsubscribe";
+    return std.json.Stringify.valueAlloc(a, .{ .type = action, .channels = channels }, .{});
+}
+
 pub const State = struct {
     kind: Kind,
     channel: []const u8,
@@ -47,51 +117,17 @@ pub const State = struct {
     snapshot: bool = false,
     sequence: ?u64 = null,
     pub fn init(a: A, config: V, p: V, socket: *Socket) !State {
-        const kind = std.meta.stringToEnum(Kind, try text(p, "type")) orelse return error.UnknownChannel;
-        const acct = switch (kind) {
-            .orders, .account, .balances, .positions => true,
-            else => false,
-        };
+        const kind = try channelKind(p);
+        const acct = isPrivate(kind);
         const auth = get(config, "auth");
         if (acct and auth != .object) return error.AuthenticationRequired;
         const explicit = get(config, "origin");
         const rest = if (acct) try text(auth, "origin") else "https://apimonaco.xyz";
-        const pinned = if (acct and get(auth, "ws_origin") != .null) try text(auth, "ws_origin") else try endpoint(a, rest);
+        const pinned = if (acct and get(auth, "ws_origin") != .null) try text(auth, "ws_origin") else try publicEndpoint(a, rest);
         const url = if (explicit == .null or (acct and eq(u8, try w.string(explicit), rest))) pinned else try endpoint(a, try w.string(explicit));
         if (acct and !eq(u8, url, pinned)) return error.AuthenticationRequired;
-        var chan: std.Io.Writer.Allocating = .init(a);
-        try chan.writer.writeAll(@tagName(kind));
-        const pair = get(p, "tradingPairId");
-        const mode = get(p, "mode");
-        if (!acct or kind == .orders or kind == .positions) {
-            if (pair != .null) {
-                const id = try w.string(pair);
-                if (kind != .trades or !eq(u8, id, "*")) try @import("orders.zig").uuid(pair);
-                try chan.writer.print(":{s}", .{try std.ascii.allocLowerString(a, id)});
-            } else if (!acct) return error.InvalidMarket else if (kind == .orders and mode != .null) try chan.writer.writeAll(":*");
-        } else if (pair != .null) return error.InvalidSubscription;
-        if (mode != .null) {
-            if (kind != .orders and kind != .orderbook and kind != .depth and kind != .bbo) return error.InvalidSubscription;
-            const m = try w.string(mode);
-            if (!in(m, &.{ "MARGIN", "SPOT" })) return error.InvalidMode;
-            try chan.writer.print(":{s}", .{m});
-        } else if (!acct and kind != .trades) return error.InvalidMode;
-        const mag = get(p, "magnitude");
-        const denom = get(p, "denomination");
-        if (mag != .null or denom != .null) {
-            if (kind != .orderbook) return error.InvalidSubscription;
-            const m = if (mag == .null) "*" else try w.string(mag);
-            if (!in(m, &.{ "*", "0.000001", "0.00001", "0.0001", "0.001", "0.01", "0.1", "1", "10", "100", "1000", "10000" })) return error.InvalidMagnitude;
-            try chan.writer.print(":{s}", .{m});
-            if (denom != .null) {
-                const d = try w.string(denom);
-                if (!in(d, &.{ "*", "base", "quote" })) return error.InvalidDenomination;
-                try chan.writer.print(":{s}", .{d});
-            }
-        }
-        for (p.object.keys()) |k| if (!in(k, &.{ "type", "tradingPairId", "mode", "magnitude", "denomination" })) return error.UnknownParameter;
-        const channel = chan.written();
-        const frame = try std.json.Stringify.valueAlloc(a, .{ .type = "Subscribe", .channels = .{channel} }, .{});
+        const channel = try topic(a, kind, p);
+        const frame = try subscriptionFrame(a, true, &.{channel});
         return .{ .kind = kind, .channel = channel, .endpoint = url, .frame = frame, .auth = if (acct) auth else .null, .lease = if (acct) try session.Lease.attach(auth, socket) else null };
     }
     pub fn deinit(self: *State) void {
@@ -103,7 +139,7 @@ pub const State = struct {
     }
     pub fn start(self: *State, a: A, io: std.Io) ![]const u8 {
         self.sequence = null;
-        self.snapshot = eq(u8, self.channel, "trades:*");
+        self.snapshot = self.kind == .ohlcv or eq(u8, self.channel, "trades:*");
         if (self.lease == null) return self.frame;
         if (!self.active()) return error.AuthenticationRequired;
         self.authenticating = true;

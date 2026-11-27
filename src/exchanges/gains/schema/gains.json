@@ -1,0 +1,17 @@
+{
+  "client": "GainsClient",
+  "venue": "gains",
+  "fixture": "http",
+  "aliases": {
+    "MarketsResponse": "serde_json::Value"
+  },
+  "models": {
+    "MarketsRequest": []
+  },
+  "methods": {
+    "markets": [
+      "MarketsRequest",
+      "MarketsResponse"
+    ]
+  }
+}

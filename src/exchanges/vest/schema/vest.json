@@ -1,0 +1,16 @@
+{
+  "client": "VestClient",
+  "venue": "vest",
+  "fixture": "http",
+  "aliases": {
+    "ExchangeInfoResponse": "serde_json::Value"
+  },
+  "models": {
+    "ExchangeInfoRequest": [
+      ["account_group", "account_group", "Option<u64>", "optional"]
+    ]
+  },
+  "methods": {
+    "exchange_info": ["ExchangeInfoRequest", "ExchangeInfoResponse"]
+  }
+}
