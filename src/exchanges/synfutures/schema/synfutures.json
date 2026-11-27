@@ -1,0 +1,84 @@
+{
+  "client": "SynFuturesClient",
+  "venue": "synfutures",
+  "fixture": "http",
+  "aliases": {
+    "GraphResponse": "serde_json::Value"
+  },
+  "models": {
+    "VirtualTradesRequest": [
+      [
+        "since",
+        "since",
+        "u64",
+        "required"
+      ],
+      [
+        "until",
+        "until",
+        "u64",
+        "required"
+      ],
+      [
+        "last",
+        "last",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "first",
+        "first",
+        "Option<u16>",
+        "optional"
+      ]
+    ],
+    "CandlesRequest": [
+      [
+        "since",
+        "since",
+        "u64",
+        "required"
+      ],
+      [
+        "until",
+        "until",
+        "u64",
+        "required"
+      ],
+      [
+        "last",
+        "last",
+        "Option<String>",
+        "optional"
+      ],
+      [
+        "first",
+        "first",
+        "Option<u16>",
+        "optional"
+      ],
+      [
+        "interval",
+        "interval",
+        "String",
+        "required"
+      ],
+      [
+        "amm_ids",
+        "amm_ids",
+        "Vec<String>",
+        "required"
+      ]
+    ]
+  },
+  "methods": {
+    "virtual_trades": [
+      "VirtualTradesRequest",
+      "GraphResponse"
+    ],
+    "candles": [
+      "CandlesRequest",
+      "GraphResponse"
+    ]
+  }
+}

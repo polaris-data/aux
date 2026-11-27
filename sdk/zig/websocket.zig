@@ -7,6 +7,7 @@ const Allocator = std.mem.Allocator;
 pub const PreparedSubscription = core.websocket.PreparedSubscription;
 pub const qfex = core.qfex_stream;
 pub const deribit = core.deribit_stream;
+pub const gains = core.gains_stream;
 
 fn endpointOverride(options: rt.Options) ?[]const u8 {
     if (options.endpoint) |endpoint| return endpoint;

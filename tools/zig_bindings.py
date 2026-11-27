@@ -60,7 +60,7 @@ PREPARED_WEBSOCKETS = {
     "PacificaClient", "ParadexClient", "ParagonClient", "PolymarketPerpsClient", "TradeXyzClient",
     "AevoClient", "ApexOmniClient", "ArcusClient", "BinanceSpotClient", "KuruClient",
     "MonacoClient", "N1Client", "PerplClient", "PhoenixClient", "RisexClient",
-    "GateDexClient", "OkxClient", "VestClient",
+    "GainsClient", "GateDexClient", "OkxClient", "VestClient",
 }
 
 
@@ -163,6 +163,15 @@ def generate(emit, groups, models_for):
                 lines.append("pub const SubscriptionTopic = ws.deribit.SubscriptionTopic;")
         elif client in PREPARED_WEBSOCKETS:
             lines.append('const ws = @import("../websocket.zig");')
+        if client == "GainsClient":
+            lines.append("pub const classifyFrame = ws.gains.classifyFrame;")
+        if client == "SynFuturesClient":
+            lines.extend([
+                'const graph = @import("../synfutures.zig");',
+                *(f"pub const {name} = graph.{name};" for name in (
+                    "Feed", "Interval", "page_size", "nextCursor", "LogPageSpec", "LogPage", "prepareConfirmedLogs",
+                )),
+            ])
         for name, variants in schema.get("enums", {}).items():
             lines.append(
                 "pub const "

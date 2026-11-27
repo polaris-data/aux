@@ -40,6 +40,14 @@ class Peer(BaseHTTPRequestHandler):
         self.wfile.write(row["response_json"].encode())
 
     def do_GET(self):
+        if self.path == "/v1/arbitrum/markets":
+            response = b'{"data":[{"symbol":"BTC/USD","base":"BTC","quote":"USD"}]}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(response)))
+            self.end_headers()
+            self.wfile.write(response)
+            return
         if self.path == "/v2/exchangeInfo":
             assert self.headers["xrestservermm"] == "restserver7"
             response = b'{"symbols":[{"symbol":"BTC-PERP","priceDecimals":2,"tickSizes":["0.01"]}]}'
@@ -248,6 +256,39 @@ class Peer(BaseHTTPRequestHandler):
         return monaco(self)
 
     def do_POST(self):
+        if self.path in ("/thegraph/v3-base", "/synfutures-base-rpc", "/synfutures-wrong-rpc"):
+            request = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            if self.path != "/thegraph/v3-base":
+                method = request["method"]
+                assert request["params"] == []
+                if method == "eth_chainId":
+                    result = "0x2105" if self.path == "/synfutures-base-rpc" else "0x1"
+                else:
+                    assert method == "eth_blockNumber" and self.path == "/synfutures-base-rpc"
+                    result = "0xf0"
+                data = {"jsonrpc": "2.0", "id": request["id"], "result": result}
+            else:
+                query, variables = request["query"], request["variables"]
+                assert "orderBy:id,orderDirection:asc" in query and "id_gt:$last" in query
+                assert variables["since"] == "100" and variables["until"] == "200"
+                if "virtualTrades(" in query:
+                    assert variables["first"] == 2
+                    last = variables["last"]
+                    assert last in ("", "trade-2")
+                    ids = ["trade-3"] if last else ["trade-1", "trade-2"]
+                    data = {"data": {"virtualTrades": [{"id": value} for value in ids]}}
+                else:
+                    assert "per4HourAmmDatas(" in query and "open_gt:0" in query
+                    assert variables["first"] == 1 and variables["last"] == ""
+                    assert variables["ids"] == ["0xec6c44e704eb1932ec5fe1e4aba58db6fee71460-4294967295"]
+                    data = {"data": {"per4HourAmmDatas": [{"id": "candle-1"}]}}
+            response = json.dumps(data).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(response)))
+            self.end_headers()
+            self.wfile.write(response)
+            return
         if self.path.startswith("/native-exchanges/"):
             from .native_exchange_peer import serve
             return serve(self)

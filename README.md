@@ -74,6 +74,7 @@ The preparation methods take venue-specific fields. Use a slice or tuple for `su
 | ApeX Omni | `subscriptions` with `channel = "book"`, `symbol`, optional `depth = 200`, and optional `frequency`. The default endpoint includes a fresh timestamp. Prepare again before reconnecting, or supply `timestamp_ms` for deterministic preparation. |
 | Arcus | `subscriptions` with `channel = "l2OrderbookUpdates"`, `id`, and optional `nLevels`. |
 | Binance Spot | `subscriptions` with `channel = "depth"` or `"kline"`, `symbol`, and optional `interval`. |
+| Gains | Up to 200 `subscriptions` per connection. Use `channel = "prices"` once for global pricing, and supply `market` such as `"BTC/USD"` for `"book"` or `"trades"`. |
 | GateDEX | `subscriptions` with `channel = "futures.order_book"` or `"futures.trades"` and `symbol`. Order books accept `depth` and default to 100 levels. The plan uses Unix seconds for the control frames. Set `timestamp_s` for deterministic preparation. |
 | Kuru | `subscriptions` with `channel = "l2Delta@f"` or `"trades"` and `marketAddress`. Pass `feedEpoch` and `seq` to resume. Market data arrives as binary messages. |
 | Monaco | `subscriptions` with `type = "orderbook"`, `"trades"`, or `"ohlcv"` and `tradingPairId`. Use `mode` for orderbook and OHLCV, and `interval` for OHLCV. |
@@ -85,6 +86,12 @@ The preparation methods take venue-specific fields. Use a slice or tuple for `su
 | Vest | `subscriptions` with `channel = "depth"`, `"tickers"`, or `"kline_1m"`. Supply `symbol` for depth and candles. Use `VestClient.exchange_info` for the v2 instrument catalog and pass `account_group` to select a REST server group. |
 
 N1 accepts a WebSocket base URL as the endpoint override and appends the `/ws/` subscription path. Its prepared frame lists are empty. The same subscription object works with managed `N1Client.subscribe` in Zig, Rust, Python, and TypeScript.
+
+`GainsClient.markets` returns the Arbitrum discovery response. On a caller-owned Zig socket, pass parsed JSON to `aux.clients.gains.classifyFrame` for the capture route and any application-level pong. Retain the original WebSocket payload for capture. Gains book messages describe virtual vault liquidity.
+
+`SynFuturesClient.virtual_trades` and `candles` read Base GraphQL pages. Keep `since` and `until` fixed in Unix seconds, and pass the last returned ID as `last` for the next page. Candles accept AMM IDs and intervals of `1h`, `4h`, `1d`, or `1w`. The Zig `aux.clients.synfutures.nextCursor` helper validates page order and GraphQL errors. A short page completes the window. Copy the cursor if it needs to outlive the response.
+
+In Zig, `aux.clients.synfutures.prepareConfirmedLogs` accepts an `aux.chain.Reader` and a starting block with up to 40 instrument addresses. It prepares an `eth_getLogs` request for up to 100 blocks through the Base head minus 20. Send its JSON body to the returned URL and advance the block cursor after capturing a successful response.
 
 Pass `.{ .headers = plan.value.headers }` to `RawWebSocket.connect` for a prepared connection. For replay compatibility, a Paradex recorder can select `sbe_version = 1` and keep using its schema 1:1 decoder. Aux’s `decodeSbe` decodes schema 1:3.
 

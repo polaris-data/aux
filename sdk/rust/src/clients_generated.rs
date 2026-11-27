@@ -502,6 +502,9 @@ client!(ExtendedClient, "extended",
     withdraw => "withdraw",
     withdraw_from_vault => "withdraw_from_vault",
 );
+client!(GainsClient, "gains",
+    markets => "markets",
+);
 client!(GrvtClient, "grvt",
     account => "account",
     cancel_order => "cancel_order",
@@ -2303,6 +2306,10 @@ client!(RisexClient, "risex",
     signing_domain => "signing_domain",
     system_config => "system_config",
     trades => "trades",
+);
+client!(SynFuturesClient, "synfutures",
+    candles => "candles",
+    virtual_trades => "virtual_trades",
 );
 client!(TardisClient, "tardis",
     api_key_info => "api_key_info",

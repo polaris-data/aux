@@ -96,6 +96,7 @@ NAMES = {
     "chainlink_candles": "ChainlinkCandlestickClient",
     "hyperdash": "HyperdashClient",
     "hyperliquid": "HyperliquidClient",
+    "synfutures": "SynFuturesClient",
 }
 
 

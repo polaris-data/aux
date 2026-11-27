@@ -21,4 +21,6 @@ pub const encoding = @import("core/encoding.zig");
 pub const websocket = @import("core/websocket.zig");
 pub const qfex_stream = @import("exchanges/qfex/stream.zig");
 pub const deribit_stream = @import("exchanges/deribit/stream.zig");
+pub const gains_stream = @import("exchanges/gains/stream.zig");
+pub const synfutures_graph = @import("exchanges/synfutures/graph.zig");
 pub const subscription_prepare = @import("core/subscription_prepare.zig");

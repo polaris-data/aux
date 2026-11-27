@@ -91,6 +91,29 @@ def kuru(peer):
         assert opcode == 1 and json.loads(packet) == {"op": "unsub", "id": subscription_id}
 
 
+def gains(peer):
+    routes = [("prices", None), ("book", "BTC/USD"), ("trades", "BTC/USD")]
+
+    def expect(action):
+        for channel, market in routes:
+            opcode, packet = read_frame(peer.rfile)
+            expected = {"op": action, "channel": channel}
+            if market is not None:
+                expected["market"] = market
+            assert opcode == 1 and json.loads(packet) == expected
+
+    expect("subscribe")
+    peer.connection.sendall(b"".join(frame(1, payload) for payload in [
+        b'{"op":"hello","chain":"arbitrum"}',
+        b'{"channel":"prices","seq":1,"snapshot":true,"data":[]}',
+        b'{"channel":"book","market":"BTC/USD","seq":1,"snapshot":true,"data":{}}',
+        b'{"channel":"trades","market":"BTC/USD","data":[]}',
+        b' {"op":"ping","timestamp":1791680400000} ',
+    ]))
+    assert read_frame(peer.rfile) == (1, b'{"op":"pong"}')
+    expect("unsubscribe")
+
+
 def serve(peer):
     upgrade(peer)
     path = peer.path.removeprefix("/caller-websocket/")
@@ -117,6 +140,8 @@ def serve(peer):
         return n1(peer, path)
     elif path == "kuru":
         kuru(peer)
+    elif path == "gains":
+        gains(peer)
     elif path == "monaco/ohlcv":
         topic = "ohlcv:550e8400-e29b-41d4-a716-446655440000:SPOT:1m"
         opcode, packet = read_frame(peer.rfile)

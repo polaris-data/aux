@@ -9,6 +9,7 @@ const apex = @import("../exchanges/apex_omni/stream.zig");
 const arcus = @import("../exchanges/arcus/stream.zig");
 const binance = @import("../exchanges/binance_spot/stream.zig");
 const gatedex = @import("../exchanges/gatedex/stream.zig");
+const gains = @import("../exchanges/gains/stream.zig");
 const kuru = @import("../exchanges/kuru/stream.zig");
 const monaco = @import("../exchanges/monaco/stream.zig");
 const okx = @import("../exchanges/okx/stream.zig");
@@ -25,6 +26,7 @@ pub fn prepare(a: wire.A, comptime venue: Venue, config: wire.V, spec: wire.V, i
         .aevo, .apex_omni, .binance_spot => try exchangePlan(a, @field(@import("routes.zig").Venue, @tagName(venue)), config, spec, items),
         .arcus, .kuru, .phoenix => try individualPlan(a, venue, config, override, items),
         .gatedex => try gatedex.prepare(a, override, spec, items),
+        .gains => try gains.prepare(a, override, items),
         .monaco => try monacoPlan(a, override, items),
         .okx => try okx.prepare(a, config, override, items),
         .perpl => try perplPlan(a, override orelse perpl.publicEndpoint(try p.testnet(config)), items),

@@ -249,6 +249,8 @@ pub fn prepare(a: A, input: V) !Request {
             q = .empty;
             try headers.object.put(a, "content-type", wire.text("application/x-www-form-urlencoded"));
         }
+    } else if (op.venue == .synfutures) {
+        body = try @import("../exchanges/synfutures/graph.zig").request(a, op.name, fields);
     } else if (op.venue == .hyperliquid) {
         body = if (op.private) try @import("../exchanges/hyperliquid/trading.zig").action(a, op.name, fields) else try market.hyperliquid(a, op.name, fields);
     } else if (hip3.dex(op.venue)) |dex| {

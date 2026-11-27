@@ -30,6 +30,7 @@ pub fn main(init: std.process.Init) !void {
     try exchanges(a, args[5]);
     try qfexSubscriptions(a, args[5]);
     try nativeExchanges(a, args[5]);
+    try @import("onchain_markets.zig").run(a, args[5]);
     const vest = aux.clients.VestClient.init(a, .{ .origin = args[5] });
     var info = try vest.exchange_info(.{ .account_group = 7 });
     defer info.deinit();
