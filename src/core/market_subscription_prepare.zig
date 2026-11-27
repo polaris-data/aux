@@ -8,11 +8,14 @@ const aevo = @import("../exchanges/aevo/stream.zig");
 const apex = @import("../exchanges/apex_omni/stream.zig");
 const arcus = @import("../exchanges/arcus/stream.zig");
 const binance = @import("../exchanges/binance_spot/stream.zig");
+const gatedex = @import("../exchanges/gatedex/stream.zig");
 const kuru = @import("../exchanges/kuru/stream.zig");
 const monaco = @import("../exchanges/monaco/stream.zig");
+const okx = @import("../exchanges/okx/stream.zig");
 const perpl = @import("../exchanges/perpl/stream.zig");
 const phoenix = @import("../exchanges/phoenix/stream.zig");
 const risex = @import("../exchanges/risex/stream.zig");
+const vest = @import("../exchanges/vest/stream.zig");
 const eq = std.mem.eql;
 const Plan = socket.PreparedSubscription;
 
@@ -21,9 +24,12 @@ pub fn prepare(a: wire.A, comptime venue: Venue, config: wire.V, spec: wire.V, i
     const plan = switch (venue) {
         .aevo, .apex_omni, .binance_spot => try exchangePlan(a, @field(@import("routes.zig").Venue, @tagName(venue)), config, spec, items),
         .arcus, .kuru, .phoenix => try individualPlan(a, venue, config, override, items),
+        .gatedex => try gatedex.prepare(a, override, spec, items),
         .monaco => try monacoPlan(a, override, items),
+        .okx => try okx.prepare(a, config, override, items),
         .perpl => try perplPlan(a, override orelse perpl.publicEndpoint(try p.testnet(config)), items),
         .risex => try risexPlan(a, override orelse risex.endpoint(try p.testnet(config)), items),
+        .vest => try vest.prepare(a, override, items),
         else => unreachable,
     };
     _ = try socket.Session.parseEndpoint(plan.endpoint);

@@ -27,12 +27,15 @@ pub const Venue = enum {
     apex_omni,
     arcus,
     binance_spot,
+    gatedex,
     kuru,
     monaco,
     n1,
+    okx,
     perpl,
     phoenix,
     risex,
+    vest,
 };
 
 pub fn prepare(a: wire.A, comptime venue: Venue, config: wire.V, spec: wire.V) !socket.PreparedSubscription {
@@ -48,7 +51,7 @@ pub fn prepare(a: wire.A, comptime venue: Venue, config: wire.V, spec: wire.V) !
     if (items.len == 0) return error.EmptySubscription;
 
     switch (venue) {
-        .aevo, .apex_omni, .arcus, .binance_spot, .kuru, .monaco, .perpl, .phoenix, .risex => return market.prepare(a, venue, config, spec, items),
+        .aevo, .apex_omni, .arcus, .binance_spot, .gatedex, .kuru, .monaco, .okx, .perpl, .phoenix, .risex, .vest => return market.prepare(a, venue, config, spec, items),
         else => {},
     }
 

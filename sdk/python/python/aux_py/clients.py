@@ -55,6 +55,7 @@ from . import risex_models as Risex
 from . import tardis_models as Tardis
 from . import trade_xyz_models as TradeXyz
 from . import variational_models as Variational
+from . import vest_models as Vest
 
 from .lifecycle import ClientLifecycle
 from . import BookSubscription
@@ -7635,4 +7636,9 @@ class VariationalClient(_Client):
     async def market_stats(self, request: Variational.MarketStatsRequest | None = None, *, params: Variational.MarketStatsRequest | None = None) -> Variational.MarketStatsResponse:
         return await execute("variational", "market_stats", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
 
-__all__ = ['AevoClient', 'ApexOmniClient', 'ArcusClient', 'AsterClient', 'BackpackClient', 'BinanceSpotClient', 'BirdeyeClient', 'BybitClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DecibelClient', 'DeribitClient', 'DeriveClient', 'DuneClient', 'DydxV4Client', 'EdgeXClient', 'ExtendedClient', 'GrvtClient', 'HibachiClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'KatanaClient', 'KrakenSpotClient', 'KuruClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'N1Client', 'NadoClient', 'OkxClient', 'OndoPerpsClient', 'OrderlyClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PerplClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'ReyaClient', 'RisexClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient', 'VariationalClient']
+
+class VestClient(_Client):
+    async def exchange_info(self, request: Vest.ExchangeInfoRequest | None = None, *, params: Vest.ExchangeInfoRequest | None = None) -> Vest.ExchangeInfoResponse:
+        return await execute("vest", "exchange_info", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
+
+__all__ = ['AevoClient', 'ApexOmniClient', 'ArcusClient', 'AsterClient', 'BackpackClient', 'BinanceSpotClient', 'BirdeyeClient', 'BybitClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DecibelClient', 'DeribitClient', 'DeriveClient', 'DuneClient', 'DydxV4Client', 'EdgeXClient', 'ExtendedClient', 'GrvtClient', 'HibachiClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'KatanaClient', 'KrakenSpotClient', 'KuruClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'N1Client', 'NadoClient', 'OkxClient', 'OndoPerpsClient', 'OrderlyClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PerplClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'ReyaClient', 'RisexClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient', 'VariationalClient', 'VestClient']

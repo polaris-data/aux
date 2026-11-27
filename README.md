@@ -74,12 +74,15 @@ The preparation methods take venue-specific fields. Use a slice or tuple for `su
 | ApeX Omni | `subscriptions` with `channel = "book"`, `symbol`, optional `depth = 200`, and optional `frequency`. The default endpoint includes a fresh timestamp. Prepare again before reconnecting, or supply `timestamp_ms` for deterministic preparation. |
 | Arcus | `subscriptions` with `channel = "l2OrderbookUpdates"`, `id`, and optional `nLevels`. |
 | Binance Spot | `subscriptions` with `channel = "depth"` or `"kline"`, `symbol`, and optional `interval`. |
+| GateDEX | `subscriptions` with `channel = "futures.order_book"` or `"futures.trades"` and `symbol`. Order books accept `depth` and default to 100 levels. The plan uses Unix seconds for the control frames. Set `timestamp_s` for deterministic preparation. |
 | Kuru | `subscriptions` with `channel = "l2Delta@f"` or `"trades"` and `marketAddress`. Pass `feedEpoch` and `seq` to resume. Market data arrives as binary messages. |
 | Monaco | `subscriptions` with `type = "orderbook"`, `"trades"`, or `"ohlcv"` and `tradingPairId`. Use `mode` for orderbook and OHLCV, and `interval` for OHLCV. |
 | N1 | `subscriptions` with `channel = "trades"`, `"deltas"`, `"candle"`, `"rfq_fills"`, or `"liquidations"`. Supply `symbol` for market streams and `resolution` for candles. The subscriptions go in the upgrade URL. |
+| OKX | `subscriptions` with `channel = "books"`, `"trades"`, or `"candle1m"` and `instId`. Prepare candles separately because they use the business socket. |
 | Perpl | `subscriptions` with `channel = "order_book"` or `"trades"` and `market_id`. Up to 16 entries share one request. |
 | Phoenix | `subscriptions` with `channel = "market"` or `"orderbook"`, `symbol`, and optional orderbook `bypassExecutionBand`. |
 | RISEx | One `subscriptions` entry with `channel = "oracle"` and an optional list of `market_ids`. |
+| Vest | `subscriptions` with `channel = "depth"`, `"tickers"`, or `"kline_1m"`. Supply `symbol` for depth and candles. Use `VestClient.exchange_info` for the v2 instrument catalog and pass `account_group` to select a REST server group. |
 
 N1 accepts a WebSocket base URL as the endpoint override and appends the `/ws/` subscription path. Its prepared frame lists are empty. The same subscription object works with managed `N1Client.subscribe` in Zig, Rust, Python, and TypeScript.
 

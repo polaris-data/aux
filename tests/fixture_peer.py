@@ -40,6 +40,15 @@ class Peer(BaseHTTPRequestHandler):
         self.wfile.write(row["response_json"].encode())
 
     def do_GET(self):
+        if self.path == "/v2/exchangeInfo":
+            assert self.headers["xrestservermm"] == "restserver7"
+            response = b'{"symbols":[{"symbol":"BTC-PERP","priceDecimals":2,"tickSizes":["0.01"]}]}'
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(response)))
+            self.end_headers()
+            self.wfile.write(response)
+            return
         if self.path.startswith("/caller-websocket/"):
             from .raw_websocket_peer import serve
             return serve(self)

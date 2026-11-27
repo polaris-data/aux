@@ -8,6 +8,7 @@ pub fn run(a: A, io: std.Io, fixture_dir: []const u8, base: []const u8) !void {
     const endpoint = try std.mem.concat(a, u8, &.{ base, "prepare/messages" });
     defer a.free(endpoint);
     const options: aux.Options = .{ .endpoint = endpoint };
+    try additionalVenues(a, options);
 
     try check(a, aux.clients.AevoClient, options, .{ .subscriptions = .{.{
         .channel = "book",
@@ -97,6 +98,51 @@ fn check(a: A, comptime Client: type, options: aux.Options, spec: anytype, defau
     defer plan.deinit();
     try t.expectEqualStrings(options.endpoint.?, plan.value.endpoint);
     try verify(a, plan.value, subscribe, unsubscribe);
+}
+
+fn additionalVenues(a: A, options: aux.Options) !void {
+    const book = .{ .channel = "book", .instId = "BTC-USDT" };
+    const trades = .{ .channel = "trades", .instId = "ETH-USDT" };
+    const candle1m = .{ .channel = "candle1m", .instId = "BTC-USDT" };
+    try check(a, aux.clients.OkxClient, options, .{ .subscriptions = .{ book, trades } }, "wss://ws.okx.com/ws/v5/public", &.{
+        "{\"op\":\"subscribe\",\"args\":[{\"channel\":\"books\",\"instId\":\"BTC-USDT\"},{\"channel\":\"trades\",\"instId\":\"ETH-USDT\"}]}",
+    }, &.{
+        "{\"op\":\"unsubscribe\",\"args\":[{\"channel\":\"books\",\"instId\":\"BTC-USDT\"},{\"channel\":\"trades\",\"instId\":\"ETH-USDT\"}]}",
+    });
+    try check(a, aux.clients.OkxClient, options, .{ .subscriptions = .{candle1m} }, "wss://ws.okx.com/ws/v5/business", &.{
+        "{\"op\":\"subscribe\",\"args\":[{\"channel\":\"candle1m\",\"instId\":\"BTC-USDT\"}]}",
+    }, &.{
+        "{\"op\":\"unsubscribe\",\"args\":[{\"channel\":\"candle1m\",\"instId\":\"BTC-USDT\"}]}",
+    });
+    const okx = aux.clients.OkxClient.init(a, options);
+    try t.expectError(error.MixedEndpoints, okx.prepareSubscription(.{ .subscriptions = .{ book, candle1m } }));
+    try t.expectError(error.AuthenticationRequired, okx.prepareSubscription(.{ .subscriptions = .{.{ .channel = "orders" }} }));
+    try t.expectError(error.InvalidSubscription, okx.prepareSubscription(.{ .subscriptions = .{.{ .channel = "trades" }} }));
+
+    try check(a, aux.clients.GateDexClient, options, .{ .timestamp_s = 1700000000, .subscriptions = .{
+        .{ .channel = "futures.order_book", .symbol = "BTC_USDT", .depth = 20 },
+        .{ .channel = "futures.trades", .symbol = "ETH_USDT" },
+    } }, "wss://api.gatedex.com/v1/ws/dex", &.{
+        "{\"time\":1700000000,\"channel\":\"futures.order_book\",\"event\":\"subscribe\",\"payload\":[\"BTC_USDT\",\"20\",\"0\"]}",
+        "{\"time\":1700000000,\"channel\":\"futures.trades\",\"event\":\"subscribe\",\"payload\":[\"ETH_USDT\"]}",
+    }, &.{
+        "{\"time\":1700000000,\"channel\":\"futures.order_book\",\"event\":\"unsubscribe\",\"payload\":[\"BTC_USDT\",\"20\",\"0\"]}",
+        "{\"time\":1700000000,\"channel\":\"futures.trades\",\"event\":\"unsubscribe\",\"payload\":[\"ETH_USDT\"]}",
+    });
+    const gatedex = aux.clients.GateDexClient.init(a, options);
+    try t.expectError(error.InvalidDepth, gatedex.prepareSubscription(.{ .subscriptions = .{.{ .channel = "futures.order_book", .symbol = "BTC_USDT", .depth = 2 }} }));
+
+    try check(a, aux.clients.VestClient, options, .{ .subscriptions = .{
+        .{ .channel = "depth", .symbol = "BTC-PERP" },
+        .{ .channel = "tickers" },
+        .{ .channel = "kline_1m", .symbol = "ETH-PERP" },
+    } }, "wss://ws-prod.hz.vestmarkets.com/ws", &.{
+        "{\"method\":\"SUBSCRIBE\",\"params\":[\"BTC-PERP@depth\",\"tickers\",\"ETH-PERP@kline_1m\"],\"id\":1}",
+    }, &.{
+        "{\"method\":\"UNSUBSCRIBE\",\"params\":[\"BTC-PERP@depth\",\"tickers\",\"ETH-PERP@kline_1m\"],\"id\":2}",
+    });
+    const vest = aux.clients.VestClient.init(a, options);
+    try t.expectError(error.InvalidSubscription, vest.prepareSubscription(.{ .subscriptions = .{.{ .channel = "tickers", .symbol = "BTC-PERP" }} }));
 }
 
 const pair = "550E8400-E29B-41D4-A716-446655440000";

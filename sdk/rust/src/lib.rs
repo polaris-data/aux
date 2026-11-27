@@ -292,6 +292,9 @@ pub mod perpl_models;
 #[cfg(feature = "risex-models")]
 #[allow(clippy::all)]
 pub mod risex_models;
+#[cfg(feature = "vest-models")]
+#[allow(clippy::all)]
+pub mod vest_models;
 #[cfg(feature = "decibel-models")]
 #[allow(clippy::all)]
 pub mod decibel_models;

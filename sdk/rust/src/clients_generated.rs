@@ -2328,3 +2328,6 @@ client!(TradeXyzClient, "trade_xyz",
 client!(VariationalClient, "variational",
     market_stats => "market_stats",
 );
+client!(VestClient, "vest",
+    exchange_info => "exchange_info",
+);
