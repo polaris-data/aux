@@ -194,7 +194,7 @@ pub fn prepare(a: A, input: V) !Request {
         }));
         if (op.venue == .birdeye) try headers.object.put(a, "x-chain", wire.text("solana"));
     } else if (op.venue != .lighter and op.venue != .qfex and op.venue != .arcus) try headers.object.put(a, if (prediction or op.venue == .hyperliquid or op.venue == .metric or perps.isVenue(op.venue)) "content-type" else "Content-Type", wire.text("application/json"));
-    if (op.venue == .phoenix or op.venue == .extended or op.venue == .monaco or perps.isVenue(op.venue)) try headers.object.put(a, "User-Agent", wire.text("aux-zig/0.0.1"));
+    if (op.venue == .phoenix or op.venue == .extended or op.venue == .monaco or perps.isVenue(op.venue)) try headers.object.put(a, "User-Agent", wire.text("aux-zig/0.0.2"));
     if (op.venue == .arcus and op.private) {
         try headers.object.put(a, "content-type", wire.text("application/json"));
         const order = try @import("../exchanges/arcus/trading.zig").order(a, eq(u8, op.name, "place_order"), fields);
