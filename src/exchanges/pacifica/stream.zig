@@ -1,15 +1,31 @@
 const std = @import("std");
 const p = @import("../../core/perps.zig");
 const w = @import("../../core/wire.zig");
+const websocket = @import("../../core/websocket.zig");
 const Event = @import("../derive/stream.zig").State.Event;
 
-const Channel = enum { trades, book, bbo, prices, account_info, account_positions, account_order_updates, account_trades };
+const Channel = enum { trades, book, bbo, prices, candle, account_info, account_positions, account_order_updates, account_trades };
+
+pub fn endpoint(config: p.V) ![]const u8 {
+    return if (try p.testnet(config)) "wss://test-ws.pacifica.fi/ws" else "wss://ws.pacifica.fi/ws";
+}
+
+fn frame(a: p.A, method: []const u8, request: p.V) ![]const u8 {
+    return std.json.Stringify.valueAlloc(a, .{ .method = method, .params = request }, .{});
+}
+
+pub fn prepareFrames(a: p.A, config: p.V, params: p.V) !websocket.SubscriptionFrames {
+    const state = try State.init(a, config, params);
+    if (state.account != null) return error.AuthenticationRequired;
+    return .{ .subscribe = state.frame, .unsubscribe = try frame(a, "unsubscribe", state.request) };
+}
 
 pub const State = struct {
     endpoint: []const u8,
     channel: Channel,
     symbol: ?[]const u8,
     account: ?[]const u8,
+    request: p.V,
     frame: []const u8,
 
     pub fn init(a: p.A, config: p.V, params: p.V) !State {
@@ -39,12 +55,20 @@ pub const State = struct {
             }
             try p.put(&request, a, "agg_level", .{ .integer = level });
         } else if (aggregate_level != .null) return error.InvalidSubscription;
+        if (channel == .candle) {
+            const interval = try p.text(params, "interval");
+            for ([_][]const u8{ "1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "8h", "12h", "1d", "1w", "1M" }) |valid| {
+                if (p.eq(u8, valid, interval)) break;
+            } else return error.InvalidInterval;
+            try p.put(&request, a, "interval", w.text(interval));
+        }
         return .{
-            .endpoint = if (try p.testnet(config)) "wss://test-ws.pacifica.fi/ws" else "wss://ws.pacifica.fi/ws",
+            .endpoint = try endpoint(config),
             .channel = channel,
             .symbol = symbol,
             .account = account,
-            .frame = try std.json.Stringify.valueAlloc(a, .{ .method = "subscribe", .params = request }, .{}),
+            .request = request,
+            .frame = try frame(a, "subscribe", request),
         };
     }
 

@@ -2,6 +2,7 @@
 const std = @import("std");
 const wire = @import("../../core/wire.zig");
 const http = @import("../../core/http.zig");
+const websocket = @import("../../core/websocket.zig");
 const A = wire.A;
 const V = wire.V;
 const equal = std.mem.eql;
@@ -45,6 +46,32 @@ fn str(v: V, fallback: []const u8) []const u8 {
 fn is(v: V, value: []const u8) bool {
     return v == .string and equal(u8, v.string, value);
 }
+
+pub fn prepare(a: A, config: V, spec: V) !websocket.PreparedSubscription {
+    const rpc = get(spec, "rpc");
+    if (rpc == .bool and rpc.bool) return error.UnsupportedSubscriptionMode;
+    const origin = get(config, "origin");
+    if (origin != .null) {
+        const base = try websocket.Session.parseEndpoint(try wire.string(origin));
+        if (base.query != null) return error.InvalidEndpoint;
+    }
+    var sub = spec;
+    const channel = get(spec, "channel");
+    const canonical: ?[]const u8 = if (is(channel, "orderbook")) "orderbooks" else if (is(channel, "mark")) "mark_price" else if (is(channel, "index")) "index_price" else null;
+    if (canonical) |name| try sub.object.put(a, "channel", wire.text(name));
+    const state = try State.init(a, config, sub, false);
+    _ = try websocket.Session.parseEndpoint(state.endpoint);
+    return .{
+        .endpoint = state.endpoint,
+        .subscribe = &.{},
+        .unsubscribe = &.{},
+        .headers = &.{
+            .{ .name = "Origin", .value = "https://app.extended.exchange" },
+            .{ .name = "User-Agent", .value = "Mozilla/5.0" },
+        },
+    };
+}
+
 pub const State = struct {
     endpoint: []const u8,
     frame: []const u8 = "",

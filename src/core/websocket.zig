@@ -9,6 +9,18 @@ const gpa = std.heap.c_allocator;
 const eq = std.mem.eql;
 const max_bytes = 8 * 1024 * 1024;
 
+pub const MessageKind = enum { text, binary };
+pub const PreparedSubscription = struct {
+    endpoint: []const u8,
+    subscribe: []const []const u8,
+    unsubscribe: []const []const u8,
+    headers: []const std.http.Header = &.{},
+};
+pub const SubscriptionFrames = struct {
+    subscribe: []const u8,
+    unsubscribe: []const u8,
+};
+
 fn headerToken(list: []const u8, wanted: []const u8) bool {
     var it = std.mem.splitScalar(u8, list, ',');
     while (it.next()) |part| if (std.ascii.eqlIgnoreCase(std.mem.trim(u8, part, " \t"), wanted)) return true;
@@ -190,7 +202,7 @@ pub const Session = struct {
         } else if (eq(u8, venue, "paradex")) {
             self.paradex = try @import("../exchanges/paradex/stream.zig").State.init(a, params, args.object.get("auth") orelse .null);
             self.channel = self.paradex.?.name;
-            self.subscribe = try std.json.Stringify.valueAlloc(a, .{ .jsonrpc = "2.0", .id = @as(u32, 1), .method = "subscribe", .params = .{ .channel = self.channel } }, .{});
+            self.subscribe = try @import("../exchanges/paradex/stream.zig").subscriptionFrame(a, "subscribe", 1, self.channel);
         } else if (is_derive) {
             const spec = try @import("../exchanges/derive/stream.zig").channel(a, params);
             self.channel = spec.name;
@@ -214,7 +226,7 @@ pub const Session = struct {
             self.qfex = try @import("../exchanges/qfex/stream.zig").State.init(a, params);
             self.subscribe = self.qfex.?.frame;
         }
-        const endpoint = if (self.exchange) |state| state.endpoint else if (self.aster) |state| state.endpoint else if (self.chainlink) |c| c.endpoint else if (self.monaco) |m| m.endpoint else if (self.extended) |state| state.endpoint else if (args.object.get("origin")) |v| try wire.string(v) else if (self.perps) |state| state.endpoint else if (self.nado) |state| state.endpoint else if (self.ondo) |state| state.endpoint else if (self.pacifica) |state| state.endpoint else if (self.arcus != null) "wss://api.arcus.xyz/v1/ws" else if (self.hyperliquid) |state| state.endpoint else if (self.lighter) |state| state.endpoint else if (self.polymarket) |state| state.endpoint() else if (self.prediction) |state| state.endpoint() else if (self.paradex != null) "wss://ws.api.prod.paradex.trade/v1?sbeSchemaId=1&sbeSchemaVersion=3" else if (is_derive) "wss://api.derive.xyz/v3/ws" else if (self.phoenix != null) "wss://perp-api.phoenix.trade/v1/ws" else "wss://mds.qfex.com/";
+        const endpoint = if (self.exchange) |state| state.endpoint else if (self.aster) |state| state.endpoint else if (self.chainlink) |c| c.endpoint else if (self.monaco) |m| m.endpoint else if (self.extended) |state| state.endpoint else if (args.object.get("origin")) |v| try wire.string(v) else if (self.perps) |state| state.endpoint else if (self.nado) |state| state.endpoint else if (self.ondo) |state| state.endpoint else if (self.pacifica) |state| state.endpoint else if (self.arcus != null) "wss://api.arcus.xyz/v1/ws" else if (self.hyperliquid) |state| state.endpoint else if (self.lighter) |state| state.endpoint else if (self.polymarket) |state| state.endpoint() else if (self.prediction) |state| state.endpoint() else if (self.paradex != null) @import("../exchanges/paradex/stream.zig").endpoint else if (is_derive) "wss://api.derive.xyz/v3/ws" else if (self.phoenix != null) "wss://perp-api.phoenix.trade/v1/ws" else @import("../exchanges/qfex/stream.zig").endpoint;
         try self.openEndpoint(endpoint);
         return self;
     }
@@ -243,8 +255,14 @@ pub const Session = struct {
         return self;
     }
     pub fn sendText(self: *Session, payload: []const u8) !void {
+        try self.sendData(.text, payload);
+    }
+    pub fn sendData(self: *Session, kind: MessageKind, payload: []const u8) !void {
         if (self.canceled.load(.acquire)) return error.Network;
-        try self.write(self.conn orelse return error.Network, 1, payload);
+        try self.write(self.conn orelse return error.Network, switch (kind) {
+            .text => 1,
+            .binary => 2,
+        }, payload);
     }
     /// Called before the reader thread starts. The initial subscription was sent on upgrade.
     pub fn startMultiplex(self: *Session, frame: []const u8) !void {
@@ -290,7 +308,7 @@ pub const Session = struct {
         defer self.topic_lock.unlock(self.io.io());
         self.disconnect();
     }
-    fn parseEndpoint(endpoint: []const u8) !std.Uri {
+    pub fn parseEndpoint(endpoint: []const u8) !std.Uri {
         for (endpoint) |b| if (b <= 32 or b == 127 or b == '\\') return error.InvalidEndpoint;
         var url = try std.Uri.parse(endpoint);
         if (url.host == null or url.user != null or url.password != null or url.fragment != null) return error.InvalidEndpoint;
@@ -342,7 +360,10 @@ pub const Session = struct {
         }
         const opening = if (self.exchange) |*state| try state.start(a, io, self.io.dial, self.url, &headers) else if (self.perps) |*state| try state.start(a, io, self.io.dial, self.url, &headers) else perps_stream.Opening{ .frame = self.subscribe };
         const url = if (opening.url) |custom| custom else if (self.aster) |*state| if (state.hasListenKey()) try parseEndpoint(try state.connect(a, self.io.dial)) else self.url else self.url;
-        var req = try host.request(&self.client, .GET, url, .{ .redirect_behavior = .unhandled, .headers = .{ .connection = .{ .override = "Upgrade" }, .user_agent = if (self.extended != null) .omit else .default }, .extra_headers = headers.items });
+        const has_user_agent = for (self.opening_headers) |header| {
+            if (std.ascii.eqlIgnoreCase(header.name, "user-agent")) break true;
+        } else false;
+        var req = try host.request(&self.client, .GET, url, .{ .redirect_behavior = .unhandled, .headers = .{ .connection = .{ .override = "Upgrade" }, .user_agent = if (self.extended != null or has_user_agent) .omit else .default }, .extra_headers = headers.items });
         // We own the connection after 101. Avoid HTTP body draining on cleanup.
         defer {
             if (req.connection) |c| c.closing = true;
@@ -543,10 +564,19 @@ pub const Session = struct {
     }
 
     pub fn message(self: *Session) !?[]u8 {
+        return self.readMessage(gpa, false);
+    }
+
+    /// Caller-managed readers accept both application opcodes.
+    pub fn rawMessage(self: *Session, allocator: std.mem.Allocator) !?[]u8 {
+        return self.readMessage(allocator, true);
+    }
+
+    fn readMessage(self: *Session, allocator: std.mem.Allocator, allow_binary: bool) !?[]u8 {
         const conn = self.conn.?;
         const reader = conn.reader();
         var fragments: std.ArrayList(u8) = .empty;
-        defer fragments.deinit(gpa);
+        defer fragments.deinit(allocator);
         var fragmented = false;
         var compressed = false;
         while (true) {
@@ -591,15 +621,15 @@ pub const Session = struct {
             if (op == 0) {
                 if (!fragmented) return error.InvalidOpcode;
             } else {
-                const binary_allowed = self.paradex != null or self.bearer != null or (self.exchange != null and self.exchange.?.kuru != null);
+                const binary_allowed = allow_binary or self.paradex != null or self.bearer != null or (self.exchange != null and self.exchange.?.kuru != null);
                 if (fragmented or (op != 1 and !(op == 2 and binary_allowed))) return error.InvalidOpcode;
                 self.binary = op == 2;
                 compressed = rsv1;
             }
             if (n > max_bytes - fragments.items.len) return error.FrameTooLarge;
-            const dest = try fragments.addManyAsSlice(gpa, @intCast(n));
+            const dest = try fragments.addManyAsSlice(allocator, @intCast(n));
             reader.readSliceAll(dest) catch return error.Network;
-            if (fin) return if (compressed) try self.deflate.?.message(fragments.items, max_bytes) else try fragments.toOwnedSlice(gpa);
+            if (fin) return if (compressed) try self.deflate.?.message(allocator, fragments.items, max_bytes) else try fragments.toOwnedSlice(allocator);
             fragmented = true;
         }
     }

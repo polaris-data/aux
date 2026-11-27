@@ -29,6 +29,48 @@ pub fn latest(allocator: std.mem.Allocator, ids: []const []const u8) !void {
 
 Clients borrow their allocator, endpoint strings, credentials and callback contexts. Each successful request returns an `Owned(T)` whose arena owns the response. `aux.parseAs(T, allocator, bytes)` applies the same decoder to caller-supplied JSON. Open JSON fields preserve numeric tokens as `number_string`. Schema fields that accept arbitrary JSON numbers use `Number.text`. Supply a separate `Diagnostic` per concurrent operation to retain the venue's structured error. Streams own their handles. A single reader can call `next()` for JSON or `nextBytes()` for binary data. Call `cancel()` to wake a blocked reader, join it, then call `deinit()`. Each returned JSON event owns its storage. Free byte chunks with the client allocator.
 
+For caller-managed WebSockets, `prepareSubscription` builds public market-data subscriptions offline. The returned plan owns the endpoint, any upgrade headers, and the ordered `subscribe` and `unsubscribe` payloads. Send these payloads over `aux.RawWebSocket` or an existing WebSocket connection. Set `Options.endpoint` to override the venue endpoint.
+
+```zig
+const client = aux.clients.QfexClient.init(allocator, .{});
+var plan = try client.prepareSubscription(.{
+    .channels = &.{ "funding", "candle" },
+    .symbols = &.{ "ABSI-USD", "CYPH-USD" },
+    .intervals = &.{"1MIN"},
+});
+defer plan.deinit();
+
+var socket = try aux.RawWebSocket.connect(allocator, plan.value.endpoint, .{});
+defer socket.deinit();
+for (plan.value.subscribe) |message| try socket.send(.text, message);
+while (try socket.next()) |message| {
+    defer allocator.free(message.payload);
+    try capture(generation, message.receive_index, message.kind, message.payload);
+    if (message.kind == .text) {
+        var decoded = aux.parseAs(aux.Value, allocator, message.payload) catch continue;
+        defer decoded.deinit();
+        try handleEvent(decoded.value);
+    }
+}
+```
+
+In this example the recorder owns `capture`, `handleEvent`, and the connection `generation`. `next` reads one complete application message at a time. Payloads include acknowledgements, errors, and venue heartbeat messages. Aux assembles fragments, handles WebSocket ping and pong, and applies an 8 MiB message limit. A slow writer slows socket reads, and a clean close or local cancellation returns `null`. A read error ends the connection. The application handles venue heartbeats and reconnects, and can send the prepared unsubscribe messages on the live connection. To stop a blocked read, call `cancel()`, join the reader, then call `deinit()`. For Paradex SBE binary payloads, use `aux.codec.decodeSbe` after capture.
+
+The preparation methods take venue-specific fields. Use a slice or tuple for `subscriptions` when the venue accepts multiple selections.
+
+| Client | Preparation input |
+| --- | --- |
+| QFEX | `channels`, `symbols`, and candle `intervals`. Market channels and candles produce separate messages. |
+| Deribit | `topics`, `subscribe_id`, and `unsubscribe_id`. Native and structured topics are grouped in batches of up to 500. |
+| Pacifica | `subscriptions` with `source`, a `symbol` for per-market streams, and `agg_level` or `interval` for books or candles. |
+| Hibachi | `subscriptions` with `symbol` and `topic`. Book entries can include `depth` and `granularity`. All entries share one market request. |
+| Hyperliquid, Paragon, trade.xyz | `subscriptions` with `type` and `coin`. Use `interval` for candles and supply `dex` when matching an explicit recorder selector. |
+| Ondo Perps | `subscriptions` with `channel`, optional `markets`, and channel-specific fields such as `depthLevels` or `resolution`. Candle requests require markets and produce one message per market. |
+| Extended | `channel`, optional `market`, and path query `params`. The plan contains the path and upgrade headers. Opening the socket starts the feed and closing it ends the feed. |
+| Paradex | `subscriptions` with a native `topic` or structured `type` and its channel fields. Use `sbe_version` to select a wire schema version and optional starting `subscribe_id` and `unsubscribe_id` values. |
+
+Pass `.{ .headers = plan.value.headers }` to `RawWebSocket.connect` for a prepared connection. For replay compatibility, a Paradex recorder can select `sbe_version = 1` and keep using its schema 1:1 decoder. Aux’s `decodeSbe` decodes schema 1:3.
+
 | Zig API | Functionality |
 | --- | --- |
 | `aux.clients` | Named HTTP clients, schema types, streaming endpoints, trading and RPC session openers |

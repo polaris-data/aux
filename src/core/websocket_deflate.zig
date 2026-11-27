@@ -13,7 +13,7 @@ pub const Inflate = struct {
         self.no_takeover = no_takeover;
     }
 
-    pub fn message(self: *Inflate, bytes: []const u8, limit: usize) ![]u8 {
+    pub fn message(self: *Inflate, allocator: std.mem.Allocator, bytes: []const u8, limit: usize) ![]u8 {
         var arena = std.heap.ArenaAllocator.init(gpa);
         defer arena.deinit();
         const a = arena.allocator();
@@ -30,7 +30,7 @@ pub const Inflate = struct {
         var decoder = flate.Decompress.init(&reader, .raw, try a.alloc(u8, flate.max_window_len));
         const output = decoder.reader.allocRemaining(a, .limited(limit + self.size)) catch return error.InvalidCompressedFrame;
         if (output.len < self.size or reader.seek != reader.end) return error.InvalidCompressedFrame;
-        const message_bytes = try gpa.dupe(u8, output[self.size..]);
+        const message_bytes = try allocator.dupe(u8, output[self.size..]);
         if (!self.no_takeover) {
             self.size = @min(self.history.len, output.len);
             @memcpy(self.history[0..self.size], output[output.len - self.size ..]);

@@ -54,6 +54,11 @@ STREAMS = {
     "DatabentoLiveClient": "connect",
 }
 
+PREPARED_WEBSOCKETS = {
+    "ExtendedClient", "HibachiClient", "HyperliquidClient", "OndoPerpsClient",
+    "PacificaClient", "ParadexClient", "ParagonClient", "TradeXyzClient",
+}
+
 
 def zig_type(ty):
     ty = ty.strip()
@@ -141,6 +146,16 @@ def generate(emit, groups, models_for):
             'const std = @import("std");',
             'const model = @import("../model.zig");',
         ]
+        prepare_subscription = {"QfexClient": "Qfex", "DeribitClient": "Deribit"}.get(client)
+        if prepare_subscription:
+            lines.extend([
+                'const ws = @import("../websocket.zig");',
+                f"pub const SubscriptionSpec = ws.{venue}.SubscriptionSpec;",
+            ])
+            if client == "DeribitClient":
+                lines.append("pub const SubscriptionTopic = ws.deribit.SubscriptionTopic;")
+        elif client in PREPARED_WEBSOCKETS:
+            lines.append('const ws = @import("../websocket.zig");')
         for name, variants in schema.get("enums", {}).items():
             lines.append(
                 "pub const "
@@ -219,6 +234,18 @@ def generate(emit, groups, models_for):
                 ]
             )
         lines.extend(client_helpers(client))
+        if prepare_subscription:
+            lines.extend([
+                "    pub fn prepareSubscription(self: Client, spec: SubscriptionSpec) !rt.Owned(ws.PreparedSubscription) {",
+                f"        return ws.prepare{prepare_subscription}(self.runtime, spec);",
+                "    }",
+            ])
+        elif client in PREPARED_WEBSOCKETS:
+            lines.extend([
+                "    pub fn prepareSubscription(self: Client, spec: anytype) !rt.Owned(ws.PreparedSubscription) {",
+                f"        return ws.prepare(self.runtime, .{venue}, spec);",
+                "    }",
+            ])
         lines.append("};")
         emit(out / "generated" / f"{unit}.zig", "\n".join(lines) + "\n")
     emit(out / "clients.zig", "\n".join(api) + "\n")
