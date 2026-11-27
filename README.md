@@ -6,7 +6,7 @@ Zig applications import the public `aux` module from `sdk/zig/root.zig`. The sta
 
 ## Zig-native SDK
 
-Use Zig 0.17.1. For a local source checkout, run `python3 tools/generate_clients.py --zig-generated-only` from the aux root, then add the checkout as the `aux` dependency in your application's `build.zig.zon`. The external consumer in `tests/zig_consumer` shows a complete local path dependency. To use the verified source archive, run `zig fetch --save=aux /absolute/path/to/aux-zig-native-0.0.2.tar.gz` in the consuming project. Import the module in your application's build script.
+Use Zig 0.17.1. For a local source checkout, run `python3 tools/generate_clients.py --zig-generated-only` from the aux root, then add the checkout as the `aux` dependency in your application's `build.zig.zon`. The external consumer in `tests/zig_consumer` shows a complete local path dependency. To use the verified source archive, run `zig fetch --save=aux /absolute/path/to/aux-zig-native-0.0.3.tar.gz` in the consuming project. Import the module in your application's build script.
 
 ```zig
 const aux = b.dependency("aux", .{ .target = target, .optimize = optimize });
@@ -304,7 +304,7 @@ With Rust 1.92+, Python 3.10+, Node 22+ and maturin 1.16 installed, run `python3
 
 ```sh
 python3 -m pip install dist/*arm64.whl
-npm install ./dist/aux-connectors-0.0.2.tgz
+npm install ./dist/aux-connectors-0.0.3.tgz
 cargo add --path /absolute/path/to/aux/sdk/rust
 ```
 
