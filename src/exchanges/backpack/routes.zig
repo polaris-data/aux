@@ -2,6 +2,7 @@ const r = @import("../../core/routes.zig");
 
 pub const operations = [_]r.Operation{
     .{ .venue = .backpack, .name = "markets", .verb = "GET", .path = "/api/v1/markets", .private = false, .origin = "https://api.backpack.exchange", .params = &.{} },
+    .{ .venue = .backpack, .name = "depth", .verb = "GET", .path = "/api/v1/depth", .private = false, .origin = "https://api.backpack.exchange", .params = &.{ .{ .key = "symbol", .loc = .query, .required = true, .collection = "" }, .{ .key = "limit", .loc = .query, .required = false, .collection = "" } } },
     .{ .venue = .backpack, .name = "ticker", .verb = "GET", .path = "/api/v1/ticker", .private = false, .origin = "https://api.backpack.exchange", .params = &.{.{ .key = "symbol", .loc = .query, .required = true, .collection = "" }} },
     .{ .venue = .backpack, .name = "trades", .verb = "GET", .path = "/api/v1/trades", .private = false, .origin = "https://api.backpack.exchange", .params = &.{.{ .key = "symbol", .loc = .query, .required = true, .collection = "" }, .{ .key = "limit", .loc = .query, .required = false, .collection = "" }} },
     .{ .venue = .backpack, .name = "account", .verb = "GET", .path = "/api/v1/account", .private = true, .origin = "https://api.backpack.exchange", .params = &.{} },

@@ -10,6 +10,16 @@ class Subscription(_SubscriptionOptional):
 class MarketsRequest(TypedDict):
     pass
 
+_DepthRequestOptional = TypedDict("_DepthRequestOptional", {'limit': 'int | None'}, total=False)
+class DepthRequest(_DepthRequestOptional):
+    symbol: str
+
+class DepthResponse(TypedDict):
+    asks: list[list[str]]
+    bids: list[list[str]]
+    lastUpdateId: int | Decimal | str
+    timestamp: int | Decimal | str
+
 class TickerRequest(TypedDict):
     symbol: str
 

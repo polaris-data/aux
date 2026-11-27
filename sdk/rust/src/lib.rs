@@ -176,7 +176,11 @@ pub mod phoenix_models;
 #[rustfmt::skip]
 pub mod extended_models;
 
-#[cfg(any(feature = "phoenix-models", feature = "extended-models"))]
+#[cfg(any(
+    feature = "backpack-models",
+    feature = "extended-models",
+    feature = "phoenix-models"
+))]
 mod model_number;
 
 pub mod solana;

@@ -640,6 +640,29 @@
   },
   {
     "venue": "binance_spot",
+    "operation": "depth",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/depth",
+    "query": {
+      "symbol": "ETHUSDT",
+      "limit": "5000",
+      "symbolStatus": "TRADING"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "limit": 5000,
+      "symbolStatus": "TRADING"
+    },
+    "body": null,
+    "response": {
+      "lastUpdateId": 9007199254740993,
+      "bids": [["1199.90000000", "2.00000000"]],
+      "asks": [["1200.00000001", "0.00123000"]]
+    }
+  },
+  {
+    "venue": "binance_spot",
     "operation": "ticker",
     "verb": "GET",
     "private": false,
@@ -2345,6 +2368,28 @@
     "request": {},
     "body": null,
     "response": []
+  },
+  {
+    "venue": "backpack",
+    "operation": "depth",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/depth",
+    "query": {
+      "symbol": "ETH_USDC",
+      "limit": "1000"
+    },
+    "request": {
+      "symbol": "ETH_USDC",
+      "limit": 1000
+    },
+    "body": null,
+    "response": {
+      "asks": [["1234.500", "0.0012300"]],
+      "bids": [["1234.000", "20.000"]],
+      "lastUpdateId": 9007199254740993,
+      "timestamp": "1735728000000001"
+    }
   },
   {
     "venue": "backpack",

@@ -104,6 +104,15 @@ fn main() -> aux_rs::Result<()> {
     native_exchanges!(AevoClient => "aevo", BackpackClient => "backpack", BinanceSpotClient => "binance_spot",
         BybitClient => "bybit", DeribitClient => "deribit", DydxV4Client => "dydx_v4", HibachiClient => "hibachi",
         KrakenSpotClient => "kraken_spot", OkxClient => "okx", OrderlyClient => "orderly");
+    let backpack = aux_rs::BackpackClient::new().with_origin(format!("{origin}/native-exchanges/backpack/rest/public"));
+    let depth = catalog.iter().find(|r| r["venue"] == "backpack" && r["operation"] == "depth").unwrap();
+    assert_eq!(backpack.depth(&depth["request"])?, depth["response"]);
+    assert_eq!(backpack.depth(&serde_json::json!({"symbol":depth["request"]["symbol"]}))?, depth["response"]);
+    let binance = aux_rs::BinanceSpotClient::new()
+        .with_origin(format!("{origin}/native-exchanges/binance_spot/rest/public"))
+        .with_credentials("fixture-key", "fixture-secret");
+    let depth = catalog.iter().find(|r| r["venue"] == "binance_spot" && r["operation"] == "depth").unwrap();
+    assert_eq!(binance.depth(&depth["request"])?, depth["response"]);
     let market_streams: Vec<serde_json::Value> = serde_json::from_str(include_str!("../market-data-ws.json")).unwrap();
     macro_rules! market_data {
         ($($client:ident => $venue:literal),+ $(,)?) => {$(
@@ -125,7 +134,7 @@ fn main() -> aux_rs::Result<()> {
             }
         )+};
     }
-    market_data!(ApexOmniClient => "apex_omni", KuruClient => "kuru", ReyaClient => "reya");
+    market_data!(ApexOmniClient => "apex_omni", BinanceSpotClient => "binance_spot", KuruClient => "kuru", ReyaClient => "reya");
     let commands = origin.replacen("http:", "ws:", 1) + "/native-exchanges/binance_spot/ws/orders";
     let trader = aux_rs::BinanceSpotClient::new().with_credentials("fixture-key", "fixture-secret");
     let order_session = trader.open_rpc(Some(&commands), &serde_json::json!({}))?;
@@ -270,9 +279,16 @@ fn main() -> aux_rs::Result<()> {
     let book_spec = serde_json::json!({"channel":"order_book","market_id":4});
     let book = lighter_feed.subscribe(&book_spec, Some(&lighter_mux))?;
     let account = lighter_feed.subscribe(&serde_json::json!({"channel":"account_all","account_index":18}), Some(&lighter_mux))?;
+    let candles = lighter_feed.subscribe(&serde_json::json!({"channel":"candle","market_id":4}), Some(&lighter_mux))?;
     for generation in [1, 2] {
         assert_eq!(read(&book)?["sequence"],generation);
         assert_eq!(read(&account)?["sequence"],generation);
+        for kind in ["subscribed/candle", "update/candle"] {
+            let candle = read(&candles)?;
+            assert_eq!(candle["type"], kind);
+            assert_eq!(candle["sequence"], generation);
+            assert_eq!(candle["candles"][0]["i"], 9007199254740993u64);
+        }
     }
     let late = lighter_feed.subscribe(&book_spec, Some(&lighter_mux))?;
     assert_eq!(read(&late)?["sequence"],3);
@@ -280,6 +296,7 @@ fn main() -> aux_rs::Result<()> {
     book.close();
     assert_eq!(read(&account)?["sequence"],4);
     account.close();
+    candles.close();
     let external_kalshi=aux_rs::KalshiClient::new().with_origin(format!("{origin}/external-kalshi")).with_request_signer("fixture-k",|message| {
         let text=std::str::from_utf8(message).unwrap();
         assert!(text.ends_with("GET/external-kalshi/portfolio/balance") && !text.contains('?'));

@@ -61,6 +61,10 @@ def serve_lighter(peer):
         message = {"channel": channel.replace("/", ":"), "type": f"{kind}/{name}", "sequence": sequence}
         if name == "order_book":
             message["order_book"] = {"offset": sequence, "nonce": sequence, "asks": [], "bids": []}
+        elif name == "candle":
+            message["candles"] = [{"t": 1789975920000, "o": 2651.81, "i": 9007199254740993}]
+            if kind == "update":
+                message["channel"] = channel
         else:
             message.update(positions={}, assets={}, trades={})
         send(message)
@@ -70,15 +74,19 @@ def serve_lighter(peer):
         event("update", "order_book/4", 0)
         event("subscribed", "order_book/4", 3)
     else:
-        channels = {"order_book/4", "account_all/18"}
-        messages = [receive(), receive()]
+        channels = {"order_book/4", "account_all/18", "candle/4/1m"}
+        messages = [receive() for _ in channels]
         assert all(message["type"] == "subscribe" for message in messages)
         assert {message["channel"] for message in messages} == channels
         send({"type": "ping"})
         assert receive() == {"type": "pong"}
         for channel in sorted(channels):
-            event("update", channel, 0)
+            if channel != "candle/4/1m":
+                event("update", channel, 0)
             event("subscribed", channel, attempt)
+        event("update", "candle/9/1m", 0)
+        event("update", "candle/4/5m", 0)
+        event("update", "candle/4/1m", attempt)
         if attempt == 1:
             peer.close_connection = True
             return

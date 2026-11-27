@@ -4,6 +4,19 @@ const w = @import("../../core/wire.zig");
 const Event = @import("../derive/stream.zig").State.Event;
 const Service = enum { market, user, sports, polybolt, perps, rtds, rfq };
 const encode = std.json.Stringify.valueAlloc;
+pub const perps_endpoint = "wss://ws.perpetuals.polymarket.com/v1/ws";
+
+pub fn preparePerpsFrames(a: w.A, channels: w.V) !@import("../../core/websocket.zig").SubscriptionFrames {
+    for (channels.array.items) |topic| {
+        const channel = try w.string(topic);
+        if (std.mem.trim(u8, channel, &std.ascii.whitespace).len == 0) return error.InvalidSubscription;
+    }
+    const subscription = @import("rpc.zig").perpsSubscription;
+    return .{
+        .subscribe = try encode(a, try subscription(a, true, channels), .{}),
+        .unsubscribe = try encode(a, try subscription(a, false, channels), .{}),
+    };
+}
 
 fn get(v: w.V, k: []const u8) w.V {
     return if (v == .object) v.object.get(k) orelse .null else .null;
@@ -89,7 +102,7 @@ pub const State = struct {
             .polybolt => "wss://ws-live-v2.polymarket.com/ws",
             .rtds => "wss://ws-live-data.polymarket.com",
             .rfq => "wss://combos-rfq-gateway-quoter.polymarket.com/ws/rfq",
-            .perps => "wss://ws.perpetuals.polymarket.com/v1/ws",
+            .perps => perps_endpoint,
         };
     }
     pub fn heartbeat(self: State) ?[]const u8 {

@@ -470,6 +470,16 @@ async function testNativeExchangeClients(origin) {
     const method = row.operation.replace(/_(.)/g, (_, c) => c.toUpperCase());
     assert.deepEqual(await client[method](row.request), row.response);
   }
+  const backpack = new sdk.BackpackClient({origin: base + "backpack/rest/public"});
+  const depth = httpRows.find(row => row.venue === "backpack" && row.operation === "depth");
+  const defaultRequest = sdk.prepareRequest("backpack", "depth", {symbol: depth.request.symbol});
+  assert.equal(defaultRequest.path, "/api/v1/depth?symbol=ETH_USDC");
+  assert.equal(defaultRequest.authenticated, false);
+  assert.deepEqual(await backpack.depth(depth.request), depth.response);
+  assert.deepEqual(await backpack.depth({symbol: depth.request.symbol}), depth.response);
+  const binance = new sdk.BinanceSpotClient({origin: base + "binance_spot/rest/public", apiKey: "fixture-key", apiSecret: "fixture-secret"});
+  const binanceDepth = httpRows.find(row => row.venue === "binance_spot" && row.operation === "depth");
+  assert.deepEqual(await binance.depth(binanceDepth.request), binanceDepth.response);
   for (const row of fixture("market-data-ws")) {
     const client = new sdk[row.client]();
     const stream = await client.subscribe(row.params, ws + row.venue + "/ws/" + row.case);
@@ -630,9 +640,19 @@ async function testSharedPeer() {
   const lighterMux = origin.replace("http:", "ws:") + "/lighter-multiplex/node";
   const firstBook = await lighterFeed.subscribeOrderBook(4, lighterMux);
   const accountFeed = await lighterFeed.subscribeAccount(18, lighterMux);
+  const candles = await lighterFeed.subscribe({channel: "candle", market_id: 4}, lighterMux);
   for (const generation of [1, 2]) {
     assert.equal((await firstBook.next()).value.sequence, generation);
     assert.equal((await accountFeed.next()).value.sequence, generation);
+    const snapshot = (await candles.next()).value;
+    assert.equal(snapshot.channel, "candle:4:1m");
+    assert.equal(snapshot.type, "subscribed/candle");
+    assert.equal(snapshot.sequence, generation);
+    assert.equal(snapshot.candles[0].i, 9007199254740993n);
+    const update = (await candles.next()).value;
+    assert.equal(update.channel, "candle/4/1m");
+    assert.equal(update.type, "update/candle");
+    assert.equal(update.sequence, generation);
   }
   const lateBook = await lighterFeed.subscribeOrderBook(4, lighterMux);
   assert.equal((await lateBook.next()).value.sequence, 3);

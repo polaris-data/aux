@@ -55,8 +55,8 @@ STREAMS = {
 }
 
 PREPARED_WEBSOCKETS = {
-    "ExtendedClient", "HibachiClient", "HyperliquidClient", "OndoPerpsClient",
-    "PacificaClient", "ParadexClient", "ParagonClient", "TradeXyzClient",
+    "ExtendedClient", "HibachiClient", "HyperliquidClient", "LighterClient", "OndoPerpsClient",
+    "PacificaClient", "ParadexClient", "ParagonClient", "PolymarketPerpsClient", "TradeXyzClient",
 }
 
 
@@ -241,9 +241,10 @@ def generate(emit, groups, models_for):
                 "    }",
             ])
         elif client in PREPARED_WEBSOCKETS:
+            prepared_venue = "polymarket_perps" if client == "PolymarketPerpsClient" else venue
             lines.extend([
                 "    pub fn prepareSubscription(self: Client, spec: anytype) !rt.Owned(ws.PreparedSubscription) {",
-                f"        return ws.prepare(self.runtime, .{venue}, spec);",
+                f"        return ws.prepare(self.runtime, .{prepared_venue}, spec);",
                 "    }",
             ])
         lines.append("};")

@@ -33,6 +33,7 @@ mod fixtures {
                 "balances" => { check::<BalancesRequest>(request); check::<BalancesResponse>(response); },
                 "cancel_all_orders" => { check::<CancelAllOrdersRequest>(request); check::<CancelAllOrdersResponse>(response); },
                 "cancel_order" => { check::<CancelOrderRequest>(request); check::<CancelOrderResponse>(response); },
+                "depth" => { check::<DepthRequest>(request); check::<DepthResponse>(response); },
                 "fills" => { check::<FillsRequest>(request); check::<FillsResponse>(response); },
                 "markets" => { check::<MarketsRequest>(request); check::<MarketsResponse>(response); },
                 "open_orders" => { check::<OpenOrdersRequest>(request); check::<OpenOrdersResponse>(response); },

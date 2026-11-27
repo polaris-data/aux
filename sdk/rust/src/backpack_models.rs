@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use crate::{BackpackClient, Error, Result};
 
+pub use crate::model_number::NativeNumber;
 pub type MarketsResponse = serde_json::Value;
 pub type TickerResponse = serde_json::Value;
 pub type TradesResponse = serde_json::Value;
@@ -34,6 +35,30 @@ pub struct Subscription {
 
 #[derive(Clone, Default, Serialize, Deserialize)]
 pub struct MarketsRequest {
+    #[serde(flatten)]
+    pub extra: serde_json::Map<String, Value>,
+}
+
+#[derive(Clone, Default, Serialize, Deserialize)]
+pub struct DepthRequest {
+    #[serde(rename = "symbol")]
+    pub symbol: String,
+    #[serde(rename = "limit", skip_serializing_if = "Option::is_none")]
+    pub limit: Option<u16>,
+    #[serde(flatten)]
+    pub extra: serde_json::Map<String, Value>,
+}
+
+#[derive(Clone, Default, Serialize, Deserialize)]
+pub struct DepthResponse {
+    #[serde(rename = "asks")]
+    pub asks: Vec<[String; 2]>,
+    #[serde(rename = "bids")]
+    pub bids: Vec<[String; 2]>,
+    #[serde(rename = "lastUpdateId")]
+    pub last_update_id: NativeNumber,
+    #[serde(rename = "timestamp")]
+    pub timestamp: NativeNumber,
     #[serde(flatten)]
     pub extra: serde_json::Map<String, Value>,
 }
@@ -181,6 +206,10 @@ impl TypedBackpackClient {
         serde_json::from_value(self.0.cancel_order(&json!(request))?)
             .map_err(|_| Error::Decode("invalid Backpack response model"))
     }
+    pub fn depth(&self, request: &DepthRequest) -> Result<DepthResponse> {
+        serde_json::from_value(self.0.depth(&json!(request))?)
+            .map_err(|_| Error::Decode("invalid Backpack response model"))
+    }
     pub fn fills(&self, request: &FillsRequest) -> Result<FillsResponse> {
         serde_json::from_value(self.0.fills(&json!(request))?)
             .map_err(|_| Error::Decode("invalid Backpack response model"))
@@ -244,6 +273,10 @@ impl AsyncTypedBackpackClient {
     }
     pub async fn cancel_order(&self, request: &CancelOrderRequest) -> Result<CancelOrderResponse> {
         serde_json::from_value(self.0.cancel_order(&json!(request)).await?)
+            .map_err(|_| Error::Decode("invalid Backpack response model"))
+    }
+    pub async fn depth(&self, request: &DepthRequest) -> Result<DepthResponse> {
+        serde_json::from_value(self.0.depth(&json!(request)).await?)
             .map_err(|_| Error::Decode("invalid Backpack response model"))
     }
     pub async fn fills(&self, request: &FillsRequest) -> Result<FillsResponse> {
