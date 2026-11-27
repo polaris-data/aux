@@ -1,6 +1,12 @@
 const std = @import("std");
 const w = @import("../../core/wire.zig");
 const eq = std.mem.eql;
+pub const endpoint = "wss://perp-api.phoenix.trade/v1/ws";
+
+pub fn subscriptionFrame(a: w.A, subscribe: bool, params: w.V) ![]const u8 {
+    return std.json.Stringify.valueAlloc(a, .{ .type = if (subscribe) "subscribe" else "unsubscribe", .subscription = params }, .{});
+}
+
 pub const State = struct {
     sequence: ?u64 = null,
     waiting: bool = false,

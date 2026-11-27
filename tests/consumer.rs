@@ -484,6 +484,12 @@ fn main() -> aux_rs::Result<()> {
         }
     }
     let wsbase=origin.replacen("http:", "ws:", 1);
+    let n1 = aux_rs::N1Client::new().subscribe(
+        &serde_json::json!({"subscriptions":[{"channel":"liquidations"}]}),
+        Some(&format!("{wsbase}/caller-websocket/n1/sdk")),
+    )?;
+    assert_eq!(n1.next_event()?.unwrap()["liquidation"]["update_id"], 42);
+    n1.close();
     let hd=aux_rs::HyperdashClient::new().with_api_key("hyperdash-key").open_stream(Some(&format!("{wsbase}/hd/stream")),&serde_json::json!({}))?;
     assert_eq!(hd.next_event()?.unwrap()["op"],"ready");
     hd.subscribe(&serde_json::json!({"channel":"trades","coin":"BTC"}))?;

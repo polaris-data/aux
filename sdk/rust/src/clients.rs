@@ -689,6 +689,69 @@ socket_subscription!(OkxClient, "okx");
 socket_subscription!(OrderlyClient, "orderly");
 socket_subscription!(ReyaClient, "reya");
 
+/// Client for N1 public market-data streams.
+#[derive(Default, Clone)]
+pub struct N1Client {
+    origin: Option<String>,
+    transport: Option<http::Policy>,
+}
+
+impl N1Client {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
+    pub fn with_origin(mut self, origin: impl Into<String>) -> Self {
+        self.origin = Some(origin.into());
+        self
+    }
+
+    pub fn with_transport(mut self, transport: impl http::Transport + 'static) -> Self {
+        self.transport = Some(http::Policy::Application(std::sync::Arc::new(transport)));
+        self
+    }
+
+    #[cfg(feature = "rustls")]
+    pub fn with_tls(mut self, config: http::rustls::ClientConfig) -> Self {
+        self.transport = Some(http::Policy::tls(config));
+        self
+    }
+
+    /// Open the URL-selected streams. An endpoint override is a WebSocket base URL.
+    pub fn subscribe(&self, params: &Value, endpoint: Option<&str>) -> Result<crate::EventStream> {
+        let config = http::config(
+            "n1", "subscribe", params, endpoint.or(self.origin.as_deref()), None, None,
+        );
+        crate::EventStream::open_with_transport(
+            &config.to_string(),
+            self.transport.as_ref().map(http::Policy::connection),
+        )
+    }
+
+    #[cfg(feature = "async")]
+    pub fn into_async(self) -> crate::AsyncClient<Self> {
+        crate::AsyncClient::new(self)
+    }
+}
+
+#[cfg(feature = "async")]
+impl crate::AsyncClient<N1Client> {
+    pub async fn subscribe(
+        &self,
+        params: &Value,
+        endpoint: Option<&str>,
+    ) -> Result<crate::AsyncEventStream> {
+        let params = params.clone();
+        let endpoint = endpoint.map(str::to_owned);
+        self.run(move |client| {
+            client
+                .subscribe(&params, endpoint.as_deref())
+                .map(crate::EventStream::into_async)
+        })
+        .await
+    }
+}
+
 struct RpcPermit {
     auth: std::sync::Arc<Value>,
     sign: SignCallback,

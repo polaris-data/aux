@@ -39,6 +39,7 @@ STREAMS = {
     "KalshiPerpsClient": "subscribe open_rpc",
     "LighterClient": "subscribe",
     "MonacoClient": "subscribe",
+    "N1Client": "subscribe",
     "ParadexClient": "subscribe open_rpc",
     "PascalClient": "subscribe open_rpc",
     "PhoenixClient": "subscribe",
@@ -57,6 +58,8 @@ STREAMS = {
 PREPARED_WEBSOCKETS = {
     "ExtendedClient", "HibachiClient", "HyperliquidClient", "LighterClient", "OndoPerpsClient",
     "PacificaClient", "ParadexClient", "ParagonClient", "PolymarketPerpsClient", "TradeXyzClient",
+    "AevoClient", "ApexOmniClient", "ArcusClient", "BinanceSpotClient", "KuruClient",
+    "MonacoClient", "N1Client", "PerplClient", "PhoenixClient", "RisexClient",
 }
 
 
@@ -130,9 +133,11 @@ def generate(emit, groups, models_for):
     ):
         slug = models_for.get(client)
         schema = SCHEMAS.get(slug, {})
-        unit = slug or (
-            "databento_live" if client == "DatabentoLiveClient" else "tardis_machine"
-        )
+        unit = slug or {
+            "DatabentoLiveClient": "databento_live",
+            "TardisMachineClient": "tardis_machine",
+            "N1Client": "n1",
+        }[client]
         api.extend(
             [
                 f'pub const {unit} = @import("generated/{unit}.zig");',

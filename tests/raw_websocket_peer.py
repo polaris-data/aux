@@ -44,6 +44,53 @@ def paradex(peer):
     peer.connection.sendall(frame(0, payload[7:]))
 
 
+def n1(peer, path):
+    selectors = "trades@BTCUSD&deltas@BTCUSD&candle@BTCUSD:1&rfq-fills@AAPLUSD&liquidations"
+    case, target = path.removeprefix("n1/").split("/ws/")
+    assert target == ("liquidations" if case == "sdk" else selectors)
+    assert peer.headers.get("Authorization") is None
+    peer.connection.sendall(frame(9, b"n1-ping"))
+    assert read_frame(peer.rfile) == (10, b"n1-ping")
+    trades = b' {"trades":{"market_symbol":"BTCUSD","price":1.000}} '
+    liquidation = b'{"liquidation":{"update_id":42}}'
+    if case == "raw":
+        peer.connection.sendall(frame(1, trades) + CLOSE)
+        assert read_frame(peer.rfile) == (8, b"\x03\xe8")
+        return
+    if case == "sdk":
+        peer.connection.sendall(frame(1, liquidation))
+        return
+    assert case == "managed"
+    count = getattr(peer.server, "n1_managed_connections", 0)
+    peer.server.n1_managed_connections = count + 1
+    if count == 0:
+        peer.connection.sendall(frame(1, b'{"type":"connected"}') + frame(1, trades) + CLOSE)
+        assert read_frame(peer.rfile) == (8, b"\x03\xe8")
+    else:
+        assert count == 1
+        peer.connection.sendall(b"".join(frame(1, payload) for payload in [
+            b'{"delta":{"market_symbol":"BTCUSD","bids":[],"asks":[]}}',
+            b'{"res":"1","mid":1,"c":2.000}',
+            b'{"rfqFills":{"market_id":14,"requests":[]}}',
+            liquidation,
+        ]))
+
+
+def kuru(peer):
+    rows = json.loads(Path(__file__).with_name("market-data-ws.json").read_text())
+    fixture = next(row for row in rows if row["venue"] == "kuru" and row["case"] == "l2-bootstrap")
+    book = fixture["subscribe"]
+    for expected in [dict(book, feedEpoch=13, seq=9007199254740993),
+                     dict(book, id=2, t="trades@f")]:
+        opcode, packet = read_frame(peer.rfile)
+        assert opcode == 1 and json.loads(packet) == expected
+    packet = bytes.fromhex(fixture["binary"][0])
+    peer.connection.sendall(frame(2, packet[:7], fin=False) + frame(0, packet[7:]))
+    for subscription_id in (1, 2):
+        opcode, packet = read_frame(peer.rfile)
+        assert opcode == 1 and json.loads(packet) == {"op": "unsub", "id": subscription_id}
+
+
 def serve(peer):
     upgrade(peer)
     path = peer.path.removeprefix("/caller-websocket/")
@@ -66,6 +113,22 @@ def serve(peer):
         peer.connection.sendall(frame(1, b'{"type":"DELTA","seq":1,"data":{"m":"BTC-USD","b":[],"a":[]}}'))
     elif path == "paradex":
         paradex(peer)
+    elif path.startswith("n1/"):
+        return n1(peer, path)
+    elif path == "kuru":
+        kuru(peer)
+    elif path == "monaco/ohlcv":
+        topic = "ohlcv:550e8400-e29b-41d4-a716-446655440000:SPOT:1m"
+        opcode, packet = read_frame(peer.rfile)
+        assert opcode == 1 and json.loads(packet) == {"type": "Subscribe", "channels": [topic]}
+        peer.connection.sendall(frame(1, b'{"type":"Event","channel":"' + topic.encode() + b'","data":{"open":1.000}}'))
+        return
+    elif path == "risex/oracle":
+        opcode, packet = read_frame(peer.rfile)
+        assert opcode == 1 and json.loads(packet) == {"method": "subscribe", "params": {"channel": "oracle", "market_ids": [1, 2]}}
+        peer.connection.sendall(frame(1, b'{"channel":"oracle","type":"subscribed","status":"success"}'))
+        peer.connection.sendall(frame(1, b'{"channel":"oracle","type":"update","market_id":null,"data":[{"market_id":"1","price":"63126084821834306372811"}]}'))
+        return
     elif path == "cancel":
         peer.connection.sendall(frame(1, b"ready"))
         assert peer.rfile.read(1) == b""

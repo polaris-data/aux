@@ -32,7 +32,11 @@ export function signDeposit(seed: string, params: DepositParams): SignedDeposit 
   return solana.signDeposit(seed, solana.prepareDeposit(params));
 }
 
-import { ApexOmniClient, KuruClient, ReyaClient, type KuruModels, type ReyaModels } from "aux-connectors";
+import { ApexOmniClient, KuruClient, N1Client, ReyaClient, type KuruModels, type ReyaModels } from "aux-connectors";
+
+export function liquidations(client: N1Client, endpoint: string) {
+  return client.subscribe({ subscriptions: [{ channel: "liquidations" }] }, endpoint);
+}
 
 export function replayTrades(request: KuruModels.Subscription) {
   return new KuruClient().subscribe(request);

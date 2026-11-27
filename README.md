@@ -70,6 +70,18 @@ The preparation methods take venue-specific fields. Use a slice or tuple for `su
 | Polymarket Perps | `channels` with native topics such as `book::42`, `klines::42::1m`, and `tickers::all`. The plan sends them together in one message for the caller's socket. |
 | Extended | `channel`, optional `market`, and path query `params`. The plan contains the path and upgrade headers. Opening the socket starts the feed and closing it ends the feed. |
 | Paradex | `subscriptions` with a native `topic` or structured `type` and its channel fields. Use `sbe_version` to select a wire schema version and optional starting `subscribe_id` and `unsubscribe_id` values. |
+| Aevo | `subscriptions` with `channel = "book"`, `symbol`, and `interval = "500ms"`. |
+| ApeX Omni | `subscriptions` with `channel = "book"`, `symbol`, optional `depth = 200`, and optional `frequency`. The default endpoint includes a fresh timestamp. Prepare again before reconnecting, or supply `timestamp_ms` for deterministic preparation. |
+| Arcus | `subscriptions` with `channel = "l2OrderbookUpdates"`, `id`, and optional `nLevels`. |
+| Binance Spot | `subscriptions` with `channel = "depth"` or `"kline"`, `symbol`, and optional `interval`. |
+| Kuru | `subscriptions` with `channel = "l2Delta@f"` or `"trades"` and `marketAddress`. Pass `feedEpoch` and `seq` to resume. Market data arrives as binary messages. |
+| Monaco | `subscriptions` with `type = "orderbook"`, `"trades"`, or `"ohlcv"` and `tradingPairId`. Use `mode` for orderbook and OHLCV, and `interval` for OHLCV. |
+| N1 | `subscriptions` with `channel = "trades"`, `"deltas"`, `"candle"`, `"rfq_fills"`, or `"liquidations"`. Supply `symbol` for market streams and `resolution` for candles. The subscriptions go in the upgrade URL. |
+| Perpl | `subscriptions` with `channel = "order_book"` or `"trades"` and `market_id`. Up to 16 entries share one request. |
+| Phoenix | `subscriptions` with `channel = "market"` or `"orderbook"`, `symbol`, and optional orderbook `bypassExecutionBand`. |
+| RISEx | One `subscriptions` entry with `channel = "oracle"` and an optional list of `market_ids`. |
+
+N1 accepts a WebSocket base URL as the endpoint override and appends the `/ws/` subscription path. Its prepared frame lists are empty. The same subscription object works with managed `N1Client.subscribe` in Zig, Rust, Python, and TypeScript.
 
 Pass `.{ .headers = plan.value.headers }` to `RawWebSocket.connect` for a prepared connection. For replay compatibility, a Paradex recorder can select `sbe_version = 1` and keep using its schema 1:1 decoder. Aux’s `decodeSbe` decodes schema 1:3.
 

@@ -17,7 +17,7 @@ pub fn run(a: A, base: []const u8) !void {
     try paradex(a, base);
 }
 
-fn verify(a: A, plan: aux.PreparedSubscription, subscribe: []const []const u8, unsubscribe: []const []const u8) !void {
+pub fn verify(a: A, plan: aux.PreparedSubscription, subscribe: []const []const u8, unsubscribe: []const []const u8) !void {
     try t.expectEqual(subscribe.len, plan.subscribe.len);
     try t.expectEqual(unsubscribe.len, plan.unsubscribe.len);
     var socket = try aux.RawWebSocket.connect(a, plan.endpoint, .{ .headers = plan.headers });

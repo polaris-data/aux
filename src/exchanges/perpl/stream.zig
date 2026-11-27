@@ -7,20 +7,34 @@ const Event = shared.Event;
 const eq = std.mem.eql;
 const gpa = std.heap.c_allocator;
 
+pub fn publicEndpoint(testnet: bool) []const u8 {
+    return if (testnet) "wss://testnet.perpl.xyz/ws/v1/market-data" else "wss://app.perpl.xyz/ws/v1/market-data";
+}
+
+pub fn publicSelector(a: p.A, params: p.V) ![]const u8 {
+    const channel = try p.text(params, "channel");
+    if (eq(u8, channel, "account")) return error.AuthenticationRequired;
+    const name = if (eq(u8, channel, "order_book")) "order-book" else if (eq(u8, channel, "trades")) "trades" else return error.InvalidSubscription;
+    return std.fmt.allocPrint(a, "{s}@{d}", .{ name, try w.unsigned(u32, try w.field(params, "market_id")) });
+}
+
+pub const Subscription = struct { stream: []const u8, subscribe: bool };
+
+pub fn subscriptionFrame(a: p.A, subs: []const Subscription) ![]const u8 {
+    return std.json.Stringify.valueAlloc(a, .{ .mt = 5, .subs = subs }, .{});
+}
+
 pub fn init(self: *shared.State, a: p.A, testnet: bool, params: p.V) !void {
     const channel = self.channel;
     self.private = eq(u8, channel, "account");
     self.book = eq(u8, channel, "order_book");
-    if (!self.private and !self.book and !eq(u8, channel, "trades")) return error.InvalidSubscription;
-    self.endpoint = if (testnet)
-        (if (self.private) "wss://testnet.perpl.xyz/ws/v1/trading" else "wss://testnet.perpl.xyz/ws/v1/market-data")
-    else
-        (if (self.private) "wss://app.perpl.xyz/ws/v1/trading" else "wss://app.perpl.xyz/ws/v1/market-data");
-    if (!self.private) {
-        const id = try w.unsigned(u32, try w.field(params, "market_id"));
-        self.selector = try std.fmt.allocPrint(a, "{s}@{d}", .{ if (self.book) "order-book" else "trades", id });
-        self.request = try std.json.Stringify.valueAlloc(a, .{ .mt = 5, .subs = .{.{ .stream = self.selector, .subscribe = true }} }, .{});
+    if (self.private) {
+        self.endpoint = if (testnet) "wss://testnet.perpl.xyz/ws/v1/trading" else "wss://app.perpl.xyz/ws/v1/trading";
+        return;
     }
+    self.endpoint = publicEndpoint(testnet);
+    self.selector = try publicSelector(a, params);
+    self.request = try subscriptionFrame(a, &.{.{ .stream = self.selector, .subscribe = true }});
 }
 
 pub fn event(self: *shared.State, message: p.V, raw: []const u8) !Event {

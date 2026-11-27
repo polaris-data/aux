@@ -166,6 +166,7 @@ def main():
         for suffix in ("_csv", "_ndjson"):
             groups[("HyperdashClient", "hyperdash")].append((name + suffix, name + suffix))
     groups[("TardisMachineClient","tardis")] = []
+    groups[("N1Client", "n1")] = []
     models_for = {s.get("client", v.title() + "Client"): v for v, s in SCHEMAS.items()}
     from zig_bindings import generate as generate_zig
     if cli_options.zig_generated_only:
@@ -217,7 +218,7 @@ def main():
         "",
     ]
     for (cls, v), methods in sorted(groups.items()):
-        if cls != "TardisMachineClient":
+        if methods:
             rust.append(f'client!({cls}, "{v}",')
         # (JS option, Python option, wire field, TypeScript type)
         extras = {
@@ -731,7 +732,7 @@ def main():
             batch = "readBatch(limit:number): Promise<HttpValue[]>;" if v == "databento" and method != "timeseries" else ""
             value_type = "Uint8Array" if method == "timeseries" else "HttpValue"
             ts.append(f"  {camel(method)}(params: Record<string,HttpValue>): Promise<AsyncIterableIterator<{value_type}> & {{close():void;{batch}}}>;")
-        if v in PERP_CLIENTS or v in EXCHANGE_CLIENTS or cls in {"ArcusClient","ChainlinkDataStreamsClient","MonacoClient","HyperliquidClient","LighterClient","PolymarketClient","PolymarketPerpsClient","ExtendedClient", "QfexClient", "PhoenixClient", "DeriveClient", "ParadexClient", "PascalClient", "KalshiClient", "KalshiPerpsClient"}:
+        if v in PERP_CLIENTS or v in EXCHANGE_CLIENTS or cls in {"N1Client","ArcusClient","ChainlinkDataStreamsClient","MonacoClient","HyperliquidClient","LighterClient","PolymarketClient","PolymarketPerpsClient","ExtendedClient", "QfexClient", "PhoenixClient", "DeriveClient", "ParadexClient", "PascalClient", "KalshiClient", "KalshiPerpsClient"}:
             bearer_py = ", auth=self._bearer" if v == "paradex" else ""
             bearer_js = ", this.bearer" if v == "paradex" else ""
             ws_venue = "polymarket_perps" if cls == "PolymarketPerpsClient" else v
@@ -795,12 +796,12 @@ def main():
                 ts.append(declaration.replace(f"  {old}(", f"  {new}(",1))
         js.append("  };")
         async_methods = {m[1] for line in ts[class_ts_start:] if (m := re.match(r"  (\w+)\(.*?\)\s*:\s*Promise<", line))}
-        methods = {m[1] for line in js[class_js_start:] if (m := re.match(r"    (?:async )?([a-zA-Z]\w*)\(", line))}
-        sync_methods = sorted(methods - async_methods - {"constructor"})
+        js_methods = {m[1] for line in js[class_js_start:] if (m := re.match(r"    (?:async )?([a-zA-Z]\w*)\(", line))}
+        sync_methods = sorted(js_methods - async_methods - {"constructor"})
         js.append(f'  require("./lifecycle.cjs").managed(classes.{cls},{json.dumps(sync_methods)});')
         ts.extend(["  readonly closed: boolean;","  close(): void;"])
         ts.append("}")
-        if cls != "TardisMachineClient":
+        if methods:
             rust.append(");")
     from contract_bindings import generate as contract_bindings
     for path, content in contract_bindings().items():

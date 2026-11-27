@@ -5314,6 +5314,12 @@ class MonacoClient(MonacoSessions, _Client):
         return await _open_stream('monaco', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret, auth=self._session)
 
 
+class N1Client(_Client):
+    async def subscribe(self, specification=None, *, params=None, endpoint=None):
+        params = _request_params(specification, params)
+        return await _open_stream('n1', 'subscribe', params, self._origin if endpoint is None else endpoint,self._api_key,self._api_secret)
+
+
 class NadoClient(_Client):
     def __init__(self, *, origin=None, api_key=None, api_secret=None, auth=None):
         super().__init__(origin=origin, api_key=api_key, api_secret=api_secret)
@@ -7629,4 +7635,4 @@ class VariationalClient(_Client):
     async def market_stats(self, request: Variational.MarketStatsRequest | None = None, *, params: Variational.MarketStatsRequest | None = None) -> Variational.MarketStatsResponse:
         return await execute("variational", "market_stats", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret)
 
-__all__ = ['AevoClient', 'ApexOmniClient', 'ArcusClient', 'AsterClient', 'BackpackClient', 'BinanceSpotClient', 'BirdeyeClient', 'BybitClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DecibelClient', 'DeribitClient', 'DeriveClient', 'DuneClient', 'DydxV4Client', 'EdgeXClient', 'ExtendedClient', 'GrvtClient', 'HibachiClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'KatanaClient', 'KrakenSpotClient', 'KuruClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'NadoClient', 'OkxClient', 'OndoPerpsClient', 'OrderlyClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PerplClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'ReyaClient', 'RisexClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient', 'VariationalClient']
+__all__ = ['AevoClient', 'ApexOmniClient', 'ArcusClient', 'AsterClient', 'BackpackClient', 'BinanceSpotClient', 'BirdeyeClient', 'BybitClient', 'ChainlinkCandlestickClient', 'ChainlinkDataStreamsClient', 'DecibelClient', 'DeribitClient', 'DeriveClient', 'DuneClient', 'DydxV4Client', 'EdgeXClient', 'ExtendedClient', 'GrvtClient', 'HibachiClient', 'HistoricalClient', 'HyperdashClient', 'HyperliquidClient', 'InjectiveClient', 'KalshiClient', 'KalshiPerpsClient', 'KatanaClient', 'KrakenSpotClient', 'KuruClient', 'LighterClient', 'MetricClient', 'MonacoClient', 'N1Client', 'NadoClient', 'OkxClient', 'OndoPerpsClient', 'OrderlyClient', 'PacificaClient', 'ParadexClient', 'ParagonClient', 'PascalClient', 'PerplClient', 'PhoenixClient', 'PolymarketClient', 'PolymarketPerpsClient', 'PythHermesClient', 'PythProClient', 'QfexClient', 'ReferenceClient', 'ReyaClient', 'RisexClient', 'TardisClient', 'TardisMachineClient', 'TradeXyzClient', 'VariationalClient']

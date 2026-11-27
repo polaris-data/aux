@@ -26,8 +26,20 @@ pub fn init(s: *State, a: w.A, _: w.V, params: w.V, channel: []const u8, t: ?[]c
         };
         const stream_name = std.mem.indexOfScalar(u8, s.topic, '@') orelse return error.InvalidSubscription;
         s.book = std.mem.startsWith(u8, s.topic[stream_name + 1 ..], "depth");
-        s.frame = try stringify(a, .{ .method = "SUBSCRIBE", .params = .{s.topic}, .id = 1 });
+        s.frame = try subscriptionFrame(a, true, &.{s.topic});
     }
+}
+
+pub fn subscriptionFrame(a: w.A, subscribe: bool, topics: []const []const u8) ![]const u8 {
+    return stringify(a, .{ .method = if (subscribe) "SUBSCRIBE" else "UNSUBSCRIBE", .params = topics, .id = @as(u64, if (subscribe) 1 else 2) });
+}
+
+pub fn isPreparedTopic(topic: []const u8) bool {
+    const sep = std.mem.indexOfScalar(u8, topic, '@') orelse return false;
+    if (sep == 0) return false;
+    const suffix = topic[sep + 1 ..];
+    if (std.mem.cutPrefix(u8, suffix, "kline_")) |interval| return in(interval, kline_intervals);
+    return in(suffix, &.{ "depth", "depth@100ms" });
 }
 
 fn topicSuffix(a: w.A, params: w.V, channel: []const u8, interval: ?[]const u8) ![]const u8 {
