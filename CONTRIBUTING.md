@@ -16,15 +16,15 @@ Each SDK has its own workflow. Run the workflow manually on the release commit t
 
 | SDK | Workflow | Example release tag | Destination |
 | --- | --- | --- | --- |
-| Rust | `release-rust.yml` | `aux-rs-v0.0.3` | crates.io, package `aux-rs` |
-| TypeScript | `release-node.yml` | `aux-connectors-v0.0.3` | npm, package `aux-connectors` |
-| Python | `release-python.yml` | `aux-py-v0.0.3` | PyPI, project `aux-py` |
-| Zig | `release-zig.yml` | `aux-zig-v0.0.3` | Source archive attached to the GitHub release |
+| Rust | `release-rust.yml` | `aux-rs-v0.0.4` | crates.io, package `aux-rs` |
+| TypeScript | `release-node.yml` | `aux-connectors-v0.0.4` | npm, package `aux-connectors` |
+| Python | `release-python.yml` | `aux-py-v0.0.4` | PyPI, project `aux-py` |
+| Zig | `release-zig.yml` | `aux-zig-v0.0.4` | Source archive attached to the GitHub release |
 
 Set the version in the SDK manifest before tagging. Rust and Python share the Cargo workspace version. Update the workspace dependency on `aux-rs` and the Cargo lockfile when changing it. TypeScript uses `sdk/typescript/package.json` and its npm lockfile. Zig uses `build.zig.zon`.
 
-A package owner must configure each registry's trusted publisher for `polaris-data/aux`, the workflow filename above, and the corresponding GitHub environment (`crates-io`, `npm`, or `pypi`). npm prereleases use the `next` dist-tag. The Zig workflow uses the repository token to attach the verified archive. Given version 0.0.3, consumers can install it with the following command after publication.
+A package owner must configure each registry's trusted publisher for `polaris-data/aux`, the workflow filename above, and the corresponding GitHub environment (`crates-io`, `npm`, or `pypi`). npm prereleases use the `next` dist-tag. The Zig workflow uses the repository token to attach the verified archive. Given version 0.0.4, consumers can install it with the following command after publication.
 
 ```sh
-zig fetch --save=aux https://github.com/polaris-data/aux/releases/download/aux-zig-v0.0.3/aux-zig-native-0.0.3.tar.gz
+zig fetch --save=aux https://github.com/polaris-data/aux/releases/download/aux-zig-v0.0.4/aux-zig-native-0.0.4.tar.gz
 ```

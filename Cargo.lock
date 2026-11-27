@@ -4,7 +4,7 @@ version = 4
 
 [[package]]
 name = "aux-rs"
-version = "0.0.3"
+version = "0.0.4"
 dependencies = [
  "rustls",
  "serde",
@@ -15,7 +15,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-node"
-version = "0.0.3"
+version = "0.0.4"
 dependencies = [
  "aux-rs",
  "napi",
@@ -26,7 +26,7 @@ dependencies = [
 
 [[package]]
 name = "aux-rs-python"
-version = "0.0.3"
+version = "0.0.4"
 dependencies = [
  "aux-rs",
  "pyo3",

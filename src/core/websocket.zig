@@ -349,7 +349,7 @@ pub const Session = struct {
         if (self.extended) |*state| {
             state.snapshot = false;
             state.sequence = null;
-            try headers.append(a, .{ .name = "User-Agent", .value = "aux-zig/0.0.3" });
+            try headers.append(a, .{ .name = "User-Agent", .value = "aux-zig/0.0.4" });
         }
         if (self.arcus) |*s| s.snapshot = false;
         if (self.chainlink) |s| try s.headers(a, io, &headers);
