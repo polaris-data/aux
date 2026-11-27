@@ -1,6 +1,6 @@
 .{
     .name = .aux,
-    .version = "0.0.1",
+    .version = "0.0.2",
     .fingerprint = 0xbac20cb84e16ac36,
     .minimum_zig_version = "0.17.1",
     .paths = .{ "build.zig", "build.zig.zon", "src", "sdk/zig", "include", "LICENSE", "README.md" },

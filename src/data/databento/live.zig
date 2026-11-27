@@ -163,7 +163,7 @@ pub const Session = struct {
         try args.object.put(a, "key", key);
         try args.object.put(a, "challenge", w.text(challenge[5..]));
         const auth = try @import("../../core/auth.zig").databento(a, args);
-        const line_data = try std.fmt.allocPrint(a, "auth={s}|dataset={s}|encoding=dbn|compression={s}|ts_out={d}|client=aux-zig/0.0.1{s}\n", .{ auth.string, dataset, compression, @intFromBool(ts), extra.items });
+        const line_data = try std.fmt.allocPrint(a, "auth={s}|dataset={s}|encoding=dbn|compression={s}|ts_out={d}|client=aux-zig/0.0.2{s}\n", .{ auth.string, dataset, compression, @intFromBool(ts), extra.items });
         try self.write(line_data);
         const reply = try self.line();
         var fields = std.mem.splitScalar(u8, reply, '|');
