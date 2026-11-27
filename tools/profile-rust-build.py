@@ -123,6 +123,8 @@ def profile_build(output):
     }
     if mode == "no-incremental":
         environment["CARGO_INCREMENTAL"] = "0"
+    if mode == "integration-only":
+        rust_suite.extend(["--test", "*"])
     start = time.monotonic()
     stop = Event()
     monitor = Thread(target=collect_memory, args=(output, stop, start), daemon=True)

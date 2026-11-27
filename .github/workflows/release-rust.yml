@@ -2,6 +2,12 @@ name: Profile Rust SDK compilation
 
 on:
   workflow_dispatch:
+    inputs:
+      comparison:
+        description: Which runner comparison to run
+        type: choice
+        options: [incremental, integration-only]
+        default: incremental
 
 permissions:
   contents: read
@@ -14,12 +20,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - {os: ubuntu-24.04, profile: baseline}
-          - {os: macos-15-intel, profile: baseline}
-          - {os: macos-15-intel, profile: no-incremental}
-          - {os: macos-15, profile: baseline}
-          - {os: macos-15, profile: no-incremental}
+        include: ${{ fromJSON(inputs.comparison == 'integration-only'
+          && '[{"os":"macos-15-intel","profile":"integration-only"},{"os":"macos-15","profile":"integration-only"}]'
+          || '[{"os":"ubuntu-24.04","profile":"baseline"},{"os":"macos-15-intel","profile":"baseline"},{"os":"macos-15-intel","profile":"no-incremental"},{"os":"macos-15","profile":"baseline"},{"os":"macos-15","profile":"no-incremental"}]') }}
     env:
       RUSTUP_TOOLCHAIN: 1.92.0
       CARGO_PROFILE_TEST_DEBUG: line-tables-only
