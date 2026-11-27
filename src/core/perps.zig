@@ -42,7 +42,11 @@ pub fn credential(value: V) ![]const u8 {
 }
 
 pub fn testnet(config: V) !bool {
-    const network = get(get(config, "auth"), "network");
+    return testnetAuth(get(config, "auth"));
+}
+
+pub fn testnetAuth(auth: V) !bool {
+    const network = get(auth, "network");
     if (network == .null) return false;
     const name = try w.string(network);
     if (eq(u8, name, "Mainnet")) return false;

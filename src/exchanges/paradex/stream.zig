@@ -1,8 +1,63 @@
 const std = @import("std");
 const w = @import("../../core/wire.zig");
+const p = @import("../../core/perps.zig");
+const websocket = @import("../../core/websocket.zig");
 const Event = @import("../derive/stream.zig").State.Event;
 const eq = std.mem.eql;
 const Kind = enum { account, balance_events, bbo, block_trades, fills, funding_data, funding_payments, funding_rate_comparison, markets, markets_summary, mmp, order_book, orders, positions, rfq, tradebusts, trades, transaction, transfers };
+const mainnet_endpoint = "wss://ws.api.prod.paradex.trade/v1";
+const testnet_endpoint = "wss://ws.api.testnet.paradex.trade/v1";
+pub const endpoint = mainnet_endpoint ++ "?sbeSchemaId=1&sbeSchemaVersion=3";
+
+pub fn subscriptionFrame(a: w.A, method: []const u8, id: u64, channel: []const u8) ![]const u8 {
+    return std.json.Stringify.valueAlloc(a, .{ .jsonrpc = "2.0", .id = id, .method = method, .params = .{ .channel = channel } }, .{});
+}
+
+pub fn preparedEndpoint(a: w.A, config: w.V, spec: w.V) ![]const u8 {
+    const override = p.get(config, "origin");
+    const testnet = try p.testnet(config);
+    const version = p.get(spec, "sbe_version");
+    const url = if (override != .null) try w.string(override) else if (testnet) testnet_endpoint else mainnet_endpoint;
+    _ = try websocket.Session.parseEndpoint(url);
+    if (override != .null and version == .null) return url;
+    const number = if (version == .null) 3 else try w.unsigned(u16, version);
+    if (number == 0) return error.UnsupportedSchema;
+    const path_end = std.mem.findScalar(u8, url, '?') orelse url.len;
+    var result: std.ArrayList(u8) = .empty;
+    try result.appendSlice(a, url[0..path_end]);
+    try result.append(a, '?');
+    if (path_end < url.len) {
+        var query = std.mem.splitScalar(u8, url[path_end + 1 ..], '&');
+        while (query.next()) |part| {
+            const key = part[0 .. std.mem.findScalar(u8, part, '=') orelse part.len];
+            if (part.len == 0 or oneOf(key, &.{ "sbeSchemaId", "sbeSchemaVersion" })) continue;
+            try result.appendSlice(a, part);
+            try result.append(a, '&');
+        }
+    }
+    try result.print(a, "sbeSchemaId=1&sbeSchemaVersion={d}", .{number});
+    return result.toOwnedSlice(a);
+}
+
+pub fn prepareFrames(a: w.A, params: w.V, subscribe_id: u64, unsubscribe_id: u64) !websocket.SubscriptionFrames {
+    const topic = p.get(params, "topic");
+    const name = if (topic == .null) blk: {
+        const state = try State.initRpc(a, params);
+        if (state.requires_auth) return error.AuthenticationRequired;
+        break :blk state.name;
+    } else blk: {
+        const native = try w.string(topic);
+        const base = native[0 .. std.mem.findAny(u8, native, ".@") orelse native.len];
+        if (!oneOf(base, &.{ "bbo", "funding_data", "funding_rate_comparison", "markets", "markets_summary", "order_book", "trades" }) or
+            std.mem.findAny(u8, native, &std.ascii.whitespace) != null) return error.InvalidChannel;
+        break :blk native;
+    };
+    return .{
+        .subscribe = try subscriptionFrame(a, "subscribe", subscribe_id, name),
+        .unsubscribe = try subscriptionFrame(a, "unsubscribe", unsubscribe_id, name),
+    };
+}
+
 fn field(v: w.V, name: []const u8) ![]const u8 {
     return w.string(try w.field(v, name));
 }

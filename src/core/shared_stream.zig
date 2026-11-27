@@ -187,7 +187,7 @@ pub const Reader = struct {
                     try scope.object.put(a, "aggregate", state.sub.object.get("aggregateByTime") orelse .{ .bool = false });
                 }
                 try identity.object.put(a, "connection_scope", scope);
-                r.unsubscribe = try std.json.Stringify.valueAlloc(ra, .{ .method = "unsubscribe", .subscription = state.sub }, .{});
+                r.unsubscribe = try @import("../exchanges/hyperliquid/stream.zig").subscriptionFrame(ra, "unsubscribe", state.sub);
                 r.topic = .{ .hyperliquid = state };
             }
             _ = identity.object.swapRemove("params");

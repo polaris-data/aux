@@ -16,7 +16,7 @@ def take(reader, n):
     return data
 
 
-def read_frame(reader):
+def read_frame(reader, limit=4096):
     op, size = take(reader, 2)
     assert op & 128 and size & 128, "expected a final masked client frame"
     size &= 127
@@ -24,7 +24,7 @@ def read_frame(reader):
         size = int.from_bytes(take(reader, 2), "big")
     elif size == 127:
         size = int.from_bytes(take(reader, 8), "big")
-    assert size < 4096
+    assert size < limit
     mask = take(reader, 4)
     return op & 15, bytes(b ^ mask[i % 4] for i, b in enumerate(take(reader, size)))
 

@@ -18,3 +18,7 @@ pub const monacoWrite = @import("exchanges/monaco/orders.zig").isWrite;
 pub const rpc = @import("core/rpc.zig");
 pub const hermes = @import("data/pyth/hermes.zig");
 pub const encoding = @import("core/encoding.zig");
+pub const websocket = @import("core/websocket.zig");
+pub const qfex_stream = @import("exchanges/qfex/stream.zig");
+pub const deribit_stream = @import("exchanges/deribit/stream.zig");
+pub const subscription_prepare = @import("core/subscription_prepare.zig");

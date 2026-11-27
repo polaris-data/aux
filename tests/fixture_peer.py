@@ -40,6 +40,9 @@ class Peer(BaseHTTPRequestHandler):
         self.wfile.write(row["response_json"].encode())
 
     def do_GET(self):
+        if self.path.startswith("/caller-websocket/"):
+            from .raw_websocket_peer import serve
+            return serve(self)
         if self.path.startswith("/native-exchanges/"):
             from .native_exchange_peer import serve
             return serve(self)

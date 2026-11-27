@@ -1,5 +1,6 @@
 const std = @import("std");
 const w = @import("../../core/wire.zig");
+const websocket = @import("../../core/websocket.zig");
 const A = w.A;
 const V = w.V;
 const E = @import("../derive/stream.zig").State.Event;
@@ -7,6 +8,56 @@ const hip3 = @import("hip3.zig");
 const perps = @import("../../core/perps.zig");
 const encode = std.json.Stringify.valueAlloc;
 const Channel = enum { l2Book, trades, orderUpdates, userFills, clearinghouseState, openOrders };
+
+pub fn endpoint(config: V) []const u8 {
+    const network = optional(optional(config, "auth"), "network");
+    return if (network == .string and std.mem.eql(u8, network.string, "Testnet")) "wss://api.hyperliquid-testnet.xyz/ws" else "wss://api.hyperliquid.xyz/ws";
+}
+
+pub fn subscriptionFrame(a: A, method: []const u8, sub: V) ![]const u8 {
+    return encode(a, .{ .method = method, .subscription = sub }, .{});
+}
+
+pub fn prepareFrames(a: A, config: V, params: V, scope: ?[]const u8) !websocket.SubscriptionFrames {
+    const kind = std.meta.stringToEnum(enum { l2Book, trades, candle, activeAssetCtx }, try text(params, "type")) orelse return error.InvalidSubscription;
+    const coin = try text(params, "coin");
+    if (std.mem.trim(u8, coin, &std.ascii.whitespace).len == 0) return error.InvalidCoin;
+    const dex = optional(params, "dex");
+    var default_dex = scope;
+    if (scope) |name| {
+        if (std.mem.eql(u8, name, "para") and try perps.testnet(config)) return error.InvalidNetwork;
+        if (std.mem.eql(u8, name, "xyz") and (coin[0] == '@' or std.mem.findScalar(u8, coin, '/') != null)) {
+            default_dex = "Spot";
+        } else if (std.mem.eql(u8, name, "xyz") and coin[0] == '#') {
+            default_dex = null;
+        } else if (!hip3.own(name, coin)) return error.InvalidMarket;
+        if (dex != .null and (default_dex == null or !std.mem.eql(u8, try w.string(dex), default_dex.?))) return error.InvalidMarket;
+    }
+    var sub = V{ .object = .empty };
+    try sub.object.put(a, "type", w.text(@tagName(kind)));
+    try sub.object.put(a, "coin", w.text(coin));
+    if (dex != .null) {
+        try sub.object.put(a, "dex", w.text(try w.string(dex)));
+    } else if (kind != .candle) {
+        if (default_dex) |name| try sub.object.put(a, "dex", w.text(name));
+    }
+    if (kind == .candle) {
+        const interval = try text(params, "interval");
+        for ([_][]const u8{ "1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "8h", "12h", "1d", "3d", "1w", "1M" }) |valid| {
+            if (std.mem.eql(u8, valid, interval)) break;
+        } else return error.InvalidInterval;
+        try sub.object.put(a, "interval", w.text(interval));
+    } else if (kind == .l2Book) {
+        for ([_][]const u8{ "nSigFigs", "mantissa" }) |key| {
+            const value = optional(params, key);
+            if (value != .null) {
+                _ = try w.unsigned(u32, value);
+                try sub.object.put(a, key, value);
+            }
+        }
+    }
+    return .{ .subscribe = try subscriptionFrame(a, "subscribe", sub), .unsubscribe = try subscriptionFrame(a, "unsubscribe", sub) };
+}
 
 fn text(v: V, k: []const u8) ![]const u8 {
     return w.string(try w.field(v, k));
@@ -51,7 +102,7 @@ pub const State = struct {
             .openOrders, .clearinghouseState => try state.sub.object.put(a, "dex", w.text(name)),
             .orderUpdates, .userFills => {},
         }
-        state.frame = try encode(a, .{ .method = "subscribe", .subscription = state.sub }, .{});
+        state.frame = try subscriptionFrame(a, "subscribe", state.sub);
         return state;
     }
     pub fn init(a: A, config: V, p: V) !State {
@@ -72,9 +123,7 @@ pub const State = struct {
             try sub.object.put(a, "aggregateByTime", flag);
         }
         if ((channel == .clearinghouseState or channel == .openOrders) and optional(p, "dex") != .null) try sub.object.put(a, "dex", w.text(try text(p, "dex")));
-        const auth = optional(config, "auth");
-        const testnet = optional(auth, "network");
-        return .{ .channel = channel, .sub = sub, .frame = try encode(a, .{ .method = "subscribe", .subscription = sub }, .{}), .endpoint = if (testnet == .string and std.mem.eql(u8, testnet.string, "Testnet")) "wss://api.hyperliquid-testnet.xyz/ws" else "wss://api.hyperliquid.xyz/ws" };
+        return .{ .channel = channel, .sub = sub, .frame = try subscriptionFrame(a, "subscribe", sub), .endpoint = endpoint(config) };
     }
     fn matches(self: *State, a: A, p: V) !bool {
         const theirs = try init(a, .null, p);
