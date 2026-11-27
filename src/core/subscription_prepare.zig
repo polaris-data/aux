@@ -8,13 +8,15 @@ const hyperliquid = @import("../exchanges/hyperliquid/stream.zig");
 const ondo = @import("../exchanges/ondo_perps/stream.zig");
 const extended = @import("../exchanges/extended/stream.zig");
 const paradex = @import("../exchanges/paradex/stream.zig");
+const lighter = @import("../exchanges/lighter/stream.zig");
+const polymarket = @import("../exchanges/polymarket/stream.zig");
 
-pub const Venue = enum { pacifica, hibachi, hyperliquid, paragon, trade_xyz, ondo_perps, extended, paradex };
+pub const Venue = enum { pacifica, hibachi, hyperliquid, paragon, trade_xyz, ondo_perps, extended, paradex, lighter, polymarket_perps };
 
 pub fn prepare(a: wire.A, comptime venue: Venue, config: wire.V, spec: wire.V) !socket.PreparedSubscription {
     if (venue == .extended) return extended.prepare(a, config, spec);
 
-    const subscriptions = try wire.field(spec, "subscriptions");
+    const subscriptions = try wire.field(spec, if (venue == .polymarket_perps) "channels" else "subscriptions");
     if (subscriptions != .array) return error.InvalidSubscription;
     const items = subscriptions.array.items;
     if (items.len == 0) return error.EmptySubscription;
@@ -29,12 +31,14 @@ pub fn prepare(a: wire.A, comptime venue: Venue, config: wire.V, spec: wire.V) !
         .hibachi => if (try p.testnet(config)) return error.InvalidNetwork else hibachi.market_endpoint,
         .hyperliquid, .paragon, .trade_xyz => hyperliquid.endpoint(config),
         .ondo_perps => try ondo.endpoint(config),
+        .lighter => try lighter.preparedEndpoint(config),
+        .polymarket_perps => polymarket.perps_endpoint,
         .extended, .paradex => unreachable,
     };
     _ = try socket.Session.parseEndpoint(endpoint);
 
-    if (venue == .hibachi) {
-        const frames = try hibachi.prepareFrames(a, items);
+    if (venue == .hibachi or venue == .polymarket_perps) {
+        const frames = if (venue == .hibachi) try hibachi.prepareFrames(a, items) else try polymarket.preparePerpsFrames(a, subscriptions);
         return .{ .endpoint = endpoint, .subscribe = try a.dupe([]const u8, &.{frames.subscribe}), .unsubscribe = try a.dupe([]const u8, &.{frames.unsubscribe}) };
     }
     const first_subscribe = if (venue == .paradex) try requestId(spec, "subscribe_id", 1) else 0;
@@ -58,7 +62,8 @@ pub fn prepare(a: wire.A, comptime venue: Venue, config: wire.V, spec: wire.V) !
             .paragon => try hyperliquid.prepareFrames(a, config, item, "para"),
             .trade_xyz => try hyperliquid.prepareFrames(a, config, item, "xyz"),
             .paradex => try paradex.prepareFrames(a, item, try addId(first_subscribe, index), try addId(first_unsubscribe, index)),
-            .hibachi, .extended, .ondo_perps => unreachable,
+            .lighter => try lighter.prepareFrames(a, item),
+            .hibachi, .extended, .ondo_perps, .polymarket_perps => unreachable,
         };
         try subscribe.append(a, pair.subscribe);
         try unsubscribe.append(a, pair.unsubscribe);

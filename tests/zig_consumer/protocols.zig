@@ -38,6 +38,7 @@ pub fn run(init: std.process.Init, client: aux.Client, args: []const []const u8)
     try authChecks(client, args[5]);
     try liveCheck(init, client, args);
     try perpsCheck(init, client.allocator, args[5], args[2]);
+    try backpackDepth(a, args[5]);
     try feedsCheck(client.allocator, args[5]);
     var decoder = try aux.codec.EventDecoder.init(64);
     defer decoder.deinit();
@@ -75,6 +76,20 @@ pub fn run(init: std.process.Init, client: aux.Client, args: []const []const u8)
         try check(record.value, row.object.get("record").?);
     }
     try std.testing.expect((try dbn.next()) == null);
+}
+
+fn backpackDepth(a: std.mem.Allocator, origin: []const u8) !void {
+    const endpoint = try std.mem.concat(a, u8, &.{ origin, "/native-exchanges/backpack/rest/public" });
+    defer a.free(endpoint);
+    const client = aux.clients.BackpackClient.init(a, .{ .origin = endpoint });
+    for ([_]?u16{ 1000, null }) |limit| {
+        var reply = try client.depth(.{ .symbol = "ETH_USDC", .limit = limit });
+        defer reply.deinit();
+        try std.testing.expectEqualStrings("1234.500", reply.value.asks[0][0]);
+        try std.testing.expectEqualStrings("0.0012300", reply.value.asks[0][1]);
+        try std.testing.expectEqualStrings("9007199254740993", reply.value.lastUpdateId.number.text);
+        try std.testing.expectEqualStrings("1735728000000001", reply.value.timestamp.string);
+    }
 }
 
 const ContractTest = *const fn (aux.chain.Evm, []const u8, aux.Value) anyerror!void;

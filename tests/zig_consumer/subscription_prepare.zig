@@ -11,6 +11,8 @@ pub fn run(a: A, base: []const u8) !void {
     try hibachi(a, options);
     try hyperliquid(a, options);
     try ondo(a, options);
+    try lighter(a, options);
+    try polymarketPerps(a, options);
     try extended(a, base);
     try paradex(a, base);
 }
@@ -33,6 +35,56 @@ fn verify(a: A, plan: aux.PreparedSubscription, subscribe: []const []const u8, u
     }
     try socket.send(.text, "done");
     try t.expect((try socket.next()) == null);
+}
+
+fn lighter(a: A, options: aux.Options) !void {
+    const spec = .{ .subscriptions = .{
+        .{ .channel = "order_book", .market_id = 4 },
+        .{ .channel = "trade", .market_id = 7 },
+        .{ .channel = "candle", .market_id = 4 },
+    } };
+    const client = aux.clients.LighterClient.init(a, options);
+    var plan = try client.prepareSubscription(spec);
+    defer plan.deinit();
+    try t.expectEqualStrings(options.endpoint.?, plan.value.endpoint);
+    try verify(a, plan.value, &.{
+        "{\"type\":\"subscribe\",\"channel\":\"order_book/4\"}",
+        "{\"type\":\"subscribe\",\"channel\":\"trade/7\"}",
+        "{\"type\":\"subscribe\",\"channel\":\"candle/4/1m\"}",
+    }, &.{
+        "{\"type\":\"unsubscribe\",\"channel\":\"order_book/4\"}",
+        "{\"type\":\"unsubscribe\",\"channel\":\"trade/7\"}",
+        "{\"type\":\"unsubscribe\",\"channel\":\"candle/4/1m\"}",
+    });
+    const defaults = aux.clients.LighterClient.init(a, .{});
+    var default_plan = try defaults.prepareSubscription(spec);
+    defer default_plan.deinit();
+    try t.expectEqualStrings("wss://mainnet.zklighter.elliot.ai/stream", default_plan.value.endpoint);
+    try t.expectError(error.InvalidChannel, defaults.prepareSubscription(.{ .subscriptions = .{.{ .channel = "account_all", .account_index = 7 }} }));
+    try t.expectError(error.InvalidId, defaults.prepareSubscription(.{ .subscriptions = .{.{ .channel = "candle", .market_id = -1 }} }));
+    const invalid = aux.clients.LighterClient.init(a, .{ .endpoint = "https://example.invalid" });
+    try t.expectError(error.InvalidEndpoint, invalid.prepareSubscription(spec));
+}
+
+fn polymarketPerps(a: A, options: aux.Options) !void {
+    const spec = .{ .channels = .{ "book::42", "klines::42::1m", "trades::42", "tickers::all" } };
+    const client = aux.clients.PolymarketPerpsClient.init(a, options);
+    var plan = try client.prepareSubscription(spec);
+    defer plan.deinit();
+    try t.expectEqualStrings(options.endpoint.?, plan.value.endpoint);
+    try verify(a, plan.value, &.{
+        "{\"req\":\"sub\",\"chs\":[\"book::42\",\"klines::42::1m\",\"trades::42\",\"tickers::all\"]}",
+    }, &.{
+        "{\"req\":\"unsub\",\"chs\":[\"book::42\",\"klines::42::1m\",\"trades::42\",\"tickers::all\"]}",
+    });
+    const defaults = aux.clients.PolymarketPerpsClient.init(a, .{});
+    var default_plan = try defaults.prepareSubscription(spec);
+    defer default_plan.deinit();
+    try t.expectEqualStrings("wss://ws.perpetuals.polymarket.com/v1/ws", default_plan.value.endpoint);
+    try t.expectError(error.EmptySubscription, defaults.prepareSubscription(.{ .channels = @as([]const []const u8, &.{}) }));
+    try t.expectError(error.InvalidSubscription, defaults.prepareSubscription(.{ .channels = .{ "book::42", " \t" } }));
+    const invalid = aux.clients.PolymarketPerpsClient.init(a, .{ .endpoint = "https://example.invalid" });
+    try t.expectError(error.InvalidEndpoint, invalid.prepareSubscription(spec));
 }
 
 fn pacifica(a: A, options: aux.Options) !void {

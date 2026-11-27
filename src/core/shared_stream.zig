@@ -17,7 +17,7 @@ pub fn eligible(venue: []const u8, p: w.V) bool {
     if (channel != .string) return false;
     if (std.mem.eql(u8, venue, "hyperliquid")) return true;
     if (std.mem.eql(u8, venue, "arcus")) return !std.mem.eql(u8, channel.string, "l2OrderbookUpdates");
-    if (std.mem.eql(u8, venue, "lighter")) return std.mem.eql(u8, channel.string, "trade") or std.mem.eql(u8, channel.string, "order_book") or std.mem.eql(u8, channel.string, "account_all");
+    if (std.mem.eql(u8, venue, "lighter")) return std.meta.stringToEnum(enum { trade, order_book, candle, account_all }, channel.string) != null;
     return std.mem.eql(u8, venue, "qfex");
 }
 
@@ -171,9 +171,7 @@ pub const Reader = struct {
                 r.topic = .{ .qfex = state };
             } else if (lighter) {
                 const state = try @import("../exchanges/lighter/stream.zig").State.init(ra, saved, params, runtime.io());
-                var frame = try w.parse(ra, state.frame);
-                try frame.object.put(ra, "type", w.text("unsubscribe"));
-                r.unsubscribe = try std.json.Stringify.valueAlloc(ra, frame, .{});
+                r.unsubscribe = try state.unsubscribeFrame(ra);
                 r.topic = .{ .lighter = state };
             } else {
                 const state = try @import("../exchanges/hyperliquid/stream.zig").State.init(ra, saved, params);

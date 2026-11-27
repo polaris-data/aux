@@ -2348,6 +2348,28 @@
   },
   {
     "venue": "backpack",
+    "operation": "depth",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v1/depth",
+    "query": {
+      "symbol": "ETH_USDC",
+      "limit": "1000"
+    },
+    "request": {
+      "symbol": "ETH_USDC",
+      "limit": 1000
+    },
+    "body": null,
+    "response": {
+      "asks": [["1234.500", "0.0012300"]],
+      "bids": [["1234.000", "20.000"]],
+      "lastUpdateId": 9007199254740993,
+      "timestamp": "1735728000000001"
+    }
+  },
+  {
+    "venue": "backpack",
     "operation": "ticker",
     "verb": "GET",
     "private": false,

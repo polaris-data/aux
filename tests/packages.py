@@ -309,9 +309,14 @@ async def test_shared_peer(origin):
         endpoint = origin.replace("http:", "ws:") + "/lighter-multiplex/python"
         book = await lighter_feed.subscribe_order_book(4, endpoint=endpoint)
         account = await lighter_feed.subscribe_account(18, endpoint=endpoint)
+        candles = await lighter_feed.subscribe({"channel": "candle", "market_id": 4}, endpoint=endpoint)
         for generation in (1, 2):
             assert (await anext(book))["sequence"] == generation
             assert (await anext(account))["sequence"] == generation
+            for kind in ("subscribed", "update"):
+                candle = await anext(candles)
+                assert (candle["type"], candle["sequence"]) == (f"{kind}/candle", generation)
+                assert candle["candles"][0]["i"] == 9007199254740993
         late = await lighter_feed.subscribe_order_book(4, endpoint=endpoint)
         assert (await anext(late))["sequence"] == 3
         await late.close()
@@ -2121,11 +2126,15 @@ async def test_native_exchange_clients(origin):
             assert await anext(stream, None) is None, venue
 
     market_clients = {"kuru": sdk.KuruClient, "reya": sdk.ReyaClient, "apex_omni": sdk.ApexOmniClient}
+    backpack = sdk.BackpackClient(origin=base + "backpack/rest/public")
     for row in fixture("exchange-http"):
         venue = row["venue"]
         if venue in market_clients:
             client = market_clients[venue](origin=base + venue + "/rest/public")
             assert await getattr(client, row["operation"])(row["request"]) == row["response"]
+        elif venue == "backpack" and row["operation"] == "depth":
+            assert await backpack.depth(row["request"]) == row["response"]
+            assert await backpack.depth({"symbol": row["request"]["symbol"]}) == row["response"]
     market_streams = fixture("market-data-ws")
     for row in market_streams:
         client = getattr(sdk, row["client"])()

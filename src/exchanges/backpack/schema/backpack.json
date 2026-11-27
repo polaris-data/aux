@@ -46,6 +46,16 @@
       ]
     ],
     "MarketsRequest": [],
+    "DepthRequest": [
+      ["symbol", "symbol", "String", "required"],
+      ["limit", "limit", "Option<u16>", "optional"]
+    ],
+    "DepthResponse": [
+      ["asks", "asks", "Vec<[String; 2]>", "required"],
+      ["bids", "bids", "Vec<[String; 2]>", "required"],
+      ["lastUpdateId", "last_update_id", "NativeNumber", "required"],
+      ["timestamp", "timestamp", "NativeNumber", "required"]
+    ],
     "TickerRequest": [
       [
         "symbol",
@@ -204,6 +214,10 @@
     ]
   },
   "methods": {
+    "depth": [
+      "DepthRequest",
+      "DepthResponse"
+    ],
     "markets": [
       "MarketsRequest",
       "MarketsResponse"

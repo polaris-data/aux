@@ -37,7 +37,8 @@ pub fn prepare(client: rt.Client, comptime venue: core.subscription_prepare.Venu
     const stringify = @import("signing.zig").value;
     const auth = client.options.auth orelse .null;
     const network = if (auth == .object) auth.object.get("network") else null;
-    const config = try stringify(a, .{ .origin = endpointOverride(client.options), .auth = .{ .network = network } });
+    const chain_id = if (venue == .lighter and auth == .object) auth.object.get("chain_id") else null;
+    const config = try stringify(a, .{ .origin = endpointOverride(client.options), .auth = .{ .network = network, .chain_id = chain_id } });
     const result = try core.subscription_prepare.prepare(a, venue, config, try stringify(a, spec));
     return .{ .arena = arena, .value = result };
 }

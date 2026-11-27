@@ -61,7 +61,7 @@ def emit_models(emit, venue, exposed):
     source = SCHEMA_PATHS[venue].relative_to(ROOT).as_posix()
     feature = f"{venue.replace('_', '-')}-models"
     data_models = venue in {"hyperdash", "birdeye", "dune", "qfex", "metric", "lighter", "monaco", "hyperliquid"}
-    native_number = venue in {"extended", "phoenix"}
+    native_number = venue in {"backpack", "extended", "phoenix"}
 
     ts = [f'// Generated from {source}.', 'import type { HttpValue } from "./index";']
     py = [f'"""{entity} REST wire models generated from {source}."""',

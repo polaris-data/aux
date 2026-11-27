@@ -12,6 +12,10 @@ fn obj(a: A, fields: anytype) !V {
     inline for (@typeInfo(@TypeOf(fields)).@"struct".field_names) |field| try v.object.put(a, field, @field(fields, field));
     return v;
 }
+pub fn perpsSubscription(a: A, subscribe: bool, channels: V) !V {
+    return obj(a, .{ .req = w.text(if (subscribe) "sub" else "unsub"), .chs = channels });
+}
+
 pub fn perps(a: A, op: []const u8, params: V, config: V, io: std.Io) !Frame {
     const commands = .{ .create_orders = "createOrders", .modify_orders = "modifyOrders", .modify_orders_coid = "modifyOrdersCOID", .cancel_orders = "cancelOrders", .cancel_orders_coid = "cancelOrdersCOID", .cancel_all = "cancelAll", .auto_cancel = "autoCancel", .update_leverage = "updateLeverage", .update_leverages = "updateLeverages", .update_margin = "updateMargin" };
     inline for (@typeInfo(@TypeOf(commands)).@"struct".field_names) |field| {
@@ -26,7 +30,7 @@ pub fn perps(a: A, op: []const u8, params: V, config: V, io: std.Io) !Frame {
     if (kind == .ping) return .{ .method = "ping", .body = try obj(a, .{ .req = w.text("post"), .op = try obj(a, .{ .type = w.text("ping") }) }) };
     if (params != .array) return error.ExpectedArray;
     for (params.array.items) |v| _ = try w.string(v);
-    return .{ .method = @tagName(kind), .body = try obj(a, .{ .req = w.text(if (kind == .subscribe) "sub" else "unsub"), .chs = params }) };
+    return .{ .method = @tagName(kind), .body = try perpsSubscription(a, kind == .subscribe, params) };
 }
 pub fn rfq(a: A, op: []const u8, payload: V, config: V) !Frame {
     const kind = std.meta.stringToEnum(enum { quote, cancel_quote, last_look }, op) orelse return error.InvalidOperation;

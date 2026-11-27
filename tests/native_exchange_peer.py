@@ -403,7 +403,12 @@ def rest(peer, venue, path, query_string, scenario):
         return respond(peer, authenticated_rest(peer, venue, path, query_string, query, raw))
     choices = [r for r in HTTP if r["venue"] == venue and r["path"] == path and r["verb"] == peer.command]
     row = next(r for r in choices if not r["private"])
-    assert query == {key: [value] for key, value in row["query"].items()}
+    expected_query = {key: [value] for key, value in row["query"].items()}
+    if venue == "backpack" and path == "/api/v1/depth":
+        if "limit" not in query:
+            del expected_query["limit"]
+        assert all(header not in peer.headers for header in ("X-Signature", "X-Timestamp", "X-Window"))
+    assert query == expected_query
     for header in ("Authorization", "X-MBX-APIKEY", "orderly-key", "X-BAPI-API-KEY", "AEVO-KEY", "OK-ACCESS-KEY", "X-Api-Key"):
         assert peer.headers.get(header) is None
     if path == "/v1/public/query":
