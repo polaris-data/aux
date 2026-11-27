@@ -50,8 +50,9 @@ def collect_memory(output, stop, begin):
                 sample["pressure"] = Path("/proc/pressure/memory").read_text()
             stream.write(json.dumps(sample) + "\n")
             stream.flush()
-            if stop.wait(12):
+            if stop.is_set():
                 break
+            stop.wait(12)
 
 
 def profile_compiler(output, compiler, args):
