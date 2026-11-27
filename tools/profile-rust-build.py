@@ -57,7 +57,7 @@ def collect_memory(output, stop, begin):
 
 def profile_compiler(output, compiler, args):
     if "--crate-name" not in args:
-        os.execv(compiler, [compiler, *args])
+        os.execvp(compiler, [compiler, *args])
 
     crate = args[args.index("--crate-name") + 1]
     if crate == "aux_rs":
