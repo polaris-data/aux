@@ -2127,6 +2127,7 @@ async def test_native_exchange_clients(origin):
 
     market_clients = {"kuru": sdk.KuruClient, "reya": sdk.ReyaClient, "apex_omni": sdk.ApexOmniClient}
     backpack = sdk.BackpackClient(origin=base + "backpack/rest/public")
+    binance_public = sdk.BinanceSpotClient(origin=base + "binance_spot/rest/public", api_key="fixture-key", api_secret="fixture-secret")
     for row in fixture("exchange-http"):
         venue = row["venue"]
         if venue in market_clients:
@@ -2135,6 +2136,8 @@ async def test_native_exchange_clients(origin):
         elif venue == "backpack" and row["operation"] == "depth":
             assert await backpack.depth(row["request"]) == row["response"]
             assert await backpack.depth({"symbol": row["request"]["symbol"]}) == row["response"]
+        elif venue == "binance_spot" and row["operation"] == "depth":
+            assert await binance_public.depth(row["request"]) == row["response"]
     market_streams = fixture("market-data-ws")
     for row in market_streams:
         client = getattr(sdk, row["client"])()

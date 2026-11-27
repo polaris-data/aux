@@ -13,7 +13,7 @@ const aux = b.dependency("aux", .{ .target = target, .optimize = optimize });
 exe.root_module.addImport("aux", aux.module("aux"));
 ```
 
-All 2,224 named HTTP methods use the shared SDK schemas. Model declarations live beside their client, for example `aux.clients.pyth_hermes.LatestPriceUpdatesRequest`. The compiler checks the request and infers the response type.
+All 2,225 named HTTP methods use the shared SDK schemas. Model declarations live beside their client, for example `aux.clients.pyth_hermes.LatestPriceUpdatesRequest`. The compiler checks the request and infers the response type.
 
 ```zig
 const aux = @import("aux");
@@ -114,13 +114,13 @@ Rust applications can enable the optional `rustls` Cargo feature and pass a `rus
 
 Python and TypeScript expose the core's authentication, transport, exchange, validation, decode and uncertain-outcome errors as subclasses of `ConnectorError`. Rust exposes these as `aux_rs::Error` variants.
 
-The HTTP methods accept wire-shaped objects. Named Python unary calls accept the reference `request=` keyword and the standalone `params=` keyword. Dune also accepts separate query or execution identifiers and result options in Python, and the corresponding `queryId` or `executionId` options in TypeScript. Python and TypeScript expose request and response models for all 2,224 named unary methods in the standalone catalog. Rust provides the same contracts through venue Cargo features such as `metric-models` and `lighter-models` and the client's `typed()` interface. Some reference methods return arbitrary JSON or accept open parameter maps. Their SDK types preserve that flexibility. The default Rust interface accepts JSON with arbitrary precision. Python decodes decimal tokens to `Decimal`. Node returns unsafe integers as `bigint` and fractional or exponent tokens as strings. [Exchange sources](src/exchanges/) · [Data sources](src/data/)
+The HTTP methods accept wire-shaped objects. Named Python unary calls accept the reference `request=` keyword and the standalone `params=` keyword. Dune also accepts separate query or execution identifiers and result options in Python, and the corresponding `queryId` or `executionId` options in TypeScript. Python and TypeScript expose request and response models for all 2,225 named unary methods in the standalone catalog. Rust provides the same contracts through venue Cargo features such as `metric-models` and `lighter-models` and the client's `typed()` interface. Some reference methods return arbitrary JSON or accept open parameter maps. Their SDK types preserve that flexibility. The default Rust interface accepts JSON with arbitrary precision. Python decodes decimal tokens to `Decimal`. Node returns unsafe integers as `bigint` and fractional or exponent tokens as strings. [Exchange sources](src/exchanges/) · [Data sources](src/data/)
 
 The default native HTTP client reuses keep-alive connections. Up to eight pooled clients each retain one idle connection. Overlapping calls can still open additional connections. Common unary exchange errors carry the venue, HTTP status and lossless response body. Hyperdash masks secrets in its error payloads.
 
 ## Port coverage
 
-The REST catalog has 1,724 fixture-backed unary routes. Hyperdash adds CSV and NDJSON variants for 250 routes, bringing the catalog to 2,224 named unary methods. Nine cataloged HTTP streams cover Hermes SSE, Chainlink candlesticks and Databento data. Tardis adds four HTTP streaming operations outside this catalog, including dataset downloads. Injective uses gRPC-Web for indexer subscriptions. Session commands, subscriptions, chain calls and offline signing helpers have separate coverage.
+The REST catalog has 1,725 fixture-backed unary routes. Hyperdash adds CSV and NDJSON variants for 250 routes, bringing the catalog to 2,225 named unary methods. Nine cataloged HTTP streams cover Hermes SSE, Chainlink candlesticks and Databento data. Tardis adds four HTTP streaming operations outside this catalog, including dataset downloads. Injective uses gRPC-Web for indexer subscriptions. Session commands, subscriptions, chain calls and offline signing helpers have separate coverage.
 
 | Area | Implemented in Zig |
 | --- | --- |
@@ -198,7 +198,8 @@ Use the named clients to discover markets, read accounts and orders, subscribe t
 
 A `book` subscription delivers each native event with its original prices, quantities, sequence fields, and checksum. The subscription ends on disconnect. Discard the old book and bootstrap again after reopening.
 
-- For **Binance Spot diff depth**, subscribe with `channel: "book"` and buffer updates while fetching `GET /api/v3/depth` directly from the venue. Use the snapshot's `lastUpdateId` and the native `U` and `u` fields to establish continuity. Use `partial_depth` with depth 5, 10, or 20 for periodic native WebSocket snapshots. [Binance depth guide](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#how-to-manage-a-local-order-book-correctly)
+- For **Binance Spot diff depth**, subscribe with `channel: "book"` and buffer updates while calling `BinanceSpotClient.depth` with the same `symbol` and an optional `limit`. Use the snapshot's `lastUpdateId` and the native `U` and `u` fields to establish continuity. Fetch a fresh snapshot after a gap or reconnect. Use `partial_depth` with depth 5, 10, or 20 for periodic native WebSocket snapshots. [Binance depth guide](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#how-to-manage-a-local-order-book-correctly)
+- For **Binance Spot candles**, subscribe with `channel: "kline"` and a `symbol`. The `interval` defaults to `1m`. The stream delivers native kline events, including updates to open candles and the final event with `k.x: true`. [Binance kline stream](https://developers.binance.com/docs/binance-spot-api-docs/web-socket-streams#klinecandlestick-streams-for-utc)
 - For **Backpack**, subscribe with `channel: "book"` and buffer updates while calling `BackpackClient.depth` with the same `symbol` and an optional `limit`. Seed the book with the returned snapshot and discard buffered events whose `u` is at or below `lastUpdateId`. Apply the first delta that covers `lastUpdateId + 1`, then check that each update starts at the previous `u + 1`. On a gap, discard the local book and call `depth` again while buffering updates. Repeat the bootstrap after reconnecting. [Backpack Depth stream](https://docs.backpack.exchange/#tag/Streams/Depth)
 
 | Client | Example book subscription | Credentials for private methods |

@@ -315,6 +315,9 @@ class BinanceSpotClient(_Client):
     async def cancel_replace_order(self, request: BinanceSpot.CancelReplaceOrderRequest | None = None, *, params: BinanceSpot.CancelReplaceOrderRequest | None = None) -> BinanceSpot.CancelReplaceOrderResponse:
         return await execute("binance_spot", "cancel_replace_order", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
 
+    async def depth(self, request: BinanceSpot.DepthRequest | None = None, *, params: BinanceSpot.DepthRequest | None = None) -> BinanceSpot.DepthResponse:
+        return await execute("binance_spot", "depth", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
+
     async def fills(self, request: BinanceSpot.FillsRequest | None = None, *, params: BinanceSpot.FillsRequest | None = None) -> BinanceSpot.FillsResponse:
         return await execute("binance_spot", "fills", _request_params(request, params), origin=self._origin, api_key=self._api_key, api_secret=self._api_secret, auth=self._auth)
 

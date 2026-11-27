@@ -60,6 +60,16 @@
         "optional"
       ]
     ],
+    "DepthRequest": [
+      ["symbol", "symbol", "String", "required"],
+      ["limit", "limit", "Option<u32>", "optional"],
+      ["symbolStatus", "symbol_status", "Option<String>", "optional"]
+    ],
+    "DepthResponse": [
+      ["lastUpdateId", "last_update_id", "u64", "required"],
+      ["bids", "bids", "Vec<[String; 2]>", "required"],
+      ["asks", "asks", "Vec<[String; 2]>", "required"]
+    ],
     "MarketsRequest": [
       [
         "symbol",
@@ -1890,6 +1900,10 @@
     ]
   },
   "methods": {
+    "depth": [
+      "DepthRequest",
+      "DepthResponse"
+    ],
     "markets": [
       "MarketsRequest",
       "MarketsResponse"

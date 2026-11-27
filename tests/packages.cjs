@@ -477,6 +477,9 @@ async function testNativeExchangeClients(origin) {
   assert.equal(defaultRequest.authenticated, false);
   assert.deepEqual(await backpack.depth(depth.request), depth.response);
   assert.deepEqual(await backpack.depth({symbol: depth.request.symbol}), depth.response);
+  const binance = new sdk.BinanceSpotClient({origin: base + "binance_spot/rest/public", apiKey: "fixture-key", apiSecret: "fixture-secret"});
+  const binanceDepth = httpRows.find(row => row.venue === "binance_spot" && row.operation === "depth");
+  assert.deepEqual(await binance.depth(binanceDepth.request), binanceDepth.response);
   for (const row of fixture("market-data-ws")) {
     const client = new sdk[row.client]();
     const stream = await client.subscribe(row.params, ws + row.venue + "/ws/" + row.case);

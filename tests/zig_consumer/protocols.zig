@@ -39,6 +39,7 @@ pub fn run(init: std.process.Init, client: aux.Client, args: []const []const u8)
     try liveCheck(init, client, args);
     try perpsCheck(init, client.allocator, args[5], args[2]);
     try backpackDepth(a, args[5]);
+    try binanceFeeds(init, a, args[5], args[2]);
     try feedsCheck(client.allocator, args[5]);
     var decoder = try aux.codec.EventDecoder.init(64);
     defer decoder.deinit();
@@ -89,6 +90,31 @@ fn backpackDepth(a: std.mem.Allocator, origin: []const u8) !void {
         try std.testing.expectEqualStrings("0.0012300", reply.value.asks[0][1]);
         try std.testing.expectEqualStrings("9007199254740993", reply.value.lastUpdateId.number.text);
         try std.testing.expectEqualStrings("1735728000000001", reply.value.timestamp.string);
+    }
+}
+
+fn binanceFeeds(init: std.process.Init, a: std.mem.Allocator, origin: []const u8, fixtures: []const u8) !void {
+    const rest = try std.mem.concat(a, u8, &.{ origin, "/native-exchanges/binance_spot/rest/depth-default" });
+    defer a.free(rest);
+    const endpoint = try std.mem.concat(a, u8, &.{ "ws:", origin[5..], "/native-exchanges/binance_spot/ws/kline" });
+    defer a.free(endpoint);
+    const client = aux.clients.BinanceSpotClient.init(a, .{ .origin = rest, .endpoint = endpoint });
+    var depth = try client.depth(.{ .symbol = "ETHUSDT" });
+    defer depth.deinit();
+    try std.testing.expectEqual(@as(u64, 9007199254740993), depth.value.lastUpdateId);
+    try std.testing.expectEqualStrings("0.00123000", depth.value.asks[0][1]);
+
+    var rows = try fixture(init, fixtures, "market-data-ws.json");
+    defer rows.deinit();
+    for (rows.value.array.items) |row| {
+        if (!std.mem.eql(u8, row.object.get("venue").?.string, "binance_spot")) continue;
+        var candles = try client.subscribe(row.object.get("params").?);
+        defer candles.deinit();
+        for (row.object.get("events").?.array.items) |expected| {
+            var event = (try candles.next()) orelse return error.MissingMessage;
+            defer event.deinit();
+            try check(event.value, expected);
+        }
     }
 }
 

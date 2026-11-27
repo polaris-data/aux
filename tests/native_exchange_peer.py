@@ -110,6 +110,14 @@ def market_stream(peer, venue, scenario):
         send(peer, {"type": "channel_data", "channel": "/v2/spotMarkets/summary", "data": []})
         for event in spec["events"]:
             send(peer, event)
+    elif venue == "binance_spot":
+        candle, combined = spec["events"]
+        send(peer, {"result": None, "id": sub["id"]})
+        send(peer, dict(candle, s="BTCUSDT", k=dict(candle["k"], s="BTCUSDT")))
+        send(peer, dict(candle, k=dict(candle["k"], i="1m")))
+        send(peer, dict(combined, stream="ethusdt@kline_1m"))
+        for event in spec["events"]:
+            send(peer, event)
     else:
         send(peer, {"success": True, "request": sub})
         send(peer, {"op": "ping", "args": [str(time.time_ns() // 1_000_000)]})
@@ -408,6 +416,9 @@ def rest(peer, venue, path, query_string, scenario):
         if "limit" not in query:
             del expected_query["limit"]
         assert all(header not in peer.headers for header in ("X-Signature", "X-Timestamp", "X-Window"))
+    if venue == "binance_spot" and scenario == "depth-default":
+        assert path == "/api/v3/depth"
+        expected_query = {"symbol": expected_query["symbol"]}
     assert query == expected_query
     for header in ("Authorization", "X-MBX-APIKEY", "orderly-key", "X-BAPI-API-KEY", "AEVO-KEY", "OK-ACCESS-KEY", "X-Api-Key"):
         assert peer.headers.get(header) is None

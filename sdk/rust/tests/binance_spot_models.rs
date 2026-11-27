@@ -36,6 +36,7 @@ mod fixtures {
                 "cancel_order" => { check::<CancelOrderRequest>(request); check::<CancelOrderResponse>(response); },
                 "cancel_order_list" => { check::<CancelOrderListRequest>(request); check::<CancelOrderListResponse>(response); },
                 "cancel_replace_order" => { check::<CancelReplaceOrderRequest>(request); check::<CancelReplaceOrderResponse>(response); },
+                "depth" => { check::<DepthRequest>(request); check::<DepthResponse>(response); },
                 "fills" => { check::<FillsRequest>(request); check::<FillsResponse>(response); },
                 "markets" => { check::<MarketsRequest>(request); check::<MarketsResponse>(response); },
                 "open_order_lists" => { check::<OpenOrderListsRequest>(request); check::<OpenOrderListsResponse>(response); },

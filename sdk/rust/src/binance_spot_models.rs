@@ -44,6 +44,30 @@ pub struct Subscription {
 }
 
 #[derive(Clone, Default, Serialize, Deserialize)]
+pub struct DepthRequest {
+    #[serde(rename = "symbol")]
+    pub symbol: String,
+    #[serde(rename = "limit", skip_serializing_if = "Option::is_none")]
+    pub limit: Option<u32>,
+    #[serde(rename = "symbolStatus", skip_serializing_if = "Option::is_none")]
+    pub symbol_status: Option<String>,
+    #[serde(flatten)]
+    pub extra: serde_json::Map<String, Value>,
+}
+
+#[derive(Clone, Default, Serialize, Deserialize)]
+pub struct DepthResponse {
+    #[serde(rename = "lastUpdateId")]
+    pub last_update_id: u64,
+    #[serde(rename = "bids")]
+    pub bids: Vec<[String; 2]>,
+    #[serde(rename = "asks")]
+    pub asks: Vec<[String; 2]>,
+    #[serde(flatten)]
+    pub extra: serde_json::Map<String, Value>,
+}
+
+#[derive(Clone, Default, Serialize, Deserialize)]
 pub struct MarketsRequest {
     #[serde(rename = "symbol", skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
@@ -808,6 +832,10 @@ impl TypedBinanceSpotClient {
         serde_json::from_value(self.0.cancel_replace_order(&json!(request))?)
             .map_err(|_| Error::Decode("invalid BinanceSpot response model"))
     }
+    pub fn depth(&self, request: &DepthRequest) -> Result<DepthResponse> {
+        serde_json::from_value(self.0.depth(&json!(request))?)
+            .map_err(|_| Error::Decode("invalid BinanceSpot response model"))
+    }
     pub fn fills(&self, request: &FillsRequest) -> Result<FillsResponse> {
         serde_json::from_value(self.0.fills(&json!(request))?)
             .map_err(|_| Error::Decode("invalid BinanceSpot response model"))
@@ -907,6 +935,10 @@ impl AsyncTypedBinanceSpotClient {
     }
     pub async fn cancel_replace_order(&self, request: &CancelReplaceOrderRequest) -> Result<CancelReplaceOrderResponse> {
         serde_json::from_value(self.0.cancel_replace_order(&json!(request)).await?)
+            .map_err(|_| Error::Decode("invalid BinanceSpot response model"))
+    }
+    pub async fn depth(&self, request: &DepthRequest) -> Result<DepthResponse> {
+        serde_json::from_value(self.0.depth(&json!(request)).await?)
             .map_err(|_| Error::Decode("invalid BinanceSpot response model"))
     }
     pub async fn fills(&self, request: &FillsRequest) -> Result<FillsResponse> {

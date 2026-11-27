@@ -640,6 +640,29 @@
   },
   {
     "venue": "binance_spot",
+    "operation": "depth",
+    "verb": "GET",
+    "private": false,
+    "path": "/api/v3/depth",
+    "query": {
+      "symbol": "ETHUSDT",
+      "limit": "5000",
+      "symbolStatus": "TRADING"
+    },
+    "request": {
+      "symbol": "ETHUSDT",
+      "limit": 5000,
+      "symbolStatus": "TRADING"
+    },
+    "body": null,
+    "response": {
+      "lastUpdateId": 9007199254740993,
+      "bids": [["1199.90000000", "2.00000000"]],
+      "asks": [["1200.00000001", "0.00123000"]]
+    }
+  },
+  {
+    "venue": "binance_spot",
     "operation": "ticker",
     "verb": "GET",
     "private": false,

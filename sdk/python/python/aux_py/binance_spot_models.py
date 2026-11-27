@@ -7,6 +7,15 @@ _SubscriptionOptional = TypedDict("_SubscriptionOptional", {'symbol': 'str | Non
 class Subscription(_SubscriptionOptional):
     channel: str
 
+_DepthRequestOptional = TypedDict("_DepthRequestOptional", {'limit': 'int | None', 'symbolStatus': 'str | None'}, total=False)
+class DepthRequest(_DepthRequestOptional):
+    symbol: str
+
+class DepthResponse(TypedDict):
+    lastUpdateId: int
+    bids: list[list[str]]
+    asks: list[list[str]]
+
 _MarketsRequestOptional = TypedDict("_MarketsRequestOptional", {'symbol': 'str | None', 'symbols': 'list[str] | None', 'permissions': 'list[str] | None', 'showPermissionSets': 'bool | None', 'symbolStatus': 'str | None'}, total=False)
 class MarketsRequest(_MarketsRequestOptional):
     pass

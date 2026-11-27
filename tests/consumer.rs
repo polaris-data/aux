@@ -108,6 +108,11 @@ fn main() -> aux_rs::Result<()> {
     let depth = catalog.iter().find(|r| r["venue"] == "backpack" && r["operation"] == "depth").unwrap();
     assert_eq!(backpack.depth(&depth["request"])?, depth["response"]);
     assert_eq!(backpack.depth(&serde_json::json!({"symbol":depth["request"]["symbol"]}))?, depth["response"]);
+    let binance = aux_rs::BinanceSpotClient::new()
+        .with_origin(format!("{origin}/native-exchanges/binance_spot/rest/public"))
+        .with_credentials("fixture-key", "fixture-secret");
+    let depth = catalog.iter().find(|r| r["venue"] == "binance_spot" && r["operation"] == "depth").unwrap();
+    assert_eq!(binance.depth(&depth["request"])?, depth["response"]);
     let market_streams: Vec<serde_json::Value> = serde_json::from_str(include_str!("../market-data-ws.json")).unwrap();
     macro_rules! market_data {
         ($($client:ident => $venue:literal),+ $(,)?) => {$(
@@ -129,7 +134,7 @@ fn main() -> aux_rs::Result<()> {
             }
         )+};
     }
-    market_data!(ApexOmniClient => "apex_omni", KuruClient => "kuru", ReyaClient => "reya");
+    market_data!(ApexOmniClient => "apex_omni", BinanceSpotClient => "binance_spot", KuruClient => "kuru", ReyaClient => "reya");
     let commands = origin.replacen("http:", "ws:", 1) + "/native-exchanges/binance_spot/ws/orders";
     let trader = aux_rs::BinanceSpotClient::new().with_credentials("fixture-key", "fixture-secret");
     let order_session = trader.open_rpc(Some(&commands), &serde_json::json!({}))?;
